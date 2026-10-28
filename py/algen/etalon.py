@@ -8,9 +8,10 @@
 * «открыто» не должно ни выводиться, ни опровергаться;
 * вывод верного или опровержение ложного — ОШИБКА базы, а не промах.
 
-Вывод сам по себе опровергает только то, что противоречит правилам. Ложное
-обычно закрывается контрпримером (этап 5), поэтому «ложно → неизвестно» здесь
-считается промахом, а не ошибкой.
+Вывод сам по себе опровергает только то, что противоречит правилам. Если он
+ответа не дал, ищется контрпример в библиотеке (algen.library): пара (G, N),
+где посылки верны, а цель ложна. «Ложно → неизвестно» считается промахом, а
+не ошибкой.
 
     cd py && python3 -m algen.etalon
 """
@@ -21,6 +22,7 @@ import re
 import sys
 from collections import Counter
 
+from .library import Library, Scene
 from .logic import DATA, Graph, Theory, Vocab, decide
 
 ETALON = DATA / "etalon" / "эталон.jsonl"
@@ -113,8 +115,9 @@ def judge(answer, kind):
     return "промах"
 
 
-def run(facts, grow=1):
+def run(facts, grow=1, search=True):
     vocabs, report = {}, []
+    lib = scene = None
     for f in facts:
         row = {"id": f["id"], "ответ": f["ответ"]}
         try:
@@ -124,9 +127,17 @@ def run(facts, grow=1):
             report.append({**row, "итог": "не разбирается", "почему": str(e)})
             continue
         verdict = decide(Theory(g, grow=grow), prem, goal)
-        row.update(итог=judge(f["ответ"], verdict.kind), вердикт=verdict.kind,
+        kind, core = verdict.kind, verdict.core
+        if kind == "неизвестно" and search and f["раздел"] == "grp":
+            if scene is None:
+                lib, scene = Library(), Scene(v)
+            found = scene.witnesses(lib, prem, goal)
+            if found:
+                kind = "опровергается"
+                row["контрпример"] = [f"G = {w['имя G']}, N = {w['имя N']}" for w in found]
+        row.update(итог=judge(f["ответ"], kind), вердикт=kind,
                    ядро=[f"{'' if val else '¬'}{a[1]}({', '.join(map(str, a[2:]))})"
-                         for a, val in verdict.core or []])
+                         for a, val in core or []])
         if verdict.kind == "выводится" and len(verdict.core) < len(prem):
             row["лишние посылки"] = len(prem) - len(verdict.core)
         report.append(row)
@@ -146,7 +157,9 @@ def main():
         json.dump(report, sys.stdout, ensure_ascii=False, indent=1)
         return
     for r in report:
-        extra = r.get("почему") or f"{r['вердикт']}; ядро: {', '.join(r['ядро']) or '—'}"
+        extra = r.get("почему") or (f"{r['вердикт']}; " + (
+            f"контрпример: {r['контрпример'][0]}" if "контрпример" in r
+            else f"ядро: {', '.join(r['ядро']) or '—'}"))
         print(f"{r['id']:10} {r['ответ']:8} {r['итог']:17} {extra}")
     print("\n" + ", ".join(f"{k} {v}" for k, v in Counter(r["итог"] for r in report).most_common()))
 

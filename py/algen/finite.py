@@ -8,7 +8,11 @@
     python3 -m algen.finite --до 100
 
 пишет data/finite/grp-small.jsonl и таблицу прямых произведений
-data/finite/grp-small-products.jsonl. Порядки считаются параллельно кусками,
+data/finite/grp-small-products.jsonl. Отдельные группы большего порядка,
+нужные как примеры, досчитываются в data/finite/grp-extra.jsonl:
+
+    python3 -m algen.finite --добавить 120:5 720:771
+ Порядки считаются параллельно кусками,
 затем склеиваются по возрастанию порядка.
 """
 
@@ -25,6 +29,7 @@ SCRIPT = Path(__file__).with_name("gap") / "groups.g"
 PRODUCTS_SCRIPT = Path(__file__).with_name("gap") / "products.g"
 OUT = ROOT / "data" / "finite" / "grp-small.jsonl"
 PRODUCTS = ROOT / "data" / "finite" / "grp-small-products.jsonl"
+EXTRA = ROOT / "data" / "finite" / "grp-extra.jsonl"
 
 
 def _run(lo, hi, path):
@@ -49,6 +54,34 @@ def build(upto, jobs):
                         out.write(line)
 
 
+def _refs(r):
+    for sub in r["subs"] or []:
+        yield sub["group"]
+        if "quotient" in sub:
+            yield sub["quotient"]
+
+
+def build_extra(keys, upto):
+    """Группы порядка выше upto, нужные как примеры, вместе со всеми их
+    подгруппами и факторами порядка выше upto, чтобы ссылки не висели."""
+    have = load(extra=True)
+    todo = {k for k in keys if k not in have}
+    while todo:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "extra.jsonl")
+            ks = ", ".join(f"[{k.replace(':', ', ')}]" for k in sorted(todo))
+            prog = f'KEYS:=[{ks}];; OUT:="{path}";; Read("{SCRIPT}");\n'
+            subprocess.run(["gap", "-q", "-o", "4g"], input=prog, text=True, check=True,
+                           stdout=subprocess.DEVNULL)
+            with open(path) as f:
+                new = [json.loads(line) for line in f]
+        with EXTRA.open("a") as out:
+            for r in new:
+                out.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")
+                have[r["key"]] = r
+        todo = {k for r in new for k in _refs(r) if k not in have and int(k.split(":")[0]) > upto}
+
+
 def build_products(upto):
     prog = f'HI:={upto};; OUT:="{PRODUCTS}";; Read("{PRODUCTS_SCRIPT}");\n'
     subprocess.run(["gap", "-q", "-o", "4g"], input=prog, text=True, check=True,
@@ -65,10 +98,14 @@ def load_products(path=PRODUCTS):
     return out
 
 
-def load(path=OUT):
-    """Словарь key → запись группы."""
+def load(path=OUT, extra=False):
+    """Словарь key → запись группы; extra — с группами из grp-extra.jsonl."""
     with open(path) as f:
-        return {g["key"]: g for g in map(json.loads, f)}
+        out = {g["key"]: g for g in map(json.loads, f)}
+    if extra and EXTRA.exists():
+        with EXTRA.open() as f:
+            out.update((g["key"], g) for g in map(json.loads, f))
+    return out
 
 
 if __name__ == "__main__":
@@ -76,7 +113,13 @@ if __name__ == "__main__":
     ap.add_argument("--до", dest="upto", type=int, default=100)
     ap.add_argument("--нитей", dest="jobs", type=int, default=os.cpu_count())
     ap.add_argument("--только-произведения", dest="only_products", action="store_true")
+    ap.add_argument("--добавить", dest="extra", nargs="+", metavar="n:i",
+                    help="досчитать отдельные группы выше --до в data/finite/grp-extra.jsonl")
     a = ap.parse_args()
+    if a.extra:
+        build_extra(a.extra, a.upto)
+        print(EXTRA, sum(1 for _ in EXTRA.open()))
+        raise SystemExit
     if not a.only_products:
         build(a.upto, a.jobs)
         print(OUT, sum(1 for _ in OUT.open()))
