@@ -26,9 +26,11 @@ from .library import Library, Search
 from .logic import DATA, Graph, Theory, Vocab, decide
 
 ETALON = DATA / "etalon" / "эталон.jsonl"
-SORTS = {"grp": {"Grp": ("Grp.obj", None), "Sub": ("Grp.sub", "ambient"), "Fam": ("Grp.fam", None)}}
+SORTS = {"grp": {"Grp": ("Grp.obj", None), "Sub": ("Grp.sub", "ambient"), "Fam": ("Grp.fam", None),
+                 "Mor": ("Grp.mor", ("dom", "cod"))}}
 # Короткие обозначения конструкций в записи эталона.
-OPS = {"grp": {"Z": "center", "Inn": "inn", "Aut": "aut", "ab": "ab", "∏": "prod-fam", "⊕": "sum-fam"}}
+OPS = {"grp": {"Z": "center", "Inn": "inn", "Aut": "aut", "ab": "ab", "∏": "prod-fam", "⊕": "sum-fam",
+               "ker": "ker", "im": "im", "commutator": "commutator", "center": "center"}}
 INFIX = {"grp": {"×": "prod", "∗": "freeprod", "/": "quotient"}}
 
 
@@ -92,14 +94,21 @@ def scheme(vocab, fact):
     g, names, prem = Graph(vocab), {}, []
     for decl in fact["условие"].split(";"):
         head, _, lits = decl.partition("|")
-        m = re.fullmatch(r"\s*∀\s*(\w+)\s*:\s*(\w+)(?:\((\w+)\))?\s*", head)
+        m = re.fullmatch(r"\s*∀\s*(\w+)\s*:\s*(\w+)(?:\(([\w\s,]+)\))?\s*", head)
         if not m:
             raise Unsupported(f"объявление {head!r}")
-        name, sort, parent = m.groups()
+        name, sort, parents = m.groups()
         if sort not in SORTS[section]:
             raise Unsupported(f"сорт {sort}")
         s, link = SORTS[section][sort]
-        names[name] = g.var(name, s, **({link: names[parent]} if parent else {}))
+        links = {}
+        if parents:
+            ps = [x.strip() for x in parents.split(",")]
+            keys = link if isinstance(link, tuple) else (link,)
+            if len(ps) != len(keys):
+                raise Unsupported(f"объявление {head!r}")
+            links = {k: names[x] for k, x in zip(keys, ps)}
+        names[name] = g.var(name, s, **links)
         prem += [literal(g, x, names, section) for x in split_top(lits, ",")]
     goal = literal(g, fact["цель"], names, section)
     return g, prem, goal
