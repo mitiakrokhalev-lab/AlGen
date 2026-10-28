@@ -1,5 +1,5 @@
 {
- "заметка": "Бесконечные группы для нового движка (py/algen/library.py). Перенесены из data/infinite.json и сверены: выводом (python3 -m algen.library ищет противоречия записанных значений с базой правил) и по смыслу. Отсутствующее значение — «неизвестно». Поле «почему» объясняет нетривиальные значения и исправления старой библиотеки. Все значения написаны нейросетью и человеком не сверены, поэтому статус у всей записи — «не проверено».",
+ "заметка": "Бесконечные группы для нового движка (py/algen/library.py). Перенесены из data/infinite.json и сверены: выводом (python3 -m algen.library ищет противоречия записанных значений с базой правил) и по смыслу. Отсутствующее значение — «неизвестно». Поле «почему» объясняет нетривиальные значения и исправления старой библиотеки. Все значения написаны нейросетью и человеком не сверены, поэтому статус у всей записи — «не проверено». Поле «трудно» перечисляет значения, которые сами по себе теоремы или требуют идеи: контрпример, опирающийся на такое значение, не делает задачу тривиальной.",
  "группы": [
   {
    "id": "Z",
@@ -20,7 +20,9 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "polycyclic": true,
+    "linear": true
    },
    "почему": {},
    "подгруппы": [
@@ -97,7 +99,8 @@
    ],
    "центр": "все",
    "коммутант": "0",
-   "абелианизация": "Z"
+   "абелианизация": "Z",
+   "aut": "2:1"
   },
   {
    "id": "ZxZ",
@@ -118,7 +121,9 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "polycyclic": true,
+    "linear": true
    },
    "почему": {},
    "подгруппы": [
@@ -188,7 +193,9 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "polycyclic": true,
+    "linear": true
    },
    "почему": {},
    "подгруппы": [
@@ -273,7 +280,8 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true
    },
    "почему": {},
    "подгруппы": [
@@ -357,9 +365,14 @@
     "divisible": true,
     "centerless": false,
     "residually-finite": false,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": true,
+    "hopfian": true
    },
-   "почему": {},
+   "почему": {
+    "linear": "унипотентные матрицы 2×2 над ℚ",
+    "hopfian": "эндоморфизмы ℚ — умножения на рациональные числа"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -428,9 +441,14 @@
     "divisible": true,
     "centerless": false,
     "residually-finite": false,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "linear": "корни из 1 в ℂ*",
+    "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -513,9 +531,13 @@
     "divisible": true,
     "centerless": false,
     "residually-finite": false,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -597,9 +619,14 @@
     "divisible": true,
     "centerless": false,
     "residually-finite": false,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "linear": "абелева без кручения мощности ⩽ 𝔠 вкладывается в ℚ^(𝔠) ≅ ℝ, а ℝ — в унипотентные матрицы над ℝ",
+    "hopfian": "ℝ ≅ ℚ^(𝔠) — бесконечномерное пространство над ℚ, сдвиг базиса сюръективен с ядром"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -680,9 +707,13 @@
     "divisible": true,
     "centerless": false,
     "residually-finite": false,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром"
+   },
    "подгруппы": [
     {
      "id": "1",
@@ -780,9 +811,13 @@
     "divisible": true,
     "centerless": false,
     "residually-finite": false,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром"
+   },
    "подгруппы": [
     {
      "id": "1",
@@ -897,9 +932,13 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "hopfian": "ℚ* ≅ C₂ × ⊕ℤ, сдвиг на ⊕ℤ"
+   },
    "подгруппы": [
     {
      "id": "1",
@@ -984,9 +1023,13 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром"
+   },
    "подгруппы": [
     {
      "id": "1",
@@ -1054,7 +1097,8 @@
     "divisible": false,
     "centerless": true,
     "residually-finite": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": true
    },
    "почему": {},
    "подгруппы": [
@@ -1100,6 +1144,22 @@
      "фактор": "ZxZ"
     },
     {
+     "id": "ядро на BS(2,3)",
+     "имя": "ядро F₂ ↠ BS(2, 3)",
+     "≅": "Foo",
+     "свойства": {
+      "normal": true,
+      "maximal": false,
+      "whole": false,
+      "central": false,
+      "finite-index": false
+     },
+     "фактор": "BS23",
+     "почему": {
+      "≅": "нетривиальная нормальная подгруппа бесконечного индекса в F₂ свободна бесконечного ранга (Шрайер)"
+     }
+    },
+    {
      "id": "все",
      "имя": "F₂",
      "≅": "F2",
@@ -1116,7 +1176,10 @@
    ],
    "центр": "1",
    "коммутант": "коммутант",
-   "абелианизация": "ZxZ"
+   "абелианизация": "ZxZ",
+   "трудно": [
+    "residually-finite"
+   ]
   },
   {
    "id": "Foo",
@@ -1137,9 +1200,13 @@
     "divisible": false,
     "centerless": true,
     "residually-finite": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром"
+   },
    "подгруппы": [
     {
      "id": "1",
@@ -1192,9 +1259,13 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -1209,6 +1280,24 @@
       "finite-index": false
      },
      "фактор": "Zoo"
+    },
+    {
+     "id": "ядро на ℚ",
+     "имя": "ядро ⊕ℤ ↠ ℚ, eₙ ↦ 1/n!",
+     "≅": "Zoo",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "Q",
+     "почему": {
+      "characteristic": "перестановка e₁ ↔ e₂ переводит 2e₂ − e₁ ∈ K в 2e₁ − e₂ ∉ K",
+      "≅": "подгруппа свободной абелевой счётного ранга, сама счётного ранга, так как фактор ℚ не к. п."
+     }
     },
     {
      "id": "все",
@@ -1249,7 +1338,9 @@
     "divisible": false,
     "centerless": true,
     "residually-finite": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "polycyclic": true,
+    "linear": true
    },
    "почему": {},
    "подгруппы": [
@@ -1347,9 +1438,14 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "linear": "абелева без кручения мощности ⩽ 𝔠 вкладывается в ℚ^(𝔠) ≅ ℝ, а ℝ — в унипотентные матрицы над ℝ",
+    "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -1420,9 +1516,14 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "linear": "элементарная абелева 2-группа мощности ⩽ 𝔠 — аддитивная группа поля характеристики 2, то есть унипотентные матрицы над ним",
+    "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -1500,7 +1601,8 @@
    ],
    "центр": "все",
    "коммутант": "0",
-   "абелианизация": "SumC2"
+   "абелианизация": "SumC2",
+   "aut": "AutSumC2"
   },
   {
    "id": "QxQ",
@@ -1522,9 +1624,13 @@
     "divisible": true,
     "centerless": false,
     "residually-finite": false,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": true
    },
-   "почему": {},
+   "почему": {
+    "hopfian": "эндоморфизмы — ℚ-линейные отображения ℚ²"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -1593,9 +1699,13 @@
     "divisible": true,
     "centerless": false,
     "residually-finite": false,
-    "indecomposable": true
+    "indecomposable": true,
+    "polycyclic": false,
+    "linear": true
    },
-   "почему": {},
+   "почему": {
+    "linear": "по определению подгруппа GL₃(ℚ)"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -1664,9 +1774,13 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "polycyclic": true,
+    "linear": true
    },
-   "почему": {},
+   "почему": {
+    "linear": "кристаллографическая группа на плоскости, подгруппа аффинной GL₃(ℝ)"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -1763,7 +1877,8 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true
    },
    "почему": {},
    "подгруппы": [
@@ -1863,7 +1978,8 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": false,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true
    },
    "почему": {},
    "подгруппы": [
@@ -1948,10 +2064,13 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": false,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
    },
    "почему": {
-    "indecomposable": "прямое произведение по определению"
+    "indecomposable": "прямое произведение по определению",
+    "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром"
    },
    "подгруппы": [
     {
@@ -2035,7 +2154,8 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": true
    },
    "почему": {
     "indecomposable": "GL₂(ℤ) виртуально свободна, поэтому нет ℤ², и один множитель конечен; наибольшая конечная нормальная подгруппа {±E}, но её дополнение индекса 2 невозможно: оба характера GL₂(ℤ) → C₂ тривиальны на −E"
@@ -2083,7 +2203,10 @@
      "фактор": "1:1"
     }
    ],
-   "центр": "центр"
+   "центр": "центр",
+   "трудно": [
+    "residually-finite"
+   ]
   },
   {
    "id": "Z2adic",
@@ -2105,10 +2228,12 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": true
    },
    "почему": {
-    "indecomposable": "ℤ₂/2ℤ₂ ≅ C₂, поэтому в A ⊕ B один слагаемый 2-делим; он и q-делим для нечётных q, т. е. делим, а ℤ₂ редуцирована (⋂ 2ⁿℤ₂ = 0)"
+    "indecomposable": "ℤ₂/2ℤ₂ ≅ C₂, поэтому в A ⊕ B один слагаемый 2-делим; он и q-делим для нечётных q, т. е. делим, а ℤ₂ редуцирована (⋂ 2ⁿℤ₂ = 0)",
+    "linear": "абелева без кручения мощности ⩽ 𝔠 вкладывается в ℚ^(𝔠) ≅ ℝ, а ℝ — в унипотентные матрицы над ℝ"
    },
    "подгруппы": [
     {
@@ -2178,10 +2303,13 @@
     "divisible": true,
     "centerless": true,
     "residually-finite": false,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": true,
+    "hopfian": true
    },
    "почему": {
-    "divisible": "exp: sl₂(ℝ) → PSL₂(ℝ) сюръективна: из A и −A след одной ⩾ 0 > −2, а такие элементы SL₂(ℝ) лежат в образе exp; x = exp(X) ⇒ x = exp(X/n)ⁿ (в старой библиотеке было False)"
+    "divisible": "exp: sl₂(ℝ) → PSL₂(ℝ) сюръективна: из A и −A след одной ⩾ 0 > −2, а такие элементы SL₂(ℝ) лежат в образе exp; x = exp(X) ⇒ x = exp(X/n)ⁿ (в старой библиотеке было False)",
+    "linear": "присоединённое представление в GL₃(ℝ)"
    },
    "подгруппы": [
     {
@@ -2262,9 +2390,12 @@
     "periodic": false,
     "divisible": false,
     "centerless": true,
-    "residually-finite": false
+    "residually-finite": false,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "hopfian": "a ↦ a², t ↦ t — эпиморфизм с нетривиальным ядром [tat⁻¹, a] (Баумслаг–Солитэр, 1962)"
+   },
    "подгруппы": [
     {
      "id": "1",
@@ -2309,7 +2440,11 @@
     }
    ],
    "центр": "1",
-   "абелианизация": "Z"
+   "абелианизация": "Z",
+   "трудно": [
+    "residually-finite",
+    "hopfian"
+   ]
   },
   {
    "id": "Ainf",
@@ -2331,9 +2466,13 @@
     "divisible": false,
     "centerless": true,
     "residually-finite": false,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": false,
+    "hopfian": true
    },
-   "почему": {},
+   "почему": {
+    "linear": "A_∞ содержит все Aₙ, а точное представление Aₙ имеет степень ⩾ n − 2 над любым полем"
+   },
    "подгруппы": [
     {
      "id": "1",
@@ -2401,7 +2540,8 @@
     "divisible": false,
     "centerless": true,
     "residually-finite": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": true
    },
    "почему": {},
    "подгруппы": [
@@ -2498,9 +2638,14 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "linear": "элементарная абелева 2-группа мощности ⩽ 𝔠 — аддитивная группа поля характеристики 2, то есть унипотентные матрицы над ним",
+    "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром"
+   },
    "подгруппы": [
     {
      "id": "1",
@@ -2584,7 +2729,8 @@
     "divisible": false,
     "centerless": true,
     "residually-finite": false,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": true
    },
    "почему": {
     "residually-finite": "содержит бесконечную простую PSL₂(ℚ), а подгруппа ф. а. группы ф. а.",
@@ -2642,7 +2788,8 @@
     "divisible": false,
     "centerless": true,
     "residually-finite": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "polycyclic": false
    },
    "почему": {
     "indecomposable": "группа Григорчука почти бесконечна (все собственные факторы конечны), а A × B с бесконечной G даёт бесконечный фактор"
@@ -2678,7 +2825,11 @@
     }
    ],
    "центр": "1",
-   "абелианизация": "8:5"
+   "абелианизация": "8:5",
+   "трудно": [
+    "periodic",
+    "residually-finite"
+   ]
   },
   {
    "id": "Z12",
@@ -2700,13 +2851,16 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": true,
+    "hopfian": true
    },
    "почему": {
     "residually-finite": "⋂ 3ⁿℤ[1/2] = 0 и ℤ[1/2]/3ⁿℤ[1/2] ≅ C_{3ⁿ}",
     "divisible": "1 не делится на 3",
     "indecomposable": "подгруппа ℚ, ранг 1",
-    "fin-gen": "к. п. подгруппа ℚ циклична, а ℤ[1/2] не циклична"
+    "fin-gen": "к. п. подгруппа ℚ циклична, а ℤ[1/2] не циклична",
+    "hopfian": "эндоморфизмы — умножения на элементы ℤ[1/2], сюръективен только обратимый"
    },
    "подгруппы": [
     {
@@ -2782,13 +2936,17 @@
     "divisible": false,
     "centerless": true,
     "residually-finite": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "polycyclic": false,
+    "linear": true
    },
    "почему": {
     "residually-finite": "к. п. линейная группа (вкладывается в GL₂(ℚ)), теорема Мальцева",
     "nilpotent": "[t, a] = a, поэтому a лежит во всех членах нижнего центрального ряда",
     "centerless": "t-часть центрального элемента должна быть 0, а a-часть неподвижна под умножением на 2",
-    "indecomposable": "нетривиальная нормальная N пересекает ℤ[1/2]: иначе [N, ℤ[1/2]] ⊆ N ∩ ℤ[1/2] = 1 и N ⊆ C(ℤ[1/2]) = ℤ[1/2]; у A × B множители пересекали бы ℤ[1/2] по нетривиальным подгруппам с тривиальным пересечением, а в группе ранга 1 так не бывает"
+    "indecomposable": "нетривиальная нормальная N пересекает ℤ[1/2]: иначе [N, ℤ[1/2]] ⊆ N ∩ ℤ[1/2] = 1 и N ⊆ C(ℤ[1/2]) = ℤ[1/2]; у A × B множители пересекали бы ℤ[1/2] по нетривиальным подгруппам с тривиальным пересечением, а в группе ранга 1 так не бывает",
+    "polycyclic": "ℤ[1/2] — подгруппа, не к. п.",
+    "linear": "a ↦ (1 1; 0 1), t ↦ (2 0; 0 1) в GL₂(ℚ)"
    },
    "подгруппы": [
     {
@@ -2877,7 +3035,9 @@
     "divisible": true,
     "centerless": true,
     "residually-finite": false,
-    "indecomposable": true
+    "indecomposable": true,
+    "linear": true,
+    "hopfian": true
    },
    "почему": {
     "simple": "SO(3) абстрактно проста (классический факт, напр. Хамфрис; доказательство через то, что нормальная подгруппа с нетривиальным вращением содержит все вращения на малые углы)",
@@ -2938,6 +3098,9 @@
    "абелианизация": "1:1",
    "ссылки": [
     "стандартный пример"
+   ],
+   "трудно": [
+    "simple"
    ]
   },
   {
@@ -2960,7 +3123,8 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": true
    },
    "почему": {
     "perfect": "абелианизация ℤ"
@@ -3052,7 +3216,9 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "polycyclic": true,
+    "linear": true
    },
    "почему": {},
    "подгруппы": [
@@ -3141,7 +3307,9 @@
     "divisible": false,
     "centerless": false,
     "residually-finite": true,
-    "indecomposable": false
+    "indecomposable": false,
+    "polycyclic": true,
+    "linear": true
    },
    "почему": {},
    "подгруппы": [
@@ -3225,6 +3393,426 @@
    "центр": "центр",
    "ссылки": [
     "прямое произведение"
+   ]
+  },
+  {
+   "id": "SumS3",
+   "имя": "⊕_ℤ S₃",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "indecomposable": false,
+    "hopfian": false
+   },
+   "почему": {
+    "residually-finite": "подгруппа ∏S₃, а произведение конечных ф. а.",
+    "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "SumS3"
+    },
+    {
+     "id": "все",
+     "имя": "⊕S₃",
+     "≅": "SumS3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "ссылки": [
+    "прямая сумма"
+   ]
+  },
+  {
+   "id": "S3wrZ",
+   "имя": "S₃ ≀ ℤ",
+   "заметка": "Ограниченное сплетение. База ⊕S₃ и фактор ℤ ф. а., а сама группа нет (Грюнберг).",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": false
+   },
+   "почему": {
+    "residually-finite": "возьмём неперестановочные a, a′ ∈ S₃ в координате 0. В любом конечном факторе образ сдвига b имеет конечный порядок m, поэтому [a, a′] и [a, b⁻ᵐa′bᵐ] = 1 имеют один образ: [a, a′] ≠ 1 лежит в ядре каждого конечного фактора (K. W. Gruenberg, Residual properties of infinite soluble groups, 1957)",
+    "centerless": "центр базы тривиален, а элемент вне базы двигает координаты",
+    "fin-gen": "порождается S₃ в координате 0 и сдвигом"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "S3wrZ"
+    },
+    {
+     "id": "база",
+     "имя": "⊕_ℤ S₃",
+     "≅": "SumS3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": false,
+      "finite-index": false
+     },
+     "фактор": "Z",
+     "почему": {
+      "characteristic": "это множество элементов конечного порядка"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "S₃ ≀ ℤ",
+     "≅": "S3wrZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "ссылки": [
+    "K. W. Gruenberg, Residual properties of infinite soluble groups, Proc. LMS 1957"
+   ],
+   "трудно": [
+    "residually-finite"
+   ]
+  },
+  {
+   "id": "Sp4Z",
+   "имя": "Sp₄(ℤ)",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "linear": true
+   },
+   "почему": {
+    "residually-finite": "к. п. линейная (Мальцев); или через конгруэнц-подгруппы",
+    "centerless": "−E центральна",
+    "solvable": "содержит F₂",
+    "simple": "конгруэнц-подгруппы нормальны"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "Sp4Z"
+    },
+    {
+     "id": "центр",
+     "имя": "{±E}",
+     "≅": "2:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     }
+    },
+    {
+     "id": "все",
+     "имя": "Sp₄(ℤ)",
+     "≅": "Sp4Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "ссылки": [
+    "стандартный пример"
+   ],
+   "трудно": [
+    "residually-finite"
+   ]
+  },
+  {
+   "id": "DeligneSp4",
+   "имя": "Sp̃₄(ℤ)/4ℤ (Делинь)",
+   "заметка": "Пусть Sp̃₄(ℤ) — прообраз Sp₄(ℤ) в универсальной накрывающей Sp₄(ℝ), центральное расширение с ядром ℤ. По Делиню каждая подгруппа конечного индекса в Sp̃₄(ℤ) содержит 2ℤ. Поэтому у фактора по 4ℤ центральная подгруппа C₄ = ℤ/4ℤ, а элемент 2 ∈ ℤ/4ℤ лежит во всех подгруппах конечного индекса.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "torsion-free": false,
+    "periodic": false,
+    "centerless": false,
+    "residually-finite": false
+   },
+   "почему": {
+    "residually-finite": "P. Deligne, Extensions centrales non résiduellement finies de groupes arithmétiques, C. R. Acad. Sci. 1978",
+    "centerless": "ℤ/4ℤ центральна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "DeligneSp4"
+    },
+    {
+     "id": "C4",
+     "имя": "ℤ/4ℤ",
+     "≅": "4:1",
+     "свойства": {
+      "normal": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "Sp4Z"
+    },
+    {
+     "id": "все",
+     "имя": "Sp̃₄(ℤ)/4ℤ",
+     "≅": "DeligneSp4",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "ссылки": [
+    "P. Deligne, C. R. Acad. Sci. Paris 287 (1978)"
+   ],
+   "трудно": [
+    "residually-finite"
+   ]
+  },
+  {
+   "id": "AutSumC2",
+   "имя": "Aut(⊕C₂) = GL(ℵ₀, 𝔽₂)",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "torsion-free": false,
+    "periodic": false,
+    "centerless": true,
+    "residually-finite": false
+   },
+   "почему": {
+    "residually-finite": "перестановки базиса дают Sym(ℕ) ⊃ A_∞, бесконечную простую",
+    "fin-gen": "несчётна",
+    "periodic": "перестановка базиса с бесконечным циклом",
+    "centerless": "центр GL(V) — скаляры, над 𝔽₂ это 1",
+    "simple": "финитарные автоморфизмы образуют собственную нормальную подгруппу"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "AutSumC2"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(⊕C₂)",
+     "≅": "AutSumC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "ссылки": [
+    "стандартный пример"
+   ]
+  },
+  {
+   "id": "AutF3",
+   "имя": "Aut(F₃)",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "linear": false,
+    "polycyclic": false
+   },
+   "почему": {
+    "residually-finite": "Aut к. п. ф. а. группы ф. а. (G. Baumslag, 1963)",
+    "linear": "E. Formanek, C. Procesi, The automorphism group of a free group is not linear, J. Algebra 1992",
+    "perfect": "абелианизация C₂ (знак определителя на Z³)",
+    "centerless": "Inn(F₃) ≅ F₃ без центра, и централизатор Inn тривиален",
+    "solvable": "содержит Inn(F₃) ≅ F₃"
+   },
+   "трудно": [
+    "residually-finite",
+    "linear"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "AutF3"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(F₃)",
+     "≅": "AutF3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "ссылки": [
+    "E. Formanek, C. Procesi, 1992"
    ]
   }
  ]

@@ -22,13 +22,16 @@ import re
 import sys
 from collections import Counter
 
-from .library import Library, Scene
+from .library import Library, Search
 from .logic import DATA, Graph, Theory, Vocab, decide
 
 ETALON = DATA / "etalon" / "эталон.jsonl"
-SORTS = {"grp": {"Grp": ("Grp.obj", None), "Sub": ("Grp.sub", "ambient")}}
+SORTS = {"grp": {"Grp": ("Grp.obj", None), "Sub": ("Grp.sub", "ambient"), "Fam": ("Grp.fam", None),
+                 "Mor": ("Grp.mor", ("dom", "cod"))}}
 # Короткие обозначения конструкций в записи эталона.
-OPS = {"grp": {"Z": "center", "core": "core", "Inn": "inn"}}
+OPS = {"grp": {"Z": "center", "Inn": "inn", "Aut": "aut", "ab": "ab", "∏": "prod-fam", "⊕": "sum-fam",
+               "ker": "ker", "im": "im", "commutator": "commutator", "center": "center"}}
+INFIX = {"grp": {"×": "prod", "∗": "freeprod", "/": "quotient"}}
 
 
 class Unsupported(Exception):
@@ -53,11 +56,13 @@ def term(g, s, names, section):
     s = s.strip()
     if s in names:
         return names[s]
-    parts = split_top(s, "/")
-    if len(parts) == 2:
-        t = g.make("quotient", [term(g, p, names, section) for p in parts])
+    for sym, op in INFIX[section].items():
+        parts = split_top(s, sym)
+        if len(parts) == 2:
+            t = g.make(op, [term(g, p, names, section) for p in parts])
+            break
     else:
-        m = re.fullmatch(r"(\w[\w-]*)\((.*)\)", s)
+        m = re.fullmatch(r"(\w[\w-]*|∏|⊕)\s*\((.*)\)", s) or re.fullmatch(r"(∏|⊕)\s*(\w+)", s)
         if not m or m.group(1) not in OPS[section]:
             raise Unsupported(f"терм {s!r}")
         t = g.make(OPS[section][m.group(1)],
@@ -89,14 +94,21 @@ def scheme(vocab, fact):
     g, names, prem = Graph(vocab), {}, []
     for decl in fact["условие"].split(";"):
         head, _, lits = decl.partition("|")
-        m = re.fullmatch(r"\s*∀\s*(\w+)\s*:\s*(\w+)(?:\((\w+)\))?\s*", head)
+        m = re.fullmatch(r"\s*∀\s*(\w+)\s*:\s*(\w+)(?:\(([\w\s,]+)\))?\s*", head)
         if not m:
             raise Unsupported(f"объявление {head!r}")
-        name, sort, parent = m.groups()
+        name, sort, parents = m.groups()
         if sort not in SORTS[section]:
             raise Unsupported(f"сорт {sort}")
         s, link = SORTS[section][sort]
-        names[name] = g.var(name, s, **({link: names[parent]} if parent else {}))
+        links = {}
+        if parents:
+            ps = [x.strip() for x in parents.split(",")]
+            keys = link if isinstance(link, tuple) else (link,)
+            if len(ps) != len(keys):
+                raise Unsupported(f"объявление {head!r}")
+            links = {k: names[x] for k, x in zip(keys, ps)}
+        names[name] = g.var(name, s, **links)
         prem += [literal(g, x, names, section) for x in split_top(lits, ",")]
     goal = literal(g, fact["цель"], names, section)
     return g, prem, goal
@@ -117,7 +129,7 @@ def judge(answer, kind):
 
 def run(facts, grow=1, search=True):
     vocabs, report = {}, []
-    lib = scene = None
+    lib = None
     for f in facts:
         row = {"id": f["id"], "ответ": f["ответ"]}
         try:
@@ -126,15 +138,16 @@ def run(facts, grow=1, search=True):
         except (Unsupported, FileNotFoundError) as e:
             report.append({**row, "итог": "не разбирается", "почему": str(e)})
             continue
-        verdict = decide(Theory(g, grow=grow), prem, goal)
+        theory = Theory(g, grow=grow)
+        verdict = decide(theory, prem, goal)
         kind, core = verdict.kind, verdict.core
         if kind == "неизвестно" and search and f["раздел"] == "grp":
-            if scene is None:
-                lib, scene = Library(), Scene(v)
-            found = scene.witnesses(lib, prem, goal)
+            lib = lib or Library()
+            found = Search(g, theory, lib).witnesses(prem, goal)
             if found:
                 kind = "опровергается"
-                row["контрпример"] = [f"G = {w['имя G']}, N = {w['имя N']}" for w in found]
+                row["контрпример"] = [", ".join(f"{k} = {v}" for k, v in w["подстановка"].items())
+                                      for w in found]
         row.update(итог=judge(f["ответ"], kind), вердикт=kind,
                    ядро=[f"{'' if val else '¬'}{a[1]}({', '.join(map(str, a[2:]))})"
                          for a, val in core or []])

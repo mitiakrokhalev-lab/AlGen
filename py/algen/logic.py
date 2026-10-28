@@ -78,6 +78,10 @@ class Vocab:
         return v
 
     def apply(self, patch):
+        for p in patch.get("свойства", []):
+            if p["id"] in self.props:
+                raise KeyError(f"свойство {p['id']} уже есть в словаре")
+            self.props[p["id"]] = p["sort"] if isinstance(p["sort"], list) else [p["sort"]]
         drop = {x["id"] for x in patch.get("снять", [])}
         missing = drop - {r["id"] for r in self.rules}
         if missing:

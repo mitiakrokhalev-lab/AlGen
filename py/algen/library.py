@@ -21,8 +21,8 @@ import random
 import sys
 from multiprocessing import Pool
 
-from .finite import load as load_finite
-from .logic import DATA, Graph, Theory, Vocab
+from .finite import load as load_finite, load_products
+from .logic import DATA, App, Graph, Theory, Var, Vocab
 
 INFINITE = DATA / "infinite" / "grp.json"
 SUB_PROPS = ("normal", "characteristic", "maximal", "whole", "central", "finite-index")
@@ -42,6 +42,10 @@ class Library:
         with open(infinite, encoding="utf-8") as f:
             for r in json.load(f)["группы"]:
                 self.obj[r["id"]] = {"key": r["id"], "конечная": False, **r}
+        self.prod = load_products()
+        for k, o in self.obj.items():
+            for other, p in o.get("произведения", {}).items():
+                self.prod[k, other] = self.prod[other, k] = p
         for o in self.obj.values():
             for s in o["подгруппы"] or []:
                 for k in (s["≅"], s.get("фактор")):
@@ -153,9 +157,23 @@ class Scene:
             if all(vals.get(a) == v for a, v in premises) and vals.get(goal[0]) == (not goal[1]):
                 s = o["подгруппы"][sub]
                 out.append({"G": key, "имя G": o.get("имя"), "N": s["id"],
-                            "имя N": s.get("имя", lib.obj[s["≅"]].get("имя"))})
+                            "имя N": s.get("имя", lib.obj[s["≅"]].get("имя")),
+                            "трудно": self.hard(lib, key, sub, need)})
                 if len(out) >= limit:
                     break
+        return out
+
+    def hard(self, lib, key, sub, atoms):
+        """Какие из атомов пары держатся на значениях, помеченных «трудно»:
+        сами по себе теоремы или требуют идеи."""
+        o = lib.obj[key]
+        s = o["подгруппы"][sub]
+        owner = {self.G: o, self.N: lib.obj[s["≅"]], self.Q: lib.obj.get(s.get("фактор"))}
+        out = []
+        for a in atoms:
+            rec = owner.get(a[2]) if a[0] == "p" else None
+            if rec and a[1] in rec.get("трудно", ()):
+                out.append(f"{a[1]}({rec.get('имя', rec['key'])})")
         return out
 
     def atoms(self):
@@ -165,9 +183,135 @@ class Scene:
 
 GROUP_PROPS = ("trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable",
                "nilpotent", "perfect", "torsion-free", "periodic", "divisible", "centerless",
-               "residually-finite", "indecomposable")
+               "residually-finite", "indecomposable", "hopfian", "linear", "polycyclic")
 
 _LIB = _SCENE = None
+
+
+# --- поиск контрпримера на произвольной схеме -----------------------------------
+
+
+class Search:
+    """Контрпример к «посылки ⇒ цель» на графе условия.
+
+    Переменные схемы пробегают библиотеку: группа — объекты, подгруппа —
+    записанные подгруппы уже выбранной группы. Построенные термы, которые
+    библиотека знает (фактор, произведение, Aut, центр, коммутант), получают
+    записанные значения; про остальные значения выводит SAT-решатель из
+    записанных и базы правил. Подстановка — контрпример, если из записей
+    следуют все посылки и отрицание цели."""
+
+    def __init__(self, graph, theory, lib, max_order=16):
+        self.g, self.T, self.lib = graph, theory, lib
+        self.s = theory.solver()
+        self.vars = [t for t in graph.terms if isinstance(t, Var)]
+        many = sum(1 for t in self.vars if graph.terms[t].sort == "Grp.obj") > 1
+        # Для схем с несколькими группами — бесконечные и малые конечные.
+        self.objects = [k for k, o in lib.obj.items()
+                        if not many or not o["конечная"] or int(k.split(":")[0]) <= max_order]
+
+    def _assign(self, i, env):
+        if i == len(self.vars):
+            yield dict(env)
+            return
+        t = self.vars[i]
+        info = self.g.terms[t]
+        if info.sort == "Grp.obj":
+            for k in self.objects:
+                env[t] = ("obj", k)
+                yield from self._assign(i + 1, env)
+        elif info.sort == "Grp.sub":
+            amb = env.get(info.links.get("ambient"))
+            if amb is None or amb[0] != "obj":
+                return
+            for j in range(len(self.lib.obj[amb[1]]["подгруппы"] or [])):
+                env[t] = ("sub", amb[1], j)
+                yield from self._assign(i + 1, env)
+        # прочие сорта (семейства, гомоморфизмы) библиотека пока не перебирает
+        env.pop(t, None)
+
+    def _image(self, t, env):
+        if t in env:
+            return env[t]
+        if not isinstance(t, App):
+            return None
+        args = [self._image(a, env) for a in t.args]
+        lib = self.lib
+        if t.op == "quotient" and args[0] and args[1] and args[1][0] == "sub":
+            q = lib.obj[args[1][1]]["подгруппы"][args[1][2]].get("фактор")
+            return ("obj", q) if q else None
+        if t.op in ("prod", "freeprod") and all(a and a[0] == "obj" for a in args):
+            p = lib.prod.get((args[0][1], args[1][1])) if t.op == "prod" else None
+            return ("obj", p) if p else None
+        if t.op in ("aut", "ab") and args[0] and args[0][0] == "obj":
+            k = lib.obj[args[0][1]].get({"aut": "aut", "ab": "абелианизация"}[t.op])
+            return ("obj", k) if k else None
+        if t.op in ("center", "commutator") and args[0] and args[0][0] == "obj":
+            o = lib.obj[args[0][1]]
+            sid = o.get({"center": "центр", "commutator": "коммутант"}[t.op])
+            subs = o["подгруппы"] or []
+            idx = next((j for j, x in enumerate(subs) if x["id"] == sid), None)
+            return ("sub", args[0][1], idx) if idx is not None else None
+        return None
+
+    def facts(self, env, terms=None):
+        """{атом: значение} по записям библиотеки и {атом: трудное значение}."""
+        out, hard, subs = {}, {}, {}
+        for t in terms or self.g.terms:
+            im = self._image(t, env)
+            if im is None:
+                continue
+            if im[0] == "obj":
+                rec, rel = self.lib.obj[im[1]], {}
+            else:
+                s = self.lib.obj[im[1]]["подгруппы"][im[2]]
+                rec, rel = self.lib.obj[s["≅"]], s["свойства"]
+                subs[t] = im
+            for p, v in list(rec["свойства"].items()) + list(rel.items()):
+                if self.g.v.prop_fits(p, self.g.terms[t].sort) or p in rel:
+                    out[("p", p, t)] = v
+                    if p in rec.get("трудно", ()) and p not in rel:
+                        hard[("p", p, t)] = f"{p}({rec.get('имя', rec['key'])})"
+        items = list(subs.items())
+        for i, (a, ia) in enumerate(items):
+            for b, ib in items[i + 1:]:
+                if ia[1] == ib[1] and self.g.terms[a].links.get("ambient") == self.g.terms[b].links.get("ambient"):
+                    out[("r", "eq-sub", *sorted((a, b), key=str))] = ia[2] == ib[2]
+        return out, hard
+
+    def entails(self, assume, atom, value):
+        l = self.T.lit(atom, value)
+        if l is None:
+            return True
+        if l is False:
+            return False
+        return not self.s.solve(assumptions=assume + [-l])
+
+    def witnesses(self, premises, goal, limit=3):
+        out = []
+        asked = {a[2] for a, _ in premises} | {goal[0][2]}
+        for env in self._assign(0, {}):
+            quick, _ = self.facts(env, asked)  # сначала только термы вопроса
+            if any(quick.get(a, v) != v for a, v in premises) or quick.get(goal[0]) == goal[1]:
+                continue
+            facts, hard = self.facts(env)
+            assume = [l for a, v in facts.items() if (l := self.T.lit(a, v)) not in (None, False)]
+            if not self.s.solve(assumptions=assume):
+                continue  # записи противоречат базе: это ловит сверка библиотеки
+            if all(self.entails(assume, a, v) for a, v in premises) and self.entails(assume, goal[0], not goal[1]):
+                names = {str(t): self._name(im) for t, im in env.items()}
+                used = [hard[a] for a in [x for x, _ in premises] + [goal[0]] if a in hard]
+                out.append({"подстановка": names, "трудно": used})
+                if len(out) >= limit:
+                    break
+        return out
+
+    def _name(self, im):
+        if im[0] == "obj":
+            o = self.lib.obj[im[1]]
+            return o.get("имя", im[1])
+        s = self.lib.obj[im[1]]["подгруппы"][im[2]]
+        return s.get("имя", self.lib.obj[s["≅"]].get("имя"))
 
 
 def _init():

@@ -98,6 +98,17 @@ def load_products(path=PRODUCTS):
     return out
 
 
+# Свойства, добавленные в словарь после сборки таблицы. Для конечной группы
+# их значение следует из уже посчитанных: конечная группа хопфова и линейна
+# (регулярное представление), полициклическая тогда и только тогда, когда
+# разрешима.
+FINITE_DERIVED = {
+    "hopfian": lambda p: True,
+    "linear": lambda p: True,
+    "polycyclic": lambda p: p["solvable"],
+}
+
+
 def load(path=OUT, extra=False):
     """Словарь key → запись группы; extra — с группами из grp-extra.jsonl."""
     with open(path) as f:
@@ -105,6 +116,9 @@ def load(path=OUT, extra=False):
     if extra and EXTRA.exists():
         with EXTRA.open() as f:
             out.update((g["key"], g) for g in map(json.loads, f))
+    for g in out.values():
+        for p, f in FINITE_DERIVED.items():
+            g["props"].setdefault(p, f(g["props"]))
     return out
 
 
