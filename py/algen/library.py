@@ -55,6 +55,120 @@ class Library:
     def infinite(self):
         return [k for k, o in self.obj.items() if not o["конечная"]]
 
+    def synthesize_products(self, vocab, max_order=8):
+        """Добавить прямые произведения A × B для бесконечных A и B из
+        библиотеки и малых конечных (хотя бы один множитель бесконечен).
+
+        Значения A × B не записываются рукой: решатель выводит их из значений
+        множителей по правилам базы, неизвестное остаётся неизвестным.
+        Подгруппы произведения — 1, A × 1, 1 × B, всё, а также H × B и A × K
+        для записанных подгрупп H ⩽ A и K ⩽ B; их свойства вложения следуют
+        из устройства прямого произведения."""
+        g = Graph(vocab)
+        X, Y = g.var("X", "Grp.obj"), g.var("Y", "Grp.obj")
+        P = g.given(g.make("prod", [X, Y]))
+        T = Theory(g, grow=1)
+        s = T.solver()
+        base = [k for k, o in self.obj.items() if not o.get("синтез") and (
+            not o["конечная"] or 1 < int(k.split(":")[0]) <= max_order
+            or (o["свойства"].get("simple") and not o["свойства"].get("abelian")))]
+        prime_cyclic = {k for k, o in self.obj.items() if o["конечная"] and o["свойства"].get("simple")
+                        and o["свойства"].get("abelian")}
+
+        def small(a, b):
+            oa, ob = self.obj[a], self.obj[b]
+            return oa["конечная"] and ob["конечная"] and int(a.split(":")[0]) * int(b.split(":")[0]) <= 100
+
+        def product(a, b):
+            """Ключ A × B: из таблицы, из библиотеки или построенный заново."""
+            if (a, b) in self.prod:
+                return self.prod[a, b]
+            if a == "1:1" or b == "1:1":
+                return b if a == "1:1" else a
+            if small(a, b):
+                return None  # такое произведение есть в таблице GAP, но не размечено
+            oa, ob = self.obj[a], self.obj[b]
+            key = f"{a}×{b}"
+            assume = []
+            for t, o in ((X, oa), (Y, ob)):
+                for p, v in o["свойства"].items():
+                    l = T.lit(("p", p, t), v)
+                    if l not in (None, False):
+                        assume.append(l)
+            if not s.solve(assumptions=assume):
+                raise ValueError(f"{key}: значения множителей противоречат базе")
+            props = {}
+            for p in GROUP_PROPS:
+                l = T.lit(("p", p, P))
+                if not s.solve(assumptions=assume + [-l]):
+                    props[p] = True
+                elif not s.solve(assumptions=assume + [l]):
+                    props[p] = False
+            hard = sorted(set(oa.get("трудно", [])) | set(ob.get("трудно", [])))
+
+            def factor(own, other, okey, name):
+                swap = {"characteristic": False} if a == b and not oa["свойства"].get("trivial") else {}
+                return {"id": name, "имя": name, "≅": own, "фактор": okey,
+                        "свойства": {**swap, "normal": True, "whole": False,
+                                     "finite-index": bool(other["свойства"].get("finite")),
+                                     "maximal": okey in prime_cyclic,
+                                     **central(self.obj[own]["свойства"].get("abelian"))}}
+            self.obj[key] = {
+                "key": key, "имя": f"{oa.get('имя', a)} × {ob.get('имя', b)}", "конечная": False,
+                "синтез": True, "свойства": props, "трудно": hard, "почему": {},
+                "подгруппы": [
+                    {"id": "1", "≅": "1:1", "фактор": key,
+                     "свойства": {"normal": True, "characteristic": True, "maximal": False, "whole": False,
+                                  "central": True, "finite-index": bool(props.get("finite"))}},
+                    factor(a, ob, b, "A × 1"), factor(b, oa, a, "1 × B"),
+                    {"id": "все", "≅": key, "фактор": "1:1",
+                     "свойства": {"normal": True, "characteristic": True, "maximal": False, "whole": True,
+                                  "finite-index": True}}]}
+            self.prod[a, b] = self.prod[b, a] = key
+            return key
+
+        def central(v):
+            return {"central": True} if v else {"central": False} if v is False else {}
+
+        made = []
+        for i, a in enumerate(base):
+            for b in base[i:]:
+                if (a, b) in self.prod or small(a, b):
+                    continue
+                made.append((a, b, product(a, b)))
+        s.delete()
+        # H × B и A × K: подгруппы множителя, умноженные на другой множитель.
+        # Новые произведения H × B строятся здесь же, но своих H × B не получают.
+        s = T.solver()
+        for a, b, key in made:
+            subs = self.obj[key]["подгруппы"]
+            for own, other, side in ((a, b, 0), (b, a, 1)):
+                if a == b and side == 1:
+                    continue  # те же подгруппы с точностью до перестановки множителей
+                for h in self.obj[own]["подгруппы"] or []:
+                    hp = h["свойства"]
+                    if hp.get("whole") or h["≅"] == "1:1":
+                        continue
+                    iso = product(h["≅"], other) if side == 0 else product(other, h["≅"])
+                    if iso is None:
+                        continue
+                    op = self.obj[other]["свойства"]
+                    rec = {"id": f"{h['id']} × B" if side == 0 else f"A × {h['id']}", "≅": iso,
+                           "свойства": {"normal": hp.get("normal"), "whole": False,
+                                        "maximal": hp.get("maximal"),
+                                        "finite-index": hp.get("finite-index"),
+                                        **central(hp.get("central") and op.get("abelian")
+                                                  if hp.get("central") is not False and op.get("abelian") is not False
+                                                  else False)}}
+                    if hp.get("normal") is False:
+                        rec["свойства"]["characteristic"] = False
+                    if hp.get("normal") and h.get("фактор"):
+                        rec["фактор"] = h["фактор"]
+                    rec["свойства"] = {k: v for k, v in rec["свойства"].items() if v is not None}
+                    subs.insert(len(subs) - 1, rec)
+        s.delete()
+        return len(made)
+
 
 # --- сцена G, N, G/N -----------------------------------------------------------
 
@@ -129,10 +243,14 @@ class Scene:
                 out[a] = False
         return out
 
-    def values(self, lib, key, sub, need=None):
+    def values(self, lib, key, sub, need=None, easy=False):
         """Значения атомов пары (G, N): записанные и выведенные из них.
-        need — какие атомы нужны; выводятся только недостающие из них."""
+        need — какие атомы нужны; выводятся только недостающие из них.
+        easy — не опираться на значения с пометкой «трудно»."""
         facts = self.facts(lib, key, sub)
+        if easy:
+            hard = self.hard_atoms(lib, key, sub)
+            facts = {a: x for a, x in facts.items() if a not in hard}
         vals = {a: v for a, (v, _) in facts.items()}
         missing = [a for a in (need or self.atoms()) if a not in vals]
         if missing:
@@ -162,6 +280,15 @@ class Scene:
                 if len(out) >= limit:
                     break
         return out
+
+    def hard_atoms(self, lib, key, sub):
+        """Атомы пары, записанные значения которых помечены «трудно»."""
+        o = lib.obj[key]
+        owner = [(self.G, o)]
+        if sub is not None:
+            s = o["подгруппы"][sub]
+            owner += [(self.N, lib.obj[s["≅"]]), (self.Q, lib.obj.get(s.get("фактор")))]
+        return {("p", p, t) for t, rec in owner if rec for p in rec.get("трудно", ())}
 
     def hard(self, lib, key, sub, atoms):
         """Какие из атомов пары держатся на значениях, помеченных «трудно»:
@@ -208,7 +335,8 @@ class Search:
         many = sum(1 for t in self.vars if graph.terms[t].sort == "Grp.obj") > 1
         # Для схем с несколькими группами — бесконечные и малые конечные.
         self.objects = [k for k, o in lib.obj.items()
-                        if not many or not o["конечная"] or int(k.split(":")[0]) <= max_order]
+                        if not many or (not o.get("синтез") and (
+                            not o["конечная"] or int(k.split(":")[0]) <= max_order))]
 
     def _assign(self, i, env):
         if i == len(self.vars):
