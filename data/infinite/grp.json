@@ -175,6 +175,63 @@
    "абелианизация": "ZxZ"
   },
   {
+   "id": "Z3",
+   "имя": "ℤ³",
+   "заметка": "Свободная абелева ранга 3.",
+   "свойства": {
+    "trivial": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "perfect": false,
+    "periodic": false,
+    "linear": true,
+    "abelian": true,
+    "cyclic": false,
+    "nilpotent": true,
+    "centerless": false,
+    "indecomposable": false,
+    "fin-gen": true,
+    "torsion-free": true,
+    "divisible": false,
+    "residually-finite": true,
+    "polycyclic": true,
+    "hopfian": true
+   },
+   "почему": {},
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z3"
+    },
+    {
+     "id": "все",
+     "имя": "ℤ³",
+     "≅": "Z3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
+  },
+  {
    "id": "ZxC2",
    "имя": "ℤ × C₂",
    "свойства": {
@@ -1364,6 +1421,21 @@
      "почему": "прообраз максимальной подгруппы при сюръекции максимален, индекс тот же (бесконечный); к. п. подгруппа лежит в ⟨x₁, …, xₙ⟩ ⊊ ⟨x₁, …, xₙ₊₁⟩ ⊊ F_∞ и не максимальна, поэтому это свободная группа бесконечного ранга"
     },
     {
+     "id": "коммутант",
+     "имя": "F_∞′",
+     "≅": "Foo",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Zoo",
+     "почему": "фактор ⊕ℤ; свободная группа бесконечного ранга (Шрайер: подгруппа свободной свободна; бесконечного индекса и нормальна ≠ 1, значит, не конечно порождена)"
+    },
+    {
      "id": "все",
      "имя": "F_∞",
      "≅": "Foo",
@@ -1379,7 +1451,8 @@
     }
    ],
    "центр": "1",
-   "абелианизация": "Zoo"
+   "абелианизация": "Zoo",
+   "коммутант": "коммутант"
   },
   {
    "id": "Zoo",
@@ -1746,6 +1819,66 @@
    "aut": "AutSumC2"
   },
   {
+   "id": "SumC3",
+   "имя": "⊕C₃",
+   "заметка": "Счётная элементарная абелева 3-группа.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "polycyclic": false,
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false
+   },
+   "почему": {
+    "linear": "унитреугольные [[1, a], [0, 1]], a ∈ 𝔽₃[t]",
+    "hopfian": "сдвиг базиса e₁ ↦ 0, eᵢ ↦ eᵢ₋₁"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC3"
+    },
+    {
+     "id": "все",
+     "имя": "⊕C₃",
+     "≅": "SumC3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
+  },
+  {
    "id": "QxQ",
    "имя": "ℚ²",
    "заметка": "Нужна как фактор UT₃(ℚ) по центру: именно она показывает, что финитная аппроксимируемость факторами НЕ наследуется.",
@@ -1819,6 +1952,65 @@
    "центр": "все",
    "коммутант": "0",
    "абелианизация": "QxQ"
+  },
+  {
+   "id": "Q3",
+   "имя": "ℚ³",
+   "заметка": "Векторное пространство размерности 3 над ℚ.",
+   "свойства": {
+    "trivial": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "perfect": false,
+    "periodic": false,
+    "linear": true,
+    "abelian": true,
+    "cyclic": false,
+    "nilpotent": true,
+    "centerless": false,
+    "indecomposable": false,
+    "fin-gen": false,
+    "torsion-free": true,
+    "divisible": true,
+    "residually-finite": false,
+    "polycyclic": false,
+    "hopfian": true
+   },
+   "почему": {
+    "hopfian": "сюръективный эндоморфизм ℚ-линеен (ℤ-линейное отображение делимых групп без кручения), а сюръективное линейное отображение ℚ³ → ℚ³ инъективно"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Q3"
+    },
+    {
+     "id": "все",
+     "имя": "ℚ³",
+     "≅": "Q3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
   },
   {
    "id": "UT3Q",
@@ -1910,6 +2102,176 @@
    "центр": "центр",
    "коммутант": "центр",
    "абелианизация": "QxQ"
+  },
+  {
+   "id": "UT4Q",
+   "имя": "UT₄(ℚ)",
+   "заметка": "Унитреугольные рациональные матрицы 4 × 4: делимая нильпотентная ступени 3.",
+   "свойства": {
+    "trivial": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "perfect": false,
+    "periodic": false,
+    "linear": true,
+    "abelian": false,
+    "cyclic": false,
+    "centerless": false,
+    "fin-gen": false,
+    "nilpotent": true,
+    "torsion-free": true,
+    "divisible": true,
+    "residually-finite": false,
+    "polycyclic": false,
+    "indecomposable": true,
+    "hopfian": true
+   },
+   "почему": {
+    "divisible": "u = exp(X) для нильпотентной X, и u = exp(X/n)ⁿ, а exp(X/n) рационален",
+    "residually-finite": "центр ℚ: делимая группа не имеет нетривиальных конечных факторов",
+    "indecomposable": "если G = A × B, то ℚ ≅ Z(A) × Z(B), так что Z(B) = 1, и нильпотентная B тривиальна",
+    "hopfian": "по Мальцеву эндоморфизмы — ℚ-линейные отображения алгебры Ли размерности 6; сюръективное инъективно"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "UT4Q"
+    },
+    {
+     "id": "центр",
+     "имя": "⟨e₁₄⟩ над ℚ",
+     "≅": "Q",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "центр UTₙ — угловая клетка"
+    },
+    {
+     "id": "коммутант",
+     "имя": "{I + a e₁₃ + b e₂₄ + c e₁₄} над ℚ",
+     "≅": "Q3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Q3",
+     "почему": "как у UT₄(ℤ): матрицы с нулевой первой наддиагональю, ≅ ℚ³, не централен; фактор ℚ³"
+    },
+    {
+     "id": "все",
+     "имя": "UT₄(ℚ)",
+     "≅": "UT4Q",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "коммутант"
+  },
+  {
+   "id": "ExtraInf",
+   "имя": "E_∞ (экстраспециальная 2-группа счётного ранга)",
+   "заметка": "Центральное произведение счётного числа D₈: ⟨xᵢ, yᵢ, z | xᵢ² = yᵢ² = z² = 1, [xᵢ, yᵢ] = z, остальные коммутируют⟩. Центр = коммутант = C₂.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "fin-gen": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": false,
+    "polycyclic": false,
+    "indecomposable": true,
+    "hopfian": true
+   },
+   "почему": {
+    "residually-finite": "нетривиальная нормальная подгруппа нильпотентной группы пересекает центр C₂ = ⟨z⟩, то есть содержит z; подгруппы конечного индекса нетривиальны",
+    "hopfian": "нетривиальное ядро содержит z = [x₁, y₁], и фактор абелев",
+    "indecomposable": "если G = A × B, то C₂ = Z(A) × Z(B), так что, скажем, Z(B) = 1, и нильпотентная B тривиальна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "ExtraInf"
+    },
+    {
+     "id": "центр",
+     "имя": "⟨z⟩",
+     "≅": "2:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC2",
+     "почему": "центр и коммутант: [xᵢ, yᵢ] = z; G/⟨z⟩ ≅ ⊕C₂ абелева, а форма коммутирования невырождена"
+    },
+    {
+     "id": "все",
+     "имя": "E_∞ (экстраспециальная 2-группа счётного ранга)",
+     "≅": "ExtraInf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "центр"
   },
   {
    "id": "Klein",
@@ -2679,6 +3041,21 @@
      }
     },
     {
+     "id": "коммутант",
+     "имя": "⟨⟨a⟩⟩",
+     "≅": "BS23c",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z",
+     "почему": "BS(2, 3)ᵃᵇ = ℤ (a ↦ 0, t ↦ 1)"
+    },
+    {
      "id": "все",
      "имя": "BS(2,3)",
      "≅": "BS23",
@@ -2698,6 +3075,64 @@
    "трудно": [
     "residually-finite",
     "hopfian"
+   ],
+   "коммутант": "коммутант"
+  },
+  {
+   "id": "BS23c",
+   "имя": "BS(2, 3)′",
+   "заметка": "Ядро BS(2, 3) → ℤ: дерево групп ⟨aᵢ⟩ ≅ ℤ с aᵢ₊₁² = aᵢ³.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": true,
+    "periodic": false,
+    "polycyclic": false,
+    "divisible": false
+   },
+   "почему": {
+    "fin-gen": "объединение строго возрастающей цепочки амальгам ⟨a₋ₙ, …, aₙ⟩",
+    "free": "содержит ⟨a₀, a₁ | a₁² = a₀³⟩ — группу трилистника с нетривиальным центром",
+    "perfect": "отображается на ⟨aᵢ | aᵢ₊₁² = aᵢ³⟩ᵃᵇ ≠ 0 — абелианизация ⊂ ℚ, aᵢ ↦ (3/2)ⁱ",
+    "divisible": "образ ⊂ ℤ[1/6] в абелианизации: aᵢ ↦ (3/2)ⁱ, а ℤ[1/6] не делима (на 5)",
+    "solvable": "содержит F₂ (в группе трилистника)"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "BS23c"
+    },
+    {
+     "id": "все",
+     "имя": "BS(2, 3)′",
+     "≅": "BS23c",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
    ]
   },
   {
@@ -3136,6 +3571,21 @@
      "фактор": "PGL2Q"
     },
     {
+     "id": "коммутант",
+     "имя": "PSL₂(ℚ)",
+     "≅": "PSL2Q",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC2",
+     "почему": "PGL₂(ℚ)/PSL₂(ℚ) ≅ ℚ*/ℚ*² ≅ ⊕C₂ абелева, а PSL₂(ℚ) совершенна"
+    },
+    {
      "id": "все",
      "имя": "PGL₂(ℚ)",
      "≅": "PGL2Q",
@@ -3150,7 +3600,66 @@
      "фактор": "1:1"
     }
    ],
-   "центр": "1"
+   "центр": "1",
+   "коммутант": "коммутант"
+  },
+  {
+   "id": "PSL2Q",
+   "имя": "PSL₂(ℚ)",
+   "заметка": "Простая счётная линейная группа.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": true,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": true,
+    "torsion-free": false,
+    "periodic": false,
+    "centerless": true,
+    "residually-finite": false,
+    "polycyclic": false,
+    "linear": true
+   },
+   "почему": {
+    "simple": "PSL₂(K) проста при |K| > 3",
+    "fin-gen": "конечное множество лежит в PSL₂(ℤ[1/N]) ⊊ PSL₂(ℚ)",
+    "linear": "присоединённое представление вкладывает PSL₂(ℚ) в GL₃(ℚ)"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "PSL2Q"
+    },
+    {
+     "id": "все",
+     "имя": "PSL₂(ℚ)",
+     "≅": "PSL2Q",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
   },
   {
    "id": "Grig",
@@ -3664,6 +4173,21 @@
      "фактор": "6:1"
     },
     {
+     "id": "коммутант",
+     "имя": "A₃ × 0",
+     "≅": "3:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "ZxC2",
+     "почему": "(S₃ × ℤ)′ = S₃′ × ℤ′ = A₃; фактор C₂ × ℤ бесконечен"
+    },
+    {
      "id": "все",
      "имя": "S₃ × ℤ",
      "≅": "S3xZ",
@@ -3682,7 +4206,8 @@
    "абелианизация": "ZxC2",
    "ссылки": [
     "прямое произведение"
-   ]
+   ],
+   "коммутант": "коммутант"
   },
   {
    "id": "S3xZ2",
@@ -3772,6 +4297,20 @@
      "фактор": "6:1"
     },
     {
+     "id": "коммутант",
+     "имя": "A₃ × 0",
+     "≅": "3:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "(S₃ × ℤ²)′ = A₃; фактор C₂ × ℤ² бесконечен"
+    },
+    {
      "id": "все",
      "имя": "S₃ × ℤ²",
      "≅": "S3xZ2",
@@ -3789,7 +4328,8 @@
    "центр": "центр",
    "ссылки": [
     "прямое произведение"
-   ]
+   ],
+   "коммутант": "коммутант"
   },
   {
    "id": "SumS3",
@@ -3835,6 +4375,21 @@
      "фактор": "SumS3"
     },
     {
+     "id": "коммутант",
+     "имя": "⊕A₃",
+     "≅": "SumC3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC2",
+     "почему": "коммутант суммы — сумма коммутантов; фактор ⊕C₂ бесконечен"
+    },
+    {
      "id": "все",
      "имя": "⊕S₃",
      "≅": "SumS3",
@@ -3855,7 +4410,8 @@
    ],
    "короткий довод": [
     "linear"
-   ]
+   ],
+   "коммутант": "коммутант"
   },
   {
    "id": "S3wrZ",
@@ -4584,14 +5140,16 @@
     "centerless": false,
     "residually-finite": false,
     "polycyclic": false,
-    "hopfian": true
+    "hopfian": true,
+    "divisible": false
    },
    "почему": {
     "perfect": "коммутант отображается на PSL₂(ℝ), а коммутант связной группы Ли с совершенной алгеброй Ли — вся группа",
     "torsion-free": "максимальная компактная подгруппа SL₂(ℝ) — SO(2), её прообраз ℝ, и компактных подгрупп, кроме 1, нет; конечная подгруппа компактна",
     "residually-finite": "образ ядра K конечного фактора в простой PSL₂(ℝ) — всё, поэтому фактор по K — фактор центра, абелев, а совершенная группа не имеет нетривиальных абелевых факторов",
     "fin-gen": "несчётна",
-    "hopfian": "нормальная подгруппа N либо в центре ℤ (её образ в простой PSL₂(ℝ) тривиален), либо NZ = G и G = [G, G] ⊆ N; фактор по kℤ (k ≠ 0) имеет конечный центр ℤ/k, а у G центр ℤ, поэтому сюръекция G → G инъективна"
+    "hopfian": "нормальная подгруппа N либо в центре ℤ (её образ в простой PSL₂(ℝ) тривиален), либо NZ = G и G = [G, G] ⊆ N; фактор по kℤ (k ≠ 0) имеет конечный центр ℤ/k, а у G центр ℤ, поэтому сюръекция G → G инъективна",
+    "divisible": "пусть z порождает центр ℤ, a — образ гиперболического элемента при поднятии однопараметрической подгруппы. Если y^n = az, то y лежит над гиперболическим элементом, то есть y = bz^j с b в поднятой однопараметрической подгруппе, и y^n = b^n z^{nj}; значит, n | 1. Так что az не квадрат"
    },
    "трудно": [],
    "подгруппы": [
@@ -4751,6 +5309,20 @@
      "фактор": "F3"
     },
     {
+     "id": "коммутант",
+     "имя": "F₃′",
+     "≅": "Foo",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "фактор ℤ^3 бесконечен; свободная группа бесконечного ранга (Шрайер: подгруппа свободной свободна; бесконечного индекса и нормальна ≠ 1, значит, не конечно порождена)"
+    },
+    {
      "id": "все",
      "имя": "F3",
      "≅": "F3",
@@ -4767,7 +5339,8 @@
    ],
    "ссылки": [
     "стандартный пример"
-   ]
+   ],
+   "коммутант": "коммутант"
   },
   {
    "id": "F4",
@@ -4810,6 +5383,20 @@
      "фактор": "F4"
     },
     {
+     "id": "коммутант",
+     "имя": "F₄′",
+     "≅": "Foo",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "фактор ℤ^4 бесконечен; свободная группа бесконечного ранга (Шрайер: подгруппа свободной свободна; бесконечного индекса и нормальна ≠ 1, значит, не конечно порождена)"
+    },
+    {
      "id": "все",
      "имя": "F4",
      "≅": "F4",
@@ -4826,7 +5413,8 @@
    ],
    "ссылки": [
     "стандартный пример"
-   ]
+   ],
+   "коммутант": "коммутант"
   },
   {
    "id": "ThompsonF",
@@ -5310,6 +5898,101 @@
    "коммутант": "вращения"
   },
   {
+   "id": "DihQ",
+   "имя": "Dih(ℚ) = ℚ ⋊ C₂",
+   "заметка": "Обобщённая диэдральная группа: x ↦ −x. Коммутант 2ℚ = ℚ максимален.",
+   "свойства": {
+    "trivial": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "perfect": false,
+    "periodic": false,
+    "linear": true,
+    "abelian": false,
+    "cyclic": false,
+    "fin-gen": false,
+    "nilpotent": false,
+    "torsion-free": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": false,
+    "polycyclic": false,
+    "indecomposable": true,
+    "hopfian": true
+   },
+   "почему": {
+    "divisible": "отражения — инволюции, а квадраты лежат в ℚ",
+    "nilpotent": "γₙ = 2^{n−1}ℚ = ℚ",
+    "linear": "x ↦ ±x + q — аффинные преобразования прямой над ℚ, ⩽ GL₂(ℚ)",
+    "hopfian": "сюръекция φ переводит характеристичную ℚ = G′ на себя, на ℚ это умножение на рациональное ≠ 0; ker φ нормально и пересекает ℚ тривиально, значит, лежит в C_G(ℚ) = ℚ и тривиально",
+    "indecomposable": "если G = A × B, то ℚ = G′ = A′ × B′ и ℚ неразложима, скажем, B′ = 1; B абелева без центра, B = 1",
+    "centerless": "−x = x только при x = 0, отражения не коммутируют со сдвигами"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "DihQ"
+    },
+    {
+     "id": "сдвиги",
+     "имя": "ℚ",
+     "≅": "Q",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true
+     },
+     "фактор": "2:1",
+     "почему": "[s, x] = 2x, так что коммутант 2ℚ = ℚ индекса 2"
+    },
+    {
+     "id": "отражение",
+     "имя": "⟨s⟩",
+     "≅": "2:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "sxs = −x, ⟨s⟩ ⊊ ⟨s, ℤ⟩ ⊊ G"
+    },
+    {
+     "id": "все",
+     "имя": "Dih(ℚ) = ℚ ⋊ C₂",
+     "≅": "DihQ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "сдвиги"
+  },
+  {
    "id": "UT3Z",
    "имя": "UT₃(ℤ) (группа Гейзенберга)",
    "заметка": "Свободная нильпотентная ступени 2 ранга 2: ⟨x, y | [x, y] = z централен⟩.",
@@ -5414,6 +6097,96 @@
    "коммутант": "центр"
   },
   {
+   "id": "UT4Z",
+   "имя": "UT₄(ℤ)",
+   "заметка": "Унитреугольные целые матрицы 4 × 4: нильпотентная ступени 3.",
+   "свойства": {
+    "trivial": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "perfect": false,
+    "periodic": false,
+    "linear": true,
+    "abelian": false,
+    "cyclic": false,
+    "centerless": false,
+    "fin-gen": true,
+    "nilpotent": true,
+    "torsion-free": true,
+    "divisible": false,
+    "residually-finite": true,
+    "polycyclic": true,
+    "indecomposable": true,
+    "hopfian": true
+   },
+   "почему": {
+    "indecomposable": "если UT₄(ℤ) = A × B, то ℤ ≅ Z(G) = Z(A) × Z(B), так что, скажем, Z(B) = 1; нильпотентная группа без центра тривиальна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "UT4Z"
+    },
+    {
+     "id": "центр",
+     "имя": "⟨e₁₄⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "центр UTₙ — угловая клетка"
+    },
+    {
+     "id": "коммутант",
+     "имя": "{I + a e₁₃ + b e₂₄ + c e₁₄}",
+     "≅": "Z3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z3",
+     "почему": "γ₂(UTₙ(ℤ)) — матрицы с нулевой первой наддиагональью; [e₁₃, e₂₄] = 1, так что он ≅ ℤ³; [I + e₁₂, I + e₂₄] = I + e₁₄ ≠ I — не централен; фактор ℤ³ по наддиагонали"
+    },
+    {
+     "id": "все",
+     "имя": "UT₄(ℤ)",
+     "≅": "UT4Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "коммутант"
+  },
+  {
    "id": "Lamp",
    "имя": "C₂ ≀ ℤ (лампочник)",
    "заметка": "Двупорождённая метабелева группа с базой ⊕_ℤ C₂ ≅ 𝔽₂[t, t⁻¹].",
@@ -5488,6 +6261,21 @@
      "почему": "t сопрягает лампу e₀ в e₁; ⟨t⟩ ⊊ (1 + t)𝔽₂[t^{±1}] ⋊ ⟨t⟩"
     },
     {
+     "id": "коммутант",
+     "имя": "(1 + t)𝔽₂[t^{±1}]",
+     "≅": "SumC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "ZxC2",
+     "почему": "[t, f] = (t − 1)f, поэтому коммутант — идеал (1 + t) базы; фактор C₂ × ℤ"
+    },
+    {
      "id": "все",
      "имя": "C₂ ≀ ℤ (лампочник)",
      "≅": "Lamp",
@@ -5502,7 +6290,8 @@
      "фактор": "1:1"
     }
    ],
-   "центр": "1"
+   "центр": "1",
+   "коммутант": "коммутант"
   },
   {
    "id": "HallU",
@@ -5727,7 +6516,8 @@
       "whole": false,
       "maximal": false,
       "finite-index": false
-     }
+     },
+     "почему": "централизатор всех элементарных матриц в GL₂(R) — скаляры, а скаляры из SL₂ — ±1"
     },
     {
      "id": "все",
@@ -5746,7 +6536,8 @@
    ],
    "короткий довод": [
     "hopfian"
-   ]
+   ],
+   "центр": "центр±"
   },
   {
    "id": "SumSL25",
@@ -5912,6 +6703,21 @@
      "почему": "перестановка координат её сдвигает"
     },
     {
+     "id": "центр",
+     "имя": "⊕_ℕ Z(UT₃(ℤ))",
+     "≅": "Zoo",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Zoo",
+     "почему": "центр и коммутант суммы — суммы центров и коммутантов слагаемых, а у UT₃(ℤ) оба равны ⟨z⟩ ≅ ℤ; фактор ⊕_ℕ ℤ² ≅ ⊕ℤ"
+    },
+    {
      "id": "все",
      "имя": "⊕_ℕ UT₃(ℤ)",
      "≅": "SumUT3Z",
@@ -5928,6 +6734,68 @@
    ],
    "короткий довод": [
     "linear"
+   ],
+   "центр": "центр",
+   "коммутант": "центр"
+  },
+  {
+   "id": "SumCp",
+   "имя": "⊕_p C_p",
+   "заметка": "Прямая сумма циклических групп всех простых порядков.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": true,
+    "polycyclic": false
+   },
+   "почему": {
+    "linear": "корни из 1 простых степеней в ℂ*",
+    "hopfian": "сюръекция сохраняет каждую p-компоненту C_p и на ней биективна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumCp"
+    },
+    {
+     "id": "все",
+     "имя": "⊕_p C_p",
+     "≅": "SumCp",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
    ]
   },
   {
@@ -5976,6 +6844,20 @@
      "фактор": "SumUT3p"
     },
     {
+     "id": "центр",
+     "имя": "⊕_p Z(UT₃(𝔽_p))",
+     "≅": "SumCp",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "у UT₃(𝔽_p) центр и коммутант совпадают и ≅ C_p; у суммы — суммы"
+    },
+    {
      "id": "все",
      "имя": "⊕_p UT₃(𝔽_p)",
      "≅": "SumUT3p",
@@ -5992,7 +6874,9 @@
    ],
    "короткий довод": [
     "linear"
-   ]
+   ],
+   "центр": "центр",
+   "коммутант": "центр"
   },
   {
    "id": "Hall54",
@@ -6323,12 +7207,16 @@
     "centerless": false,
     "polycyclic": false,
     "linear": false,
-    "indecomposable": true
+    "indecomposable": true,
+    "hopfian": true,
+    "residually-finite": false
    },
    "почему": {
     "linear": "C(x₁, y₁) ⊋ C(x₁, y₁, x₂, y₂) ⊋ … — бесконечная убывающая цепочка централизаторов, а в линейной группе она стабилизируется",
     "indecomposable": "центр ⟨z⟩ ≅ ℤ; у произведения двух нетривиальных нильпотентных групп без кручения центр — произведение двух нетривиальных",
-    "torsion-free": "центральное расширение ℤ ↪ G ↠ ⊕ℤ без кручения в ядре и факторе"
+    "torsion-free": "центральное расширение ℤ ↪ G ↠ ⊕ℤ без кручения в ядре и факторе",
+    "hopfian": "нетривиальное нормальное K пересекает центр ⟨z⟩: zᵐ ∈ K, m ≠ 0. Если G/K ≅ G, то образ z — элемент конечного порядка в группе без кручения, z ∈ K, и G/K абелев, ведь G′ = ⟨z⟩",
+    "residually-finite": "в конечном факторе пары (xᵢ, yᵢ) повторяются: xᵢ ↦ a, xⱼ ↦ a при i ≠ j, и образ z = [xⱼ, yⱼ] = [xᵢ, yⱼ] = 1"
    },
    "подгруппы": [
     {
@@ -6399,12 +7287,14 @@
     "periodic": false,
     "centerless": false,
     "residually-finite": false,
-    "polycyclic": false
+    "polycyclic": false,
+    "divisible": true
    },
    "почему": {
     "perfect": "объединение совершенных",
     "centerless": "скаляры ζI, ζ — корни из 1, переходят в скаляры",
-    "residually-finite": "центр ℚ/ℤ не ф. а."
+    "residually-finite": "центр ℚ/ℤ не ф. а.",
+    "divisible": "A ∈ SL_{n!}(ℂ) имеет корень B ∈ GL_{n!}(ℂ) степени m (жорданова форма), det B = ζ, ζ^m = 1; в SL_{N!}(ℂ) с m | N!/n! образ A — блочная diag(A, …, A), её корень diag(B, …, B) имеет det ζ^{N!/n!} = 1"
    },
    "подгруппы": [
     {
@@ -6433,7 +7323,8 @@
       "maximal": false,
       "finite-index": false
      },
-     "почему": "центральный элемент централен в SL_{n!}(ℂ) при больших n, то есть скаляр"
+     "почему": "центральный элемент централен в SL_{n!}(ℂ) при больших n, то есть скаляр",
+     "фактор": "PSLinfC"
     },
     {
      "id": "все",
@@ -6452,6 +7343,63 @@
    ],
    "центр": "центр",
    "коммутант": "все"
+  },
+  {
+   "id": "PSLinfC",
+   "имя": "PSL_∞(ℂ) = ⋃ PSL_{n!}(ℂ)",
+   "заметка": "Фактор SL_∞(ℂ) по центру ℚ/ℤ: объединение возрастающей цепочки простых групп.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": true,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": true,
+    "torsion-free": false,
+    "periodic": false,
+    "centerless": true,
+    "divisible": true,
+    "polycyclic": false
+   },
+   "почему": {
+    "simple": "объединение возрастающей цепочки простых групп PSL_{n!}(ℂ) просто",
+    "fin-gen": "конечное множество лежит в некотором PSL_{n!}(ℂ) ⊊ PSL_∞(ℂ)",
+    "divisible": "образ делимой SL_∞(ℂ)"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "PSLinfC"
+    },
+    {
+     "id": "все",
+     "имя": "PSL_∞(ℂ)",
+     "≅": "PSLinfC",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
   },
   {
    "id": "SumGrigK",

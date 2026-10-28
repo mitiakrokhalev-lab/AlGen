@@ -25,6 +25,9 @@ from .finite import load as load_finite, load_products
 from .logic import DATA, App, Graph, Theory, Var, Vocab
 
 INFINITE = DATA / "infinite" / "grp.json"
+# Конечные множители произведений сверх малых и простых: A₄, S₄, SL(2, 3) (коммутант Q₈
+# неабелев нильпотентен), SL(2, 5) (совершенная с центром).
+EXTRA_FINITE = ("12:3", "24:12", "24:3", "120:5")
 ALL, ONE = "<всё>", "<1>"  # подгруппы множителя в метках подгрупп произведения
 SUB_PROPS = ("normal", "characteristic", "maximal", "whole", "central", "finite-index")
 
@@ -52,6 +55,26 @@ class Library:
                 for k in (s["≅"], s.get("фактор")):
                     if k is not None and k not in self.obj:
                         raise KeyError(f"{o['key']}/{s['id']}: нет группы {k}")
+        for o in self.obj.values():
+            self._center_commutator(o)
+
+    @staticmethod
+    def _center_commutator(o):
+        """Центр и коммутант, которые следуют из свойств группы: у абелевой
+        центр — вся группа, коммутант — 1; у совершенной (и у простой
+        неабелевой) коммутант — вся группа; у группы без центра центр — 1."""
+        subs = o["подгруппы"] or []
+        one = next((x["id"] for x in subs if x["≅"] == "1:1"), None)
+        whole = next((x["id"] for x in subs if x["свойства"].get("whole")), None)
+        p = o["свойства"]
+        simple = p.get("simple") and p.get("abelian") is False
+        if o.get("центр") is None:
+            o["центр"] = whole if p.get("abelian") else one if p.get("centerless") or simple else None
+        if o.get("коммутант") is None:
+            o["коммутант"] = one if p.get("abelian") else whole if p.get("perfect") or simple else None
+        for f in ("центр", "коммутант"):
+            if o[f] is None:
+                del o[f]
 
     def infinite(self):
         return [k for k, o in self.obj.items() if not o["конечная"]]
@@ -71,7 +94,7 @@ class Library:
         T = Theory(g, grow=1)
         s = T.solver()
         base = [k for k, o in self.obj.items() if not o.get("синтез") and not o.get("без произведений") and (
-            not o["конечная"] or 1 < int(k.split(":")[0]) <= max_order
+            not o["конечная"] or 1 < int(k.split(":")[0]) <= max_order or k in EXTRA_FINITE
             or (o["свойства"].get("simple") and not o["свойства"].get("abelian")))]
         prime_cyclic = {k for k, o in self.obj.items() if o["конечная"] and o["свойства"].get("simple")
                         and o["свойства"].get("abelian")}
@@ -126,13 +149,15 @@ class Library:
                     {"id": "все", "≅": key, "фактор": "1:1", "пара": (ALL, ALL),
                      "свойства": {"normal": True, "characteristic": True, "maximal": False, "whole": True,
                                   "finite-index": True}}]}
+            self._center_commutator(self.obj[key])
             self.prod[a, b] = self.prod[b, a] = key
+            built.append((a, b, key))
             return key
 
         def central(v):
             return {"central": True} if v else {"central": False} if v is False else {}
 
-        made = []
+        made, built = [], []
         for i, a in enumerate(base):
             for b in base[i:]:
                 if (a, b) in self.prod or small(a, b):
@@ -198,8 +223,12 @@ class Library:
                                          "maximal": False, "central": False,
                                          **({"finite-index": False} if hp.get("finite-index") is False
                                             or op.get("finite") is False else {})}})
-        # Центр и коммутант: Z(A × B) = Z(A) × Z(B), (A × B)′ = A′ × B′.
-        for a, b, key in made:
+        # Центр и коммутант: Z(A × B) = Z(A) × Z(B), (A × B)′ = A′ × B′ — для
+        # всех построенных произведений, в том числе построенных здесь же.
+        i = 0
+        while i < len(built):
+            a, b, key = built[i]
+            i += 1
             o = self.obj[key]
             subs = o["подгруппы"]
             pairs = {x["пара"]: x["id"] for x in subs if "пара" in x}
@@ -219,7 +248,11 @@ class Library:
                 rec = {"id": field, "≅": iso, "пара": pair,
                        "свойства": {"normal": True, "characteristic": True, "whole": False,
                                     "central": True if field == "центр" else both("central"),
-                                    "finite-index": both("finite-index")}}
+                                    "finite-index": both("finite-index"),
+                                    # A × K максимальна ровно при максимальной K; при
+                                    # собственных нормальных обоих множителях — нет.
+                                    "maximal": pb.get("maximal") if pair[0] == ALL else
+                                    pa.get("maximal") if pair[1] == ALL else False}}
                 rec["свойства"] = {k: v for k, v in rec["свойства"].items() if v is not None}
                 if sa.get("фактор") and sb.get("фактор"):
                     q = product(sa["фактор"], sb["фактор"])
