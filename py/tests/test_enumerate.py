@@ -7,7 +7,7 @@ import unittest
 
 import numpy as np
 
-from algen.enumerate import enumerate_form, minimal
+from algen.enumerate import cover, enumerate_form, minimal
 
 
 class FakeForm:
@@ -42,6 +42,13 @@ class EnumerateTest(unittest.TestCase):
         alive, _ = enumerate_form(form, 1, goals=[4, 5])
         self.assertIn(((0,), 4), alive)
         self.assertIn(((0,), 5), alive)
+
+    def test_cover_prefers_shared_fact(self):
+        # Условия 0 и 1 держатся на x или y, условие 2 — только на y:
+        # хватает одного факта y.
+        x, y, z = (frozenset([n]) for n in "xyz")
+        out = cover([[x, y], [y, z], [y]])
+        self.assertEqual(out, [y, y, y])
 
 
 if __name__ == "__main__":

@@ -34,7 +34,8 @@ A, B, C», поэтому остаток печатается запретами
 import argparse
 import json
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
+from itertools import combinations
 
 import numpy as np
 
@@ -54,7 +55,7 @@ class Form:
     """Форма «G, N, G/N»: атомы, матрица значений по библиотеке, теория."""
 
     def __init__(self, lib, vocab):
-        self.sc = Scene(vocab)
+        self.sc, self.lib, self._kept = Scene(vocab), lib, {}
         sc = self.sc
         self.atoms = ([("p", p, sc.G) for p in GROUP_PROPS]
                       + [("p", p, sc.N) for p in SUB_PROPS]
@@ -111,6 +112,61 @@ class Form:
     def lit(self, j):
         """Номер столбца → (атом, значение)."""
         return self.atoms[j // 2], j % 2 == 0
+
+    def row_keeping(self, r, keep, mark):
+        """Строка пары r, где из значений с пометкой mark оставлены только
+        атомы keep. При mark = «трудно» короткий довод разрешён, как в s."""
+        k = (r, keep, mark)
+        if k not in self._kept:
+            key, sub = self.names[r]
+            drop = ("трудно",) if mark == "трудно" else MARKS
+            hard = self.sc.hard_atoms(self.lib, key, sub, drop) - keep
+            facts = {a: x for a, x in self.sc.facts(self.lib, key, sub).items() if a not in hard}
+            vals = {a: v for a, (v, _) in facts.items()}
+            vals.update(self.sc.derive(facts, [a for a in self.atoms if a not in vals]))
+            self._kept[k] = self._matrix([[vals.get(a) for a in self.atoms]])[0]
+        return self._kept[k]
+
+    def deciding(self, prem, g, mark, limit=40):
+        """На каких помеченных mark значениях держится опровержение условия.
+        Для каждой из первых limit строк-опровержений (записанные группы
+        раньше произведений) — наименьшие наборы помеченных значений, которых
+        хватает. Возвращает {набор имён вида «hopfian(BS23)»: строка}."""
+        mat = self.s if mark == "короткий довод" else self.m
+        cols = list(prem) + [g ^ 1]
+        rows = sorted(self.refuters(prem, g, mat), key=lambda r: "×" in self.names[r][0])[:limit]
+        out = {}
+        for r in rows:
+            key, sub = self.names[r]
+            marked = sorted(self.sc.hard_atoms(self.lib, key, sub, (mark,)), key=str)
+            hit = []
+            for size in range(1, min(len(marked), 3) + 1):
+                hit = [k for k in combinations(marked, size)
+                       if self.row_keeping(r, frozenset(k), mark)[cols].all()]
+                if hit:
+                    break
+            for k in hit or [marked]:
+                out.setdefault(frozenset(self.sc.marked_name(self.lib, key, sub, a, mark) for a in k), r)
+        return out
+
+
+def cover(options):
+    """Жадно выбрать факты, чтобы у каждого условия один из его наборов
+    (options[i] — список frozenset) был выбран целиком. Возвращает для
+    каждого условия выбранный набор: решающий факт условия."""
+    chosen, left, out = set(), set(range(len(options))), [None] * len(options)
+    while left:
+        def gain(c):
+            n = sum(1 for i in left if any(t <= chosen | c for t in options[i]))
+            return n / max(1, len(c - chosen))
+        best = max({c for i in left for c in options[i]}, key=lambda c: (gain(c), sorted(c)))
+        chosen |= best
+        for i in list(left):
+            fit = [t for t in options[i] if t <= chosen]
+            if fit:
+                out[i] = min(fit, key=lambda t: (len(t), sorted(t)))
+                left.discard(i)
+    return out
 
 
 def enumerate_form(form, max_prem, goals=None, m=None):
@@ -187,19 +243,22 @@ def run(max_prem, lib=None, vocab=None):
         # Опровергается только помеченным значением: условие не закрыто.
         for mat, mark, kind in ((form.s, "короткий довод", "короткий довод"),
                                 (form.m, "трудно", "трудный контрпример")):
-            bad = form.refuters(prem, g, mat)
-            if not len(bad):
+            if not len(form.refuters(prem, g, mat)):
                 continue
-            key, sub = form.names[bad[0]]
-            used = form.sc.hard(lib, key, sub, [form.lit(j)[0] for j in (*prem, g)], mark)
-            # Значение могло быть выведено из помеченного, а не записано:
-            # тогда называем все помеченные значения пары.
-            used = used or form.sc.hard(lib, key, sub, sorted(form.sc.hard_atoms(lib, key, sub, (mark,)),
-                                                              key=str), mark)
-            r["контрпример"] = {"G": key, "N": lib.obj[key]["подгруппы"][sub]["id"], mark: used}
             r["вердикт"] = "ОШИБКА: выводится, а библиотека опровергает" if v.kind == "выводится" else kind
+            r["_держится"] = (mark, form.deciding(prem, g, mark))
             break
         report.append(r)
+    # Решающий факт: наименьший набор помеченных значений, общий для многих
+    # условий. Тысяча условий так сводится к десятку фактов.
+    for mark in MARKS:
+        rs = [r for r in report if r.get("_держится", (None,))[0] == mark]
+        for r, fact in zip(rs, cover([list(r["_держится"][1]) for r in rs])):
+            key, sub = form.names[r["_держится"][1][fact]]
+            r["решающий факт"] = sorted(fact)
+            r["контрпример"] = {"G": key, "N": lib.obj[key]["подгруппы"][sub]["id"], mark: sorted(fact)}
+    for r in report:
+        r.pop("_держится", None)
     return form, alive, empty, report
 
 
@@ -232,15 +291,23 @@ def main():
         tail = f"; заполнить {hint['атом']} у {hint['G']} / {hint['N']}" if hint else ""
         print(f"не бывает? {' & '.join(r['запрет'])}   [примеров посылок: {r['примеров']}{tail}]")
     print(f"запретов без примера: {len(seen)}", file=sys.stderr)
-    for r in report:
-        if "контрпример" in r and (a.short or r["вердикт"] != "короткий довод"):
-            c = r["контрпример"]
-            used = c.get("трудно", c.get("короткий довод"))
-            print(f"{r['вердикт']}: {', '.join(r['посылки'])} ⇒ {r['цель']}   "
-                  f"[{c['G']} / {c['N']}; держится на {', '.join(used) or '?'}]")
-    if not a.short and tally["короткий довод"]:
-        print(f"скрыто условий с коротким доводом: {tally['короткий довод']} (показать: --короткие)",
-              file=sys.stderr)
+    for kind in ("трудный контрпример", "короткий довод"):
+        groups = defaultdict(list)
+        for r in report:
+            if r["вердикт"] == kind:
+                groups[tuple(r["решающий факт"])].append(r)
+        ranked = sorted(groups.items(), key=lambda x: (-len(x[1]), x[0]))
+        if kind == "короткий довод" and not a.short:
+            if ranked:
+                print(f"скрыто условий с коротким доводом: {tally[kind]}, решающих фактов {len(ranked)}: "
+                      + ", ".join(f"{' & '.join(f)} ({len(rs)})" for f, rs in ranked)
+                      + " (показать: --короткие)", file=sys.stderr)
+            continue
+        for fact, rs in ranked:
+            print(f"{kind}: {' & '.join(fact)} — условий {len(rs)}")
+            for r in rs:
+                c = r["контрпример"]
+                print(f"    {', '.join(r['посылки'])} ⇒ {r['цель']}   [{c['G']} / {c['N']}]")
 
 
 if __name__ == "__main__":

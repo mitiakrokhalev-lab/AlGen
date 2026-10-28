@@ -304,6 +304,16 @@ class Scene:
                 out.append(f"{a[1]}({rec.get('имя', rec['key'])})")
         return out
 
+    def marked_name(self, lib, key, sub, atom, mark):
+        """Имя помеченного значения как факта об исходной группе: у
+        произведения — о том множителе, у которого оно помечено."""
+        s = lib.obj[key]["подгруппы"][sub]
+        rec = {self.G: key, self.N: s["≅"], self.Q: s.get("фактор")}[atom[2]]
+        for part in rec.split("×"):
+            if atom[1] in lib.obj[part].get(mark, ()):
+                return f"{atom[1]}({part})"
+        return f"{atom[1]}({rec})"
+
     def atoms(self):
         return ([("p", p, t) for t in (self.G, self.N, self.Q) for p in GROUP_PROPS]
                 + [("p", p, self.N) for p in SUB_PROPS])
