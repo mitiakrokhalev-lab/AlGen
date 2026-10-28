@@ -1,0 +1,4383 @@
+{
+  "заметка": "Библиотека колец. В отличие от групп и конечных пространств здесь НЕ ВЫЧИСЛЯЕТСЯ ничего: интересные кольца бесконечны, а конечных колец малого порядка слишком мало, чтобы на них что-то опровергалось. Поэтому все кольца ОБЪЯВЛЕНЫ, а сверщик tools/check-ring.mjs гоняет по ним всю базу и требует, чтобы ни одно правило не было нарушено.",
+  "заметка_о_pid": "«pid» у нас значит кольцо главных идеалов БЕЗ ДЕЛИТЕЛЕЙ НУЛЯ: правило «pid ⇒ ufd ⇒ domain» так и записано. Поэтому у ℤ/4ℤ, где всякий идеал главный, pid = false, и это не ошибка, а выбор определения.",
+  "заметка_о_ссылках": "Поля «обратимые» и «аддитивная» ссылаются в каталог ГРУПП по id — это и есть кросс-категорный мост. Где подходящей группы в каталоге нет, поле опущено, и терм честно невычислим.",
+  "кольца": [
+    {
+      "id": "Zero",
+      "имя": "0",
+      "props": {
+        "trivial-ring": true,
+        "comm": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": true,
+        "no-zero-div": true
+      },
+      "заметка": "Нулевое кольцо: 1 = 0. Не поле и не локально — максимальных идеалов у него нет вовсе. Единственный идеал разом нулевой и весь. Делителей нуля нет пусто́: ненулевых элементов в нём вовсе нет.",
+      "идеалы": [
+        {
+          "id": "Zero.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Zero.0"
+        }
+      ],
+      "обратимые": "C1",
+      "аддитивная": "C1",
+      "нильрадикал": "Zero.0",
+      "джекобсон": "Zero.0"
+    },
+    {
+      "id": "Z",
+      "имя": "ℤ",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "Z.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Z",
+          "радикал": "Z.0"
+        },
+        {
+          "id": "Z.2",
+          "имя": "2ℤ",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "F2",
+          "радикал": "Z.2"
+        },
+        {
+          "id": "Z.4",
+          "имя": "4ℤ",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": false
+          },
+          "фактор": "Z4",
+          "заметка": "√4ℤ = 2ℤ ≠ 4ℤ — идеал не радикален, хотя кольцо приведено.",
+          "радикал": "Z.2"
+        },
+        {
+          "id": "Z.6",
+          "имя": "6ℤ",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Z6",
+          "заметка": "Радикален, но не прост: √6ℤ = 6ℤ, а 2·3 ∈ 6ℤ при 2, 3 ∉ 6ℤ.",
+          "радикал": "Z.6"
+        },
+        {
+          "id": "Z.1",
+          "имя": "ℤ",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Z.1"
+        }
+      ],
+      "поли": "Zx",
+      "матрицы": "M2Z",
+      "частных": "Q",
+      "обратимые": "C2",
+      "аддитивная": "Z",
+      "нильрадикал": "Z.0",
+      "джекобсон": "Z.0"
+    },
+    {
+      "id": "Q",
+      "имя": "ℚ",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": true,
+        "division": true,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": true,
+        "simple-ring": true,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "Q.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Q",
+          "радикал": "Q.0"
+        },
+        {
+          "id": "Q.1",
+          "имя": "ℚ",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Q.1"
+        }
+      ],
+      "поли": "Qx",
+      "матрицы": "M2Q",
+      "частных": "Q",
+      "обратимые": "Qmul",
+      "аддитивная": "Q",
+      "нильрадикал": "Q.0",
+      "джекобсон": "Q.0"
+    },
+    {
+      "id": "R",
+      "имя": "ℝ",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": true,
+        "division": true,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": true,
+        "simple-ring": true,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "R.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "R",
+          "радикал": "R.0"
+        },
+        {
+          "id": "R.1",
+          "имя": "ℝ",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "R.1"
+        }
+      ],
+      "частных": "R",
+      "аддитивная": "R",
+      "нильрадикал": "R.0",
+      "джекобсон": "R.0"
+    },
+    {
+      "id": "C",
+      "имя": "ℂ",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": true,
+        "division": true,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": true,
+        "simple-ring": true,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "C.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "C",
+          "радикал": "C.0"
+        },
+        {
+          "id": "C.1",
+          "имя": "ℂ",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "C.1"
+        }
+      ],
+      "частных": "C",
+      "обратимые": "Cmul",
+      "нильрадикал": "C.0",
+      "джекобсон": "C.0"
+    },
+    {
+      "id": "F2",
+      "имя": "𝔽₂",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": true,
+        "division": true,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": true,
+        "simple-ring": true,
+        "finite-ring": true,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "F2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "F2",
+          "радикал": "F2.0"
+        },
+        {
+          "id": "F2.1",
+          "имя": "𝔽₂",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "F2.1"
+        }
+      ],
+      "поли": "F2x",
+      "матрицы": "M2F2",
+      "частных": "F2",
+      "обратимые": "C1",
+      "аддитивная": "C2",
+      "нильрадикал": "F2.0",
+      "джекобсон": "F2.0"
+    },
+    {
+      "id": "F3",
+      "имя": "𝔽₃",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": true,
+        "division": true,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": true,
+        "simple-ring": true,
+        "finite-ring": true,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "F3.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "F3",
+          "радикал": "F3.0"
+        },
+        {
+          "id": "F3.1",
+          "имя": "𝔽₃",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "F3.1"
+        }
+      ],
+      "частных": "F3",
+      "обратимые": "C2",
+      "аддитивная": "C3",
+      "нильрадикал": "F3.0",
+      "джекобсон": "F3.0"
+    },
+    {
+      "id": "F4",
+      "имя": "𝔽₄",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": true,
+        "division": true,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": true,
+        "simple-ring": true,
+        "finite-ring": true,
+        "no-zero-div": true
+      },
+      "заметка": "Поле из четырёх элементов: аддитивно — четверная группа Клейна, мультипликативно — C₃. Не ℤ/4ℤ.",
+      "идеалы": [
+        {
+          "id": "F4.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "F4",
+          "радикал": "F4.0"
+        },
+        {
+          "id": "F4.1",
+          "имя": "𝔽₄",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "F4.1"
+        }
+      ],
+      "частных": "F4",
+      "обратимые": "C3",
+      "аддитивная": "V4",
+      "нильрадикал": "F4.0",
+      "джекобсон": "F4.0"
+    },
+    {
+      "id": "Z4",
+      "имя": "ℤ/4ℤ",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": true,
+        "no-zero-div": false
+      },
+      "заметка": "Конечное локальное кольцо, не поле. Всякий его идеал главный, но областью оно не является, и pid у нас значит именно область.",
+      "идеалы": [
+        {
+          "id": "Z4.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": false
+          },
+          "фактор": "Z4",
+          "заметка": "Не радикален: 2² = 0, а 2 ∉ 0.",
+          "радикал": "Z4.2"
+        },
+        {
+          "id": "Z4.2",
+          "имя": "(2)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "F2",
+          "заметка": "Максимальный, простой И нильпотентный разом: (2)² = 0.",
+          "радикал": "Z4.2"
+        },
+        {
+          "id": "Z4.1",
+          "имя": "ℤ/4ℤ",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Z4.1"
+        }
+      ],
+      "обратимые": "C2",
+      "аддитивная": "C4",
+      "нильрадикал": "Z4.2",
+      "джекобсон": "Z4.2"
+    },
+    {
+      "id": "Z6",
+      "имя": "ℤ/6ℤ",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": true,
+        "no-zero-div": false
+      },
+      "заметка": "Приведено, но не область: два максимальных идеала, и потому не локально. Это произведение 𝔽₂ × 𝔽₃.",
+      "идеалы": [
+        {
+          "id": "Z6.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Z6",
+          "радикал": "Z6.0"
+        },
+        {
+          "id": "Z6.2",
+          "имя": "(2)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "F2",
+          "радикал": "Z6.2"
+        },
+        {
+          "id": "Z6.3",
+          "имя": "(3)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "F3",
+          "радикал": "Z6.3"
+        },
+        {
+          "id": "Z6.1",
+          "имя": "ℤ/6ℤ",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Z6.1"
+        }
+      ],
+      "обратимые": "C2",
+      "аддитивная": "C6",
+      "нильрадикал": "Z6.0",
+      "джекобсон": "Z6.0"
+    },
+    {
+      "id": "Zx",
+      "имя": "ℤ[x]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "заметка": "Факториально, но не кольцо главных идеалов: (2, x) не главный. Классический разделитель этих двух свойств.",
+      "идеалы": [
+        {
+          "id": "Zx.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Zx",
+          "радикал": "Zx.0"
+        },
+        {
+          "id": "Zx.x",
+          "имя": "(x)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Z",
+          "заметка": "Прост, но не максимален: ℤ[x]/(x) = ℤ — область, а не поле.",
+          "радикал": "Zx.x"
+        },
+        {
+          "id": "Zx.2x",
+          "имя": "(2, x)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": false,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "F2",
+          "заметка": "Конечно порождён, но НЕ главный — этим ℤ[x] и отличается от ℤ.",
+          "радикал": "Zx.2x"
+        },
+        {
+          "id": "Zx.1",
+          "имя": "ℤ[x]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Zx.1"
+        }
+      ],
+      "поли": "Zxy",
+      "частных": "Qx",
+      "обратимые": "C2",
+      "аддитивная": "Zoo",
+      "нильрадикал": "Zx.0",
+      "джекобсон": "Zx.0"
+    },
+    {
+      "id": "Zxy",
+      "имя": "ℤ[x, y]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "Zxy.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Zxy",
+          "радикал": "Zxy.0"
+        },
+        {
+          "id": "Zxy.xy",
+          "имя": "(x, y)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": false,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Z",
+          "радикал": "Zxy.xy"
+        },
+        {
+          "id": "Zxy.1",
+          "имя": "ℤ[x, y]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Zxy.1"
+        }
+      ],
+      "обратимые": "C2",
+      "аддитивная": "Zoo",
+      "нильрадикал": "Zxy.0",
+      "джекобсон": "Zxy.0"
+    },
+    {
+      "id": "Qx",
+      "имя": "ℚ[x]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "Qx.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Qx",
+          "радикал": "Qx.0"
+        },
+        {
+          "id": "Qx.x",
+          "имя": "(x)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Q",
+          "радикал": "Qx.x"
+        },
+        {
+          "id": "Qx.x2",
+          "имя": "(x²)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": false
+          },
+          "фактор": "Qx2",
+          "радикал": "Qx.x"
+        },
+        {
+          "id": "Qx.1",
+          "имя": "ℚ[x]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Qx.1"
+        }
+      ],
+      "частных": "Qx_frac",
+      "обратимые": "Qmul",
+      "нильрадикал": "Qx.0",
+      "джекобсон": "Qx.0"
+    },
+    {
+      "id": "Qx2",
+      "имя": "ℚ[x]/(x²)",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": false
+      },
+      "заметка": "Артиново и БЕСКОНЕЧНО. Прямо опровергает «артиново ⇒ конечно»: цепи идеалов обрываются, потому что размерность над ℚ равна двум, а элементов всё равно континуум.",
+      "идеалы": [
+        {
+          "id": "Qx2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": false
+          },
+          "фактор": "Qx2",
+          "радикал": "Qx2.x"
+        },
+        {
+          "id": "Qx2.x",
+          "имя": "(x)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Q",
+          "радикал": "Qx2.x"
+        },
+        {
+          "id": "Qx2.1",
+          "имя": "ℚ[x]/(x²)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Qx2.1"
+        }
+      ],
+      "нильрадикал": "Qx2.x",
+      "джекобсон": "Qx2.x"
+    },
+    {
+      "id": "Qx_frac",
+      "имя": "ℚ(x)",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": true,
+        "division": true,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": true,
+        "simple-ring": true,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "Qxf.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Qx_frac",
+          "радикал": "Qxf.0"
+        },
+        {
+          "id": "Qxf.1",
+          "имя": "ℚ(x)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Qxf.1"
+        }
+      ],
+      "частных": "Qx_frac",
+      "нильрадикал": "Qxf.0",
+      "джекобсон": "Qxf.0"
+    },
+    {
+      "id": "F2x",
+      "имя": "𝔽₂[x]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "заметка": "Счётное кольцо главных идеалов характеристики 2. Вместе с ℤ показывает, что «кольцо главных идеалов» ничего не говорит о характеристике.",
+      "идеалы": [
+        {
+          "id": "F2x.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "F2x",
+          "радикал": "F2x.0"
+        },
+        {
+          "id": "F2x.x",
+          "имя": "(x)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "F2",
+          "радикал": "F2x.x"
+        },
+        {
+          "id": "F2x.x2",
+          "имя": "(x²)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": false
+          },
+          "фактор": "F2x2",
+          "радикал": "F2x.x"
+        },
+        {
+          "id": "F2x.1",
+          "имя": "𝔽₂[x]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "F2x.1"
+        }
+      ],
+      "обратимые": "C1",
+      "аддитивная": "SumC2",
+      "нильрадикал": "F2x.0",
+      "джекобсон": "F2x.0"
+    },
+    {
+      "id": "F2x2",
+      "имя": "𝔽₂[x]/(x²)",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": true,
+        "no-zero-div": false
+      },
+      "заметка": "Кольцо из четырёх элементов, локальное, не поле и не ℤ/4ℤ: здесь 1 + 1 = 0, а x² = 0. Пара с ℤ/4ℤ показывает, что конечных локальных колец одного порядка бывает несколько.",
+      "идеалы": [
+        {
+          "id": "F2x2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": false
+          },
+          "фактор": "F2x2",
+          "радикал": "F2x2.x"
+        },
+        {
+          "id": "F2x2.x",
+          "имя": "(x)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "F2",
+          "радикал": "F2x2.x"
+        },
+        {
+          "id": "F2x2.1",
+          "имя": "𝔽₂[x]/(x²)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "F2x2.1"
+        }
+      ],
+      "обратимые": "C2",
+      "аддитивная": "V4",
+      "нильрадикал": "F2x2.x",
+      "джекобсон": "F2x2.x"
+    },
+    {
+      "id": "Zxoo",
+      "имя": "ℤ[x₁, x₂, …]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": true,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "заметка": "Факториально и НЕ нётерово: цепь (x₁) ⊂ (x₁, x₂) ⊂ … не обрывается. Единственное в библиотеке кольцо с не конечно порождённым идеалом.",
+      "идеалы": [
+        {
+          "id": "Zxoo.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Zxoo",
+          "радикал": "Zxoo.0"
+        },
+        {
+          "id": "Zxoo.all",
+          "имя": "(x₁, x₂, …)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": false,
+            "fin-gen-ideal": false,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Z",
+          "заметка": "Прост (фактор — ℤ), но не конечно порождён.",
+          "радикал": "Zxoo.all"
+        },
+        {
+          "id": "Zxoo.1",
+          "имя": "ℤ[x₁, x₂, …]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Zxoo.1"
+        }
+      ],
+      "обратимые": "C2",
+      "аддитивная": "Zoo",
+      "нильрадикал": "Zxoo.0",
+      "джекобсон": "Zxoo.0"
+    },
+    {
+      "id": "Zi",
+      "имя": "ℤ[i]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "Zi.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Zi",
+          "радикал": "Zi.0"
+        },
+        {
+          "id": "Zi.1pi",
+          "имя": "(1 + i)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "F2",
+          "радикал": "Zi.1pi"
+        },
+        {
+          "id": "Zi.3",
+          "имя": "(3)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "F9",
+          "заметка": "3 остаётся простым в ℤ[i], и фактор — поле из девяти элементов.",
+          "радикал": "Zi.3"
+        },
+        {
+          "id": "Zi.1",
+          "имя": "ℤ[i]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Zi.1"
+        }
+      ],
+      "обратимые": "C4",
+      "аддитивная": "ZxZ",
+      "нильрадикал": "Zi.0",
+      "джекобсон": "Zi.0"
+    },
+    {
+      "id": "F9",
+      "имя": "𝔽₉",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": true,
+        "division": true,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": true,
+        "simple-ring": true,
+        "finite-ring": true,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "F9.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "F9",
+          "радикал": "F9.0"
+        },
+        {
+          "id": "F9.1",
+          "имя": "𝔽₉",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "F9.1"
+        }
+      ],
+      "частных": "F9",
+      "обратимые": "C8",
+      "аддитивная": "C3xC3",
+      "нильрадикал": "F9.0",
+      "джекобсон": "F9.0"
+    },
+    {
+      "id": "Zsqrt5",
+      "имя": "ℤ[√−5]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "заметка": "Нётерова область, НЕ факториальная: 6 = 2·3 = (1 + √−5)(1 − √−5). Разделяет «нётерово» и «факториально» — а вместе с ℤ[x] показывает, что эти два свойства независимы в обе стороны.",
+      "идеалы": [
+        {
+          "id": "Zs5.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Zsqrt5",
+          "радикал": "Zs5.0"
+        },
+        {
+          "id": "Zs5.p2",
+          "имя": "(2, 1 + √−5)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": false,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "F2",
+          "заметка": "Главный образец не главного идеала: его квадрат равен (2), а сам он не порождён одним элементом.",
+          "радикал": "Zs5.p2"
+        },
+        {
+          "id": "Zs5.1",
+          "имя": "ℤ[√−5]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Zs5.1"
+        }
+      ],
+      "обратимые": "C2",
+      "аддитивная": "ZxZ",
+      "нильрадикал": "Zs5.0",
+      "джекобсон": "Zs5.0"
+    },
+    {
+      "id": "Zloc2",
+      "имя": "ℤ₍₂₎",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": true,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "заметка": "Локализация ℤ в простом 2: дроби с нечётным знаменателем. Локальное кольцо главных идеалов, не поле и не артиново.",
+      "идеалы": [
+        {
+          "id": "Zl2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Zloc2",
+          "радикал": "Zl2.0"
+        },
+        {
+          "id": "Zl2.2",
+          "имя": "(2)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "F2",
+          "радикал": "Zl2.2"
+        },
+        {
+          "id": "Zl2.1",
+          "имя": "ℤ₍₂₎",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Zl2.1"
+        }
+      ],
+      "частных": "Q",
+      "нильрадикал": "Zl2.0",
+      "джекобсон": "Zl2.2"
+    },
+    {
+      "id": "Z2adic",
+      "имя": "ℤ₂ (целые 2-адические)",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": true,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "идеалы": [
+        {
+          "id": "Z2a.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "Z2adic",
+          "радикал": "Z2a.0"
+        },
+        {
+          "id": "Z2a.2",
+          "имя": "(2)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "F2",
+          "радикал": "Z2a.2"
+        },
+        {
+          "id": "Z2a.1",
+          "имя": "ℤ₂",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "Z2a.1"
+        }
+      ],
+      "аддитивная": "Z2adic",
+      "нильрадикал": "Z2a.0",
+      "джекобсон": "Z2a.2"
+    },
+    {
+      "id": "M2Q",
+      "имя": "M₂(ℚ)",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": false,
+        "simple-ring": true,
+        "finite-ring": false,
+        "no-zero-div": false
+      },
+      "заметка": "Простое кольцо без нетривиальных двусторонних идеалов — и при этом с делителями нуля и нильпотентами. Опровергает «просто ⇒ область» вне коммутативного случая.",
+      "идеалы": [
+        {
+          "id": "M2Q.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "maximal-ideal": true
+          },
+          "фактор": "M2Q"
+        },
+        {
+          "id": "M2Q.1",
+          "имя": "M₂(ℚ)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false
+          },
+          "фактор": "Zero"
+        }
+      ],
+      "центр": "Q",
+      "джекобсон": "M2Q.0"
+    },
+    {
+      "id": "M2Z",
+      "имя": "M₂(ℤ)",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": false
+      },
+      "заметка": "Не простое: M₂(nℤ) — двусторонний идеал. Пара с M₂(ℚ) показывает, что простота матричного кольца держится на том, что коэффициенты — тело.",
+      "идеалы": [
+        {
+          "id": "M2Z.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "maximal-ideal": false
+          },
+          "фактор": "M2Z"
+        },
+        {
+          "id": "M2Z.2",
+          "имя": "M₂(2ℤ)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "maximal-ideal": true
+          },
+          "фактор": "M2F2"
+        },
+        {
+          "id": "M2Z.1",
+          "имя": "M₂(ℤ)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false
+          },
+          "фактор": "Zero"
+        }
+      ],
+      "центр": "Z",
+      "джекобсон": "M2Z.0"
+    },
+    {
+      "id": "M2F2",
+      "имя": "M₂(𝔽₂)",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": false,
+        "simple-ring": true,
+        "finite-ring": true,
+        "no-zero-div": false
+      },
+      "заметка": "Конечное простое кольцо из 16 элементов — и не тело. Показывает, что малая теорема Веддербёрна про КОНЕЧНЫЕ ТЕЛА, а не про конечные простые кольца.",
+      "идеалы": [
+        {
+          "id": "M2F2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "maximal-ideal": true
+          },
+          "фактор": "M2F2"
+        },
+        {
+          "id": "M2F2.1",
+          "имя": "M₂(𝔽₂)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false
+          },
+          "фактор": "Zero"
+        }
+      ],
+      "центр": "F2",
+      "обратимые": "S3",
+      "заметка_об_обратимых": "GL₂(𝔽₂) ≅ S₃ — шесть обратимых матриц.",
+      "джекобсон": "M2F2.0"
+    },
+    {
+      "id": "H",
+      "имя": "ℍ (кватернионы)",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "domain": false,
+        "field": false,
+        "division": true,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": true,
+        "simple-ring": true,
+        "finite-ring": false,
+        "no-zero-div": true
+      },
+      "заметка": "Тело, не являющееся полем. Ради него «поле» и «тело» разведены двумя свойствами: иначе малая теорема Веддербёрна нечем опровергается в бесконечном случае. «domain» у нас значит коммутативную область, потому у ℍ он false.",
+      "идеалы": [
+        {
+          "id": "H.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "maximal-ideal": true
+          },
+          "фактор": "H"
+        },
+        {
+          "id": "H.1",
+          "имя": "ℍ",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false
+          },
+          "фактор": "Zero"
+        }
+      ],
+      "центр": "R",
+      "джекобсон": "H.0"
+    },
+    {
+      "id": "UT2Q",
+      "имя": "UT₂(ℚ)",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": false
+      },
+      "заметка": "Верхнетреугольные матрицы 2×2 над ℚ: артиново и нётерово, но не простое и не локальное. Его радикал Джекобсона — строго верхнетреугольные, и он нильпотентен.",
+      "идеалы": [
+        {
+          "id": "UT2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "maximal-ideal": false
+          },
+          "фактор": "UT2Q"
+        },
+        {
+          "id": "UT2.n",
+          "имя": "строго верхнетреугольные",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "maximal-ideal": false
+          },
+          "фактор": "prod:Q|Q"
+        },
+        {
+          "id": "UT2.1",
+          "имя": "UT₂(ℚ)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false
+          },
+          "фактор": "Zero"
+        }
+      ],
+      "центр": "Q",
+      "джекобсон": "UT2.n"
+    },
+    {
+      "id": "C01",
+      "имя": "C[0, 1]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": false
+      },
+      "заметка": "Непрерывные функции на отрезке: приведено (функция с f² = 0 равна нулю), но не область — две горбатые функции с непересекающимися носителями перемножаются в ноль. Не нётерово.",
+      "идеалы": [
+        {
+          "id": "C01.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "C01",
+          "радикал": "C01.0"
+        },
+        {
+          "id": "C01.m",
+          "имя": "{f : f(0) = 0}",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": false,
+            "fin-gen-ideal": false,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "R",
+          "заметка": "Максимален: фактор — ℝ через f ↦ f(0). И не конечно порождён.",
+          "радикал": "C01.m"
+        },
+        {
+          "id": "C01.1",
+          "имя": "C[0, 1]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "C01.1"
+        }
+      ],
+      "нильрадикал": "C01.0",
+      "джекобсон": "C01.0"
+    },
+    {
+      "id": "F2N",
+      "имя": "∏ℕ 𝔽₂",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false,
+        "no-zero-div": false
+      },
+      "заметка": "Булево кольцо: всякий элемент идемпотентен, потому оно приведено, но делителей нуля полно. Ни нётерово, ни артиново — цепи идеалов по носителям не обрываются ни вверх, ни вниз.",
+      "идеалы": [
+        {
+          "id": "F2N.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "F2N",
+          "радикал": "F2N.0"
+        },
+        {
+          "id": "F2N.fin",
+          "имя": "⊕ℕ 𝔽₂",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": false,
+            "fin-gen-ideal": false,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "заметка": "Финитные последовательности: идеал, не конечно порождённый и не простой.",
+          "радикал": "F2N.fin"
+        },
+        {
+          "id": "F2N.1",
+          "имя": "∏ℕ 𝔽₂",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": false,
+            "maximal-ideal": false,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero",
+          "радикал": "F2N.1"
+        }
+      ],
+      "нильрадикал": "F2N.0",
+      "джекобсон": "F2N.0"
+    },
+    {
+      "id": "ZZ",
+      "имя": "ℤ[t, t⁻¹]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Групповое кольцо ℤ[ℤ] — кольцо Лорановых многочленов. Факториально, но не главных идеалов: (2, t − 1) не главный.",
+      "идеалы": [
+        {
+          "id": "ZZ.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "ZZ"
+        },
+        {
+          "id": "ZZ.1",
+          "имя": "ℤ[t, t⁻¹]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "QZ",
+      "имя": "ℚ[t, t⁻¹]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "ℚ[ℤ]: локализация ℚ[t], а значит кольцо главных идеалов.",
+      "идеалы": [
+        {
+          "id": "QZ.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "QZ"
+        },
+        {
+          "id": "QZ.1",
+          "имя": "ℚ[t, t⁻¹]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "QS3",
+      "имя": "ℚ[S₃]",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "По Машке ℚ[S₃] ≅ ℚ × ℚ × M₂(ℚ): полупросто, а потому приведено и артиново, но не просто и не коммутативно.",
+      "идеалы": [
+        {
+          "id": "QS3.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "QS3"
+        },
+        {
+          "id": "QS3.1",
+          "имя": "ℚ[S₃]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "QF2",
+      "имя": "ℚ[F₂]",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Групповая алгебра свободной группы: делителей нуля в ней НЕТ (теорема Кона—Льюина), а коммутативной она не является — ради этого случая свойство «без делителей нуля» и заведено отдельно от «области целостности».",
+      "идеалы": [
+        {
+          "id": "QF2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "QF2"
+        },
+        {
+          "id": "QF2.1",
+          "имя": "ℚ[F₂]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ],
+      "центр": "Q",
+      "заметка_о_центре": "Свободная группа ранга ⩾ 2 — ICC: всякий нетривиальный класс сопряжённости в ней бесконечен. Центр группового кольца порождён суммами по КОНЕЧНЫМ классам, значит он совпадает с самим коэффициентным кольцом."
+    },
+    {
+      "id": "ZC2",
+      "имя": "ℤ[C₂]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Кручение в группе сразу даёт делители нуля: (1 − g)(1 + g) = 0. Приведено, но не область.",
+      "идеалы": [
+        {
+          "id": "ZC2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "ZC2"
+        },
+        {
+          "id": "ZC2.1",
+          "имя": "ℤ[C₂]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "ZZ2",
+      "имя": "ℤ[x, y, x⁻¹, y⁻¹]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "ℤ[ℤ²].",
+      "идеалы": [
+        {
+          "id": "ZZ2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "ZZ2"
+        },
+        {
+          "id": "ZZ2.1",
+          "имя": "ℤ[x, y, x⁻¹, y⁻¹]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Z|F2",
+      "имя": "ℤ[F₂]",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Групповое кольцо свободной группы над ℤ: делителей нуля нет (Кон—Льюин), но кольцо некоммутативно и не нётерово.",
+      "идеалы": [
+        {
+          "id": "GR:Z|F2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Z|F2"
+        },
+        {
+          "id": "GR:Z|F2.1",
+          "имя": "ℤ[F₂]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ],
+      "центр": "Z",
+      "заметка_о_центре": "Свободная группа ранга ⩾ 2 — ICC: всякий нетривиальный класс сопряжённости в ней бесконечен. Центр группового кольца порождён суммами по КОНЕЧНЫМ классам, значит он совпадает с самим коэффициентным кольцом."
+    },
+    {
+      "id": "GR:F2|Z",
+      "имя": "𝔽₂[ℤ]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "𝔽₂[t, t⁻¹] — кольцо главных идеалов характеристики 2.",
+      "идеалы": [
+        {
+          "id": "GR:F2|Z.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:F2|Z"
+        },
+        {
+          "id": "GR:F2|Z.1",
+          "имя": "𝔽₂[ℤ]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Q|ZxZ",
+      "имя": "ℚ[ℤ²]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "ℚ[x, y, x⁻¹, y⁻¹]: нётерово, факториально, но не главных идеалов.",
+      "идеалы": [
+        {
+          "id": "GR:Q|ZxZ.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Q|ZxZ"
+        },
+        {
+          "id": "GR:Q|ZxZ.1",
+          "имя": "ℚ[ℤ²]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Z|Zoo",
+      "имя": "ℤ[⊕ℤ]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Счётное число переменных Лорана: область, но НЕ нётерово.",
+      "идеалы": [
+        {
+          "id": "GR:Z|Zoo.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Z|Zoo"
+        },
+        {
+          "id": "GR:Z|Zoo.1",
+          "имя": "ℤ[⊕ℤ]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Q|Zoo",
+      "имя": "ℚ[⊕ℤ]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "То же над ℚ.",
+      "идеалы": [
+        {
+          "id": "GR:Q|Zoo.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Q|Zoo"
+        },
+        {
+          "id": "GR:Q|Zoo.1",
+          "имя": "ℚ[⊕ℤ]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Q|UT3Q",
+      "имя": "ℚ[UT₃(ℚ)]",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Группа без кручения нильпотентна, и по Мальцеву делителей нуля в её групповой алгебре нет.",
+      "идеалы": [
+        {
+          "id": "GR:Q|UT3Q.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Q|UT3Q"
+        },
+        {
+          "id": "GR:Q|UT3Q.1",
+          "имя": "ℚ[UT₃(ℚ)]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Z|UT3Q",
+      "имя": "ℤ[UT₃(ℚ)]",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "То же над ℤ.",
+      "идеалы": [
+        {
+          "id": "GR:Z|UT3Q.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Z|UT3Q"
+        },
+        {
+          "id": "GR:Z|UT3Q.1",
+          "имя": "ℤ[UT₃(ℚ)]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Q|Klein",
+      "имя": "ℚ[K]",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Группа бутылки Клейна без кручения и полициклична: по Холлу кольцо нётерово, по Мальцеву — без делителей нуля.",
+      "идеалы": [
+        {
+          "id": "GR:Q|Klein.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Q|Klein"
+        },
+        {
+          "id": "GR:Q|Klein.1",
+          "имя": "ℚ[K]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Q|BS23",
+      "имя": "ℚ[BS(2, 3)]",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "BS(2, 3) без кручения и право-упорядочиваема, значит делителей нуля нет.",
+      "идеалы": [
+        {
+          "id": "GR:Q|BS23.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Q|BS23"
+        },
+        {
+          "id": "GR:Q|BS23.1",
+          "имя": "ℚ[BS(2, 3)]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Z|Foo",
+      "имя": "ℤ[F_∞]",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": true,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Свободная группа бесконечного ранга.",
+      "идеалы": [
+        {
+          "id": "GR:Z|Foo.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Z|Foo"
+        },
+        {
+          "id": "GR:Z|Foo.1",
+          "имя": "ℤ[F_∞]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ],
+      "центр": "Z",
+      "заметка_о_центре": "Свободная группа ранга ⩾ 2 — ICC: всякий нетривиальный класс сопряжённости в ней бесконечен. Центр группового кольца порождён суммами по КОНЕЧНЫМ классам, значит он совпадает с самим коэффициентным кольцом."
+    },
+    {
+      "id": "GR:Q|C3",
+      "имя": "ℚ[C₃]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "По Машке ≅ ℚ × ℚ(ζ₃): полупросто, приведено, с делителями нуля.",
+      "идеалы": [
+        {
+          "id": "GR:Q|C3.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Q|C3"
+        },
+        {
+          "id": "GR:Q|C3.1",
+          "имя": "ℚ[C₃]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Q|C4",
+      "имя": "ℚ[C₄]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Полупросто: характеристика нуль не делит порядок.",
+      "идеалы": [
+        {
+          "id": "GR:Q|C4.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Q|C4"
+        },
+        {
+          "id": "GR:Q|C4.1",
+          "имя": "ℚ[C₄]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Q|V4",
+      "имя": "ℚ[V₄]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "≅ ℚ⁴.",
+      "идеалы": [
+        {
+          "id": "GR:Q|V4.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Q|V4"
+        },
+        {
+          "id": "GR:Q|V4.1",
+          "имя": "ℚ[V₄]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Q|A5",
+      "имя": "ℚ[A₅]",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Полупросто и некоммутативно.",
+      "идеалы": [
+        {
+          "id": "GR:Q|A5.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Q|A5"
+        },
+        {
+          "id": "GR:Q|A5.1",
+          "имя": "ℚ[A₅]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Z|C3",
+      "имя": "ℤ[C₃]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Над ℤ полупростоты нет, но кручение всё равно даёт делители нуля.",
+      "идеалы": [
+        {
+          "id": "GR:Z|C3.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Z|C3"
+        },
+        {
+          "id": "GR:Z|C3.1",
+          "имя": "ℤ[C₃]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Z|S3",
+      "имя": "ℤ[S₃]",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Некоммутативно, с делителями нуля.",
+      "идеалы": [
+        {
+          "id": "GR:Z|S3.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Z|S3"
+        },
+        {
+          "id": "GR:Z|S3.1",
+          "имя": "ℤ[S₃]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:F2|V4",
+      "имя": "𝔽₂[V₄]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": true
+      },
+      "заметка": "Характеристика делит порядок: Машке НЕ работает, кольцо локально и не приведено.",
+      "идеалы": [
+        {
+          "id": "GR:F2|V4.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true
+          },
+          "фактор": "GR:F2|V4"
+        },
+        {
+          "id": "GR:F2|V4.1",
+          "имя": "𝔽₂[V₄]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:F2|C4",
+      "имя": "𝔽₂[C₄]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": true
+      },
+      "заметка": "То же: не приведено.",
+      "идеалы": [
+        {
+          "id": "GR:F2|C4.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true
+          },
+          "фактор": "GR:F2|C4"
+        },
+        {
+          "id": "GR:F2|C4.1",
+          "имя": "𝔽₂[C₄]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Q|Dinf",
+      "имя": "ℚ[D∞]",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Бесконечная диэдральная группа содержит инволюции — делители нуля есть.",
+      "идеалы": [
+        {
+          "id": "GR:Q|Dinf.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Q|Dinf"
+        },
+        {
+          "id": "GR:Q|Dinf.1",
+          "имя": "ℚ[D∞]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Q|Pruf2",
+      "имя": "ℚ[ℤ(2^∞)]",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "заметка": "Периодическая группа: кручение всюду.",
+      "идеалы": [
+        {
+          "id": "GR:Q|Pruf2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:Q|Pruf2"
+        },
+        {
+          "id": "GR:Q|Pruf2.1",
+          "имя": "ℚ[ℤ(2^∞)]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "Qx_loc",
+      "имя": "ℚ[x]₍ₓ₎",
+      "заметка": "Локализация ℚ[x] в (x): дискретно нормированное кольцо. Локальное, главных идеалов, не поле и не артиново.",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": true,
+        "domain": true,
+        "field": false,
+        "division": false,
+        "pid": true,
+        "ufd": true,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": true,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "идеалы": [
+        {
+          "id": "Qxl.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true,
+            "prime": true,
+            "maximal-ideal": false
+          },
+          "фактор": "Qx_loc",
+          "радикал": "Qxl.0"
+        },
+        {
+          "id": "Qxl.x",
+          "имя": "(x)",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "prime": true,
+            "maximal-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Q",
+          "радикал": "Qxl.x"
+        },
+        {
+          "id": "Qxl.1",
+          "имя": "ℚ[x]₍ₓ₎",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true,
+            "prime": false,
+            "maximal-ideal": false
+          },
+          "фактор": "Zero"
+        }
+      ],
+      "частных": "Qx_frac",
+      "нильрадикал": "Qxl.0",
+      "джекобсон": "Qxl.x"
+    },
+    {
+      "id": "GR:F2|ZxC2",
+      "имя": "𝔽₂[C₂ × ℤ]",
+      "заметка": "Группа НЕ периодическая (в ней есть ℤ), но КРУЧЕНИЕ в ней есть, и инволюция x даёт нильпотент: (1 + x)² = 1 + x² = 0 в характеристике 2. Ради этого запись и нужна: «G не периодическая ⇒ R[G] без нильпотентов» подтверждалось на всех примерах, потому что все непериодические группы таблицы были без кручения. Как кольцо это 𝔽₂[C₂][t, t⁻¹] — лорановы многочлены над локальным 𝔽₂[x]/(x²).",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": false,
+        "local": false,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "идеалы": [
+        {
+          "id": "GR:F2|ZxC2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true
+          },
+          "фактор": "GR:F2|ZxC2"
+        },
+        {
+          "id": "GR:F2|ZxC2.1",
+          "имя": "𝔽₂[C₂ × ℤ]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:M2Q|C2",
+      "имя": "M₂(ℚ)[C₂]",
+      "заметка": "M₂(ℚ)[C₂] ≅ M₂(ℚ[C₂]) ≅ M₂(ℚ × ℚ) ≅ M₂(ℚ) × M₂(ℚ): характеристика нуль, Машке работает, кольцо полупростое и приведённое. Единственная в таблице запись с НЕкоммутативным R и нетривиальной G — без неё «R некоммутативно ⇒ R ≅ R[G]» подтверждалось на одних лишь тривиальных G, где это и правда так.",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": true,
+        "simple-ring": false,
+        "finite-ring": false
+      },
+      "идеалы": [
+        {
+          "id": "GR:M2Q|C2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true,
+            "radical-ideal": true
+          },
+          "фактор": "GR:M2Q|C2"
+        },
+        {
+          "id": "GR:M2Q|C2.1",
+          "имя": "M₂(ℚ)[C₂]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:F2|S3",
+      "имя": "𝔽₂[S₃]",
+      "заметка": "Характеристика 2 делит |S₃| = 6, поэтому Машке не работает: радикал Джекобсона ненулевой, и нильпотенты есть. Группа неабелева, значит и кольцо некоммутативно — ровно тот пример, которого не хватало вопросу «G неабелева ⇒ R[G] без нильпотентов».",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": true
+      },
+      "идеалы": [
+        {
+          "id": "GR:F2|S3.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true
+          },
+          "фактор": "GR:F2|S3"
+        },
+        {
+          "id": "GR:F2|S3.1",
+          "имя": "𝔽₂[S₃]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Z4|S3",
+      "имя": "(ℤ/4ℤ)[S₃]",
+      "заметка": "R коммутативно и не является областью (2 нильпотентно), а группа неабелева — значит R[G] НЕкоммутативно. Без этой записи вопрос «R коммутативно, R не область ⇒ R[G] коммутативно» подтверждался: все коммутативные не-области таблицы стояли при абелевых группах.",
+      "props": {
+        "trivial-ring": false,
+        "comm": false,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": true
+      },
+      "идеалы": [
+        {
+          "id": "GR:Z4|S3.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true
+          },
+          "фактор": "GR:Z4|S3"
+        },
+        {
+          "id": "GR:Z4|S3.1",
+          "имя": "(ℤ/4ℤ)[S₃]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:F2|Pruf2",
+      "имя": "𝔽₂[ℤ(2^∞)]",
+      "заметка": "Группа ДЕЛИМА и при этом периодична, а характеристика 2 делит порядок каждого её элемента: (1 + g)^{2ⁿ} = 1 + g^{2ⁿ} = 0. Нильпотентов полно. Без этой записи «R — область, G делима ⇒ R[G] без нильпотентов» подтверждалось: все делимые группы таблицы стояли при ℚ, где характеристика нуль и Машке работает. Кольцо локально (объединение локальных 𝔽₂[C_{2ⁿ}]) и НЕ нётерово, а значит и не артиново по теореме Хопкинса.",
+      "props": {
+        "trivial-ring": false,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "simple-ring": false,
+        "comm": true,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": true,
+        "reduced": false,
+        "finite-ring": false
+      },
+      "идеалы": [
+        {
+          "id": "GR:F2|Pruf2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true
+          },
+          "фактор": "GR:F2|Pruf2"
+        },
+        {
+          "id": "GR:F2|Pruf2.1",
+          "имя": "𝔽₂[ℤ(2^∞)]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Z4|UT3Q",
+      "имя": "(ℤ/4ℤ)[UT₃(ℚ)]",
+      "заметка": "Единственная делимая НЕабелева группа библиотеки — UT₃(ℚ), и при коммутативном не-области R она даёт некоммутативное групповое кольцо. Это и требовалось вопросу «R коммутативно, R не область, G делима ⇒ R[G] коммутативно». Нётеровости нет: UT₃(ℚ) не конечно порождена.",
+      "props": {
+        "trivial-ring": false,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "simple-ring": false,
+        "comm": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "reduced": false,
+        "finite-ring": false
+      },
+      "идеалы": [
+        {
+          "id": "GR:Z4|UT3Q.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true
+          },
+          "фактор": "GR:Z4|UT3Q"
+        },
+        {
+          "id": "GR:Z4|UT3Q.1",
+          "имя": "(ℤ/4ℤ)[UT₃(ℚ)]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:M2Q|Q",
+      "имя": "M₂(ℚ)[ℚ⁺]",
+      "заметка": "M₂(ℚ)[ℚ⁺] ≅ M₂(ℚ[ℚ⁺]): некоммутативно, с нильпотентами (матричная единица в квадрате нуль) и НЕ нётерово, тогда как сам M₂(ℚ) нётеров. Поэтому R ≅ R[G] здесь ложно — а вопрос «R некоммутативно, G делима ⇒ R ≅ R[G]» подтверждался на одних тривиальных G, где это верно.",
+      "props": {
+        "trivial-ring": false,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "simple-ring": false,
+        "comm": false,
+        "noeth-ring": false,
+        "artin-ring": false,
+        "local": false,
+        "reduced": false,
+        "finite-ring": false
+      },
+      "идеалы": [
+        {
+          "id": "GR:M2Q|Q.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true
+          },
+          "фактор": "GR:M2Q|Q"
+        },
+        {
+          "id": "GR:M2Q|Q.1",
+          "имя": "M₂(ℚ)[ℚ⁺]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Z4|C2",
+      "имя": "(ℤ/4ℤ)[C₂]",
+      "заметка": "Шестнадцать элементов против четырёх у самого ℤ/4ℤ — значит R ≅ R[G] здесь ложно, и это закрывает «R коммутативно, R с делителями нуля, G циклическая ⇒ R ≅ R[G]». Кольцо локально: R локально с полем вычетов 𝔽₂, а C₂ — это 2-группа.",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": true,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": true
+      },
+      "идеалы": [
+        {
+          "id": "GR:Z4|C2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true
+          },
+          "фактор": "GR:Z4|C2"
+        },
+        {
+          "id": "GR:Z4|C2.1",
+          "имя": "(ℤ/4ℤ)[C₂]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    },
+    {
+      "id": "GR:Z6|C2",
+      "имя": "(ℤ/6ℤ)[C₂]",
+      "заметка": "Здесь важна НЕ мощность, а свойство: ℤ/6ℤ ≅ 𝔽₂ × 𝔽₃ приведено, а (ℤ/6ℤ)[C₂] ≅ 𝔽₂[C₂] × 𝔽₃[C₂] НЕ приведено — в 𝔽₂[C₂] характеристика делит порядок группы. Значит кольца различаются объявленным свойством, и «R ≅ R[G]» для них ЛОЖНО. С (ℤ/4ℤ)[C₂] этого не получалось: у него и у самого ℤ/4ℤ все объявленные свойства совпадают, и модель честно отвечала «не знаю».",
+      "props": {
+        "trivial-ring": false,
+        "comm": true,
+        "no-zero-div": false,
+        "domain": false,
+        "field": false,
+        "division": false,
+        "pid": false,
+        "ufd": false,
+        "noeth-ring": true,
+        "artin-ring": true,
+        "local": false,
+        "reduced": false,
+        "simple-ring": false,
+        "finite-ring": true
+      },
+      "идеалы": [
+        {
+          "id": "GR:Z6|C2.0",
+          "имя": "0",
+          "props": {
+            "zero-ideal": true,
+            "whole-ideal": false,
+            "proper": true,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": true
+          },
+          "фактор": "GR:Z6|C2"
+        },
+        {
+          "id": "GR:Z6|C2.1",
+          "имя": "(ℤ/6ℤ)[C₂]",
+          "props": {
+            "zero-ideal": false,
+            "whole-ideal": true,
+            "proper": false,
+            "principal": true,
+            "fin-gen-ideal": true,
+            "nilpotent-ideal": false,
+            "radical-ideal": true
+          },
+          "фактор": "Zero"
+        }
+      ]
+    }
+  ],
+  "произведения": [
+    { "слева": "F2", "справа": "F3", "равно": "Z6" },
+    { "слева": "Zero", "справа": "Zero", "равно": "Zero" }
+  ],
+  "морфизмы": [
+    {
+      "id": "Z→F2",
+      "имя": "ℤ ↠ 𝔽₂",
+      "дом": "Z",
+      "код": "F2",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "Z.2",
+      "образ": "F2"
+    },
+    {
+      "id": "Z→Z4",
+      "имя": "ℤ ↠ ℤ/4ℤ",
+      "дом": "Z",
+      "код": "Z4",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "Z.4",
+      "образ": "Z4"
+    },
+    {
+      "id": "Z→Q",
+      "имя": "ℤ ↪ ℚ",
+      "дом": "Z",
+      "код": "Q",
+      "props": { "surjective-ring": false, "injective-ring": true, "iso-ring": false },
+      "ядро": "Z.0",
+      "образ": "Z"
+    },
+    {
+      "id": "Z→Z",
+      "имя": "id_ℤ",
+      "дом": "Z",
+      "код": "Z",
+      "props": { "surjective-ring": true, "injective-ring": true, "iso-ring": true },
+      "ядро": "Z.0",
+      "образ": "Z"
+    },
+    {
+      "id": "Z→Zero",
+      "имя": "ℤ ↠ 0",
+      "дом": "Z",
+      "код": "Zero",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "Z.1",
+      "образ": "Zero",
+      "заметка": "Единственный гомоморфизм, у которого ядро — всё кольцо: в нулевом кольце 1 = 0, и требование f(1) = 1 больше ничего не запрещает."
+    },
+    {
+      "id": "Zx→Z",
+      "имя": "ℤ[x] ↠ ℤ, x ↦ 0",
+      "дом": "Zx",
+      "код": "Z",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "Zx.x",
+      "образ": "Z"
+    },
+    {
+      "id": "Zx→Zx",
+      "имя": "ℤ[x] ↪ ℤ[x], x ↦ x²",
+      "дом": "Zx",
+      "код": "Zx",
+      "props": { "surjective-ring": false, "injective-ring": true, "iso-ring": false },
+      "ядро": "Zx.0",
+      "образ": "Zx",
+      "заметка": "Инъективный эндоморфизм, не сюръективный: образ изоморфен всему кольцу, но им не является."
+    },
+    {
+      "id": "Qx→Q",
+      "имя": "ℚ[x] ↠ ℚ, x ↦ 0",
+      "дом": "Qx",
+      "код": "Q",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "Qx.x",
+      "образ": "Q"
+    },
+    {
+      "id": "Qx→Qx2",
+      "имя": "ℚ[x] ↠ ℚ[x]/(x²)",
+      "дом": "Qx",
+      "код": "Qx2",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "Qx.x2",
+      "образ": "Qx2"
+    },
+    {
+      "id": "Q→Qxf",
+      "имя": "ℚ ↪ ℚ(x)",
+      "дом": "Q",
+      "код": "Qx_frac",
+      "props": {
+        "surjective-ring": false,
+        "injective-ring": true,
+        "iso-ring": false,
+        "finite-dim": false,
+        "central-mor": true
+      },
+      "ядро": "Q.0",
+      "образ": "Q"
+    },
+    {
+      "id": "Zloc2→F2",
+      "имя": "ℤ₍₂₎ ↠ 𝔽₂",
+      "дом": "Zloc2",
+      "код": "F2",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "Zl2.2",
+      "образ": "F2"
+    },
+    {
+      "id": "F2x→F2x2",
+      "имя": "𝔽₂[x] ↠ 𝔽₂[x]/(x²)",
+      "дом": "F2x",
+      "код": "F2x2",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "F2x.x2",
+      "образ": "F2x2"
+    },
+    {
+      "id": "F2→M2F2",
+      "имя": "𝔽₂ ↪ M₂(𝔽₂) скалярами",
+      "дом": "F2",
+      "код": "M2F2",
+      "props": {
+        "surjective-ring": false,
+        "injective-ring": true,
+        "iso-ring": false,
+        "finite-dim": true,
+        "central-mor": true
+      },
+      "ядро": "F2.0",
+      "образ": "F2"
+    },
+    {
+      "id": "Zi→F9",
+      "имя": "ℤ[i] ↠ 𝔽₉",
+      "дом": "Zi",
+      "код": "F9",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "Zi.3",
+      "образ": "F9"
+    },
+    {
+      "id": "Zsqrt5→F2",
+      "имя": "ℤ[√−5] ↠ 𝔽₂",
+      "дом": "Zsqrt5",
+      "код": "F2",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "Zs5.p2",
+      "образ": "F2"
+    },
+    {
+      "id": "C01→R",
+      "имя": "C[0, 1] ↠ ℝ, f ↦ f(0)",
+      "дом": "C01",
+      "код": "R",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "C01.m",
+      "образ": "R"
+    },
+    {
+      "id": "Zxoo→Z",
+      "имя": "ℤ[x₁, x₂, …] ↠ ℤ",
+      "дом": "Zxoo",
+      "код": "Z",
+      "props": { "surjective-ring": true, "injective-ring": false, "iso-ring": false },
+      "ядро": "Zxoo.all",
+      "образ": "Z"
+    },
+    {
+      "id": "Q→M2Q",
+      "имя": "ℚ ↪ M₂(ℚ) скалярами",
+      "дом": "Q",
+      "код": "M2Q",
+      "props": {
+        "surjective-ring": false,
+        "injective-ring": true,
+        "iso-ring": false,
+        "finite-dim": true,
+        "central-mor": true
+      },
+      "ядро": "Q.0",
+      "образ": "Q",
+      "заметка": "Структурный морфизм алгебры матриц: размерность 4, образ — скалярные матрицы, то есть центр."
+    },
+    {
+      "id": "R→H",
+      "имя": "ℝ ↪ ℍ",
+      "дом": "R",
+      "код": "H",
+      "props": {
+        "surjective-ring": false,
+        "injective-ring": true,
+        "iso-ring": false,
+        "finite-dim": true,
+        "central-mor": true
+      },
+      "ядро": "R.0",
+      "образ": "R",
+      "заметка": "ℍ — четырёхмерная алгебра с делением над ℝ. Именно на ней правило «конечномерная без делителей нуля — тело» показывает, что тело бывает и не полем."
+    },
+    {
+      "id": "R→C",
+      "имя": "ℝ ↪ ℂ",
+      "дом": "R",
+      "код": "C",
+      "props": {
+        "surjective-ring": false,
+        "injective-ring": true,
+        "iso-ring": false,
+        "finite-dim": true,
+        "central-mor": true
+      },
+      "ядро": "R.0",
+      "образ": "R",
+      "заметка": "Двумерная алгебра над ℝ."
+    },
+    {
+      "id": "Q→QS3",
+      "имя": "ℚ ↪ ℚ[S₃]",
+      "дом": "Q",
+      "код": "QS3",
+      "props": {
+        "surjective-ring": false,
+        "injective-ring": true,
+        "iso-ring": false,
+        "finite-dim": true,
+        "central-mor": true
+      },
+      "ядро": "Q.0",
+      "образ": "Q",
+      "заметка": "Размерность 6; по Машке полупроста."
+    },
+    {
+      "id": "Q→Qx_alg",
+      "имя": "ℚ ↪ ℚ[x]",
+      "дом": "Q",
+      "код": "Qx",
+      "props": {
+        "surjective-ring": false,
+        "injective-ring": true,
+        "iso-ring": false,
+        "finite-dim": false,
+        "central-mor": true
+      },
+      "ядро": "Q.0",
+      "образ": "Q",
+      "заметка": "Бесконечномерная алгебра: 1, x, x², … линейно независимы."
+    },
+    {
+      "id": "Q→QZ",
+      "имя": "ℚ ↪ ℚ[t, t⁻¹]",
+      "дом": "Q",
+      "код": "QZ",
+      "props": {
+        "surjective-ring": false,
+        "injective-ring": true,
+        "iso-ring": false,
+        "finite-dim": false,
+        "central-mor": true
+      },
+      "ядро": "Q.0",
+      "образ": "Q",
+      "заметка": "Групповая алгебра бесконечной группы бесконечномерна."
+    },
+    {
+      "id": "Q→QF2",
+      "имя": "ℚ ↪ ℚ[F₂]",
+      "дом": "Q",
+      "код": "QF2",
+      "props": {
+        "surjective-ring": false,
+        "injective-ring": true,
+        "iso-ring": false,
+        "finite-dim": false,
+        "central-mor": true
+      },
+      "ядро": "Q.0",
+      "образ": "Q",
+      "заметка": "Без делителей нуля и бесконечномерна: правило про тело здесь НЕ применимо, и это важно — иначе ℚ[F₂] объявили бы телом."
+    }
+  ],
+  "групповые": [
+    { "кольцо": "Z", "группа": "Z", "равно": "ZZ" },
+    { "кольцо": "Q", "группа": "Z", "равно": "QZ" },
+    { "кольцо": "Z", "группа": "ZxZ", "равно": "ZZ2" },
+    { "кольцо": "Q", "группа": "S3", "равно": "QS3" },
+    { "кольцо": "Q", "группа": "F2", "равно": "QF2" },
+    { "кольцо": "Z", "группа": "C2", "равно": "ZC2" },
+    { "кольцо": "F2", "группа": "C2", "равно": "F2x2" },
+    { "кольцо": "Q", "группа": "C2", "равно": "prod:Q|Q" },
+    { "кольцо": "Z", "группа": "C1", "равно": "Z" },
+    { "кольцо": "Q", "группа": "C1", "равно": "Q" },
+    { "кольцо": "Z", "группа": "F2", "равно": "GR:Z|F2" },
+    { "кольцо": "F2", "группа": "Z", "равно": "GR:F2|Z" },
+    { "кольцо": "Q", "группа": "ZxZ", "равно": "GR:Q|ZxZ" },
+    { "кольцо": "Z", "группа": "Zoo", "равно": "GR:Z|Zoo" },
+    { "кольцо": "Q", "группа": "Zoo", "равно": "GR:Q|Zoo" },
+    { "кольцо": "Q", "группа": "UT3Q", "равно": "GR:Q|UT3Q" },
+    { "кольцо": "Z", "группа": "UT3Q", "равно": "GR:Z|UT3Q" },
+    { "кольцо": "Q", "группа": "Klein", "равно": "GR:Q|Klein" },
+    { "кольцо": "Q", "группа": "BS23", "равно": "GR:Q|BS23" },
+    { "кольцо": "Z", "группа": "Foo", "равно": "GR:Z|Foo" },
+    { "кольцо": "Q", "группа": "C3", "равно": "GR:Q|C3" },
+    { "кольцо": "Q", "группа": "C4", "равно": "GR:Q|C4" },
+    { "кольцо": "Q", "группа": "V4", "равно": "GR:Q|V4" },
+    { "кольцо": "Q", "группа": "A5", "равно": "GR:Q|A5" },
+    { "кольцо": "Z", "группа": "C3", "равно": "GR:Z|C3" },
+    { "кольцо": "Z", "группа": "S3", "равно": "GR:Z|S3" },
+    { "кольцо": "F2", "группа": "V4", "равно": "GR:F2|V4" },
+    { "кольцо": "F2", "группа": "C4", "равно": "GR:F2|C4" },
+    { "кольцо": "Q", "группа": "Dinf", "равно": "GR:Q|Dinf" },
+    { "кольцо": "Q", "группа": "Pruf2", "равно": "GR:Q|Pruf2" },
+    { "кольцо": "F2", "группа": "ZxC2", "равно": "GR:F2|ZxC2" },
+    { "кольцо": "M2Q", "группа": "C2", "равно": "GR:M2Q|C2" },
+    { "кольцо": "F2", "группа": "S3", "равно": "GR:F2|S3" },
+    { "кольцо": "Z4", "группа": "S3", "равно": "GR:Z4|S3" },
+    { "кольцо": "F2", "группа": "Pruf2", "равно": "GR:F2|Pruf2" },
+    { "кольцо": "Z4", "группа": "UT3Q", "равно": "GR:Z4|UT3Q" },
+    { "кольцо": "M2Q", "группа": "Q", "равно": "GR:M2Q|Q" },
+    { "кольцо": "Z4", "группа": "C2", "равно": "GR:Z4|C2" },
+    { "кольцо": "Z6", "группа": "C2", "равно": "GR:Z6|C2" }
+  ],
+  "локализации": [
+    { "кольцо": "Z", "идеал": "Z.2", "равно": "Zloc2" },
+    { "кольцо": "Qx", "идеал": "Qx.x", "равно": "Qx_loc" }
+  ]
+}

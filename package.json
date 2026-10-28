@@ -1,0 +1,18 @@
+{
+  "name": "algen",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Генератор задач по алгебре и общей топологии",
+  "scripts": {
+    "test": "node --test --test-concurrency=1 test/*.test.mjs",
+    "web": "node tools/build-web.mjs",
+    "gen": "node bin/gen.mjs",
+    "show": "node bin/show.mjs",
+    "targets": "node tools/targets.mjs",
+    "texts": "node tools/targets.mjs --текст",
+    "groups": "node tools/compute-groups.mjs",
+    "infinite": "node tools/check-infinite.mjs",
+    "serve": "node tools/serve.mjs"
+  }
+}

@@ -1,0 +1,866 @@
+{
+  "заметка": "Объявленные бесконечные пространства. Нужны по той же причине, что бесконечные группы: у конечных пространств T₁, T₂, метризуемость и дискретность — одно и то же, вторая аксиома счётности верна всегда, компактность тоже. Без этих записей половина базы проверялась бы на пространствах, где вопрос тривиален.",
+  "договор": {
+    "props": "свойства пространства; отсутствующее свойство значит «не знаю», а не «ложно»",
+    "подпространства": "представительные подпространства: «объект» — id пространства, которому оно гомеоморфно, «props» — свойства ВЛОЖЕНИЯ (открыто, замкнуто, плотно, всё)",
+    "факторы": "id подпространства → id пространства, которому гомеоморфен фактор по нему",
+    "произведения": "id второго сомножителя → id пространства"
+  },
+  "объекты": [
+    {
+      "id": "R",
+      "имя": "ℝ",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": true,
+        "path-connected": true,
+        "totally-disconnected": false,
+        "compact": false,
+        "locally-compact": true,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": true,
+        "first-countable": true,
+        "second-countable": true,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{0}",
+          "объект": "точка",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "Q",
+          "имя": "ℚ ⊂ ℝ",
+          "объект": "Q",
+          "props": { "open": false, "closed": false, "dense": true, "whole": false }
+        },
+        {
+          "id": "интервал",
+          "имя": "(0, 1)",
+          "объект": "R",
+          "props": { "open": true, "closed": false, "dense": false, "whole": false }
+        },
+        {
+          "id": "отрезок",
+          "имя": "[0, 1]",
+          "объект": "I",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "Z",
+          "имя": "ℤ ⊂ ℝ",
+          "объект": "N",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "ℝ",
+          "объект": "R",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ],
+      "факторы": { "отрезок": "R", "всё": "точка" },
+      "заметка": "ℝ/[0,1] снова гомеоморфно ℝ — стягивание отрезка ничего не меняет."
+    },
+    {
+      "id": "Q",
+      "имя": "ℚ",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": true,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": false,
+        "path-connected": false,
+        "totally-disconnected": true,
+        "compact": false,
+        "locally-compact": false,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": true,
+        "first-countable": true,
+        "second-countable": true,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{0}",
+          "объект": "точка",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "ℚ",
+          "объект": "Q",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ],
+      "заметка": "Единственное счётное метризуемое пространство без изолированных точек — и НЕ локально компактное, чем и ценно."
+    },
+    {
+      "id": "I",
+      "имя": "[0, 1]",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": true,
+        "path-connected": true,
+        "totally-disconnected": false,
+        "compact": true,
+        "locally-compact": true,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": true,
+        "first-countable": true,
+        "second-countable": true,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{0}",
+          "объект": "точка",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "Кантор",
+          "имя": "канторово множество",
+          "объект": "C",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "концы",
+          "имя": "{0, 1}",
+          "объект": "пара",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "интервал",
+          "имя": "(0, 1)",
+          "объект": "R",
+          "props": { "open": true, "closed": false, "dense": true, "whole": false }
+        },
+        {
+          "id": "рациональные",
+          "имя": "ℚ ∩ [0,1]",
+          "объект": "Q",
+          "props": { "open": false, "closed": false, "dense": true, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "[0, 1]",
+          "объект": "I",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ],
+      "факторы": { "концы": "Sphere1", "всё": "точка", "рациональные": "ImodQ" },
+      "заметка": "[0,1] со склеенными концами — окружность. Фактор по ПЛОТНОМУ подпространству (ℚ ∩ [0,1]) антидискретен, и это главный пример темы «фактор не сохраняет хаусдорфовость»."
+    },
+    {
+      "id": "Sphere1",
+      "имя": "S¹",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": true,
+        "path-connected": true,
+        "totally-disconnected": false,
+        "compact": true,
+        "locally-compact": true,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": true,
+        "first-countable": true,
+        "second-countable": true,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{∗}",
+          "объект": "точка",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "дуга",
+          "имя": "открытая дуга",
+          "объект": "R",
+          "props": { "open": true, "closed": false, "dense": true, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "S¹",
+          "объект": "Sphere1",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "имя": "канторово множество",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": false,
+        "path-connected": false,
+        "totally-disconnected": true,
+        "compact": true,
+        "locally-compact": true,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": true,
+        "first-countable": true,
+        "second-countable": true,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{0}",
+          "объект": "точка",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "C",
+          "объект": "C",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ],
+      "произведения": { "C": "C" },
+      "заметка": "Компактно, вполне несвязно и при этом БЕЗ изолированных точек: единственное сочетание в библиотеке. C × C ≈ C."
+    },
+    {
+      "id": "N",
+      "имя": "ℕ (дискретное)",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": true,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": false,
+        "path-connected": false,
+        "totally-disconnected": true,
+        "compact": false,
+        "locally-compact": true,
+        "discrete": true,
+        "indiscrete": false,
+        "metrizable": true,
+        "first-countable": true,
+        "second-countable": true,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{0}",
+          "объект": "точка",
+          "props": { "open": true, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "ℕ",
+          "объект": "N",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "S",
+      "имя": "прямая Зоргенфрея",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": false,
+        "path-connected": false,
+        "totally-disconnected": true,
+        "compact": false,
+        "locally-compact": false,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": false,
+        "first-countable": true,
+        "second-countable": false,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{0}",
+          "объект": "точка",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "S",
+          "объект": "S",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ],
+      "произведения": { "S": "S2" },
+      "заметка": "Сепарабельна, нормальна и удовлетворяет первой аксиоме счётности, но НЕ метризуема и НЕ удовлетворяет второй. Единственное такое пространство в библиотеке: на нём и ломается «сепарабельно и первая аксиома ⇒ вторая»."
+    },
+    {
+      "id": "S2",
+      "имя": "плоскость Зоргенфрея",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": false,
+        "connected": false,
+        "path-connected": false,
+        "totally-disconnected": true,
+        "compact": false,
+        "locally-compact": false,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": false,
+        "first-countable": true,
+        "second-countable": false,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{(0,0)}",
+          "объект": "точка",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "антидиагональ",
+          "имя": "{x + y = 0}",
+          "объект": "Ndiscr",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "S²",
+          "объект": "S2",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ],
+      "заметка": "Произведение двух нормальных пространств, которое НЕ нормально. Ради этого единственного факта плоскость Зоргенфрея и объявлена: правила «произведение сохраняет нормальность» в базе нет, и опровергать его нужно чем-то."
+    },
+    {
+      "id": "Ndiscr",
+      "имя": "несчётное дискретное",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": false,
+        "path-connected": false,
+        "totally-disconnected": true,
+        "compact": false,
+        "locally-compact": true,
+        "discrete": true,
+        "indiscrete": false,
+        "metrizable": true,
+        "first-countable": true,
+        "second-countable": false,
+        "separable": false
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{∗}",
+          "объект": "точка",
+          "props": { "open": true, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "D",
+          "объект": "Ndiscr",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ],
+      "заметка": "Метризуемо и НЕ сепарабельно — этим отличается от ℕ и показывает, что метризуемость сепарабельности не даёт."
+    },
+    {
+      "id": "RCF",
+      "имя": "ℝ с кофинитной топологией",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": false,
+        "T3": false,
+        "T4": false,
+        "connected": true,
+        "totally-disconnected": false,
+        "compact": true,
+        "locally-compact": true,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": false,
+        "first-countable": false,
+        "second-countable": false,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{0}",
+          "объект": "точка",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "ℝ_cf",
+          "объект": "RCF",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ],
+      "заметка": "T₁ и НЕ хаусдорфово, при этом компактно и связно. Бесконечная компактная T₁-нехаусдорфова — сочетание, которого нет ни у одного другого пространства библиотеки. Линейная связность не объявлена намеренно: она зависит от мощности, и врать тут не за чем."
+    },
+    {
+      "id": "W1",
+      "имя": "ω₁ (ординалы)",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": false,
+        "path-connected": false,
+        "totally-disconnected": true,
+        "compact": false,
+        "locally-compact": true,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": false,
+        "first-countable": true,
+        "second-countable": false,
+        "separable": false
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{0}",
+          "объект": "точка",
+          "props": { "open": true, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "ω₁",
+          "объект": "W1",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ],
+      "заметка": "Нормально, первая аксиома счётности, но не сепарабельно и не метризуемо. Отличается от прямой Зоргенфрея ровно сепарабельностью."
+    },
+    {
+      "id": "Ind",
+      "имя": "несчётное антидискретное",
+      "заметка": "Связно, линейно связно, компактно и при этом НЕ T₀. Несчётность отличает его от конечных антидискретных, а без неё вопросы «связно и несчётно ⇒ T₁?» оставались без единого контрпримера.",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": false,
+        "T1": false,
+        "T2": false,
+        "T3": false,
+        "T4": false,
+        "connected": true,
+        "path-connected": true,
+        "totally-disconnected": false,
+        "compact": true,
+        "locally-compact": true,
+        "discrete": false,
+        "indiscrete": true,
+        "metrizable": false,
+        "first-countable": true,
+        "second-countable": true,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{∗}",
+          "объект": "точка",
+          "props": { "open": false, "closed": false, "dense": true, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "X",
+          "объект": "Ind",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "W1plus",
+      "имя": "ω₁ + 1",
+      "заметка": "Компактно и хаусдорфово, значит нормально, — но НЕ метризуемо и НЕ удовлетворяет первой аксиоме счётности (в точке ω₁ нет счётной базы). Единственный в библиотеке компакт, который не метризуем.",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": false,
+        "path-connected": false,
+        "totally-disconnected": true,
+        "compact": true,
+        "locally-compact": true,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": false,
+        "first-countable": false,
+        "second-countable": false,
+        "separable": false
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{0}",
+          "объект": "точка",
+          "props": { "open": true, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "омега1",
+          "имя": "ω₁",
+          "объект": "W1",
+          "props": { "open": true, "closed": false, "dense": true, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "ω₁ + 1",
+          "объект": "W1plus",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "Sine",
+      "имя": "синусоида тополога",
+      "заметка": "Связна, но НЕ линейно связна — единственный такой пример в библиотеке, и он же классический. Компактна и метризуема, поэтому опровергает «связно ⇒ линейно связно» не за счёт патологии отделимости.",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": true,
+        "path-connected": false,
+        "totally-disconnected": false,
+        "compact": true,
+        "locally-compact": true,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": true,
+        "first-countable": true,
+        "second-countable": true,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{(0,0)}",
+          "объект": "точка",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "дуга",
+          "имя": "график при x > 0",
+          "объект": "R",
+          "props": { "open": true, "closed": false, "dense": true, "whole": false }
+        },
+        {
+          "id": "отрезок",
+          "имя": "предельный отрезок",
+          "объект": "I",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "синусоида",
+          "объект": "Sine",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "Plank",
+      "имя": "доска Тихонова",
+      "заметка": "([0, ω₁] × [0, ω]) без угловой точки. Хаусдорфова и регулярна, но НЕ нормальна — второй (после плоскости Зоргенфрея) и совсем иначе устроенный пример. Содержит замкнутое компактное неметризуемое подпространство ω₁ + 1.",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": false,
+        "connected": false,
+        "path-connected": false,
+        "totally-disconnected": true,
+        "compact": false,
+        "locally-compact": true,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": false,
+        "first-countable": false,
+        "second-countable": false,
+        "separable": false
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{(0,0)}",
+          "объект": "точка",
+          "props": { "open": true, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "край",
+          "имя": "[0, ω₁] × {0}",
+          "объект": "W1plus",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "доска",
+          "объект": "Plank",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "CoCount",
+      "имя": "ℝ со счётными дополнениями",
+      "заметка": "Открыты те множества, дополнение которых счётно. T₁ и НЕ хаусдорфово (любые два непустых открытых пересекаются), связно, не сепарабельно, не первой и не второй аксиомы. Единственное в библиотеке несепарабельное нехаусдорфово — до него вопросы «не метризуемо и не сепарабельно ⇒ хаусдорфово?» оставались без контрпримера. Линейная связность ложна: всякое непрерывное отображение отрезка сюда постоянно.",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": false,
+        "T3": false,
+        "T4": false,
+        "connected": true,
+        "path-connected": false,
+        "totally-disconnected": false,
+        "compact": false,
+        "locally-compact": false,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": false,
+        "first-countable": false,
+        "second-countable": false,
+        "separable": false
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{0}",
+          "объект": "точка",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "счётное",
+          "имя": "счётное подмножество",
+          "объект": "N",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "несчётное",
+          "имя": "несчётное собственное подмножество",
+          "объект": "CoCount",
+          "props": { "open": false, "closed": false, "dense": true, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "ℝ_cc",
+          "объект": "CoCount",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ],
+      "факторы": { "несчётное": "CCmodU", "всё": "точка" }
+    },
+    {
+      "id": "ImodQ",
+      "имя": "[0,1] / ℚ",
+      "заметка": "Фактор отрезка по ПЛОТНОМУ множеству рациональных — главный пример темы «фактор не сохраняет отделимость». Точка [ℚ] не замкнута, потому что ℚ не замкнуто, значит фактор даже не T₁. Компактность, локальная компактность и аксиомы счётности не объявлены намеренно: я в них не уверен.",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": false,
+        "T2": false,
+        "T3": false,
+        "T4": false,
+        "connected": true,
+        "path-connected": true,
+        "totally-disconnected": false,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": false,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "[ℚ]",
+          "объект": "точка",
+          "props": { "open": false, "closed": false, "dense": true, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "[0,1]/ℚ",
+          "объект": "ImodQ",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "CCmodU",
+      "имя": "ℝ_cc / несчётное",
+      "заметка": "То же явление на другом материале: в счётно-дополнительной топологии замкнуты ровно счётные множества, поэтому всякое несчётное собственное подмножество плотно и не замкнуто, а фактор по нему не T₁.",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": false,
+        "T2": false,
+        "T3": false,
+        "T4": false,
+        "connected": true,
+        "totally-disconnected": false,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": false,
+        "separable": true
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "[A]",
+          "объект": "точка",
+          "props": { "open": false, "closed": false, "dense": true, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "ℝ_cc/A",
+          "объект": "CCmodU",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "Long",
+      "имя": "длинная прямая",
+      "заметка": "Линейно связна, нормальна и локально компактна, но НЕ метризуема и НЕ сепарабельна. Единственное в библиотеке линейно связное неметризуемое пространство: до неё вопрос «регулярно и линейно связно ⇒ метризуемо» подтверждался на всех шестнадцати подходящих примерах.",
+      "props": {
+        "point": false,
+        "finite": false,
+        "countable": false,
+        "T0": true,
+        "T1": true,
+        "T2": true,
+        "T3": true,
+        "T4": true,
+        "connected": true,
+        "path-connected": true,
+        "totally-disconnected": false,
+        "compact": false,
+        "locally-compact": true,
+        "discrete": false,
+        "indiscrete": false,
+        "metrizable": false,
+        "first-countable": true,
+        "second-countable": false,
+        "separable": false
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "{0}",
+          "объект": "точка",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "начало",
+          "имя": "начальный отрезок ≅ [0,1]",
+          "объект": "I",
+          "props": { "open": false, "closed": true, "dense": false, "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "длинная прямая",
+          "объект": "Long",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    }
+  ]
+}
