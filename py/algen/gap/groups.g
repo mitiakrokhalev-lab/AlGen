@@ -119,10 +119,15 @@ end;
 
 STREAM := OutputTextFile(OUT, false);
 SetPrintFormattingStatus(STREAM, false);
-for n in [LO..HI] do
-  for i in [1..NrSmallGroups(n)] do
-    Record1(SmallGroup(n, i), STREAM);
+if IsBound(KEYS) then
+  # Отдельные группы порядка выше таблицы: KEYS = [[n, i], ...].
+  for k in KEYS do Record1(SmallGroup(k[1], k[2]), STREAM); od;
+else
+  for n in [LO..HI] do
+    for i in [1..NrSmallGroups(n)] do
+      Record1(SmallGroup(n, i), STREAM);
+    od;
   od;
-od;
+fi;
 CloseStream(STREAM);
 QUIT;
