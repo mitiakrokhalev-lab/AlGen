@@ -398,6 +398,7 @@ def run(max_prem, lib=None, vocab=None, form=None):
     vocab = vocab or Vocab.section("grp")
     if lib is None:
         lib = Library()
+        lib.saturate()
         lib.synthesize_products(vocab)
     form = form or Form(lib, vocab)
     fixed = getattr(form, "fixed_lits", [])
@@ -490,6 +491,7 @@ def main():
     if a.decl:
         vocab = Vocab.section("grp")
         lib = Library()
+        lib.saturate()
         lib.synthesize_products(vocab)
         form = SchemeForm(lib, vocab, a.decl, [x for x in a.terms.split(";") if x.strip()], a.max_subs)
         form, alive, empty, report = run(a.k, lib, vocab, form)

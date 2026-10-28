@@ -2104,6 +2104,81 @@
    "абелианизация": "QxQ"
   },
   {
+   "id": "UT3R",
+   "имя": "UT₃(ℝ)",
+   "заметка": "Вещественная группа Гейзенберга: делимая нильпотентная, центр и коммутант ℝ ≅ ⊕ℚ нехопфовы.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": true,
+    "periodic": false,
+    "divisible": true,
+    "centerless": false,
+    "residually-finite": false,
+    "polycyclic": false,
+    "linear": true,
+    "indecomposable": true
+   },
+   "почему": {
+    "divisible": "(x, y, z)ⁿ = (nx, ny, nz + C(n, 2)xy) решается относительно x, y, z",
+    "indecomposable": "если G = A × B, то A, B неабелевы (абелев множитель лежит в центре = коммутанту = A′ × B′), и ℝ² = G/Z распадается на ℚ-подпространства V_A ⊥ V_B для формы det; но det(u, v) = 0 значит v ∈ ℝu, и V_A + V_B лежит на одной прямой"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "UT3R"
+    },
+    {
+     "id": "центр",
+     "имя": "{I + c e₁₃}",
+     "≅": "R",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "центр и коммутант: [I + a e₁₂, I + b e₂₃] = I + ab e₁₃"
+    },
+    {
+     "id": "все",
+     "имя": "UT₃(ℝ)",
+     "≅": "UT3R",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "центр"
+  },
+  {
    "id": "UT4Q",
    "имя": "UT₄(ℚ)",
    "заметка": "Унитреугольные рациональные матрицы 4 × 4: делимая нильпотентная ступени 3.",
@@ -3549,11 +3624,13 @@
     "centerless": true,
     "residually-finite": false,
     "indecomposable": true,
-    "linear": true
+    "linear": true,
+    "hopfian": true
    },
    "почему": {
     "residually-finite": "содержит бесконечную простую PSL₂(ℚ), а подгруппа ф. а. группы ф. а.",
-    "indecomposable": "PGL₂(ℚ)' = PSL₂(ℚ) проста, её централизатор тривиален; из A × B следует, что один множитель абелев и централизует PSL₂(ℚ), значит тривиален"
+    "indecomposable": "PGL₂(ℚ)' = PSL₂(ℚ) проста, её централизатор тривиален; из A × B следует, что один множитель абелев и централизует PSL₂(ℚ), значит тривиален",
+    "hopfian": "нетривиальная нормальная N пересекает простую PSL₂(ℚ): иначе [N, PSL₂(ℚ)] = 1 и N ⩽ C(PSL₂(ℚ)) = 1. Значит, ядро сюръекции ≠ 1 содержит PSL₂(ℚ) = G′, и образ абелев"
    },
    "подгруппы": [
     {
@@ -3602,6 +3679,67 @@
    ],
    "центр": "1",
    "коммутант": "коммутант"
+  },
+  {
+   "id": "Grigc",
+   "имя": "𝒢′ (коммутант группы Григорчука)",
+   "заметка": "Подгруппа индекса 8 в группе Григорчука, 𝒢/𝒢′ ≅ C₂³.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "polycyclic": false,
+    "periodic": true,
+    "torsion-free": false,
+    "divisible": false,
+    "residually-finite": true,
+    "linear": false
+   },
+   "почему": {
+    "fin-gen": "подгруппа конечного индекса к. п. группы",
+    "periodic": "подгруппа периодической",
+    "residually-finite": "подгруппа ф. а.",
+    "linear": "иначе 𝒢 линейна (индуцированное представление), а к. п. линейная периодическая группа конечна (Бернсайд — Шур)",
+    "divisible": "делимая ф. а. группа тривиальна"
+   },
+   "трудно": [
+    "periodic",
+    "residually-finite"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Grigc"
+    },
+    {
+     "id": "все",
+     "имя": "𝒢′",
+     "≅": "Grigc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
   },
   {
    "id": "PSL2Q",
@@ -3715,6 +3853,21 @@
      "почему": "не к. п.; лежит в K собственной (индекс 16); группа Григорчука без центра"
     },
     {
+     "id": "коммутант",
+     "имя": "𝒢′",
+     "≅": "Grigc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "8:5",
+     "почему": "𝒢 порождена инволюциями a, b, c, d с bcd = 1, абелианизация C₂³"
+    },
+    {
      "id": "все",
      "имя": "𝒢",
      "≅": "Grig",
@@ -3734,7 +3887,8 @@
    "трудно": [
     "periodic",
     "residually-finite"
-   ]
+   ],
+   "коммутант": "коммутант"
   },
   {
    "id": "Z12",

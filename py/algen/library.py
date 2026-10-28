@@ -264,6 +264,51 @@ class Library:
         s.delete()
         return len(made)
 
+    def saturate(self, workers=None, rounds=3):
+        """Дописать в записи бесконечных групп значения, которые следуют по
+        базе из записанных (самой группы, её подгрупп, центра, коммутанта и
+        факторов). Свойство группы получает пометку, если без помеченных
+        значений не выводится; свойства вложения подгрупп — только без
+        пометок. Повторяется, пока что-то дописывается (не больше rounds раз),
+        ведь выведенное у одной группы пригодится там, где она подгруппа."""
+        global _LIB
+        added = 0
+        for _ in range(rounds):
+            _LIB = self
+            with Pool(workers, initializer=_init_scene) as pool:
+                res = pool.map(_saturate, list(jobs(self, self.infinite())), chunksize=4)
+            best = {}
+            subs = []
+            for key, sub, grp, emb in res:
+                for prop, (v, mark) in grp.items():
+                    old = best.get((key, prop))
+                    if old is None or MARKS_ORDER[mark] < MARKS_ORDER[old[1]]:
+                        best[key, prop] = (v, mark)
+                subs += [(key, sub, prop, v) for prop, v in emb.items()]
+            n = 0
+            for (key, prop), (v, mark) in best.items():
+                o = self.obj[key]
+                if prop in o["свойства"]:
+                    continue
+                o["свойства"][prop] = v
+                if mark:
+                    o[mark] = sorted(set(o.get(mark, [])) | {prop})
+                why = o.setdefault("почему", {})
+                if isinstance(why, dict):
+                    why.setdefault(prop, "выведено по базе из записанных значений")
+                n += 1
+            for key, sub, prop, v in subs:
+                props = self.obj[key]["подгруппы"][sub]["свойства"]
+                if prop not in props:
+                    props[prop] = v
+                    n += 1
+            added += n
+            if not n:
+                break
+        for o in self.obj.values():
+            self._center_commutator(o)
+        return added
+
     def _sub(self, key, sid):
         if sid is None:
             return None
@@ -587,6 +632,38 @@ def _init():
     global _LIB, _SCENE
     _LIB = Library()
     _SCENE = Scene(Vocab.section("grp"))
+
+
+def _init_scene():
+    global _SCENE
+    _SCENE = Scene(Vocab.section("grp"))
+
+
+MARKS_ORDER = {None: 0, "короткий довод": 1, "трудно": 2}
+
+
+def _saturate(job):
+    """Выведенные значения пары (G, N): свойства G с пометкой (или None) и
+    свойства вложения N без пометок."""
+    key, sub = job
+    S, lib = _SCENE, _LIB
+    o = lib.obj[key]
+    ga = [("p", p, S.G) for p in GROUP_PROPS if p not in o["свойства"]]
+    s = o["подгруппы"][sub] if sub is not None else None
+    na = [("p", p, S.N) for p in SUB_PROPS if s is not None and p not in s["свойства"]]
+    if not ga and not na:
+        return key, sub, {}, {}
+    if S.check(S.facts(lib, key, sub)) is not None:
+        return key, sub, {}, {}  # противоречие покажет сверка
+    grp, emb = {}, {}
+    for drop, mark in ((MARKS, None), (("трудно",), "короткий довод"), ((), "трудно")):
+        vals = S.values(lib, key, sub, need=ga + (na if mark is None else []), drop=drop)
+        for a in ga:
+            if a in vals and a[1] not in grp:
+                grp[a[1]] = (vals[a], mark)
+        if mark is None:
+            emb = {a[1]: vals[a] for a in na if a in vals}
+    return key, sub, grp, emb
 
 
 def _audit(job):
