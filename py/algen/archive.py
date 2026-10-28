@@ -15,6 +15,8 @@
 * короткий довод — контрпример держится на значении с пометкой «короткий
   довод» (несколько строк, но не учебный факт); в выдаче скрыто, показать —
   флаг --короткие;
+* проверено на примерах — условие с параметрами верно на всех примерах из
+  таблицы конечных групп, но не выведено; это не закрыто;
 * открыто — ответ неизвестен;
 * КРАСНЫЙ ФЛАГ — задача не записывается в словаре, или генератор ответил не
   так, как ожидалось по уровню карточки. Список флагов — мерило покрытия.
@@ -28,6 +30,7 @@ import sys
 from collections import Counter
 
 from .etalon import Unsupported, judge, scheme
+from .params import Model, ParseError as PError, check
 from .identities import FREE_NILPOTENT, ParseError, holds, parse, show_poly, show_word, variety
 from .library import Library, Search
 from .logic import Theory, Vocab, decide
@@ -47,6 +50,8 @@ def run_card(c, vocab, lib):
     if not c.get("условие"):
         return {**out, "корзина": "КРАСНЫЙ ФЛАГ",
                 "почему": "не записывается: нет в словаре " + ", ".join(c.get("вне_словаря", ["?"]))}
+    if c.get("расширение") == "P":
+        return parametric(c, out, lib)
     try:
         g, prem, goal = scheme(vocab, c)
     except Unsupported as e:
@@ -95,6 +100,30 @@ def identity(c, prem):
             ", ".join(lit_str(a, v) for a, v in rest) + " она может не выполнять"
     shown = show_word(wit) if lev is None else show_poly(wit) + " ≠ 0 в алгебре Магнуса"
     return "опровергается", f"контрпример — относительно свободная группа ({where}): u⁻¹v ↦ {shown}"
+
+
+def parametric(c, out, lib):
+    """Условие с параметрами: перебор примеров в таблице конечных групп.
+    Контрпример закрывает задачу, а «верно на всех примерах» — нет: это
+    проверка, не доказательство."""
+    global _MODEL
+    if _MODEL is None or _MODEL.lib is not lib:
+        _MODEL = Model(lib)
+    try:
+        kind, detail, _ = check(c["условие"], c["цель"], _MODEL)
+    except PError as e:
+        return {**out, "корзина": "КРАСНЫЙ ФЛАГ", "почему": f"не разбирается: {e}"}
+    out.update(вердикт=kind, детали=detail)
+    if kind == "опровергается":
+        if c["ответ"] == "ложно":
+            return {**out, "корзина": "закрыто генератором"}
+        return {**out, "корзина": "КРАСНЫЙ ФЛАГ", "почему": f"ответ «{c['ответ']}», а {detail}"}
+    if kind == "проверено" and c["ответ"] == "верно":
+        return {**out, "корзина": "проверено на примерах"}
+    return {**out, "корзина": "КРАСНЫЙ ФЛАГ", "почему": f"ответ «{c['ответ']}», а генератор: {detail}"}
+
+
+_MODEL = None
 
 
 def finish(c, out, kind, detail):
