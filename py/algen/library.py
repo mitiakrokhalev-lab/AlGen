@@ -183,7 +183,7 @@ class Scene:
 
 GROUP_PROPS = ("trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable",
                "nilpotent", "perfect", "torsion-free", "periodic", "divisible", "centerless",
-               "residually-finite", "indecomposable")
+               "residually-finite", "indecomposable", "hopfian", "linear", "polycyclic")
 
 _LIB = _SCENE = None
 
