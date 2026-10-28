@@ -260,7 +260,9 @@ def check(rule, table, pair_limit, subpair_limit=40):
             if not all(prem):
                 res["посылки ложны"] += 1
                 continue
-            concl = table.atom(rule["then"], env)
+            outs = rule["then"]["или"] if "или" in rule["then"] else [rule["then"]]
+            vals = [table.atom(a, env) for a in outs]
+            concl = UNDEF if all(v is UNDEF for v in vals) else any(v is True for v in vals)
         except Skip as e:
             res[f"не считается: {e}"] += 1
             continue
@@ -314,12 +316,22 @@ def main():
     ap.add_argument("--классов-для-пар", dest="subpair_limit", type=int, default=40,
                     help="для сцен с двумя подгруппами брать группы с не большим числом классов")
     ap.add_argument("--нитей", dest="jobs", type=int, default=os.cpu_count())
+    ap.add_argument("--поправки", dest="patch", default=str(OUT.parents[1] / "new" / "grp.json"),
+                    help="data/new/<раздел>.json: снятые и добавленные правила; пусто — без поправок")
     ap.add_argument("--json", dest="as_json", action="store_true")
     a = ap.parse_args()
     d = json.load(open(a.rules))
     _TABLE = Table(load(a.table), load_products(a.products))
     _ARGS = (a.pair_limit, a.subpair_limit)
     rules = d["rules"] + gives_rules(d.get("gives", []))
+    if a.patch:
+        from .logic import Vocab
+        patch = json.load(open(a.patch, encoding="utf-8"))
+        v = Vocab({**d, "gives": []})
+        v.apply(patch)
+        drop = {x["id"] for x in patch.get("снять", [])}
+        new = {x["id"] for x in patch.get("добавить", [])}
+        rules = [r for r in rules if r["id"] not in drop] + [r for r in v.rules if r["id"] in new]
     with Pool(a.jobs) as pool:
         report = pool.map(_one, rules, chunksize=1)
     if a.as_json:

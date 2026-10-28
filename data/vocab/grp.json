@@ -1,0 +1,10103 @@
+{
+ "id": "Grp",
+ "subsorts": [
+  [
+   "Grp.sub",
+   "Grp.obj"
+  ],
+  [
+   "Grp.sub",
+   "Grp.subset"
+  ]
+ ],
+ "properties": [
+  {
+   "id": "trivial",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "abelian",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "cyclic",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "finite",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "fin-gen",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "free",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "simple",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "solvable",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "nilpotent",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "perfect",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "torsion-free",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "periodic",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "divisible",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "centerless",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "residually-finite",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam",
+    "Grp.diag"
+   ]
+  },
+  {
+   "id": "normal",
+   "sort": [
+    "Grp.sub",
+    "Grp.subfam"
+   ]
+  },
+  {
+   "id": "characteristic",
+   "sort": [
+    "Grp.sub",
+    "Grp.subfam"
+   ]
+  },
+  {
+   "id": "maximal",
+   "sort": [
+    "Grp.sub",
+    "Grp.subfam"
+   ]
+  },
+  {
+   "id": "whole",
+   "sort": [
+    "Grp.sub",
+    "Grp.subfam"
+   ]
+  },
+  {
+   "id": "central",
+   "sort": [
+    "Grp.sub",
+    "Grp.subfam"
+   ]
+  },
+  {
+   "id": "finite-index",
+   "sort": [
+    "Grp.sub",
+    "Grp.subfam"
+   ]
+  },
+  {
+   "id": "injective",
+   "sort": "Grp.mor"
+  },
+  {
+   "id": "surjective",
+   "sort": "Grp.mor"
+  },
+  {
+   "id": "iso",
+   "sort": "Grp.mor"
+  },
+  {
+   "id": "zero-mor",
+   "sort": "Grp.mor"
+  },
+  {
+   "id": "identity-elt",
+   "sort": "Grp.elt"
+  },
+  {
+   "id": "torsion-elt",
+   "sort": "Grp.elt"
+  },
+  {
+   "id": "finite-fam",
+   "sort": [
+    "Grp.fam",
+    "Grp.subfam"
+   ]
+  },
+  {
+   "id": "injective-sys",
+   "sort": "Grp.diag"
+  },
+  {
+   "id": "surjective-sys",
+   "sort": "Grp.diag"
+  },
+  {
+   "id": "constant-sys",
+   "sort": "Grp.diag"
+  },
+  {
+   "id": "central-elt",
+   "sort": "Grp.elt"
+  },
+  {
+   "id": "involution",
+   "sort": "Grp.elt"
+  },
+  {
+   "id": "generator",
+   "sort": "Grp.elt"
+  },
+  {
+   "id": "num-finite",
+   "sort": "Grp.num"
+  },
+  {
+   "id": "num-one",
+   "sort": "Grp.num"
+  },
+  {
+   "id": "num-two",
+   "sort": "Grp.num"
+  },
+  {
+   "id": "num-prime",
+   "sort": "Grp.num"
+  },
+  {
+   "id": "num-even",
+   "sort": "Grp.num"
+  },
+  {
+   "id": "indecomposable",
+   "sort": [
+    "Grp.obj",
+    "Grp.fam"
+   ]
+  },
+  {
+   "id": "subgroup",
+   "sort": "Grp.subset"
+  },
+  {
+   "id": "set-whole",
+   "sort": "Grp.subset"
+  }
+ ],
+ "relations": [
+  {
+   "id": "iso",
+   "in": [
+    "Grp.obj",
+    "Grp.obj"
+   ],
+   "same": null
+  },
+  {
+   "id": "le",
+   "in": [
+    "Grp.sub",
+    "Grp.sub"
+   ],
+   "same": "ambient"
+  },
+  {
+   "id": "eq-sub",
+   "in": [
+    "Grp.sub",
+    "Grp.sub"
+   ],
+   "same": "ambient"
+  },
+  {
+   "id": "commute",
+   "in": [
+    "Grp.elt",
+    "Grp.elt"
+   ],
+   "same": "ambient"
+  },
+  {
+   "id": "conjugate",
+   "in": [
+    "Grp.elt",
+    "Grp.elt"
+   ],
+   "same": "ambient"
+  },
+  {
+   "id": "num-eq",
+   "in": [
+    "Grp.num",
+    "Grp.num"
+   ],
+   "same": null
+  },
+  {
+   "id": "num-divides",
+   "in": [
+    "Grp.num",
+    "Grp.num"
+   ],
+   "same": null
+  },
+  {
+   "id": "num-coprime",
+   "in": [
+    "Grp.num",
+    "Grp.num"
+   ],
+   "same": null
+  }
+ ],
+ "constructions": [
+  {
+   "id": "terminal",
+   "in": [],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": {
+    "trivial": true,
+    "abelian": true,
+    "finite": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "trivial-sub",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": {
+    "trivial": true,
+    "normal": true,
+    "characteristic": true,
+    "central": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "whole-sub",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": {
+    "whole": true,
+    "normal": true,
+    "characteristic": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "choose-sub",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "choose-mor",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.mor",
+    "dom": "X",
+    "cod": "Y"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "choose-elt",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.elt",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "choose-act",
+   "in": [
+    {
+     "role": "Q",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.act",
+    "dom": "Q",
+    "cod": "N"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "proj",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X",
+     "requires": [
+      "normal"
+     ]
+    }
+   ],
+   "out": {
+    "sort": "Grp.mor",
+    "dom": "X",
+    "cod": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   },
+   "gives": {
+    "surjective": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "incl",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.mor",
+    "dom": "N",
+    "cod": "X"
+   },
+   "gives": {
+    "injective": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "quotient",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X",
+     "requires": [
+      "normal"
+     ]
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "ker",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.mor"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "dom F"
+   },
+   "gives": {
+    "normal": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "im",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.mor"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "cod F"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "image-of",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.mor"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "dom F"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "cod F"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "preimage",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.mor"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "cod F"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "dom F"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "compose",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.mor"
+    },
+    {
+     "role": "G",
+     "sort": "Grp.mor",
+     "dom": "cod F"
+    }
+   ],
+   "out": {
+    "sort": "Grp.mor",
+    "dom": "dom F",
+    "cod": "cod G"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "meet",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "role": "M",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "join",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "role": "M",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "as-sub",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "role": "K",
+     "sort": "Grp.sub",
+     "ambient": "N"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "inn",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": {
+     "op": "aut",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "gives": {
+    "normal": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "choose-fam",
+   "in": [],
+   "out": {
+    "sort": "Grp.fam"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "choose-subfam",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.subfam",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "prod-fam",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.fam"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "sum-fam",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.fam"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": {
+     "op": "prod-fam",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "gives": {
+    "normal": true,
+    "characteristic": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "meet-fam",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "Ф",
+     "sort": "Grp.subfam",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "join-fam",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "Ф",
+     "sort": "Grp.subfam",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "prod",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "prod-sub",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "role": "M",
+     "sort": "Grp.sub",
+     "ambient": "Y"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "freeprod",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "pullback",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.mor"
+    },
+    {
+     "role": "G",
+     "sort": "Grp.mor",
+     "cod": "cod F"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "pushout",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.mor"
+    },
+    {
+     "role": "G",
+     "sort": "Grp.mor",
+     "dom": "dom F"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "equalizer",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.mor"
+    },
+    {
+     "role": "G",
+     "sort": "Grp.mor",
+     "dom": "dom F",
+     "cod": "cod F"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "dom F"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "coequalizer",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.mor"
+    },
+    {
+     "role": "G",
+     "sort": "Grp.mor",
+     "dom": "dom F",
+     "cod": "cod F"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "center",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": {
+    "normal": true,
+    "characteristic": true,
+    "abelian": true,
+    "central": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "commutator",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": {
+    "normal": true,
+    "characteristic": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "centralizer",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "normalizer",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "normal-closure",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": {
+    "normal": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "torsion",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj",
+     "requires": [
+      "abelian"
+     ]
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": {
+    "normal": true,
+    "characteristic": true,
+    "periodic": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "ab",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": {
+    "abelian": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "aut",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "semidirect",
+   "in": [
+    {
+     "role": "N",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "Q",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "A",
+     "sort": "Grp.act",
+     "dom": "Q",
+     "cod": "N"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "free",
+   "in": [
+    {
+     "role": "S",
+     "sort": "Set.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": {
+    "free": true,
+    "torsion-free": true,
+    "residually-finite": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "units",
+   "in": [
+    {
+     "role": "R",
+     "sort": "Ring.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "pi1",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Top.pt"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "choose-diag",
+   "in": [],
+   "out": {
+    "sort": "Grp.diag"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "colim",
+   "in": [
+    {
+     "role": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "lim",
+   "in": [
+    {
+     "role": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "out": {
+    "sort": "Grp.obj"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "gen",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": {
+    "abelian": true,
+    "cyclic": true
+   },
+   "commutative": false
+  },
+  {
+   "id": "centralizer-elt",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.sub",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "apply-mor",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.mor"
+    },
+    {
+     "role": "x",
+     "sort": "Grp.elt",
+     "ambient": "dom F"
+    }
+   ],
+   "out": {
+    "sort": "Grp.elt",
+    "ambient": "cod F"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "as-elt",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "role": "x",
+     "sort": "Grp.elt",
+     "ambient": "N"
+    }
+   ],
+   "out": {
+    "sort": "Grp.elt",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "ord",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.num"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "index",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.num"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "eltord",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.num"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "union",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "A",
+     "sort": "Grp.subset",
+     "ambient": "X"
+    },
+    {
+     "role": "B",
+     "sort": "Grp.subset",
+     "ambient": "X"
+    }
+   ],
+   "out": {
+    "sort": "Grp.subset",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  },
+  {
+   "id": "torsion-set",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "out": {
+    "sort": "Grp.subset",
+    "ambient": "X"
+   },
+   "gives": null,
+   "commutative": false
+  }
+ ],
+ "degenerations": [
+  {
+   "op": "quotient",
+   "when": {
+    "N": {
+     "trivial": true
+    }
+   },
+   "equals": "X",
+   "почему": "G/1 ≅ G"
+  },
+  {
+   "op": "quotient",
+   "when": {
+    "N": {
+     "whole": true
+    }
+   },
+   "equals": {
+    "op": "terminal",
+    "args": []
+   },
+   "почему": "G/G ≅ 1"
+  },
+  {
+   "op": "quotient",
+   "when": {
+    "X": {
+     "trivial": true
+    }
+   },
+   "equals": {
+    "op": "terminal",
+    "args": []
+   },
+   "почему": "фактор тривиальной группы тривиален"
+  },
+  {
+   "op": "ker",
+   "when": {
+    "F": {
+     "injective": true
+    }
+   },
+   "equals": {
+    "op": "trivial-sub",
+    "args": [
+     "dom F"
+    ]
+   },
+   "почему": "ядро вложения тривиально"
+  },
+  {
+   "op": "im",
+   "when": {
+    "F": {
+     "surjective": true
+    }
+   },
+   "equals": {
+    "op": "whole-sub",
+    "args": [
+     "cod F"
+    ]
+   },
+   "почему": "образ эпиморфизма — вся группа"
+  },
+  {
+   "op": "prod",
+   "when": {
+    "Y": {
+     "trivial": true
+    }
+   },
+   "equals": "X",
+   "почему": "G × 1 ≅ G"
+  },
+  {
+   "op": "prod",
+   "when": {
+    "X": {
+     "trivial": true
+    }
+   },
+   "equals": "Y",
+   "почему": "1 × G ≅ G"
+  },
+  {
+   "op": "freeprod",
+   "when": {
+    "Y": {
+     "trivial": true
+    }
+   },
+   "equals": "X",
+   "почему": "G ∗ 1 ≅ G"
+  },
+  {
+   "op": "center",
+   "when": {
+    "X": {
+     "abelian": true
+    }
+   },
+   "equals": {
+    "op": "whole-sub",
+    "args": [
+     "X"
+    ]
+   },
+   "почему": "центр абелевой группы — она сама"
+  },
+  {
+   "op": "commutator",
+   "when": {
+    "X": {
+     "abelian": true
+    }
+   },
+   "equals": {
+    "op": "trivial-sub",
+    "args": [
+     "X"
+    ]
+   },
+   "почему": "коммутант абелевой группы тривиален"
+  },
+  {
+   "op": "ab",
+   "when": {
+    "X": {
+     "abelian": true
+    }
+   },
+   "equals": "X",
+   "почему": "абелианизация абелевой группы — она сама"
+  },
+  {
+   "op": "normal-closure",
+   "when": {
+    "N": {
+     "normal": true
+    }
+   },
+   "equals": "N",
+   "почему": "нормальное замыкание нормальной подгруппы — она сама"
+  },
+  {
+   "op": "torsion",
+   "when": {
+    "X": {
+     "torsion-free": true
+    }
+   },
+   "equals": {
+    "op": "trivial-sub",
+    "args": [
+     "X"
+    ]
+   },
+   "почему": "в группе без кручения подгруппа кручения тривиальна"
+  },
+  {
+   "op": "quotient",
+   "pattern": {
+    "N": {
+     "op": "commutator",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "equals": {
+    "op": "ab",
+    "args": [
+     "X"
+    ]
+   },
+   "почему": "G/[G,G] — это абелианизация"
+  },
+  {
+   "op": "quotient",
+   "pattern": {
+    "N": {
+     "op": "trivial-sub",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "equals": "X",
+   "почему": "G/1 ≅ G, записанное структурно"
+  },
+  {
+   "op": "quotient",
+   "pattern": {
+    "N": {
+     "op": "whole-sub",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "equals": {
+    "op": "terminal",
+    "args": []
+   },
+   "почему": "G/G ≅ 1, записанное структурно"
+  },
+  {
+   "op": "image-of",
+   "pattern": {
+    "N": {
+     "op": "whole-sub",
+     "args": [
+      "dom F"
+     ]
+    }
+   },
+   "equals": {
+    "op": "im",
+    "args": [
+     "F"
+    ]
+   },
+   "почему": "образ всей группы — это im"
+  },
+  {
+   "op": "preimage",
+   "pattern": {
+    "N": {
+     "op": "trivial-sub",
+     "args": [
+      "cod F"
+     ]
+    }
+   },
+   "equals": {
+    "op": "ker",
+    "args": [
+     "F"
+    ]
+   },
+   "почему": "прообраз единицы — это ядро"
+  },
+  {
+   "op": "preimage",
+   "pattern": {
+    "N": {
+     "op": "whole-sub",
+     "args": [
+      "cod F"
+     ]
+    }
+   },
+   "equals": {
+    "op": "whole-sub",
+    "args": [
+     "dom F"
+    ]
+   },
+   "почему": "прообраз всей группы — вся группа"
+  },
+  {
+   "op": "meet",
+   "when": {
+    "N": {
+     "trivial": true
+    }
+   },
+   "equals": {
+    "op": "trivial-sub",
+    "args": [
+     "X"
+    ]
+   },
+   "почему": "пересечение с тривиальной подгруппой тривиально"
+  },
+  {
+   "op": "meet",
+   "when": {
+    "N": {
+     "whole": true
+    }
+   },
+   "equals": "M",
+   "почему": "пересечение со всей группой ничего не меняет"
+  },
+  {
+   "op": "join",
+   "when": {
+    "N": {
+     "trivial": true
+    }
+   },
+   "equals": "M",
+   "почему": "тривиальная подгруппа ничего не порождает"
+  },
+  {
+   "op": "join",
+   "when": {
+    "N": {
+     "whole": true
+    }
+   },
+   "equals": {
+    "op": "whole-sub",
+    "args": [
+     "X"
+    ]
+   },
+   "почему": "вместе со всей группой порождается вся группа"
+  },
+  {
+   "op": "ker",
+   "pattern": {
+    "F": {
+     "op": "proj",
+     "bind": [
+      "X",
+      "N"
+     ]
+    }
+   },
+   "equals": "N",
+   "почему": "ядро проекции на фактор — та самая подгруппа"
+  },
+  {
+   "op": "im",
+   "pattern": {
+    "F": {
+     "op": "incl",
+     "bind": [
+      "X",
+      "N"
+     ]
+    }
+   },
+   "equals": "N",
+   "почему": "образ вложения — та самая подгруппа"
+  },
+  {
+   "op": "ker",
+   "pattern": {
+    "F": {
+     "op": "incl",
+     "bind": [
+      "X",
+      "N"
+     ]
+    }
+   },
+   "equals": {
+    "op": "trivial-sub",
+    "args": [
+     "dom F"
+    ]
+   },
+   "почему": "ядро вложения тривиально"
+  },
+  {
+   "op": "prod-sub",
+   "when": {
+    "N": {
+     "whole": true
+    },
+    "M": {
+     "whole": true
+    }
+   },
+   "equals": {
+    "op": "whole-sub",
+    "args": [
+     {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    ]
+   },
+   "почему": "произведение всей группы на всю — вся группа"
+  },
+  {
+   "op": "prod-sub",
+   "when": {
+    "N": {
+     "trivial": true
+    },
+    "M": {
+     "trivial": true
+    }
+   },
+   "equals": {
+    "op": "trivial-sub",
+    "args": [
+     {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    ]
+   },
+   "почему": "произведение единичных подгрупп единично"
+  },
+  {
+   "op": "sum-fam",
+   "when": {
+    "F": {
+     "finite-fam": true
+    }
+   },
+   "equals": {
+    "op": "whole-sub",
+    "args": [
+     {
+      "op": "prod-fam",
+      "args": [
+       "F"
+      ]
+     }
+    ]
+   },
+   "почему": "у конечного семейства прямая сумма совпадает с произведением"
+  },
+  {
+   "op": "freeprod",
+   "when": {
+    "X": {
+     "trivial": true
+    }
+   },
+   "equals": "Y",
+   "почему": "1 ∗ B ≅ B"
+  }
+ ],
+ "rules": [
+  {
+   "id": "quotient:сохраняет:abelian",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   }
+  },
+  {
+   "id": "quotient:сохраняет:cyclic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "cyclic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "cyclic",
+    "t": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   }
+  },
+  {
+   "id": "quotient:сохраняет:finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   }
+  },
+  {
+   "id": "quotient:сохраняет:fin-gen",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "fin-gen",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "fin-gen",
+    "t": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   }
+  },
+  {
+   "id": "quotient:сохраняет:solvable",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "solvable",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "solvable",
+    "t": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   }
+  },
+  {
+   "id": "quotient:сохраняет:nilpotent",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "nilpotent",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   }
+  },
+  {
+   "id": "quotient:сохраняет:periodic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "periodic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   }
+  },
+  {
+   "id": "quotient:сохраняет:divisible",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "divisible",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "divisible",
+    "t": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   }
+  },
+  {
+   "id": "quotient:сохраняет:perfect",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "perfect",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "perfect",
+    "t": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   }
+  },
+  {
+   "id": "quotient:сохраняет:trivial",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   }
+  },
+  {
+   "id": "meet:сохраняет:normal",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "name": "M",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "normal",
+     "t": "N"
+    },
+    {
+     "p": "normal",
+     "t": "M"
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": {
+     "op": "meet",
+     "args": [
+      "X",
+      "N",
+      "M"
+     ]
+    }
+   }
+  },
+  {
+   "id": "meet:сохраняет:characteristic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "name": "M",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "characteristic",
+     "t": "N"
+    },
+    {
+     "p": "characteristic",
+     "t": "M"
+    }
+   ],
+   "then": {
+    "p": "characteristic",
+    "t": {
+     "op": "meet",
+     "args": [
+      "X",
+      "N",
+      "M"
+     ]
+    }
+   }
+  },
+  {
+   "id": "join:сохраняет:normal",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "name": "M",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "normal",
+     "t": "N"
+    },
+    {
+     "p": "normal",
+     "t": "M"
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": {
+     "op": "join",
+     "args": [
+      "X",
+      "N",
+      "M"
+     ]
+    }
+   }
+  },
+  {
+   "id": "join:сохраняет:characteristic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "name": "M",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "characteristic",
+     "t": "N"
+    },
+    {
+     "p": "characteristic",
+     "t": "M"
+    }
+   ],
+   "then": {
+    "p": "characteristic",
+    "t": {
+     "op": "join",
+     "args": [
+      "X",
+      "N",
+      "M"
+     ]
+    }
+   }
+  },
+  {
+   "id": "prod:сохраняет:abelian",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    },
+    {
+     "p": "abelian",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "prod:сохраняет:finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    },
+    {
+     "p": "finite",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "prod:сохраняет:fin-gen",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "fin-gen",
+     "t": "X"
+    },
+    {
+     "p": "fin-gen",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "fin-gen",
+    "t": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "prod:сохраняет:solvable",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "solvable",
+     "t": "X"
+    },
+    {
+     "p": "solvable",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "solvable",
+    "t": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "prod:сохраняет:nilpotent",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "nilpotent",
+     "t": "X"
+    },
+    {
+     "p": "nilpotent",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "prod:сохраняет:periodic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "periodic",
+     "t": "X"
+    },
+    {
+     "p": "periodic",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "prod:сохраняет:torsion-free",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": "X"
+    },
+    {
+     "p": "torsion-free",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "prod:сохраняет:divisible",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "divisible",
+     "t": "X"
+    },
+    {
+     "p": "divisible",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "divisible",
+    "t": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "prod:сохраняет:residually-finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "residually-finite",
+     "t": "X"
+    },
+    {
+     "p": "residually-finite",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "prod:сохраняет:trivial",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    },
+    {
+     "p": "trivial",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "prod:отражает:abelian:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "X"
+   }
+  },
+  {
+   "id": "prod:отражает:abelian:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "prod:отражает:cyclic:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "cyclic",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "cyclic",
+    "t": "X"
+   }
+  },
+  {
+   "id": "prod:отражает:cyclic:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "cyclic",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "cyclic",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "prod:отражает:finite:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": "X"
+   }
+  },
+  {
+   "id": "prod:отражает:finite:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "prod:отражает:fin-gen:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "fin-gen",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "fin-gen",
+    "t": "X"
+   }
+  },
+  {
+   "id": "prod:отражает:fin-gen:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "fin-gen",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "fin-gen",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "prod:отражает:solvable:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "solvable",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "solvable",
+    "t": "X"
+   }
+  },
+  {
+   "id": "prod:отражает:solvable:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "solvable",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "solvable",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "prod:отражает:nilpotent:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "nilpotent",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": "X"
+   }
+  },
+  {
+   "id": "prod:отражает:nilpotent:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "nilpotent",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "prod:отражает:periodic:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "periodic",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": "X"
+   }
+  },
+  {
+   "id": "prod:отражает:periodic:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "periodic",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "prod:отражает:torsion-free:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": "X"
+   }
+  },
+  {
+   "id": "prod:отражает:torsion-free:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "prod:отражает:residually-finite:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "residually-finite",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": "X"
+   }
+  },
+  {
+   "id": "prod:отражает:residually-finite:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "residually-finite",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "prod:отражает:trivial:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "X"
+   }
+  },
+  {
+   "id": "prod:отражает:trivial:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": {
+      "op": "prod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "freeprod:сохраняет:torsion-free",
+   "ссылка": "теорема Куроша о подгруппах свободного произведения",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": "X"
+    },
+    {
+     "p": "torsion-free",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "freeprod:сохраняет:residually-finite",
+   "ссылка": "Грюнберг",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "residually-finite",
+     "t": "X"
+    },
+    {
+     "p": "residually-finite",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "freeprod:сохраняет:fin-gen",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "fin-gen",
+     "t": "X"
+    },
+    {
+     "p": "fin-gen",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "fin-gen",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   }
+  },
+  {
+   "id": "freeprod:отражает:abelian:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "X"
+   }
+  },
+  {
+   "id": "freeprod:отражает:abelian:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "freeprod:отражает:finite:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": "X"
+   }
+  },
+  {
+   "id": "freeprod:отражает:finite:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "freeprod:отражает:solvable:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "solvable",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "solvable",
+    "t": "X"
+   }
+  },
+  {
+   "id": "freeprod:отражает:solvable:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "solvable",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "solvable",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "freeprod:отражает:nilpotent:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "nilpotent",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": "X"
+   }
+  },
+  {
+   "id": "freeprod:отражает:nilpotent:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "nilpotent",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "freeprod:отражает:periodic:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "periodic",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": "X"
+   }
+  },
+  {
+   "id": "freeprod:отражает:periodic:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "periodic",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "freeprod:отражает:torsion-free:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": "X"
+   }
+  },
+  {
+   "id": "freeprod:отражает:torsion-free:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "freeprod:отражает:residually-finite:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "residually-finite",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": "X"
+   }
+  },
+  {
+   "id": "freeprod:отражает:residually-finite:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "residually-finite",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "freeprod:отражает:trivial:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "X"
+   }
+  },
+  {
+   "id": "freeprod:отражает:trivial:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "freeprod:отражает:free:X",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "free",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "free",
+    "t": "X"
+   }
+  },
+  {
+   "id": "freeprod:отражает:free:Y",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "free",
+     "t": {
+      "op": "freeprod",
+      "args": [
+       "X",
+       "Y"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "free",
+    "t": "Y"
+   }
+  },
+  {
+   "id": "aut:сохраняет:finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": {
+     "op": "aut",
+     "args": [
+      "X"
+     ]
+    }
+   }
+  },
+  {
+   "id": "aut:сохраняет:trivial",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "aut",
+     "args": [
+      "X"
+     ]
+    }
+   }
+  },
+  {
+   "id": "подгруппа:наследует:abelian",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа:наследует:cyclic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "cyclic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "cyclic",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа:наследует:finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа:наследует:solvable",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "solvable",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "solvable",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа:наследует:nilpotent",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "nilpotent",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа:наследует:torsion-free",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа:наследует:periodic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "periodic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа:наследует:residually-finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "residually-finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа:наследует:trivial",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа:наследует:free",
+   "ссылка": "теорема Нильсена — Шрайера",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "free",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "free",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ:наследует:abelian",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": {
+     "op": "im",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ:наследует:cyclic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "cyclic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "cyclic",
+    "t": {
+     "op": "im",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ:наследует:finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": {
+     "op": "im",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ:наследует:fin-gen",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "fin-gen",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "fin-gen",
+    "t": {
+     "op": "im",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ:наследует:solvable",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "solvable",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "solvable",
+    "t": {
+     "op": "im",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ:наследует:nilpotent",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "nilpotent",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": {
+     "op": "im",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ:наследует:periodic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "periodic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": {
+     "op": "im",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ:наследует:divisible",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "divisible",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "divisible",
+    "t": {
+     "op": "im",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ:наследует:perfect",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "perfect",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "perfect",
+    "t": {
+     "op": "im",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ:наследует:trivial",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "im",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "абелева⇒коммутант тривиален",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "commutator",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "коммутант тривиален⇒абелева",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": {
+      "op": "commutator",
+      "args": [
+       "X"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "совершенна⇒коммутант вся",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "perfect",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "whole",
+    "t": {
+     "op": "commutator",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "коммутант вся⇒совершенна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": {
+      "op": "commutator",
+      "args": [
+       "X"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "perfect",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "центр тривиален⇒centerless",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": {
+      "op": "center",
+      "args": [
+       "X"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "centerless",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "centerless⇒центр тривиален",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "centerless",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "center",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "изоморфизм⇒инъективен",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "iso",
+     "t": "F"
+    }
+   ],
+   "then": {
+    "p": "injective",
+    "t": "F"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "изоморфизм⇒сюръективен",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "iso",
+     "t": "F"
+    }
+   ],
+   "then": {
+    "p": "surjective",
+    "t": "F"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "инъективен и сюръективен⇒изоморфизм",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "injective",
+     "t": "F"
+    },
+    {
+     "p": "surjective",
+     "t": "F"
+    }
+   ],
+   "then": {
+    "p": "iso",
+    "t": "F"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "сюръективен⇒образ вся группа",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "surjective",
+     "t": "F"
+    }
+   ],
+   "then": {
+    "p": "whole",
+    "t": {
+     "op": "im",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ вся группа⇒сюръективен",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": {
+      "op": "im",
+      "args": [
+       "F"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "surjective",
+    "t": "F"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "ядро тривиально⇒инъективен",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": {
+      "op": "ker",
+      "args": [
+       "F"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "injective",
+    "t": "F"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "инъективен⇒ядро тривиально",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "injective",
+     "t": "F"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "ker",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "характеристическая⇒нормальная",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "characteristic",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "центральная⇒нормальная",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "central",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "лежит в центре⇒центральная",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "rel": "le",
+     "args": [
+      "N",
+      {
+       "op": "center",
+       "args": [
+        "X"
+       ]
+      }
+     ]
+    }
+   ],
+   "then": {
+    "p": "central",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа⇒нормальная",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа⇒конечного индекса",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "finite-index",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальная⇒нормальная",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "в абелевой всякая подгруппа нормальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "включение транзитивно",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "A",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "name": "B",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "name": "C",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "rel": "le",
+     "args": [
+      "A",
+      "B"
+     ]
+    },
+    {
+     "rel": "le",
+     "args": [
+      "B",
+      "C"
+     ]
+    }
+   ],
+   "then": {
+    "rel": "le",
+    "args": [
+     "A",
+     "C"
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "равенство подгрупп⇒включение",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "A",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "name": "B",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "rel": "eq-sub",
+     "args": [
+      "A",
+      "B"
+     ]
+    }
+   ],
+   "then": {
+    "rel": "le",
+    "args": [
+     "A",
+     "B"
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "фактор по N абелев⇒коммутант лежит в N",
+   "ссылка": "стандартная характеризация: G/N абелева ⟺ [G,G] ⩽ N",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "normal",
+     "t": "N"
+    },
+    {
+     "p": "abelian",
+     "t": {
+      "op": "quotient",
+      "args": [
+       "X",
+       "N"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "rel": "le",
+    "args": [
+     {
+      "op": "commutator",
+      "args": [
+       "X"
+      ]
+     },
+     "N"
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "коммутант лежит в N и N нормальна⇒фактор абелев",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "normal",
+     "t": "N"
+    },
+    {
+     "rel": "le",
+     "args": [
+      {
+       "op": "commutator",
+       "args": [
+        "X"
+       ]
+      },
+      "N"
+     ]
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": {
+     "op": "quotient",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа кручения периодична",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": {
+     "op": "torsion",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "конечная⇒периодична",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "конечная⇒конечно порождена",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "fin-gen",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "циклическая⇒абелева",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "cyclic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "циклическая⇒конечно порождена",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "cyclic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "fin-gen",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "абелева⇒нильпотентна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "нильпотентна⇒разрешима",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "nilpotent",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "solvable",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальна⇒абелева",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальна⇒циклична",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "cyclic",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальна⇒конечна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободна⇒без кручения",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "free",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "без кручения и периодична⇒тривиальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": "X"
+    },
+    {
+     "p": "periodic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:trivial",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "trivial",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:abelian",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "abelian",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:cyclic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "cyclic",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "cyclic",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "finite",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:fin-gen",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "fin-gen",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "fin-gen",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:free",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "free",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "free",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:simple",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "simple",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "simple",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:solvable",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "solvable",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "solvable",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:nilpotent",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "nilpotent",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:perfect",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "perfect",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "perfect",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:torsion-free",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "torsion-free",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:periodic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "periodic",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:divisible",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "divisible",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "divisible",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:centerless",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "centerless",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "centerless",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "вся группа:переносит:residually-finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    },
+    {
+     "p": "residually-finite",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "конечная⇒финитно аппроксимируема",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "в конечной всякая подгруппа конечного индекса",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "finite-index",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "центральная⇒абелева",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "central",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "произведение нормальных нормально",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "name": "M",
+     "sort": "Grp.sub",
+     "ambient": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "normal",
+     "t": "N"
+    },
+    {
+     "p": "normal",
+     "t": "M"
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": {
+     "op": "prod-sub",
+     "args": [
+      "X",
+      "Y",
+      "N",
+      "M"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "прообраз нормальной нормален",
+   "ссылка": "задача 3.39; лемма, на которой стоит вторая теорема об изоморфизме",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "Y"
+    }
+   ],
+   "if": [
+    {
+     "p": "normal",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": {
+     "op": "preimage",
+     "args": [
+      "F",
+      "N"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "образ нормальной при эпиморфизме нормален",
+   "ссылка": "лемма, на которой стоит третья теорема об изоморфизме",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "F",
+     "sort": "Grp.mor",
+     "dom": "X",
+     "cod": "Y"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "surjective",
+     "t": "F"
+    },
+    {
+     "p": "normal",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": {
+     "op": "image-of",
+     "args": [
+      "F",
+      "N"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "произведение семейства:abelian",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "F",
+     "sort": "Grp.fam"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "F"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": {
+     "op": "prod-fam",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "произведение семейства:torsion-free",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "F",
+     "sort": "Grp.fam"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": "F"
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": {
+     "op": "prod-fam",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "произведение семейства:residually-finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "F",
+     "sort": "Grp.fam"
+    }
+   ],
+   "if": [
+    {
+     "p": "residually-finite",
+     "t": "F"
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": {
+     "op": "prod-fam",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "произведение семейства:divisible",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "F",
+     "sort": "Grp.fam"
+    }
+   ],
+   "if": [
+    {
+     "p": "divisible",
+     "t": "F"
+    }
+   ],
+   "then": {
+    "p": "divisible",
+    "t": {
+     "op": "prod-fam",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "произведение семейства:trivial",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "F",
+     "sort": "Grp.fam"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "F"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "prod-fam",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "конечное произведение конечных конечно",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "F",
+     "sort": "Grp.fam"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "F"
+    },
+    {
+     "p": "finite-fam",
+     "t": "F"
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": {
+     "op": "prod-fam",
+     "args": [
+      "F"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободна и не циклична⇒без центра",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "free",
+     "t": "X"
+    },
+    {
+     "p": "cyclic",
+     "t": "X",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "centerless",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "простая абелева⇒циклическая",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "simple",
+     "t": "X"
+    },
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "cyclic",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "простая неабелева⇒без центра",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "simple",
+     "t": "X"
+    },
+    {
+     "p": "abelian",
+     "t": "X",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "centerless",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "конечна и делима⇒тривиальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    },
+    {
+     "p": "divisible",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "абелева и совершенна⇒тривиальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    },
+    {
+     "p": "perfect",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "конечна и свободна⇒тривиальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    },
+    {
+     "p": "free",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "бесконечная циклическая свободна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "cyclic",
+     "t": "X"
+    },
+    {
+     "p": "finite",
+     "t": "X",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "free",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "конечно порождена, разрешима и периодична⇒конечна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "fin-gen",
+     "t": "X"
+    },
+    {
+     "p": "solvable",
+     "t": "X"
+    },
+    {
+     "p": "periodic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "прямой предел:сохраняет:abelian",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": {
+     "op": "colim",
+     "args": [
+      "D"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "прямой предел:сохраняет:torsion-free",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": {
+     "op": "colim",
+     "args": [
+      "D"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "прямой предел:сохраняет:periodic",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "periodic",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": {
+     "op": "colim",
+     "args": [
+      "D"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "прямой предел:сохраняет:divisible",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "divisible",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "divisible",
+    "t": {
+     "op": "colim",
+     "args": [
+      "D"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "прямой предел:сохраняет:perfect",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "perfect",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "perfect",
+    "t": {
+     "op": "colim",
+     "args": [
+      "D"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "прямой предел:сохраняет:trivial",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "colim",
+     "args": [
+      "D"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "обратный предел:сохраняет:abelian",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": {
+     "op": "lim",
+     "args": [
+      "D"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "обратный предел:сохраняет:torsion-free",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": {
+     "op": "lim",
+     "args": [
+      "D"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "обратный предел:сохраняет:trivial",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "lim",
+     "args": [
+      "D"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "обратный предел:сохраняет:residually-finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "residually-finite",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": {
+     "op": "lim",
+     "args": [
+      "D"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "обратный предел конечных финитно аппроксимируем",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": {
+     "op": "lim",
+     "args": [
+      "D"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "постоянная система: пределы совпадают",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "constant-sys",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "rel": "iso",
+    "args": [
+     {
+      "op": "colim",
+      "args": [
+       "D"
+      ]
+     },
+     {
+      "op": "lim",
+      "args": [
+       "D"
+      ]
+     }
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "постоянная система: отображения инъективны",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "constant-sys",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "injective-sys",
+    "t": "D"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "постоянная система: отображения сюръективны",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "D",
+     "sort": "Grp.diag"
+    }
+   ],
+   "if": [
+    {
+     "p": "constant-sys",
+     "t": "D"
+    }
+   ],
+   "then": {
+    "p": "surjective-sys",
+    "t": "D"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальна⇒свободна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "free",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "единица централена",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "identity-elt",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "central-elt",
+    "t": "x"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "единица периодична",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "identity-elt",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "torsion-elt",
+    "t": "x"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "инволюция периодична",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "involution",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "torsion-elt",
+    "t": "x"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "в абелевой всякий элемент централен",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "central-elt",
+    "t": "x"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "централен ⇒ порождённая нормальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "central-elt",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": {
+     "op": "gen",
+     "args": [
+      "X",
+      "x"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "централен ⇔ централизатор весь",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "central-elt",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "whole",
+    "t": {
+     "op": "centralizer-elt",
+     "args": [
+      "X",
+      "x"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "централизатор весь ⇒ централен",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": {
+      "op": "centralizer-elt",
+      "args": [
+       "X",
+       "x"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "central-elt",
+    "t": "x"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порождающий ⇔ порождённая — вся",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "generator",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "whole",
+    "t": {
+     "op": "gen",
+     "args": [
+      "X",
+      "x"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порождённая — вся ⇒ порождающий",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": {
+      "op": "gen",
+      "args": [
+       "X",
+       "x"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "generator",
+    "t": "x"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порождающий ⇒ группа циклическая",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "generator",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "cyclic",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "периодичен ⇒ порождённая конечна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-elt",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": {
+     "op": "gen",
+     "args": [
+      "X",
+      "x"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "единица порождает только тривиальную",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "identity-elt",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "gen",
+     "args": [
+      "X",
+      "x"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "централен ⇒ перестановочен со всяким",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    },
+    {
+     "name": "y",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "central-elt",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "rel": "commute",
+    "args": [
+     "x",
+     "y"
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "в абелевой всякие два элемента перестановочны",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    },
+    {
+     "name": "y",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "rel": "commute",
+    "args": [
+     "x",
+     "y"
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "группа конечна ⇒ порядок конечен",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "num-finite",
+    "t": {
+     "op": "ord",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порядок конечен ⇒ группа конечна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-finite",
+     "t": {
+      "op": "ord",
+      "args": [
+       "X"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "группа тривиальна ⇒ порядок равен 1",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "num-one",
+    "t": {
+     "op": "ord",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порядок равен 1 ⇒ группа тривиальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-one",
+     "t": {
+      "op": "ord",
+      "args": [
+       "X"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа конечного индекса ⇒ индекс конечен",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite-index",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "num-finite",
+    "t": {
+     "op": "index",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "индекс конечен ⇒ подгруппа конечного индекса",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-finite",
+     "t": {
+      "op": "index",
+      "args": [
+       "X",
+       "N"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "finite-index",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа вся ⇒ индекс равен 1",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "num-one",
+    "t": {
+     "op": "index",
+     "args": [
+      "X",
+      "N"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "индекс равен 1 ⇒ подгруппа вся",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-one",
+     "t": {
+      "op": "index",
+      "args": [
+       "X",
+       "N"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "whole",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "элемент — единица ⇒ порядок 1",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "identity-elt",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "num-one",
+    "t": {
+     "op": "eltord",
+     "args": [
+      "X",
+      "x"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порядок элемента 1 ⇒ это единица",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-one",
+     "t": {
+      "op": "eltord",
+      "args": [
+       "X",
+       "x"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "identity-elt",
+    "t": "x"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "инволюция ⇒ порядок элемента 2",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "involution",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "num-two",
+    "t": {
+     "op": "eltord",
+     "args": [
+      "X",
+      "x"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порядок элемента 2 ⇒ инволюция",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-two",
+     "t": {
+      "op": "eltord",
+      "args": [
+       "X",
+       "x"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "involution",
+    "t": "x"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "элемент периодичен ⇒ порядок конечен",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-elt",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "p": "num-finite",
+    "t": {
+     "op": "eltord",
+     "args": [
+      "X",
+      "x"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порядок элемента конечен ⇒ элемент периодичен",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-finite",
+     "t": {
+      "op": "eltord",
+      "args": [
+       "X",
+       "x"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "torsion-elt",
+    "t": "x"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "два ⇒ конечно",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-two",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-finite",
+    "t": "m"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "единица ⇒ конечно",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-one",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-finite",
+    "t": "m"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "простое ⇒ конечно",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-prime",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-finite",
+    "t": "m"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "два — простое",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-two",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-prime",
+    "t": "m"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "два чётно",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-two",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-even",
+    "t": "m"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "единица не простое",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-one",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-prime",
+    "t": "m",
+    "значение": false
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "Лагранж: порядок подгруппы делит порядок группы",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "rel": "num-divides",
+    "args": [
+     {
+      "op": "ord",
+      "args": [
+       "N"
+      ]
+     },
+     {
+      "op": "ord",
+      "args": [
+       "X"
+      ]
+     }
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "индекс 2 ⇒ подгруппа нормальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-two",
+     "t": {
+      "op": "index",
+      "args": [
+       "X",
+       "N"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "normal",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порядок простой ⇒ группа циклическая",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-prime",
+     "t": {
+      "op": "ord",
+      "args": [
+       "X"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "cyclic",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порядок элемента делит порядок группы",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "finite",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "rel": "num-divides",
+    "args": [
+     {
+      "op": "eltord",
+      "args": [
+       "X",
+       "x"
+      ]
+     },
+     {
+      "op": "ord",
+      "args": [
+       "X"
+      ]
+     }
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порядок фактора равен индексу",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "normal",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "rel": "num-eq",
+    "args": [
+     {
+      "op": "ord",
+      "args": [
+       {
+        "op": "quotient",
+        "args": [
+         "X",
+         "N"
+        ]
+       }
+      ]
+     },
+     {
+      "op": "index",
+      "args": [
+       "X",
+       "N"
+      ]
+     }
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "индекс 2 ⇒ подгруппа максимальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-two",
+     "t": {
+      "op": "index",
+      "args": [
+       "X",
+       "N"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "maximal",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "индекс простой ⇒ подгруппа максимальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-prime",
+     "t": {
+      "op": "index",
+      "args": [
+       "X",
+       "N"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "maximal",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "целая подгруппа изоморфна группе",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "rel": "iso",
+    "args": [
+     "N",
+     "X"
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "целая подгруппа содержит всякую",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "name": "M",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "rel": "le",
+    "args": [
+     "M",
+     "N"
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальна⇒совершенна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "perfect",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальна⇒делима",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "divisible",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальна⇒периодична",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальна⇒нильпотентна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальна⇒без кручения",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "torsion-free",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальна⇒финитно аппроксимируема",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "residually-finite",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальная подгруппа характеристична",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "characteristic",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальная подгруппа центральна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "central",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "порождённая элементом лежит в его централизаторе",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [],
+   "then": {
+    "rel": "le",
+    "args": [
+     {
+      "op": "gen",
+      "args": [
+       "X",
+       "x"
+      ]
+     },
+     {
+      "op": "centralizer-elt",
+      "args": [
+       "X",
+       "x"
+      ]
+     }
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "элемент централен ⇔ централизатор весь: порождённая нормальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "central-elt",
+     "t": "x"
+    }
+   ],
+   "then": {
+    "rel": "le",
+    "args": [
+     {
+      "op": "gen",
+      "args": [
+       "X",
+       "x"
+      ]
+     },
+     {
+      "op": "center",
+      "args": [
+       "X"
+      ]
+     }
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "проста⇒неразложима",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "simple",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "indecomposable",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальна⇒неразложима",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "indecomposable",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "произведение двух нетривиальных разложимо",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X",
+     "значение": false
+    },
+    {
+     "p": "trivial",
+     "t": "Y",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "indecomposable",
+    "t": {
+     "op": "prod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    },
+    "значение": false
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободна⇒неразложима",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "free",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "indecomposable",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "разрешима и совершенна⇒тривиальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "solvable",
+     "t": "X"
+    },
+    {
+     "p": "perfect",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа является подгруппой как подмножество",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [],
+   "then": {
+    "p": "subgroup",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "объединение с содержащим — подгруппа",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "A",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "name": "B",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "rel": "le",
+     "args": [
+      "A",
+      "B"
+     ]
+    }
+   ],
+   "then": {
+    "p": "subgroup",
+    "t": {
+     "op": "union",
+     "args": [
+      "X",
+      "A",
+      "B"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "у абелевой множество кручения — подгруппа",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "subgroup",
+    "t": {
+     "op": "torsion-set",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "у группы без кручения множество кручения тривиально",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "torsion-free",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "subgroup",
+    "t": {
+     "op": "torsion-set",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "у периодической множество кручения — вся группа",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "periodic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "set-whole",
+    "t": {
+     "op": "torsion-set",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "совпадает со всей группой ⇒ подгруппа",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "S",
+     "sort": "Grp.subset",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "set-whole",
+     "t": "S"
+    }
+   ],
+   "then": {
+    "p": "subgroup",
+    "t": "S"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "тривиальная подгруппа содержится в любой",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    },
+    {
+     "name": "M",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "rel": "le",
+    "args": [
+     "N",
+     "M"
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "индекс по единичной подгруппе равен порядку",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "rel": "num-eq",
+    "args": [
+     {
+      "op": "index",
+      "args": [
+       "X",
+       "N"
+      ]
+     },
+     {
+      "op": "ord",
+      "args": [
+       "X"
+      ]
+     }
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "центральная подгруппа с циклическим фактором⇒группа абелева",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "central",
+     "t": "N"
+    },
+    {
+     "p": "cyclic",
+     "t": {
+      "op": "quotient",
+      "args": [
+       "X",
+       "N"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "равные числа: num-finite",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    },
+    {
+     "name": "n",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "rel": "num-eq",
+     "args": [
+      "m",
+      "n"
+     ]
+    },
+    {
+     "p": "num-finite",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-finite",
+    "t": "n"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "равные числа: num-one",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    },
+    {
+     "name": "n",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "rel": "num-eq",
+     "args": [
+      "m",
+      "n"
+     ]
+    },
+    {
+     "p": "num-one",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-one",
+    "t": "n"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "равные числа: num-two",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    },
+    {
+     "name": "n",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "rel": "num-eq",
+     "args": [
+      "m",
+      "n"
+     ]
+    },
+    {
+     "p": "num-two",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-two",
+    "t": "n"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "равные числа: num-prime",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    },
+    {
+     "name": "n",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "rel": "num-eq",
+     "args": [
+      "m",
+      "n"
+     ]
+    },
+    {
+     "p": "num-prime",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-prime",
+    "t": "n"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "равные числа: num-even",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    },
+    {
+     "name": "n",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "rel": "num-eq",
+     "args": [
+      "m",
+      "n"
+     ]
+    },
+    {
+     "p": "num-even",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-even",
+    "t": "n"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "чётно ⇒ конечно",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-even",
+     "t": "m"
+    }
+   ],
+   "then": {
+    "p": "num-finite",
+    "t": "m"
+   },
+   "без_контрапозиции": true
+  },
+  {
+   "id": "нечётно ⇒ конечно",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "m",
+     "sort": "Grp.num"
+    }
+   ],
+   "if": [
+    {
+     "p": "num-even",
+     "t": "m",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "num-finite",
+    "t": "m"
+   },
+   "без_контрапозиции": true
+  },
+  {
+   "id": "в абелевой всякая подгруппа центральна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "central",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "центральная ⇒ лежит в центре",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "central",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "rel": "le",
+    "args": [
+     "N",
+     {
+      "op": "center",
+      "args": [
+       "X"
+      ]
+     }
+    ]
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "абелева и без центра⇒тривиальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    },
+    {
+     "p": "centerless",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "проста и нильпотентна⇒абелева",
+   "ссылка": "у нетривиальной нильпотентной группы центр нетривиален, а в простой нормальная подгруппа только вся — значит центр и есть вся группа",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "simple",
+     "t": "X"
+    },
+    {
+     "p": "nilpotent",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "центр свободного произведения нетривиальных тривиален",
+   "ссылка": "классическая теорема: в A ∗ B при нетривиальных A и B центр тривиален — нормальная форма слова не допускает перестановочности со всем",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X",
+     "значение": false
+    },
+    {
+     "p": "trivial",
+     "t": "Y",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": {
+     "op": "center",
+     "args": [
+      {
+       "op": "freeprod",
+       "args": [
+        "X",
+        "Y"
+       ]
+      }
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободное произведение нетривиальных бесконечно",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X",
+     "значение": false
+    },
+    {
+     "p": "trivial",
+     "t": "Y",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    },
+    "значение": false
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободное произведение нетривиальных неабелево",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X",
+     "значение": false
+    },
+    {
+     "p": "trivial",
+     "t": "Y",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    },
+    "значение": false
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "нетривиальная группа с тривиальным центром не нильпотентна",
+   "ссылка": "у нетривиальной нильпотентной группы верхний центральный ряд начинается с нетривиального центра",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X",
+     "значение": false
+    },
+    {
+     "p": "trivial",
+     "t": {
+      "op": "center",
+      "args": [
+       "X"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": "X",
+    "значение": false
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "группа автоморфизмов циклической абелева",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "cyclic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": {
+     "op": "aut",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "группа автоморфизмов циклической конечна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "cyclic",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "finite",
+    "t": {
+     "op": "aut",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подмножество совпадает со всей ⇒ подгруппа совпадает со всей",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "set-whole",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "whole",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "подгруппа совпадает со всей ⇒ подмножество совпадает со всей",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": "N"
+    }
+   ],
+   "then": {
+    "p": "set-whole",
+    "t": "N"
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободное произведение нетривиальных неразложимо",
+   "ссылка": "централизатор нетривиального элемента в свободном произведении лежит в сопряжённом множителе или циклический (теорема о централизаторах)",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X",
+     "значение": false
+    },
+    {
+     "p": "trivial",
+     "t": "Y",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "indecomposable",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободное произведение свободных свободно",
+   "ссылка": "теорема Куроша: свободное произведение свободных групп свободно, ранг складывается (Грушко)",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "free",
+     "t": "X"
+    },
+    {
+     "p": "free",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "free",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободное произведение совершенных совершенно",
+   "ссылка": "абелианизация свободного произведения есть прямое произведение абелианизаций",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "perfect",
+     "t": "X"
+    },
+    {
+     "p": "perfect",
+     "t": "Y"
+    }
+   ],
+   "then": {
+    "p": "perfect",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "несовершенный множитель делает свободное произведение несовершенным",
+   "ссылка": "та же абелианизация: (A ∗ B)^ab = A^ab × B^ab, и ненулевой множитель её не убивает",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "perfect",
+     "t": "X",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "perfect",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    },
+    "значение": false
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободное произведение нетривиальных не просто",
+   "ссылка": "ядро отображения A ∗ B → A × B нетривиально и собственно",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X",
+     "значение": false
+    },
+    {
+     "p": "trivial",
+     "t": "Y",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "simple",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    },
+    "значение": false
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободное произведение нетривиальных не периодично",
+   "ссылка": "произведение ab нетривиальных элементов разных множителей имеет бесконечный порядок (нормальная форма)",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X",
+     "значение": false
+    },
+    {
+     "p": "trivial",
+     "t": "Y",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "periodic",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    },
+    "значение": false
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободное произведение нетривиальных не нильпотентно",
+   "ссылка": "у нетривиальной нильпотентной группы центр нетривиален, а центр свободного произведения нетривиальных тривиален",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X",
+     "значение": false
+    },
+    {
+     "p": "trivial",
+     "t": "Y",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "nilpotent",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    },
+    "значение": false
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "свободное произведение нетривиальных не делимо",
+   "ссылка": "корни элемента ab лежат в его централизаторе, а централизатор элемента, не сопряжённого в множитель, бесконечно циклический — и корней всех степеней в нём нет",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "name": "Y",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "trivial",
+     "t": "X",
+     "значение": false
+    },
+    {
+     "p": "trivial",
+     "t": "Y",
+     "значение": false
+    }
+   ],
+   "then": {
+    "p": "divisible",
+    "t": {
+     "op": "freeprod",
+     "args": [
+      "X",
+      "Y"
+     ]
+    },
+    "значение": false
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "проста⇒нетривиальна",
+   "ссылка": null,
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "simple",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "trivial",
+    "t": "X",
+    "значение": false
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "абелева⇒центр совпадает со всей группой",
+   "ссылка": "в абелевой группе перестановочны все элементы, значит центр — вся группа",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
+   "then": {
+    "p": "whole",
+    "t": {
+     "op": "center",
+     "args": [
+      "X"
+     ]
+    }
+   },
+   "без_контрапозиции": false
+  },
+  {
+   "id": "центр совпадает со всей группой⇒абелева",
+   "ссылка": "обратное к предыдущему: если всякий элемент централен, группа абелева",
+   "scene": [
+    {
+     "name": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "if": [
+    {
+     "p": "whole",
+     "t": {
+      "op": "center",
+      "args": [
+       "X"
+      ]
+     }
+    }
+   ],
+   "then": {
+    "p": "abelian",
+    "t": "X"
+   },
+   "без_контрапозиции": false
+  }
+ ],
+ "gives": [
+  {
+   "op": "terminal",
+   "in": [],
+   "gives": {
+    "trivial": true,
+    "abelian": true,
+    "finite": true
+   }
+  },
+  {
+   "op": "trivial-sub",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "gives": {
+    "trivial": true,
+    "normal": true,
+    "characteristic": true,
+    "central": true
+   }
+  },
+  {
+   "op": "whole-sub",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "gives": {
+    "whole": true,
+    "normal": true,
+    "characteristic": true
+   }
+  },
+  {
+   "op": "proj",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X",
+     "requires": [
+      "normal"
+     ]
+    }
+   ],
+   "gives": {
+    "surjective": true
+   }
+  },
+  {
+   "op": "incl",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "gives": {
+    "injective": true
+   }
+  },
+  {
+   "op": "ker",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.mor"
+    }
+   ],
+   "gives": {
+    "normal": true
+   }
+  },
+  {
+   "op": "inn",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "gives": {
+    "normal": true
+   }
+  },
+  {
+   "op": "sum-fam",
+   "in": [
+    {
+     "role": "F",
+     "sort": "Grp.fam"
+    }
+   ],
+   "gives": {
+    "normal": true,
+    "characteristic": true
+   }
+  },
+  {
+   "op": "center",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "gives": {
+    "normal": true,
+    "characteristic": true,
+    "abelian": true,
+    "central": true
+   }
+  },
+  {
+   "op": "commutator",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "gives": {
+    "normal": true,
+    "characteristic": true
+   }
+  },
+  {
+   "op": "normal-closure",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "N",
+     "sort": "Grp.sub",
+     "ambient": "X"
+    }
+   ],
+   "gives": {
+    "normal": true
+   }
+  },
+  {
+   "op": "torsion",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj",
+     "requires": [
+      "abelian"
+     ]
+    }
+   ],
+   "gives": {
+    "normal": true,
+    "characteristic": true,
+    "periodic": true
+   }
+  },
+  {
+   "op": "ab",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    }
+   ],
+   "gives": {
+    "abelian": true
+   }
+  },
+  {
+   "op": "free",
+   "in": [
+    {
+     "role": "S",
+     "sort": "Set.obj"
+    }
+   ],
+   "gives": {
+    "free": true,
+    "torsion-free": true,
+    "residually-finite": true
+   }
+  },
+  {
+   "op": "gen",
+   "in": [
+    {
+     "role": "X",
+     "sort": "Grp.obj"
+    },
+    {
+     "role": "x",
+     "sort": "Grp.elt",
+     "ambient": "X"
+    }
+   ],
+   "gives": {
+    "abelian": true,
+    "cyclic": true
+   }
+  }
+ ]
+}
