@@ -1,5 +1,5 @@
 {
- "заметка": "Бесконечные группы для нового движка (py/algen/library.py). Перенесены из data/infinite.json и сверены: выводом (python3 -m algen.library ищет противоречия записанных значений с базой правил) и по смыслу. Отсутствующее значение — «неизвестно». Поле «почему» объясняет нетривиальные значения и исправления старой библиотеки. Все значения написаны нейросетью и человеком не сверены, поэтому статус у всей записи — «не проверено».",
+ "заметка": "Бесконечные группы для нового движка (py/algen/library.py). Перенесены из data/infinite.json и сверены: выводом (python3 -m algen.library ищет противоречия записанных значений с базой правил) и по смыслу. Отсутствующее значение — «неизвестно». Поле «почему» объясняет нетривиальные значения и исправления старой библиотеки. Все значения написаны нейросетью и человеком не сверены, поэтому статус у всей записи — «не проверено». Поле «трудно» перечисляет значения, которые сами по себе теоремы или требуют идеи: контрпример, опирающийся на такое значение, не делает задачу тривиальной.",
  "группы": [
   {
    "id": "Z",
@@ -1100,6 +1100,22 @@
      "фактор": "ZxZ"
     },
     {
+     "id": "ядро на BS(2,3)",
+     "имя": "ядро F₂ ↠ BS(2, 3)",
+     "≅": "Foo",
+     "свойства": {
+      "normal": true,
+      "maximal": false,
+      "whole": false,
+      "central": false,
+      "finite-index": false
+     },
+     "фактор": "BS23",
+     "почему": {
+      "≅": "нетривиальная нормальная подгруппа бесконечного индекса в F₂ свободна бесконечного ранга (Шрайер)"
+     }
+    },
+    {
      "id": "все",
      "имя": "F₂",
      "≅": "F2",
@@ -1116,7 +1132,10 @@
    ],
    "центр": "1",
    "коммутант": "коммутант",
-   "абелианизация": "ZxZ"
+   "абелианизация": "ZxZ",
+   "трудно": [
+    "residually-finite"
+   ]
   },
   {
    "id": "Foo",
@@ -1209,6 +1228,24 @@
       "finite-index": false
      },
      "фактор": "Zoo"
+    },
+    {
+     "id": "ядро на ℚ",
+     "имя": "ядро ⊕ℤ ↠ ℚ, eₙ ↦ 1/n!",
+     "≅": "Zoo",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "Q",
+     "почему": {
+      "characteristic": "перестановка e₁ ↔ e₂ переводит 2e₂ − e₁ ∈ K в 2e₁ − e₂ ∉ K",
+      "≅": "подгруппа свободной абелевой счётного ранга, сама счётного ранга, так как фактор ℚ не к. п."
+     }
     },
     {
      "id": "все",
@@ -2083,7 +2120,10 @@
      "фактор": "1:1"
     }
    ],
-   "центр": "центр"
+   "центр": "центр",
+   "трудно": [
+    "residually-finite"
+   ]
   },
   {
    "id": "Z2adic",
@@ -2309,7 +2349,10 @@
     }
    ],
    "центр": "1",
-   "абелианизация": "Z"
+   "абелианизация": "Z",
+   "трудно": [
+    "residually-finite"
+   ]
   },
   {
    "id": "Ainf",
@@ -2678,7 +2721,11 @@
     }
    ],
    "центр": "1",
-   "абелианизация": "8:5"
+   "абелианизация": "8:5",
+   "трудно": [
+    "periodic",
+    "residually-finite"
+   ]
   },
   {
    "id": "Z12",
@@ -2938,6 +2985,9 @@
    "абелианизация": "1:1",
    "ссылки": [
     "стандартный пример"
+   ],
+   "трудно": [
+    "simple"
    ]
   },
   {
@@ -3225,6 +3275,295 @@
    "центр": "центр",
    "ссылки": [
     "прямое произведение"
+   ]
+  },
+  {
+   "id": "SumS3",
+   "имя": "⊕_ℤ S₃",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "indecomposable": false
+   },
+   "почему": {
+    "residually-finite": "подгруппа ∏S₃, а произведение конечных ф. а."
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "SumS3"
+    },
+    {
+     "id": "все",
+     "имя": "⊕S₃",
+     "≅": "SumS3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "ссылки": [
+    "прямая сумма"
+   ]
+  },
+  {
+   "id": "S3wrZ",
+   "имя": "S₃ ≀ ℤ",
+   "заметка": "Ограниченное сплетение. База ⊕S₃ и фактор ℤ ф. а., а сама группа нет (Грюнберг).",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": false
+   },
+   "почему": {
+    "residually-finite": "возьмём неперестановочные a, a′ ∈ S₃ в координате 0. В любом конечном факторе образ сдвига b имеет конечный порядок m, поэтому [a, a′] и [a, b⁻ᵐa′bᵐ] = 1 имеют один образ: [a, a′] ≠ 1 лежит в ядре каждого конечного фактора (K. W. Gruenberg, Residual properties of infinite soluble groups, 1957)",
+    "centerless": "центр базы тривиален, а элемент вне базы двигает координаты",
+    "fin-gen": "порождается S₃ в координате 0 и сдвигом"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "S3wrZ"
+    },
+    {
+     "id": "база",
+     "имя": "⊕_ℤ S₃",
+     "≅": "SumS3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": false,
+      "finite-index": false
+     },
+     "фактор": "Z",
+     "почему": {
+      "characteristic": "это множество элементов конечного порядка"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "S₃ ≀ ℤ",
+     "≅": "S3wrZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "ссылки": [
+    "K. W. Gruenberg, Residual properties of infinite soluble groups, Proc. LMS 1957"
+   ],
+   "трудно": [
+    "residually-finite"
+   ]
+  },
+  {
+   "id": "Sp4Z",
+   "имя": "Sp₄(ℤ)",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true
+   },
+   "почему": {
+    "residually-finite": "к. п. линейная (Мальцев); или через конгруэнц-подгруппы",
+    "centerless": "−E центральна",
+    "solvable": "содержит F₂",
+    "simple": "конгруэнц-подгруппы нормальны"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "Sp4Z"
+    },
+    {
+     "id": "центр",
+     "имя": "{±E}",
+     "≅": "2:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     }
+    },
+    {
+     "id": "все",
+     "имя": "Sp₄(ℤ)",
+     "≅": "Sp4Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "ссылки": [
+    "стандартный пример"
+   ],
+   "трудно": [
+    "residually-finite"
+   ]
+  },
+  {
+   "id": "DeligneSp4",
+   "имя": "Sp̃₄(ℤ)/4ℤ (Делинь)",
+   "заметка": "Пусть Sp̃₄(ℤ) — прообраз Sp₄(ℤ) в универсальной накрывающей Sp₄(ℝ), центральное расширение с ядром ℤ. По Делиню каждая подгруппа конечного индекса в Sp̃₄(ℤ) содержит 2ℤ. Поэтому у фактора по 4ℤ центральная подгруппа C₄ = ℤ/4ℤ, а элемент 2 ∈ ℤ/4ℤ лежит во всех подгруппах конечного индекса.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "torsion-free": false,
+    "periodic": false,
+    "centerless": false,
+    "residually-finite": false
+   },
+   "почему": {
+    "residually-finite": "P. Deligne, Extensions centrales non résiduellement finies de groupes arithmétiques, C. R. Acad. Sci. 1978",
+    "centerless": "ℤ/4ℤ центральна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "DeligneSp4"
+    },
+    {
+     "id": "C4",
+     "имя": "ℤ/4ℤ",
+     "≅": "4:1",
+     "свойства": {
+      "normal": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "Sp4Z"
+    },
+    {
+     "id": "все",
+     "имя": "Sp̃₄(ℤ)/4ℤ",
+     "≅": "DeligneSp4",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "ссылки": [
+    "P. Deligne, C. R. Acad. Sci. Paris 287 (1978)"
+   ],
+   "трудно": [
+    "residually-finite"
    ]
   }
  ]

@@ -153,9 +153,23 @@ class Scene:
             if all(vals.get(a) == v for a, v in premises) and vals.get(goal[0]) == (not goal[1]):
                 s = o["подгруппы"][sub]
                 out.append({"G": key, "имя G": o.get("имя"), "N": s["id"],
-                            "имя N": s.get("имя", lib.obj[s["≅"]].get("имя"))})
+                            "имя N": s.get("имя", lib.obj[s["≅"]].get("имя")),
+                            "трудно": self.hard(lib, key, sub, need)})
                 if len(out) >= limit:
                     break
+        return out
+
+    def hard(self, lib, key, sub, atoms):
+        """Какие из атомов пары держатся на значениях, помеченных «трудно»:
+        сами по себе теоремы или требуют идеи."""
+        o = lib.obj[key]
+        s = o["подгруппы"][sub]
+        owner = {self.G: o, self.N: lib.obj[s["≅"]], self.Q: lib.obj.get(s.get("фактор"))}
+        out = []
+        for a in atoms:
+            rec = owner.get(a[2]) if a[0] == "p" else None
+            if rec and a[1] in rec.get("трудно", ()):
+                out.append(f"{a[1]}({rec.get('имя', rec['key'])})")
         return out
 
     def atoms(self):
