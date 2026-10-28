@@ -35,12 +35,14 @@ import argparse
 import json
 import sys
 from collections import Counter, defaultdict
-from itertools import combinations
+from itertools import combinations, permutations
 
 import numpy as np
 
-from .library import GROUP_PROPS, MARKS, SUB_PROPS, Library, Scene, jobs
-from .logic import Vocab, decide
+from types import SimpleNamespace
+
+from .library import GROUP_PROPS, MARKS, SUB_PROPS, Library, Scene, Search, jobs
+from .logic import Theory, Var, Vocab, decide
 
 
 def atom_name(a):
@@ -49,6 +51,64 @@ def atom_name(a):
 
 def lit_name(a, v):
     return ("" if v else "¬") + atom_name(a)
+
+
+# --- подсхемы и симметрии ---------------------------------------------------------
+
+COMMUTATIVE = {"prod", "freeprod"}
+
+
+def term_vars(t):
+    if isinstance(t, Var):
+        return {t}
+    return set().union(*(term_vars(a) for a in t.args))
+
+
+def atom_vars(a, graph):
+    """Переменные, о которых говорит атом. Свойство вложения (normal(N))
+    говорит и об объемлющей группе, свойство N как группы — только об N."""
+    out = term_vars(a[2])
+    if a[1] in SUB_PROPS:
+        amb = graph.terms[a[2]].links.get("ambient")
+        if amb is not None:
+            out |= term_vars(amb)
+    return out
+
+
+def canon(t, perm):
+    if isinstance(t, Var):
+        return perm.get(t, t).name
+    args = [canon(x, perm) for x in t.args]
+    if t.op in COMMUTATIVE:
+        args.sort()
+    return f"{t.op}({', '.join(args)})"
+
+
+def symmetries(graph, atoms, fixed):
+    """Перестановки переменных, которые сохраняют сорта, связи, набор атомов
+    формы и посылки схемы. Условия, переходящие друг в друга, — одно условие."""
+    vs = [t for t in graph.terms if isinstance(t, Var)]
+    base = {(a[1], canon(a[2], {})) for a in atoms}
+    fixed_c = {(a[1], canon(a[2], {}), v) for a, v in fixed}
+    out = []
+    for p in permutations(vs):
+        perm = dict(zip(vs, p))
+        if any(graph.terms[v].sort != graph.terms[perm[v]].sort
+               or {k: perm.get(x, x) for k, x in graph.terms[v].links.items()} != graph.terms[perm[v]].links
+               for v in vs):
+            continue
+        if {(a[1], canon(a[2], perm)) for a in atoms} != base:
+            continue
+        if {(a[1], canon(a[2], perm), v) for a, v in fixed} != fixed_c:
+            continue
+        out.append(perm)
+    return out
+
+
+def klass(lits, perms):
+    """Канонический запрет: множество литералов с точностью до симметрий."""
+    return min(tuple(sorted(("" if v else "¬") + f"{a[1]}({canon(a[2], perm)})" for a, v in lits))
+               for perm in perms)
 
 
 class Form:
@@ -62,8 +122,11 @@ class Form:
                       + [("p", p, sc.N) for p in GROUP_PROPS]
                       + [("p", p, sc.Q) for p in GROUP_PROPS])
         self.index = {a: i for i, a in enumerate(self.atoms)}
-        self.normal = self.index[("p", "normal", sc.N)]
-        self.on_q = {i for i, a in enumerate(self.atoms) if a[2] == sc.Q}
+        normal = 2 * self.index[("p", "normal", sc.N)]
+        # Атом i имеет смысл, только если посылки содержат столбцы req[i]:
+        # G/N существует при нормальной N.
+        self.req = {i: {normal} for i, a in enumerate(self.atoms) if a[2] == sc.Q}
+        self.fixed = []  # столбцы, верные во всех условиях формы
         # Три матрицы: m — все значения, s — без «трудно», e — ещё и без
         # «короткого довода», то есть только понятные.
         levels = {"m": (), "s": ("трудно",), "e": MARKS}
@@ -98,20 +161,34 @@ class Form:
         """Строка, где посылки верны, а значение цели не записано и не
         выводится: заполнив его, можно закрыть условие. Записанные группы
         предпочтительнее построенных произведений."""
-        rows = np.flatnonzero(self.m[:, list(prem)].all(axis=1) & ~self.m[:, g] & ~self.m[:, g ^ 1])
+        rows = np.flatnonzero(self.m[:, list(prem) + self.fixed].all(axis=1) & ~self.m[:, g] & ~self.m[:, g ^ 1])
         if not len(rows):
             return None
-        return min(rows, key=lambda r: "×" in self.names[r][0])
+        return min(rows, key=self.synthetic)
 
     def refuters(self, prem, g, m=None):
         """Строки матрицы (по умолчанию m), где посылки верны, а цель ложна."""
         m = self.m if m is None else m
         neg = g + 1 if g % 2 == 0 else g - 1
-        return np.flatnonzero(m[:, list(prem) + [neg]].all(axis=1))
+        return np.flatnonzero(m[:, list(prem) + self.fixed + [neg]].all(axis=1))
 
     def lit(self, j):
         """Номер столбца → (атом, значение)."""
         return self.atoms[j // 2], j % 2 == 0
+
+    def synthetic(self, r):
+        """Строка из построенного произведения: такие показываем последними."""
+        return "×" in self.names[r][0]
+
+    def where(self, r):
+        key, sub = self.names[r]
+        return f"G = {key}, N = {self.lib.obj[key]['подгруппы'][sub]['id']}"
+
+    def marked(self, r, mark):
+        """Помеченные mark атомы строки r: [(атом, имя факта)]."""
+        key, sub = self.names[r]
+        return [(a, self.sc.marked_name(self.lib, key, sub, a, mark))
+                for a in sorted(self.sc.hard_atoms(self.lib, key, sub, (mark,)), key=str)]
 
     def row_keeping(self, r, keep, mark):
         """Строка пары r, где из значений с пометкой mark оставлены только
@@ -133,12 +210,12 @@ class Form:
         раньше произведений) — наименьшие наборы помеченных значений, которых
         хватает. Возвращает {набор имён вида «hopfian(BS23)»: строка}."""
         mat = self.s if mark == "короткий довод" else self.m
-        cols = list(prem) + [g ^ 1]
-        rows = sorted(self.refuters(prem, g, mat), key=lambda r: "×" in self.names[r][0])[:limit]
+        cols = list(prem) + self.fixed + [g ^ 1]
+        rows = sorted(self.refuters(prem, g, mat), key=self.synthetic)[:limit]
         out = {}
         for r in rows:
-            key, sub = self.names[r]
-            marked = sorted(self.sc.hard_atoms(self.lib, key, sub, (mark,)), key=str)
+            named = dict(self.marked(r, mark))
+            marked = sorted(named, key=str)
             hit = []
             for size in range(1, min(len(marked), 3) + 1):
                 hit = [k for k in combinations(marked, size)
@@ -146,8 +223,106 @@ class Form:
                 if hit:
                     break
             for k in hit or [marked]:
-                out.setdefault(frozenset(self.sc.marked_name(self.lib, key, sub, a, mark) for a in k), r)
+                out.setdefault(frozenset(named[a] for a in k), r)
         return out
+
+
+class SchemeForm(Form):
+    """Форма по схеме: «∀ A : Grp; ∀ B : Grp» и термы вроде «A × B».
+
+    Строки — подстановки библиотеки в переменные схемы (как в Search),
+    столбцы — свойства переменных и названных термов. Посылки из записи
+    схемы («∀ H : Sub(G) | abelian(H)») входят во все условия."""
+
+    def __init__(self, lib, vocab, decl, terms=(), max_subs=None):
+        from .etalon import scheme, term
+        g, fixed, _ = scheme(vocab, {"раздел": "grp", "условие": decl})
+        names = {str(t): t for t in g.terms}
+        own = list(g.terms)
+        for x in terms:
+            t = term(g, x, names, "grp")
+            if t not in own:
+                own.append(t)
+        self.g, self.lib, self._kept = g, lib, {}
+        T = Theory(g, grow=1)
+        self.sc = SimpleNamespace(T=T, s=T.solver())
+        self.search = Search(g, T, lib)
+        self.atoms = []
+        for t in own:
+            sort = g.terms[t].sort
+            if sort == "Grp.obj":
+                self.atoms += [("p", p, t) for p in GROUP_PROPS]
+            elif sort == "Grp.sub":
+                self.atoms += [("p", p, t) for p in SUB_PROPS + GROUP_PROPS]
+        self.index = {a: i for i, a in enumerate(self.atoms)}
+        self.req = {}
+        for i, a in enumerate(self.atoms):
+            need = {2 * self.index[("p", p, u)] for p, u in g.requires(a[2]) if ("p", p, u) in self.index}
+            if need:
+                self.req[i] = need
+        self.fixed = [2 * self.index[a] + (0 if v else 1) for a, v in fixed if a in self.index]
+        self.fixed_lits = fixed
+        levels = {"m": (), "s": ("трудно",), "e": MARKS}
+        rows, self.envs, self.skipped = {k: [] for k in levels}, [], []
+        for env in self.search._assign(0, {}):
+            if max_subs and any(im[0] == "sub" and im[2] >= max_subs for im in env.values()):
+                continue
+            facts, hard = self.search.facts(env)
+            assume = [l for a, v in facts.items() if (l := T.lit(a, v)) not in (None, False)]
+            if not self.sc.s.solve(assumptions=assume):
+                self.skipped.append(self.where_env(env))  # записи противоречат базе
+                continue
+            full = None
+            for k, drop in levels.items():
+                if full is not None and not any(m in drop for m, _ in hard.values()):
+                    rows[k].append(full)
+                    continue
+                f = {a: v for a, v in facts.items() if not (a in hard and hard[a][0] in drop)}
+                row = self._derive(f)
+                rows[k].append(row)
+                full = full or row
+            self.envs.append(dict(env))
+        self.m, self.s, self.e = (self._matrix(rows[k]) for k in levels)
+        self.names = list(range(len(self.envs)))
+
+    def _derive(self, facts):
+        T, s = self.sc.T, self.sc.s
+        assume = [l for a, v in facts.items() if (l := T.lit(a, v)) not in (None, False)]
+        out = []
+        for a in self.atoms:
+            if a in facts:
+                out.append(facts[a])
+                continue
+            l = T.lit(a)
+            if not s.solve(assumptions=assume + [-l]):
+                out.append(True)
+            elif not s.solve(assumptions=assume + [l]):
+                out.append(False)
+            else:
+                out.append(None)
+        return out
+
+    def synthetic(self, r):
+        return any(im[0] == "obj" and self.lib.obj[im[1]].get("синтез") for im in self.envs[r].values())
+
+    def where(self, r):
+        return self.where_env(self.envs[r])
+
+    def where_env(self, env):
+        return ", ".join(f"{t} = {self.search._name(im)}" for t, im in env.items())
+
+    def marked(self, r, mark):
+        _, hard = self.search.facts(self.envs[r])
+        return sorted(((a, name) for a, (m, name) in hard.items() if m == mark), key=lambda x: str(x[0]))
+
+    def row_keeping(self, r, keep, mark):
+        k = (r, keep, mark)
+        if k not in self._kept:
+            facts, hard = self.search.facts(self.envs[r])
+            drop = ("трудно",) if mark == "трудно" else MARKS
+            f = {a: v for a, v in facts.items() if not (a in hard and hard[a][0] in drop and a not in keep)}
+            self._kept[k] = self._matrix([self._derive(f)])[0]
+        return self._kept[k]
 
 
 def cover(options):
@@ -185,14 +360,14 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     def go(prem, rows, start):
         if prem:
             atoms = {j // 2 for j in prem}
-            needs_normal = bool(atoms & form.on_q)
-            if not needs_normal or 2 * form.normal in prem:
+            have = set(prem) | set(form.fixed)
+            if all(form.req.get(i, set()) <= have for i in atoms):
                 if rows.size == 0:
                     empty.append(tuple(prem))
                 else:
                     sub = m[rows]
                     for g in goal_cols:
-                        if g // 2 in atoms or (g // 2 in form.on_q and 2 * form.normal not in prem):
+                        if g // 2 in atoms or not form.req.get(g // 2, set()) <= have:
                             continue
                         neg = g + 1 if g % 2 == 0 else g - 1
                         if not sub[:, neg].any():
@@ -205,7 +380,8 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             nxt = rows[m[rows, j]] if prem else np.flatnonzero(m[:, j])
             go(prem + [j], nxt, j + 1)
 
-    go([], np.arange(m.shape[0]), 0)
+    start = np.flatnonzero(m[:, form.fixed].all(axis=1)) if form.fixed else np.arange(m.shape[0])
+    go([], start, 0)
     return alive, empty
 
 
@@ -218,28 +394,48 @@ def minimal(alive):
     return out
 
 
-def run(max_prem, lib=None, vocab=None):
+def run(max_prem, lib=None, vocab=None, form=None):
     vocab = vocab or Vocab.section("grp")
     if lib is None:
         lib = Library()
         lib.synthesize_products(vocab)
-    form = Form(lib, vocab)
+    form = form or Form(lib, vocab)
+    fixed = getattr(form, "fixed_lits", [])
+    graph = form.sc.T.g
+    allvars = {t for t in graph.terms if isinstance(t, Var)}
+    perms = symmetries(graph, form.atoms, fixed)
+    degen = []
+    for t in sorted(allvars, key=str):
+        sort = graph.terms[t].sort
+        if sort == "Grp.obj" and len(allvars) > 1:
+            degen.append((("p", "trivial", t), True))
+        elif sort == "Grp.sub":
+            degen += [(("p", "trivial", t), True), (("p", "whole", t), True)]
     alive, empty = enumerate_form(form, max_prem)
     mins = minimal(alive)
     report = []
     for (prem, g), support in mins.items():
         prem_l = [form.lit(j) for j in prem]
         goal = form.lit(g)
-        v = decide(form.sc.T, prem_l, goal, form.sc.s)
+        # Условие только о части переменных — факт меньшей схемы.
+        if set().union(*(atom_vars(a, graph) for a, _ in prem_l + [goal] + fixed)) != allvars:
+            continue
+        # Вырожденное: посылки заставляют группу быть тривиальной или
+        # подгруппу — тривиальной или всей. Это тоже факт меньшей схемы.
+        # Смотрим на весь запрет, чтобы контрапозиции решались одинаково.
+        whole = fixed + prem_l + [(goal[0], not goal[1])]
+        if any(decide(form.sc.T, whole, d, form.sc.s).kind == "выводится" for d in degen):
+            continue
+        v = decide(form.sc.T, fixed + prem_l, goal, form.sc.s)
         r = {"посылки": [lit_name(*x) for x in prem_l], "цель": lit_name(*goal),
              "запрет": sorted([lit_name(*x) for x in prem_l] + [lit_name(goal[0], not goal[1])]),
+             "класс": klass(prem_l + [(goal[0], not goal[1])], perms),
              "примеров": support, "вердикт": v.kind,
              "ядро": [lit_name(*x) for x in v.core or []]}
         if v.kind == "неизвестно":
             hint = form.unknown_goal(prem, g)
             if hint is not None:
-                key, sub = form.names[hint]
-                r["заполнить"] = {"G": key, "N": lib.obj[key]["подгруппы"][sub]["id"], "атом": atom_name(goal[0])}
+                r["заполнить"] = {"где": form.where(hint), "атом": atom_name(goal[0])}
         # Опровергается только помеченным значением: условие не закрыто.
         for mat, mark, kind in ((form.s, "короткий довод", "короткий довод"),
                                 (form.m, "трудно", "трудный контрпример")):
@@ -254,9 +450,8 @@ def run(max_prem, lib=None, vocab=None):
     for mark in MARKS:
         rs = [r for r in report if r.get("_держится", (None,))[0] == mark]
         for r, fact in zip(rs, cover([list(r["_держится"][1]) for r in rs])):
-            key, sub = form.names[r["_держится"][1][fact]]
             r["решающий факт"] = sorted(fact)
-            r["контрпример"] = {"G": key, "N": lib.obj[key]["подгруппы"][sub]["id"], mark: sorted(fact)}
+            r["контрпример"] = {"где": form.where(r["_держится"][1][fact]), mark: sorted(fact)}
     for r in report:
         r.pop("_держится", None)
     return form, alive, empty, report
@@ -271,7 +466,7 @@ def clusters(triples):
     while left:
         by_pair = defaultdict(list)
         for t in left:
-            for i in range(3):
+            for i in range(len(t)):
                 pair = t[:i] + t[i + 1:]
                 by_pair[pair].append(t[i])
         pair, thirds = max(by_pair.items(), key=lambda x: (len(x[1]), x[0]))
@@ -283,16 +478,34 @@ def clusters(triples):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--посылок", dest="k", type=int, default=2)
+    ap.add_argument("--схема", dest="decl", help="схема, например «∀ A : Grp; ∀ B : Grp»; по умолчанию форма G, N, G/N")
+    ap.add_argument("--термы", dest="terms", default="", help="термы схемы через «;», например «A × B»")
+    ap.add_argument("--подгрупп", dest="max_subs", type=int, default=None,
+                    help="брать у каждой группы не больше стольких подгрупп")
     ap.add_argument("--json", dest="out", help="записать остаток и трудные контрпримеры в JSON")
     ap.add_argument("--короткие", dest="short", action="store_true",
                     help="показать и условия, опровергнутые только коротким доводом")
     a = ap.parse_args()
-    form, alive, empty, report = run(a.k)
-    tally = Counter(r["вердикт"] for r in report)
-    print(f"пар в библиотеке {form.m.shape[0]}, литералов {form.m.shape[1]}", file=sys.stderr)
-    print(f"не опровергнуто библиотекой {len(alive)}, из них минимальных {len(report)}: "
-          + ", ".join(f"{k} {v}" for k, v in tally.most_common()), file=sys.stderr)
+    form = None
+    if a.decl:
+        vocab = Vocab.section("grp")
+        lib = Library()
+        lib.synthesize_products(vocab)
+        form = SchemeForm(lib, vocab, a.decl, [x for x in a.terms.split(";") if x.strip()], a.max_subs)
+        form, alive, empty, report = run(a.k, lib, vocab, form)
+    else:
+        form, alive, empty, report = run(a.k)
+    # Считаем запреты: условие, его контрапозиции и симметричные ему — один.
+    classes = {}
+    for r in report:
+        classes.setdefault(r["класс"], r)
+    tally = Counter(r["вердикт"] for r in classes.values())
+    print(f"строк в библиотеке {form.m.shape[0]}, литералов {form.m.shape[1]}", file=sys.stderr)
+    print(f"не опровергнуто библиотекой {len(alive)}, минимальных обо всех переменных {len(report)}, "
+          f"запретов {len(classes)}: " + ", ".join(f"{k} {v}" for k, v in tally.most_common()), file=sys.stderr)
     print(f"посылок без единого примера: {len(empty)}", file=sys.stderr)
+    for w in getattr(form, "skipped", [])[:5]:
+        print(f"ПРОТИВОРЕЧИЕ в записях: {w}", file=sys.stderr)
     if a.out:
         with open(a.out, "w", encoding="utf-8") as f:
             json.dump({"остаток": [r for r in report if r["вердикт"] == "неизвестно"],
@@ -304,11 +517,11 @@ def main():
     for r in report:
         if r["вердикт"] != "неизвестно":
             continue
-        t = tuple(r["запрет"])
+        t = r["класс"]
         seen.setdefault(t, r["примеров"])
         if r.get("заполнить"):
             h = r["заполнить"]
-            hints[t].add(f"{h['атом']} у {h['G']} / {h['N']}")
+            hints[t].add(f"{h['атом']} у {h['где']}")
     groups = clusters(list(seen))
     for pair, thirds in groups:
         ts = [tuple(sorted(pair + (x,))) for x in thirds]
@@ -322,21 +535,20 @@ def main():
     print(f"запретов без примера: {len(seen)}, кластеров: {len(groups)}", file=sys.stderr)
     for kind in ("трудный контрпример", "короткий довод"):
         groups = defaultdict(list)
-        for r in report:
+        for r in classes.values():
             if r["вердикт"] == kind:
                 groups[tuple(r["решающий факт"])].append(r)
         ranked = sorted(groups.items(), key=lambda x: (-len(x[1]), x[0]))
         if kind == "короткий довод" and not a.short:
             if ranked:
-                print(f"скрыто условий с коротким доводом: {tally[kind]}, решающих фактов {len(ranked)}: "
+                print(f"скрыто запретов с коротким доводом: {tally[kind]}, решающих фактов {len(ranked)}: "
                       + ", ".join(f"{' & '.join(f)} ({len(rs)})" for f, rs in ranked)
                       + " (показать: --короткие)", file=sys.stderr)
             continue
         for fact, rs in ranked:
-            print(f"{kind}: {' & '.join(fact)} — условий {len(rs)}")
+            print(f"{kind}: {' & '.join(fact)} — запретов {len(rs)}")
             for r in rs:
-                c = r["контрпример"]
-                print(f"    {', '.join(r['посылки'])} ⇒ {r['цель']}   [{c['G']} / {c['N']}]")
+                print(f"    бывает: {' & '.join(r['класс'])}   [{r['контрпример']['где']}]")
 
 
 if __name__ == "__main__":

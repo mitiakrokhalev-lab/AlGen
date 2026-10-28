@@ -14,7 +14,7 @@ class FakeForm:
     """Три атома a, b, c; строки — объекты библиотеки (верно / ложно / None)."""
 
     def __init__(self, rows):
-        self.on_q, self.normal = set(), 0
+        self.req, self.fixed = {}, []
         m = np.zeros((len(rows), 6), dtype=bool)
         for r, row in enumerate(rows):
             for i, v in enumerate(row):

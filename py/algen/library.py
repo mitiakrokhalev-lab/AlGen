@@ -25,6 +25,7 @@ from .finite import load as load_finite, load_products
 from .logic import DATA, App, Graph, Theory, Var, Vocab
 
 INFINITE = DATA / "infinite" / "grp.json"
+ALL, ONE = "<всё>", "<1>"  # подгруппы множителя в метках подгрупп произведения
 SUB_PROPS = ("normal", "characteristic", "maximal", "whole", "central", "finite-index")
 
 
@@ -109,6 +110,7 @@ class Library:
             def factor(own, other, okey, name):
                 swap = {"characteristic": False} if a == b and not oa["свойства"].get("trivial") else {}
                 return {"id": name, "имя": name, "≅": own, "фактор": okey,
+                        "пара": (ALL, ONE) if name == "A × 1" else (ONE, ALL),
                         "свойства": {**swap, "normal": True, "whole": False,
                                      "finite-index": bool(other["свойства"].get("finite")),
                                      "maximal": okey in prime_cyclic,
@@ -117,11 +119,11 @@ class Library:
                 "key": key, "имя": f"{oa.get('имя', a)} × {ob.get('имя', b)}", "конечная": False,
                 "синтез": True, "свойства": props, **marks, "почему": {},
                 "подгруппы": [
-                    {"id": "1", "≅": "1:1", "фактор": key,
+                    {"id": "1", "≅": "1:1", "фактор": key, "пара": (ONE, ONE),
                      "свойства": {"normal": True, "characteristic": True, "maximal": False, "whole": False,
                                   "central": True, "finite-index": bool(props.get("finite"))}},
                     factor(a, ob, b, "A × 1"), factor(b, oa, a, "1 × B"),
-                    {"id": "все", "≅": key, "фактор": "1:1",
+                    {"id": "все", "≅": key, "фактор": "1:1", "пара": (ALL, ALL),
                      "свойства": {"normal": True, "characteristic": True, "maximal": False, "whole": True,
                                   "finite-index": True}}]}
             self.prod[a, b] = self.prod[b, a] = key
@@ -170,7 +172,10 @@ class Library:
                     if iso is None:
                         continue
                     op = self.obj[other]["свойства"]
-                    rec = {"id": f"{h['id']} × B" if side == 0 else f"A × {h['id']}", "≅": iso,
+                    # Номера подгрупп конечных групп («1») не путать с «1 × B».
+                    hid = f"№{h['id']}" if h["id"].isdigit() else h["id"]
+                    rec = {"id": f"{hid} × B" if side == 0 else f"A × {hid}", "≅": iso,
+                           "пара": (h["id"], ALL) if side == 0 else (ALL, h["id"]),
                            "свойства": {"normal": hp.get("normal"), "whole": False,
                                         "maximal": hp.get("maximal"),
                                         "finite-index": hp.get("finite-index"),
@@ -187,13 +192,56 @@ class Library:
                         # H × 1 — тоже не нормальна, не максимальна (H × 1 ⊊ H × B),
                         # бесконечного индекса, если A × B бесконечна по B или H.
                         subs.insert(len(subs) - 1, {
-                            "id": f"{h['id']} × 1" if side == 0 else f"1 × {h['id']}", "≅": h["≅"],
+                            "id": f"{hid} × 1" if side == 0 else f"1 × {hid}", "≅": h["≅"],
+                            "пара": (h["id"], ONE) if side == 0 else (ONE, h["id"]),
                             "свойства": {"normal": False, "characteristic": False, "whole": False,
                                          "maximal": False, "central": False,
                                          **({"finite-index": False} if hp.get("finite-index") is False
                                             or op.get("finite") is False else {})}})
+        # Центр и коммутант: Z(A × B) = Z(A) × Z(B), (A × B)′ = A′ × B′.
+        for a, b, key in made:
+            o = self.obj[key]
+            subs = o["подгруппы"]
+            pairs = {x["пара"]: x["id"] for x in subs if "пара" in x}
+            for field in ("центр", "коммутант"):
+                sa, sb = (self._sub(k, self.obj[k].get(field)) for k in (a, b))
+                if sa is None or sb is None:
+                    continue
+                pair = (self._norm(sa), self._norm(sb))
+                if pair in pairs:
+                    o[field] = pairs[pair]
+                    continue
+                iso = product(sa["≅"], sb["≅"])
+                if iso is None:
+                    continue
+                pa, pb = sa["свойства"], sb["свойства"]
+                both = lambda p: (pa.get(p) and pb.get(p)) if None not in (pa.get(p), pb.get(p)) else None
+                rec = {"id": field, "≅": iso, "пара": pair,
+                       "свойства": {"normal": True, "characteristic": True, "whole": False,
+                                    "central": True if field == "центр" else both("central"),
+                                    "finite-index": both("finite-index")}}
+                rec["свойства"] = {k: v for k, v in rec["свойства"].items() if v is not None}
+                if sa.get("фактор") and sb.get("фактор"):
+                    q = product(sa["фактор"], sb["фактор"])
+                    if q:
+                        rec["фактор"] = q
+                subs.insert(len(subs) - 1, rec)
+                pairs[pair] = field
+                o[field] = field
         s.delete()
         return len(made)
+
+    def _sub(self, key, sid):
+        if sid is None:
+            return None
+        return next((x for x in self.obj[key]["подгруппы"] or [] if x["id"] == sid), None)
+
+    @staticmethod
+    def _norm(sub):
+        """Подгруппа множителя для пары в произведении: вся, тривиальная или своя."""
+        if sub["свойства"].get("whole"):
+            return ALL
+        return ONE if sub["≅"] == "1:1" else sub["id"]
 
 
 # --- сцена G, N, G/N -----------------------------------------------------------
@@ -360,6 +408,11 @@ _LIB = _SCENE = None
 # --- поиск контрпримера на произвольной схеме -----------------------------------
 
 
+# Множители построенных произведений для схем с несколькими группами.
+CORE = ["2:1", "6:1", "60:5", "Z", "Q", "QmodZ", "Pruf2", "F2", "Foo", "UT3Z", "PSL2R", "BS23", "Ainf",
+        "SumC2", "Tarski", "SL2Rcov"]
+
+
 class Search:
     """Контрпример к «посылки ⇒ цель» на графе условия.
 
@@ -376,9 +429,20 @@ class Search:
         self.vars = [t for t in graph.terms if isinstance(t, Var)]
         many = sum(1 for t in self.vars if graph.terms[t].sort == "Grp.obj") > 1
         # Для схем с несколькими группами — бесконечные и малые конечные.
+        # Неразрешимые конечные порядка ⩽ 120 (A₅, S₅, SL(2, 5), …) нужны всегда.
         self.objects = [k for k, o in lib.obj.items()
                         if not many or (not o.get("синтез") and (
-                            not o["конечная"] or int(k.split(":")[0]) <= max_order))]
+                            not o["конечная"] or int(k.split(":")[0]) <= max_order
+                            or (o["свойства"].get("solvable") is False and int(k.split(":")[0]) <= 120)))]
+        if many:
+            # Разложимые примеры: построенные произведения небольшого набора групп.
+            have = set(self.objects)
+            for i, a in enumerate(CORE):
+                for b in CORE[i:]:
+                    k = lib.prod.get((a, b))
+                    if k and k not in have:
+                        self.objects.append(k)
+                        have.add(k)
 
     def _assign(self, i, env):
         if i == len(self.vars):
