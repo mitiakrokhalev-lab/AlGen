@@ -6251,6 +6251,98 @@
    "коммутант": "центр"
   },
   {
+   "id": "UT3ZoQ",
+   "имя": "UT₃(ℤ) ∘ ℚ",
+   "заметка": "Матрицы [[1, a, c], [0, 1, b], [0, 0, 1]] с a, b ∈ ℤ, c ∈ ℚ: центральное произведение UT₃(ℤ) и ℚ по ⟨z⟩ = ℤ. Центр делим, а группа нет.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": true,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": false,
+    "polycyclic": false,
+    "linear": true,
+    "indecomposable": true
+   },
+   "почему": {
+    "divisible": "G/Z(G) ≅ ℤ² не делима",
+    "residually-finite": "центр ℚ не имеет конечных факторов, а пересекается с любой нетривиальной нормальной подгруппой",
+    "indecomposable": "если G = A × B, то ℚ = Z(A) × Z(B), скажем Z(B) = 1, и нильпотентная B тривиальна",
+    "linear": "подгруппа UT₃(ℚ)"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "UT3ZoQ"
+    },
+    {
+     "id": "центр",
+     "имя": "{c e₁₃}, c ∈ ℚ",
+     "≅": "Q",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "ZxZ",
+     "почему": "[x, y] = z, и матрица с a ≠ 0 или b ≠ 0 не коммутирует с x или y"
+    },
+    {
+     "id": "коммутант",
+     "имя": "⟨z⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "[(a, b, c), (a′, b′, c′)] = ab′ − a′b ∈ ℤ"
+    },
+    {
+     "id": "все",
+     "имя": "UT₃(ℤ) ∘ ℚ",
+     "≅": "UT3ZoQ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "коммутант"
+  },
+  {
    "id": "UT4Z",
    "имя": "UT₄(ℤ)",
    "заметка": "Унитреугольные целые матрицы 4 × 4: нильпотентная ступени 3.",
