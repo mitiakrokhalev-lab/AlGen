@@ -69,7 +69,7 @@ class Library:
         P = g.given(g.make("prod", [X, Y]))
         T = Theory(g, grow=1)
         s = T.solver()
-        base = [k for k, o in self.obj.items() if not o.get("синтез") and (
+        base = [k for k, o in self.obj.items() if not o.get("синтез") and not o.get("без произведений") and (
             not o["конечная"] or 1 < int(k.split(":")[0]) <= max_order
             or (o["свойства"].get("simple") and not o["свойства"].get("abelian")))]
         prime_cyclic = {k for k, o in self.obj.items() if o["конечная"] and o["свойства"].get("simple")
@@ -139,9 +139,26 @@ class Library:
         s.delete()
         # H × B и A × K: подгруппы множителя, умноженные на другой множитель.
         # Новые произведения H × B строятся здесь же, но своих H × B не получают.
+        # Ещё H × 1 для ненормальных H и диагональ в A × A.
         s = T.solver()
         for a, b, key in made:
             subs = self.obj[key]["подгруппы"]
+            if a == b and not self.obj[a]["свойства"].get("trivial", True):
+                ap = self.obj[a]["свойства"]
+                ab = ap.get("abelian")
+                # Диагональ нормальна (и центральна) ровно для абелевой A, не
+                # характеристична: (x, y) ↦ (x, xy) или сопряжение во втором
+                # множителе её сдвигают. Для простой A она максимальна: H ⊋ Δ
+                # пересекает A × 1 по подгруппе, нормализуемой Δ, то есть
+                # нормальной в A; для абелевой A фактор A × A / Δ ≅ A.
+                diag = {"id": "диагональ", "≅": a,
+                        "свойства": {"normal": ab, "characteristic": False, "whole": False,
+                                     **central(ab), "maximal": ap.get("simple"),
+                                     "finite-index": ap.get("finite")}}
+                if ab:
+                    diag["фактор"] = a
+                diag["свойства"] = {k: v for k, v in diag["свойства"].items() if v is not None}
+                subs.insert(len(subs) - 1, diag)
             for own, other, side in ((a, b, 0), (b, a, 1)):
                 if a == b and side == 1:
                     continue  # те же подгруппы с точностью до перестановки множителей
@@ -166,6 +183,15 @@ class Library:
                         rec["фактор"] = h["фактор"]
                     rec["свойства"] = {k: v for k, v in rec["свойства"].items() if v is not None}
                     subs.insert(len(subs) - 1, rec)
+                    if hp.get("normal") is False:
+                        # H × 1 — тоже не нормальна, не максимальна (H × 1 ⊊ H × B),
+                        # бесконечного индекса, если A × B бесконечна по B или H.
+                        subs.insert(len(subs) - 1, {
+                            "id": f"{h['id']} × 1" if side == 0 else f"1 × {h['id']}", "≅": h["≅"],
+                            "свойства": {"normal": False, "characteristic": False, "whole": False,
+                                         "maximal": False, "central": False,
+                                         **({"finite-index": False} if hp.get("finite-index") is False
+                                            or op.get("finite") is False else {})}})
         s.delete()
         return len(made)
 

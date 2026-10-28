@@ -7,7 +7,7 @@ import unittest
 
 import numpy as np
 
-from algen.enumerate import cover, enumerate_form, minimal
+from algen.enumerate import clusters, cover, enumerate_form, minimal
 
 
 class FakeForm:
@@ -49,6 +49,12 @@ class EnumerateTest(unittest.TestCase):
         x, y, z = (frozenset([n]) for n in "xyz")
         out = cover([[x, y], [y, z], [y]])
         self.assertEqual(out, [y, y, y])
+
+    def test_clusters_share_pair(self):
+        ts = [("a", "b", "c"), ("a", "b", "d"), ("a", "b", "e"), ("c", "f", "g")]
+        out = clusters(ts)
+        self.assertEqual(out[0], (("a", "b"), ["c", "d", "e"]))
+        self.assertEqual(len(out), 2)
 
 
 if __name__ == "__main__":

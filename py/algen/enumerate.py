@@ -262,6 +262,24 @@ def run(max_prem, lib=None, vocab=None):
     return form, alive, empty, report
 
 
+def clusters(triples):
+    """Сгруппировать запреты по общей паре литералов: «A & B & C₁», «A & B & C₂»
+    — один вопрос о парах (G, N) с A и B, обычно один недостающий пример.
+    Жадно: пара, общая для наибольшего числа ещё не взятых запретов.
+    Возвращает [(пара, [третьи литералы])]."""
+    left, out = set(triples), []
+    while left:
+        by_pair = defaultdict(list)
+        for t in left:
+            for i in range(3):
+                pair = t[:i] + t[i + 1:]
+                by_pair[pair].append(t[i])
+        pair, thirds = max(by_pair.items(), key=lambda x: (len(x[1]), x[0]))
+        out.append((pair, sorted(thirds)))
+        left -= {tuple(sorted(pair + (x,))) for x in thirds}
+    return sorted(out, key=lambda x: (-len(x[1]), x[0]))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--посылок", dest="k", type=int, default=2)
@@ -282,15 +300,26 @@ def main():
                        "короткий довод": [r for r in report if r["вердикт"] == "короткий довод"],
                        "выводится": sum(r["вердикт"] == "выводится" for r in report)},
                       f, ensure_ascii=False, indent=1)
-    seen = set()
+    seen, hints = {}, defaultdict(set)
     for r in report:
-        if r["вердикт"] != "неизвестно" or frozenset(r["запрет"]) in seen:
+        if r["вердикт"] != "неизвестно":
             continue
-        seen.add(frozenset(r["запрет"]))
-        hint = r.get("заполнить")
-        tail = f"; заполнить {hint['атом']} у {hint['G']} / {hint['N']}" if hint else ""
-        print(f"не бывает? {' & '.join(r['запрет'])}   [примеров посылок: {r['примеров']}{tail}]")
-    print(f"запретов без примера: {len(seen)}", file=sys.stderr)
+        t = tuple(r["запрет"])
+        seen.setdefault(t, r["примеров"])
+        if r.get("заполнить"):
+            h = r["заполнить"]
+            hints[t].add(f"{h['атом']} у {h['G']} / {h['N']}")
+    groups = clusters(list(seen))
+    for pair, thirds in groups:
+        ts = [tuple(sorted(pair + (x,))) for x in thirds]
+        hint = sorted(set().union(*(hints[t] for t in ts)))
+        tail = "; заполнить " + ", ".join(hint[:3]) + (" …" if len(hint) > 3 else "") if hint else ""
+        if len(thirds) == 1:
+            print(f"не бывает? {' & '.join(ts[0])}   [примеров посылок: {seen[ts[0]]}{tail}]")
+        else:
+            print(f"не бывает? {' & '.join(pair)} & одно из: {', '.join(thirds)}   "
+                  f"[запретов {len(thirds)}{tail}]")
+    print(f"запретов без примера: {len(seen)}, кластеров: {len(groups)}", file=sys.stderr)
     for kind in ("трудный контрпример", "короткий довод"):
         groups = defaultdict(list)
         for r in report:
