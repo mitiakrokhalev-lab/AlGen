@@ -2293,12 +2293,14 @@
     "residually-finite": false,
     "polycyclic": false,
     "indecomposable": true,
-    "hopfian": true
+    "hopfian": true,
+    "linear": false
    },
    "почему": {
     "residually-finite": "нетривиальная нормальная подгруппа нильпотентной группы пересекает центр C₂ = ⟨z⟩, то есть содержит z; подгруппы конечного индекса нетривиальны",
     "hopfian": "нетривиальное ядро содержит z = [x₁, y₁], и фактор абелев",
-    "indecomposable": "если G = A × B, то C₂ = Z(A) × Z(B), так что, скажем, Z(B) = 1, и нильпотентная B тривиальна"
+    "indecomposable": "если G = A × B, то C₂ = Z(A) × Z(B), так что, скажем, Z(B) = 1, и нильпотентная B тривиальна",
+    "linear": "в линейной группе убывающие цепочки централизаторов обрываются (централизаторы замкнуты по Зарисскому), а C(x₁) ⊋ C(x₁, x₂) ⊋ … бесконечна: yₖ лежит в C(x₁, …, xₖ₋₁), но не в C(xₖ)"
    },
    "подгруппы": [
     {
@@ -2346,7 +2348,10 @@
     }
    ],
    "центр": "центр",
-   "коммутант": "центр"
+   "коммутант": "центр",
+   "короткий довод": [
+    "linear"
+   ]
   },
   {
    "id": "Klein",
@@ -2786,6 +2791,21 @@
      }
     },
     {
+     "id": "коммутант",
+     "имя": "GL₂(ℤ)′",
+     "≅": "GL2Zc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "4:2",
+     "почему": "GL₂(ℤ)ᵃᵇ ≅ C₂ × C₂ (из GL₂(ℤ) ≅ D₄ ∗_{C₂×C₂} D₆); GL₂(ℤ)′ — единственная подгруппа индекса 2 в SL₂(ℤ) (SL₂(ℤ)ᵃᵇ ≅ C₁₂ циклична); она не максимальна: между ней и GL₂(ℤ) лежит SL₂(ℤ)"
+    },
+    {
      "id": "все",
      "имя": "GL₂(ℤ)",
      "≅": "GL2Z",
@@ -2803,7 +2823,8 @@
    "центр": "центр",
    "трудно": [
     "residually-finite"
-   ]
+   ],
+   "коммутант": "коммутант"
   },
   {
    "id": "Z2adic",
@@ -4626,6 +4647,21 @@
      }
     },
     {
+     "id": "коммутант",
+     "имя": "(S₃ ≀ ℤ)′",
+     "≅": "S3wrZc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "ZxC2",
+     "почему": "G = B ⋊ ⟨t⟩, Gᵃᵇ = (Bᵃᵇ)_t × ℤ = (⊕C₂)_сдвиг × ℤ = C₂ × ℤ; ядро — чётные по знаку элементы B"
+    },
+    {
      "id": "все",
      "имя": "S₃ ≀ ℤ",
      "≅": "S3wrZ",
@@ -4646,7 +4682,8 @@
    ],
    "трудно": [
     "residually-finite"
-   ]
+   ],
+   "коммутант": "коммутант"
   },
   {
    "id": "Sp4Z",
@@ -4848,6 +4885,16 @@
      "фактор": "AutSumC2"
     },
     {
+     "id": "коммутант",
+     "имя": "GL(ℵ₀, 𝔽₂)′",
+     "≅": "AutSumC2c",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false
+     }
+    },
+    {
      "id": "все",
      "имя": "Aut(⊕C₂)",
      "≅": "AutSumC2",
@@ -4865,7 +4912,8 @@
    "центр": "1",
    "ссылки": [
     "стандартный пример"
-   ]
+   ],
+   "коммутант": "коммутант"
   },
   {
    "id": "AutF3",
@@ -5591,7 +5639,8 @@
     "centerless": true,
     "residually-finite": false,
     "hopfian": true,
-    "polycyclic": false
+    "polycyclic": false,
+    "indecomposable": true
    },
    "почему": {
     "residually-finite": "ядро конечного фактора пересекает простую бесконечную F′ по подгруппе конечного индекса, то есть содержит F′; поэтому F′ ≠ 1 лежит во всех ядрах",
@@ -5599,11 +5648,13 @@
     "free": "содержит ℤ²",
     "solvable": "содержит простую неабелеву F′",
     "divisible": "фактор ℤ² не делим",
-    "centerless": "элемент, перестановочный со всеми, должен сохранять носители всех элементов F"
+    "centerless": "элемент, перестановочный со всеми, должен сохранять носители всех элементов F",
+    "indecomposable": "всякий собственный фактор F абелев (Cannon–Floyd–Parry, теорема 4.3); если F = A × B, то A ≅ F/B и B ≅ F/A абелевы, и F абелева"
    },
    "трудно": [
     "residually-finite",
-    "hopfian"
+    "hopfian",
+    "indecomposable"
    ],
    "подгруппы": [
     {
@@ -6272,13 +6323,15 @@
     "residually-finite": false,
     "polycyclic": false,
     "linear": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "hopfian": true
    },
    "почему": {
     "divisible": "G/Z(G) ≅ ℤ² не делима",
     "residually-finite": "центр ℚ не имеет конечных факторов, а пересекается с любой нетривиальной нормальной подгруппой",
     "indecomposable": "если G = A × B, то ℚ = Z(A) × Z(B), скажем Z(B) = 1, и нильпотентная B тривиальна",
-    "linear": "подгруппа UT₃(ℚ)"
+    "linear": "подгруппа UT₃(ℚ)",
+    "hopfian": "пусть φ сюръективен, K = ker φ. φ(G′) = G′ ≅ ℤ хопфова, так что K ∩ G′ = 1. Если K ≠ 1, то K пересекает центр ℚ (группа нильпотентна) по k ≠ 0, и nk ∈ G′ ∖ 1 для подходящего n — противоречие"
    },
    "подгруппы": [
     {
@@ -6726,7 +6779,8 @@
     "polycyclic": false,
     "linear": true,
     "hopfian": false,
-    "simple": false
+    "simple": false,
+    "divisible": false
    },
    "почему": {
     "perfect": "[diag(2, ½), e₁₂(c)] = e₁₂(3c), так что все элементарные матрицы — коммутаторы",
@@ -6734,7 +6788,8 @@
     "linear": "ℂ[x₁, …] вложено в поле ℂ(x₁, …)",
     "fin-gen": "несчётна",
     "centerless": "−1 ∈ E₂(ℂ) = SL₂(ℂ) централен",
-    "simple": "центр {±1} — собственная нетривиальная нормальная подгруппа"
+    "simple": "центр {±1} — собственная нетривиальная нормальная подгруппа",
+    "divisible": "g = e₁₂(x₁)e₂₁(x₁) имеет след 2 + x₁². Если h² = g, h ∈ SL₂, то по Гамильтону–Кэли g = (tr h)h − E, и (tr h)² = tr g + 2 = 4 + x₁² — не квадрат в ℂ[x₁, …]"
    },
    "подгруппы": [
     {
@@ -6807,11 +6862,13 @@
     "residually-finite": true,
     "polycyclic": false,
     "hopfian": false,
-    "indecomposable": false
+    "indecomposable": false,
+    "linear": false
    },
    "почему": {
     "hopfian": "отбросить первую координату и сдвинуть остальные — сюръекция с ядром SL(2, 5)",
-    "residually-finite": "прямая сумма конечных групп: проекции на конечные подсуммы разделяют элементы"
+    "residually-finite": "прямая сумма конечных групп: проекции на конечные подсуммы разделяют элементы",
+    "linear": "содержит ⊕C₂ (центры) и ⊕C₃: довод как у ⊕_ℕ A₅"
    },
    "подгруппы": [
     {
@@ -6887,7 +6944,10 @@
     }
    ],
    "центр": "центр",
-   "коммутант": "все"
+   "коммутант": "все",
+   "короткий довод": [
+    "linear"
+   ]
   },
   {
    "id": "SumUT3Z",
@@ -7534,13 +7594,15 @@
     "centerless": false,
     "residually-finite": false,
     "polycyclic": false,
-    "divisible": true
+    "divisible": true,
+    "linear": false
    },
    "почему": {
     "perfect": "объединение совершенных",
     "centerless": "скаляры ζI, ζ — корни из 1, переходят в скаляры",
     "residually-finite": "центр ℚ/ℤ не ф. а.",
-    "divisible": "A ∈ SL_{n!}(ℂ) имеет корень B ∈ GL_{n!}(ℂ) степени m (жорданова форма), det B = ζ, ζ^m = 1; в SL_{N!}(ℂ) с m | N!/n! образ A — блочная diag(A, …, A), её корень diag(B, …, B) имеет det ζ^{N!/n!} = 1"
+    "divisible": "A ∈ SL_{n!}(ℂ) имеет корень B ∈ GL_{n!}(ℂ) степени m (жорданова форма), det B = ζ, ζ^m = 1; в SL_{N!}(ℂ) с m | N!/n! образ A — блочная diag(A, …, A), её корень diag(B, …, B) имеет det ζ^{N!/n!} = 1",
+    "linear": "диагональные матрицы с ±1 и с кубическими корнями из 1 дают бесконечные элементарные абелевы 2- и 3-подгруппы: довод как у ⊕_ℕ A₅"
    },
    "подгруппы": [
     {
@@ -7588,7 +7650,10 @@
     }
    ],
    "центр": "центр",
-   "коммутант": "все"
+   "коммутант": "все",
+   "короткий довод": [
+    "linear"
+   ]
   },
   {
    "id": "PSLinfC",
@@ -7816,6 +7881,422 @@
      },
      "фактор": "1:1"
     }
+   ]
+  },
+  {
+   "id": "GL2Zc",
+   "имя": "GL₂(ℤ)′",
+   "заметка": "Коммутант GL₂(ℤ): единственная подгруппа индекса 2 в SL₂(ℤ). Содержит −E и свободную SL₂(ℤ)′ индекса 6.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "linear": true,
+    "polycyclic": false
+   },
+   "почему": {
+    "fin-gen": "подгруппа конечного индекса 4 в к. п. GL₂(ℤ)",
+    "free": "содержит −E порядка 2",
+    "torsion-free": "содержит −E порядка 2",
+    "solvable": "содержит SL₂(ℤ)′ ≅ F₂",
+    "perfect": "GL₂(ℤ)′ / SL₂(ℤ)′ — подгруппа индекса 2 в SL₂(ℤ)ᵃᵇ ≅ C₁₂, то есть C₆",
+    "centerless": "−E централен",
+    "simple": "центр {±E} — собственная нетривиальная нормальная подгруппа",
+    "residually-finite": "подгруппа GL₂(ℤ)",
+    "linear": "подгруппа GL₂(ℤ)"
+   },
+   "трудно": [
+    "residually-finite"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "GL2Zc"
+    },
+    {
+     "id": "центр",
+     "имя": "{±E}",
+     "≅": "2:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "централизатор подгруппы конечного индекса в SL₂(ℤ) — скаляры: она содержит степени Tᵏ и их транспонированные"
+    },
+    {
+     "id": "SL₂(ℤ)′",
+     "имя": "SL₂(ℤ)′",
+     "≅": "F2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "6:2",
+     "почему": "SL₂(ℤ)′ свободна ранга 2 индекса 12 в SL₂(ℤ), а GL₂(ℤ)′ имеет в SL₂(ℤ) индекс 2"
+    },
+    {
+     "id": "все",
+     "имя": "GL₂(ℤ)′",
+     "≅": "GL2Zc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "ссылки": [
+    "стандартный пример: SL₂(ℤ) ≅ C₄ ∗_{C₂} C₆, GL₂(ℤ) ≅ D₄ ∗_{C₂×C₂} D₆"
+   ]
+  },
+  {
+   "id": "S3wrZc",
+   "имя": "(S₃ ≀ ℤ)′",
+   "заметка": "Коммутант S₃ ≀ ℤ: элементы базы ⊕S₃ с чётным числом нечётных координат.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "linear": false,
+    "polycyclic": false
+   },
+   "почему": {
+    "fin-gen": "бесконечная подгруппа локально конечной ⊕S₃",
+    "nilpotent": "проекция на нулевую координату — на S₃: в ней есть A₃ и пары транспозиций в координатах 0 и 1",
+    "perfect": "фактор по ⊕C₃ — бесконечная элементарная абелева 2-группа",
+    "centerless": "проекция на каждую координату — вся S₃, поэтому центральный элемент имеет координаты в Z(S₃) = 1",
+    "residually-finite": "подгруппа ф. а. ⊕S₃",
+    "linear": "содержит ⊕C₃ и бесконечную элементарную абелеву 2-подгруппу из пар транспозиций; довод как у ⊕_ℤ S₃",
+    "simple": "⊕C₃ — собственная нетривиальная нормальная подгруппа"
+   },
+   "короткий довод": [
+    "linear"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "S3wrZc"
+    },
+    {
+     "id": "⊕C₃",
+     "имя": "⊕A₃",
+     "≅": "SumC3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC2",
+     "почему": "элементы порядка 3 и 1 образуют ⊕A₃; фактор — чётные векторы в ⊕C₂, это ⊕C₂"
+    },
+    {
+     "id": "все",
+     "имя": "(S₃ ≀ ℤ)′",
+     "≅": "S3wrZc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "⊕C₃"
+  },
+  {
+   "id": "AutSumC2c",
+   "имя": "Aut(⊕C₂)′ = GL(ℵ₀, 𝔽₂)′",
+   "заметка": "Коммутант GL(ℵ₀, 𝔽₂). Записаны только значения с элементарным доводом; совпадает ли он со всей группой, здесь не утверждается.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "solvable": false,
+    "nilpotent": false,
+    "torsion-free": false,
+    "periodic": false,
+    "residually-finite": false,
+    "polycyclic": false
+   },
+   "почему": {
+    "finite": "содержит A_∞ (совершенную) перестановок базиса",
+    "torsion-free": "содержит A₅",
+    "solvable": "содержит A₅",
+    "periodic": "σ: eᵢ ↦ eᵢ₊₁ и π: eᵢ ↦ e₋ᵢ (базис по ℤ): [σ, π] = σ⁻² бесконечного порядка",
+    "residually-finite": "содержит бесконечную простую A_∞"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "AutSumC2c"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(⊕C₂)′",
+     "≅": "AutSumC2c",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
+  },
+  {
+   "id": "D8oPruf2",
+   "имя": "D₈ ∘ ℤ(2^∞)",
+   "заметка": "Центральное произведение D₈ и ℤ(2^∞) с отождествлением центра D₈ с элементом порядка 2. Делимый центр, коммутант C₂.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": false,
+    "polycyclic": false,
+    "linear": true,
+    "hopfian": true,
+    "indecomposable": true
+   },
+   "почему": {
+    "fin-gen": "фактор по D₈ — ℤ(2^∞)/C₂ ≅ ℤ(2^∞)",
+    "divisible": "фактор G/Z(G) ≅ C₂ × C₂",
+    "residually-finite": "нормальная подгруппа конечного индекса пересекает делимый центр ℤ(2^∞) по подгруппе конечного индекса, то есть содержит его, а с ним и z",
+    "linear": "D₈ ⊂ GL₂(ℂ) с центром −1 и 2-примарные скаляры",
+    "hopfian": "если φ сюръективен, то φ биективен на конечном G′ = ⟨z⟩, так что ker φ ∩ G′ = 1, ker φ централен и лежит в ℤ(2^∞); но всякая нетривиальная подгруппа ℤ(2^∞) содержит z",
+    "indecomposable": "если G = A × B, то ℤ(2^∞) = Z(A) × Z(B) неразложима, скажем Z(B) = 1, и нильпотентная B тривиальна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "D8oPruf2"
+    },
+    {
+     "id": "коммутант",
+     "имя": "⟨z⟩",
+     "≅": "2:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Pruf2xV4",
+     "почему": "D₈′ = Z(D₈); G/⟨z⟩ = D₈/⟨z⟩ × ℤ(2^∞)/C₂ ≅ V₄ × ℤ(2^∞)"
+    },
+    {
+     "id": "центр",
+     "имя": "ℤ(2^∞)",
+     "≅": "Pruf2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "4:2",
+     "почему": "(d, p) централен ⇔ d ∈ Z(D₈)"
+    },
+    {
+     "id": "все",
+     "имя": "D₈ ∘ ℤ(2^∞)",
+     "≅": "D8oPruf2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "коммутант",
+   "ссылки": [
+    "стандартная конструкция"
+   ]
+  },
+  {
+   "id": "HeisZQZ",
+   "имя": "H(ℤ, ℚ/ℤ)",
+   "заметка": "Тройки (n, b, c), n ∈ ℤ, b, c ∈ ℚ/ℤ, с умножением (n, b, c)(n′, b′, c′) = (n + n′, b + b′, c + c′ + nb′). Нильпотентна ступени 2, центр ℚ/ℤ периодичен, а сама группа нет.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": false,
+    "polycyclic": false
+   },
+   "почему": {
+    "periodic": "(1, 0, 0) бесконечного порядка",
+    "fin-gen": "фактор по центру ℤ × ℚ/ℤ не к. п.",
+    "divisible": "фактор ℤ × ℚ/ℤ не делим",
+    "residually-finite": "нормальная подгруппа конечного индекса содержит делимый центр ℚ/ℤ"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "HeisZQZ"
+    },
+    {
+     "id": "центр",
+     "имя": "{(0, 0, c)}",
+     "≅": "QmodZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "(n, b, c) централен ⇔ nb′ = n′b для всех n′, b′ ⇔ n = 0 и b = 0; коммутатор [(n, b, ·), (n′, b′, ·)] = nb′ − n′b пробегает весь ℚ/ℤ"
+    },
+    {
+     "id": "все",
+     "имя": "H(ℤ, ℚ/ℤ)",
+     "≅": "HeisZQZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "центр",
+   "ссылки": [
+    "стандартная конструкция"
    ]
   }
  ]
