@@ -104,7 +104,7 @@ class Library:
                     props[p] = True
                 elif not s.solve(assumptions=assume + [l]):
                     props[p] = False
-            hard = sorted(set(oa.get("трудно", [])) | set(ob.get("трудно", [])))
+            marks = {m: sorted(set(oa.get(m, [])) | set(ob.get(m, []))) for m in MARKS}
 
             def factor(own, other, okey, name):
                 swap = {"characteristic": False} if a == b and not oa["свойства"].get("trivial") else {}
@@ -115,7 +115,7 @@ class Library:
                                      **central(self.obj[own]["свойства"].get("abelian"))}}
             self.obj[key] = {
                 "key": key, "имя": f"{oa.get('имя', a)} × {ob.get('имя', b)}", "конечная": False,
-                "синтез": True, "свойства": props, "трудно": hard, "почему": {},
+                "синтез": True, "свойства": props, **marks, "почему": {},
                 "подгруппы": [
                     {"id": "1", "≅": "1:1", "фактор": key,
                      "свойства": {"normal": True, "characteristic": True, "maximal": False, "whole": False,
@@ -243,13 +243,13 @@ class Scene:
                 out[a] = False
         return out
 
-    def values(self, lib, key, sub, need=None, easy=False):
+    def values(self, lib, key, sub, need=None, drop=()):
         """Значения атомов пары (G, N): записанные и выведенные из них.
         need — какие атомы нужны; выводятся только недостающие из них.
-        easy — не опираться на значения с пометкой «трудно»."""
+        drop — пометки (из MARKS), значения с которыми не используются."""
         facts = self.facts(lib, key, sub)
-        if easy:
-            hard = self.hard_atoms(lib, key, sub)
+        if drop:
+            hard = self.hard_atoms(lib, key, sub, drop)
             facts = {a: x for a, x in facts.items() if a not in hard}
         vals = {a: v for a, (v, _) in facts.items()}
         missing = [a for a in (need or self.atoms()) if a not in vals]
@@ -276,30 +276,31 @@ class Scene:
                 s = o["подгруппы"][sub]
                 out.append({"G": key, "имя G": o.get("имя"), "N": s["id"],
                             "имя N": s.get("имя", lib.obj[s["≅"]].get("имя")),
-                            "трудно": self.hard(lib, key, sub, need)})
+                            **{m: self.hard(lib, key, sub, need, m) for m in MARKS}})
                 if len(out) >= limit:
                     break
         return out
 
-    def hard_atoms(self, lib, key, sub):
-        """Атомы пары, записанные значения которых помечены «трудно»."""
+    def hard_atoms(self, lib, key, sub, marks=("трудно",)):
+        """Атомы пары, записанные значения которых помечены одной из marks."""
         o = lib.obj[key]
         owner = [(self.G, o)]
         if sub is not None:
             s = o["подгруппы"][sub]
             owner += [(self.N, lib.obj[s["≅"]]), (self.Q, lib.obj.get(s.get("фактор")))]
-        return {("p", p, t) for t, rec in owner if rec for p in rec.get("трудно", ())}
+        return {("p", p, t) for t, rec in owner if rec for m in marks for p in rec.get(m, ())}
 
-    def hard(self, lib, key, sub, atoms):
-        """Какие из атомов пары держатся на значениях, помеченных «трудно»:
-        сами по себе теоремы или требуют идеи."""
+    def hard(self, lib, key, sub, atoms, mark="трудно"):
+        """Какие из атомов пары держатся на значениях с пометкой mark:
+        «трудно» — сами по себе теоремы или требуют идеи, «короткий довод» —
+        не учебные, но доказываются в несколько строк."""
         o = lib.obj[key]
         s = o["подгруппы"][sub]
         owner = {self.G: o, self.N: lib.obj[s["≅"]], self.Q: lib.obj.get(s.get("фактор"))}
         out = []
         for a in atoms:
             rec = owner.get(a[2]) if a[0] == "p" else None
-            if rec and a[1] in rec.get("трудно", ()):
+            if rec and a[1] in rec.get(mark, ()):
                 out.append(f"{a[1]}({rec.get('имя', rec['key'])})")
         return out
 
@@ -307,6 +308,11 @@ class Scene:
         return ([("p", p, t) for t in (self.G, self.N, self.Q) for p in GROUP_PROPS]
                 + [("p", p, self.N) for p in SUB_PROPS])
 
+
+# Пометки значений библиотеки: контрпример, который держится на таком
+# значении, условие не закрывает. «трудно» — теорема или нужна идея,
+# «короткий довод» — довод в несколько строк, но не учебный.
+MARKS = ("трудно", "короткий довод")
 
 GROUP_PROPS = ("trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable",
                "nilpotent", "perfect", "torsion-free", "periodic", "divisible", "centerless",
@@ -383,7 +389,8 @@ class Search:
         return None
 
     def facts(self, env, terms=None):
-        """{атом: значение} по записям библиотеки и {атом: трудное значение}."""
+        """{атом: значение} по записям библиотеки и {атом: (пометка, значение)}
+        для значений с пометками из MARKS."""
         out, hard, subs = {}, {}, {}
         for t in terms or self.g.terms:
             im = self._image(t, env)
@@ -398,8 +405,9 @@ class Search:
             for p, v in list(rec["свойства"].items()) + list(rel.items()):
                 if self.g.v.prop_fits(p, self.g.terms[t].sort) or p in rel:
                     out[("p", p, t)] = v
-                    if p in rec.get("трудно", ()) and p not in rel:
-                        hard[("p", p, t)] = f"{p}({rec.get('имя', rec['key'])})"
+                    for m in MARKS:
+                        if p in rec.get(m, ()) and p not in rel:
+                            hard[("p", p, t)] = (m, f"{p}({rec.get('имя', rec['key'])})")
         items = list(subs.items())
         for i, (a, ia) in enumerate(items):
             for b, ib in items[i + 1:]:
@@ -429,7 +437,7 @@ class Search:
             if all(self.entails(assume, a, v) for a, v in premises) and self.entails(assume, goal[0], not goal[1]):
                 names = {str(t): self._name(im) for t, im in env.items()}
                 used = [hard[a] for a in [x for x, _ in premises] + [goal[0]] if a in hard]
-                out.append({"подстановка": names, "трудно": used})
+                out.append({"подстановка": names, **{m: [x for k, x in used if k == m] for m in MARKS}})
                 if len(out) >= limit:
                     break
         return out

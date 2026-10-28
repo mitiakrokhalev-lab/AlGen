@@ -110,7 +110,7 @@ def scheme(vocab, fact):
             links = {k: names[x] for k, x in zip(keys, ps)}
         names[name] = g.var(name, s, **links)
         prem += [literal(g, x, names, section) for x in split_top(lits, ",")]
-    goal = literal(g, fact["цель"], names, section)
+    goal = literal(g, fact["цель"], names, section) if fact.get("цель") else None
     return g, prem, goal
 
 
