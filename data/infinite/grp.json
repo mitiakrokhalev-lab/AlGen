@@ -97,7 +97,8 @@
    ],
    "центр": "все",
    "коммутант": "0",
-   "абелианизация": "Z"
+   "абелианизация": "Z",
+   "aut": "2:1"
   },
   {
    "id": "ZxZ",
@@ -1537,7 +1538,8 @@
    ],
    "центр": "все",
    "коммутант": "0",
-   "абелианизация": "SumC2"
+   "абелианизация": "SumC2",
+   "aut": "AutSumC2"
   },
   {
    "id": "QxQ",
@@ -3564,6 +3566,66 @@
    ],
    "трудно": [
     "residually-finite"
+   ]
+  },
+  {
+   "id": "AutSumC2",
+   "имя": "Aut(⊕C₂) = GL(ℵ₀, 𝔽₂)",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "torsion-free": false,
+    "periodic": false,
+    "centerless": true,
+    "residually-finite": false
+   },
+   "почему": {
+    "residually-finite": "перестановки базиса дают Sym(ℕ) ⊃ A_∞, бесконечную простую",
+    "fin-gen": "несчётна",
+    "periodic": "перестановка базиса с бесконечным циклом",
+    "centerless": "центр GL(V) — скаляры, над 𝔽₂ это 1",
+    "simple": "финитарные автоморфизмы образуют собственную нормальную подгруппу"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "AutSumC2"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(⊕C₂)",
+     "≅": "AutSumC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "ссылки": [
+    "стандартный пример"
    ]
   }
  ]

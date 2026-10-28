@@ -22,13 +22,14 @@ import re
 import sys
 from collections import Counter
 
-from .library import Library, Scene
+from .library import Library, Search
 from .logic import DATA, Graph, Theory, Vocab, decide
 
 ETALON = DATA / "etalon" / "эталон.jsonl"
-SORTS = {"grp": {"Grp": ("Grp.obj", None), "Sub": ("Grp.sub", "ambient")}}
+SORTS = {"grp": {"Grp": ("Grp.obj", None), "Sub": ("Grp.sub", "ambient"), "Fam": ("Grp.fam", None)}}
 # Короткие обозначения конструкций в записи эталона.
-OPS = {"grp": {"Z": "center", "core": "core", "Inn": "inn"}}
+OPS = {"grp": {"Z": "center", "Inn": "inn", "Aut": "aut", "ab": "ab", "∏": "prod-fam", "⊕": "sum-fam"}}
+INFIX = {"grp": {"×": "prod", "∗": "freeprod", "/": "quotient"}}
 
 
 class Unsupported(Exception):
@@ -53,11 +54,13 @@ def term(g, s, names, section):
     s = s.strip()
     if s in names:
         return names[s]
-    parts = split_top(s, "/")
-    if len(parts) == 2:
-        t = g.make("quotient", [term(g, p, names, section) for p in parts])
+    for sym, op in INFIX[section].items():
+        parts = split_top(s, sym)
+        if len(parts) == 2:
+            t = g.make(op, [term(g, p, names, section) for p in parts])
+            break
     else:
-        m = re.fullmatch(r"(\w[\w-]*)\((.*)\)", s)
+        m = re.fullmatch(r"(\w[\w-]*|∏|⊕)\s*\((.*)\)", s) or re.fullmatch(r"(∏|⊕)\s*(\w+)", s)
         if not m or m.group(1) not in OPS[section]:
             raise Unsupported(f"терм {s!r}")
         t = g.make(OPS[section][m.group(1)],
@@ -117,7 +120,7 @@ def judge(answer, kind):
 
 def run(facts, grow=1, search=True):
     vocabs, report = {}, []
-    lib = scene = None
+    lib = None
     for f in facts:
         row = {"id": f["id"], "ответ": f["ответ"]}
         try:
@@ -126,15 +129,16 @@ def run(facts, grow=1, search=True):
         except (Unsupported, FileNotFoundError) as e:
             report.append({**row, "итог": "не разбирается", "почему": str(e)})
             continue
-        verdict = decide(Theory(g, grow=grow), prem, goal)
+        theory = Theory(g, grow=grow)
+        verdict = decide(theory, prem, goal)
         kind, core = verdict.kind, verdict.core
         if kind == "неизвестно" and search and f["раздел"] == "grp":
-            if scene is None:
-                lib, scene = Library(), Scene(v)
-            found = scene.witnesses(lib, prem, goal)
+            lib = lib or Library()
+            found = Search(g, theory, lib).witnesses(prem, goal)
             if found:
                 kind = "опровергается"
-                row["контрпример"] = [f"G = {w['имя G']}, N = {w['имя N']}" for w in found]
+                row["контрпример"] = [", ".join(f"{k} = {v}" for k, v in w["подстановка"].items())
+                                      for w in found]
         row.update(итог=judge(f["ответ"], kind), вердикт=kind,
                    ядро=[f"{'' if val else '¬'}{a[1]}({', '.join(map(str, a[2:]))})"
                          for a, val in core or []])

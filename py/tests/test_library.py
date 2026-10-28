@@ -41,5 +41,20 @@ class LibraryTest(unittest.TestCase):
         self.assertEqual(sc.witnesses(self.lib, prem, (("p", "finite-index", sc.N), True)), [])
 
 
+
+class SearchTest(unittest.TestCase):
+    def test_two_groups(self):
+        # A ф. а. ⇒ A × B ф. а.? Нет: B = ℚ. Значение для A × B выводится из правил.
+        from algen.etalon import scheme
+        from algen.library import Search
+        from algen.logic import Theory
+        v = Vocab.section("grp")
+        fact = {"раздел": "grp", "условие": "∀ A : Grp | residually-finite(A); ∀ B : Grp",
+                "цель": "residually-finite(A × B)"}
+        g, prem, goal = scheme(v, fact)
+        found = Search(g, Theory(g), Library()).witnesses(prem, goal, limit=1)
+        self.assertTrue(found)
+
+
 if __name__ == "__main__":
     unittest.main()

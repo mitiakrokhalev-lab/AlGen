@@ -25,7 +25,7 @@ import sys
 from collections import Counter
 
 from .etalon import Unsupported, judge, scheme
-from .library import Library, Scene
+from .library import Library, Search
 from .logic import Theory, Vocab, decide
 
 # Уровни, которые генератор обязан закрыть сам.
@@ -36,7 +36,7 @@ def lit_str(a, v):
     return f"{'' if v else '¬'}{a[1]}({', '.join(map(str, a[2:]))})"
 
 
-def run_card(c, vocab, lib, scene):
+def run_card(c, vocab, lib):
     out = {"id": c["id"]}
     if c["уровень"] == "определение":
         return {**out, "корзина": "словарь"}
@@ -47,7 +47,8 @@ def run_card(c, vocab, lib, scene):
         g, prem, goal = scheme(vocab, c)
     except Unsupported as e:
         return {**out, "корзина": "КРАСНЫЙ ФЛАГ", "почему": f"не разбирается: {e}"}
-    v = decide(Theory(g, grow=1), prem, goal)
+    theory = Theory(g, grow=1)
+    v = decide(theory, prem, goal)
     kind, detail = v.kind, ""
     if kind == "выводится":
         used = {a for a, _ in v.core or []}
@@ -56,12 +57,12 @@ def run_card(c, vocab, lib, scene):
         if extra:
             detail += "; лишние посылки: " + ", ".join(extra)
     elif kind == "неизвестно":
-        found = scene.witnesses(lib, prem, goal, limit=10)
+        found = Search(g, theory, lib).witnesses(prem, goal, limit=10)
         if found:
             # Понятный контрпример лучше: тот, что не держится на теоремах.
             w = min(found, key=lambda w: len(w["трудно"]))
             kind = "опровергается"
-            detail = f"контрпример: G = {w['имя G']}, N = {w['имя N']}"
+            detail = "контрпример: " + ", ".join(f"{k} = {x}" for k, x in w["подстановка"].items())
             if w["трудно"]:
                 hard = "; держится на " + ", ".join(w["трудно"])
                 out.update(вердикт=kind, детали=detail + hard)
@@ -85,8 +86,8 @@ def run_card(c, vocab, lib, scene):
 
 def run(cards):
     vocab = Vocab.section("grp")
-    lib, scene = Library(), Scene(vocab)
-    return [run_card(c, vocab, lib, scene) for c in cards]
+    lib = Library()
+    return [run_card(c, vocab, lib) for c in cards]
 
 
 def main():
