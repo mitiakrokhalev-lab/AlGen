@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import FINITE_DERIVED, arith_sub_props, load as load_finite, load_aut, load_compl, load_products
+from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_compl, load_products
 from .logic import DATA, App, Graph, Theory, Var, Vocab
 
 INFINITE = DATA / "infinite" / "grp.json"
@@ -108,6 +108,8 @@ class Library:
                         props = dict(r[fld + "_props"])
                         for p, f in FINITE_DERIVED.items():
                             props.setdefault(p, f(props))
+                        for p, v in arith_props(r[fld + "_order"]).items():
+                            props.setdefault(p, v)
                         self.obj[ak] = {"key": ak, "имя": name or ak, "конечная": True, "свойства": props,
                                         "подгруппы": None, "без произведений": True,
                                         # ключ не из SmallGroups: другой ключ может быть той же группой
