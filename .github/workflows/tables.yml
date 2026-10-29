@@ -1,0 +1,101 @@
+name: tables
+
+# Перебор через таблицы баз (python3 -m algen.table):
+#   1) build — 20 машин считают части таблиц всех баз (значения атомов на строках библиотеки);
+#   2) enum  — 20 машин перебирают схемы, беря столбцы из таблиц;
+#   3) summary — общая сводка; результаты в ветку «results-<ветка>».
+# Запуск: пуш в ветку «tab-…».
+
+on:
+  push:
+    branches: ["tab-*"]
+
+env:
+  ARGS: "--без bounded-exponent"
+  BASES: "G,GN,AB,GHK,GMN,GHF"
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        job: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: таблицы
+        run: |
+          cd py
+          python3 -m algen.table строить-все --задание ${{ matrix.job }}/20 --каталог ../tab --нитей 4 $ARGS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tab-${{ matrix.job }}
+          path: tab
+          retention-days: 7
+          compression-level: 1
+
+  enum:
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: tab-*
+          path: tab
+          merge-multiple: true
+      - name: перебор
+        run: |
+          cd py
+          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 4 $ARGS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: part-${{ matrix.part }}
+          path: out
+          retention-days: 30
+
+  summary:
+    needs: enum
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: part-*
+          path: parts
+      - run: |
+          mkdir -p all && cp parts/*/*.json parts/*/*.txt all/ 2>/dev/null || true
+          cd py && python3 -m algen.batch сводка ../all
+      - name: результаты в ветку «results-…»
+        run: |
+          tar czf results.tar.gz all
+          cp all/сводка.md сводка.md
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e results.tar.gz -e сводка.md
+          git add results.tar.gz сводка.md
+          git commit -qm "Результаты перебора: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"

@@ -48,8 +48,8 @@ from .logic import App, Theory, Var, Vocab, decide
 # числом термов растут комбинаторно с каждым свойством.
 SKIP = set()
 MOR_PROPS = ("injective", "surjective", "iso", "zero-mor")
-RELATIONS = True
-DIVERSE = 4  # моделей «наоборот» в _derive  # атомы-отношения между термами схемы (⩽, =, ≅)
+RELATIONS = True  # атомы-отношения между термами схемы (⩽, =, ≅)
+DIVERSE = 4  # моделей «наоборот» в _derive
 
 
 def relation_atoms(g, terms):
@@ -336,7 +336,9 @@ class SchemeForm(Form):
     столбцы — свойства переменных и названных термов. Посылки из записи
     схемы («∀ H : Sub(G) | abelian(H)») входят во все условия."""
 
-    def __init__(self, lib, vocab, decl, terms=(), max_subs=None):
+    def __init__(self, lib, vocab, decl, terms=(), max_subs=None, grow_ops=None, part=None, with_rows=True):
+        """part = (i, n): считать только строки с номерами i - 1, i - 1 + n, …;
+        with_rows=False — без строк (каркас для таблицы базы)."""
         from .etalon import scheme, term
         g, fixed, _ = scheme(vocab, {"раздел": "grp", "условие": decl})
         names = {str(t): t for t in g.terms}
@@ -346,7 +348,7 @@ class SchemeForm(Form):
             if t not in own:
                 own.append(t)
         self.g, self.lib, self._kept = g, lib, {}
-        T = Theory(g, grow=1, extra=relation_atoms(g, own) if RELATIONS else ())
+        T = Theory(g, grow=1, extra=relation_atoms(g, own) if RELATIONS else (), grow_ops=grow_ops)
         self.sc = SimpleNamespace(T=T, s=T.solver())
         self.search = Search(g, T, lib)
         self.atoms = []
@@ -372,7 +374,12 @@ class SchemeForm(Form):
         rows, self.envs, self.skipped = {k: [] for k in levels}, [], []
         self._facts = {}  # записанные значения строк — лениво, только для разбора помеченных
         derived = self._derived = {}  # кэш вывода: одинаковые наборы записанных значений — одна строка
-        for env in self.search._assign(0, {}):
+        self.own = own
+        if not with_rows:
+            return
+        for n_env, env in enumerate(self.search._assign(0, {})):
+            if part and n_env % part[1] != part[0] - 1:
+                continue
             if max_subs and any(im[0] == "sub" and im[2] >= max_subs for im in env.values()):
                 continue
             facts, hard = self.search.facts(env)
@@ -592,13 +599,38 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     goal_cols = range(n_lit) if goals is None else goals
     alive, empty, lower = {}, [], set()
     count = 0
+    # Покрытие (схемы из таблицы базы): условие должно касаться каждого
+    # «верхнего» элемента схемы, иначе оно — факт меньшей схемы и выдаётся там.
+    need = getattr(form, "need", None)
+    if need:
+        amask = np.zeros(n_lit // 2, dtype=np.int64)
+        for b, grp in enumerate(need):
+            for i in grp:
+                amask[i] |= 1 << b
+        lmask = np.repeat(amask, 2)
+        full = (1 << len(need)) - 1
+    every = np.arange(m.shape[0])
 
     def proper_subsets(prem):
         for r in range(1, len(prem)):
             yield from combinations(prem, r)
 
-    def go(prem, rows, start, depth):
+    def alive_direct(q, g):
+        """Подусловие (q, g) не опровергнуто (для минимальности при покрытии)."""
+        have = set(q) | set(form.fixed)
+        if not all(form.req.get(j // 2, set()) <= have for j in list(q) + [g]):
+            return False
+        rows = every
+        for j in q:
+            rows = rows[m[rows, j]]
+        return rows.size > 0 and not m[rows, g ^ 1].any()
+
+    def go(prem, rows, start, depth, pm=0):
         nonlocal count
+        if need:
+            miss = full & ~pm
+            if bin(miss).count("1") > 2 * (depth - len(prem) + 1):
+                return  # не хватит литералов, чтобы коснуться всех элементов
         if len(prem) == depth:
             atoms = {j // 2 for j in prem}
             have = set(prem) | set(form.fixed)
@@ -608,8 +640,15 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 empty.append(tuple(prem))
                 return
             sub = m[rows]
-            negs = sub[:, [g ^ 1 for g in range(n_lit)]].any(axis=0) if len(goal_cols) == n_lit else None
-            for g in goal_cols:
+            gc = goal_cols
+            if need:
+                miss = full & ~pm
+                ok = (lmask & miss) == miss
+                gc = [g for g in goal_cols if ok[g]]
+                if not gc:
+                    return
+            negs = sub[:, [g ^ 1 for g in range(n_lit)]].any(axis=0) if len(gc) > 40 else None
+            for g in gc:
                 if g // 2 in atoms or not form.req.get(g // 2, set()) <= have:
                     continue
                 if (negs[g] if negs is not None else sub[:, g ^ 1].any()):
@@ -618,7 +657,10 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 key = (tuple(prem), g)
                 if depth < max_prem:
                     lower.add(key)
-                if any((q, g) in lower for q in proper_subsets(prem)):
+                if need:
+                    if any(alive_direct(q, g) for q in proper_subsets(prem)):
+                        continue
+                elif any((q, g) in lower for q in proper_subsets(prem)):
                     continue
                 alive[key] = int(sub[:, g].sum())
             return
@@ -626,7 +668,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             if j // 2 in {x // 2 for x in prem}:
                 continue
             nxt = rows[m[rows, j]] if prem else np.flatnonzero(m[:, j])
-            go(prem + [j], nxt, j + 1, depth)
+            go(prem + [j], nxt, j + 1, depth, pm | (int(lmask[j]) if need else 0))
 
     start = np.flatnonzero(m[:, form.fixed].all(axis=1)) if form.fixed else np.arange(m.shape[0])
     for depth in range(1, max_prem + 1):
