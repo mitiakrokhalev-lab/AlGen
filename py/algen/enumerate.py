@@ -48,7 +48,8 @@ from .logic import App, Theory, Var, Vocab, decide
 # числом термов растут комбинаторно с каждым свойством.
 SKIP = set()
 MOR_PROPS = ("injective", "surjective", "iso", "zero-mor")
-RELATIONS = True  # атомы-отношения между термами схемы (⩽, =, ≅)
+RELATIONS = True
+DIVERSE = 4  # моделей «наоборот» в _derive  # атомы-отношения между термами схемы (⩽, =, ≅)
 
 
 def relation_atoms(g, terms):
@@ -416,6 +417,7 @@ class SchemeForm(Form):
         lits = {a: l for a, l in lits.items() if type(l) is int}  # 1 == True в Python: сравнивать нельзя
         if not s.solve(assumptions=assume):
             return [facts.get(a) for a in self.atoms]
+        model = set(s.get_model())
         # Единичное распространение даёт большую часть следствий почти даром.
         ok, implied = s.propagate(assumptions=assume)
         implied = set(implied or ())
@@ -427,9 +429,28 @@ class SchemeForm(Form):
             elif -l in implied:
                 val[a] = False
                 del lits[a]
-        model = set(s.get_model())
         seen_t = {a for a, l in lits.items() if l in model}      # встречалось «верно»
         seen_f = {a for a, l in lits.items() if -l in model}     # встречалось «ложно»
+        # Модели «наоборот»: решателю предлагаем противоположные значения всех
+        # атомов, у которых пока одно значение, — одна модель снимает сразу многие.
+        for _ in range(DIVERSE):
+            one = [(a, l) for a, l in lits.items() if (a in seen_t) != (a in seen_f)]
+            if not one:
+                break
+            s.set_phases([-l if a in seen_t else l for a, l in one])
+            if not s.solve(assumptions=assume):
+                break
+            m = set(s.get_model())
+            new = 0
+            for a, l in one:
+                if a in seen_t and -l in m:
+                    seen_f.add(a)
+                    new += 1
+                elif a in seen_f and l in m:
+                    seen_t.add(a)
+                    new += 1
+            if new == 0:
+                break
         for a, l in lits.items():
             if a in seen_t and a in seen_f:
                 continue

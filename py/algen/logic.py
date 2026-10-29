@@ -261,11 +261,13 @@ class Graph:
 class Theory:
     """Пропозициональная теория графа: переменные-атомы и клаузы."""
 
-    def __init__(self, graph, grow=1, extra=()):
+    def __init__(self, graph, grow=1, extra=(), grow_ops=None):
         self.g = graph
+        self.grow_ops = grow_ops  # какие конструкции можно достраивать (None — все)
         self.v = graph.v
         self.grow = grow
         self.var = {}
+        self._lc = {}  # кэш lit: атом → номер переменной (0 — тождественно верный)
         self.atoms = []
         self.clauses = []
         self.origin = []  # id правила для каждой клаузы
@@ -276,15 +278,22 @@ class Theory:
     # атомы ---------------------------------------------------------------
 
     def lit(self, atom, value=True):
+        n = self._lc.get(atom)
+        if n is None:
+            n = self._lc[atom] = self._var_of(atom)
+        if n == 0:
+            return None if value else False  # t ≅ t верно всегда
+        return n if value else -n
+
+    def _var_of(self, atom):
         if atom[0] == "r" and atom[1] in ("iso", "eq-sub") and str(atom[3]) < str(atom[2]):
             atom = (atom[0], atom[1], atom[3], atom[2])  # симметричные отношения
         if atom[0] == "r" and atom[1] in ("iso", "eq-sub") and atom[2] == atom[3]:
-            return None if value else False  # t ≅ t верно всегда
+            return 0
         if atom not in self.var:
             self.var[atom] = len(self.atoms) + 1
             self.atoms.append(atom)
-        n = self.var[atom]
-        return n if value else -n
+        return self.var[atom]
 
     # заземление правил ----------------------------------------------------
 
@@ -400,6 +409,27 @@ class Theory:
                     out.append(x)
         return out
 
+    def _grow_term(self, pat, env):
+        """Достройка: новый терм строится, только если среди его аргументов не
+        больше одного построенного терма (Z(X/N), X × Z(X) — да; Z(X) × X′ — нет).
+        Иначе граф большой схемы растёт квадратично, а такие термы выводу почти
+        не нужны."""
+        if isinstance(pat, str):
+            return env.get(pat)
+        if "bind" in pat:
+            return None
+        args = [self._grow_term(a, env) for a in pat.get("args", [])]
+        if any(a is None for a in args):
+            return None
+        t = App(pat["op"], tuple(args))
+        if t in self.g.terms:
+            return t
+        if sum(isinstance(a, App) for a in args) > 1:
+            return None
+        if self.grow_ops is not None and pat["op"] not in self.grow_ops:
+            return None
+        return self.g.make(pat["op"], args, depth_limit=self.grow)
+
     def _term(self, pat, env, limit):
         if isinstance(pat, str):
             return env.get(pat)
@@ -476,7 +506,7 @@ class Theory:
                 inner = {x for p in pats for x in self._pat_roles(p)}
                 for env in self._bindings(r["scene"], (), shallow=inner, limit=self.grow):
                     for p in pats:
-                        self._term(p, env, self.grow)
+                        self._grow_term(p, env)
             for d in self.v.degen:
                 list(self._degen(d, self.grow))
             if len(self.g.terms) == before:
@@ -557,8 +587,17 @@ class Theory:
         by_rel = {}
         for _, rel, a, b in pairs:
             by_rel.setdefault(rel, set()).add((a, b))
+        groups = []
         for rel, ps in by_rel.items():
             nodes = {x for p in ps for x in p}
+            if rel == "eq-sub":  # равенство — только у подгрупп одной группы
+                amb = {}
+                for x in nodes:
+                    amb.setdefault(self.g.terms[x].links.get("ambient"), set()).add(x)
+                groups += [(rel, ns) for ns in amb.values()]
+            else:
+                groups.append((rel, nodes))
+        for rel, nodes in groups:
             if len(nodes) > 40:
                 continue
             for a, b, c in itertools.permutations(nodes, 3):
