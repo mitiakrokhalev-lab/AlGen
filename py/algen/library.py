@@ -131,8 +131,10 @@ class Library:
             o["центр"] = whole if p.get("abelian") else one if p.get("centerless") or simple else None
         if o.get("коммутант") is None:
             o["коммутант"] = one if p.get("abelian") else whole if p.get("perfect") or simple else None
-        for f in ("центр", "коммутант"):
-            if o[f] is None:
+        if o.get("кручение") is None and p.get("abelian"):
+            o["кручение"] = whole if p.get("periodic") else one if p.get("torsion-free") else None
+        for f in ("центр", "коммутант", "кручение"):
+            if f in o and o[f] is None:
                 del o[f]
 
     def infinite(self):
@@ -291,7 +293,8 @@ class Library:
             o = self.obj[key]
             subs = o["подгруппы"]
             pairs = {x["пара"]: x["id"] for x in subs if "пара" in x}
-            for field in ("центр", "коммутант"):
+            # Кручение абелевой: T(A × B) = T(A) × T(B).
+            for field in ("центр", "коммутант", "кручение"):
                 sa, sb = (self._sub(k, self.obj[k].get(field)) for k in (a, b))
                 if sa is None or sb is None:
                     continue

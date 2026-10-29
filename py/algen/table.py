@@ -362,6 +362,29 @@ def run_schemes(a):
     print(f"готово за {round(time.time() - t0)} с", file=sys.stderr)
 
 
+def completeness(lib, vocab, base, tdir, top=15):
+    """Полнота библиотеки по термам вселенной: доля известных значений атомов
+    терма по строкам, где терм существует, и группы с наибольшим числом
+    неизвестных значений (что вписать в библиотеку в первую очередь)."""
+    from collections import Counter
+    f = load(lib, vocab, base, tdir)
+    known = f.e[:, 0::2] | f.e[:, 1::2]
+    out = []
+    for t in f.own:
+        idx = [i for i, a in enumerate(f.atoms) if a[0] == "p" and a[2] == t]
+        if not idx:
+            continue
+        rows = np.array([f.search._image(t, env) is not None or isinstance(t, Var) for env in f.envs])
+        k = known[:, idx]
+        miss = Counter()
+        for r in np.flatnonzero((~k).any(axis=1)):
+            env = f.envs[r]
+            g = next(iter(env.values()))
+            miss[lib.obj[g[1]].get("имя", g[1])] += int((~k[r]).sum())
+        out.append((str(t), float(k.mean()), float(rows.mean()), miss.most_common(top)))
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -378,6 +401,10 @@ def main():
     s.add_argument("--задание", dest="job", required=True, help="j/N")
     s.add_argument("--каталог", dest="dir", required=True)
     s.add_argument("--нитей", dest="jobs", type=int, default=mp.cpu_count())
+    s.add_argument("--без", dest="skip", default="")
+    s = sub.add_parser("полнота")
+    s.add_argument("base")
+    s.add_argument("--каталог", dest="dir", required=True)
     s.add_argument("--без", dest="skip", default="")
     s = sub.add_parser("перебор")
     s.add_argument("bases", help="базы через запятую")
@@ -404,6 +431,10 @@ def main():
     elif a.cmd == "строить":
         i, n = map(int, a.part.split("/"))
         build(built_library(vocab), vocab, a.base, (i, n), a.dir)
+    elif a.cmd == "полнота":
+        for t, k, im, miss in completeness(built_library(vocab), vocab, a.base, a.dir):
+            print(f"{t:36s} известно {k:.0%}, образ в библиотеке {im:.0%}")
+            print("    больше всего неизвестных: " + "; ".join(f"{g} {n}" for g, n in miss[:8]))
     elif a.cmd == "строить-все":
         j, n = map(int, a.job.split("/"))
         build_all(built_library(vocab), vocab, j, n, a.dir, a.jobs)
