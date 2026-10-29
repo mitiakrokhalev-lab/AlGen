@@ -449,10 +449,40 @@ def show_env(env, model):
     return ", ".join(out)
 
 
+# Порядки неабелевых простых групп меньше 10 000 (по классификации):
+# A₅, L₂(7), A₆, L₂(8), L₂(11), L₂(13), L₂(17), A₇, L₂(19), L₂(16), L₃(3), U₃(3),
+# L₂(23), L₂(25), M₁₁, L₂(27).
+SIMPLE_ORDERS = (60, 168, 360, 504, 660, 1092, 2448, 2520, 3420, 4080, 5616, 6048, 6072, 7800, 7920, 9828)
+
+
+def _by_classification(decls, g):
+    """«Группа порядка n (не) проста» при n вне таблицы: по списку порядков
+    простых групп. None, если карточка не такого вида."""
+    if len(decls) != 1 or decls[0][1] != "grp":
+        return None
+    name, _, _, prem = decls[0]
+    if not (prem and prem[0] == "cmp" and prem[1] == "=" and prem[2] == ("call", "ord", [("var", name)])
+            and prem[3][0] == "int"):
+        return None
+    n = prem[3][1]
+    neg = g[0] == "not"
+    core = g[1] if neg else g
+    if core != ("pred", "simple", [("var", name)]) or n >= 10000:
+        return None
+    possible = n in SIMPLE_ORDERS or (n > 1 and all(n % q for q in range(2, int(n ** 0.5) + 1)))
+    if neg:
+        return ("проверено", f"по классификации: {n} — не порядок простой группы", 1) if not possible else \
+            ("опровергается", f"по классификации есть простая группа порядка {n}", 1)
+    return None
+
+
 def check(cond, goal, model, limit=200000):
     """(вердикт, детали, число проверенных примеров)."""
     decls = parse_condition(cond)
     g = parse_formula(goal)
+    byc = _by_classification(decls, g)
+    if byc and (model.order_hint(decls[0][3], {}) or 0) > BOUND:
+        return byc
     seen = unknown = 0
     for env in islice(model.instances(decls), limit):
         v = model.holds_safe(g, env)
