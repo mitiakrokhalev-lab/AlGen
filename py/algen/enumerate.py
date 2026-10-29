@@ -47,6 +47,7 @@ from .logic import App, Theory, Var, Vocab, decide
 # Свойства, которые не входят в атомы формы (флаг --без): схемы с большим
 # числом термов растут комбинаторно с каждым свойством.
 SKIP = set()
+MOR_PROPS = ("injective", "surjective", "iso", "zero-mor")
 
 
 def props():
@@ -204,6 +205,8 @@ class Form:
         не записано больше значений: обычно оно оттуда и берётся."""
         im = self._image(r, atom[2])
         t = atom[2]
+        if im is not None and im[0] == "mor":
+            return f"{atom_name(atom)} у {self.where(r)}"
         if im is None and isinstance(t, App) and t.op in ("center", "commutator", "quotient"):
             # Не записан центр или коммутант: приписываем это группе, у которой его нет.
             g = t.args[0]
@@ -313,6 +316,8 @@ class SchemeForm(Form):
                 self.atoms += [("p", p, t) for p in props()]
             elif sort == "Grp.sub":
                 self.atoms += [("p", p, t) for p in list(SUB_PROPS) + props()]
+            elif sort == "Grp.mor":
+                self.atoms += [("p", p, t) for p in MOR_PROPS]
         self.index = {a: i for i, a in enumerate(self.atoms)}
         self.req = {}
         for i, a in enumerate(self.atoms):
@@ -322,7 +327,8 @@ class SchemeForm(Form):
         self.fixed = [2 * self.index[a] + (0 if v else 1) for a, v in fixed if a in self.index]
         self.fixed_lits = fixed
         levels = {"m": (), "s": ("трудно",), "e": MARKS}
-        rows, self.envs, self.skipped, self.row_facts = {k: [] for k in levels}, [], [], []
+        rows, self.envs, self.skipped = {k: [] for k in levels}, [], []
+        self._facts = {}  # записанные значения строк — лениво, только для разбора помеченных
         derived = self._derived = {}  # кэш вывода: одинаковые наборы записанных значений — одна строка
         for env in self.search._assign(0, {}):
             if max_subs and any(im[0] == "sub" and im[2] >= max_subs for im in env.values()):
@@ -338,16 +344,26 @@ class SchemeForm(Form):
                     rows[k].append(full)
                     continue
                 f = {a: v for a, v in facts.items() if not (a in hard and hard[a][0] in drop)}
-                key = frozenset(f.items())
+                key = self._key(f)
                 row = derived.get(key)
                 if row is None:
                     row = derived[key] = self._derive(f)
                 rows[k].append(row)
                 full = full or row
             self.envs.append(dict(env))
-            self.row_facts.append((facts, hard))
         self.m, self.s, self.e = (self._matrix(rows[k]) for k in levels)
         self.names = list(range(len(self.envs)))
+
+    def _key(self, f):
+        """Компактный ключ набора значений для кэша вывода."""
+        T = self.sc.T
+        return np.array(sorted(l for a, v in f.items() if type(l := T.lit(a, v)) is int),
+                        dtype=np.int32).tobytes()
+
+    def row_facts(self, r):
+        if r not in self._facts:
+            self._facts[r] = self.search.facts(self.envs[r])
+        return self._facts[r]
 
     def _derive(self, facts):
         """Значения атомов, следующие из записанных: ядро («backbone») решателя.
@@ -398,16 +414,16 @@ class SchemeForm(Form):
         return ", ".join(f"{t} = {self.search._name(im)}" for t, im in env.items())
 
     def marked(self, r, mark):
-        _, hard = self.row_facts[r]
+        _, hard = self.row_facts(r)
         return sorted(((a, name) for a, (m, name) in hard.items() if m == mark), key=lambda x: str(x[0]))
 
     def row_keeping(self, r, keep, mark):
         k = (r, keep, mark)
         if k not in self._kept:
-            facts, hard = self.row_facts[r]
+            facts, hard = self.row_facts(r)
             drop = ("трудно",) if mark == "трудно" else MARKS
             f = {a: v for a, v in facts.items() if not (a in hard and hard[a][0] in drop and a not in keep)}
-            key = frozenset(f.items())
+            key = self._key(f)
             row = self._derived.get(key)
             if row is None:
                 row = self._derived[key] = self._derive(f)
@@ -494,43 +510,56 @@ def cover(options):
 
 
 def enumerate_form(form, max_prem, goals=None, m=None):
-    """Все условия не длиннее max_prem посылок, которые библиотека не
-    опровергает (по матрице m, по умолчанию — только понятными значениями).
-    Возвращает (неопровергнутые, без примера)."""
+    """Все минимальные условия не длиннее max_prem посылок, которые библиотека
+    не опровергает (по матрице m, по умолчанию — только понятными значениями).
+    Неминимальные (с неопровергнутым подусловием) не хранятся: при слабой
+    библиотеке их миллионы. Возвращает (неопровергнутые минимальные, без
+    примера); общее число неопровергнутых — в form.n_alive."""
     m = form.e if m is None else m
     n_lit = m.shape[1]
     goal_cols = range(n_lit) if goals is None else goals
-    alive, empty = {}, []
+    alive, empty, lower = {}, [], set()
+    count = 0
 
-    def ok_lits(prem):
-        atoms = {j // 2 for j in prem}
-        return len(atoms) == len(prem)
+    def proper_subsets(prem):
+        for r in range(1, len(prem)):
+            yield from combinations(prem, r)
 
-    def go(prem, rows, start):
-        if prem:
+    def go(prem, rows, start, depth):
+        nonlocal count
+        if len(prem) == depth:
             atoms = {j // 2 for j in prem}
             have = set(prem) | set(form.fixed)
-            if all(form.req.get(i, set()) <= have for i in atoms):
-                if rows.size == 0:
-                    empty.append(tuple(prem))
-                else:
-                    sub = m[rows]
-                    for g in goal_cols:
-                        if g // 2 in atoms or not form.req.get(g // 2, set()) <= have:
-                            continue
-                        neg = g + 1 if g % 2 == 0 else g - 1
-                        if not sub[:, neg].any():
-                            alive[tuple(prem), g] = int(sub[:, g].sum())
-        if len(prem) == max_prem:
+            if not all(form.req.get(i, set()) <= have for i in atoms):
+                return
+            if rows.size == 0:
+                empty.append(tuple(prem))
+                return
+            sub = m[rows]
+            negs = sub[:, [g ^ 1 for g in range(n_lit)]].any(axis=0) if len(goal_cols) == n_lit else None
+            for g in goal_cols:
+                if g // 2 in atoms or not form.req.get(g // 2, set()) <= have:
+                    continue
+                if (negs[g] if negs is not None else sub[:, g ^ 1].any()):
+                    continue
+                count += 1
+                key = (tuple(prem), g)
+                if depth < max_prem:
+                    lower.add(key)
+                if any((q, g) in lower for q in proper_subsets(prem)):
+                    continue
+                alive[key] = int(sub[:, g].sum())
             return
         for j in range(start, n_lit):
             if j // 2 in {x // 2 for x in prem}:
                 continue
             nxt = rows[m[rows, j]] if prem else np.flatnonzero(m[:, j])
-            go(prem + [j], nxt, j + 1)
+            go(prem + [j], nxt, j + 1, depth)
 
     start = np.flatnonzero(m[:, form.fixed].all(axis=1)) if form.fixed else np.arange(m.shape[0])
-    go([], start, 0)
+    for depth in range(1, max_prem + 1):
+        go([], start, 0, depth)
+    form.n_alive = count
     return alive, empty
 
 
@@ -626,6 +655,139 @@ def clusters(triples):
     return sorted(out, key=lambda x: (-len(x[1]), x[0]))
 
 
+REGISTRY = DATA_DIR = None
+
+
+def load_registry():
+    """Реестр разобранных вопросов: data/registry/grp.json. Значения, имя которых
+    содержит шаблон вопроса, и запреты из списка в выдаче сворачиваются в одну
+    строку со ссылкой на номер вопроса."""
+    from .logic import DATA
+    p = DATA / "registry" / "grp.json"
+    if not p.exists():
+        return {"вопросы": [], "запреты": {}}
+    with open(p, encoding="utf-8") as f:
+        d = json.load(f)
+    return {"вопросы": d.get("вопросы", []), "запреты": d.get("запреты", {})}
+
+
+def registry_match(registry, value):
+    for q in registry.get("вопросы", []):
+        if any(p in value for p in q.get("шаблоны", [])):
+            return q["№"]
+    return None
+
+
+def render(form, alive, empty, report, short=False, full=False, json_path=None,
+           out=sys.stdout, err=sys.stderr, registry=None):
+    """Печать отчёта о прогоне и сводка для пакетного режима (возвращается)."""
+    registry = registry if registry is not None else load_registry()
+    import builtins
+
+    def print(*args, file=None, **kw):  # noqa: A001 — в out, а «file=sys.stderr» — в err
+        builtins.print(*args, file=err if file is sys.stderr else out, **kw)
+
+    # Считаем запреты: условие, его контрапозиции и симметричные ему — один.
+    classes = {}
+    for r in report:
+        classes.setdefault(r["класс"], r)
+    tally = Counter(r["вердикт"] for r in classes.values())
+    print(f"строк в библиотеке {form.m.shape[0]}, литералов {form.m.shape[1]}", file=sys.stderr)
+    print(f"не опровергнуто библиотекой {getattr(form, 'n_alive', len(alive))}, минимальных обо всех переменных {len(report)}, "
+          f"запретов {len(classes)}: " + ", ".join(f"{k} {v}" for k, v in tally.most_common()), file=sys.stderr)
+    print(f"посылок без единого примера: {len(empty)}", file=sys.stderr)
+    for w in getattr(form, "skipped", [])[:5]:
+        print(f"ПРОТИВОРЕЧИЕ в записях: {w}", file=sys.stderr)
+    if json_path:
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump({"остаток": [r for r in report if r["вердикт"] == "неизвестно"],
+                       "трудный контрпример": [r for r in report if r["вердикт"] == "трудный контрпример"],
+                       "короткий довод": [r for r in report if r["вердикт"] == "короткий довод"],
+                       "выводится": sum(r["вердикт"] == "выводится" for r in report)},
+                      f, ensure_ascii=False, indent=1)
+    seen, hints, vals = {}, defaultdict(set), defaultdict(set)
+    for r in report:
+        if r["вердикт"] != "неизвестно":
+            continue
+        t = r["класс"]
+        seen.setdefault(t, r["примеров"])
+        vals[t] |= set(r.get("значения", ()))
+        if r.get("заполнить"):
+            h = r["заполнить"]
+            hints[t].add(f"{h['атом']} у {h['где']}")
+    # Сводка остатка по решающим значениям: одно незаписанное значение
+    # (обычно у одной группы библиотеки) отвечает за десятки запретов.
+    # Полный список запретов — ниже (--полностью) и в --json.
+    dec = decisive({t: vals[t] for t in seen})
+    bare = sorted(t for t in seen if not vals[t])
+    # Реестр: разобранные значения и запреты сворачиваются в строку с номером.
+    rz = registry.get("запреты", {})
+    known = defaultdict(list)
+    fresh = []
+    for v, ts in dec:
+        q = registry_match(registry, v)
+        (known[q].extend(ts) if q else fresh.append((v, ts)))
+    bare_fresh = []
+    for t in bare:
+        k = " & ".join(t)
+        (known[rz[k]["№"]].append(t) if k in rz else bare_fresh.append(t))
+    print(f"== решающих значений {len(fresh)}: касаются {sum(len(ts) for _, ts in fresh)} запретов; "
+          f"без кандидата {len(bare_fresh)}; уже в реестре {sum(len(x) for x in known.values())} ==")
+    for v, ts in fresh:
+        print(f"значение {v} — запретов {len(ts)}; например: {' & '.join(ts[0])}")
+    print(f"== без кандидата: нужен пример или правило ==")
+    cl = clusters(bare_fresh)
+    for pair, thirds in cl:
+        if len(thirds) == 1:
+            print(f"не бывает? {' & '.join(pair + tuple(thirds))}   [примеров посылок: {seen[tuple(sorted(pair + tuple(thirds)))]}]")
+        else:
+            print(f"не бывает? {' & '.join(pair)} & одно из: {', '.join(thirds)}   [запретов {len(thirds)}]")
+    if known:
+        print("== уже в реестре (data/registry/grp.json) ==")
+        qs = {q["№"]: q for q in registry.get("вопросы", [])}
+        for k, ts in sorted(known.items(), key=lambda x: -len(x[1])):
+            print(f"{k} — запретов {len(ts)}: {qs.get(k, {}).get('вопрос', '')}")
+    print(f"решающих значений {len(fresh)} на {sum(len(ts) for _, ts in fresh)} запретов, без кандидата {len(bare_fresh)} "
+          f"в {len(cl)} кластерах, в реестре {sum(len(x) for x in known.values())}", file=sys.stderr)
+    summary = {
+        "запретов": len(classes), "вердикты": dict(tally), "остаток": len(seen),
+        "значения": [{"имя": v, "запретов": len(ts), "пример": " & ".join(ts[0])} for v, ts in fresh],
+        "без кандидата": [{"пара": list(pair), "третьи": thirds} for pair, thirds in cl],
+        "реестр": {k: len(ts) for k, ts in known.items()},
+    }
+    groups = clusters(list(seen))
+    if full:
+        print("== все запреты остатка ==")
+    for pair, thirds in groups if full else ():
+        ts = [tuple(sorted(pair + (x,))) for x in thirds]
+        hint = sorted(set().union(*(hints[t] for t in ts)))
+        tail = "; заполнить " + ", ".join(hint[:3]) + (" …" if len(hint) > 3 else "") if hint else ""
+        if len(thirds) == 1:
+            print(f"не бывает? {' & '.join(ts[0])}   [примеров посылок: {seen[ts[0]]}{tail}]")
+        else:
+            print(f"не бывает? {' & '.join(pair)} & одно из: {', '.join(thirds)}   "
+                  f"[запретов {len(thirds)}{tail}]")
+    print(f"запретов без примера: {len(seen)}, кластеров: {len(groups)}", file=sys.stderr)
+    for kind in ("трудный контрпример", "короткий довод"):
+        groups = defaultdict(list)
+        for r in classes.values():
+            if r["вердикт"] == kind:
+                groups[tuple(r["решающий факт"])].append(r)
+        ranked = sorted(groups.items(), key=lambda x: (-len(x[1]), x[0]))
+        summary[kind] = {" & ".join(f): len(rs) for f, rs in ranked}
+        if kind == "короткий довод" and not short:
+            if ranked:
+                print(f"скрыто запретов с коротким доводом: {tally[kind]}, решающих фактов {len(ranked)}: "
+                      + ", ".join(f"{' & '.join(f)} ({len(rs)})" for f, rs in ranked)
+                      + " (показать: --короткие)", file=sys.stderr)
+            continue
+        for fact, rs in ranked:
+            print(f"{kind}: {' & '.join(fact)} — запретов {len(rs)}")
+            for r in rs:
+                print(f"    бывает: {' & '.join(r['класс'])}   [{r['контрпример']['где']}]")
+    return summary
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--посылок", dest="k", type=int, default=2)
@@ -650,80 +812,7 @@ def main():
         form, alive, empty, report = run(a.k, lib, vocab, form)
     else:
         form, alive, empty, report = run(a.k)
-    # Считаем запреты: условие, его контрапозиции и симметричные ему — один.
-    classes = {}
-    for r in report:
-        classes.setdefault(r["класс"], r)
-    tally = Counter(r["вердикт"] for r in classes.values())
-    print(f"строк в библиотеке {form.m.shape[0]}, литералов {form.m.shape[1]}", file=sys.stderr)
-    print(f"не опровергнуто библиотекой {len(alive)}, минимальных обо всех переменных {len(report)}, "
-          f"запретов {len(classes)}: " + ", ".join(f"{k} {v}" for k, v in tally.most_common()), file=sys.stderr)
-    print(f"посылок без единого примера: {len(empty)}", file=sys.stderr)
-    for w in getattr(form, "skipped", [])[:5]:
-        print(f"ПРОТИВОРЕЧИЕ в записях: {w}", file=sys.stderr)
-    if a.out:
-        with open(a.out, "w", encoding="utf-8") as f:
-            json.dump({"остаток": [r for r in report if r["вердикт"] == "неизвестно"],
-                       "трудный контрпример": [r for r in report if r["вердикт"] == "трудный контрпример"],
-                       "короткий довод": [r for r in report if r["вердикт"] == "короткий довод"],
-                       "выводится": sum(r["вердикт"] == "выводится" for r in report)},
-                      f, ensure_ascii=False, indent=1)
-    seen, hints, vals = {}, defaultdict(set), defaultdict(set)
-    for r in report:
-        if r["вердикт"] != "неизвестно":
-            continue
-        t = r["класс"]
-        seen.setdefault(t, r["примеров"])
-        vals[t] |= set(r.get("значения", ()))
-        if r.get("заполнить"):
-            h = r["заполнить"]
-            hints[t].add(f"{h['атом']} у {h['где']}")
-    # Сводка остатка по решающим значениям: одно незаписанное значение
-    # (обычно у одной группы библиотеки) отвечает за десятки запретов.
-    # Полный список запретов — ниже (--полностью) и в --json.
-    dec = decisive({t: vals[t] for t in seen})
-    bare = sorted(t for t in seen if not vals[t])
-    print(f"== решающих значений {len(dec)}: касаются {len(seen) - len(bare)} запретов; "
-          f"без кандидата {len(bare)} ==")
-    for v, ts in dec:
-        print(f"значение {v} — запретов {len(ts)}; например: {' & '.join(ts[0])}")
-    print(f"== без кандидата: нужен пример или правило ==")
-    for pair, thirds in clusters(bare):
-        if len(thirds) == 1:
-            print(f"не бывает? {' & '.join(pair + tuple(thirds))}   [примеров посылок: {seen[tuple(sorted(pair + tuple(thirds)))]}]")
-        else:
-            print(f"не бывает? {' & '.join(pair)} & одно из: {', '.join(thirds)}   [запретов {len(thirds)}]")
-    print(f"решающих значений {len(dec)} на {len(seen) - len(bare)} запретов, без кандидата {len(bare)} "
-          f"в {len(clusters(bare))} кластерах", file=sys.stderr)
-    groups = clusters(list(seen))
-    if a.full:
-        print("== все запреты остатка ==")
-    for pair, thirds in groups if a.full else ():
-        ts = [tuple(sorted(pair + (x,))) for x in thirds]
-        hint = sorted(set().union(*(hints[t] for t in ts)))
-        tail = "; заполнить " + ", ".join(hint[:3]) + (" …" if len(hint) > 3 else "") if hint else ""
-        if len(thirds) == 1:
-            print(f"не бывает? {' & '.join(ts[0])}   [примеров посылок: {seen[ts[0]]}{tail}]")
-        else:
-            print(f"не бывает? {' & '.join(pair)} & одно из: {', '.join(thirds)}   "
-                  f"[запретов {len(thirds)}{tail}]")
-    print(f"запретов без примера: {len(seen)}, кластеров: {len(groups)}", file=sys.stderr)
-    for kind in ("трудный контрпример", "короткий довод"):
-        groups = defaultdict(list)
-        for r in classes.values():
-            if r["вердикт"] == kind:
-                groups[tuple(r["решающий факт"])].append(r)
-        ranked = sorted(groups.items(), key=lambda x: (-len(x[1]), x[0]))
-        if kind == "короткий довод" and not a.short:
-            if ranked:
-                print(f"скрыто запретов с коротким доводом: {tally[kind]}, решающих фактов {len(ranked)}: "
-                      + ", ".join(f"{' & '.join(f)} ({len(rs)})" for f, rs in ranked)
-                      + " (показать: --короткие)", file=sys.stderr)
-            continue
-        for fact, rs in ranked:
-            print(f"{kind}: {' & '.join(fact)} — запретов {len(rs)}")
-            for r in rs:
-                print(f"    бывает: {' & '.join(r['класс'])}   [{r['контрпример']['где']}]")
+    render(form, alive, empty, report, short=a.short, full=a.full, json_path=a.out)
 
 
 if __name__ == "__main__":

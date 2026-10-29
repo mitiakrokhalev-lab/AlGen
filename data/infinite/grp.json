@@ -8500,7 +8500,7 @@
     "simple": "Inn(F₃) — собственная нетривиальная нормальная подгруппа",
     "residually-finite": "подгруппа ф. а. Aut(F₃)",
     "linear": "если бы подгруппа индекса 2 была линейна, то индуцированное представление дало бы линейность Aut(F₃) (Formanek–Procesi)",
-    "perfect": "SAut(Fₙ) порождается нильсеновыми трансвекциями ρᵢⱼ, λᵢⱼ (S. M. Gersten, A presentation for the special automorphism group of a free group, J. Pure Appl. Algebra 33, 1984), а при n ⩾ 3 каждая — коммутатор: [ρᵢₖ, ρₖⱼ] = ρᵢⱼ^{±1}",
+    "perfect": "SAut(Fₙ) порождается нильсеновыми трансвекциями ρᵢⱼ, λᵢⱼ (S. M. Gersten, A presentation for the special automorphism group of a free group, J. Pure Appl. Algebra 33, 1984), а при n ⩾ 3 каждая — коммутатор: [ρᵢₖ, ρₖⱼ] = ρᵢⱼ^{±1} — проверено Димой по статье 1984 г.",
     "indecomposable": "если H = A × B, то нормальная Inn(F₃) ≅ F₃ пересекает A и B по коммутирующим нормальным подгруппам F₃, одна из них, скажем Inn ∩ B, тривиальна; тогда [Inn, B] ⩽ Inn ∩ B = 1, а централизатор Inn(F₃) в Aut(F₃) тривиален, так что B = 1"
    },
    "подгруппы": [

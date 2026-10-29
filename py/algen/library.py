@@ -44,7 +44,11 @@ class Library:
             self.obj[k] = {"key": k, "имя": r["name"], "конечная": True, "свойства": r["props"],
                            "подгруппы": None if r["subs"] is None else [
                                {"id": str(i), "≅": s["group"], "свойства": s["props"],
-                                **({"фактор": s["quotient"]} if "quotient" in s else {})}
+                                **({"фактор": s["quotient"]} if "quotient" in s else {}),
+                                # номера подгрупп (представители классов сопряжённости)
+                                **{f: str(s[k]) for k, f in (("normalizer", "нормализатор"),
+                                   ("centralizer", "централизатор"), ("normal_closure", "нормальное замыкание"))
+                                   if s.get(k) is not None}}
                                for i, s in enumerate(r["subs"])],
                            "центр": None if r.get("center") is None else str(r["center"]),
                            "коммутант": None if r.get("commutator") is None else str(r["commutator"])}
@@ -520,7 +524,10 @@ class Search:
         self.g, self.T, self.lib = graph, theory, lib
         self.s = theory.solver()
         self.vars = [t for t in graph.terms if isinstance(t, Var)]
-        many = sum(1 for t in self.vars if graph.terms[t].sort == "Grp.obj") > 1
+        # Несколько групп или больше двух переменных (цепочки подгрупп, гомоморфизмы):
+        # строк иначе миллионы, берём сокращённый набор объектов.
+        many = (sum(1 for t in self.vars if graph.terms[t].sort == "Grp.obj") > 1
+                or len(self.vars) > 2)
         # Для схем с несколькими группами — бесконечные и малые конечные.
         # Неразрешимые конечные порядка ⩽ 120 (A₅, S₅, SL(2, 5), …) нужны всегда.
         self.objects = [k for k, o in lib.obj.items()
@@ -537,6 +544,42 @@ class Search:
                         self.objects.append(k)
                         have.add(k)
 
+    def _obj(self, im):
+        """Ключ группы-объекта для образа: самой группы или подгруппы (её ≅)."""
+        if im is None:
+            return None
+        if im[0] == "obj":
+            return im[1]
+        if im[0] == "sub":
+            return self.lib.obj[im[1]]["подгруппы"][im[2]]["≅"]
+        return None
+
+    def _sub_index(self, key, pred):
+        subs = self.lib.obj[key]["подгруппы"] or []
+        return next((j for j, x in enumerate(subs) if pred(x)), None)
+
+    def _one(self, key):
+        return self._sub_index(key, lambda x: x["≅"] == "1:1")
+
+    def _all(self, key):
+        return self._sub_index(key, lambda x: x["свойства"].get("whole"))
+
+    def morphisms(self, d, c):
+        """Гомоморфизмы d → c, которые библиотека знает: тождественный,
+        нулевой, проекции на факторы, вложения подгрупп.
+        ("mor", вид, d, c, номер подгруппы или None)."""
+        out = [("mor", "zero", d, c, None)]
+        if d == c:
+            out.append(("mor", "id", d, c, None))
+        for j, x in enumerate(self.lib.obj[d]["подгруппы"] or []):
+            if x["свойства"].get("normal") and x.get("фактор") == c and not x["свойства"].get("whole") \
+                    and x["≅"] != "1:1":
+                out.append(("mor", "proj", d, c, j))
+        for j, x in enumerate(self.lib.obj[c]["подгруппы"] or []):
+            if x["≅"] == d and not x["свойства"].get("whole") and x["≅"] != "1:1":
+                out.append(("mor", "incl", d, c, j))
+        return out
+
     def _assign(self, i, env):
         if i == len(self.vars):
             yield dict(env)
@@ -548,13 +591,22 @@ class Search:
                 env[t] = ("obj", k)
                 yield from self._assign(i + 1, env)
         elif info.sort == "Grp.sub":
-            amb = env.get(info.links.get("ambient"))
-            if amb is None or amb[0] != "obj":
+            # подгруппа группы или подгруппы (тогда — подгруппа её типа ≅)
+            amb = self._obj(self._image(info.links.get("ambient"), env))
+            if amb is None:
                 return
-            for j in range(len(self.lib.obj[amb[1]]["подгруппы"] or [])):
-                env[t] = ("sub", amb[1], j)
+            for j in range(len(self.lib.obj[amb]["подгруппы"] or [])):
+                env[t] = ("sub", amb, j)
                 yield from self._assign(i + 1, env)
-        # прочие сорта (семейства, гомоморфизмы) библиотека пока не перебирает
+        elif info.sort == "Grp.mor":
+            d = self._obj(self._image(info.links.get("dom"), env))
+            c = self._obj(self._image(info.links.get("cod"), env))
+            if d is None or c is None:
+                return
+            for f in self.morphisms(d, c):
+                env[t] = f
+                yield from self._assign(i + 1, env)
+        # прочие сорта (семейства, элементы) библиотека пока не перебирает
         env.pop(t, None)
 
     def _image(self, t, env):
@@ -567,11 +619,14 @@ class Search:
         if t.op == "quotient" and args[0] and args[1] and args[1][0] == "sub":
             q = lib.obj[args[1][1]]["подгруппы"][args[1][2]].get("фактор")
             return ("obj", q) if q else None
-        if t.op in ("prod", "freeprod", "wreath") and all(a and a[0] == "obj" for a in args):
-            p = {"prod": lib.prod, "freeprod": lib.fprod, "wreath": lib.wreath}[t.op].get((args[0][1], args[1][1]))
+        if t.op in ("prod", "freeprod", "wreath"):
+            ks = [self._obj(a) for a in args]
+            if None in ks:
+                return None
+            p = {"prod": lib.prod, "freeprod": lib.fprod, "wreath": lib.wreath}[t.op].get((ks[0], ks[1]))
             return ("obj", p) if p else None
-        if t.op in ("aut", "ab", "inn") and args[0] and args[0][0] == "obj":
-            o = lib.obj[args[0][1]]
+        if t.op in ("aut", "ab", "inn") and self._obj(args[0]):
+            o = lib.obj[self._obj(args[0])]
             k = o.get({"aut": "aut", "ab": "абелианизация", "inn": "inn"}[t.op])
             if not k and t.op in ("ab", "inn"):
                 # Gᵃᵇ = G/G′, Inn(G) ≅ G/Z(G): фактор записанной подгруппы.
@@ -579,13 +634,70 @@ class Search:
                 s = next((x for x in o["подгруппы"] or [] if x["id"] == sid), None)
                 k = s.get("фактор") if s else None
             return ("obj", k) if k else None
-        if t.op in ("center", "commutator") and args[0] and args[0][0] == "obj":
-            o = lib.obj[args[0][1]]
+        if t.op in ("center", "commutator") and self._obj(args[0]):
+            key = self._obj(args[0])
+            o = lib.obj[key]
             sid = o.get({"center": "центр", "commutator": "коммутант"}[t.op])
-            subs = o["подгруппы"] or []
-            idx = next((j for j, x in enumerate(subs) if x["id"] == sid), None)
-            return ("sub", args[0][1], idx) if idx is not None else None
+            idx = self._sub_index(key, lambda x: x["id"] == sid) if sid is not None else None
+            return ("sub", key, idx) if idx is not None else None
+        if t.op in ("ker", "im") and args[0] and args[0][0] == "mor":
+            _, kind, d, c, j = args[0]
+            if t.op == "ker":
+                idx = {"zero": self._all(d), "id": self._one(d), "proj": j, "incl": self._one(d)}[kind]
+                return ("sub", d, idx) if idx is not None else None
+            idx = {"zero": self._one(c), "id": self._all(c), "proj": self._all(c), "incl": j}[kind]
+            return ("sub", c, idx) if idx is not None else None
+        if t.op in ("meet", "join") and len(args) == 3 and all(a and a[0] == "sub" for a in args[1:]):
+            n, m = args[1], args[2]
+            if n[1] != m[1]:
+                return None
+            key = n[1]
+            one, whole = self._one(key), self._all(key)
+            meet = t.op == "meet"
+            if n[2] == m[2]:
+                return n
+            for a, b in ((n, m), (m, n)):
+                if a[2] == one:
+                    return a if meet else b
+                if a[2] == whole:
+                    return b if meet else a
+            return None
+        if t.op in ("centralizer", "normalizer", "normal-closure") and len(args) == 2 and args[1] and args[1][0] == "sub":
+            key, j = args[1][1], args[1][2]
+            x = lib.obj[key]["подгруппы"][j]
+            pr = x["свойства"]
+            if t.op == "normalizer" and pr.get("normal"):
+                return ("sub", key, self._all(key))
+            if t.op == "normal-closure" and pr.get("normal"):
+                return args[1]
+            if t.op == "centralizer":
+                if pr.get("whole"):
+                    c = lib.obj[key].get("центр")
+                    idx = self._sub_index(key, lambda s: s["id"] == c) if c is not None else None
+                    return ("sub", key, idx) if idx is not None else None
+                if x["≅"] == "1:1" or pr.get("central") and lib.obj[key]["свойства"].get("abelian"):
+                    return ("sub", key, self._all(key))
+            f = {"centralizer": "централизатор", "normalizer": "нормализатор",
+                 "normal-closure": "нормальное замыкание"}[t.op]
+            if x.get(f) is not None:
+                idx = self._sub_index(key, lambda s: s["id"] == x[f])
+                return ("sub", key, idx) if idx is not None else None
+            return None
         return None
+
+    def _mor_facts(self, f):
+        _, kind, d, c, j = f
+        td = self.lib.obj[d]["свойства"].get("trivial")
+        tc = self.lib.obj[c]["свойства"].get("trivial")
+        if kind == "id":
+            return {"injective": True, "surjective": True, "iso": True, "zero-mor": td}
+        if kind == "zero":
+            return {"zero-mor": True, "injective": td, "surjective": tc,
+                    "iso": (td and tc) if td is not None and tc is not None else None}
+        x = (self.lib.obj[d] if kind == "proj" else self.lib.obj[c])["подгруппы"][j]
+        if kind == "proj":  # j — ядро, собственное и нетривиальное
+            return {"injective": False, "surjective": True, "iso": False, "zero-mor": tc}
+        return {"injective": True, "surjective": False, "iso": False, "zero-mor": td}
 
     def facts(self, env, terms=None):
         """{атом: значение} по записям библиотеки и {атом: (пометка, значение)}
@@ -594,6 +706,11 @@ class Search:
         for t in terms or self.g.terms:
             im = self._image(t, env)
             if im is None:
+                continue
+            if im[0] == "mor":
+                for p, v in self._mor_facts(im).items():
+                    if v is not None and self.g.v.prop_fits(p, self.g.terms[t].sort):
+                        out[("p", p, t)] = v
                 continue
             if im[0] == "obj":
                 rec, rel = self.lib.obj[im[1]], {}
@@ -642,6 +759,14 @@ class Search:
         return out
 
     def _name(self, im):
+        if im[0] == "mor":
+            _, kind, d, c, j = im
+            nd, nc = (self.lib.obj[x].get("имя", x) for x in (d, c))
+            if kind == "proj":
+                return f"{nd} ↠ {nc} (фактор по {self.lib.obj[d]['подгруппы'][j].get('id')})"
+            if kind == "incl":
+                return f"{nd} ↪ {nc} (подгруппа {self.lib.obj[c]['подгруппы'][j].get('id')})"
+            return {"id": f"id: {nd} → {nc}", "zero": f"1: {nd} → {nc}"}[kind]
         if im[0] == "obj":
             o = self.lib.obj[im[1]]
             return o.get("имя", im[1])

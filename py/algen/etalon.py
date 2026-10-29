@@ -63,10 +63,10 @@ def term(g, s, names, section):
             break
     else:
         m = re.fullmatch(r"(\w[\w-]*|∏|⊕)\s*\((.*)\)", s) or re.fullmatch(r"(∏|⊕)\s*(\w+)", s)
-        if not m or m.group(1) not in OPS[section]:
+        op = m and (OPS[section].get(m.group(1)) or (m.group(1) if m.group(1) in g.v.cons else None))
+        if not op:
             raise Unsupported(f"терм {s!r}")
-        t = g.make(OPS[section][m.group(1)],
-                   [term(g, a, names, section) for a in split_top(m.group(2), ",")])
+        t = g.make(op, [term(g, a, names, section) for a in split_top(m.group(2), ",")])
     if t is None:
         raise Unsupported(f"терм {s!r} не строится")
     return g.given(t)

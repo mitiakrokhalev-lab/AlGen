@@ -30,8 +30,9 @@ class EnumerateTest(unittest.TestCase):
         alive, empty = enumerate_form(form, 2, goals=[4])
         self.assertIn(((0,), 4), alive)
         self.assertNotIn(((2,), 4), alive)
-        # a, b ⇒ c не минимально: хватает a.
-        self.assertIn(((0, 2), 4), alive)
+        # a, b ⇒ c не минимально (хватает a): не хранится, но учтено в счётчике.
+        self.assertNotIn(((0, 2), 4), alive)
+        self.assertGreater(form.n_alive, len(alive))
         mins = minimal(alive)
         self.assertIn(((0,), 4), mins)
         self.assertNotIn(((0, 2), 4), mins)
