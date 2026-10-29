@@ -9840,6 +9840,181 @@
    "ссылки": [
     "W. Hantzsche, H. Wendt, 1935"
    ]
+  },
+  {
+   "id": "SU2",
+   "имя": "SU(2)",
+   "заметка": "Делимая совершенная группа с конечным центром C₂.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "perfect": true,
+    "periodic": false,
+    "fin-gen": false,
+    "solvable": false,
+    "nilpotent": false,
+    "torsion-free": false,
+    "divisible": true,
+    "centerless": false,
+    "residually-finite": false,
+    "linear": true,
+    "polycyclic": false,
+    "hopfian": true,
+    "indecomposable": true,
+    "bounded-exponent": false
+   },
+   "почему": {
+    "divisible": "компактная связная группа Ли: каждый элемент лежит в максимальном торе, а в торе извлекаются корни",
+    "perfect": "SU(2)/{±1} ≅ SO(3) проста, а коммутант нецентрален",
+    "residually-finite": "делимая нетривиальная",
+    "fin-gen": "несчётна",
+    "hopfian": "нормальные подгруппы — 1, {±1}, SU(2) (SO(3) абстрактно проста); SU(2)/{±1} ≅ SO(3) без центра, так что сюръекция с ядром {±1} невозможна",
+    "indecomposable": "нормальные подгруппы — 1, {±1}, SU(2)",
+    "simple": "центр {±1}"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SU2"
+    },
+    {
+     "id": "центр",
+     "имя": "{±1}",
+     "≅": "2:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SO3"
+    },
+    {
+     "id": "все",
+     "имя": "SU(2)",
+     "≅": "SU2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "все",
+   "ссылки": [
+    "стандартный пример"
+   ]
+  },
+  {
+   "id": "UT5F2",
+   "имя": "UT₅(𝔽₂)",
+   "заметка": "Порядок 2¹⁰: нильпотентная с центром C₂ и неабелевым коммутантом.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": true,
+    "free": false,
+    "simple": false,
+    "perfect": false,
+    "periodic": true,
+    "fin-gen": true,
+    "solvable": true,
+    "nilpotent": true,
+    "torsion-free": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "linear": true,
+    "polycyclic": true,
+    "hopfian": true,
+    "indecomposable": true,
+    "bounded-exponent": true
+   },
+   "почему": {
+    "indecomposable": "центр C₂ неразложим, группа нильпотентна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "UT5F2"
+    },
+    {
+     "id": "центр",
+     "имя": "⟨e₁₅⟩",
+     "≅": "2:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     }
+    },
+    {
+     "id": "коммутант",
+     "имя": "γ₂",
+     "≅": "64:261",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "16:14",
+     "почему": "γ₂ = ⟨e₁₃, e₃₅⟩ × ⟨e₂₄, e₁₄, e₂₅⟩ ≅ D₈ × C₂³ (как у UT₅(ℤ)), фактор — первая наддиагональ C₂⁴"
+    },
+    {
+     "id": "все",
+     "имя": "UT₅(𝔽₂)",
+     "≅": "UT5F2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "коммутант"
   }
  ]
 }
