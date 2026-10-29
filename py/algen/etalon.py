@@ -54,10 +54,48 @@ def split_top(s, sep):
     return [x.strip() for x in out + [cur] if x.strip()]
 
 
+def _amb(g, t):
+    return g.terms[t].links.get("ambient")
+
+
+def _num(g, s, names, section):
+    """Числовые термы: |G|, |H|, |G : H|, |x|, |HK| (H, K — имена подгрупп), a · b."""
+    parts = split_top(s, "·")
+    if len(parts) > 1:
+        t = _num(g, parts[0], names, section)
+        for p in parts[1:]:
+            t = g.given(g.make("num-mul", [t, _num(g, p, names, section)]))
+        return t
+    s = s.strip()
+    if not (s.startswith("|") and s.endswith("|")):
+        return None
+    inner = s[1:-1].strip()
+    if ":" in inner:
+        a, b = (term(g, x, names, section) for x in inner.split(":", 1))
+        return g.given(g.make("index", [a, b]))
+    for i in range(1, len(inner)):
+        a, b = inner[:i].strip(), inner[i:].strip()
+        if a in names and b in names and g.terms[names[a]].sort == "Grp.sub":
+            return g.given(g.make("prod-card", [_amb(g, names[a]), names[a], names[b]]))
+    t = term(g, inner, names, section)
+    if g.terms[t].sort == "Grp.elt":
+        return g.given(g.make("eltord", [_amb(g, t), t]))
+    return g.given(g.make("ord", [t]))
+
+
 def term(g, s, names, section):
     s = s.strip()
     if s in names:
         return names[s]
+    if s.startswith("|") or "·" in s:
+        t = _num(g, s, names, section)
+        if t is not None:
+            return t
+    for sym, op in (("∩", "meet"),):
+        parts = split_top(s, sym)
+        if len(parts) == 2:
+            a, b = (term(g, x, names, section) for x in parts)
+            return g.given(g.make(op, [_amb(g, a), a, b]))
     for sym, op in INFIX[section].items():
         parts = split_top(s, sym)
         if len(parts) == 2:
@@ -75,7 +113,10 @@ def term(g, s, names, section):
 
 
 REL_INFIX = (("⩽", "le", False), ("≤", "le", False), ("⩾", "le", True), ("≥", "le", True),
-         ("≅", "iso", False), ("↪", "embeds", False))
+         ("≅", "iso", False), ("↪", "embeds", False), ("=", "=", False))
+# «=» и ⩽ по сорту левой части: числа — num-eq / num-le, элементы — eq-elt, подгруппы — eq-sub
+BY_SORT = {("=", "Grp.num"): "num-eq", ("=", "Grp.elt"): "eq-elt", ("=", "Grp.sub"): "eq-sub",
+           ("le", "Grp.num"): "num-le"}
 
 
 def _infix(s):
@@ -101,9 +142,11 @@ def literal(g, s, names, section):
     inf = _infix(body)
     if inf:
         rel, a, b = inf
+        ta, tb = term(g, a, names, section), term(g, b, names, section)
+        rel = BY_SORT.get((rel, g.terms[ta].sort), rel)
         if rel not in g.v.rels:
             raise Unsupported(f"нет в словаре: {rel}")
-        return ("r", rel, term(g, a, names, section), term(g, b, names, section)), value
+        return ("r", rel, ta, tb), value
     m = re.fullmatch(r"([\w-]+)\((.*)\)", body)
     if not m:
         raise Unsupported(f"литерал {s!r}")
