@@ -40,11 +40,12 @@ BASES = {
     "GHK": "∀ G : Grp; ∀ H : Sub(G); ∀ K : Sub(G)",
     "GMN": "∀ G : Grp; ∀ M : Sub(G); ∀ N : Sub(M)",
     "GHF": "∀ G : Grp; ∀ H : Grp; ∀ F : Mor(G, H)",
+    "Fam": "∀ F : Fam",
 }
 
 # Конструкции вселенной (термы-«вершины» схем).
 CONS = ["center", "commutator", "ab", "aut", "inn", "quotient", "prod", "freeprod", "wreath",
-        "meet", "join", "normalizer", "centralizer", "normal-closure", "ker", "im", "torsion", "frattini"]
+        "meet", "join", "normalizer", "centralizer", "normal-closure", "ker", "im", "torsion", "frattini", "prod-fam", "sum-fam"]
 SYMMETRIC = {"prod", "freeprod"}            # A × B ≅ B × A: берём один порядок
 SYMMETRIC_SUB = {"meet", "join"}            # meet(G, H, K) = meet(G, K, H)
 
@@ -56,6 +57,7 @@ DEPTH2 = {
     "AB": ["center(A × B)", "commutator(A × B)"],
     "GMN": ["M / N", "G / M", "normal-closure(M, N)"],
     "GHF": ["G / ker(F)"],
+    "Fam": ["center(prod-fam(F))", "commutator(prod-fam(F))", "prod-fam(F) / sum-fam(F)"],
 }
 
 
@@ -175,7 +177,7 @@ def build(lib, vocab, base, part, outdir):
 
 
 # Частей таблицы на базу (по числу строк и цене строки).
-PARTS = {"G": 2, "GN": 24, "AB": 16, "GHK": 32, "GMN": 12, "GHF": 16}
+PARTS = {"G": 2, "GN": 24, "AB": 16, "GHK": 32, "GMN": 12, "GHF": 16, "Fam": 1}
 
 
 def build_all(lib, vocab, job, jobs, outdir, threads):
@@ -247,6 +249,10 @@ def view(base_form, terms):
     v.m, v.s, v.e = b.m[:, cols], b.s[:, cols], b.e[:, cols]
     top = maximal(g, elems)
     v.need = [{i for i, a in enumerate(v.atoms) if t in a[2:]} for t in top]
+    gb = _STATE.get("forms", {}).get("G") or _STATE.get("generic")
+    if gb is not None:
+        GV = next(t for t in gb.own if isinstance(t, Var))
+        v.generic = (gb.e, {a[1]: i for i, a in enumerate(gb.atoms) if a[0] == "p" and a[2] == GV})
     return v
 
 
@@ -288,6 +294,10 @@ def run_schemes(a):
     outdir.mkdir(parents=True, exist_ok=True)
     jobs = []
     ks = [int(x) for x in str(a.k).split(",")]
+    try:  # таблица базы G — для фильтра условий об одном терме (generic_filter)
+        _STATE["generic"] = load(lib, vocab, "G", a.dir)
+    except (FileNotFoundError, ValueError) as e:
+        print(f"нет таблицы G для фильтра: {e}", file=sys.stderr)
     for base in a.bases.split(","):
         fp = _fp(base) + f":{a.k}"
         todo = schemes(vocab, base, ks[-1])
@@ -311,7 +321,7 @@ def run_schemes(a):
                 except Exception:
                     pass
             jobs.append((base, sid, terms, k_for(ks, tops[sid]), str(outdir), fp))
-        if any(j[0] == base for j in jobs):
+        if any(j[0] == base for j in jobs) or (base == "G" and a.bases != "G"):
             t = time.time()
             _STATE["forms"][base] = load(lib, vocab, base, a.dir)
             print(f"{base}: таблица {_STATE['forms'][base].e.shape}, {round(time.time() - t)} с",

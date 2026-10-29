@@ -83,7 +83,8 @@ class Vocab:
                 raise KeyError(f"свойство {p['id']} уже есть в словаре")
             self.props[p["id"]] = p["sort"] if isinstance(p["sort"], list) else [p["sort"]]
         drop = {x["id"] for x in patch.get("снять", [])}
-        missing = drop - {r["id"] for r in self.rules}
+        # правила «X:даёт:p» строятся из конструкций и могут быть не построены (check_rules)
+        missing = {x for x in drop - {r["id"] for r in self.rules} if ":даёт:" not in x}
         if missing:
             raise KeyError(f"снимаемых правил нет в базе: {sorted(missing)}")
         added = []

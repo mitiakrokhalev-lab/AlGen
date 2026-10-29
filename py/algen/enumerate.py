@@ -266,7 +266,7 @@ class Form:
             return f"{atom_name(atom)} у {where}"
         im = self._image(r, atom[2])
         t = atom[2]
-        if im is not None and im[0] == "mor":
+        if im is not None and im[0] in ("mor", "fam"):
             return f"{atom_name(atom)} у {self.where(r)}"
         if im is None and isinstance(t, App) and t.op in ("center", "commutator", "quotient"):
             # Не записан центр или коммутант: приписываем это группе, у которой его нет.
@@ -744,6 +744,36 @@ def minimal(alive):
     return out
 
 
+def generic_filter(form, mins):
+    """Условие только о свойствах одного терма t (не переменной) — по сути
+    условие о группах вообще. Оставляем его в схеме терма, только если общая
+    версия (t → произвольная группа базы G) опровергается библиотекой: значит,
+    условие держится на устройстве t («Inn(G) циклична ⇒ тривиальна»). Иначе
+    это повтор базы G (там оно и выдаётся) или общая теорема."""
+    gen = getattr(form, "generic", None)
+    if gen is None:
+        return mins
+    gm, gcol = gen  # матрица базы G и {свойство: номер атома}
+    out, dropped = {}, 0
+    for (prem, g), sup in mins.items():
+        lits = [form.lit(j) for j in prem] + [form.lit(g)]
+        ts = {a[2] for a, _ in lits}
+        t = next(iter(ts))
+        if len(ts) != 1 or any(a[0] != "p" for a, _ in lits) or isinstance(t, Var) \
+                or any(a[1] not in gcol for a, _ in lits):
+            out[prem, g] = sup
+            continue
+        cols = [2 * gcol[a[1]] + (0 if v else 1) for a, v in lits[:-1]]
+        a, v = lits[-1]
+        neg = 2 * gcol[a[1]] + (1 if v else 0)
+        if gm[:, cols + [neg]].all(axis=1).any():
+            out[prem, g] = sup  # общая версия опровергается — условие о терме
+        else:
+            dropped += 1
+    form.n_generic = dropped
+    return out
+
+
 def run(max_prem, lib=None, vocab=None, form=None):
     vocab = vocab or Vocab.section("grp")
     if lib is None:
@@ -762,6 +792,7 @@ def run(max_prem, lib=None, vocab=None, form=None):
             degen += [(("p", "trivial", t), True), (("p", "whole", t), True)]
     alive, empty = enumerate_form(form, max_prem)
     mins = minimal(alive)
+    mins = generic_filter(form, mins)
     report = []
     for (prem, g), support in mins.items():
         prem_l = [form.lit(j) for j in prem]
@@ -865,6 +896,9 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
         classes.setdefault(r["класс"], r)
     tally = Counter(r["вердикт"] for r in classes.values())
     print(f"строк в библиотеке {form.m.shape[0]}, литералов {form.m.shape[1]}", file=sys.stderr)
+    if getattr(form, "n_generic", 0):
+        print(f"убрано условий об одном терме, верных или открытых для всех групп (их место — база G): {form.n_generic}",
+              file=sys.stderr)
     print(f"не опровергнуто библиотекой {getattr(form, 'n_alive', len(alive))}, минимальных обо всех переменных {len(report)}, "
           f"запретов {len(classes)}: " + ", ".join(f"{k} {v}" for k, v in tally.most_common()), file=sys.stderr)
     print(f"посылок без единого примера: {len(empty)}", file=sys.stderr)

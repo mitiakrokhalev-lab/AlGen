@@ -69,8 +69,10 @@ class Library:
                            **({"подгруппы неполные": True} if partial else {})}
         self._aut_out()
         with open(infinite, encoding="utf-8") as f:
-            for r in json.load(f)["группы"]:
+            raw = json.load(f)
+            for r in raw["группы"]:
                 self.obj[r["id"]] = {"key": r["id"], "конечная": False, **r}
+        self.fam = {f["id"]: f for f in raw.get("семейства", [])}
         self.prod = load_products()
         # Свободные произведения и сплетения: поля записи «свободное произведение»
         # и «сплетение»: [A, B]. Сплетение A ≀ B не симметрично.
@@ -92,6 +94,18 @@ class Library:
                         raise KeyError(f"{o['key']}/{s['id']}: нет группы {k}")
         for o in self.obj.values():
             self._center_commutator(o)
+        for f in self.fam.values():
+            self._fam_props(f)
+
+    def _fam_props(self, f):
+        """Свойство семейства — у всех членов: да, если у всех да; нет, если у
+        кого-то нет; иначе неизвестно. finite-fam — конечно ли семейство."""
+        ms = [self.obj[k] for k in f["члены"] if k in self.obj]
+        props = {"finite-fam": not f["бесконечное"]}
+        for p in GROUP_PROPS:
+            vs = [m["свойства"].get(p) for m in ms]
+            props[p] = False if False in vs else True if vs and None not in vs else None
+        f["свойства"] = {k: v for k, v in props.items() if v is not None}
 
     def _aut_out(self):
         """Aut(G) и Out(G) конечных групп таблицы (data/finite/grp-aut.jsonl,
@@ -656,7 +670,11 @@ class Search:
             for f in self.morphisms(d, c):
                 env[t] = f
                 yield from self._assign(i + 1, env)
-        # прочие сорта (семейства, элементы) библиотека пока не перебирает
+        elif info.sort == "Grp.fam":
+            for k in self.lib.fam:
+                env[t] = ("fam", k)
+                yield from self._assign(i + 1, env)
+        # прочие сорта (элементы) библиотека пока не перебирает
         env.pop(t, None)
 
     def _image(self, t, env):
@@ -671,6 +689,17 @@ class Search:
             k = x and lib.obj[x].get("out")
             return ("obj", k) if k else None
         args = [self._image(a, env) for a in t.args]
+        if t.op in ("prod-fam", "sum-fam") and args[0] and args[0][0] == "fam":
+            f = lib.fam[args[0][1]]
+            k = f.get("∏" if t.op == "prod-fam" else "⊕")
+            if not k:
+                return None
+            if t.op == "sum-fam" and f.get("∏"):
+                # ⊕F ⩽ ∏F: подгруппа записи ∏F, изоморфная ⊕F
+                idx = self._sub_index(f["∏"], lambda x: x["≅"] == k)
+                if idx is not None:
+                    return ("sub", f["∏"], idx)
+            return ("obj", k)
         if t.op == "quotient" and args[0] and args[1] and args[1][0] == "sub":
             q = lib.obj[args[1][1]]["подгруппы"][args[1][2]].get("фактор")
             return ("obj", q) if q else None
@@ -762,6 +791,11 @@ class Search:
         for t in terms or self.g.terms:
             im = self._image(t, env)
             if im is None:
+                continue
+            if im[0] == "fam":
+                for p, v in self.lib.fam[im[1]]["свойства"].items():
+                    if self.g.v.prop_fits(p, self.g.terms[t].sort):
+                        out[("p", p, t)] = v
                 continue
             if im[0] == "mor":
                 for p, v in self._mor_facts(im).items():
@@ -903,6 +937,8 @@ class Search:
         if im[0] == "obj":
             o = self.lib.obj[im[1]]
             return o.get("имя", im[1])
+        if im[0] == "fam":
+            return self.lib.fam[im[1]].get("имя", im[1])
         s = self.lib.obj[im[1]]["подгруппы"][im[2]]
         return s.get("имя", self.lib.obj[s["≅"]].get("имя"))
 
