@@ -51,6 +51,12 @@ class Library:
             for r in json.load(f)["группы"]:
                 self.obj[r["id"]] = {"key": r["id"], "конечная": False, **r}
         self.prod = load_products()
+        # Свободные произведения: запись группы с полем «свободное произведение»: [A, B].
+        self.fprod = {}
+        for k, o in self.obj.items():
+            ab = o.get("свободное произведение")
+            if ab:
+                self.fprod[ab[0], ab[1]] = self.fprod[ab[1], ab[0]] = k
         for k, o in self.obj.items():
             for other, p in o.get("произведения", {}).items():
                 self.prod[k, other] = self.prod[other, k] = p
@@ -557,7 +563,7 @@ class Search:
             q = lib.obj[args[1][1]]["подгруппы"][args[1][2]].get("фактор")
             return ("obj", q) if q else None
         if t.op in ("prod", "freeprod") and all(a and a[0] == "obj" for a in args):
-            p = lib.prod.get((args[0][1], args[1][1])) if t.op == "prod" else None
+            p = (lib.prod if t.op == "prod" else lib.fprod).get((args[0][1], args[1][1]))
             return ("obj", p) if p else None
         if t.op in ("aut", "ab", "inn") and args[0] and args[0][0] == "obj":
             o = lib.obj[args[0][1]]
