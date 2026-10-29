@@ -19,6 +19,7 @@ import argparse
 import json
 import random
 import sys
+from pathlib import Path
 from multiprocessing import Pool
 
 from .finite import load as load_finite, load_products
@@ -736,3 +737,49 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# --- кэш библиотеки -------------------------------------------------------------
+
+CACHE = Path(__file__).resolve().parents[2] / "кэш"
+
+
+def _fingerprint():
+    """Хэш всего, от чего зависит построенная библиотека: данные и код."""
+    import hashlib
+    root = Path(__file__).resolve().parents[2]
+    files = sorted([*(root / "data" / "finite").glob("*.json*"), root / "data" / "infinite" / "grp.json",
+                    root / "data" / "new" / "grp.json", root / "data" / "vocab" / "grp.json",
+                    *(Path(__file__).parent / f for f in ("library.py", "logic.py", "finite.py"))])
+    h = hashlib.sha256()
+    for f in files:
+        if f.exists():
+            h.update(f.name.encode())
+            h.update(f.read_bytes())
+    return h.hexdigest()[:16]
+
+
+def built_library(vocab=None):
+    """Library с saturate() и synthesize_products(), из кэша на диске, если данные
+    и код не менялись. Построение — пара минут, загрузка из кэша — секунды."""
+    import pickle
+    vocab = vocab or Vocab.section("grp")
+    path = CACHE / f"библиотека-{_fingerprint()}.pickle"
+    if path.exists():
+        try:
+            with open(path, "rb") as f:
+                return pickle.load(f)
+        except Exception:
+            pass
+    lib = Library()
+    lib.saturate()
+    lib.synthesize_products(vocab)
+    try:
+        CACHE.mkdir(exist_ok=True)
+        for old in CACHE.glob("библиотека-*.pickle"):
+            old.unlink()
+        with open(path, "wb") as f:
+            pickle.dump(lib, f, protocol=pickle.HIGHEST_PROTOCOL)
+    except Exception as e:  # кэш — только ускорение
+        print(f"кэш библиотеки не записан: {e}", file=sys.stderr)
+    return lib

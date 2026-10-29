@@ -41,7 +41,7 @@ import numpy as np
 
 from types import SimpleNamespace
 
-from .library import GROUP_PROPS, MARKS, SUB_PROPS, Library, Scene, Search, jobs
+from .library import GROUP_PROPS, MARKS, SUB_PROPS, Library, Scene, Search, built_library, jobs
 from .logic import App, Theory, Var, Vocab, decide
 
 # Свойства, которые не входят в атомы формы (флаг --без): схемы с большим
@@ -322,7 +322,8 @@ class SchemeForm(Form):
         self.fixed = [2 * self.index[a] + (0 if v else 1) for a, v in fixed if a in self.index]
         self.fixed_lits = fixed
         levels = {"m": (), "s": ("трудно",), "e": MARKS}
-        rows, self.envs, self.skipped = {k: [] for k in levels}, [], []
+        rows, self.envs, self.skipped, self.row_facts = {k: [] for k in levels}, [], [], []
+        derived = self._derived = {}  # кэш вывода: одинаковые наборы записанных значений — одна строка
         for env in self.search._assign(0, {}):
             if max_subs and any(im[0] == "sub" and im[2] >= max_subs for im in env.values()):
                 continue
@@ -337,29 +338,52 @@ class SchemeForm(Form):
                     rows[k].append(full)
                     continue
                 f = {a: v for a, v in facts.items() if not (a in hard and hard[a][0] in drop)}
-                row = self._derive(f)
+                key = frozenset(f.items())
+                row = derived.get(key)
+                if row is None:
+                    row = derived[key] = self._derive(f)
                 rows[k].append(row)
                 full = full or row
             self.envs.append(dict(env))
+            self.row_facts.append((facts, hard))
         self.m, self.s, self.e = (self._matrix(rows[k]) for k in levels)
         self.names = list(range(len(self.envs)))
 
     def _derive(self, facts):
+        """Значения атомов, следующие из записанных: ядро («backbone») решателя.
+        Одна модель задаёт кандидата для каждого атома; атом проверяется одним
+        вызовом, а атомы, которые разошлись с найденными моделями, — неизвестны."""
         T, s = self.sc.T, self.sc.s
         assume = [l for a, v in facts.items() if (l := T.lit(a, v)) not in (None, False)]
-        out = []
-        for a in self.atoms:
-            if a in facts:
-                out.append(facts[a])
+        lits = {a: T.lit(a) for a in self.atoms if a not in facts}
+        lits = {a: l for a, l in lits.items() if type(l) is int}  # 1 == True в Python: сравнивать нельзя
+        if not s.solve(assumptions=assume):
+            return [facts.get(a) for a in self.atoms]
+        model = set(s.get_model())
+        seen_t = {a for a, l in lits.items() if l in model}      # встречалось «верно»
+        seen_f = {a for a, l in lits.items() if -l in model}     # встречалось «ложно»
+        val = {}
+        for a, l in lits.items():
+            if a in seen_t and a in seen_f:
                 continue
-            l = T.lit(a)
-            if not s.solve(assumptions=assume + [-l]):
-                out.append(True)
-            elif not s.solve(assumptions=assume + [l]):
-                out.append(False)
+            if a not in seen_t and a not in seen_f:
+                # переменной нет в модели (решатель её не видел): две проверки
+                if not s.solve(assumptions=assume + [-l]):
+                    val[a] = True
+                elif not s.solve(assumptions=assume + [l]):
+                    val[a] = False
+                continue
+            want = a in seen_t  # единственное пока значение
+            if s.solve(assumptions=assume + [-l if want else l]):
+                m = set(s.get_model())
+                for b, lb in lits.items():
+                    if lb in m:
+                        seen_t.add(b)
+                    elif -lb in m:
+                        seen_f.add(b)
             else:
-                out.append(None)
-        return out
+                val[a] = want
+        return [facts[a] if a in facts else val.get(a) for a in self.atoms]
 
     def synthetic(self, r):
         return any(im[0] == "obj" and self.lib.obj[im[1]].get("синтез") for im in self.envs[r].values())
@@ -374,16 +398,20 @@ class SchemeForm(Form):
         return ", ".join(f"{t} = {self.search._name(im)}" for t, im in env.items())
 
     def marked(self, r, mark):
-        _, hard = self.search.facts(self.envs[r])
+        _, hard = self.row_facts[r]
         return sorted(((a, name) for a, (m, name) in hard.items() if m == mark), key=lambda x: str(x[0]))
 
     def row_keeping(self, r, keep, mark):
         k = (r, keep, mark)
         if k not in self._kept:
-            facts, hard = self.search.facts(self.envs[r])
+            facts, hard = self.row_facts[r]
             drop = ("трудно",) if mark == "трудно" else MARKS
             f = {a: v for a, v in facts.items() if not (a in hard and hard[a][0] in drop and a not in keep)}
-            self._kept[k] = self._matrix([self._derive(f)])[0]
+            key = frozenset(f.items())
+            row = self._derived.get(key)
+            if row is None:
+                row = self._derived[key] = self._derive(f)
+            self._kept[k] = self._matrix([row])[0]
         return self._kept[k]
 
 
@@ -442,10 +470,19 @@ def cover(options):
     (options[i] — список frozenset) был выбран целиком. Возвращает для
     каждого условия выбранный набор: решающий факт условия."""
     chosen, left, out = set(), set(range(len(options))), [None] * len(options)
+    inv = defaultdict(set)  # элемент набора → условия, где он встречается
+    for i, opts in enumerate(options):
+        for t in opts:
+            for e in t:
+                inv[e].add(i)
     while left:
         def gain(c):
-            n = sum(1 for i in left if any(t <= chosen | c for t in options[i]))
-            return n / max(1, len(c - chosen))
+            new = c - chosen
+            if not new:
+                return 0
+            cand = set().union(*(inv[e] for e in new)) & left
+            n = sum(1 for i in cand if any(t <= chosen | c for t in options[i]))
+            return n / len(new)
         best = max({c for i in left for c in options[i]}, key=lambda c: (gain(c), sorted(c)))
         chosen |= best
         for i in list(left):
@@ -509,9 +546,7 @@ def minimal(alive):
 def run(max_prem, lib=None, vocab=None, form=None):
     vocab = vocab or Vocab.section("grp")
     if lib is None:
-        lib = Library()
-        lib.saturate()
-        lib.synthesize_products(vocab)
+        lib = built_library(vocab)
     form = form or Form(lib, vocab)
     fixed = getattr(form, "fixed_lits", [])
     graph = form.sc.T.g
@@ -610,9 +645,7 @@ def main():
     form = None
     if a.decl:
         vocab = Vocab.section("grp")
-        lib = Library()
-        lib.saturate()
-        lib.synthesize_products(vocab)
+        lib = built_library(vocab)
         form = SchemeForm(lib, vocab, a.decl, [x for x in a.terms.split(";") if x.strip()], a.max_subs)
         form, alive, empty, report = run(a.k, lib, vocab, form)
     else:

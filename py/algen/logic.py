@@ -126,6 +126,20 @@ class Var:
     def __str__(self):
         return self.name
 
+    def __hash__(self):  # кэш: термы — ключи словарей в горячих циклах
+        h = self.__dict__.get("_h")
+        if h is None:
+            h = hash(("Var", self.name))
+            object.__setattr__(self, "_h", h)
+        return h
+
+    def __getstate__(self):  # хэш строк зависит от процесса: кэш не сохраняем
+        return {k: v for k, v in self.__dict__.items() if k != "_h"}
+
+    def __setstate__(self, st):
+        for k, v in st.items():
+            object.__setattr__(self, k, v)
+
 
 @dataclass(frozen=True)
 class App:
@@ -133,6 +147,20 @@ class App:
 
     op: str
     args: tuple
+
+    def __hash__(self):
+        h = self.__dict__.get("_h")
+        if h is None:
+            h = hash((self.op, self.args))
+            object.__setattr__(self, "_h", h)
+        return h
+
+    def __getstate__(self):  # хэш строк зависит от процесса: кэш не сохраняем
+        return {k: v for k, v in self.__dict__.items() if k != "_h"}
+
+    def __setstate__(self, st):
+        for k, v in st.items():
+            object.__setattr__(self, k, v)
 
     def __str__(self):
         return f"{self.op}({', '.join(map(str, self.args))})"
