@@ -1,0 +1,65 @@
+name: перебор
+
+# Пакетный перебор схем на 20 машинах: python3 -m algen.batch с --часть i/20.
+# Запуск: пуш в ветку «перебор-…» (workflow_dispatch работает, когда файл есть в main).
+# Результаты каждой машины — артефакт «часть-i»; общую сводку собирает задание «сводка».
+
+on:
+  push:
+    branches: ["перебор-*"]   # прогон запускается пушем в ветку перебор-…
+  workflow_dispatch:
+    inputs:
+      schemes:
+        description: "файл схем"
+        default: "data/schemes/grp.txt"
+      args:
+        description: "доп. флаги algen.batch"
+        default: "--без bounded-exponent"
+
+jobs:
+  part:
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: перебор
+        run: |
+          cd py
+          python3 -m algen.batch прогон "../${{ inputs.schemes || 'data/schemes/grp.txt' }}" --каталог ../out --нитей 4 --память 3.5 \
+            --часть ${{ matrix.part }}/20 ${{ inputs.args || '--без bounded-exponent' }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: часть-${{ matrix.part }}
+          path: out
+          retention-days: 30
+
+  summary:
+    needs: part
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - run: |
+          mkdir -p all && cp parts/*/*.json parts/*/*.txt all/ 2>/dev/null || true
+          cd py && python3 -m algen.batch сводка ../all
+      - uses: actions/upload-artifact@v4
+        with:
+          name: все-схемы
+          path: all
+          retention-days: 30
