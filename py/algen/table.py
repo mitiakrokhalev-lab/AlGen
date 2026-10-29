@@ -44,14 +44,15 @@ BASES = {
 
 # Конструкции вселенной (термы-«вершины» схем).
 CONS = ["center", "commutator", "ab", "aut", "inn", "quotient", "prod", "freeprod", "wreath",
-        "meet", "join", "normalizer", "centralizer", "normal-closure", "ker", "im", "torsion"]
+        "meet", "join", "normalizer", "centralizer", "normal-closure", "ker", "im", "torsion", "frattini"]
 SYMMETRIC = {"prod", "freeprod"}            # A × B ≅ B × A: берём один порядок
 SYMMETRIC_SUB = {"meet", "join"}            # meet(G, H, K) = meet(G, K, H)
 
 # Термы глубины 2, известные по задачам (подтермы добавляются сами).
 DEPTH2 = {
     "G": ["center(commutator(G))", "commutator(commutator(G))", "G / center(G)",
-          "center(G / center(G))", "G / commutator(G)", "aut(G) / inn(G)"],
+          "center(G / center(G))", "G / commutator(G)", "aut(G) / inn(G)",
+          "G / frattini(G)"],
     "AB": ["center(A × B)", "commutator(A × B)"],
     "GMN": ["M / N", "G / M", "normal-closure(M, N)"],
     "GHF": ["G / ker(F)"],

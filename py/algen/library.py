@@ -52,7 +52,8 @@ class Library:
                                    if s.get(k) is not None}}
                                for i, s in enumerate(r["subs"])],
                            "центр": None if r.get("center") is None else str(r["center"]),
-                           "коммутант": None if r.get("commutator") is None else str(r["commutator"])}
+                           "коммутант": None if r.get("commutator") is None else str(r["commutator"]),
+                           "фраттини": None if r.get("frattini") is None else str(r["frattini"])}
         self._aut_out()
         with open(infinite, encoding="utf-8") as f:
             for r in json.load(f)["группы"]:
@@ -664,10 +665,10 @@ class Search:
                 s = next((x for x in o["подгруппы"] or [] if x["id"] == sid), None)
                 k = s.get("фактор") if s else None
             return ("obj", k) if k else None
-        if t.op in ("center", "commutator") and self._obj(args[0]):
+        if t.op in ("center", "commutator", "frattini") and self._obj(args[0]):
             key = self._obj(args[0])
             o = lib.obj[key]
-            sid = o.get({"center": "центр", "commutator": "коммутант"}[t.op])
+            sid = o.get({"center": "центр", "commutator": "коммутант", "frattini": "фраттини"}[t.op])
             idx = self._sub_index(key, lambda x: x["id"] == sid) if sid is not None else None
             return ("sub", key, idx) if idx is not None else None
         if t.op in ("ker", "im") and args[0] and args[0][0] == "mor":

@@ -109,6 +109,7 @@ FINITE_DERIVED = {
     "linear": lambda p: True,
     "polycyclic": lambda p: p["solvable"],
     "bounded-exponent": lambda p: True,
+    "free-abelian": lambda p: p["trivial"],
 }
 
 

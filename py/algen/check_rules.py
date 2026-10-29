@@ -332,6 +332,10 @@ def main():
         drop = {x["id"] for x in patch.get("снять", [])}
         new = {x["id"] for x in patch.get("добавить", [])}
         rules = [r for r in rules if r["id"] not in drop] + [r for r in v.rules if r["id"] in new]
+    # сцена записи базы может быть словарём {"N": {"sort": …, "ambient": "X"}}
+    rules = [{**r, "scene": [{"name": k, "sort": v} if isinstance(v, str) else {"name": k, **v}
+                             for k, v in r["scene"].items()]} if isinstance(r["scene"], dict) else r
+             for r in rules]
     with Pool(a.jobs) as pool:
         report = pool.map(_one, rules, chunksize=1)
     if a.as_json:
