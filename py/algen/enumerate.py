@@ -50,6 +50,10 @@ SKIP = set()
 MOR_PROPS = ("injective", "surjective", "iso", "zero-mor")
 RELATIONS = True  # атомы-отношения между термами схемы (⩽, =, ≅)
 DIVERSE = 4  # моделей «наоборот» в _derive
+CORE_PROPS = {"trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable", "nilpotent",
+              "perfect", "torsion-free", "periodic", "divisible", "centerless", "residually-finite",
+              "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent", "free-abelian", "p-group"}
+CORE_SUB = {"normal", "characteristic", "maximal", "whole", "central", "finite-index", "complemented"}
 
 
 def relation_atoms(g, terms):
@@ -375,12 +379,18 @@ class SchemeForm(Form):
         self.atoms = []
         for t in own:
             sort = g.terms[t].sort
+            # у построенных термов — только основные свойства (арифметика порядка,
+            # экспоненты, индексы — у переменных схемы): иначе шум растёт кратно
+            ps = props() if isinstance(t, Var) else [p for p in props() if p in CORE_PROPS]
+            sps = SUB_PROPS if isinstance(t, Var) else [p for p in SUB_PROPS if p in CORE_SUB]
             if sort == "Grp.obj":
-                self.atoms += [("p", p, t) for p in props()]
+                self.atoms += [("p", p, t) for p in ps]
             elif sort == "Grp.sub":
-                self.atoms += [("p", p, t) for p in list(SUB_PROPS) + props()]
+                self.atoms += [("p", p, t) for p in list(sps) + ps]
             elif sort == "Grp.mor":
                 self.atoms += [("p", p, t) for p in MOR_PROPS]
+            elif sort == "Grp.fam":
+                self.atoms += [("p", p, t) for p in ps + ["finite-fam"] if g.v.prop_fits(p, sort)]
         if RELATIONS:
             self.atoms += relation_atoms(g, own)
         self.index = {a: i for i, a in enumerate(self.atoms)}

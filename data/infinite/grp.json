@@ -7143,7 +7143,10 @@
    ],
    "центр": "все",
    "коммутант": "1",
-   "без произведений": true
+   "без произведений": true,
+   "aut": "AutCp",
+   "out": "AutCp",
+   "почему aut": "Aut(C_p) ≅ (ℤ/p)ˣ ≅ C_{p−1}; Inn тривиальна"
   },
   {
    "id": "E2Cx",
@@ -10768,6 +10771,71 @@
      "фактор": "1:1"
     }
    ]
+  },
+  {
+   "id": "AutCp",
+   "имя": "Aut(C_p) ≅ C_{p−1} (p > 10⁷⁵)",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": true,
+    "finite": true,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "polycyclic": true,
+    "hopfian": true,
+    "linear": true,
+    "prime-order": false,
+    "order-p2": false,
+    "odd-order": false,
+    "exponent-2": false,
+    "exponent-3": false
+   },
+   "почему": {
+    "simple": "p − 1 чётно и больше 2",
+    "odd-order": "p − 1 чётно"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "AutCp"
+    },
+    {
+     "id": "все",
+     "имя": "C_{p−1}",
+     "≅": "AutCp",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1"
   }
  ],
  "семейства": [
