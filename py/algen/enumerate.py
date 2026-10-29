@@ -166,6 +166,38 @@ class Form:
             return None
         return min(rows, key=self.synthetic)
 
+    def unknown_rows(self, prem, g):
+        """Все строки, где посылки верны, а значение цели не записано и не выводится."""
+        return np.flatnonzero(self.m[:, list(prem) + self.fixed].all(axis=1) & ~self.m[:, g] & ~self.m[:, g ^ 1])
+
+    def _image(self, r, t):
+        """Образ терма t в строке r: ("obj", ключ) или ("sub", ключ, номер)."""
+        key, sub = self.names[r]
+        if t == self.sc.G:
+            return ("obj", key)
+        if t == self.sc.N:
+            return ("sub", key, sub)
+        q = self.lib.obj[key]["подгруппы"][sub].get("фактор")
+        return ("obj", q) if q else None
+
+    def value_name(self, r, atom):
+        """Имя недостающего значения атома в строке r — «решающее значение».
+        Значение у построенного произведения приписывается множителю, у которого
+        не записано больше значений: обычно оно оттуда и берётся."""
+        im = self._image(r, atom[2])
+        if im is None:
+            return f"{atom_name(atom)} у {self.where(r)}"
+        p, lib = atom[1], self.lib
+        if im[0] == "sub" and p in SUB_PROPS:
+            key, what = im[1], f"{p}({atom[2]})"
+        else:
+            key = im[1] if im[0] == "obj" else lib.obj[im[1]]["подгруппы"][im[2]]["≅"]
+            what = p
+            key = base_factor(lib, key, p)
+            return f"{what}({lib.obj[key].get('имя', key)})"
+        key = base_factor(lib, key, None)
+        return f"{what} у {lib.obj[key].get('имя', key)}"
+
     def refuters(self, prem, g, m=None):
         """Строки матрицы (по умолчанию m), где посылки верны, а цель ложна."""
         m = self.m if m is None else m
@@ -305,6 +337,9 @@ class SchemeForm(Form):
     def synthetic(self, r):
         return any(im[0] == "obj" and self.lib.obj[im[1]].get("синтез") for im in self.envs[r].values())
 
+    def _image(self, r, t):
+        return self.search._image(t, self.envs[r])
+
     def where(self, r):
         return self.where_env(self.envs[r])
 
@@ -323,6 +358,52 @@ class SchemeForm(Form):
             f = {a: v for a, v in facts.items() if not (a in hard and hard[a][0] in drop and a not in keep)}
             self._kept[k] = self._matrix([self._derive(f)])[0]
         return self._kept[k]
+
+
+def _unknowns(o):
+    """Сколько у записи не хватает: незаписанные свойства, центр, коммутант."""
+    return (sum(o["свойства"].get(p) is None for p in GROUP_PROPS)
+            + (o.get("центр") is None) + (o.get("коммутант") is None))
+
+
+def base_factor(lib, key, p):
+    """Для построенного произведения A × B — множитель, к которому относится
+    недостающее значение свойства p (None — для подгрупп): тот, у которого p
+    не записано, а если неясно — у которого вообще меньше записано. Для
+    записанных групп — сама группа."""
+    o = lib.obj.get(key)
+    if not o or not o.get("синтез"):
+        return key
+    inv = getattr(lib, "_prod_inv", None)
+    if inv is None:
+        inv = lib._prod_inv = {k: ab for ab, k in lib.prod.items()}
+    a, b = inv.get(key, (None, None))
+    if a is None:
+        return key
+    fa, fb = (base_factor(lib, x, p) for x in (a, b))
+    oa, ob = lib.obj[fa], lib.obj[fb]
+    if p is not None:
+        ua, ub = oa["свойства"].get(p) is None, ob["свойства"].get(p) is None
+        if ua != ub:
+            return fa if ua else fb
+    ua, ub = _unknowns(oa), _unknowns(ob)
+    if ua == ub:
+        return key
+    return fa if ua > ub else fb
+
+
+def decisive(classes_opts):
+    """Жадное покрытие: {запрет: множество имён значений} → [(имя, [запреты])].
+    Каждый запрет попадает к первому выбранному значению, которое его касается."""
+    left = {t for t, o in classes_opts.items() if o}
+    out = []
+    while left:
+        cnt = Counter(v for t in left for v in classes_opts[t])
+        best = max(cnt, key=lambda v: (cnt[v], v))
+        hit = sorted(t for t in left if best in classes_opts[t])
+        out.append((best, hit))
+        left -= set(hit)
+    return out
 
 
 def cover(options):
@@ -437,6 +518,7 @@ def run(max_prem, lib=None, vocab=None, form=None):
             hint = form.unknown_goal(prem, g)
             if hint is not None:
                 r["заполнить"] = {"где": form.where(hint), "атом": atom_name(goal[0])}
+                r["значения"] = sorted({form.value_name(x, goal[0]) for x in form.unknown_rows(prem, g)})
         # Опровергается только помеченным значением: условие не закрыто.
         for mat, mark, kind in ((form.s, "короткий довод", "короткий довод"),
                                 (form.m, "трудно", "трудный контрпример")):
@@ -486,6 +568,8 @@ def main():
     ap.add_argument("--json", dest="out", help="записать остаток и трудные контрпримеры в JSON")
     ap.add_argument("--короткие", dest="short", action="store_true",
                     help="показать и условия, опровергнутые только коротким доводом")
+    ap.add_argument("--полностью", dest="full", action="store_true",
+                    help="кроме сводки по решающим значениям, напечатать все запреты остатка кластерами")
     a = ap.parse_args()
     form = None
     if a.decl:
@@ -515,17 +599,37 @@ def main():
                        "короткий довод": [r for r in report if r["вердикт"] == "короткий довод"],
                        "выводится": sum(r["вердикт"] == "выводится" for r in report)},
                       f, ensure_ascii=False, indent=1)
-    seen, hints = {}, defaultdict(set)
+    seen, hints, vals = {}, defaultdict(set), defaultdict(set)
     for r in report:
         if r["вердикт"] != "неизвестно":
             continue
         t = r["класс"]
         seen.setdefault(t, r["примеров"])
+        vals[t] |= set(r.get("значения", ()))
         if r.get("заполнить"):
             h = r["заполнить"]
             hints[t].add(f"{h['атом']} у {h['где']}")
+    # Сводка остатка по решающим значениям: одно незаписанное значение
+    # (обычно у одной группы библиотеки) отвечает за десятки запретов.
+    # Полный список запретов — ниже (--полностью) и в --json.
+    dec = decisive({t: vals[t] for t in seen})
+    bare = sorted(t for t in seen if not vals[t])
+    print(f"== решающих значений {len(dec)}: касаются {len(seen) - len(bare)} запретов; "
+          f"без кандидата {len(bare)} ==")
+    for v, ts in dec:
+        print(f"значение {v} — запретов {len(ts)}; например: {' & '.join(ts[0])}")
+    print(f"== без кандидата: нужен пример или правило ==")
+    for pair, thirds in clusters(bare):
+        if len(thirds) == 1:
+            print(f"не бывает? {' & '.join(pair + tuple(thirds))}   [примеров посылок: {seen[tuple(sorted(pair + tuple(thirds)))]}]")
+        else:
+            print(f"не бывает? {' & '.join(pair)} & одно из: {', '.join(thirds)}   [запретов {len(thirds)}]")
+    print(f"решающих значений {len(dec)} на {len(seen) - len(bare)} запретов, без кандидата {len(bare)} "
+          f"в {len(clusters(bare))} кластерах", file=sys.stderr)
     groups = clusters(list(seen))
-    for pair, thirds in groups:
+    if a.full:
+        print("== все запреты остатка ==")
+    for pair, thirds in groups if a.full else ():
         ts = [tuple(sorted(pair + (x,))) for x in thirds]
         hint = sorted(set().union(*(hints[t] for t in ts)))
         tail = "; заполнить " + ", ".join(hint[:3]) + (" …" if len(hint) > 3 else "") if hint else ""
