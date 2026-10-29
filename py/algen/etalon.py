@@ -27,7 +27,8 @@ from .logic import DATA, Graph, Theory, Vocab, decide
 
 ETALON = DATA / "etalon" / "эталон.jsonl"
 SORTS = {"grp": {"Grp": ("Grp.obj", None), "Sub": ("Grp.sub", "ambient"), "Fam": ("Grp.fam", None),
-                 "Mor": ("Grp.mor", ("dom", "cod"))}}
+                 "Mor": ("Grp.mor", ("dom", "cod")),
+                 "GSet": ("Grp.gset", "ambient"), "Pt": ("Grp.pt", "ambient")}}
 # Короткие обозначения конструкций в записи эталона.
 OPS = {"grp": {"Z": "center", "Φ": "frattini", "Inn": "inn", "Aut": "aut", "ab": "ab", "∏": "prod-fam", "⊕": "sum-fam",
                "ker": "ker", "im": "im", "commutator": "commutator", "center": "center"}}
@@ -139,6 +140,8 @@ def scheme(vocab, fact):
         # «∀ H, K : Sub(G) | …» — несколько переменных одного сорта, посылки после всех
         for name in (x.strip() for x in many.split(",")):
             names[name] = g.var(name, s, **links)
+            if s == "Grp.gset":  # G-множество непусто: точка x_A для правил о стабилизаторах
+                g.var(f"x_{name}", "Grp.pt", ambient=names[name])
         prem += [literal(g, x, names, section) for x in split_top(lits, ",")]
     goal = literal(g, fact["цель"], names, section) if fact.get("цель") else None
     return g, prem, goal

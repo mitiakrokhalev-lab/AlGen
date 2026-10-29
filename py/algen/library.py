@@ -718,8 +718,71 @@ class Search:
             for k in self.lib.fam:
                 env[t] = ("fam", k)
                 yield from self._assign(i + 1, env)
+        elif info.sort == "Grp.gset":
+            amb = self._obj(self._image(info.links.get("ambient"), env))
+            if amb is None:
+                return
+            for a in self.actions(amb):
+                env[t] = a
+                yield from self._assign(i + 1, env)
+        elif info.sort == "Grp.pt":
+            a = self._image(info.links.get("ambient"), env)
+            if not a or a[0] != "act":
+                return
+            subs = self.lib.obj[a[1]]["подгруппы"]
+            for j in range(len(a[2])):
+                env[t] = ("pt", a, j)
+                yield from self._assign(i + 1, env)
+                # другая точка той же орбиты: стабилизатор — другая сопряжённая с Hⱼ
+                if subs[a[2][j]]["свойства"].get("normal") is False:
+                    env[t] = ("pt", a, j, "g")
+                    yield from self._assign(i + 1, env)
         # прочие сорта (элементы) библиотека пока не перебирает
         env.pop(t, None)
+
+    # Действия: ("act", ключ группы, (i₁, …)) — дизъюнктное объединение
+    # G/Hᵢ₁ ⊔ …, Hᵢ — представители классов подгрупп записи (стабилизаторы
+    # точек орбит). Точка — ("pt", действие, номер орбиты).
+    def actions(self, key):
+        subs = self.lib.obj[key]["подгруппы"] or []
+        one, whole = self._one(key), self._all(key)
+        out = [("act", key, (j,)) for j in range(len(subs))]
+        if whole is not None:
+            out.append(("act", key, (whole, whole)))       # тривиальное на двух точках
+        if one is not None and whole is not None:
+            out.append(("act", key, (one, whole)))         # точное нетранзитивное
+        return out
+
+    def _core(self, key, idxs):
+        """Наибольшая нормальная подгруппа, лежащая во всех Hᵢ (ядро действия)."""
+        subs = self.lib.obj[key]["подгруппы"]
+        hs = [subs[j] for j in idxs]
+        if any(h["≅"] == "1:1" for h in hs):
+            return self._one(key)
+        if len(set(idxs)) == 1 and hs[0]["свойства"].get("normal"):
+            return idxs[0]
+        if not self.lib.obj[key]["конечная"] or any(x.get("над") is None for x in subs):
+            return None
+        best = None
+        for j, n in enumerate(subs):
+            if n["свойства"].get("normal") and all(h["id"] in n["над"] for h in hs):
+                if best is None or int(n["≅"].split(":")[0]) > int(subs[best]["≅"].split(":")[0]):
+                    best = j
+        return best
+
+    def _act_facts(self, a):
+        _, key, orbs = a
+        subs = self.lib.obj[key]["подгруппы"]
+        hs = [subs[j] for j in orbs]
+        tr = len(orbs) == 1
+        core = self._core(key, orbs)
+        free = all(h["≅"] == "1:1" for h in hs)
+        single = tr and bool(hs[0]["свойства"].get("whole"))
+        fin = [h["свойства"].get("finite-index") for h in hs]
+        prim = (True if single else hs[0]["свойства"].get("maximal")) if tr else False
+        return {"transitive": tr, "free-act": free, "regular": tr and free, "singleton-set": single,
+                "finite-set": None if None in fin else all(fin), "primitive": prim,
+                "faithful": None if core is None else subs[core]["≅"] == "1:1"}
 
     def _image(self, t, env):
         if t in env:
@@ -762,6 +825,21 @@ class Search:
                 s = next((x for x in o["подгруппы"] or [] if x["id"] == sid), None)
                 k = s.get("фактор") if s else None
             return ("obj", k) if k else None
+        if t.op == "coset-act" and args[1] and args[1][0] == "sub":
+            return ("act", args[1][1], (args[1][2],))
+        if t.op == "regular-act" and self._obj(args[0]):
+            j = self._one(self._obj(args[0]))
+            return ("act", self._obj(args[0]), (j,)) if j is not None else None
+        if t.op == "choose-pt" and args[1] and args[1][0] == "act":
+            return ("pt", args[1], 0)
+        if t.op == "base-pt" and args[1] and args[1][0] == "sub":
+            return ("pt", ("act", args[1][1], (args[1][2],)), 0)
+        if t.op == "stab" and args[2] and args[2][0] == "pt":
+            a, j = args[2][1], args[2][2]
+            return ("sub", a[1], a[2][j], *args[2][3:])
+        if t.op == "act-ker" and args[1] and args[1][0] == "act":
+            c = self._core(args[1][1], args[1][2])
+            return ("sub", args[1][1], c) if c is not None else None
         if t.op in ("center", "commutator", "frattini", "torsion") and self._obj(args[0]):
             key = self._obj(args[0])
             o = lib.obj[key]
@@ -841,6 +919,13 @@ class Search:
                     if self.g.v.prop_fits(p, self.g.terms[t].sort):
                         out[("p", p, t)] = v
                 continue
+            if im[0] == "pt":
+                continue
+            if im[0] == "act":
+                for p, v in self._act_facts(im).items():
+                    if v is not None and self.g.v.prop_fits(p, self.g.terms[t].sort):
+                        out[("p", p, t)] = v
+                continue
             if im[0] == "mor":
                 for p, v in self._mor_facts(im).items():
                     if v is not None and self.g.v.prop_fits(p, self.g.terms[t].sort):
@@ -862,6 +947,12 @@ class Search:
         for i, (a, ia) in enumerate(items):
             for b, ib in items[i + 1:]:
                 if ia[1] == ib[1] and self.g.terms[a].links.get("ambient") == self.g.terms[b].links.get("ambient"):
+                    if ia[2] == ib[2] and ia[3:] != ib[3:]:
+                        # разные сопряжённые одного класса (стабилизаторы двух точек орбиты)
+                        out[("r", "eq-sub", *sorted((a, b), key=str))] = False
+                        if self.lib.obj[ia[1]].get("конечная"):
+                            out[("r", "le", a, b)] = out[("r", "le", b, a)] = False
+                        continue
                     out[("r", "eq-sub", *sorted((a, b), key=str))] = ia[2] == ib[2]
                     # ⩽ в очевидных случаях: равные, 1 ⩽ всё, всё ⩽ всей группы
                     for x, ix, y, iy in ((a, ia, b, ib), (b, ib, a, ia)):
@@ -983,6 +1074,14 @@ class Search:
             return o.get("имя", im[1])
         if im[0] == "fam":
             return self.lib.fam[im[1]].get("имя", im[1])
+        if im[0] == "act":
+            subs = self.lib.obj[im[1]]["подгруппы"]
+            g = self._name(("obj", im[1]))
+            return " ⊔ ".join(f"{g}/{subs[j].get('имя') or self._name(('obj', subs[j]['≅']))}" for j in im[2])
+        if im[0] == "pt":
+            subs = self.lib.obj[im[1][1]]["подгруппы"]
+            h = subs[im[1][2][im[2]]]
+            return ("другая точка" if im[3:] else "точка") + f" со стабилизатором ≅ {self._name(('obj', h['≅']))}"
         s = self.lib.obj[im[1]]["подгруппы"][im[2]]
         return s.get("имя", self.lib.obj[s["≅"]].get("имя"))
 
