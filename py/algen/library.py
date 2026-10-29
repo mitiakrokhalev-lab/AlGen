@@ -104,6 +104,14 @@ class Library:
         self._quantified_props()
         for f in self.fam.values():
             self._fam_props(f)
+        # Направленные системы: члены, свойства отображений, прямой и обратный пределы.
+        self.diag = {f["id"]: f for f in raw.get("системы", [])}
+        for f in self.diag.values():
+            self._fam_props(f)
+            f["свойства"].pop("finite-fam", None)
+            for k in ("injective-sys", "surjective-sys", "constant-sys"):
+                if f.get(k) is not None:
+                    f["свойства"][k] = f[k]
 
     def _quantified_props(self):
         """Свойства с квантором по подгруппам («кванторные» в data/new/grp.json):
@@ -719,6 +727,10 @@ class Search:
             for f in self.morphisms(d, c):
                 env[t] = f
                 yield from self._assign(i + 1, env)
+        elif info.sort == "Grp.diag":
+            for k in self.lib.diag:
+                env[t] = ("diag", k)
+                yield from self._assign(i + 1, env)
         elif info.sort == "Grp.fam":
             for k in self.lib.fam:
                 env[t] = ("fam", k)
@@ -812,6 +824,9 @@ class Search:
             k = x and lib.obj[x].get("out")
             return ("obj", k) if k else None
         args = [self._image(a, env) for a in t.args]
+        if t.op in ("colim", "lim") and args[0] and args[0][0] == "diag":
+            k = lib.diag[args[0][1]].get("прямой предел" if t.op == "colim" else "обратный предел")
+            return ("obj", k) if k else None
         if t.op in ("prod-fam", "sum-fam") and args[0] and args[0][0] == "fam":
             f = lib.fam[args[0][1]]
             k = f.get("∏" if t.op == "prod-fam" else "⊕")
@@ -940,8 +955,8 @@ class Search:
             im = self._image(t, env)
             if im is None:
                 continue
-            if im[0] == "fam":
-                for p, v in self.lib.fam[im[1]]["свойства"].items():
+            if im[0] in ("fam", "diag"):
+                for p, v in (self.lib.fam if im[0] == "fam" else self.lib.diag)[im[1]]["свойства"].items():
                     if self.g.v.prop_fits(p, self.g.terms[t].sort):
                         out[("p", p, t)] = v
                 continue
@@ -1132,6 +1147,8 @@ class Search:
             return o.get("имя", im[1])
         if im[0] == "fam":
             return self.lib.fam[im[1]].get("имя", im[1])
+        if im[0] == "diag":
+            return self.lib.diag[im[1]].get("имя", im[1])
         if im[0] == "act":
             subs = self.lib.obj[im[1]]["подгруппы"]
             g = self._name(("obj", im[1]))

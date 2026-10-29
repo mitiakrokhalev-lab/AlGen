@@ -29,7 +29,8 @@ ETALON = DATA / "etalon" / "эталон.jsonl"
 SORTS = {"grp": {"Grp": ("Grp.obj", None), "Sub": ("Grp.sub", "ambient"), "Fam": ("Grp.fam", None),
                  "Mor": ("Grp.mor", ("dom", "cod")),
                  "GSet": ("Grp.gset", "ambient"), "Pt": ("Grp.pt", "ambient"),
-                 "Elt": ("Grp.elt", "ambient")}}
+                 "Elt": ("Grp.elt", "ambient"), "Diag": ("Grp.diag", None), "Num": ("Grp.num", None),
+                 "Act": ("Grp.act", ("dom", "cod"))}}
 # Короткие обозначения конструкций в записи эталона.
 OPS = {"grp": {"Z": "center", "Φ": "frattini", "Inn": "inn", "Aut": "aut", "ab": "ab", "∏": "prod-fam", "⊕": "sum-fam",
                "ker": "ker", "im": "im", "commutator": "commutator", "center": "center"}}
