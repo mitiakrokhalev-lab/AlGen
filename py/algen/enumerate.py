@@ -68,6 +68,19 @@ def relation_atoms(g, terms):
         for b in objs[i + 1:]:
             x, y = sorted((a, b), key=str)
             out.append(("r", "iso", x, y))
+    # вложение A ↪ B — только если одна из групп — переменная схемы (иначе пар слишком много)
+    if "embeds" in g.v.rels:
+        seen = set()
+        for a in objs:
+            for b in objs:
+                # одна из групп — переменная схемы, или вложение структурное:
+                # подгруппа в объемлющую, множитель в произведение (звенья транзитивности)
+                if a != b and (isinstance(a, Var) or isinstance(b, Var)
+                               or g.terms[a].links.get("ambient") == b
+                               or (isinstance(b, App) and b.op in ("prod", "freeprod", "wreath") and a in b.args)):
+                    if (a, b) not in seen:
+                        seen.add((a, b))
+                        out.append(("r", "embeds", a, b))
     return out
 
 
@@ -629,6 +642,19 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     m = form.e if m is None else m
     n_lit = m.shape[1]
     goal_cols = range(n_lit) if goals is None else goals
+    # Литералы-теоремы схемы (верны во всех строках и выводятся без посылок,
+    # например Inn(G) ↪ Aut(G)): как цель — факт без посылок, как посылка — лишние.
+    const = set()
+    if hasattr(form, "sc") and hasattr(form.sc, "T"):
+        fixed_l = [form.lit(j) for j in form.fixed]
+        for j in np.flatnonzero(m.all(axis=0)):
+            if int(j) in form.fixed:
+                continue
+            if decide(form.sc.T, fixed_l, form.lit(int(j)), form.sc.s).kind == "выводится":
+                const.add(int(j))
+    form.const = sorted(const)
+    if const:
+        goal_cols = [g for g in goal_cols if g not in const and g ^ 1 not in const]
     alive, empty, lower = {}, [], set()
     count = 0
     # Покрытие (схемы из таблицы базы): условие должно касаться каждого
@@ -697,7 +723,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 alive[key] = int(sub[:, g].sum())
             return
         for j in range(start, n_lit):
-            if j // 2 in {x // 2 for x in prem}:
+            if j // 2 in {x // 2 for x in prem} or j in const or j ^ 1 in const:
                 continue
             nxt = rows[m[rows, j]] if prem else np.flatnonzero(m[:, j])
             go(prem + [j], nxt, j + 1, depth, pm | (int(lmask[j]) if need else 0))

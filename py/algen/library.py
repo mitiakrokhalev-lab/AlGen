@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import FINITE_DERIVED, load as load_finite, load_aut, load_products
+from .finite import FINITE_DERIVED, arith_sub_props, load as load_finite, load_aut, load_products
 from .logic import DATA, App, Graph, Theory, Var, Vocab
 
 INFINITE = DATA / "infinite" / "grp.json"
@@ -42,7 +42,8 @@ class Library:
         patch = DATA / "finite" / "grp-subs-patch.json"
         patch = json.loads(patch.read_text(encoding="utf-8"))["группы"] if patch.exists() else {}
         for k, r in load_finite(extra=True).items():
-            if r["subs"] is None and k in patch:
+            partial = r["subs"] is None and k in patch
+            if partial:
                 r = {**r, **patch[k]}
             self.obj[k] = {"key": k, "имя": r["name"], "конечная": True, "свойства": r["props"],
                            "подгруппы": None if r["subs"] is None else [
@@ -56,7 +57,8 @@ class Library:
                                for i, s in enumerate(r["subs"])],
                            "центр": None if r.get("center") is None else str(r["center"]),
                            "коммутант": None if r.get("commutator") is None else str(r["commutator"]),
-                           "фраттини": None if r.get("frattini") is None else str(r["frattini"])}
+                           "фраттини": None if r.get("frattini") is None else str(r["frattini"]),
+                           **({"подгруппы неполные": True} if partial else {})}
         self._aut_out()
         with open(infinite, encoding="utf-8") as f:
             for r in json.load(f)["группы"]:
@@ -105,6 +107,7 @@ class Library:
                 o[fld] = ak
             o["inn = aut"] = r["inn_whole"]
             o["inn центральна"] = r["inn_central"]
+            o["|Aut|"], o["|Out|"] = r["aut_order"], r["out_order"]
 
     @staticmethod
     def _center_commutator(o):
@@ -800,6 +803,16 @@ class Search:
                 elif all(self.lib.obj[k].get("конечная") and not self.lib.obj[k].get("неканонический")
                          for k in (ka, kb)):
                     out[("r", "iso", x, y)] = False
+        # A ↪ B: та же группа; конечные — по таблице подгрупп B; бесконечная не вкладывается
+        # в конечную, большая конечная — в меньшую; запись «подгруппы» бесконечной B
+        for atom in [a for a in self.T.atoms if a[0] == "r" and a[1] == "embeds"] if terms is None else []:
+            a, b = atom[2], atom[3]
+            ka, kb = objs.get(a), objs.get(b)
+            if ka is None or kb is None:
+                continue
+            v = self._embeds(ka, kb)
+            if v is not None:
+                out[atom] = v
         # Inn(X) как подгруппа Aut(X): вся (полная группа) и центральна ли — по таблице GAP
         for t in terms or self.g.terms:
             if isinstance(t, App) and t.op == "inn":
@@ -809,7 +822,33 @@ class Search:
                     out[("p", "whole", t)] = rec["inn = aut"]
                     out[("p", "central", t)] = rec["inn центральна"]
                     out[("p", "finite-index", t)] = True
+                    n, i = rec["|Aut|"], rec["|Out|"]
+                    for p, v in arith_sub_props(n, n // i).items():
+                        out[("p", p, t)] = v
+                    # Inn ⊴ Aut максимальна ⇔ Out не имеет собственных нетривиальных подгрупп ⇔ |Out| простое
+                    out[("p", "maximal", t)] = arith_sub_props(n, n // i)["prime-index"]
         return out, hard
+
+    def _embeds(self, ka, kb):
+        lib = self.lib
+        if ka == kb or ka == "1:1":
+            return True
+        oa, ob = lib.obj[ka], lib.obj[kb]
+        if ob.get("конечная") and oa["свойства"].get("finite") is False:
+            return False
+        if oa.get("конечная") and ob.get("конечная") and ":" in ka and ":" in kb:
+            try:
+                if int(ka.split(":")[0]) > int(kb.split(":")[0]):
+                    return False
+            except ValueError:
+                pass
+        subs = ob.get("подгруппы")
+        if subs is not None and any(x["≅"] == ka for x in subs):
+            return True
+        if ob.get("конечная") and subs is not None and oa.get("конечная") and not oa.get("неканонический") \
+                and not ob.get("неканонический") and not ob.get("синтез") and not ob.get("подгруппы неполные"):
+            return False  # у конечной B записаны все классы подгрупп
+        return None
 
     def entails(self, assume, atom, value):
         l = self.T.lit(atom, value)

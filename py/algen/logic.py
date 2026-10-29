@@ -96,6 +96,11 @@ class Vocab:
         self.rules = [r for r in self.rules if r["id"] not in drop] + added
         # Равенства конструкций (как «вырождения» словаря): «Gᵃᵇ = G/G′».
         self.degen = self.degen + patch.get("вырождения", [])
+        # Новые отношения (например, вложение A ↪ B).
+        for r in patch.get("отношения", []):
+            if r["id"] in self.rels:
+                raise KeyError(f"отношение {r['id']} уже есть в словаре")
+            self.rels[r["id"]] = r
         # Новые конструкции (например, сплетение); «gives» — как в словаре.
         for c in patch.get("конструкции", []):
             if c["id"] in self.cons:
@@ -539,6 +544,7 @@ class Theory:
             for cond, t, s in self._degen(d, limit):
                 self._equal(cond, t, s, f"вырождение {d['op']}: {d.get('почему', '')}")
         self._equality_axioms()
+        self._embeds_axioms()
 
     # вырождения и равенства ----------------------------------------------
 
@@ -580,6 +586,40 @@ class Theory:
         lits.append(self.lit(("r", rel, t, s)))
         self._add(lits, origin)
 
+    # свойства, которые наследует подгруппа (и потому всякая вложимая группа)
+    SUB_CLOSED = ("trivial", "abelian", "cyclic", "finite", "solvable", "nilpotent", "torsion-free",
+                  "periodic", "residually-finite", "linear", "free", "free-abelian", "p-group",
+                  "exponent-2", "exponent-3", "bounded-exponent", "polycyclic", "odd-order", "two-primes")
+
+    def _embeds_axioms(self):
+        """Вложение A ↪ B: только для атомов, которые уже есть (иначе пар — квадрат
+        числа термов). Наследование свойств подгрупп, ≅ ⇒ ↪, подгруппа и множители
+        вкладываются, взаимное вложение конечных — ≅, тривиальная вкладывается всюду."""
+        emb = [a for a in self.atoms if a[0] == "r" and a[1] == "embeds"]
+        props = {}
+        for a in self.atoms:
+            if a[0] == "p":
+                props.setdefault(a[2], set()).add(a[1])
+        for atom in emb:
+            _, _, a, b = atom
+            e = self.var[atom]
+            why = "вложение"
+            for p in self.SUB_CLOSED:
+                if p in props.get(b, ()) and self.v.prop_fits(p, self.g.terms[a].sort):
+                    self._add([-e, -self.lit(("p", p, b)), self.lit(("p", p, a))], f"{why}: наследует {p}")
+            iso = self.lit(("r", "iso", a, b)) if ("r", "iso", *sorted((a, b), key=str)) in self.var else None
+            if iso is not None and iso is not False:
+                self._add([-iso, e], f"{why}: ≅ ⇒ ↪")
+                if ("r", "embeds", b, a) in self.var:
+                    self._add([-e, -self.lit(("r", "embeds", b, a)), -self.lit(("p", "finite", a)), iso],
+                              f"{why}: взаимное вложение конечных ⇒ ≅")
+            self._add([-self.lit(("p", "trivial", a)), e], f"{why}: тривиальная вкладывается")
+            info = self.g.terms[a]
+            if info.links.get("ambient") == b:
+                self._add([e], f"{why}: подгруппа")
+            if isinstance(b, App) and b.op in ("prod", "freeprod", "wreath") and a in b.args:
+                self._add([e], f"{why}: множитель {b.op}")
+
     def _equality_axioms(self):
         """≅ и = на термах: перенос свойств, симметрия уже в записи, транзитивность."""
         pairs = [a for a in self.atoms if a[0] == "r" and a[1] in ("iso", "eq-sub")]
@@ -607,6 +647,16 @@ class Theory:
         by_rel = {}
         for _, rel, a, b in pairs:
             by_rel.setdefault(rel, set()).add((a, b))
+        # вложение: транзитивность по тройкам, где оба звена уже есть
+        emb = {(a[2], a[3]) for a in self.atoms if a[0] == "r" and a[1] == "embeds"}
+        succ = {}
+        for a, b in emb:
+            succ.setdefault(a, []).append(b)
+        for a, b in emb:
+            for c in succ.get(b, []):
+                if c != a and (a, c) in emb:
+                    self._add([-self.lit(("r", "embeds", a, b)), -self.lit(("r", "embeds", b, c)),
+                               self.lit(("r", "embeds", a, c))], "embeds: транзитивность")
         groups = []
         for rel, ps in by_rel.items():
             nodes = {x for p in ps for x in p}
