@@ -30,6 +30,8 @@ PRODUCTS_SCRIPT = Path(__file__).with_name("gap") / "products.g"
 OUT = ROOT / "data" / "finite" / "grp-small.jsonl"
 PRODUCTS = ROOT / "data" / "finite" / "grp-small-products.jsonl"
 EXTRA = ROOT / "data" / "finite" / "grp-extra.jsonl"
+AUT_SCRIPT = Path(__file__).with_name("gap") / "aut.g"
+AUT = ROOT / "data" / "finite" / "grp-aut.jsonl"
 
 
 def _run(lo, hi, path):
@@ -110,6 +112,40 @@ FINITE_DERIVED = {
 }
 
 
+def build_aut(jobs):
+    """Aut(G), Inn(G), Out(G) для всех групп таблицы (gap/aut.g) → grp-aut.jsonl."""
+    keys = sorted(load(extra=True), key=lambda k: tuple(map(int, k.split(":"))))
+    chunks = [keys[i::jobs * 4] for i in range(jobs * 4)]
+    with tempfile.TemporaryDirectory() as tmp:
+        def one(i):
+            path = os.path.join(tmp, f"{i}.jsonl")
+            ks = ", ".join(f"[{k.replace(':', ', ')}]" for k in chunks[i])
+            prog = f'KEYS:=[{ks}];; OUT:="{path}";; Read("{AUT_SCRIPT}");\n'
+            subprocess.run(["gap", "-q", "-o", "8g"], input=prog, text=True, check=True,
+                           stdout=subprocess.DEVNULL)
+            return path
+        with ThreadPoolExecutor(jobs) as ex:
+            paths = list(ex.map(one, range(len(chunks))))
+        recs = {}
+        for path in paths:
+            with open(path) as f:
+                for line in f:
+                    r = json.loads(line)
+                    recs[r["key"]] = r
+    with AUT.open("w") as out:
+        for k in keys:
+            if k in recs:
+                out.write(json.dumps(recs[k], ensure_ascii=False, separators=(",", ":")) + "\n")
+
+
+def load_aut(path=AUT):
+    """key → запись об Aut, Inn, Out (если таблица посчитана)."""
+    if not Path(path).exists():
+        return {}
+    with open(path) as f:
+        return {r["key"]: r for r in map(json.loads, f)}
+
+
 def load(path=OUT, extra=False):
     """Словарь key → запись группы; extra — с группами из grp-extra.jsonl."""
     with open(path) as f:
@@ -130,7 +166,13 @@ if __name__ == "__main__":
     ap.add_argument("--только-произведения", dest="only_products", action="store_true")
     ap.add_argument("--добавить", dest="extra", nargs="+", metavar="n:i",
                     help="досчитать отдельные группы выше --до в data/finite/grp-extra.jsonl")
+    ap.add_argument("--авт", dest="aut", action="store_true",
+                    help="посчитать Aut, Inn, Out всех групп таблицы в data/finite/grp-aut.jsonl")
     a = ap.parse_args()
+    if a.aut:
+        build_aut(a.jobs)
+        print(AUT, sum(1 for _ in AUT.open()))
+        raise SystemExit
     if a.extra:
         build_extra(a.extra, a.upto)
         print(EXTRA, sum(1 for _ in EXTRA.open()))

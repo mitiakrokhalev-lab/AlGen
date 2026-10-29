@@ -230,9 +230,17 @@ class Form:
         tr, fa = self.m[:, cols], self.m[:, [c ^ 1 for c in cols]]
         unk = ~tr & ~fa
         rows = np.flatnonzero(~fa.any(axis=1) & (unk.sum(axis=1) == 1))
-        return [(r, cols[int(np.flatnonzero(unk[r])[0])]) for r in rows]
+        which = np.asarray(cols)[unk[rows].argmax(axis=1)] if len(rows) else []
+        return list(zip(rows.tolist(), [int(c) for c in which]))
 
     def value_name(self, r, atom):
+        cache = self.__dict__.setdefault("_vn", {})
+        k = (int(r), atom)
+        if k not in cache:
+            cache[k] = self._value_name(r, atom)
+        return cache[k]
+
+    def _value_name(self, r, atom):
         """Имя недостающего значения атома в строке r — «решающее значение».
         Значение у построенного произведения приписывается множителю, у которого
         не записано больше значений: обычно оно оттуда и берётся."""

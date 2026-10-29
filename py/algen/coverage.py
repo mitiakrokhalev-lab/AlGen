@@ -11,7 +11,7 @@
 
 Остальные задачи — красные флаги списка схем с причиной.
 
-    cd py && python3 -m algen.coverage ../data/schemes/grp.txt --посылок 2
+    cd py && python3 -m algen.coverage --посылок 2 --подробно
 """
 
 import argparse
@@ -44,18 +44,17 @@ def _rename(t, ren):
 
 
 class Schemes:
-    def __init__(self, vocab, path):
+    """Схемы из таблиц баз (algen.table): база + замкнутый набор термов её вселенной."""
+
+    def __init__(self, vocab, path=None):
+        from . import table as TB
         self.items = []
-        for s in read_schemes(path):
-            try:
-                g, vs, apps, _ = shape(vocab, s["условие"] or "∀ G : Grp; ∀ N : Sub(G)",
-                                       s["термы"] or (["G / N"] if not s["условие"] else []))
-            except Unsupported:
-                continue
-            self.items.append((s["id"], vs, {_rename(t, {}) for t in apps}))
+        for b, decl in TB.BASES.items():
+            g, vs, apps, _ = shape(vocab, decl, TB.universe(vocab, b))
+            self.items.append((b, vs, {_rename(t, {}) for t in apps}))
 
     def find(self, vs, terms):
-        """Схема, покрывающая переменные vs и термы terms (строки с именами задачи)."""
+        """База, во вселенной которой есть термы terms (строки с именами задачи)."""
         for sid, svs, sterms in self.items:
             if len(svs) != len(vs):
                 continue
@@ -67,6 +66,14 @@ class Schemes:
                 if ok and all(_rename(t, ren) in sterms for t in terms):
                     return sid
         return None
+
+
+def _sub(t):
+    out = {t}
+    if isinstance(t, App):
+        for a in t.args:
+            out |= _sub(a)
+    return out
 
 
 def cards(root):
@@ -86,21 +93,30 @@ def check(vocab, sch, card, k):
     lits = prem + [goal]
     if any(a[0] == "r" and a[1] not in ("le", "eq-sub", "iso") for a, _ in lits):
         return "нужны отношения сверх ⩽, =, ≅", None
-    if len(lits) > k + 1:
-        return f"литералов {len(lits)} > {k + 1}", None
+    ks = [int(x) for x in str(k).split(",")]
+    tops = {x for a, _ in lits for x in a[2:] if isinstance(x, App)}
+    tops -= {y for x in tops for y in _sub(x) if y != x}
+    kk = ks[min(len(tops), len(ks) - 1)]
+    if len(lits) > kk + 1:
+        return f"литералов {len(lits)} > {kk + 1}", None
     vs = [(t.name, g.terms[t].sort, {kk: str(v) for kk, v in g.terms[t].links.items()})
           for t in g.terms if isinstance(t, Var)]
-    used = {x for a, _ in lits for x in a[2:] if isinstance(x, App)}
+    used = set()
+    for a, _ in lits:
+        for x in a[2:]:
+            if isinstance(x, App):
+                used |= {y for y in _sub(x) if isinstance(y, App)}
     sid = sch.find(vs, used)
     if sid is None:
-        return "нет схемы с такими переменными и термами", None
+        return "нет базы с такими переменными и термами во вселенной", None
     return "покрыта", sid
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("schemes")
-    ap.add_argument("--посылок", dest="k", type=int, default=2)
+    ap.add_argument("schemes", nargs="?", help="не нужен: схемы — из таблиц баз (algen.table)")
+    ap.add_argument("--посылок", dest="k", default="2",
+                    help="k или «k0,k1,k2» — посылок для задач с 0, 1, ⩾ 2 верхними термами")
     ap.add_argument("--карточки", dest="root", default=str(DATA / "archive" / "grp"))
     ap.add_argument("--подробно", dest="verbose", action="store_true")
     a = ap.parse_args()

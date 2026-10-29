@@ -254,6 +254,12 @@ def view(base_form, terms):
 _STATE = {}
 
 
+def k_for(ks, n_top):
+    """Посылок для схемы с n_top верхними термами: ks = [k при 0 термов, при 1, …];
+    последнее значение — для всех больших."""
+    return ks[min(n_top, len(ks) - 1)]
+
+
 def _one(job):
     base, sid, terms, k, outdir, fp = job
     out, err = io.StringIO(), io.StringIO()
@@ -280,9 +286,17 @@ def run_schemes(a):
     outdir = Path(a.out)
     outdir.mkdir(parents=True, exist_ok=True)
     jobs = []
+    ks = [int(x) for x in str(a.k).split(",")]
     for base in a.bases.split(","):
         fp = _fp(base) + f":{a.k}"
-        todo = schemes(vocab, base, a.k)
+        todo = schemes(vocab, base, ks[-1])
+        g0, _, _ = scheme(vocab, {"раздел": "grp", "условие": BASES[base]})
+        n0 = {str(t): t for t in g0.terms}
+        tops = {}
+        for sid, terms in todo:
+            ts = [term(g0, x, n0, "grp") for x in terms]
+            tops[sid] = sum(1 for t in maximal(g0, closure(g0, ts + [t for t in g0.terms if isinstance(t, Var)]))
+                            if isinstance(t, App))
         if a.part:
             i, n = map(int, a.part.split("/"))
             todo = todo[i - 1::n]
@@ -295,7 +309,7 @@ def run_schemes(a):
                         continue
                 except Exception:
                     pass
-            jobs.append((base, sid, terms, a.k, str(outdir), fp))
+            jobs.append((base, sid, terms, k_for(ks, tops[sid]), str(outdir), fp))
         if any(j[0] == base for j in jobs):
             t = time.time()
             _STATE["forms"][base] = load(lib, vocab, base, a.dir)
@@ -370,7 +384,8 @@ def main():
     s.add_argument("--выход", dest="out", required=True)
     s.add_argument("--часть", dest="part")
     s.add_argument("--нитей", dest="jobs", type=int, default=mp.cpu_count())
-    s.add_argument("--посылок", dest="k", type=int, default=2)
+    s.add_argument("--посылок", dest="k", default="2",
+                   help="k или список «k0,k1,k2»: посылок для схем с 0, 1, ⩾ 2 верхними термами")
     s.add_argument("--без", dest="skip", default="")
     s.add_argument("--заново", dest="force", action="store_true")
     s.add_argument("--память", dest="mem", type=float, default=0)
