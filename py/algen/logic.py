@@ -589,7 +589,8 @@ class Theory:
     # свойства, которые наследует подгруппа (и потому всякая вложимая группа)
     SUB_CLOSED = ("trivial", "abelian", "cyclic", "finite", "solvable", "nilpotent", "torsion-free",
                   "periodic", "residually-finite", "linear", "free", "free-abelian", "p-group",
-                  "exponent-2", "exponent-3", "bounded-exponent", "polycyclic", "odd-order", "two-primes")
+                  "exponent-2", "exponent-3", "bounded-exponent", "polycyclic", "odd-order", "two-primes",
+                  "countable")
 
     def _embeds_axioms(self):
         """Вложение A ↪ B: только для атомов, которые уже есть (иначе пар — квадрат
@@ -614,6 +615,10 @@ class Theory:
                     self._add([-e, -self.lit(("r", "embeds", b, a)), -self.lit(("p", "finite", a)), iso],
                               f"{why}: взаимное вложение конечных ⇒ ≅")
             self._add([-self.lit(("p", "trivial", a)), e], f"{why}: тривиальная вкладывается")
+            # Хигман (⇒): к. п. подгруппа к. о. группы рекурсивно определена
+            if {"fin-pres"} <= props.get(b, set()) and {"fin-gen", "rec-pres"} <= props.get(a, set()):
+                self._add([-e, -self.lit(("p", "fin-pres", b)), -self.lit(("p", "fin-gen", a)),
+                           self.lit(("p", "rec-pres", a))], f"{why}: Хигман, к. п. подгруппа к. о. — р. о.")
             info = self.g.terms[a]
             if info.links.get("ambient") == b:
                 self._add([e], f"{why}: подгруппа")

@@ -33,7 +33,8 @@ from .etalon import Unsupported, judge, scheme
 from .params import Model, ParseError as PError, check
 from .identities import FREE_NILPOTENT, ParseError, holds, parse, show_poly, show_word, variety
 from .library import Library, Search
-from .logic import Theory, Vocab, decide
+from .logic import Graph, Theory, Var, Vocab, decide
+from . import formula as FM
 
 # Уровни, которые генератор обязан закрыть сам.
 MUST_CLOSE = {"правило", "следствие", "понятный контрпример"}
@@ -73,6 +74,11 @@ def run_card(c, vocab, lib):
         if bad:
             return {**out, "корзина": "КРАСНЫЙ ФЛАГ", "почему": "библиотека: " + "; ".join(bad)}
         return {**out, "корзина": "закрыто библиотекой", "вердикт": "запись", "детали": "значения библиотеки совпали"}
+    if FM.is_formula(c.get("цель", "")) and c.get("расширение") != "P":
+        try:
+            return finish(c, out, *run_formula(c, vocab, lib))
+        except Unsupported as e:
+            return {**out, "корзина": "КРАСНЫЙ ФЛАГ", "почему": f"не разбирается: {e}"}
     if not c.get("условие"):
         return {**out, "корзина": "КРАСНЫЙ ФЛАГ",
                 "почему": "не записывается: нет в словаре " + ", ".join(c.get("вне_словаря", ["?"]))}
@@ -84,7 +90,7 @@ def run_card(c, vocab, lib):
         return {**out, "корзина": "КРАСНЫЙ ФЛАГ", "почему": f"не разбирается: {e}"}
     if c.get("тождество"):
         return finish(c, out, *identity(c, prem))
-    theory = Theory(g, grow=1)
+    theory = Theory(g, grow=1, extra=[a for a, _ in prem + [goal] if a[0] == "r"])
     v = decide(theory, prem, goal)
     kind, detail = v.kind, ""
     if kind == "выводится":
@@ -105,6 +111,61 @@ def run_card(c, vocab, lib):
                     out.update(вердикт=kind, детали=detail + "; держится на " + ", ".join(w[mark]))
                     return {**out, "корзина": bucket if c["ответ"] == "ложно" else "КРАСНЫЙ ФЛАГ"}
     return finish(c, out, kind, detail)
+
+
+def run_formula(c, vocab, lib):
+    """Цель-формула: КНФ, каждая клауза — условие; ∃ — через свидетелей."""
+    if c.get("условие", "").strip():
+        g, prem, _ = scheme(vocab, {**c, "цель": None})
+    else:
+        g, prem = Graph(vocab), []
+    names = {t.name: t for t in g.terms if isinstance(t, Var)}
+    clauses = FM.cnf(FM.parse(c["цель"]))
+    plan = []  # (простые литералы, [варианты ∃: списки литералов], пример ∃ из библиотеки)
+    for cl in clauses:
+        plain = FM.literals_of(g, names, cl)
+        alts, examples = [], []
+        for x in cl:
+            if x[0] != "ex":
+                continue
+            if not names:
+                examples.append(x)
+            else:
+                alts += FM.expand(g, names, x)
+        plan.append((plain, alts, examples))
+    rel = [a for plain, alts, _ in plan for a, _ in plain + [l for alt in alts for l in alt] + prem if a[0] == "r"]
+    T = Theory(g, grow=1, extra=rel)
+    s = T.solver()
+    detail, refuted, open_ = [], False, False
+    for plain, alts, examples in plan:
+        negs = [(a, not v) for a, v in plain]
+        ok = False
+        if plain and not alts and not examples:
+            ok = decide(T, prem + negs[1:], plain[0], s).kind == "выводится"
+        for alt in alts:
+            if all(decide(T, prem + negs, l, s).kind == "выводится" for l in alt):
+                ok = True
+                detail.append("свидетель: " + ", ".join(lit_str(a, v) for a, v in alt))
+                break
+        for ex in examples:
+            w = FM.library_example(vocab, lib, ex)
+            if w:
+                ok = True
+                detail.append("пример из библиотеки: " + w)
+                break
+        if ok:
+            continue
+        if plain and not alts and not examples:
+            found = Search(g, T, lib).witnesses(prem + negs[1:], plain[0], limit=3)
+            if found:
+                w = min(found, key=lambda w: (len(w["трудно"]), len(w["короткий довод"])))
+                refuted = True
+                detail.append("контрпример клаузе: " + ", ".join(f"{k} = {x}" for k, x in w["подстановка"].items()))
+                continue
+        open_ = True
+    s.delete()
+    kind = "опровергается" if refuted else "неизвестно" if open_ else "выводится"
+    return kind, f"клауз {len(plan)}; " + "; ".join(detail)
 
 
 def identity(c, prem):

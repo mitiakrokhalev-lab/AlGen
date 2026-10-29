@@ -10718,6 +10718,56 @@
    "центр": "все",
    "коммутант": "1",
    "кручение": "T"
+  },
+  {
+   "id": "NovikovBoone",
+   "имя": "группа Новикова — Буна (к. о., проблема слов неразрешима)",
+   "свойства": {
+    "trivial": false,
+    "finite": false,
+    "fin-gen": true,
+    "abelian": false,
+    "cyclic": false,
+    "fin-pres": true,
+    "word-problem": false,
+    "residually-finite": false
+   },
+   "почему": {
+    "word-problem": "П. С. Новиков (1955), У. Бун (1958)",
+    "residually-finite": "к. о. ф. а. группа имеет разрешимую проблему слов (Мальцев)"
+   },
+   "трудно": [
+    "word-problem"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "NovikovBoone"
+    },
+    {
+     "id": "все",
+     "имя": "G",
+     "≅": "NovikovBoone",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
   }
  ]
 }
