@@ -72,10 +72,37 @@ def term(g, s, names, section):
     return g.given(t)
 
 
+REL_INFIX = (("⩽", "le", False), ("≤", "le", False), ("⩾", "le", True), ("≥", "le", True),
+         ("≅", "iso", False), ("↪", "embeds", False))
+
+
+def _infix(s):
+    """Инфиксная запись отношения вне скобок: «A ⩽ B», «X ≅ Y», «H ↪ G»."""
+    depth = 0
+    for i, ch in enumerate(s):
+        depth += ch == "("
+        depth -= ch == ")"
+        if depth == 0:
+            for sym, rel, flip in REL_INFIX:
+                if s.startswith(sym, i):
+                    a, b = s[:i].strip(), s[i + len(sym):].strip()
+                    return (rel, b, a) if flip else (rel, a, b)
+    return None
+
+
 def literal(g, s, names, section):
     s = s.strip()
     value = not s.startswith("¬")
-    m = re.fullmatch(r"([\w-]+)\((.*)\)", s.lstrip("¬").strip())
+    body = s.lstrip("¬").strip()
+    if body.startswith("(") and body.endswith(")") and _infix(body[1:-1]):
+        body = body[1:-1].strip()
+    inf = _infix(body)
+    if inf:
+        rel, a, b = inf
+        if rel not in g.v.rels:
+            raise Unsupported(f"нет в словаре: {rel}")
+        return ("r", rel, term(g, a, names, section), term(g, b, names, section)), value
+    m = re.fullmatch(r"([\w-]+)\((.*)\)", body)
     if not m:
         raise Unsupported(f"литерал {s!r}")
     args = [term(g, a, names, section) for a in split_top(m.group(2), ",")]
@@ -94,10 +121,10 @@ def scheme(vocab, fact):
     g, names, prem = Graph(vocab), {}, []
     for decl in fact["условие"].split(";"):
         head, _, lits = decl.partition("|")
-        m = re.fullmatch(r"\s*∀\s*(\w+)\s*:\s*(\w+)(?:\((.+)\))?\s*", head)
+        m = re.fullmatch(r"\s*∀\s*(\w+(?:\s*,\s*\w+)*)\s*:\s*(\w+)(?:\((.+)\))?\s*", head)
         if not m:
             raise Unsupported(f"объявление {head!r}")
-        name, sort, parents = m.groups()
+        many, sort, parents = m.groups()
         if sort not in SORTS[section]:
             raise Unsupported(f"сорт {sort}")
         s, link = SORTS[section][sort]
@@ -109,7 +136,9 @@ def scheme(vocab, fact):
                 raise Unsupported(f"объявление {head!r}")
             # родитель — переменная или терм: «∀ H : Sub(A ∗ B)»
             links = {k: names[x] if x in names else term(g, x, names, section) for k, x in zip(keys, ps)}
-        names[name] = g.var(name, s, **links)
+        # «∀ H, K : Sub(G) | …» — несколько переменных одного сорта, посылки после всех
+        for name in (x.strip() for x in many.split(",")):
+            names[name] = g.var(name, s, **links)
         prem += [literal(g, x, names, section) for x in split_top(lits, ",")]
     goal = literal(g, fact["цель"], names, section) if fact.get("цель") else None
     return g, prem, goal

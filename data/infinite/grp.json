@@ -22,9 +22,14 @@
     "residually-finite": true,
     "indecomposable": true,
     "polycyclic": true,
-    "linear": true
+    "linear": true,
+    "co-hopfian": false,
+    "locally-cyclic": true
    },
-   "почему": {},
+   "почему": {
+    "co-hopfian": "x ↦ 2x",
+    "locally-cyclic": "циклическая"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -125,9 +130,12 @@
     "residually-finite": true,
     "indecomposable": false,
     "polycyclic": true,
-    "linear": true
+    "linear": true,
+    "co-hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "co-hopfian": "x ↦ 2x"
+   },
    "подгруппы": [
     {
      "id": "0",
@@ -202,9 +210,12 @@
     "divisible": false,
     "residually-finite": true,
     "polycyclic": true,
-    "hopfian": true
+    "hopfian": true,
+    "co-hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "co-hopfian": "x ↦ 2x"
+   },
    "подгруппы": [
     {
      "id": "1",
@@ -445,12 +456,16 @@
     "indecomposable": true,
     "linear": true,
     "hopfian": true,
-    "rec-pres-ctbl": true
+    "rec-pres-ctbl": true,
+    "co-hopfian": true,
+    "locally-cyclic": true
    },
    "почему": {
     "linear": "унипотентные матрицы 2×2 над ℚ",
     "hopfian": "эндоморфизмы ℚ — умножения на рациональные числа",
-    "rec-pres-ctbl": "образующие 1/n!, соотношения n·(1/n!) = 1/(n−1)!"
+    "rec-pres-ctbl": "образующие 1/n!, соотношения n·(1/n!) = 1/(n−1)!",
+    "co-hopfian": "инъективные эндоморфизмы ℚ — умножения на q ≠ 0, они обратимы",
+    "locally-cyclic": "⟨a/b, c/d⟩ ⩽ ⟨1/(bd)⟩"
    },
    "подгруппы": [
     {
@@ -540,13 +555,17 @@
     "linear": true,
     "hopfian": false,
     "bounded-exponent": false,
-    "p-group": false
+    "p-group": false,
+    "co-hopfian": true,
+    "locally-cyclic": true
    },
    "почему": {
     "linear": "корни из 1 в ℂ*",
     "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром",
     "bounded-exponent": "элементы порядка n при всех n",
-    "p-group": "есть элементы порядков 2 и 3"
+    "p-group": "есть элементы порядков 2 и 3",
+    "co-hopfian": "эндоморфизмы — умножения на элементы ℤ̂; инъективность (ядро на элементах порядка p) требует обратимости в каждом ℤ_p",
+    "locally-cyclic": "к. п. подгруппа конечна и лежит в циклической ⟨1/n⟩"
    },
    "подгруппы": [
     {
@@ -634,12 +653,20 @@
     "linear": true,
     "hopfian": false,
     "bounded-exponent": false,
-    "p-group": true
+    "p-group": true,
+    "co-hopfian": true,
+    "locally-cyclic": true,
+    "proper-subs-cyclic": true,
+    "proper-subs-finite": true
    },
    "почему": {
     "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром",
     "bounded-exponent": "элементы порядка 2ⁿ при всех n",
-    "p-group": "порядки элементов — 2ᵏ"
+    "p-group": "порядки элементов — 2ᵏ",
+    "co-hopfian": "эндоморфизмы — умножения на ℤ₂; инъективный ⇔ нечётный множитель ⇔ обратим",
+    "locally-cyclic": "объединение цепочки C₂ ⩽ C₄ ⩽ …",
+    "proper-subs-cyclic": "собственные подгруппы — C_{2ⁿ}",
+    "proper-subs-finite": "собственные подгруппы — C_{2ⁿ}"
    },
    "подгруппы": [
     {
@@ -724,11 +751,13 @@
     "residually-finite": false,
     "indecomposable": false,
     "linear": true,
-    "hopfian": false
+    "hopfian": false,
+    "co-hopfian": false
    },
    "почему": {
     "linear": "абелева без кручения мощности ⩽ 𝔠 вкладывается в ℚ^(𝔠) ≅ ℝ, а ℝ — в унипотентные матрицы над ℝ",
-    "hopfian": "ℝ ≅ ℚ^(𝔠) — бесконечномерное пространство над ℚ, сдвиг базиса сюръективен с ядром"
+    "hopfian": "ℝ ≅ ℚ^(𝔠) — бесконечномерное пространство над ℚ, сдвиг базиса сюръективен с ядром",
+    "co-hopfian": "ℝ — ℚ-пространство размерности 𝔠, сдвиг базиса"
    },
    "подгруппы": [
     {
@@ -1129,11 +1158,13 @@
     "indecomposable": false,
     "linear": true,
     "hopfian": false,
-    "free-abelian": true
+    "free-abelian": true,
+    "co-hopfian": false
    },
    "почему": {
     "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром",
-    "free-abelian": "ℚ*₊ ≅ ⊕_p ℤ по разложению на простые множители."
+    "free-abelian": "ℚ*₊ ≅ ⊕_p ℤ по разложению на простые множители.",
+    "co-hopfian": "ℚ*₊ ≅ ⊕ℤ, сдвиг координат"
    },
    "подгруппы": [
     {
@@ -1207,9 +1238,12 @@
     "centerless": true,
     "residually-finite": true,
     "indecomposable": true,
-    "linear": true
+    "linear": true,
+    "co-hopfian": false
    },
-   "почему": {},
+   "почему": {
+    "co-hopfian": "a ↦ a², b ↦ b² — инъекция с собственным образом"
+   },
    "подгруппы": [
     {
      "id": "1",
@@ -1416,10 +1450,12 @@
     "residually-finite": true,
     "indecomposable": true,
     "linear": true,
-    "hopfian": false
+    "hopfian": false,
+    "co-hopfian": false
    },
    "почему": {
-    "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром"
+    "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром",
+    "co-hopfian": "x_i ↦ x_{i+1}"
    },
    "подгруппы": [
     {
@@ -1534,11 +1570,13 @@
     "indecomposable": false,
     "linear": true,
     "hopfian": false,
-    "free-abelian": true
+    "free-abelian": true,
+    "co-hopfian": false
    },
    "почему": {
     "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром",
-    "free-abelian": "⊕ℤ — прямая сумма копий ℤ по определению."
+    "free-abelian": "⊕ℤ — прямая сумма копий ℤ по определению.",
+    "co-hopfian": "сдвиг координат вправо"
    },
    "подгруппы": [
     {
@@ -1812,7 +1850,8 @@
     "hopfian": false,
     "bounded-exponent": true,
     "p-group": true,
-    "exponent-2": true
+    "exponent-2": true,
+    "co-hopfian": false
    },
    "почему": {
     "linear": "элементарная абелева 2-группа мощности ⩽ 𝔠 — аддитивная группа поля характеристики 2, то есть унипотентные матрицы над ним",
@@ -1820,7 +1859,8 @@
     "bounded-exponent": "показатель 2",
     "p-group": "экспонента 2",
     "exponent-2": "по определению группы",
-    "фраттини": "каждый элемент ≠ 0 лежит вне некоторой гиперплоскости — максимальной подгруппы индекса 2"
+    "фраттини": "каждый элемент ≠ 0 лежит вне некоторой гиперплоскости — максимальной подгруппы индекса 2",
+    "co-hopfian": "сдвиг координат вправо"
    },
    "подгруппы": [
     {
@@ -6174,20 +6214,26 @@
     "torsion-free": false,
     "divisible": false,
     "bounded-exponent": true,
-    "p-group": true
+    "p-group": true,
+    "proper-subs-cyclic": true,
+    "proper-subs-finite": true
    },
    "почему": {
     "simple": "А. Ю. Ольшанский, Бесконечная группа с подгруппами простых порядков, Изв. АН СССР, 1980",
     "divisible": "каждый элемент имеет порядок p, поэтому p-я степень любого элемента — 1, и неединичный элемент не p-я степень",
     "bounded-exponent": "все собственные подгруппы — C_p, поэтому период p (Ольшанский)",
-    "p-group": "все собственные подгруппы порядка p"
+    "p-group": "все собственные подгруппы порядка p",
+    "proper-subs-cyclic": "по построению Ольшанского",
+    "proper-subs-finite": "по построению Ольшанского"
    },
    "трудно": [
     "simple",
     "periodic",
     "finite",
     "divisible",
-    "bounded-exponent"
+    "bounded-exponent",
+    "proper-subs-cyclic",
+    "proper-subs-finite"
    ],
    "подгруппы": [
     {

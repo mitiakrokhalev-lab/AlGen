@@ -50,6 +50,7 @@ class Vocab:
         self.rels = {r["id"]: r for r in d["relations"]}
         self.cons = {c["id"]: c for c in d["constructions"]}
         self.degen = d["degenerations"]
+        self.quantified = {}
         self.rules = [r for r in d["rules"]]
         for c in d.get("gives", []):
             scene = [{"name": s["role"], "sort": s["sort"],
@@ -84,7 +85,7 @@ class Vocab:
             self.props[p["id"]] = p["sort"] if isinstance(p["sort"], list) else [p["sort"]]
         drop = {x["id"] for x in patch.get("снять", [])}
         # правила «X:даёт:p» строятся из конструкций и могут быть не построены (check_rules)
-        missing = {x for x in drop - {r["id"] for r in self.rules} if ":даёт:" not in x}
+        missing = {x for x in drop - {r["id"] for r in self.rules} if ":даёт:" not in x and ":сохраняет:" not in x}
         if missing:
             raise KeyError(f"снимаемых правил нет в базе: {sorted(missing)}")
         added = []
@@ -102,6 +103,9 @@ class Vocab:
             if r["id"] in self.rels:
                 raise KeyError(f"отношение {r['id']} уже есть в словаре")
             self.rels[r["id"]] = r
+        # Свойства с квантором по подгруппам: Q(G) ⇔ ∀ H ⩽ G (фильтр(H) ⇒ P(H)).
+        for q in patch.get("кванторные", []):
+            self._quantified(q)
         # Новые конструкции (например, сплетение); «gives» — как в словаре.
         for c in patch.get("конструкции", []):
             if c["id"] in self.cons:
@@ -112,6 +116,43 @@ class Vocab:
             for p, v in (c.get("gives") or {}).items():
                 self.rules.append({"id": f"{c['id']}:даёт:{p}", "scene": scene, "if": [],
                                    "then": {"p": p, "t": t, "значение": v}})
+            # «preserves»: свойство всех аргументов-подгрупп переходит к результату
+            subs = [x["role"] for x in c["in"] if x["sort"] == "Grp.sub"]
+            for p in c.get("preserves") or []:
+                self.rules.append({"id": f"{c['id']}:сохраняет:{p}", "scene": scene,
+                                   "if": [{"p": p, "t": r} for r in subs], "then": {"p": p, "t": t}})
+
+    def _quantified(self, q):
+        """Свойство «всякая подгруппа H с фильтром обладает P» (локально конечна,
+        все собственные подгруппы абелевы, …) и его правила:
+          исключение  Q(G), H ⩽ G, фильтр(H) ⇒ P(H);
+          на себя     Q(G), фильтр(G) ⇒ P(G) (если фильтр не требует H ≠ G);
+          наследование Q(G), H ⩽ G ⇒ Q(H) («наследуется»: фильтр в H влечёт фильтр в G);
+          введение    P(G) ⇒ Q(G) («из p»: P наследуется подгруппами)."""
+        qid, p, filt = q["id"], q["p"], q.get("фильтр", [])
+        if qid in self.props:
+            raise KeyError(f"свойство {qid} уже есть в словаре")
+        self.props[qid] = ["Grp.obj"]
+        X = {"name": "X", "sort": "Grp.obj"}
+        H = {"name": "H", "sort": "Grp.sub", "ambient": "X"}
+
+        def lit(x, t):
+            return {"p": x["p"], "t": t, **({"значение": False} if x.get("значение") is False else {})}
+        self.rules.append({"id": f"{qid}:исключение", "scene": [X, H],
+                           "if": [{"p": qid, "t": "X"}] + [lit(x, "H") for x in filt],
+                           "then": {"p": p, "t": "H"}})
+        if not any(x["p"] == "whole" for x in filt):
+            self.rules.append({"id": f"{qid}:на себя", "scene": [X],
+                               "if": [{"p": qid, "t": "X"}] + [lit(x, "X") for x in filt],
+                               "then": {"p": p, "t": "X"}})
+        if q.get("наследуется"):
+            self.rules.append({"id": f"{qid}:наследуется", "scene": [X, H],
+                               "if": [{"p": qid, "t": "X"}], "then": {"p": qid, "t": "H"}})
+        if q.get("из p"):
+            self.rules.append({"id": f"{qid}:из {p}", "scene": [X],
+                               "if": [{"p": p, "t": "X"}], "then": {"p": qid, "t": "X"}})
+        self.quantified = getattr(self, "quantified", {})
+        self.quantified[qid] = q
 
     def fits(self, have, want):
         return have == want or want in self.up.get(have, ())

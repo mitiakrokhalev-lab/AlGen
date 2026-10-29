@@ -96,8 +96,50 @@ class Library:
                         raise KeyError(f"{o['key']}/{s['id']}: нет группы {k}")
         for o in self.obj.values():
             self._center_commutator(o)
+        self._quantified_props()
         for f in self.fam.values():
             self._fam_props(f)
+
+    def _quantified_props(self):
+        """Свойства с квантором по подгруппам («кванторные» в data/new/grp.json):
+        у конечной группы с полным списком классов подгрупп — по списку; у
+        остальных — «нет», если записанная подгруппа с фильтром не обладает P."""
+        patch = DATA / "new" / "grp.json"
+        qs = json.loads(patch.read_text(encoding="utf-8")).get("кванторные", []) if patch.exists() else []
+
+        def val(sub, p):
+            v = sub["свойства"].get(p)
+            if v is None and sub["≅"] in self.obj:
+                v = self.obj[sub["≅"]]["свойства"].get(p)
+            return v
+        for o in self.obj.values():
+            subs = o["подгруппы"]
+            if not subs:
+                continue
+            complete = o["конечная"] and not o.get("подгруппы неполные")
+            for q in qs:
+                if o["свойства"].get(q["id"]) is not None:
+                    continue
+                verdict, unknown = True, False
+                for sub in subs:
+                    f = [val(sub, x["p"]) for x in q.get("фильтр", [])]
+                    want = [x.get("значение", True) for x in q.get("фильтр", [])]
+                    if any(v is not None and v != w for v, w in zip(f, want)):
+                        continue
+                    pv = val(sub, q["p"])
+                    if None in f:
+                        if pv is False:
+                            unknown = True
+                        continue
+                    if pv is False:
+                        verdict = False
+                        break
+                    if pv is None:
+                        unknown = True
+                if verdict is False:
+                    o["свойства"][q["id"]] = False
+                elif complete and not unknown:
+                    o["свойства"][q["id"]] = True
 
     def _fam_props(self, f):
         """Свойство семейства — у всех членов: да, если у всех да; нет, если у
