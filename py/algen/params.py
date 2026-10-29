@@ -224,6 +224,7 @@ class Model:
 
     def __init__(self, lib=None):
         self.lib = lib or Library()
+        self.raw = None  # записи GAP (размеры классов подгрупп) — по требованию
         with open(FAMILIES, encoding="utf-8") as f:
             self.fam = {k: {int(n): v for n, v in d.items()} for k, d in json.load(f)["семейства"].items()}
         self.finite = [k for k, o in self.lib.obj.items() if o["конечная"]]
@@ -282,6 +283,24 @@ class Model:
                 return ("num", math.lcm(args[0][1], args[1][1]))
             if f in ("phi", "φ"):
                 return ("num", phi(args[0][1]))
+            if f in ("n_p", "sylow_count"):
+                # число силовских p-подгрупп: размер класса сопряжённых силовских
+                pr, g = args[0][1], self.group(args[1])
+                if self.raw is None:
+                    from .finite import load
+                    self.raw = load(extra=True)
+                r = self.raw.get(g)
+                if r is None or r["subs"] is None:
+                    return None
+                n = int(g.split(":")[0])
+                pk = 1
+                while n % (pk * pr) == 0:
+                    pk *= pr
+                cls = [x for x in r["subs"] if int(x["group"].split(":")[0]) == pk]
+                return ("num", sum(x["class_size"] for x in cls)) if cls else None
+            if f in ("Aut", "Out"):
+                k = self.lib.obj[self.group(args[0])].get(f.lower())
+                return ("grp", k) if k in self.lib.obj else None
             if f in ("Z", "center", "commutator"):
                 g = args[0]
                 if g[0] != "grp":
