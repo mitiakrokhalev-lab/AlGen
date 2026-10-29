@@ -4951,14 +4951,16 @@
     "centerless": true,
     "residually-finite": true,
     "linear": false,
-    "polycyclic": false
+    "polycyclic": false,
+    "indecomposable": true
    },
    "почему": {
     "residually-finite": "Aut к. п. ф. а. группы ф. а. (G. Baumslag, 1963)",
     "linear": "E. Formanek, C. Procesi, The automorphism group of a free group is not linear, J. Algebra 1992",
     "perfect": "абелианизация C₂ (знак определителя на Z³)",
     "centerless": "Inn(F₃) ≅ F₃ без центра, и централизатор Inn тривиален",
-    "solvable": "содержит Inn(F₃) ≅ F₃"
+    "solvable": "содержит Inn(F₃) ≅ F₃",
+    "indecomposable": "если H = A × B, то нормальная Inn(F₃) ≅ F₃ пересекает A и B по коммутирующим нормальным подгруппам F₃, одна из них, скажем Inn ∩ B, тривиальна; тогда [Inn, B] ⩽ Inn ∩ B = 1, а централизатор Inn(F₃) в Aut(F₃) тривиален, так что B = 1"
    },
    "трудно": [
     "residually-finite",
@@ -7918,7 +7920,7 @@
   {
    "id": "GL2Zc",
    "имя": "GL₂(ℤ)′",
-   "заметка": "Коммутант GL₂(ℤ): единственная подгруппа индекса 2 в SL₂(ℤ). Содержит −E и свободную SL₂(ℤ)′ индекса 6.",
+   "заметка": "Коммутант GL₂(ℤ): единственная подгруппа индекса 2 в SL₂(ℤ). Содержит −E и свободную SL₂(ℤ)′ индекса 6. Изоморфна (C₃ ∗ C₃) × ⟨−E⟩: a = U², b = SaS⁻¹ (U порядка 6, U³ = −E) порождают C₃ ∗ C₃, она изоморфно проектируется на подгруппу индекса 2 в PSL₂(ℤ) ≅ C₂ ∗ C₃.",
    "свойства": {
     "trivial": false,
     "abelian": false,
@@ -7997,6 +7999,21 @@
      "почему": "SL₂(ℤ)′ свободна ранга 2 индекса 12 в SL₂(ℤ), а GL₂(ℤ)′ имеет в SL₂(ℤ) индекс 2"
     },
     {
+     "id": "коммутант",
+     "имя": "(C₃ ∗ C₃)′",
+     "≅": "F4",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "18:5",
+     "почему": "G ≅ (C₃ ∗ C₃) × C₂, Gᵃᵇ ≅ C₃ × C₃ × C₂; (C₃ ∗ C₃)′ — ядро на C₃ × C₃, индекс 9, свободна (Курош), χ = 9·(1/3 + 1/3 − 1) = −3, ранг 4"
+    },
+    {
      "id": "все",
      "имя": "GL₂(ℤ)′",
      "≅": "GL2Zc",
@@ -8014,7 +8031,8 @@
    "центр": "центр",
    "ссылки": [
     "стандартный пример: SL₂(ℤ) ≅ C₄ ∗_{C₂} C₆, GL₂(ℤ) ≅ D₄ ∗_{C₂×C₂} D₆"
-   ]
+   ],
+   "коммутант": "коммутант"
   },
   {
    "id": "S3wrZc",
@@ -8342,7 +8360,7 @@
     "finite": false,
     "free": false,
     "simple": false,
-    "perfect": false,
+    "perfect": true,
     "periodic": false,
     "fin-gen": true,
     "solvable": false,
@@ -8352,7 +8370,8 @@
     "centerless": true,
     "residually-finite": true,
     "linear": false,
-    "polycyclic": false
+    "polycyclic": false,
+    "indecomposable": true
    },
    "почему": {
     "fin-gen": "индекс 2 в к. п. Aut(F₃)",
@@ -8361,7 +8380,9 @@
     "centerless": "содержит Inn(F₃); автоморфизм, перестановочный со всеми внутренними, тождествен, так как Z(F₃) = 1",
     "simple": "Inn(F₃) — собственная нетривиальная нормальная подгруппа",
     "residually-finite": "подгруппа ф. а. Aut(F₃)",
-    "linear": "если бы подгруппа индекса 2 была линейна, то индуцированное представление дало бы линейность Aut(F₃) (Formanek–Procesi)"
+    "linear": "если бы подгруппа индекса 2 была линейна, то индуцированное представление дало бы линейность Aut(F₃) (Formanek–Procesi)",
+    "perfect": "SAut(Fₙ) порождается нильсеновыми трансвекциями ρᵢⱼ, λᵢⱼ (S. M. Gersten, A presentation for the special automorphism group of a free group, J. Pure Appl. Algebra 33, 1984), а при n ⩾ 3 каждая — коммутатор: [ρᵢₖ, ρₖⱼ] = ρᵢⱼ^{±1}",
+    "indecomposable": "если H = A × B, то нормальная Inn(F₃) ≅ F₃ пересекает A и B по коммутирующим нормальным подгруппам F₃, одна из них, скажем Inn ∩ B, тривиальна; тогда [Inn, B] ⩽ Inn ∩ B = 1, а централизатор Inn(F₃) в Aut(F₃) тривиален, так что B = 1"
    },
    "подгруппы": [
     {
@@ -8399,8 +8420,10 @@
     "linear"
    ],
    "ссылки": [
-    "E. Formanek, C. Procesi, 1992"
-   ]
+    "E. Formanek, C. Procesi, 1992",
+    "S. M. Gersten, 1984"
+   ],
+   "коммутант": "все"
   },
   {
    "id": "Sp4Zc",
@@ -8529,6 +8552,20 @@
      }
     },
     {
+     "id": "центр",
+     "имя": "Z(UT₃(ℤ)) × ℤ³",
+     "≅": "Z4",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "ZxZ"
+    },
+    {
      "id": "все",
      "имя": "UT₃(ℤ) × ℤ³",
      "≅": "UT3ZxZ3",
@@ -8543,7 +8580,8 @@
      "фактор": "1:1"
     }
    ],
-   "коммутант": "коммутант"
+   "коммутант": "коммутант",
+   "центр": "центр"
   },
   {
    "id": "UT5Z",
@@ -9138,6 +9176,219 @@
    ],
    "центр": "1",
    "коммутант": "коммутант"
+  },
+  {
+   "id": "Z4",
+   "имя": "ℤ⁴",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "nilpotent": true,
+    "solvable": true,
+    "perfect": false,
+    "simple": false,
+    "centerless": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "torsion-free": true,
+    "periodic": false,
+    "divisible": false,
+    "residually-finite": true,
+    "polycyclic": true,
+    "linear": true,
+    "hopfian": true,
+    "indecomposable": false
+   },
+   "почему": {
+    "free": "абелева нециклическая"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z4"
+    },
+    {
+     "id": "все",
+     "имя": "ℤ⁴",
+     "≅": "Z4",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1"
+  },
+  {
+   "id": "Pruf2sq",
+   "имя": "ℤ(2^∞)²",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "nilpotent": true,
+    "solvable": true,
+    "perfect": false,
+    "simple": false,
+    "centerless": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": true,
+    "residually-finite": false,
+    "polycyclic": false,
+    "linear": true,
+    "hopfian": false,
+    "indecomposable": false
+   },
+   "почему": {
+    "linear": "диагональные 2-примарные корни из 1 в GL₂(ℂ)",
+    "hopfian": "x ↦ 2x"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Pruf2sq"
+    },
+    {
+     "id": "все",
+     "имя": "ℤ(2^∞)²",
+     "≅": "Pruf2sq",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1"
+  },
+  {
+   "id": "DihPruf2sq",
+   "имя": "Dih(ℤ(2^∞)²)",
+   "заметка": "Обобщённая группа диэдра A ⋊ ⟨t⟩, t: a ↦ −a, A = ℤ(2^∞)². Коммутант (t − 1)A = 2A = A абелев и максимален, центр C₂ × C₂ не цикличен.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "perfect": false,
+    "periodic": true,
+    "fin-gen": false,
+    "solvable": true,
+    "nilpotent": false,
+    "torsion-free": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": false,
+    "linear": true,
+    "polycyclic": false,
+    "hopfian": false
+   },
+   "почему": {
+    "nilpotent": "t действует на A = ℤ(2^∞)² обращением, и [A, t, …, t] = 2ⁿA = A",
+    "residually-finite": "подгруппа конечного индекса пересекает делимую A по подгруппе конечного индекса, то есть содержит A",
+    "linear": "a ↦ diag(a), t ↦ перестановка в GL₄(ℂ)",
+    "hopfian": "a ↦ 2a, t ↦ t — сюръекция с ядром A[2]",
+    "divisible": "фактор C₂"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "DihPruf2sq"
+    },
+    {
+     "id": "A",
+     "имя": "ℤ(2^∞)²",
+     "≅": "Pruf2sq",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true
+     },
+     "фактор": "2:1"
+    },
+    {
+     "id": "центр",
+     "имя": "A[2] ≅ C₂ × C₂",
+     "≅": "4:2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "at^k централен ⇔ k = 0 и a = −a"
+    },
+    {
+     "id": "все",
+     "имя": "Dih(ℤ(2^∞)²)",
+     "≅": "DihPruf2sq",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "A"
   }
  ]
 }

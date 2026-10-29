@@ -42,7 +42,7 @@ import numpy as np
 from types import SimpleNamespace
 
 from .library import GROUP_PROPS, MARKS, SUB_PROPS, Library, Scene, Search, jobs
-from .logic import Theory, Var, Vocab, decide
+from .logic import App, Theory, Var, Vocab, decide
 
 
 def atom_name(a):
@@ -180,11 +180,30 @@ class Form:
         q = self.lib.obj[key]["подгруппы"][sub].get("фактор")
         return ("obj", q) if q else None
 
+    def one_unknown(self, cols):
+        """Строки, где ни один литерал запрета (столбцы cols) не ложен, а
+        неизвестен ровно один: заполнив его, можно закрыть запрет.
+        Возвращает [(строка, столбец неизвестного литерала)]."""
+        cols = list(cols) + self.fixed
+        tr, fa = self.m[:, cols], self.m[:, [c ^ 1 for c in cols]]
+        unk = ~tr & ~fa
+        rows = np.flatnonzero(~fa.any(axis=1) & (unk.sum(axis=1) == 1))
+        return [(r, cols[int(np.flatnonzero(unk[r])[0])]) for r in rows]
+
     def value_name(self, r, atom):
         """Имя недостающего значения атома в строке r — «решающее значение».
         Значение у построенного произведения приписывается множителю, у которого
         не записано больше значений: обычно оно оттуда и берётся."""
         im = self._image(r, atom[2])
+        t = atom[2]
+        if im is None and isinstance(t, App) and t.op in ("center", "commutator", "quotient"):
+            # Не записан центр или коммутант: приписываем это группе, у которой его нет.
+            g = t.args[0]
+            gim = self._image(r, g)
+            if gim is not None and gim[0] == "obj":
+                field = "коммутант" if t.op == "commutator" else "центр"
+                key = base_factor(self.lib, gim[1], None, field)
+                return f"не записан {field} у {self.lib.obj[key].get('имя', key)}"
         if im is None:
             return f"{atom_name(atom)} у {self.where(r)}"
         p, lib = atom[1], self.lib
@@ -366,11 +385,11 @@ def _unknowns(o):
             + (o.get("центр") is None) + (o.get("коммутант") is None))
 
 
-def base_factor(lib, key, p):
+def base_factor(lib, key, p, field=None):
     """Для построенного произведения A × B — множитель, к которому относится
-    недостающее значение свойства p (None — для подгрупп): тот, у которого p
-    не записано, а если неясно — у которого вообще меньше записано. Для
-    записанных групп — сама группа."""
+    недостающее значение свойства p (None — для подгрупп) или незаписанное
+    поле field («центр», «коммутант»): тот, у которого его нет, а если неясно —
+    у которого вообще меньше записано. Для записанных групп — сама группа."""
     o = lib.obj.get(key)
     if not o or not o.get("синтез"):
         return key
@@ -380,8 +399,12 @@ def base_factor(lib, key, p):
     a, b = inv.get(key, (None, None))
     if a is None:
         return key
-    fa, fb = (base_factor(lib, x, p) for x in (a, b))
+    fa, fb = (base_factor(lib, x, p, field) for x in (a, b))
     oa, ob = lib.obj[fa], lib.obj[fb]
+    if field is not None:
+        ua, ub = oa.get(field) is None, ob.get(field) is None
+        if ua != ub:
+            return fa if ua else fb
     if p is not None:
         ua, ub = oa["свойства"].get(p) is None, ob["свойства"].get(p) is None
         if ua != ub:
@@ -518,7 +541,9 @@ def run(max_prem, lib=None, vocab=None, form=None):
             hint = form.unknown_goal(prem, g)
             if hint is not None:
                 r["заполнить"] = {"где": form.where(hint), "атом": atom_name(goal[0])}
-                r["значения"] = sorted({form.value_name(x, goal[0]) for x in form.unknown_rows(prem, g)})
+            # Решающие значения: строки, где неизвестен ровно один литерал запрета.
+            r["значения"] = sorted({form.value_name(x, form.lit(c)[0])
+                                    for x, c in form.one_unknown(list(prem) + [g ^ 1])})
         # Опровергается только помеченным значением: условие не закрыто.
         for mat, mark, kind in ((form.s, "короткий довод", "короткий довод"),
                                 (form.m, "трудно", "трудный контрпример")):

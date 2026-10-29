@@ -555,8 +555,14 @@ class Search:
         if t.op in ("prod", "freeprod") and all(a and a[0] == "obj" for a in args):
             p = lib.prod.get((args[0][1], args[1][1])) if t.op == "prod" else None
             return ("obj", p) if p else None
-        if t.op in ("aut", "ab") and args[0] and args[0][0] == "obj":
-            k = lib.obj[args[0][1]].get({"aut": "aut", "ab": "абелианизация"}[t.op])
+        if t.op in ("aut", "ab", "inn") and args[0] and args[0][0] == "obj":
+            o = lib.obj[args[0][1]]
+            k = o.get({"aut": "aut", "ab": "абелианизация", "inn": "inn"}[t.op])
+            if not k and t.op in ("ab", "inn"):
+                # Gᵃᵇ = G/G′, Inn(G) ≅ G/Z(G): фактор записанной подгруппы.
+                sid = o.get("коммутант" if t.op == "ab" else "центр")
+                s = next((x for x in o["подгруппы"] or [] if x["id"] == sid), None)
+                k = s.get("фактор") if s else None
             return ("obj", k) if k else None
         if t.op in ("center", "commutator") and args[0] and args[0][0] == "obj":
             o = lib.obj[args[0][1]]
