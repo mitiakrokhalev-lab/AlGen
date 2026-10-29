@@ -48,6 +48,26 @@ from .logic import App, Theory, Var, Vocab, decide
 # числом термов растут комбинаторно с каждым свойством.
 SKIP = set()
 MOR_PROPS = ("injective", "surjective", "iso", "zero-mor")
+RELATIONS = True  # атомы-отношения между термами схемы (⩽, =, ≅)
+
+
+def relation_atoms(g, terms):
+    """⩽ и = для подгрупп одной группы, ≅ для групп (в том числе подгрупп как
+    групп). Симметричные — с аргументами по возрастанию строки, как в Theory.lit."""
+    out = []
+    subs = [t for t in terms if g.terms[t].sort == "Grp.sub"]
+    objs = [t for t in terms if g.v.fits(g.terms[t].sort, "Grp.obj")]
+    for i, a in enumerate(subs):
+        for b in subs:
+            if a != b and g.terms[a].links.get("ambient") == g.terms[b].links.get("ambient"):
+                out.append(("r", "le", a, b))
+                if str(a) < str(b):
+                    out.append(("r", "eq-sub", a, b))
+    for i, a in enumerate(objs):
+        for b in objs[i + 1:]:
+            x, y = sorted((a, b), key=str)
+            out.append(("r", "iso", x, y))
+    return out
 
 
 def props():
@@ -75,7 +95,10 @@ def term_vars(t):
 
 def atom_vars(a, graph):
     """Переменные, о которых говорит атом. Свойство вложения (normal(N))
-    говорит и об объемлющей группе, свойство N как группы — только об N."""
+    говорит и об объемлющей группе, свойство N как группы — только об N.
+    Отношение — о всех своих аргументах."""
+    if a[0] == "r":
+        return set().union(*(term_vars(x) for x in a[2:]))
     out = term_vars(a[2])
     if a[1] in SUB_PROPS:
         amb = graph.terms[a[2]].links.get("ambient")
@@ -93,12 +116,21 @@ def canon(t, perm):
     return f"{t.op}({', '.join(args)})"
 
 
+def canon_atom(a, perm):
+    """Строка атома с переименованными переменными; у симметричных отношений
+    аргументы упорядочены."""
+    args = [canon(x, perm) for x in a[2:]]
+    if a[0] == "r" and a[1] in ("iso", "eq-sub"):
+        args.sort()
+    return f"{a[1]}({', '.join(args)})"
+
+
 def symmetries(graph, atoms, fixed):
     """Перестановки переменных, которые сохраняют сорта, связи, набор атомов
     формы и посылки схемы. Условия, переходящие друг в друга, — одно условие."""
     vs = [t for t in graph.terms if isinstance(t, Var)]
-    base = {(a[1], canon(a[2], {})) for a in atoms}
-    fixed_c = {(a[1], canon(a[2], {}), v) for a, v in fixed}
+    base = {canon_atom(a, {}) for a in atoms}
+    fixed_c = {(canon_atom(a, {}), v) for a, v in fixed}
     out = []
     for p in permutations(vs):
         perm = dict(zip(vs, p))
@@ -106,9 +138,9 @@ def symmetries(graph, atoms, fixed):
                or {k: perm.get(x, x) for k, x in graph.terms[v].links.items()} != graph.terms[perm[v]].links
                for v in vs):
             continue
-        if {(a[1], canon(a[2], perm)) for a in atoms} != base:
+        if {canon_atom(a, perm) for a in atoms} != base:
             continue
-        if {(a[1], canon(a[2], perm), v) for a, v in fixed} != fixed_c:
+        if {(canon_atom(a, perm), v) for a, v in fixed} != fixed_c:
             continue
         out.append(perm)
     return out
@@ -116,7 +148,7 @@ def symmetries(graph, atoms, fixed):
 
 def klass(lits, perms):
     """Канонический запрет: множество литералов с точностью до симметрий."""
-    return min(tuple(sorted(("" if v else "¬") + f"{a[1]}({canon(a[2], perm)})" for a, v in lits))
+    return min(tuple(sorted(("" if v else "¬") + canon_atom(a, perm) for a, v in lits))
                for perm in perms)
 
 
@@ -203,6 +235,8 @@ class Form:
         """Имя недостающего значения атома в строке r — «решающее значение».
         Значение у построенного произведения приписывается множителю, у которого
         не записано больше значений: обычно оно оттуда и берётся."""
+        if atom[0] == "r":
+            return f"{atom_name(atom)} у {self.where(r)}"
         im = self._image(r, atom[2])
         t = atom[2]
         if im is not None and im[0] == "mor":
@@ -306,7 +340,7 @@ class SchemeForm(Form):
             if t not in own:
                 own.append(t)
         self.g, self.lib, self._kept = g, lib, {}
-        T = Theory(g, grow=1)
+        T = Theory(g, grow=1, extra=relation_atoms(g, own) if RELATIONS else ())
         self.sc = SimpleNamespace(T=T, s=T.solver())
         self.search = Search(g, T, lib)
         self.atoms = []
@@ -318,6 +352,8 @@ class SchemeForm(Form):
                 self.atoms += [("p", p, t) for p in list(SUB_PROPS) + props()]
             elif sort == "Grp.mor":
                 self.atoms += [("p", p, t) for p in MOR_PROPS]
+        if RELATIONS:
+            self.atoms += relation_atoms(g, own)
         self.index = {a: i for i, a in enumerate(self.atoms)}
         self.req = {}
         for i, a in enumerate(self.atoms):

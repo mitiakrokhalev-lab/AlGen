@@ -261,7 +261,7 @@ class Graph:
 class Theory:
     """Пропозициональная теория графа: переменные-атомы и клаузы."""
 
-    def __init__(self, graph, grow=1):
+    def __init__(self, graph, grow=1, extra=()):
         self.g = graph
         self.v = graph.v
         self.grow = grow
@@ -269,6 +269,8 @@ class Theory:
         self.atoms = []
         self.clauses = []
         self.origin = []  # id правила для каждой клаузы
+        for a in extra:  # атомы перебора (отношения), которым нужны аксиомы равенства
+            self.lit(a)
         self._build()
 
     # атомы ---------------------------------------------------------------

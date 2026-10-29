@@ -729,6 +729,29 @@ class Search:
             for b, ib in items[i + 1:]:
                 if ia[1] == ib[1] and self.g.terms[a].links.get("ambient") == self.g.terms[b].links.get("ambient"):
                     out[("r", "eq-sub", *sorted((a, b), key=str))] = ia[2] == ib[2]
+                    # ⩽ в очевидных случаях: равные, 1 ⩽ всё, всё ⩽ всей группы
+                    for x, ix, y, iy in ((a, ia, b, ib), (b, ib, a, ia)):
+                        sx = self.lib.obj[ix[1]]["подгруппы"][ix[2]]
+                        sy = self.lib.obj[iy[1]]["подгруппы"][iy[2]]
+                        if ix[2] == iy[2] or sx["≅"] == "1:1" or sy["свойства"].get("whole"):
+                            out[("r", "le", x, y)] = True
+                        elif sx["свойства"].get("whole") or sy["≅"] == "1:1":
+                            out[("r", "le", x, y)] = False
+        # ≅ между группами: один ключ — изоморфны; разные ключи конечных таблиц — нет
+        objs = {}
+        for t in terms or self.g.terms:
+            if self.g.v.fits(self.g.terms[t].sort, "Grp.obj"):
+                k = self._obj(self._image(t, env))
+                if k is not None:
+                    objs[t] = k
+        oi = list(objs.items())
+        for i, (a, ka) in enumerate(oi):
+            for b, kb in oi[i + 1:]:
+                x, y = sorted((a, b), key=str)
+                if ka == kb:
+                    out[("r", "iso", x, y)] = True
+                elif self.lib.obj[ka].get("конечная") and self.lib.obj[kb].get("конечная"):
+                    out[("r", "iso", x, y)] = False
         return out, hard
 
     def entails(self, assume, atom, value):

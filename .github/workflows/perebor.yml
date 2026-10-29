@@ -1,12 +1,12 @@
-name: перебор
+name: perebor
 
 # Пакетный перебор схем на 20 машинах: python3 -m algen.batch с --часть i/20.
-# Запуск: пуш в ветку «перебор-…» (workflow_dispatch работает, когда файл есть в main).
+# Запуск: пуш в ветку «run-…» (workflow_dispatch работает, когда файл есть в main).
 # Результаты каждой машины — артефакт «часть-i»; общую сводку собирает задание «сводка».
 
 on:
   push:
-    branches: ["перебор-*"]   # прогон запускается пушем в ветку перебор-…
+    branches: ["run-*"]   # прогон запускается пушем в ветку run-…
   workflow_dispatch:
     inputs:
       schemes:
@@ -38,7 +38,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: часть-${{ matrix.part }}
+          name: part-${{ matrix.part }}
           path: out
           retention-days: 30
 
@@ -62,17 +62,17 @@ jobs:
           cd py && python3 -m algen.batch сводка ../all
       - uses: actions/upload-artifact@v4
         with:
-          name: все-схемы
+          name: all-schemes
           path: all
           retention-days: 30
       - name: результаты в ветку «результаты-…» (их можно забрать через git)
         run: |
-          tar czf результаты.tar.gz all
+          tar czf results.tar.gz all
           cp all/сводка.md сводка.md
           git config user.name "algen-bot"
           git config user.email "algen-bot@users.noreply.github.com"
-          git checkout --orphan "результаты-${GITHUB_REF_NAME}"
-          git rm -rq --cached . && git clean -fdq -e результаты.tar.gz -e сводка.md
-          git add результаты.tar.gz сводка.md
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e results.tar.gz -e сводка.md
+          git add results.tar.gz сводка.md
           git commit -qm "Результаты перебора: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
-          git push -f origin "HEAD:refs/heads/результаты-${GITHUB_REF_NAME}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"
