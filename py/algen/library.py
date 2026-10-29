@@ -46,7 +46,8 @@ class Library:
         compl, endo = load_compl(), load_endo()
         for k, r in load_finite(extra=True).items():
             for data, field, prop in ((compl, "complemented", "complemented"),
-                                      (endo, "fully_invariant", "fully-invariant")):
+                                      (endo, "fully_invariant", "fully-invariant"),
+                                      (endo, "subnormal", "subnormal")):
                 c = data.get(k)
                 if c and c.get(field) is not None and r["subs"] is not None and \
                         [[x["group"], x["class_size"]] for x in r["subs"]] == c["check"]:
@@ -837,6 +838,9 @@ class Search:
         if t.op == "stab" and args[2] and args[2][0] == "pt":
             a, j = args[2][1], args[2][2]
             return ("sub", a[1], a[2][j], *args[2][3:])
+        if t.op == "core" and args[1] and args[1][0] == "sub":
+            c = self._core(args[1][1], (args[1][2],))
+            return ("sub", args[1][1], c) if c is not None else None
         if t.op == "act-ker" and args[1] and args[1][0] == "act":
             c = self._core(args[1][1], args[1][2])
             return ("sub", args[1][1], c) if c is not None else None
@@ -950,10 +954,14 @@ class Search:
                     if ia[2] == ib[2] and ia[3:] != ib[3:]:
                         # разные сопряжённые одного класса (стабилизаторы двух точек орбиты)
                         out[("r", "eq-sub", *sorted((a, b), key=str))] = False
+                        out[("r", "conj-sub", *sorted((a, b), key=str))] = True
                         if self.lib.obj[ia[1]].get("конечная"):
                             out[("r", "le", a, b)] = out[("r", "le", b, a)] = False
                         continue
                     out[("r", "eq-sub", *sorted((a, b), key=str))] = ia[2] == ib[2]
+                    if self.lib.obj[ia[1]].get("конечная"):
+                        # классы сопряжённости таблицы различны
+                        out[("r", "conj-sub", *sorted((a, b), key=str))] = ia[2] == ib[2]
                     # ⩽ в очевидных случаях: равные, 1 ⩽ всё, всё ⩽ всей группы
                     for x, ix, y, iy in ((a, ia, b, ib), (b, ib, a, ia)):
                         sx = self.lib.obj[ix[1]]["подгруппы"][ix[2]]
