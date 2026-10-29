@@ -46,6 +46,8 @@ jobs:
     needs: part
     if: always()
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -63,3 +65,14 @@ jobs:
           name: все-схемы
           path: all
           retention-days: 30
+      - name: результаты в ветку «результаты-…» (их можно забрать через git)
+        run: |
+          tar czf результаты.tar.gz all
+          cp all/сводка.md сводка.md
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "результаты-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e результаты.tar.gz -e сводка.md
+          git add результаты.tar.gz сводка.md
+          git commit -qm "Результаты перебора: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/результаты-${GITHUB_REF_NAME}"
