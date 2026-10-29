@@ -647,7 +647,8 @@ class Theory:
     SUB_CLOSED = ("trivial", "abelian", "cyclic", "finite", "solvable", "nilpotent", "torsion-free",
                   "periodic", "residually-finite", "linear", "free", "free-abelian", "p-group",
                   "exponent-2", "exponent-3", "bounded-exponent", "polycyclic", "odd-order", "two-primes",
-                  "countable")
+                  "countable", "left-orderable", "bi-orderable", "amenable", "residually-nilpotent",
+                  "metabelian", "class-2", "dedekind")
 
     def _embeds_axioms(self):
         """Вложение A ↪ B: только для атомов, которые уже есть (иначе пар — квадрат

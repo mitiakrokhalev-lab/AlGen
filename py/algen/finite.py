@@ -125,6 +125,11 @@ FINITE_DERIVED = {
     "rec-pres": lambda p: True,
     "rec-pres-ctbl": lambda p: True,
     "word-problem": lambda p: True,
+    "left-orderable": lambda p: p["trivial"],
+    "bi-orderable": lambda p: p["trivial"],
+    "amenable": lambda p: True,
+    "property-t": lambda p: True,
+    "residually-nilpotent": lambda p: p["nilpotent"],
 }
 
 
