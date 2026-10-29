@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_compl, load_products
+from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_compl, load_endo, load_products
 from .logic import DATA, App, Graph, Theory, Var, Vocab
 
 INFINITE = DATA / "infinite" / "grp.json"
@@ -43,13 +43,15 @@ class Library:
         self.obj = {}
         patch = DATA / "finite" / "grp-subs-patch.json"
         patch = json.loads(patch.read_text(encoding="utf-8"))["группы"] if patch.exists() else {}
-        compl = load_compl()
+        compl, endo = load_compl(), load_endo()
         for k, r in load_finite(extra=True).items():
-            c = compl.get(k)
-            if c and c["complemented"] is not None and r["subs"] is not None and \
-                    [[x["group"], x["class_size"]] for x in r["subs"]] == c["check"]:
-                for x, v in zip(r["subs"], c["complemented"]):
-                    x["props"]["complemented"] = v
+            for data, field, prop in ((compl, "complemented", "complemented"),
+                                      (endo, "fully_invariant", "fully-invariant")):
+                c = data.get(k)
+                if c and c.get(field) is not None and r["subs"] is not None and \
+                        [[x["group"], x["class_size"]] for x in r["subs"]] == c["check"]:
+                    for x, v in zip(r["subs"], c[field]):
+                        x["props"][prop] = v
             partial = r["subs"] is None and k in patch
             if partial:
                 r = {**r, **patch[k]}

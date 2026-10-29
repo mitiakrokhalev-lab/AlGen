@@ -35,6 +35,8 @@ AUT_SCRIPT = Path(__file__).with_name("gap") / "aut.g"
 AUT = ROOT / "data" / "finite" / "grp-aut.jsonl"
 COMPL_SCRIPT = Path(__file__).with_name("gap") / "compl.g"
 COMPL = ROOT / "data" / "finite" / "grp-compl.jsonl"
+ENDO_SCRIPT = Path(__file__).with_name("gap") / "endo.g"
+ENDO = ROOT / "data" / "finite" / "grp-endo.jsonl"
 PRESENT_SCRIPT = Path(__file__).with_name("gap") / "present.g"
 PRESENT = ROOT / "data" / "finite" / "grp-present.jsonl"
 
@@ -215,6 +217,14 @@ def load_compl(path=COMPL):
         return {r["key"]: r for r in map(json.loads, f)}
 
 
+def load_endo(path=ENDO):
+    """key → [вполне инвариантна ли подгруппа класса i] (если таблица посчитана)."""
+    if not Path(path).exists():
+        return {}
+    with open(path) as f:
+        return {r["key"]: r for r in map(json.loads, f)}
+
+
 def load_aut(path=AUT):
     """key → запись об Aut, Inn, Out (если таблица посчитана)."""
     if not Path(path).exists():
@@ -299,6 +309,8 @@ if __name__ == "__main__":
                     help="порядок и тип групп по копредставлениям из карточек → data/finite/grp-present.jsonl")
     ap.add_argument("--дополнения", dest="compl", action="store_true",
                     help="дополняемость подгрупп всех групп таблицы в data/finite/grp-compl.jsonl")
+    ap.add_argument("--эндоморфизмы", dest="endo", action="store_true",
+                    help="вполне инвариантные подгруппы всех групп таблицы в data/finite/grp-endo.jsonl")
     ap.add_argument("--авт", dest="aut", action="store_true",
                     help="посчитать Aut, Inn, Out всех групп таблицы в data/finite/grp-aut.jsonl")
     a = ap.parse_args()
@@ -309,6 +321,10 @@ if __name__ == "__main__":
     if a.compl:
         build_table(COMPL_SCRIPT, COMPL, a.jobs)
         print(COMPL, sum(1 for _ in COMPL.open()))
+        raise SystemExit
+    if a.endo:
+        build_table(ENDO_SCRIPT, ENDO, a.jobs)
+        print(ENDO, sum(1 for _ in ENDO.open()))
         raise SystemExit
     if a.aut:
         build_aut(a.jobs)
