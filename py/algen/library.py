@@ -51,12 +51,16 @@ class Library:
             for r in json.load(f)["группы"]:
                 self.obj[r["id"]] = {"key": r["id"], "конечная": False, **r}
         self.prod = load_products()
-        # Свободные произведения: запись группы с полем «свободное произведение»: [A, B].
-        self.fprod = {}
+        # Свободные произведения и сплетения: поля записи «свободное произведение»
+        # и «сплетение»: [A, B]. Сплетение A ≀ B не симметрично.
+        self.fprod, self.wreath = {}, {}
         for k, o in self.obj.items():
             ab = o.get("свободное произведение")
             if ab:
                 self.fprod[ab[0], ab[1]] = self.fprod[ab[1], ab[0]] = k
+            ab = o.get("сплетение")
+            if ab:
+                self.wreath[ab[0], ab[1]] = k
         for k, o in self.obj.items():
             for other, p in o.get("произведения", {}).items():
                 self.prod[k, other] = self.prod[other, k] = p
@@ -562,8 +566,8 @@ class Search:
         if t.op == "quotient" and args[0] and args[1] and args[1][0] == "sub":
             q = lib.obj[args[1][1]]["подгруппы"][args[1][2]].get("фактор")
             return ("obj", q) if q else None
-        if t.op in ("prod", "freeprod") and all(a and a[0] == "obj" for a in args):
-            p = (lib.prod if t.op == "prod" else lib.fprod).get((args[0][1], args[1][1]))
+        if t.op in ("prod", "freeprod", "wreath") and all(a and a[0] == "obj" for a in args):
+            p = {"prod": lib.prod, "freeprod": lib.fprod, "wreath": lib.wreath}[t.op].get((args[0][1], args[1][1]))
             return ("obj", p) if p else None
         if t.op in ("aut", "ab", "inn") and args[0] and args[0][0] == "obj":
             o = lib.obj[args[0][1]]

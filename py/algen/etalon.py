@@ -31,7 +31,7 @@ SORTS = {"grp": {"Grp": ("Grp.obj", None), "Sub": ("Grp.sub", "ambient"), "Fam":
 # Короткие обозначения конструкций в записи эталона.
 OPS = {"grp": {"Z": "center", "Inn": "inn", "Aut": "aut", "ab": "ab", "∏": "prod-fam", "⊕": "sum-fam",
                "ker": "ker", "im": "im", "commutator": "commutator", "center": "center"}}
-INFIX = {"grp": {"×": "prod", "∗": "freeprod", "/": "quotient"}}
+INFIX = {"grp": {"×": "prod", "∗": "freeprod", "≀": "wreath", "/": "quotient"}}
 
 
 class Unsupported(Exception):

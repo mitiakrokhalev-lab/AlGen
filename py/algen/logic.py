@@ -96,6 +96,16 @@ class Vocab:
         self.rules = [r for r in self.rules if r["id"] not in drop] + added
         # Равенства конструкций (как «вырождения» словаря): «Gᵃᵇ = G/G′».
         self.degen = self.degen + patch.get("вырождения", [])
+        # Новые конструкции (например, сплетение); «gives» — как в словаре.
+        for c in patch.get("конструкции", []):
+            if c["id"] in self.cons:
+                raise KeyError(f"конструкция {c['id']} уже есть в словаре")
+            self.cons[c["id"]] = c
+            scene = [{"name": x["role"], "sort": x["sort"], **{k: x[k] for k in LINKS if k in x}} for x in c["in"]]
+            t = {"op": c["id"], "args": [x["role"] for x in c["in"]]}
+            for p, v in (c.get("gives") or {}).items():
+                self.rules.append({"id": f"{c['id']}:даёт:{p}", "scene": scene, "if": [],
+                                   "then": {"p": p, "t": t, "значение": v}})
 
     def fits(self, have, want):
         return have == want or want in self.up.get(have, ())
