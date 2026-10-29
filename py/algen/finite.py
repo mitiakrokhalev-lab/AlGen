@@ -235,6 +235,9 @@ def load(path=OUT, extra=False):
             cyc = {int(s["group"].split(":")[0]) for s in g["subs"]
                    if cyclic.get(s["group"], s["group"] in ("1:1", "2:1", "3:1"))}
             g["props"].setdefault("exponent-2", cyc <= {1, 2})
+            orders = {int(s["group"].split(":")[0]) for s in g["subs"]}
+            n0 = int(g["key"].split(":")[0])
+            g["props"].setdefault("clt", all(d in orders for d in range(1, n0 + 1) if n0 % d == 0))
             g["props"].setdefault("exponent-3", cyc <= {1, 3})
         for s in g["subs"] or []:
             m = int(s["group"].split(":")[0])
