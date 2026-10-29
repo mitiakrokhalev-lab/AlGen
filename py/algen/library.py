@@ -30,7 +30,10 @@ INFINITE = DATA / "infinite" / "grp.json"
 # неабелев нильпотентен), SL(2, 5) (совершенная с центром).
 EXTRA_FINITE = ("12:3", "24:12", "24:3", "120:5")
 ALL, ONE = "<всё>", "<1>"  # подгруппы множителя в метках подгрупп произведения
-SUB_PROPS = ("normal", "characteristic", "maximal", "whole", "central", "finite-index")
+SUB_PROPS = ("normal", "characteristic", "maximal", "whole", "central", "finite-index",
+             # арифметика индекса (конечный индекс): 2, простой, наименьший простой делитель |G|;
+             # силовская (нетривиальная), холлова (порядок взаимно прост с индексом)
+             "index-2", "prime-index", "min-prime-index", "sylow", "hall")
 
 
 class Library:
@@ -523,7 +526,11 @@ MARKS = ("трудно", "короткий довод")
 
 GROUP_PROPS = ("trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable",
                "nilpotent", "perfect", "torsion-free", "periodic", "divisible", "centerless",
-               "residually-finite", "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent")
+               "residually-finite", "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent",
+               "free-abelian",
+               # арифметика порядка: p-группа (порядки элементов — степени одного простого),
+               # |G| простое, p², pq (p ≠ q), не больше двух простых делителей, нечётный
+               "p-group", "prime-order", "order-p2", "order-pq", "two-primes", "odd-order")
 
 _LIB = _SCENE = None
 

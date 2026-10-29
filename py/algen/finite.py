@@ -18,6 +18,7 @@ data/finite/grp-small-products.jsonl. Отдельные группы больш
 
 import argparse
 import json
+import math
 import os
 import subprocess
 import tempfile
@@ -147,6 +148,38 @@ def load_aut(path=AUT):
         return {r["key"]: r for r in map(json.loads, f)}
 
 
+def _factor(n):
+    out, d = {}, 2
+    while d * d <= n:
+        while n % d == 0:
+            out[d] = out.get(d, 0) + 1
+            n //= d
+        d += 1
+    if n > 1:
+        out[n] = out.get(n, 0) + 1
+    return out
+
+
+def arith_props(n):
+    """Арифметические свойства конечной группы порядка n."""
+    f = _factor(n)
+    return {"p-group": len(f) <= 1, "prime-order": len(f) == 1 and sum(f.values()) == 1,
+            "order-p2": len(f) == 1 and sum(f.values()) == 2,
+            "order-pq": len(f) == 2 and sum(f.values()) == 2,
+            "two-primes": len(f) <= 2, "odd-order": n % 2 == 1}
+
+
+def arith_sub_props(n, m):
+    """Свойства вложения подгруппы порядка m в группу порядка n (индекс n/m)."""
+    i = n // m
+    fi, fn = _factor(i), _factor(n)
+    fm = _factor(m)
+    return {"index-2": i == 2, "prime-index": len(fi) == 1 and sum(fi.values()) == 1,
+            "min-prime-index": n > 1 and i == min(fn),
+            "sylow": len(fm) == 1 and math.gcd(m, i) == 1,
+            "hall": math.gcd(m, i) == 1}
+
+
 def load(path=OUT, extra=False):
     """Словарь key → запись группы; extra — с группами из grp-extra.jsonl."""
     with open(path) as f:
@@ -157,6 +190,13 @@ def load(path=OUT, extra=False):
     for g in out.values():
         for p, f in FINITE_DERIVED.items():
             g["props"].setdefault(p, f(g["props"]))
+        n = int(g["key"].split(":")[0])
+        for p, v in arith_props(n).items():
+            g["props"].setdefault(p, v)
+        for s in g["subs"] or []:
+            m = int(s["group"].split(":")[0])
+            for p, v in arith_sub_props(n, m).items():
+                s["props"].setdefault(p, v)
     return out
 
 
