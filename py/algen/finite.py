@@ -115,6 +115,12 @@ FINITE_DERIVED = {
     "polycyclic": lambda p: p["solvable"],
     "bounded-exponent": lambda p: True,
     "free-abelian": lambda p: p["trivial"],
+    "no-finite-quotients": lambda p: p["trivial"],
+    "countable": lambda p: True,
+    "fin-pres": lambda p: True,
+    "rec-pres": lambda p: True,
+    "rec-pres-ctbl": lambda p: True,
+    "word-problem": lambda p: True,
 }
 
 
@@ -272,6 +278,9 @@ def load(path=OUT, extra=False):
             n0 = int(g["key"].split(":")[0])
             g["props"].setdefault("clt", all(d in orders for d in range(1, n0 + 1) if n0 % d == 0))
             g["props"].setdefault("exponent-3", cyc <= {1, 3})
+            g["props"].setdefault("exponent-4", cyc <= {1, 2, 4})
+            g["props"].setdefault("exponent-6", cyc <= {1, 2, 3, 6})
+            g["props"].setdefault("dedekind", all(x["props"].get("normal") for x in g["subs"]))
         for s in g["subs"] or []:
             m = int(s["group"].split(":")[0])
             for p, v in arith_sub_props(n, m).items():

@@ -183,34 +183,53 @@ def expand(g, names, ex):
 
 
 def library_example(vocab, lib, ex):
-    """∃ без свободных переменных: пример из библиотеки, где тело верно по записям."""
+    """∃ без свободных переменных (цепочка ∃ x : Grp | … ∧ ∃ y : Grp | …, не больше
+    двух групп): пример из библиотеки, где тело верно по записям или выводится из них."""
     from .library import Search
-    from .logic import Graph, Theory
-    _, name, sort, parents, body = ex
-    if parents:
+    from .logic import Graph, Theory, decide
+    g, names, parts = Graph(vocab), {}, []
+
+    def walk(x):
+        _, name, sort, parents, body = x
+        if parents or sort != "Grp":
+            raise Unsupported("пример ∃: только группы без параметров")
+        s, _ = SORTS["grp"][sort]
+        names[name] = g.var(name, s)
+        for y in (body[1] if body[0] == "and" else [body]):
+            if y[0] == "lit":
+                parts.append(y)
+            elif y[0] == "ex":
+                walk(y)
+            else:
+                raise Unsupported("в теле ∃ — только ∧ литералов и ∃")
+    try:
+        walk(ex)
+    except Unsupported:
         return None
-    g = Graph(vocab)
-    s, _ = SORTS["grp"][sort]
-    v = g.var(name, s)
-    parts = body[1] if body[0] == "and" else [body]
-    if any(x[0] != "lit" for x in parts):
+    if len(names) > 2:
         return None
-    lits = [literal(g, x[1], {name: v}, "grp") for x in parts]
-    from .logic import decide
-    T = Theory(g, grow=1)
+    lits = [literal(g, x[1], names, "grp") for x in parts]
+    T = Theory(g, grow=1, extra=[a for a, _ in lits if a[0] == "r"])
     S = Search(g, T, lib)
     s = T.solver()
+    fallback = None
     try:
         for env in S._assign(0, {}):
             facts, hard = S.facts(env)
             if any(facts.get(a) == (not val) for a, val in lits):
                 continue
-            # значения, которых нет в записи, — выводом из записанных (без помеченных)
             known = [(a, x) for a, x in facts.items() if a not in hard]
+            name = ", ".join(f"{t} = {S._name(im)}" for t, im in env.items())
             if all(facts.get(a) == val and a not in hard
                    or decide(T, known, (a, val), s).kind == "выводится" for a, val in lits):
-                k = env[v][1]
-                return lib.obj[k].get("имя", k)
+                return name
+            # пример держится на трудных (литературных) фактах записи — запасной
+            if fallback is None:
+                every = list(facts.items())
+                used = [a for a, val in lits if a in hard and facts.get(a) == val]
+                if all(facts.get(a) == val or decide(T, every, (a, val), s).kind == "выводится"
+                       for a, val in lits):
+                    fallback = name + " (опирается на литературные факты записи" + (": " + ", ".join(a[1] for a in used) if used else "") + ")"
     finally:
         s.delete()
-    return None
+    return fallback
