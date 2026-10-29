@@ -44,6 +44,14 @@ from types import SimpleNamespace
 from .library import GROUP_PROPS, MARKS, SUB_PROPS, Library, Scene, Search, jobs
 from .logic import App, Theory, Var, Vocab, decide
 
+# Свойства, которые не входят в атомы формы (флаг --без): схемы с большим
+# числом термов растут комбинаторно с каждым свойством.
+SKIP = set()
+
+
+def props():
+    return [p for p in GROUP_PROPS if p not in SKIP]
+
 
 def atom_name(a):
     return f"{a[1]}({', '.join(map(str, a[2:]))})"
@@ -117,10 +125,10 @@ class Form:
     def __init__(self, lib, vocab):
         self.sc, self.lib, self._kept = Scene(vocab), lib, {}
         sc = self.sc
-        self.atoms = ([("p", p, sc.G) for p in GROUP_PROPS]
+        self.atoms = ([("p", p, sc.G) for p in props()]
                       + [("p", p, sc.N) for p in SUB_PROPS]
-                      + [("p", p, sc.N) for p in GROUP_PROPS]
-                      + [("p", p, sc.Q) for p in GROUP_PROPS])
+                      + [("p", p, sc.N) for p in props()]
+                      + [("p", p, sc.Q) for p in props()])
         self.index = {a: i for i, a in enumerate(self.atoms)}
         normal = 2 * self.index[("p", "normal", sc.N)]
         # Атом i имеет смысл, только если посылки содержат столбцы req[i]:
@@ -302,9 +310,9 @@ class SchemeForm(Form):
         for t in own:
             sort = g.terms[t].sort
             if sort == "Grp.obj":
-                self.atoms += [("p", p, t) for p in GROUP_PROPS]
+                self.atoms += [("p", p, t) for p in props()]
             elif sort == "Grp.sub":
-                self.atoms += [("p", p, t) for p in SUB_PROPS + GROUP_PROPS]
+                self.atoms += [("p", p, t) for p in list(SUB_PROPS) + props()]
         self.index = {a: i for i, a in enumerate(self.atoms)}
         self.req = {}
         for i, a in enumerate(self.atoms):
@@ -593,9 +601,12 @@ def main():
     ap.add_argument("--json", dest="out", help="записать остаток и трудные контрпримеры в JSON")
     ap.add_argument("--короткие", dest="short", action="store_true",
                     help="показать и условия, опровергнутые только коротким доводом")
+    ap.add_argument("--без", dest="skip", default="",
+                    help="свойства через запятую, которые не перебирать, например bounded-exponent")
     ap.add_argument("--полностью", dest="full", action="store_true",
                     help="кроме сводки по решающим значениям, напечатать все запреты остатка кластерами")
     a = ap.parse_args()
+    SKIP.update(x.strip() for x in a.skip.split(",") if x.strip())
     form = None
     if a.decl:
         vocab = Vocab.section("grp")
