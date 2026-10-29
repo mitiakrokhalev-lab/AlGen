@@ -5114,6 +5114,20 @@
      "фактор": "SumQZ"
     },
     {
+     "id": "⊕C₂",
+     "имя": "⊕_ℕ (½ℤ/ℤ)",
+     "≅": "SumC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "элементы порядка ⩽ 2"
+    },
+    {
      "id": "все",
      "имя": "⊕ℚ/ℤ",
      "≅": "SumQZ",
@@ -10015,6 +10029,237 @@
    ],
    "центр": "центр",
    "коммутант": "коммутант"
+  },
+  {
+   "id": "UT3F3t",
+   "имя": "UT₃(𝔽₃(t))",
+   "заметка": "Линейная группа ограниченного периода, не ф. а.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "perfect": false,
+    "periodic": true,
+    "fin-gen": false,
+    "solvable": true,
+    "nilpotent": true,
+    "torsion-free": false,
+    "bounded-exponent": true,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": false,
+    "linear": true,
+    "polycyclic": false
+   },
+   "почему": {
+    "bounded-exponent": "показатель 3 (характеристика 3, ступень 2)",
+    "residually-finite": "подгруппа K конечного индекса имеет образ Ū конечного индекса в F², и [Ū, G] ⊇ ω(u, F²) = F для u ∈ Ū ∖ 0 (форма F-билинейна): центр F лежит в K",
+    "fin-gen": "к. п. нильпотентная периодическая конечна",
+    "linear": "по определению"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "UT3F3t"
+    },
+    {
+     "id": "центр",
+     "имя": "e₁₃(F)",
+     "≅": "SumC3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC3",
+     "почему": "центр UT₃(F) — угловые элементы; F ≅ ⊕C₃ как группа, F² — тоже"
+    },
+    {
+     "id": "все",
+     "имя": "UT₃(𝔽₃(t))",
+     "≅": "UT3F3t",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "центр"
+  },
+  {
+   "id": "Binf",
+   "имя": "B(∞, n), n нечётно ⩾ 665",
+   "заметка": "Свободная бёрнсайдова группа счётного ранга периода n.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "perfect": false,
+    "periodic": true,
+    "fin-gen": false,
+    "bounded-exponent": true,
+    "torsion-free": false,
+    "divisible": false,
+    "hopfian": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false
+   },
+   "почему": {
+    "hopfian": "x₁ ↦ 1, xᵢ₊₁ ↦ xᵢ — сюръективный эндоморфизм относительно свободной группы с нетривиальным ядром",
+    "fin-gen": "конечное множество элементов лежит в ⟨x₁, …, x_k⟩, а фактор по нормальному замыканию x₁, …, x_k снова изоморфен B(∞, n) ≠ 1",
+    "abelian": "содержит B(2, n) — подгруппу, порождённую x₁, x₂",
+    "solvable": "содержит B(2, n)",
+    "nilpotent": "содержит B(2, n)",
+    "periodic": "период n",
+    "bounded-exponent": "период n",
+    "finite": "содержит бесконечную B(2, n) (Новиков — Адян)"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Binf"
+    },
+    {
+     "id": "все",
+     "имя": "B(∞, n), n нечётно ⩾ 665",
+     "≅": "Binf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "трудно": [
+    "finite"
+   ],
+   "ссылки": [
+    "П. С. Новиков, С. И. Адян, 1968"
+   ]
+  },
+  {
+   "id": "B2n",
+   "имя": "B(2, n), n нечётно ⩾ 665",
+   "заметка": "Свободная бёрнсайдова группа ранга 2 большого нечётного периода: к. п., ограниченного периода, бесконечна.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "perfect": false,
+    "periodic": true,
+    "fin-gen": true,
+    "bounded-exponent": true,
+    "torsion-free": false,
+    "divisible": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "residually-finite": false,
+    "linear": false
+   },
+   "почему": {
+    "finite": "П. С. Новиков, С. И. Адян, 1968: B(m, n) бесконечна при m ⩾ 2 и нечётном n ⩾ 4381 (Адян: n ⩾ 665)",
+    "perfect": "B(2, n)ᵃᵇ = (ℤ/n)²",
+    "simple": "коммутант — собственная нормальная подгруппа",
+    "residually-finite": "к. п. ф. а. ограниченного периода конечна (Зельманов)",
+    "linear": "к. п. периодическая линейная конечна (Бернсайд — Шур)",
+    "solvable": "к. п. периодическая разрешимая конечна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "B2n"
+    },
+    {
+     "id": "B(∞, n)",
+     "имя": "B(∞, n)",
+     "≅": "Binf",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "С. И. Адян: B(2, n) содержит подгруппы, изоморфные B(∞, n); индекс бесконечен, так как B(∞, n) не к. п."
+    },
+    {
+     "id": "все",
+     "имя": "B(2, n), n нечётно ⩾ 665",
+     "≅": "B2n",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "трудно": [
+    "finite",
+    "residually-finite"
+   ],
+   "ссылки": [
+    "П. С. Новиков, С. И. Адян, 1968",
+    "С. И. Адян, Проблема Бернсайда и тождества в группах, 1975"
+   ]
   }
  ]
 }
