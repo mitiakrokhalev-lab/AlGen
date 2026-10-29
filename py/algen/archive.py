@@ -47,6 +47,32 @@ def run_card(c, vocab, lib):
     out = {"id": c["id"]}
     if c["уровень"] == "определение":
         return {**out, "корзина": "словарь"}
+    if c.get("библиотека"):
+        # Утверждение о конкретной группе: сверка с записью библиотеки.
+        # [ключ, свойство, значение] или [ключ, «поле подгруппы», свойство, значение].
+        bad = []
+        for item in c["библиотека"]:
+            key, *rest = item
+            o = lib.obj.get(key)
+            if o is None:
+                bad.append(f"нет группы {key}")
+                continue
+            if len(rest) == 3:
+                field, p, want = rest
+                sid = o.get(field)
+                sub = next((x for x in o["подгруппы"] or [] if x["id"] == sid), None)
+                o = lib.obj.get(sub["≅"]) if sub else None
+                if o is None:
+                    bad.append(f"у {key} не записано поле «{field}»")
+                    continue
+            else:
+                p, want = rest
+            have = o["свойства"].get(p)
+            if have != want:
+                bad.append(f"{p}({o.get('имя', o['key'])}) = {have}, а нужно {want}")
+        if bad:
+            return {**out, "корзина": "КРАСНЫЙ ФЛАГ", "почему": "библиотека: " + "; ".join(bad)}
+        return {**out, "корзина": "закрыто библиотекой", "вердикт": "запись", "детали": "значения библиотеки совпали"}
     if not c.get("условие"):
         return {**out, "корзина": "КРАСНЫЙ ФЛАГ",
                 "почему": "не записывается: нет в словаре " + ", ".join(c.get("вне_словаря", ["?"]))}
