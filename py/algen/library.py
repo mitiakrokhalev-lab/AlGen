@@ -95,7 +95,9 @@ class Library:
                         for p, f in FINITE_DERIVED.items():
                             props.setdefault(p, f(props))
                         self.obj[ak] = {"key": ak, "имя": name or ak, "конечная": True, "свойства": props,
-                                        "подгруппы": None, "без произведений": True}
+                                        "подгруппы": None, "без произведений": True,
+                                        # ключ не из SmallGroups: другой ключ может быть той же группой
+                                        **({} if r.get(fld) else {"неканонический": True})}
                 o[fld] = ak
             o["inn = aut"] = r["inn_whole"]
             o["inn центральна"] = r["inn_central"]
@@ -786,8 +788,18 @@ class Search:
                 x, y = sorted((a, b), key=str)
                 if ka == kb:
                     out[("r", "iso", x, y)] = True
-                elif self.lib.obj[ka].get("конечная") and self.lib.obj[kb].get("конечная"):
+                elif all(self.lib.obj[k].get("конечная") and not self.lib.obj[k].get("неканонический")
+                         for k in (ka, kb)):
                     out[("r", "iso", x, y)] = False
+        # Inn(X) как подгруппа Aut(X): вся (полная группа) и центральна ли — по таблице GAP
+        for t in terms or self.g.terms:
+            if isinstance(t, App) and t.op == "inn":
+                x = self._obj(self._image(t.args[0], env))
+                rec = self.lib.obj[x] if x else {}
+                if "inn = aut" in rec:
+                    out[("p", "whole", t)] = rec["inn = aut"]
+                    out[("p", "central", t)] = rec["inn центральна"]
+                    out[("p", "finite-index", t)] = True
         return out, hard
 
     def entails(self, assume, atom, value):
