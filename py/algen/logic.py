@@ -94,6 +94,8 @@ class Vocab:
                          for k, v in scene.items()]
             added.append({**r, "scene": scene})
         self.rules = [r for r in self.rules if r["id"] not in drop] + added
+        # Равенства конструкций (как «вырождения» словаря): «Gᵃᵇ = G/G′».
+        self.degen = self.degen + patch.get("вырождения", [])
 
     def fits(self, have, want):
         return have == want or want in self.up.get(have, ())
