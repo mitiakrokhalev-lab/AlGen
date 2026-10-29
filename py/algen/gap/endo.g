@@ -9,7 +9,8 @@
 # ненормальная подгруппа не вполне инвариантна).
 #
 # Вызов: gap -q -o 8g endo.g с KEYS и OUT (см. finite.py, «--эндоморфизмы»).
-# Строка вывода: {"key": "n:i", "fully_invariant": [true, …], "end_classes": m,
+# Заодно — субнормальность каждого класса (IsSubnormal), список «subnormal».
+# Строка вывода: {"key": "n:i", "fully_invariant": [true, …], "subnormal": […], "end_classes": m,
 # "check": [[тип, размер класса], …]} или null вместо списка, если группа велика.
 
 if not IsBound(MAXCLASSES) then MAXCLASSES := 300; fi;
@@ -57,6 +58,11 @@ Record1 := function(G, out)
     fi;
     if i > 1 then Append(s, ","); fi;
     Append(s, ShallowCopy(String(ok)));
+  od;
+  Append(s, "],\"subnormal\":[");
+  for i in [1..Length(reps)] do
+    if i > 1 then Append(s, ","); fi;
+    Append(s, ShallowCopy(String(IsSubnormal(G, reps[i]))));
   od;
   Append(s, "],\"check\":[");
   for i in [1..Length(reps)] do
