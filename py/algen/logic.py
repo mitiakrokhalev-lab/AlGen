@@ -245,6 +245,12 @@ class Graph:
 
     def requires(self, t):
         """Условия существования терма: [(свойство, терм)], рекурсивно."""
+        memo = self.__dict__.setdefault("_req", {})
+        if t not in memo:
+            memo[t] = self._requires(t)
+        return memo[t]
+
+    def _requires(self, t):
         out = []
         if isinstance(t, App):
             c = self.v.cons[t.op]
@@ -309,12 +315,26 @@ class Theory:
                 if k in r and r[k].split()[-1] not in names:
                     return
         terms = list(self.g.terms.items())
-        by_sort = {}
+        by_sort, by_link = {}, {}
 
         def cands(r, env):
             lst = by_sort.get(r["sort"])
             if lst is None:
                 lst = by_sort[r["sort"]] = [(t, i) for t, i in terms if self.v.fits(i.sort, r["sort"])]
+            # связь на уже выбранную роль: только термы с этой связью (индекс)
+            for k in LINKS:
+                if k in r:
+                    try:
+                        want = self.g._ref(r[k], env)
+                    except KeyError:
+                        continue
+                    idx = by_link.get((r["sort"], k))
+                    if idx is None:
+                        idx = by_link[r["sort"], k] = {}
+                        for t, i in lst:
+                            idx.setdefault(i.links.get(k), []).append((t, i))
+                    lst = idx.get(want, [])
+                    break
             if r["name"] in shallow:
                 # аргумент образца: новый терм глубины ⩽ limit строится только
                 # из термов глубины < limit

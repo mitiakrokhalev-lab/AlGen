@@ -12,7 +12,7 @@ on:
 
 env:
   ARGS: "--без bounded-exponent"
-  BASES: "G,GN,AB,GHK,GMN,GHF"
+  BASES: "G,GN,AB"   # перебор схем; таблицы строятся для всех баз
 
 jobs:
   build:

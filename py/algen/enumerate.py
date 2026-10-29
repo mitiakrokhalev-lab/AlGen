@@ -466,6 +466,30 @@ class SchemeForm(Form):
                     new += 1
             if new == 0:
                 break
+        # Остальные атомы с одним значением проверяем пачкой: временная клауза
+        # «хотя бы один из них меняет значение». Модель снимает сразу многие;
+        # противоречие — все оставшиеся выводятся.
+        while True:
+            one = [(a, l) for a, l in lits.items() if (a in seen_t) != (a in seen_f)]
+            if len(one) < 3:
+                break
+            act = T.lit(("act", len(T.atoms)))
+            flip = [-l if a in seen_t else l for a, l in one]
+            s.add_clause([-act] + flip)
+            s.set_phases(flip)
+            ok = s.solve(assumptions=assume + [act])
+            m = set(s.get_model()) if ok else None
+            s.add_clause([-act])  # клауза больше не нужна
+            if not ok:
+                for a, l in one:
+                    val[a] = a in seen_t
+                    del lits[a]
+                break
+            for a, l in one:
+                if a in seen_t and -l in m:
+                    seen_f.add(a)
+                elif a in seen_f and l in m:
+                    seen_t.add(a)
         for a, l in lits.items():
             if a in seen_t and a in seen_f:
                 continue

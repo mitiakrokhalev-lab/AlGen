@@ -175,7 +175,7 @@ def build(lib, vocab, base, part, outdir):
 
 
 # Частей таблицы на базу (по числу строк и цене строки).
-PARTS = {"G": 4, "GN": 96, "AB": 50, "GHK": 90, "GMN": 37, "GHF": 55}
+PARTS = {"G": 2, "GN": 24, "AB": 16, "GHK": 32, "GMN": 12, "GHF": 16}
 
 
 def build_all(lib, vocab, job, jobs, outdir, threads):
