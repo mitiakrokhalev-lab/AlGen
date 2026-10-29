@@ -281,6 +281,9 @@ class Model:
                 return ("num", math.gcd(args[0][1], args[1][1]))
             if f in ("lcm", "НОК"):
                 return ("num", math.lcm(args[0][1], args[1][1]))
+            if f in ("fact", "factorial"):
+                n = args[0][1]
+                return ("num", math.factorial(n)) if 0 <= n <= 20 else None
             if f in ("phi", "φ"):
                 return ("num", phi(args[0][1]))
             if f in ("n_p", "sylow_count"):

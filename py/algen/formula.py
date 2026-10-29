@@ -196,10 +196,21 @@ def library_example(vocab, lib, ex):
     if any(x[0] != "lit" for x in parts):
         return None
     lits = [literal(g, x[1], {name: v}, "grp") for x in parts]
-    S = Search(g, Theory(g, grow=1), lib)
-    for env in S._assign(0, {}):
-        facts, hard = S.facts(env)
-        if all(facts.get(a) == val and a not in hard for a, val in lits):
-            k = env[v][1]
-            return lib.obj[k].get("имя", k)
+    from .logic import decide
+    T = Theory(g, grow=1)
+    S = Search(g, T, lib)
+    s = T.solver()
+    try:
+        for env in S._assign(0, {}):
+            facts, hard = S.facts(env)
+            if any(facts.get(a) == (not val) for a, val in lits):
+                continue
+            # значения, которых нет в записи, — выводом из записанных (без помеченных)
+            known = [(a, x) for a, x in facts.items() if a not in hard]
+            if all(facts.get(a) == val and a not in hard
+                   or decide(T, known, (a, val), s).kind == "выводится" for a, val in lits):
+                k = env[v][1]
+                return lib.obj[k].get("имя", k)
+    finally:
+        s.delete()
     return None
