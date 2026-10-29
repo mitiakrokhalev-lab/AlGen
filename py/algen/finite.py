@@ -187,12 +187,19 @@ def load(path=OUT, extra=False):
     if extra and EXTRA.exists():
         with EXTRA.open() as f:
             out.update((g["key"], g) for g in map(json.loads, f))
+    cyclic = {k: g["props"].get("cyclic") for k, g in out.items()}
     for g in out.values():
         for p, f in FINITE_DERIVED.items():
             g["props"].setdefault(p, f(g["props"]))
         n = int(g["key"].split(":")[0])
         for p, v in arith_props(n).items():
             g["props"].setdefault(p, v)
+        if g["subs"] is not None:
+            # экспонента 2 (3): все циклические подгруппы порядка 1 или 2 (3)
+            cyc = {int(s["group"].split(":")[0]) for s in g["subs"]
+                   if cyclic.get(s["group"], s["group"] in ("1:1", "2:1", "3:1"))}
+            g["props"].setdefault("exponent-2", cyc <= {1, 2})
+            g["props"].setdefault("exponent-3", cyc <= {1, 3})
         for s in g["subs"] or []:
             m = int(s["group"].split(":")[0])
             for p, v in arith_sub_props(n, m).items():

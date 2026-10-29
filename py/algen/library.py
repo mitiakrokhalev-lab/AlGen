@@ -530,7 +530,8 @@ GROUP_PROPS = ("trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "sim
                "free-abelian",
                # арифметика порядка: p-группа (порядки элементов — степени одного простого),
                # |G| простое, p², pq (p ≠ q), не больше двух простых делителей, нечётный
-               "p-group", "prime-order", "order-p2", "order-pq", "two-primes", "odd-order")
+               "p-group", "prime-order", "order-p2", "order-pq", "two-primes", "odd-order",
+               "exponent-2", "exponent-3")
 
 _LIB = _SCENE = None
 
