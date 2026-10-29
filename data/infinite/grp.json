@@ -10610,6 +10610,90 @@
     "П. С. Новиков, С. И. Адян, 1968",
     "С. И. Адян, Проблема Бернсайда и тождества в группах, 1975"
    ]
+  },
+  {
+   "id": "ProdCp",
+   "имя": "∏_p C_p",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "nilpotent": true,
+    "solvable": true,
+    "perfect": false,
+    "simple": false,
+    "centerless": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "indecomposable": false,
+    "fin-gen": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "residually-finite": true,
+    "polycyclic": false,
+    "free-abelian": false,
+    "p-group": false,
+    "bounded-exponent": false
+   },
+   "почему": {
+    "periodic": "(1, 1, 1, …) бесконечного порядка",
+    "divisible": "C_p не делится на p",
+    "residually-finite": "проекции на конечные произведения",
+    "bounded-exponent": "есть элементы порядка p для всех p"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "фактор": "ProdCp"
+    },
+    {
+     "id": "все",
+     "имя": "∏_p C_p",
+     "≅": "ProdCp",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true,
+      "complemented": true
+     },
+     "фактор": "1:1"
+    },
+    {
+     "id": "T",
+     "имя": "⊕_p C_p (кручение)",
+     "≅": "SumCp",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": false
+     },
+     "почему": {
+      "complemented": "фактор ∏/⊕ делим и без кручения, а ∏C_p не содержит ненулевых делимых подгрупп; дополнение было бы изоморфно фактору"
+     }
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "кручение": "T"
   }
  ]
 }

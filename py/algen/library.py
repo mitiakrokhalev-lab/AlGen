@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import FINITE_DERIVED, arith_sub_props, load as load_finite, load_aut, load_products
+from .finite import FINITE_DERIVED, arith_sub_props, load as load_finite, load_aut, load_compl, load_products
 from .logic import DATA, App, Graph, Theory, Var, Vocab
 
 INFINITE = DATA / "infinite" / "grp.json"
@@ -33,7 +33,9 @@ ALL, ONE = "<всё>", "<1>"  # подгруппы множителя в мет�
 SUB_PROPS = ("normal", "characteristic", "maximal", "whole", "central", "finite-index",
              # арифметика индекса (конечный индекс): 2, простой, наименьший простой делитель |G|;
              # силовская (нетривиальная), холлова (порядок взаимно прост с индексом)
-             "index-2", "prime-index", "min-prime-index", "sylow", "hall")
+             "index-2", "prime-index", "min-prime-index", "sylow", "hall",
+             # есть дополнение B: N ∩ B = 1, NB = G
+             "complemented")
 
 
 class Library:
@@ -41,7 +43,13 @@ class Library:
         self.obj = {}
         patch = DATA / "finite" / "grp-subs-patch.json"
         patch = json.loads(patch.read_text(encoding="utf-8"))["группы"] if patch.exists() else {}
+        compl = load_compl()
         for k, r in load_finite(extra=True).items():
+            c = compl.get(k)
+            if c and c["complemented"] is not None and r["subs"] is not None and \
+                    [[x["group"], x["class_size"]] for x in r["subs"]] == c["check"]:
+                for x, v in zip(r["subs"], c["complemented"]):
+                    x["props"]["complemented"] = v
             partial = r["subs"] is None and k in patch
             if partial:
                 r = {**r, **patch[k]}
@@ -676,10 +684,11 @@ class Search:
                 s = next((x for x in o["подгруппы"] or [] if x["id"] == sid), None)
                 k = s.get("фактор") if s else None
             return ("obj", k) if k else None
-        if t.op in ("center", "commutator", "frattini") and self._obj(args[0]):
+        if t.op in ("center", "commutator", "frattini", "torsion") and self._obj(args[0]):
             key = self._obj(args[0])
             o = lib.obj[key]
-            sid = o.get({"center": "центр", "commutator": "коммутант", "frattini": "фраттини"}[t.op])
+            sid = o.get({"center": "центр", "commutator": "коммутант", "frattini": "фраттини",
+                         "torsion": "кручение"}[t.op])
             idx = self._sub_index(key, lambda x: x["id"] == sid) if sid is not None else None
             return ("sub", key, idx) if idx is not None else None
         if t.op in ("ker", "im") and args[0] and args[0][0] == "mor":
