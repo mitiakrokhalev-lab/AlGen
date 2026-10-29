@@ -416,10 +416,20 @@ class SchemeForm(Form):
         lits = {a: l for a, l in lits.items() if type(l) is int}  # 1 == True в Python: сравнивать нельзя
         if not s.solve(assumptions=assume):
             return [facts.get(a) for a in self.atoms]
+        # Единичное распространение даёт большую часть следствий почти даром.
+        ok, implied = s.propagate(assumptions=assume)
+        implied = set(implied or ())
+        val = {}
+        for a, l in list(lits.items()):
+            if l in implied:
+                val[a] = True
+                del lits[a]
+            elif -l in implied:
+                val[a] = False
+                del lits[a]
         model = set(s.get_model())
         seen_t = {a for a, l in lits.items() if l in model}      # встречалось «верно»
         seen_f = {a for a, l in lits.items() if -l in model}     # встречалось «ложно»
-        val = {}
         for a, l in lits.items():
             if a in seen_t and a in seen_f:
                 continue

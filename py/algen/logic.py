@@ -288,7 +288,11 @@ class Theory:
 
     # заземление правил ----------------------------------------------------
 
-    def _bindings(self, scene):
+    def _bindings(self, scene, pats=(), shallow=(), limit=None):
+        """Подстановки термов графа в роли сцены. pats — образцы термов правила
+        ({"op", "args"}): если задать, роли из аргументов образца берутся из уже
+        построенных термов с этой конструкцией (для заземления без роста:
+        подстановка, при которой образца нет в графе, всё равно отбрасывается)."""
         roles = sorted(scene, key=lambda r: sum(1 for k in LINKS if k in r))
         names = {r["name"] for r in roles}
         for r in roles:
@@ -296,28 +300,105 @@ class Theory:
                 if k in r and r[k].split()[-1] not in names:
                     return
         terms = list(self.g.terms.items())
+        by_sort = {}
 
-        def go(i, env):
-            if i == len(roles):
+        def cands(r, env):
+            lst = by_sort.get(r["sort"])
+            if lst is None:
+                lst = by_sort[r["sort"]] = [(t, i) for t, i in terms if self.v.fits(i.sort, r["sort"])]
+            if r["name"] in shallow:
+                # аргумент образца: новый терм глубины ⩽ limit строится только
+                # из термов глубины < limit
+                return [(t, i) for t, i in lst if i.depth < limit]
+            return lst
+
+        def fits(r, t, info, env):
+            if not self.v.fits(info.sort, r["sort"]):
+                return False
+            for k in LINKS:
+                if k in r:
+                    want = self.g._ref(r[k], env)
+                    if want is None or info.links.get(k) != want:
+                        return False
+            return True
+
+        def go(i, env, order):
+            if i == len(order):
                 yield dict(env)
                 return
-            r = roles[i]
-            for t, info in terms:
-                if not self.v.fits(info.sort, r["sort"]):
-                    continue
-                ok = True
-                for k in LINKS:
-                    if k in r:
-                        want = self.g._ref(r[k], env)
-                        if want is None or info.links.get(k) != want:
-                            ok = False
-                            break
-                if ok:
+            r = order[i]
+            if r["name"] in env:
+                if fits(r, env[r["name"]], self.g.terms[env[r["name"]]], env):
+                    yield from go(i + 1, env, order)
+                return
+            for t, info in cands(r, env):
+                if fits(r, t, info, env):
                     env[r["name"]] = t
-                    yield from go(i + 1, env)
+                    yield from go(i + 1, env, order)
                     del env[r["name"]]
 
-        yield from go(0, {})
+        # образец с наибольшим числом ролей среди аргументов
+        best = None
+        for pat in pats:
+            args = pat.get("args", [])
+            if "bind" in pat or not args or not all(isinstance(a, str) and a in names for a in args):
+                continue
+            if best is None or len(set(args)) > len(set(best["args"])):
+                best = pat
+        if best is None or len(set(best["args"])) < 2:
+            yield from go(0, {}, roles)
+            return
+        for t in self._by_op().get(best["op"], ()):
+            env = {}
+            ok = True
+            for a, x in zip(best["args"], t.args):
+                if env.setdefault(a, x) != x:
+                    ok = False
+                    break
+            if ok and len(t.args) == len(best["args"]):
+                yield from go(0, env, roles)
+
+    def _by_op(self):
+        n = len(self.g.terms)
+        if getattr(self, "_op_n", None) != n:
+            idx = {}
+            for t in self.g.terms:
+                if isinstance(t, App):
+                    idx.setdefault(t.op, []).append(t)
+            self._op_idx, self._op_n = idx, n
+        return self._op_idx
+
+    @staticmethod
+    def _all_patterns(r):
+        """Все образцы-термы правила (верхнего уровня) по порядку, как их строит _atom."""
+        out = []
+        concl = r["then"]["или"] if "или" in r["then"] else [r["then"]]
+        for a in list(r["if"]) + concl:
+            for x in ([a["t"]] if "t" in a else a.get("args", [])):
+                if isinstance(x, dict):
+                    out.append(x)
+        return out
+
+    @staticmethod
+    def _pat_roles(p):
+        out = set()
+        for a in p.get("args", []):
+            if isinstance(a, str):
+                out.add(a)
+            elif isinstance(a, dict):
+                out |= Theory._pat_roles(a)
+        return out
+
+    @staticmethod
+    def _patterns(r):
+        """Образцы-термы правила (dict с op) в посылках и выводах, без вложенных."""
+        out = []
+        concl = r["then"]["или"] if "или" in r["then"] else [r["then"]]
+        for a in list(r["if"]) + concl:
+            for x in ([a["t"]] if "t" in a else a.get("args", [])):
+                if isinstance(x, dict) and "op" in x:
+                    out.append(x)
+        return out
 
     def _term(self, pat, env, limit):
         if isinstance(pat, str):
@@ -341,10 +422,11 @@ class Theory:
             return None
         return ("p", a["p"], t), a.get("значение", True), [t]
 
-    def _ground_rule(self, r, limit):
-        """(посылки, выводы): вывод правила — атом или {"или": [атомы]}."""
+    def _ground_rule(self, r, limit, grow=True):
+        """(посылки, выводы): вывод правила — атом или {"или": [атомы]}.
+        grow=False — без построения новых термов (все термы правила уже в графе)."""
         concl = r["then"]["или"] if "или" in r["then"] else [r["then"]]
-        for env in self._bindings(r["scene"]):
+        for env in self._bindings(r["scene"], () if grow else self._patterns(r)):
             prem = [self._atom(a, env, limit) for a in r["if"]]
             outs = [self._atom(a, env, limit) for a in concl]
             if any(p is None for p in prem + outs):
@@ -379,15 +461,29 @@ class Theory:
         # затем заземляем всё на получившемся графе без роста.
         for _ in range(self.grow):
             before = len(self.g.terms)
+            # Достройка создаёт только термы-образцы правил; правила с одинаковой
+            # сценой и образцами (например, «× сохраняет P» для разных P)
+            # строят одно и то же — их обходим один раз.
+            seen = set()
             for r in self.v.rules:
-                list(self._ground_rule(r, self.grow))
+                pats = self._all_patterns(r)
+                if not pats:
+                    continue
+                key = json.dumps([r["scene"], pats], sort_keys=True, ensure_ascii=False)
+                if key in seen:
+                    continue
+                seen.add(key)
+                inner = {x for p in pats for x in self._pat_roles(p)}
+                for env in self._bindings(r["scene"], (), shallow=inner, limit=self.grow):
+                    for p in pats:
+                        self._term(p, env, self.grow)
             for d in self.v.degen:
                 list(self._degen(d, self.grow))
             if len(self.g.terms) == before:
                 break
         limit = max(i.depth for i in self.g.terms.values())
         for r in self.v.rules:
-            for parts in self._ground_rule(r, limit):
+            for parts in self._ground_rule(r, 0, grow=False):  # без новых термов
                 self._clause(parts, r["id"])
         for d in self.v.degen:
             for cond, t, s in self._degen(d, limit):
