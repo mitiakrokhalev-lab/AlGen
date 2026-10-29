@@ -9694,6 +9694,103 @@
    ],
    "центр": "все",
    "коммутант": "1"
+  },
+  {
+   "id": "HW",
+   "имя": "группа Хантцше — Вендт",
+   "заметка": "⟨x, y | x⁻¹y²x = y⁻², y⁻¹x²y = x⁻²⟩: группа без кручения с конечной абелианизацией C₄ × C₄.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "perfect": false,
+    "periodic": false,
+    "fin-gen": true,
+    "solvable": true,
+    "nilpotent": false,
+    "torsion-free": true,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "linear": true,
+    "polycyclic": true,
+    "hopfian": true
+   },
+   "почему": {
+    "torsion-free": "фундаментальная группа замкнутого плоского 3-многообразия (группа Бибербаха)",
+    "centerless": "центр группы Бибербаха — векторы решётки, неподвижные голономией; у голономии C₂ × C₂ из diag(1, −1, −1), diag(−1, 1, −1) их нет",
+    "nilpotent": "нетривиальная без центра",
+    "hopfian": "к. п. ф. а.",
+    "linear": "полициклическая (или аффинное представление)"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "HW"
+    },
+    {
+     "id": "решётка",
+     "имя": "ℤ³",
+     "≅": "Z3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "4:2",
+     "почему": "подгруппа трансляций, фактор — голономия C₂ × C₂"
+    },
+    {
+     "id": "коммутант",
+     "имя": "G′",
+     "≅": "Z3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "16:2",
+     "почему": "Gᵃᵇ ≅ C₄ × C₄ (H₁ дидикосма); G/ℤ³ абелева, так что G′ ⊆ ℤ³ и [ℤ³ : G′] = 4"
+    },
+    {
+     "id": "все",
+     "имя": "группа Хантцше — Вендт",
+     "≅": "HW",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "коммутант",
+   "ссылки": [
+    "W. Hantzsche, H. Wendt, 1935"
+   ]
   }
  ]
 }
