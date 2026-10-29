@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_compl, load_endo, load_products
+from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_compl, load_endo, load_elts, load_products
 from .logic import DATA, App, Graph, Theory, Var, Vocab
 
 INFINITE = DATA / "infinite" / "grp.json"
@@ -43,7 +43,7 @@ class Library:
         self.obj = {}
         patch = DATA / "finite" / "grp-subs-patch.json"
         patch = json.loads(patch.read_text(encoding="utf-8"))["группы"] if patch.exists() else {}
-        compl, endo = load_compl(), load_endo()
+        compl, endo, elts = load_compl(), load_endo(), load_elts()
         for k, r in load_finite(extra=True).items():
             for data, field, prop in ((compl, "complemented", "complemented"),
                                       (endo, "fully_invariant", "fully-invariant"),
@@ -70,6 +70,10 @@ class Library:
                            "коммутант": None if r.get("commutator") is None else str(r["commutator"]),
                            "фраттини": None if r.get("frattini") is None else str(r["frattini"]),
                            **({"подгруппы неполные": True} if partial else {})}
+            e = elts.get(k)
+            if e and e.get("classes") and r["subs"] is not None and \
+                    [[x["group"], x["class_size"]] for x in r["subs"]] == e["check"]:
+                self.obj[k]["элементы"] = e["classes"]
         self._aut_out()
         with open(infinite, encoding="utf-8") as f:
             raw = json.load(f)
@@ -719,6 +723,17 @@ class Search:
             for k in self.lib.fam:
                 env[t] = ("fam", k)
                 yield from self._assign(i + 1, env)
+        elif info.sort == "Grp.elt":
+            amb = self._obj(self._image(info.links.get("ambient"), env))
+            cls = amb and self.lib.obj[amb].get("элементы")
+            if not cls:
+                return
+            for j, c in enumerate(cls):
+                env[t] = ("elt", amb, j)
+                yield from self._assign(i + 1, env)
+                if c["size"] > 1:  # другой элемент того же класса (не перестановочный с x, если такой есть)
+                    env[t] = ("elt", amb, j, "g")
+                    yield from self._assign(i + 1, env)
         elif info.sort == "Grp.gset":
             amb = self._obj(self._image(info.links.get("ambient"), env))
             if amb is None:
@@ -838,6 +853,13 @@ class Search:
         if t.op == "stab" and args[2] and args[2][0] == "pt":
             a, j = args[2][1], args[2][2]
             return ("sub", a[1], a[2][j], *args[2][3:])
+        if t.op in ("gen", "centralizer-elt") and len(args) == 2 and args[1] and args[1][0] == "elt":
+            c = lib.obj[args[1][1]]["элементы"][args[1][2]]
+            j = c["gen" if t.op == "gen" else "cent"]
+            # у другого элемента класса — сопряжённая подгруппа (та же, если она нормальна)
+            # («?»: может и совпасть — ⟨x⁻¹⟩ = ⟨x⟩, C(x⁻¹) = C(x))
+            v = ("?",) if args[1][3:] and not lib.obj[args[1][1]]["подгруппы"][j]["свойства"].get("normal") else ()
+            return ("sub", args[1][1], j, *v)
         if t.op == "core" and args[1] and args[1][0] == "sub":
             c = self._core(args[1][1], (args[1][2],))
             return ("sub", args[1][1], c) if c is not None else None
@@ -913,7 +935,7 @@ class Search:
     def facts(self, env, terms=None):
         """{атом: значение} по записям библиотеки и {атом: (пометка, значение)}
         для значений с пометками из MARKS."""
-        out, hard, subs = {}, {}, {}
+        out, hard, subs, elts = {}, {}, {}, {}
         for t in terms or self.g.terms:
             im = self._image(t, env)
             if im is None:
@@ -924,6 +946,16 @@ class Search:
                         out[("p", p, t)] = v
                 continue
             if im[0] == "pt":
+                continue
+            if im[0] == "elt":
+                c = self.lib.obj[im[1]]["элементы"][im[2]]
+                for p, v in (("identity-elt", c["ord"] == 1), ("involution", c["ord"] == 2),
+                             ("central-elt", c["size"] == 1), ("torsion-elt", True),
+                             ("real-elt", c["real"]), ("commutator-elt", c["comm"]),
+                             ("generator", self.lib.obj[im[1]]["подгруппы"][c["gen"]]["свойства"].get("whole"))):
+                    if v is not None and p in self.g.v.props:
+                        out[("p", p, t)] = v
+                elts[t] = im
                 continue
             if im[0] == "act":
                 for p, v in self._act_facts(im).items():
@@ -951,10 +983,12 @@ class Search:
         for i, (a, ia) in enumerate(items):
             for b, ib in items[i + 1:]:
                 if ia[1] == ib[1] and self.g.terms[a].links.get("ambient") == self.g.terms[b].links.get("ambient"):
-                    if ia[2] == ib[2] and ia[3:] != ib[3:]:
+                    if ia[2] == ib[2] and (ia[3:] != ib[3:] or "?" in ia[3:]):
+                        out[("r", "conj-sub", *sorted((a, b), key=str))] = True
+                        if "?" in ia[3:] + ib[3:]:
+                            continue  # сопряжённые, может быть, и равные
                         # разные сопряжённые одного класса (стабилизаторы двух точек орбиты)
                         out[("r", "eq-sub", *sorted((a, b), key=str))] = False
-                        out[("r", "conj-sub", *sorted((a, b), key=str))] = True
                         if self.lib.obj[ia[1]].get("конечная"):
                             out[("r", "le", a, b)] = out[("r", "le", b, a)] = False
                         continue
@@ -978,6 +1012,22 @@ class Search:
                                 and sy["свойства"].get("normal"):
                             # у нормальных подгрупп класс сопряжённости из одной подгруппы: таблица точна
                             out[("r", "le", x, y)] = sy["id"] in sx["над"]
+        # элементы: сопряжённость — по классам; равенство и перестановочность — в очевидных случаях
+        items = list(elts.items())
+        for i, (a, ia) in enumerate(items):
+            for b, ib in items[i + 1:]:
+                if ia[1] != ib[1] or self.g.terms[a].links.get("ambient") != self.g.terms[b].links.get("ambient"):
+                    continue
+                x, y = sorted((a, b), key=str)
+                same = ia == ib
+                out[("r", "conjugate", x, y)] = ia[2] == ib[2]
+                out[("r", "eq-elt", x, y)] = same
+                cls = self.lib.obj[ia[1]]["элементы"]
+                if same or cls[ia[2]]["size"] == 1 or cls[ib[2]]["size"] == 1:
+                    out[("r", "commute", x, y)] = True
+                elif ia[2] == ib[2] and cls[ia[2]].get("nc"):
+                    # «другой элемент класса» берётся не перестановочным с x
+                    out[("r", "commute", x, y)] = False
         # ≅ между группами: один ключ — изоморфны; разные ключи конечных таблиц — нет
         objs = {}
         for t in terms or self.g.terms:
@@ -1086,6 +1136,9 @@ class Search:
             subs = self.lib.obj[im[1]]["подгруппы"]
             g = self._name(("obj", im[1]))
             return " ⊔ ".join(f"{g}/{subs[j].get('имя') or self._name(('obj', subs[j]['≅']))}" for j in im[2])
+        if im[0] == "elt":
+            c = self.lib.obj[im[1]]["элементы"][im[2]]
+            return ("ещё один элемент" if im[3:] else "элемент") + f" порядка {c['ord']} (класс из {c['size']})"
         if im[0] == "pt":
             subs = self.lib.obj[im[1][1]]["подгруппы"]
             h = subs[im[1][2][im[2]]]
