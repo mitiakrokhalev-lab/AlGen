@@ -236,7 +236,12 @@ class Form:
         Значение у построенного произведения приписывается множителю, у которого
         не записано больше значений: обычно оно оттуда и берётся."""
         if atom[0] == "r":
-            return f"{atom_name(atom)} у {self.where(r)}"
+            # отношение: приписываем группе (множителю произведения), где оно не записано
+            vs = sorted(set().union(*(term_vars(x) for x in atom[2:])), key=str)
+            keys = [self._image(r, v) for v in vs]
+            keys = [base_factor(self.lib, k[1], None) for k in keys if k and k[0] == "obj"]
+            where = ", ".join(self.lib.obj[k].get("имя", k) for k in keys) or self.where(r)
+            return f"{atom_name(atom)} у {where}"
         im = self._image(r, atom[2])
         t = atom[2]
         if im is not None and im[0] == "mor":

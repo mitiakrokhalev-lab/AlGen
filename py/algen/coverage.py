@@ -6,7 +6,7 @@
 
 * те же переменные (сорта и связи: подгруппа чего, гомоморфизм откуда куда);
 * есть все термы задачи;
-* все литералы задачи — свойства (отношения перебор пока не перебирает);
+* все литералы задачи — свойства или отношения ⩽, =, ≅;
 * литералов (посылки + цель) не больше k + 1, где k — число посылок перебора.
 
 Остальные задачи — красные флаги списка схем с причиной.
@@ -84,13 +84,13 @@ def check(vocab, sch, card, k):
     except Unsupported as e:
         return f"не записывается: {e}", None
     lits = prem + [goal]
-    if any(a[0] != "p" for a, _ in lits):
-        return "нужны отношения (⩽, ≅, …)", None
+    if any(a[0] == "r" and a[1] not in ("le", "eq-sub", "iso") for a, _ in lits):
+        return "нужны отношения сверх ⩽, =, ≅", None
     if len(lits) > k + 1:
         return f"литералов {len(lits)} > {k + 1}", None
     vs = [(t.name, g.terms[t].sort, {kk: str(v) for kk, v in g.terms[t].links.items()})
           for t in g.terms if isinstance(t, Var)]
-    used = {a[2] for a, _ in lits if isinstance(a[2], App)}
+    used = {x for a, _ in lits for x in a[2:] if isinstance(x, App)}
     sid = sch.find(vs, used)
     if sid is None:
         return "нет схемы с такими переменными и термами", None

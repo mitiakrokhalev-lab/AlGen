@@ -45,6 +45,7 @@ class Library:
                            "подгруппы": None if r["subs"] is None else [
                                {"id": str(i), "≅": s["group"], "свойства": s["props"],
                                 **({"фактор": s["quotient"]} if "quotient" in s else {}),
+                                **({"над": [str(x) for x in s["le"]]} if s.get("le") is not None else {}),
                                 # номера подгрупп (представители классов сопряжённости)
                                 **{f: str(s[k]) for k, f in (("normalizer", "нормализатор"),
                                    ("centralizer", "централизатор"), ("normal_closure", "нормальное замыкание"))
@@ -733,10 +734,18 @@ class Search:
                     for x, ix, y, iy in ((a, ia, b, ib), (b, ib, a, ia)):
                         sx = self.lib.obj[ix[1]]["подгруппы"][ix[2]]
                         sy = self.lib.obj[iy[1]]["подгруппы"][iy[2]]
+                        o = self.lib.obj[ix[1]]
+                        rec = {(u, v): w for u, v, w in o.get("⩽", [])}
                         if ix[2] == iy[2] or sx["≅"] == "1:1" or sy["свойства"].get("whole"):
                             out[("r", "le", x, y)] = True
                         elif sx["свойства"].get("whole") or sy["≅"] == "1:1":
                             out[("r", "le", x, y)] = False
+                        elif (sx["id"], sy["id"]) in rec:
+                            out[("r", "le", x, y)] = rec[sx["id"], sy["id"]]
+                        elif o.get("конечная") and "над" in sx and sx["свойства"].get("normal") \
+                                and sy["свойства"].get("normal"):
+                            # у нормальных подгрупп класс сопряжённости из одной подгруппы: таблица точна
+                            out[("r", "le", x, y)] = sy["id"] in sx["над"]
         # ≅ между группами: один ключ — изоморфны; разные ключи конечных таблиц — нет
         objs = {}
         for t in terms or self.g.terms:
