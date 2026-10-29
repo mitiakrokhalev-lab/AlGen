@@ -35,6 +35,8 @@ AUT_SCRIPT = Path(__file__).with_name("gap") / "aut.g"
 AUT = ROOT / "data" / "finite" / "grp-aut.jsonl"
 COMPL_SCRIPT = Path(__file__).with_name("gap") / "compl.g"
 COMPL = ROOT / "data" / "finite" / "grp-compl.jsonl"
+PRESENT_SCRIPT = Path(__file__).with_name("gap") / "present.g"
+PRESENT = ROOT / "data" / "finite" / "grp-present.jsonl"
 
 
 def _run(lo, hi, path):
@@ -168,6 +170,37 @@ def build_table(script, target, jobs):
                 out.write(json.dumps(recs[k], ensure_ascii=False, separators=(",", ":")) + "\n")
 
 
+def present_tasks():
+    """Копредставления из карточек архива: [(id, образующие, соотношения)]."""
+    out = []
+    for p in sorted((ROOT / "data" / "archive").glob("*/*.jsonl")):
+        for line in p.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            c = json.loads(line)
+            for i, pr in enumerate(c.get("копредставления", [])):
+                out.append((f"{c['id']}#{i}", pr["образующие"], pr["соотношения"]))
+    return out
+
+
+def build_present():
+    tasks = present_tasks()
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "p.jsonl")
+        ts = ", ".join("[" + json.dumps(i) + ", [" + ", ".join(json.dumps(g) for g in gs) + "], " + json.dumps(r) + "]"
+                       for i, gs, r in tasks)
+        prog = f'TASKS:=[{ts}];; OUT:="{path}";; Read("{PRESENT_SCRIPT}");\n'
+        subprocess.run(["gap", "-q", "-o", "8g"], input=prog, text=True, check=True, stdout=subprocess.DEVNULL)
+        PRESENT.write_text(open(path).read())
+
+
+def load_present(path=PRESENT):
+    if not Path(path).exists():
+        return {}
+    with open(path) as f:
+        return {r["id"]: r for r in map(json.loads, f)}
+
+
 def load_compl(path=COMPL):
     """key → [дополняема ли подгруппа класса i] (если таблица посчитана)."""
     if not Path(path).exists():
@@ -253,11 +286,17 @@ if __name__ == "__main__":
     ap.add_argument("--только-произведения", dest="only_products", action="store_true")
     ap.add_argument("--добавить", dest="extra", nargs="+", metavar="n:i",
                     help="досчитать отдельные группы выше --до в data/finite/grp-extra.jsonl")
+    ap.add_argument("--копредставления", dest="present", action="store_true",
+                    help="порядок и тип групп по копредставлениям из карточек → data/finite/grp-present.jsonl")
     ap.add_argument("--дополнения", dest="compl", action="store_true",
                     help="дополняемость подгрупп всех групп таблицы в data/finite/grp-compl.jsonl")
     ap.add_argument("--авт", dest="aut", action="store_true",
                     help="посчитать Aut, Inn, Out всех групп таблицы в data/finite/grp-aut.jsonl")
     a = ap.parse_args()
+    if a.present:
+        build_present()
+        print(PRESENT, sum(1 for _ in PRESENT.open()))
+        raise SystemExit
     if a.compl:
         build_table(COMPL_SCRIPT, COMPL, a.jobs)
         print(COMPL, sum(1 for _ in COMPL.open()))

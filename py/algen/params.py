@@ -281,6 +281,18 @@ class Model:
                 return ("num", math.gcd(args[0][1], args[1][1]))
             if f in ("lcm", "НОК"):
                 return ("num", math.lcm(args[0][1], args[1][1]))
+            if f in ("sub_count_free", "normal_prime_count_free"):
+                r, k = args[0][1], args[1][1]
+                if f == "normal_prime_count_free":  # нормальные индекса p в F_r: (p^r − 1)/(p − 1)
+                    return ("num", (k ** r - 1) // (k - 1))
+                # подгруппы индекса k в F_r (формула Холла): N_j = (j!)^r = |Hom(F_r, S_j)|,
+                # a_k = N_k/(k−1)! − Σ_{i<k} N_{k−i}/(k−i)! · a_i
+                N = [math.factorial(j) ** r for j in range(k + 1)]
+                a = [0, 1]
+                for m in range(2, k + 1):
+                    a.append(N[m] // math.factorial(m - 1)
+                             - sum(N[m - i] // math.factorial(m - i) * a[i] for i in range(1, m)))
+                return ("num", a[k])
             if f in ("fact", "factorial"):
                 n = args[0][1]
                 return ("num", math.factorial(n)) if 0 <= n <= 20 else None
