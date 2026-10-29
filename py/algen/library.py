@@ -492,7 +492,7 @@ MARKS = ("трудно", "короткий довод")
 
 GROUP_PROPS = ("trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable",
                "nilpotent", "perfect", "torsion-free", "periodic", "divisible", "centerless",
-               "residually-finite", "indecomposable", "hopfian", "linear", "polycyclic")
+               "residually-finite", "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent")
 
 _LIB = _SCENE = None
 

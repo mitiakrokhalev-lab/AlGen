@@ -106,6 +106,7 @@ FINITE_DERIVED = {
     "hopfian": lambda p: True,
     "linear": lambda p: True,
     "polycyclic": lambda p: p["solvable"],
+    "bounded-exponent": lambda p: True,
 }
 
 

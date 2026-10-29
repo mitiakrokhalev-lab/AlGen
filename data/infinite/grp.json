@@ -500,11 +500,13 @@
     "residually-finite": false,
     "indecomposable": false,
     "linear": true,
-    "hopfian": false
+    "hopfian": false,
+    "bounded-exponent": false
    },
    "почему": {
     "linear": "корни из 1 в ℂ*",
-    "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром"
+    "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром",
+    "bounded-exponent": "элементы порядка n при всех n"
    },
    "подгруппы": [
     {
@@ -590,10 +592,12 @@
     "residually-finite": false,
     "indecomposable": true,
     "linear": true,
-    "hopfian": false
+    "hopfian": false,
+    "bounded-exponent": false
    },
    "почему": {
-    "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром"
+    "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром",
+    "bounded-exponent": "элементы порядка 2ⁿ при всех n"
    },
    "подгруппы": [
     {
@@ -1740,11 +1744,13 @@
     "residually-finite": true,
     "indecomposable": false,
     "linear": true,
-    "hopfian": false
+    "hopfian": false,
+    "bounded-exponent": true
    },
    "почему": {
     "linear": "элементарная абелева 2-группа мощности ⩽ 𝔠 — аддитивная группа поля характеристики 2, то есть унипотентные матрицы над ним",
-    "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром"
+    "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром",
+    "bounded-exponent": "показатель 2"
    },
    "подгруппы": [
     {
@@ -1849,11 +1855,13 @@
     "polycyclic": false,
     "indecomposable": false,
     "linear": true,
-    "hopfian": false
+    "hopfian": false,
+    "bounded-exponent": true
    },
    "почему": {
     "linear": "унитреугольные [[1, a], [0, 1]], a ∈ 𝔽₃[t]",
-    "hopfian": "сдвиг базиса e₁ ↦ 0, eᵢ ↦ eᵢ₋₁"
+    "hopfian": "сдвиг базиса e₁ ↦ 0, eᵢ ↦ eᵢ₋₁",
+    "bounded-exponent": "показатель 3"
    },
    "подгруппы": [
     {
@@ -2303,13 +2311,15 @@
     "polycyclic": false,
     "indecomposable": true,
     "hopfian": true,
-    "linear": false
+    "linear": false,
+    "bounded-exponent": true
    },
    "почему": {
     "residually-finite": "нетривиальная нормальная подгруппа нильпотентной группы пересекает центр C₂ = ⟨z⟩, то есть содержит z; подгруппы конечного индекса нетривиальны",
     "hopfian": "нетривиальное ядро содержит z = [x₁, y₁], и фактор абелев",
     "indecomposable": "если G = A × B, то C₂ = Z(A) × Z(B), так что, скажем, Z(B) = 1, и нильпотентная B тривиальна",
-    "linear": "в линейной группе убывающие цепочки централизаторов обрываются (централизаторы замкнуты по Зарисскому), а C(x₁) ⊋ C(x₁, x₂) ⊋ … бесконечна: yₖ лежит в C(x₁, …, xₖ₋₁), но не в C(xₖ)"
+    "linear": "в линейной группе убывающие цепочки централизаторов обрываются (централизаторы замкнуты по Зарисскому), а C(x₁) ⊋ C(x₁, x₂) ⊋ … бесконечна: yₖ лежит в C(x₁, …, xₖ₋₁), но не в C(xₖ)",
+    "bounded-exponent": "показатель 4"
    },
    "подгруппы": [
     {
@@ -2693,11 +2703,13 @@
     "residually-finite": false,
     "indecomposable": false,
     "linear": true,
-    "hopfian": false
+    "hopfian": false,
+    "bounded-exponent": false
    },
    "почему": {
     "indecomposable": "прямое произведение по определению",
-    "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром"
+    "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром",
+    "bounded-exponent": "содержит ℤ(2^∞)"
    },
    "подгруппы": [
     {
@@ -3278,10 +3290,12 @@
     "residually-finite": false,
     "indecomposable": true,
     "linear": false,
-    "hopfian": true
+    "hopfian": true,
+    "bounded-exponent": false
    },
    "почему": {
-    "linear": "содержит ⊕ (C₂ × C₂) и ⊕ C₃ на непересекающихся носителях; бесконечная элементарная абелева p-подгруппа для двух разных p; в характеристике, отличной от p, она диагонализуема, и её ранг ограничен степенью"
+    "linear": "содержит ⊕ (C₂ × C₂) и ⊕ C₃ на непересекающихся носителях; бесконечная элементарная абелева p-подгруппа для двух разных p; в характеристике, отличной от p, она диагонализуема, и её ранг ограничен степенью",
+    "bounded-exponent": "содержит n-циклы (n нечётно) при всех n"
    },
    "подгруппы": [
     {
@@ -4557,12 +4571,14 @@
     "residually-finite": true,
     "indecomposable": false,
     "hopfian": false,
-    "linear": false
+    "linear": false,
+    "bounded-exponent": true
    },
    "почему": {
     "residually-finite": "подгруппа ∏S₃, а произведение конечных ф. а.",
     "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром",
-    "linear": "бесконечная элементарная абелева 2-подгруппа (или 3-подгруппа в характеристике 2) диагонализуема, а ранг диагональной подгруппы ограничен n"
+    "linear": "бесконечная элементарная абелева 2-подгруппа (или 3-подгруппа в характеристике 2) диагонализуема, а ранг диагональной подгруппы ограничен n",
+    "bounded-exponent": "показатель 6"
    },
    "подгруппы": [
     {
@@ -5073,12 +5089,14 @@
     "indecomposable": false,
     "hopfian": false,
     "linear": false,
-    "polycyclic": false
+    "polycyclic": false,
+    "bounded-exponent": false
    },
    "почему": {
     "linear": "в характеристике 0 конечная абелева подгруппа GLₙ диагонализуема, поэтому p-ранг ⩽ n, а здесь p-ранг бесконечен; в характеристике p подгруппа ℤ(q^∞) для q ≠ p тоже диагонализуема, и q-ранг ограничен",
     "hopfian": "сдвиг слагаемых",
-    "residually-finite": "делима и нетривиальна"
+    "residually-finite": "делима и нетривиальна",
+    "bounded-exponent": "содержит ℚ/ℤ"
    },
    "подгруппы": [
     {
@@ -5140,12 +5158,14 @@
     "indecomposable": false,
     "hopfian": false,
     "polycyclic": false,
-    "linear": false
+    "linear": false,
+    "bounded-exponent": true
    },
    "почему": {
     "hopfian": "сдвиг слагаемых сюръективен с ядром A₅",
     "residually-finite": "подгруппа ∏A₅",
-    "linear": "содержит ⊕ (C₂ × C₂) и ⊕ C₃; бесконечная элементарная абелева p-подгруппа для двух разных p; в характеристике, отличной от p, она диагонализуема, и её ранг ограничен степенью"
+    "linear": "содержит ⊕ (C₂ × C₂) и ⊕ C₃; бесконечная элементарная абелева p-подгруппа для двух разных p; в характеристике, отличной от p, она диагонализуема, и её ранг ограничен степенью",
+    "bounded-exponent": "показатель 30"
    },
    "подгруппы": [
     {
@@ -5908,17 +5928,20 @@
     "simple": true,
     "periodic": true,
     "torsion-free": false,
-    "divisible": false
+    "divisible": false,
+    "bounded-exponent": true
    },
    "почему": {
     "simple": "А. Ю. Ольшанский, Бесконечная группа с подгруппами простых порядков, Изв. АН СССР, 1980",
-    "divisible": "каждый элемент имеет порядок p, поэтому p-я степень любого элемента — 1, и неединичный элемент не p-я степень"
+    "divisible": "каждый элемент имеет порядок p, поэтому p-я степень любого элемента — 1, и неединичный элемент не p-я степень",
+    "bounded-exponent": "все собственные подгруппы — C_p, поэтому период p (Ольшанский)"
    },
    "трудно": [
     "simple",
     "periodic",
     "finite",
-    "divisible"
+    "divisible",
+    "bounded-exponent"
    ],
    "подгруппы": [
     {
@@ -6083,7 +6106,8 @@
     "polycyclic": false,
     "linear": true,
     "hopfian": false,
-    "indecomposable": true
+    "indecomposable": true,
+    "bounded-exponent": false
    },
    "почему": {
     "nilpotent": "ступень подгрупп Dih(C_{2ⁿ}) растёт с n",
@@ -6091,7 +6115,8 @@
     "divisible": "отражение s не квадрат: квадраты — это 2A = A",
     "linear": "вращения на корни из 1 степени 2ⁿ и отражение в O(2)",
     "hopfian": "(a, ε) ↦ (2a, ε) — эндоморфизм (удвоение перестановочно с инверсией), сюръективный, с ядром C₂",
-    "indecomposable": "если G = A × B, то G′ = A′ × B′ ≅ ℤ(2^∞) неразложима, скажем B′ = 1; тогда B ⊆ Z(G) = C₂, B = C₂ и A ≅ G/Z(G) ≅ G, но тогда Z(G) ⊇ Z(A) × B ≅ C₂ × C₂ — противоречие"
+    "indecomposable": "если G = A × B, то G′ = A′ × B′ ≅ ℤ(2^∞) неразложима, скажем B′ = 1; тогда B ⊆ Z(G) = C₂, B = C₂ и A ≅ G/Z(G) ≅ G, но тогда Z(G) ⊇ Z(A) × B ≅ C₂ × C₂ — противоречие",
+    "bounded-exponent": "содержит ℤ(2^∞)"
    },
    "подгруппы": [
     {
@@ -6701,12 +6726,14 @@
     "residually-finite": false,
     "polycyclic": false,
     "hopfian": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "bounded-exponent": false
    },
    "почему": {
     "simple": "образ Gᵢ в Sym(Gᵢ) при вложении Кэли лежит в Alt(Gᵢ) (циклы элемента порядка m — |Gᵢ|/m циклов длины m, их число чётно), поэтому U — объединение цепочки простых Alt(Gᵢ)",
     "divisible": "g ∈ Gᵢ порядка m действует на Gⱼ (j > i) произведением |Gⱼ|/m циклов длины m; при больших j их число делится на k, и k таких циклов — k-я степень одного цикла длины km из Sym(Gⱼ)",
-    "fin-gen": "локально конечна и бесконечна"
+    "fin-gen": "локально конечна и бесконечна",
+    "bounded-exponent": "содержит все конечные группы"
    },
    "подгруппы": [
     {
@@ -6950,12 +6977,14 @@
     "polycyclic": false,
     "hopfian": false,
     "indecomposable": false,
-    "linear": false
+    "linear": false,
+    "bounded-exponent": true
    },
    "почему": {
     "hopfian": "отбросить первую координату и сдвинуть остальные — сюръекция с ядром SL(2, 5)",
     "residually-finite": "прямая сумма конечных групп: проекции на конечные подсуммы разделяют элементы",
-    "linear": "содержит ⊕C₂ (центры) и ⊕C₃: довод как у ⊕_ℕ A₅"
+    "linear": "содержит ⊕C₂ (центры) и ⊕C₃: довод как у ⊕_ℕ A₅",
+    "bounded-exponent": "показатель периода SL(2, 5)"
    },
    "подгруппы": [
     {
@@ -7154,11 +7183,13 @@
     "indecomposable": false,
     "linear": true,
     "hopfian": true,
-    "polycyclic": false
+    "polycyclic": false,
+    "bounded-exponent": false
    },
    "почему": {
     "linear": "корни из 1 простых степеней в ℂ*",
-    "hopfian": "сюръекция сохраняет каждую p-компоненту C_p и на ней биективна"
+    "hopfian": "сюръекция сохраняет каждую p-компоненту C_p и на ней биективна",
+    "bounded-exponent": "элементы всех простых порядков"
    },
    "подгруппы": [
     {
@@ -7214,12 +7245,14 @@
     "polycyclic": false,
     "hopfian": true,
     "indecomposable": false,
-    "linear": false
+    "linear": false,
+    "bounded-exponent": false
    },
    "почему": {
     "linear": "в линейной группе убывающие цепочки централизаторов стабилизируются (централизатор — пересечение с замкнутым по Зарисскому), а C(H₁) ⊋ C(H₁ ⊕ H₂) ⊋ … для неабелевых слагаемых",
     "hopfian": "слагаемое UT₃(𝔽_p) — силовская p-подгруппа, сюръекция переводит её на себя, а конечная сюръекция инъективна",
-    "residually-finite": "прямая сумма конечных групп"
+    "residually-finite": "прямая сумма конечных групп",
+    "bounded-exponent": "элементы всех простых порядков"
    },
    "подгруппы": [
     {
@@ -8108,7 +8141,8 @@
     "centerless": true,
     "residually-finite": true,
     "linear": false,
-    "polycyclic": false
+    "polycyclic": false,
+    "bounded-exponent": true
    },
    "почему": {
     "fin-gen": "бесконечная подгруппа локально конечной ⊕S₃",
@@ -8117,7 +8151,8 @@
     "centerless": "проекция на каждую координату — вся S₃, поэтому центральный элемент имеет координаты в Z(S₃) = 1",
     "residually-finite": "подгруппа ф. а. ⊕S₃",
     "linear": "содержит ⊕C₃ и бесконечную элементарную абелеву 2-подгруппу из пар транспозиций; довод как у ⊕_ℤ S₃",
-    "simple": "⊕C₃ — собственная нетривиальная нормальная подгруппа"
+    "simple": "⊕C₃ — собственная нетривиальная нормальная подгруппа",
+    "bounded-exponent": "подгруппа ⊕S₃, показатель 6"
    },
    "короткий довод": [
     "linear"
@@ -8248,7 +8283,8 @@
     "polycyclic": false,
     "linear": true,
     "hopfian": true,
-    "indecomposable": true
+    "indecomposable": true,
+    "bounded-exponent": false
    },
    "почему": {
     "fin-gen": "фактор по D₈ — ℤ(2^∞)/C₂ ≅ ℤ(2^∞)",
@@ -8256,7 +8292,8 @@
     "residually-finite": "нормальная подгруппа конечного индекса пересекает делимый центр ℤ(2^∞) по подгруппе конечного индекса, то есть содержит его, а с ним и z",
     "linear": "D₈ ⊂ GL₂(ℂ) с центром −1 и 2-примарные скаляры",
     "hopfian": "если φ сюръективен, то φ биективен на конечном G′ = ⟨z⟩, так что ker φ ∩ G′ = 1, ker φ централен и лежит в ℤ(2^∞); но всякая нетривиальная подгруппа ℤ(2^∞) содержит z",
-    "indecomposable": "если G = A × B, то ℤ(2^∞) = Z(A) × Z(B) неразложима, скажем Z(B) = 1, и нильпотентная B тривиальна"
+    "indecomposable": "если G = A × B, то ℤ(2^∞) = Z(A) × Z(B) неразложима, скажем Z(B) = 1, и нильпотентная B тривиальна",
+    "bounded-exponent": "содержит ℤ(2^∞)"
    },
    "подгруппы": [
     {
@@ -9314,11 +9351,13 @@
     "polycyclic": false,
     "linear": true,
     "hopfian": false,
-    "indecomposable": false
+    "indecomposable": false,
+    "bounded-exponent": false
    },
    "почему": {
     "linear": "диагональные 2-примарные корни из 1 в GL₂(ℂ)",
-    "hopfian": "x ↦ 2x"
+    "hopfian": "x ↦ 2x",
+    "bounded-exponent": "содержит ℤ(2^∞)"
    },
    "подгруппы": [
     {
@@ -9375,14 +9414,16 @@
     "residually-finite": false,
     "linear": true,
     "polycyclic": false,
-    "hopfian": false
+    "hopfian": false,
+    "bounded-exponent": false
    },
    "почему": {
     "nilpotent": "t действует на A = ℤ(2^∞)² обращением, и [A, t, …, t] = 2ⁿA = A",
     "residually-finite": "подгруппа конечного индекса пересекает делимую A по подгруппе конечного индекса, то есть содержит A",
     "linear": "a ↦ diag(a), t ↦ перестановка в GL₄(ℂ)",
     "hopfian": "a ↦ 2a, t ↦ t — сюръекция с ядром A[2]",
-    "divisible": "фактор C₂"
+    "divisible": "фактор C₂",
+    "bounded-exponent": "содержит ℤ(2^∞)"
    },
    "подгруппы": [
     {
