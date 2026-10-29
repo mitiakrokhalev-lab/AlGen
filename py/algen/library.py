@@ -35,7 +35,11 @@ SUB_PROPS = ("normal", "characteristic", "maximal", "whole", "central", "finite-
 class Library:
     def __init__(self, infinite=INFINITE):
         self.obj = {}
+        patch = DATA / "finite" / "grp-subs-patch.json"
+        patch = json.loads(patch.read_text(encoding="utf-8"))["группы"] if patch.exists() else {}
         for k, r in load_finite(extra=True).items():
+            if r["subs"] is None and k in patch:
+                r = {**r, **patch[k]}
             self.obj[k] = {"key": k, "имя": r["name"], "конечная": True, "свойства": r["props"],
                            "подгруппы": None if r["subs"] is None else [
                                {"id": str(i), "≅": s["group"], "свойства": s["props"],

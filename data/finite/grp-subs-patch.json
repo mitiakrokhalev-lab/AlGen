@@ -1,0 +1,287 @@
+{
+ "заметка": "Минимальные подгруппы (1, центр, коммутант, вся) для конечных групп, у которых полная таблица подгрупп не считалась. Ключи групп-множителей — по SmallGroup; структура — из имени GAP (прямые произведения).",
+ "группы": {
+  "32:51": {
+   "subs": [
+    {
+     "group": "1:1",
+     "quotient": "32:51",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "32:51",
+     "quotient": "1:1",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": true,
+      "finite-index": true
+     }
+    }
+   ],
+   "center": 1,
+   "commutator": 0
+  },
+  "64:260": {
+   "subs": [
+    {
+     "group": "1:1",
+     "quotient": "64:260",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "64:260",
+     "quotient": "1:1",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": true,
+      "finite-index": true
+     }
+    }
+   ],
+   "center": 1,
+   "commutator": 0
+  },
+  "64:267": {
+   "subs": [
+    {
+     "group": "1:1",
+     "quotient": "64:267",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "64:267",
+     "quotient": "1:1",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": true,
+      "finite-index": true
+     }
+    }
+   ],
+   "center": 1,
+   "commutator": 0
+  },
+  "96:231": {
+   "subs": [
+    {
+     "group": "1:1",
+     "quotient": "96:231",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "96:231",
+     "quotient": "1:1",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": true,
+      "finite-index": true
+     }
+    }
+   ],
+   "center": 1,
+   "commutator": 0
+  },
+  "64:261": {
+   "subs": [
+    {
+     "group": "1:1",
+     "quotient": "64:261",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "16:14",
+     "quotient": "4:2",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "2:1",
+     "quotient": "32:51",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "64:261",
+     "quotient": "1:1",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     }
+    }
+   ],
+   "center": 1,
+   "commutator": 2
+  },
+  "64:262": {
+   "subs": [
+    {
+     "group": "1:1",
+     "quotient": "64:262",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "16:14",
+     "quotient": "4:2",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "2:1",
+     "quotient": "32:51",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "64:262",
+     "quotient": "1:1",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     }
+    }
+   ],
+   "center": 1,
+   "commutator": 2
+  },
+  "96:230": {
+   "subs": [
+    {
+     "group": "1:1",
+     "quotient": "96:230",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "16:14",
+     "quotient": "6:1",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "3:1",
+     "quotient": "32:51",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": false,
+      "finite-index": true
+     }
+    },
+    {
+     "group": "96:230",
+     "quotient": "1:1",
+     "props": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     }
+    }
+   ],
+   "center": 1,
+   "commutator": 2
+  }
+ }
+}

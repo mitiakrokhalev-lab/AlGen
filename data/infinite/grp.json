@@ -2158,7 +2158,8 @@
       "maximal": false,
       "finite-index": false
      },
-     "почему": "центр и коммутант: [I + a e₁₂, I + b e₂₃] = I + ab e₁₃"
+     "почему": "центр и коммутант: [I + a e₁₂, I + b e₂₃] = I + ab e₁₃",
+     "фактор": "R"
     },
     {
      "id": "все",
@@ -2520,7 +2521,9 @@
       "whole": false,
       "maximal": false,
       "finite-index": false
-     }
+     },
+     "фактор": "Z2xC2",
+     "почему": "C₂ × F₂ᵃᵇ"
     },
     {
      "id": "множитель",
@@ -4483,7 +4486,8 @@
       "maximal": false,
       "finite-index": false
      },
-     "почему": "(S₃ × ℤ²)′ = A₃; фактор C₂ × ℤ² бесконечен"
+     "почему": "(S₃ × ℤ²)′ = A₃; фактор C₂ × ℤ² бесконечен",
+     "фактор": "Z2xC2"
     },
     {
      "id": "все",
@@ -5556,7 +5560,8 @@
       "maximal": false,
       "finite-index": false
      },
-     "почему": "фактор ℤ^3 бесконечен; свободная группа бесконечного ранга (Шрайер: подгруппа свободной свободна; бесконечного индекса и нормальна ≠ 1, значит, не конечно порождена)"
+     "почему": "фактор ℤ^3 бесконечен; свободная группа бесконечного ранга (Шрайер: подгруппа свободной свободна; бесконечного индекса и нормальна ≠ 1, значит, не конечно порождена)",
+     "фактор": "Z3"
     },
     {
      "id": "все",
@@ -5630,7 +5635,8 @@
       "maximal": false,
       "finite-index": false
      },
-     "почему": "фактор ℤ^4 бесконечен; свободная группа бесконечного ранга (Шрайер: подгруппа свободной свободна; бесконечного индекса и нормальна ≠ 1, значит, не конечно порождена)"
+     "почему": "фактор ℤ^4 бесконечен; свободная группа бесконечного ранга (Шрайер: подгруппа свободной свободна; бесконечного индекса и нормальна ≠ 1, значит, не конечно порождена)",
+     "фактор": "Z4"
     },
     {
      "id": "все",
@@ -6409,7 +6415,8 @@
       "maximal": false,
       "finite-index": false
      },
-     "почему": "[(a, b, c), (a′, b′, c′)] = ab′ − a′b ∈ ℤ"
+     "почему": "[(a, b, c), (a′, b′, c′)] = ab′ − a′b ∈ ℤ",
+     "фактор": "Z2xQmodZ"
     },
     {
      "id": "все",
@@ -8326,7 +8333,8 @@
       "maximal": false,
       "finite-index": false
      },
-     "почему": "(n, b, c) централен ⇔ nb′ = n′b для всех n′, b′ ⇔ n = 0 и b = 0; коммутатор [(n, b, ·), (n′, b′, ·)] = nb′ − n′b пробегает весь ℚ/ℤ"
+     "почему": "(n, b, c) централен ⇔ nb′ = n′b для всех n′, b′ ⇔ n = 0 и b = 0; коммутатор [(n, b, ·), (n′, b′, ·)] = nb′ − n′b пробегает весь ℚ/ℤ",
+     "фактор": "ZxQmodZ"
     },
     {
      "id": "все",
@@ -8653,7 +8661,8 @@
       "maximal": false,
       "finite-index": false
      },
-     "почему": "G′ = γ₂(G); он порождён e₁₃, e₃₅ ([e₁₃, e₃₅] = e₁₅) и центральными в G′ e₂₄, e₁₄, e₂₅; по координатам Мальцева G′ ≅ ⟨e₁₃, e₃₅, e₁₅⟩ × ⟨e₂₄, e₁₄, e₂₅⟩ ≅ UT₃(ℤ) × ℤ³"
+     "почему": "G′ = γ₂(G); он порождён e₁₃, e₃₅ ([e₁₃, e₃₅] = e₁₅) и центральными в G′ e₂₄, e₁₄, e₂₅; по координатам Мальцева G′ ≅ ⟨e₁₃, e₃₅, e₁₅⟩ × ⟨e₂₄, e₁₄, e₂₅⟩ ≅ UT₃(ℤ) × ℤ³",
+     "фактор": "Z4"
     },
     {
      "id": "все",
@@ -9389,6 +9398,264 @@
    ],
    "центр": "центр",
    "коммутант": "A"
+  },
+  {
+   "id": "UT3Z12modZ",
+   "имя": "UT₃(ℤ[1/2])/⟨e₁₃⟩",
+   "заметка": "Тройки (a, b, c), a, b ∈ ℤ[1/2], c ∈ ℤ[1/2]/ℤ ≅ ℤ(2^∞). Центральный неразложимый нехопфов коммутант ℤ(2^∞).",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "perfect": false,
+    "periodic": false,
+    "fin-gen": false,
+    "solvable": true,
+    "nilpotent": true,
+    "torsion-free": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": false,
+    "polycyclic": false,
+    "indecomposable": true
+   },
+   "почему": {
+    "fin-gen": "фактор по центру ℤ[1/2]² не к. п.",
+    "divisible": "фактор ℤ[1/2]² не делится на 3",
+    "residually-finite": "нормальная подгруппа конечного индекса содержит делимый центр ℤ(2^∞)",
+    "indecomposable": "центр ℤ(2^∞) неразложим, группа нильпотентна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "UT3Z12modZ"
+    },
+    {
+     "id": "центр",
+     "имя": "{(0, 0, c)}, c ∈ ℤ[1/2]/ℤ",
+     "≅": "Pruf2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "(a, b, ·) централен ⇔ ab′ − a′b ∈ ℤ для всех a′, b′ ∈ ℤ[1/2] ⇔ a = b = 0; коммутаторы пробегают весь ℤ[1/2]/ℤ"
+    },
+    {
+     "id": "все",
+     "имя": "UT₃(ℤ[1/2])/⟨e₁₃⟩",
+     "≅": "UT3Z12modZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "центр"
+  },
+  {
+   "id": "ZxQmodZ",
+   "имя": "ℤ × ℚ/ℤ",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "nilpotent": true,
+    "solvable": true,
+    "perfect": false,
+    "simple": false,
+    "centerless": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "indecomposable": false,
+    "fin-gen": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "residually-finite": false,
+    "linear": true,
+    "hopfian": false,
+    "polycyclic": false
+   },
+   "почему": {
+    "linear": "2^ℤ × корни из 1 в ℂ*",
+    "hopfian": "(n, x) ↦ (n, 2x)",
+    "residually-finite": "делимая подгруппа ℚ/ℤ"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "ZxQmodZ"
+    },
+    {
+     "id": "все",
+     "имя": "ℤ × ℚ/ℤ",
+     "≅": "ZxQmodZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1"
+  },
+  {
+   "id": "Z2xQmodZ",
+   "имя": "ℤ² × ℚ/ℤ",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "nilpotent": true,
+    "solvable": true,
+    "perfect": false,
+    "simple": false,
+    "centerless": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "indecomposable": false,
+    "fin-gen": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "residually-finite": false,
+    "linear": true,
+    "hopfian": false,
+    "polycyclic": false
+   },
+   "почему": {
+    "linear": "2^ℤ × 3^ℤ × корни из 1 в ℂ*",
+    "hopfian": "(v, x) ↦ (v, 2x)",
+    "residually-finite": "делимая подгруппа ℚ/ℤ"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z2xQmodZ"
+    },
+    {
+     "id": "все",
+     "имя": "ℤ² × ℚ/ℤ",
+     "≅": "Z2xQmodZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1"
+  },
+  {
+   "id": "Z2xC2",
+   "имя": "ℤ² × C₂",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "nilpotent": true,
+    "solvable": true,
+    "perfect": false,
+    "simple": false,
+    "centerless": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "indecomposable": false,
+    "fin-gen": true,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "residually-finite": true,
+    "linear": true,
+    "hopfian": true,
+    "polycyclic": true
+   },
+   "почему": {},
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z2xC2"
+    },
+    {
+     "id": "все",
+     "имя": "ℤ² × C₂",
+     "≅": "Z2xC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1"
   }
  ]
 }
