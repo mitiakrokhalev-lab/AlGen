@@ -315,9 +315,24 @@ class Theory:
         подстановка, при которой образца нет в графе, всё равно отбрасывается)."""
         roles = sorted(scene, key=lambda r: sum(1 for k in LINKS if k in r))
         names = {r["name"] for r in roles}
+        def link_roles(x):
+            if isinstance(x, dict):
+                return set().union(*[link_roles(a) for a in x.get("args", [])]) if x.get("args") else set()
+            return {x.split()[-1]}
+
+        def ref(x, env):
+            """Связь роли: как Graph._ref, но образец-терм только ищется, не строится."""
+            if isinstance(x, dict):
+                args = [ref(a, env) for a in x.get("args", [])]
+                if any(a is None for a in args):
+                    return None
+                t = App(x["op"], tuple(args))
+                return t if t in self.g.terms else None
+            return self.g._ref(x, env)
+
         for r in roles:
             for k in LINKS:
-                if k in r and r[k].split()[-1] not in names:
+                if k in r and not link_roles(r[k]) <= names:
                     return
         terms = list(self.g.terms.items())
         by_sort, by_link = {}, {}
@@ -330,7 +345,7 @@ class Theory:
             for k in LINKS:
                 if k in r:
                     try:
-                        want = self.g._ref(r[k], env)
+                        want = ref(r[k], env)
                     except KeyError:
                         continue
                     idx = by_link.get((r["sort"], k))
@@ -351,7 +366,7 @@ class Theory:
                 return False
             for k in LINKS:
                 if k in r:
-                    want = self.g._ref(r[k], env)
+                    want = ref(r[k], env)
                     if want is None or info.links.get(k) != want:
                         return False
             return True

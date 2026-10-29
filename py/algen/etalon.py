@@ -94,7 +94,7 @@ def scheme(vocab, fact):
     g, names, prem = Graph(vocab), {}, []
     for decl in fact["условие"].split(";"):
         head, _, lits = decl.partition("|")
-        m = re.fullmatch(r"\s*∀\s*(\w+)\s*:\s*(\w+)(?:\(([\w\s,]+)\))?\s*", head)
+        m = re.fullmatch(r"\s*∀\s*(\w+)\s*:\s*(\w+)(?:\((.+)\))?\s*", head)
         if not m:
             raise Unsupported(f"объявление {head!r}")
         name, sort, parents = m.groups()
@@ -103,11 +103,12 @@ def scheme(vocab, fact):
         s, link = SORTS[section][sort]
         links = {}
         if parents:
-            ps = [x.strip() for x in parents.split(",")]
+            ps = split_top(parents, ",")
             keys = link if isinstance(link, tuple) else (link,)
             if len(ps) != len(keys):
                 raise Unsupported(f"объявление {head!r}")
-            links = {k: names[x] for k, x in zip(keys, ps)}
+            # родитель — переменная или терм: «∀ H : Sub(A ∗ B)»
+            links = {k: names[x] if x in names else term(g, x, names, section) for k, x in zip(keys, ps)}
         names[name] = g.var(name, s, **links)
         prem += [literal(g, x, names, section) for x in split_top(lits, ",")]
     goal = literal(g, fact["цель"], names, section) if fact.get("цель") else None
