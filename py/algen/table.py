@@ -51,7 +51,7 @@ SYMMETRIC_SUB = {"meet", "join"}            # meet(G, H, K) = meet(G, K, H)
 # Термы глубины 2, известные по задачам (подтермы добавляются сами).
 DEPTH2 = {
     "G": ["center(commutator(G))", "commutator(commutator(G))", "G / center(G)",
-          "center(G / center(G))", "G / commutator(G)"],
+          "center(G / center(G))", "G / commutator(G)", "aut(G) / inn(G)"],
     "AB": ["center(A × B)", "commutator(A × B)"],
     "GMN": ["M / N", "G / M", "normal-closure(M, N)"],
     "GHF": ["G / ker(F)"],

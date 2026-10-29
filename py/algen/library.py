@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import load as load_finite, load_products
+from .finite import FINITE_DERIVED, load as load_finite, load_aut, load_products
 from .logic import DATA, App, Graph, Theory, Var, Vocab
 
 INFINITE = DATA / "infinite" / "grp.json"
@@ -53,6 +53,7 @@ class Library:
                                for i, s in enumerate(r["subs"])],
                            "центр": None if r.get("center") is None else str(r["center"]),
                            "коммутант": None if r.get("commutator") is None else str(r["commutator"])}
+        self._aut_out()
         with open(infinite, encoding="utf-8") as f:
             for r in json.load(f)["группы"]:
                 self.obj[r["id"]] = {"key": r["id"], "конечная": False, **r}
@@ -77,6 +78,27 @@ class Library:
                         raise KeyError(f"{o['key']}/{s['id']}: нет группы {k}")
         for o in self.obj.values():
             self._center_commutator(o)
+
+    def _aut_out(self):
+        """Aut(G) и Out(G) конечных групп таблицы (data/finite/grp-aut.jsonl,
+        считает GAP). Группа вне таблицы заводится записью только со свойствами."""
+        for k, r in load_aut().items():
+            o = self.obj.get(k)
+            if o is None:
+                continue
+            for fld, name in (("aut", r.get("aut_name")), ("out", None)):
+                ak = r.get(fld)
+                if not ak or ak not in self.obj:
+                    ak = ak or f"{r[fld + '_order']}:{fld.capitalize()}({k})"
+                    if ak not in self.obj:
+                        props = dict(r[fld + "_props"])
+                        for p, f in FINITE_DERIVED.items():
+                            props.setdefault(p, f(props))
+                        self.obj[ak] = {"key": ak, "имя": name or ak, "конечная": True, "свойства": props,
+                                        "подгруппы": None, "без произведений": True}
+                o[fld] = ak
+            o["inn = aut"] = r["inn_whole"]
+            o["inn центральна"] = r["inn_central"]
 
     @staticmethod
     def _center_commutator(o):
@@ -615,8 +637,13 @@ class Search:
             return env[t]
         if not isinstance(t, App):
             return None
-        args = [self._image(a, env) for a in t.args]
         lib = self.lib
+        if (t.op == "quotient" and isinstance(t.args[0], App) and t.args[0].op == "aut"
+                and isinstance(t.args[1], App) and t.args[1].op == "inn" and t.args[1].args == t.args[0].args):
+            x = self._obj(self._image(t.args[0].args[0], env))  # Out(X) = Aut(X)/Inn(X)
+            k = x and lib.obj[x].get("out")
+            return ("obj", k) if k else None
+        args = [self._image(a, env) for a in t.args]
         if t.op == "quotient" and args[0] and args[1] and args[1][0] == "sub":
             q = lib.obj[args[1][1]]["подгруппы"][args[1][2]].get("фактор")
             return ("obj", q) if q else None
