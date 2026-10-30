@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_compl, load_endo, load_elts, load_products
+from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_compl, load_endo, load_elts, load_homs, load_products
 from .logic import DATA, App, Graph, Theory, Var, Vocab
 
 INFINITE = DATA / "infinite" / "grp.json"
@@ -43,7 +43,7 @@ class Library:
         self.obj = {}
         patch = DATA / "finite" / "grp-subs-patch.json"
         patch = json.loads(patch.read_text(encoding="utf-8"))["группы"] if patch.exists() else {}
-        compl, endo, elts = load_compl(), load_endo(), load_elts()
+        compl, endo, elts, homs = load_compl(), load_endo(), load_elts(), load_homs()
         for k, r in load_finite(extra=True).items():
             for data, field, prop in ((compl, "complemented", "complemented"),
                                       (endo, "fully_invariant", "fully-invariant"),
@@ -74,6 +74,10 @@ class Library:
             if e and e.get("classes") and r["subs"] is not None and \
                     [[x["group"], x["class_size"]] for x in r["subs"]] == e["check"]:
                 self.obj[k]["элементы"] = e["classes"]
+            h = homs.get(k)
+            if h and h.get("endos") is not None and r["subs"] is not None and \
+                    [[x["group"], x["class_size"]] for x in r["subs"]] == h["check"]:
+                self.obj[k]["эндоморфизмы"] = h["endos"]
         self._aut_out()
         with open(infinite, encoding="utf-8") as f:
             raw = json.load(f)
@@ -694,6 +698,8 @@ class Search:
         out = [("mor", "zero", d, c, None)]
         if d == c:
             out.append(("mor", "id", d, c, None))
+            # прочие эндоморфизмы конечной группы — из GAP (gap/homs.g)
+            out += [("mor", "end", d, c, i) for i in range(len(self.lib.obj[d].get("эндоморфизмы") or []))]
         for j, x in enumerate(self.lib.obj[d]["подгруппы"] or []):
             if x["свойства"].get("normal") and x.get("фактор") == c and not x["свойства"].get("whole") \
                     and x["≅"] != "1:1":
@@ -892,6 +898,9 @@ class Search:
             return ("sub", key, idx) if idx is not None else None
         if t.op in ("ker", "im") and args[0] and args[0][0] == "mor":
             _, kind, d, c, j = args[0]
+            if kind == "end":
+                e = lib.obj[d]["эндоморфизмы"][j]
+                return ("sub", d, e["ker"]) if t.op == "ker" else ("sub", c, e["im"])
             if t.op == "ker":
                 idx = {"zero": self._all(d), "id": self._one(d), "proj": j, "incl": self._one(d)}[kind]
                 return ("sub", d, idx) if idx is not None else None
@@ -940,10 +949,16 @@ class Search:
         td = self.lib.obj[d]["свойства"].get("trivial")
         tc = self.lib.obj[c]["свойства"].get("trivial")
         if kind == "id":
-            return {"injective": True, "surjective": True, "iso": True, "zero-mor": td}
+            return {"injective": True, "surjective": True, "iso": True, "zero-mor": td,
+                    "idempotent": True, "inner-aut": True}
         if kind == "zero":
             return {"zero-mor": True, "injective": td, "surjective": tc,
-                    "iso": (td and tc) if td is not None and tc is not None else None}
+                    "iso": (td and tc) if td is not None and tc is not None else None,
+                    "idempotent": True if d == c else None, "inner-aut": td if d == c else None}
+        if kind == "end":
+            e = self.lib.obj[d]["эндоморфизмы"][j]
+            return {"injective": e["inj"], "surjective": e["surj"], "iso": e["inj"] and e["surj"],
+                    "zero-mor": False, "idempotent": e["idem"], "inner-aut": e["inner"]}
         x = (self.lib.obj[d] if kind == "proj" else self.lib.obj[c])["подгруппы"][j]
         if kind == "proj":  # j — ядро, собственное и нетривиальное
             return {"injective": False, "surjective": True, "iso": False, "zero-mor": tc}
@@ -1143,6 +1158,11 @@ class Search:
                 return f"{nd} ↠ {nc} (фактор по {self.lib.obj[d]['подгруппы'][j].get('id')})"
             if kind == "incl":
                 return f"{nd} ↪ {nc} (подгруппа {self.lib.obj[c]['подгруппы'][j].get('id')})"
+            if kind == "end":
+                e = self.lib.obj[d]["эндоморфизмы"][j]
+                subs = self.lib.obj[d]["подгруппы"]
+                nm = lambda i: self._name(("obj", subs[i]["≅"]))
+                return f"эндоморфизм {nd}: ядро ≅ {nm(e['ker'])}, образ ≅ {nm(e['im'])}"
             return {"id": f"id: {nd} → {nc}", "zero": f"1: {nd} → {nc}"}[kind]
         if im[0] == "obj":
             o = self.lib.obj[im[1]]

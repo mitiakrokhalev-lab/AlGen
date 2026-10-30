@@ -39,6 +39,8 @@ ENDO_SCRIPT = Path(__file__).with_name("gap") / "endo.g"
 ENDO = ROOT / "data" / "finite" / "grp-endo.jsonl"
 ELTS_SCRIPT = Path(__file__).with_name("gap") / "elts.g"
 ELTS = ROOT / "data" / "finite" / "grp-elts.jsonl"
+HOMS_SCRIPT = Path(__file__).with_name("gap") / "homs.g"
+HOMS = ROOT / "data" / "finite" / "grp-homs.jsonl"
 PRESENT_SCRIPT = Path(__file__).with_name("gap") / "present.g"
 PRESENT = ROOT / "data" / "finite" / "grp-present.jsonl"
 
@@ -240,6 +242,14 @@ def load_elts(path=ELTS):
         return {r["key"]: r for r in map(json.loads, f)}
 
 
+def load_homs(path=HOMS):
+    """key → представители классов эндоморфизмов (если таблица посчитана)."""
+    if not Path(path).exists():
+        return {}
+    with open(path) as f:
+        return {r["key"]: r for r in map(json.loads, f)}
+
+
 def load_aut(path=AUT):
     """key → запись об Aut, Inn, Out (если таблица посчитана)."""
     if not Path(path).exists():
@@ -328,6 +338,8 @@ if __name__ == "__main__":
                     help="вполне инвариантные подгруппы всех групп таблицы в data/finite/grp-endo.jsonl")
     ap.add_argument("--элементы", dest="elts", action="store_true",
                     help="классы сопряжённых элементов всех групп таблицы в data/finite/grp-elts.jsonl")
+    ap.add_argument("--гомоморфизмы", dest="homs", action="store_true",
+                    help="эндоморфизмы всех групп таблицы в data/finite/grp-homs.jsonl")
     ap.add_argument("--авт", dest="aut", action="store_true",
                     help="посчитать Aut, Inn, Out всех групп таблицы в data/finite/grp-aut.jsonl")
     a = ap.parse_args()
@@ -338,6 +350,10 @@ if __name__ == "__main__":
     if a.compl:
         build_table(COMPL_SCRIPT, COMPL, a.jobs)
         print(COMPL, sum(1 for _ in COMPL.open()))
+        raise SystemExit
+    if a.homs:
+        build_table(HOMS_SCRIPT, HOMS, a.jobs)
+        print(HOMS, sum(1 for _ in HOMS.open()))
         raise SystemExit
     if a.elts:
         build_table(ELTS_SCRIPT, ELTS, a.jobs)
