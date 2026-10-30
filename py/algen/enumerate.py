@@ -456,6 +456,7 @@ class SchemeForm(Form):
         levels = {"m": (), "s": ("трудно",), "e": MARKS}
         rows, self.envs, self.skipped = {k: [] for k in levels}, [], []
         derived = self._derived
+        self._used = used = set()  # ключи выводов, нужные этим строкам (для кэша между прогонами)
         for n_env, env in enumerate(self.search._assign(0, {})):
             if part and n_env % part[1] != part[0] - 1:
                 continue
@@ -473,6 +474,7 @@ class SchemeForm(Form):
                     continue
                 f = {a: v for a, v in facts.items() if not (a in hard and hard[a][0] in drop)}
                 key = self._key(f)
+                used.add(key)
                 row = derived.get(key)
                 if row is None:
                     row = derived[key] = self._derive(f)

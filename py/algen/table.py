@@ -191,6 +191,58 @@ def _fp(base):
     return f"{_fingerprint()}:{base}:{','.join(sorted(E.SKIP))}"
 
 
+def theory_fp(base):
+    """Хэш того, от чего зависит вывод строки по её записанным значениям:
+    правила и словарь, код теории и атомов — но не данные библиотеки.
+    Кэш выводов с этим отпечатком переживает круги заполнения библиотеки."""
+    import hashlib
+    root = Path(__file__).resolve().parents[2]
+    files = [root / "data" / "grp.json", root / "data" / "new" / "grp.json", root / "data" / "vocab" / "grp.json",
+             *(Path(__file__).parent / f for f in ("logic.py", "enumerate.py", "library.py", "table.py", "etalon.py"))]
+    h = hashlib.sha256()
+    for f in files:
+        if f.exists():
+            h.update(f.name.encode())
+            h.update(f.read_bytes())
+    h.update(f"{base}:{','.join(sorted(E.SKIP))}".encode())
+    return h.hexdigest()[:16]
+
+
+def _pack_rows(d):
+    """{ключ: [True/False/None, …]} → {ключ: (биты «верно», биты «ложно»)}."""
+    out = {}
+    for k, row in d.items():
+        t = np.packbits(np.array([v is True for v in row], dtype=bool))
+        f = np.packbits(np.array([v is False for v in row], dtype=bool))
+        out[k] = (t.tobytes(), f.tobytes(), len(row))
+    return out
+
+
+def _unpack_rows(d):
+    out = {}
+    for k, (t, f, n) in d.items():
+        tt = np.unpackbits(np.frombuffer(t, dtype=np.uint8))[:n]
+        ff = np.unpackbits(np.frombuffer(f, dtype=np.uint8))[:n]
+        out[k] = [True if a else (False if b else None) for a, b in zip(tt, ff)]
+    return out
+
+
+def load_cache(base, cdir):
+    """Выводы строк базы из кэша прошлых прогонов (только с тем же theory_fp)."""
+    if not cdir or not Path(cdir).exists():
+        return {}
+    fp, rows = theory_fp(base), {}
+    for path in Path(cdir).rglob(f"{base}.*.dcache"):
+        try:
+            with open(path, "rb") as fh:
+                data = pickle.load(fh)
+        except Exception:
+            continue
+        if data.get("отпечаток") == fp:
+            rows.update(data["строки"])
+    return _unpack_rows(rows)
+
+
 def build(lib, vocab, base, part, outdir, skel=None):
     """Часть таблицы базы. skel — готовый каркас (теория строится один раз на
     базу, части получают его через fork); иначе строится здесь."""
@@ -207,7 +259,12 @@ def build(lib, vocab, base, part, outdir, skel=None):
             **{k: np.packbits(getattr(f, k), axis=1) for k in "mse"}}
     with open(path, "wb") as fh:
         pickle.dump(data, fh, protocol=pickle.HIGHEST_PROTOCOL)
-    print(f"{base} {part[0]}/{part[1]}: строк {len(f.envs)}, атомов {len(f.atoms)}, "
+    # кэш выводов этой части (ключ — записанные значения строки) для следующих прогонов
+    used = {k: f._derived[k] for k in getattr(f, "_used", ()) if k in f._derived}
+    new = [k for k in used if k not in getattr(f, "_cached_keys", ())]
+    with open(Path(outdir) / f"{base}.{part[0]}-{part[1]}.dcache", "wb") as fh:
+        pickle.dump({"отпечаток": theory_fp(base), "строки": _pack_rows(used)}, fh, protocol=pickle.HIGHEST_PROTOCOL)
+    print(f"{base} {part[0]}/{part[1]}: строк {len(f.envs)}, атомов {len(f.atoms)}, новых выводов {len(new)}, "
           f"{round(time.time() - t0)} с → {path}", file=sys.stderr)
 
 
@@ -236,7 +293,7 @@ def assignment(jobs):
     return out
 
 
-def build_all(lib, vocab, job, jobs, outdir, threads):
+def build_all(lib, vocab, job, jobs, outdir, threads, cache=None):
     """Задание job из jobs: части таблиц job, job + jobs, … по threads процессов."""
     mine = assignment(jobs)[job - 1]
     ctx = mp.get_context("fork")
@@ -251,7 +308,10 @@ def build_all(lib, vocab, job, jobs, outdir, threads):
         if b not in skel:  # каркас базы — один раз на машину
             t = time.time()
             skel[b] = skeleton(lib, vocab, b)
-            print(f"{b}: каркас {round(time.time() - t)} с", file=sys.stderr, flush=True)
+            cached = load_cache(b, cache)
+            skel[b]._derived.update(cached)
+            skel[b]._cached_keys = set(cached)
+            print(f"{b}: каркас {round(time.time() - t)} с, из кэша выводов {len(cached)}", file=sys.stderr, flush=True)
         p = ctx.Process(target=build, args=(lib, vocab, b, part, outdir, skel[b]))
         p.start()
         running.append(p)
@@ -504,6 +564,7 @@ def main():
     s.add_argument("--каталог", dest="dir", required=True)
     s.add_argument("--нитей", dest="jobs", type=int, default=mp.cpu_count())
     s.add_argument("--без", dest="skip", default="")
+    s.add_argument("--кэш", dest="cache", default=None, help="каталог с *.dcache прошлых прогонов")
     s = sub.add_parser("полнота")
     s.add_argument("base")
     s.add_argument("--каталог", dest="dir", required=True)
@@ -543,7 +604,7 @@ def main():
             print("    больше всего неизвестных: " + "; ".join(f"{g} {n}" for g, n in miss[:8]))
     elif a.cmd == "строить-все":
         j, n = map(int, a.job.split("/"))
-        build_all(built_library(vocab), vocab, j, n, a.dir, a.jobs)
+        build_all(built_library(vocab), vocab, j, n, a.dir, a.jobs, a.cache)
     else:
         run_schemes(a)
 
