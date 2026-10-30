@@ -331,7 +331,7 @@ class Form:
             self._kept[k] = self._matrix([[vals.get(a) for a in self.atoms]])[0]
         return self._kept[k]
 
-    def deciding(self, prem, g, mark, limit=40):
+    def deciding(self, prem, g, mark, limit=8):
         """На каких помеченных mark значениях держится опровержение условия.
         Для каждой из первых limit строк-опровержений (записанные группы
         раньше произведений) — наименьшие наборы помеченных значений, которых
@@ -344,7 +344,9 @@ class Form:
             named = dict(self.marked(r, mark))
             marked = sorted(named, key=str)
             hit = []
-            for size in range(1, min(len(marked), 3) + 1):
+            # наборы до 2 значений (до 3 — только при немногих помеченных): каждый
+            # набор — вывод решателем, а нужен лишь пример решающего факта для сводки
+            for size in range(1, min(len(marked), 3 if len(marked) <= 6 else 2) + 1):
                 hit = [k for k in combinations(marked, size)
                        if self.row_keeping(r, frozenset(k), mark)[cols].all()]
                 if hit:
