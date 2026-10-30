@@ -160,7 +160,15 @@ def aggregate(a):
         v = r.get("вердикты", {})
         lines.append(f"| {r['id']} | {r.get('запретов')} | {v.get('выводится', 0)} | {r.get('остаток')} | "
                      f"{len(r.get('значения', []))} / {sum(len(c['третьи']) for c in r.get('без кандидата', []))} | {r.get('секунд')} |")
-    md = [f"# Сводка пакетного прогона\n\nСхем: {len(recs)}.\n",
+    from collections import Counter
+    st = Counter(r.get("статус") for r in recs)
+    ok = [r for r in recs if r.get("статус") == "ok"]
+    head = (f"Схем: {len(recs)}; " + ", ".join(f"{k}: {n}" for k, n in st.most_common()) +
+            f". Выводится: {sum(r.get('вердикты', {}).get('выводится', 0) for r in ok)}, "
+            f"остаток: {sum(r.get('остаток') or 0 for r in ok)}, "
+            f"секунд на схему: среднее {round(sum(r.get('секунд') or 0 for r in recs) / max(1, len(recs)))}, "
+            f"наибольшее {max((r.get('секунд') or 0 for r in recs), default=0)}.\n")
+    md = [f"# Сводка пакетного прогона\n\n{head}",
           "## Решающие значения (по всем схемам)\n", "| значение | схем | запретов | пример |", "|---|---|---|---|"]
     for name, x in sorted(vals.items(), key=lambda kv: (-kv[1]["запретов"], kv[0])):
         md.append(f"| {name} | {x['схем']} | {x['запретов']} | {x['пример']} |")
