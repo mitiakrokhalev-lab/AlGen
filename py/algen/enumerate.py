@@ -317,6 +317,14 @@ class Form:
         """Номер столбца → (атом, значение)."""
         return self.atoms[j // 2], j % 2 == 0
 
+    def lits(self, j):
+        """Литералы столбца: у парного атома («P(A) и P(B)») — два литерала."""
+        a = self.atoms[j // 2]
+        if a[0] == "pair":
+            _, p, x, y, pol = a
+            return [(("p", p, x), pol), (("p", p, y), pol)]
+        return [self.lit(j)]
+
     def synthetic(self, r):
         """Строка из построенного произведения: такие показываем последними."""
         return "×" in self.names[r][0]
@@ -660,6 +668,49 @@ def cover(options):
     return out
 
 
+def add_pairs(form, pairs):
+    """Парные атомы для симметричных переменных (A, B): «P(A) и P(B)» и
+    «¬P(A) и ¬P(B)». Столбец 0 — оба верны, столбец 1 — хотя бы один ложен.
+    В посылках берётся только столбец 0, целью парный атом не бывает: так
+    условия вида «A, B к. п. и ф. а. ⇒ …» укладываются в меньшее k."""
+    if getattr(form, "pair_atoms", None):
+        return
+    index = {a: i for i, a in enumerate(form.atoms)}
+    new_atoms, cols = [], {k: [] for k in "mse"}
+    comp = {}
+    for x, y in pairs:
+        for a in list(form.atoms):
+            if a[0] != "p" or a[2] != x or ("p", a[1], y) not in index:
+                continue
+            ia, ib = index[a], index[("p", a[1], y)]
+            for pol in (True, False):
+                d = 0 if pol else 1
+                pa = ("pair", a[1], x, y, pol)
+                for k in "mse":
+                    mat = getattr(form, k)
+                    both = mat[:, 2 * ia + d] & mat[:, 2 * ib + d]
+                    notboth = mat[:, 2 * ia + 1 - d] | mat[:, 2 * ib + 1 - d]
+                    cols[k] += [both, notboth]
+                comp[len(form.atoms) + len(new_atoms)] = {ia, ib}
+                new_atoms.append(pa)
+    if not new_atoms:
+        return
+    base = len(form.atoms)
+    for k in "mse":
+        setattr(form, k, np.hstack([getattr(form, k), np.stack(cols[k], axis=1)]))
+    form.atoms = list(form.atoms) + new_atoms
+    if hasattr(form, "index"):
+        form.index = {a: i for i, a in enumerate(form.atoms)}
+    for i, cs in comp.items():
+        r = set().union(*(form.req.get(c, set()) for c in cs))
+        if r:
+            form.req[i] = r
+    if getattr(form, "need", None):
+        form.need = [grp | {i for i, cs in comp.items() if cs & grp} for grp in form.need]
+    form.pair_atoms = comp  # номер парного атома → номера атомов-составляющих
+    form._synth = None
+
+
 def enumerate_form(form, max_prem, goals=None, m=None):
     """Все минимальные условия не длиннее max_prem посылок, которые библиотека
     не опровергает (по матрице m, по умолчанию — только понятными значениями).
@@ -691,6 +742,17 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     form.deferred = sorted(atom_name(form.atoms[i]) for i in deferred)
     if deferred:
         goal_cols = [g for g in goal_cols if g // 2 not in deferred]
+    pairs = getattr(form, "pair_atoms", None) or {}
+    if pairs:
+        goal_cols = [g for g in goal_cols if g // 2 not in pairs]
+    # атомы, несовместимые в одной посылке с данным (парный и его составляющие)
+    clash = {}
+    for i, cs in pairs.items():
+        clash.setdefault(i, set()).update(cs)
+        for c in cs:
+            clash.setdefault(c, set()).add(i)
+    for i, cs in pairs.items():  # «P(A) и P(B)» с «¬P(A) и ¬P(B)» — тоже
+        clash[i] |= {k for k, ds in pairs.items() if ds == cs}
     alive, empty, lower = {}, [], set()
     count = 0
     # Покрытие (схемы из таблицы базы): условие должно касаться каждого
@@ -762,6 +824,8 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             for g in gc:
                 if g // 2 in atoms or not form.req.get(g // 2, set()) <= have:
                     continue
+                if pairs and clash.get(g // 2, set()) & atoms:
+                    continue
                 if negs[g]:
                     continue
                 count += 1
@@ -777,8 +841,11 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             return
         if prem and not R.any():
             return  # посылки уже несовместны в библиотеке: продолжения — тоже
+        used = {x // 2 for x in prem}
         for j in range(start, n_lit):
-            if j // 2 in {x // 2 for x in prem} or j in const or j ^ 1 in const or j // 2 in deferred:
+            if j // 2 in used or j in const or j ^ 1 in const or j // 2 in deferred:
+                continue
+            if pairs and ((j // 2 in pairs and j % 2) or clash.get(j // 2, set()) & used):
                 continue
             go(prem + [j], PT[j] & R, j + 1, depth, pm | (int(lmask[j]) if need else 0))
 
@@ -811,7 +878,7 @@ def generic_filter(form, mins):
     gm, gcol = gen  # матрица базы G и {свойство: номер атома}
     out, dropped = {}, 0
     for (prem, g), sup in mins.items():
-        lits = [form.lit(j) for j in prem] + [form.lit(g)]
+        lits = [l for j in prem for l in form.lits(j)] + [form.lit(g)]
         ts = {a[2] for a, _ in lits}
         t = next(iter(ts))
         if len(ts) != 1 or any(a[0] != "p" for a, _ in lits) or isinstance(t, Var) \
@@ -845,12 +912,14 @@ def run(max_prem, lib=None, vocab=None, form=None):
             degen.append((("p", "trivial", t), True))
         elif sort == "Grp.sub":
             degen += [(("p", "trivial", t), True), (("p", "whole", t), True)]
+    if getattr(form, "pairs", None):
+        add_pairs(form, form.pairs)
     alive, empty = enumerate_form(form, max_prem)
     mins = minimal(alive)
     mins = generic_filter(form, mins)
     report = []
     for (prem, g), support in mins.items():
-        prem_l = [form.lit(j) for j in prem]
+        prem_l = [l for j in prem for l in form.lits(j)]
         goal = form.lit(g)
         # Условие только о части переменных — факт меньшей схемы.
         if set().union(*(atom_vars(a, graph) for a, _ in prem_l + [goal] + fixed)) != allvars:
@@ -872,7 +941,8 @@ def run(max_prem, lib=None, vocab=None, form=None):
             if hint is not None:
                 r["заполнить"] = {"где": form.where(hint), "атом": atom_name(goal[0])}
             # Решающие значения: строки, где неизвестен ровно один литерал запрета.
-            r["значения"] = sorted({form.value_name(x, form.lit(c)[0])
+            r["значения"] = sorted({form.value_name(x, form.lit(c)[0]) if form.lit(c)[0][0] != "pair" else
+                                    form.value_name(x, form.lits(c)[0][0])
                                     for x, c in form.one_unknown(list(prem) + [g ^ 1], limit=60)})
         # Опровергается только помеченным значением: условие не закрыто.
         for mat, mark, kind in ((form.s, "короткий довод", "короткий довод"),

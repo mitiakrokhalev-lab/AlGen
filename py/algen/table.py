@@ -271,6 +271,11 @@ def view(base_form, terms):
     v.m, v.s, v.e = b.m[:, cols], b.s[:, cols], b.e[:, cols]
     top = maximal(g, elems)
     v.need = [{i for i, a in enumerate(v.atoms) if t in a[2:]} for t in top]
+    sw = SWAP.get(_STATE.get("base_of", {}).get(id(b)))
+    if sw:  # парные атомы «P(A) и P(B)» для симметричных переменных базы
+        vs = {str(t): t for t in v.own if isinstance(t, Var)}
+        if sw[0] in vs and sw[1] in vs:
+            v.pairs = [(vs[sw[0]], vs[sw[1]])]
     gb = _STATE.get("forms", {}).get("G") or _STATE.get("generic")
     if gb is not None:
         GV = next(t for t in gb.own if isinstance(t, Var))
@@ -364,6 +369,7 @@ def run_schemes(a):
         if any(j[0] == base for j in jobs) or (base == "G" and a.bases != "G"):
             t = time.time()
             _STATE["forms"][base] = load(lib, vocab, base, a.dir)
+            _STATE.setdefault("base_of", {})[id(_STATE["forms"][base])] = base
             print(f"{base}: таблица {_STATE['forms'][base].e.shape}, {round(time.time() - t)} с",
                   file=sys.stderr, flush=True)
     print(f"схем к перебору {len(jobs)}, нитей {a.jobs}", file=sys.stderr, flush=True)
