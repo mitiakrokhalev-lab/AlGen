@@ -223,7 +223,14 @@ class Form:
         rows = np.flatnonzero(self.m[:, list(prem) + self.fixed].all(axis=1) & ~self.m[:, g] & ~self.m[:, g ^ 1])
         if not len(rows):
             return None
-        return min(rows, key=self.synthetic)
+        real = rows[~self.synth_mask()[rows]]
+        return int(real[0] if len(real) else rows[0])
+
+    def synth_mask(self):
+        """Строки построенных произведений (вычисляется один раз)."""
+        if getattr(self, "_synth", None) is None or len(self._synth) != self.m.shape[0]:
+            self._synth = np.array([self.synthetic(r) for r in range(self.m.shape[0])], dtype=bool)
+        return self._synth
 
     def unknown_rows(self, prem, g):
         """Все строки, где посылки верны, а значение цели не записано и не выводится."""
@@ -239,7 +246,7 @@ class Form:
         q = self.lib.obj[key]["подгруппы"][sub].get("фактор")
         return ("obj", q) if q else None
 
-    def one_unknown(self, cols):
+    def one_unknown(self, cols, limit=None):
         """Строки, где ни один литерал запрета (столбцы cols) не ложен, а
         неизвестен ровно один: заполнив его, можно закрыть запрет.
         Возвращает [(строка, столбец неизвестного литерала)]."""
@@ -247,6 +254,9 @@ class Form:
         tr, fa = self.m[:, cols], self.m[:, [c ^ 1 for c in cols]]
         unk = ~tr & ~fa
         rows = np.flatnonzero(~fa.any(axis=1) & (unk.sum(axis=1) == 1))
+        if limit is not None and len(rows) > limit:
+            real = rows[~self.synth_mask()[rows]]
+            rows = np.concatenate([real, rows[self.synth_mask()[rows]]])[:limit]
         which = np.asarray(cols)[unk[rows].argmax(axis=1)] if len(rows) else []
         return list(zip(rows.tolist(), [int(c) for c in which]))
 
@@ -331,14 +341,15 @@ class Form:
             self._kept[k] = self._matrix([[vals.get(a) for a in self.atoms]])[0]
         return self._kept[k]
 
-    def deciding(self, prem, g, mark, limit=8):
+    def deciding(self, prem, g, mark, limit=4):
         """На каких помеченных mark значениях держится опровержение условия.
         Для каждой из первых limit строк-опровержений (записанные группы
         раньше произведений) — наименьшие наборы помеченных значений, которых
         хватает. Возвращает {набор имён вида «hopfian(BS23)»: строка}."""
         mat = self.s if mark == "короткий довод" else self.m
         cols = list(prem) + self.fixed + [g ^ 1]
-        rows = sorted(self.refuters(prem, g, mat), key=self.synthetic)[:limit]
+        rows = self.refuters(prem, g, mat)
+        rows = np.concatenate([rows[~self.synth_mask()[rows]], rows[self.synth_mask()[rows]]])[:limit].tolist()
         out = {}
         for r in rows:
             named = dict(self.marked(r, mark))
@@ -830,7 +841,7 @@ def run(max_prem, lib=None, vocab=None, form=None):
                 r["заполнить"] = {"где": form.where(hint), "атом": atom_name(goal[0])}
             # Решающие значения: строки, где неизвестен ровно один литерал запрета.
             r["значения"] = sorted({form.value_name(x, form.lit(c)[0])
-                                    for x, c in form.one_unknown(list(prem) + [g ^ 1])})
+                                    for x, c in form.one_unknown(list(prem) + [g ^ 1], limit=60)})
         # Опровергается только помеченным значением: условие не закрыто.
         for mat, mark, kind in ((form.s, "короткий довод", "короткий довод"),
                                 (form.m, "трудно", "трудный контрпример")):
