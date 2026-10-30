@@ -206,13 +206,32 @@ def build(lib, vocab, base, part, outdir, skel=None):
 
 
 # Частей таблицы на базу (по числу строк и цене строки).
-PARTS = {"G": 2, "GN": 24, "AB": 16, "GHK": 32, "GMN": 12, "GHF": 16, "Fam": 1}
+# Подобрано по цене «строк × атомов» (замер 30.10: G 12 тыс. × 659, GN 148 тыс. × 1412,
+# AB 89 тыс. × 1225, GHK 53 тыс. × 3494, GMN 24 тыс. × 3196, GHF 92 тыс. × 1301):
+# части примерно равной цены, по 4 на машину при 20 машинах.
+PARTS = {"G": 2, "GN": 24, "AB": 12, "GHK": 21, "GMN": 9, "GHF": 14, "Fam": 1}
+COST = {"G": 8.0, "GN": 209.5, "AB": 108.8, "GHK": 185.0, "GMN": 76.7, "GHF": 119.8, "Fam": 0.01}
+
+
+def assignment(jobs):
+    """Части таблиц по машинам: самые дорогие — первыми, каждая — на наименее
+    загруженную машину (одинаково на всех машинах: порядок детерминирован)."""
+    tasks = [(b, (i, n)) for b, n in PARTS.items() for i in range(1, n + 1)]
+    tasks.sort(key=lambda t: (-COST[t[0]] / PARTS[t[0]], t[0], t[1]))
+    load = [0.0] * jobs
+    out = [[] for _ in range(jobs)]
+    for b, part in tasks:
+        j = min(range(jobs), key=lambda x: (load[x], x))
+        load[j] += COST[b] / PARTS[b]
+        out[j].append((b, part))
+    for o in out:  # одна база подряд: каркас строится один раз
+        o.sort(key=lambda t: (list(PARTS).index(t[0]), t[1]))
+    return out
 
 
 def build_all(lib, vocab, job, jobs, outdir, threads):
     """Задание job из jobs: части таблиц job, job + jobs, … по threads процессов."""
-    tasks = [(b, (i, n)) for b, n in PARTS.items() for i in range(1, n + 1)]
-    mine = tasks[job - 1::jobs]
+    mine = assignment(jobs)[job - 1]
     ctx = mp.get_context("fork")
     running = []
     skel = {}
