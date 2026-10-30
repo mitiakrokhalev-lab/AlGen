@@ -119,6 +119,11 @@ class Library:
                 for k in (s["≅"], s.get("фактор")):
                     if k is not None and k not in self.obj:
                         raise KeyError(f"{o['key']}/{s['id']}: нет группы {k}")
+            if not o["конечная"]:  # ссылки на подгруппы записи должны существовать
+                ids = {x["id"] for x in o["подгруппы"] or []}
+                for f in ("центр", "коммутант", "фраттини", "кручение"):
+                    if o.get(f) is not None and o[f] not in ids:
+                        raise KeyError(f"{o['key']}: {f} = {o[f]!r}, такой подгруппы нет")
         for o in self.obj.values():
             self._center_commutator(o)
         self._quantified_props()
