@@ -224,7 +224,19 @@
      "6Z",
      false
     ]
-   ]
+   ],
+   "произведения": {
+    "Z": "ZxZ",
+    "2:1": "ZxC2",
+    "3:1": "C3xZ",
+    "5:1": "C5xZ",
+    "4:2": "V4xZ",
+    "6:1": "S3xZ",
+    "60:5": "A5xZ",
+    "120:5": "SL25xZ",
+    "Z3": "Z4"
+   },
+   "почему произведения": "ℤ × A для записей A × ℤ библиотеки — по их определению; ℤ × ℤ³ = ℤ⁴"
   },
   {
    "id": "ZxZ",
@@ -483,7 +495,13 @@
      "2Z×Z",
      false
     ]
-   ]
+   ],
+   "произведения": {
+    "Z": "Z3",
+    "2:1": "Z2xC2",
+    "6:1": "S3xZ2"
+   },
+   "почему произведения": "ℤ² × ℤ = ℤ³; ℤ² × C₂ и S₃ × ℤ² — записи библиотеки по определению"
   },
   {
    "id": "Z3",
@@ -1157,6 +1175,134 @@
      }
     },
     {
+     "id": "⟨τ⟩",
+     "имя": "⟨τ⟩ × 0, τ = (1 2)(3 4)",
+     "≅": "2:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "maximal": "⟨τ⟩ ⊊ V₄"
+     }
+    },
+    {
+     "id": "⟨σ⟩",
+     "имя": "⟨σ⟩ × 0, σ = (1 2 3)",
+     "≅": "3:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "maximal": "⟨σ⟩ ⊊ A₄"
+     }
+    },
+    {
+     "id": "⟨ρ⟩",
+     "имя": "⟨ρ⟩ × 0, ρ = (1 2 3 4 5)",
+     "≅": "5:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "maximal": "⟨ρ⟩ ⊊ D₁₀"
+     }
+    },
+    {
+     "id": "V₄×ℤ",
+     "имя": "C(τ) = V₄ × ℤ",
+     "≅": "V4xZ",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": false
+     },
+     "почему": {
+      "normal": "V₄ не нормальна в A₅",
+      "maximal": "V₄ × ℤ ⊊ A₄ × ℤ",
+      "finite-index": "индекс 15"
+     }
+    },
+    {
+     "id": "⟨σ⟩×ℤ",
+     "имя": "C(σ) = ⟨σ⟩ × ℤ",
+     "≅": "C3xZ",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": false
+     },
+     "почему": {
+      "normal": "⟨σ⟩ не нормальна в A₅",
+      "maximal": "⊊ S₃ × ℤ, S₃ = ⟨(1 2 3), (1 2)(4 5)⟩",
+      "finite-index": "индекс 20"
+     }
+    },
+    {
+     "id": "⟨ρ⟩×ℤ",
+     "имя": "C(ρ) = ⟨ρ⟩ × ℤ",
+     "≅": "C5xZ",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": false
+     },
+     "почему": {
+      "normal": "⟨ρ⟩ не нормальна в A₅",
+      "maximal": "⊊ D₁₀ × ℤ",
+      "finite-index": "индекс 12"
+     }
+    },
+    {
+     "id": "⟨(τ,1)⟩",
+     "имя": "⟨(τ, 1)⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": false
+     },
+     "почему": {
+      "normal": "сопряжённый (gτg⁻¹, 1) ∉ ⟨(τ, 1)⟩ при gτg⁻¹ ≠ τ",
+      "maximal": "⊊ ⟨τ⟩ × ℤ",
+      "finite-index": "содержит (1, 2): индекс 120/2 = 60"
+     }
+    },
+    {
      "id": "все",
      "имя": "A₅ × ℤ",
      "≅": "A5xZ",
@@ -1193,6 +1339,50 @@
      "gen": "0×2Z",
      "cent": "все",
      "почему": "образ в абелианизации ℤ ненулевой"
+    },
+    {
+     "имя": "(τ, 0)",
+     "ord": 2,
+     "central": false,
+     "real": true,
+     "comm": true,
+     "nc": true,
+     "gen": "⟨τ⟩",
+     "cent": "V₄×ℤ",
+     "почему": "C_{A₅}((1 2)(3 4)) = V₄ (класс из 15); (1 2)(3 5) — сопряжённый, не перестановочный; в A₅ каждый элемент — коммутатор: (1 2)(3 4) = [(2 3 4), (1 3 2)], (1 2 3) = [(2 3 4), (1 5 2)], (1 2 3 4 5) = [(3 4 5), (1 4)(2 3)]"
+    },
+    {
+     "имя": "(σ, 0)",
+     "ord": 3,
+     "central": false,
+     "real": true,
+     "comm": true,
+     "nc": true,
+     "gen": "⟨σ⟩",
+     "cent": "⟨σ⟩×ℤ",
+     "почему": "C_{A₅}((1 2 3)) = ⟨(1 2 3)⟩ (класс из 20); (2 3)(4 5) сопрягает σ с σ⁻¹; (1 2 4) — сопряжённый, не перестановочный; в A₅ каждый элемент — коммутатор: (1 2)(3 4) = [(2 3 4), (1 3 2)], (1 2 3) = [(2 3 4), (1 5 2)], (1 2 3 4 5) = [(3 4 5), (1 4)(2 3)]"
+    },
+    {
+     "имя": "(ρ, 0)",
+     "ord": 5,
+     "central": false,
+     "real": true,
+     "comm": true,
+     "nc": true,
+     "gen": "⟨ρ⟩",
+     "cent": "⟨ρ⟩×ℤ",
+     "почему": "C_{A₅}(ρ) = ⟨ρ⟩ (класс из 12); (2 5)(3 4) сопрягает ρ с ρ⁻¹; сопряжённые вне ⟨ρ⟩ не перестановочны с ρ; в A₅ каждый элемент — коммутатор: (1 2)(3 4) = [(2 3 4), (1 3 2)], (1 2 3) = [(2 3 4), (1 5 2)], (1 2 3 4 5) = [(3 4 5), (1 4)(2 3)]"
+    },
+    {
+     "имя": "(τ, 1)",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "⟨(τ,1)⟩",
+     "cent": "V₄×ℤ",
+     "почему": "вторая координата сохраняется сопряжением, поэтому (τ, 1) ≁ (τ, −1); коммутаторы лежат в A₅ × 0; C((τ, 1)) = C(τ) × ℤ; (1 2)(3 5) даёт неперестановочный сопряжённый"
     }
    ],
    "центр": "центр",
@@ -1228,9 +1418,67 @@
      "⟨τ⟩×ℤ",
      "A5×2Z",
      false
+    ],
+    [
+     "⟨τ⟩",
+     "множитель",
+     true
+    ],
+    [
+     "⟨σ⟩",
+     "множитель",
+     true
+    ],
+    [
+     "⟨ρ⟩",
+     "множитель",
+     true
+    ],
+    [
+     "⟨τ⟩",
+     "V₄×ℤ",
+     true
+    ],
+    [
+     "⟨τ⟩×ℤ",
+     "V₄×ℤ",
+     true
+    ],
+    [
+     "⟨(τ,1)⟩",
+     "⟨τ⟩×ℤ",
+     true
+    ],
+    [
+     "центр",
+     "V₄×ℤ",
+     true
+    ],
+    [
+     "⟨σ⟩",
+     "⟨σ⟩×ℤ",
+     true
+    ],
+    [
+     "⟨ρ⟩",
+     "⟨ρ⟩×ℤ",
+     true
+    ],
+    [
+     "центр",
+     "⟨σ⟩×ℤ",
+     true
+    ],
+    [
+     "центр",
+     "⟨ρ⟩×ℤ",
+     true
     ]
    ],
-   "фраттини": "0"
+   "фраттини": "0",
+   "aut": "240:189",
+   "out": "4:2",
+   "почему aut": "коммутант A₅ × 0 и центр 0 × ℤ характеристичны, поэтому Aut = Aut(A₅) × Aut(ℤ) = S₅ × C₂ (SmallGroup(240, 189)); Inn ≅ A₅, Out ≅ C₂ × C₂"
   },
   {
    "id": "Q",
@@ -1388,7 +1636,9 @@
    "фраттини": "все",
    "произведения": {
     "Q3": "Q4",
-    "Q4": "Q5"
+    "Q4": "Q5",
+    "Q": "QxQ",
+    "QxQ": "Q3"
    },
    "почему произведения": "ℚ × ℚⁿ = ℚⁿ⁺¹",
    "⩽": [
@@ -3011,7 +3261,11 @@
      "коммутант",
      true
     ]
-   ]
+   ],
+   "произведения": {
+    "2:1": "C2xF2"
+   },
+   "почему произведения": "C₂ × F₂ — запись библиотеки"
   },
   {
    "id": "Foo",
@@ -3150,7 +3404,20 @@
    "центр": "1",
    "абелианизация": "Zoo",
    "коммутант": "коммутант",
-   "фраттини": "1"
+   "фраттини": "1",
+   "элементы": [
+    {
+     "имя": "x₁",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "⟨x₁⟩",
+     "cent": "⟨x₁⟩",
+     "почему": "x₁ ∉ F_∞′; x₂x₁x₂⁻¹ не перестановочен с x₁; в свободной группе x ~ x⁻¹ только при x = 1; C(x) — циклическая, порождена корнем из x"
+    }
+   ]
   },
   {
    "id": "Zoo",
@@ -3363,6 +3630,19 @@
      "кослагаемое",
      false
     ]
+   ],
+   "элементы": [
+    {
+     "имя": "e₁",
+     "ord": 0,
+     "central": true,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "ℤe₁",
+     "cent": "все",
+     "почему": "абелева группа: x ~ x⁻¹ ⇔ 2x = 0; коммутатор только 0"
+    }
    ]
   },
   {
@@ -4059,6 +4339,27 @@
      "фактор": "SumC3"
     },
     {
+     "id": "⟨e₁⟩",
+     "имя": "⟨e₁⟩",
+     "≅": "3:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "фактор": "SumC3",
+     "почему": {
+      "characteristic": "перестановка e₁ ↔ e₂",
+      "maximal": "⟨e₁⟩ ⊊ ⟨e₁, e₂⟩",
+      "complemented": "дополнение ⊕_{i ⩾ 2} ⟨eᵢ⟩",
+      "фактор": "⊕_{i ⩾ 2} C₃ ≅ ⊕C₃"
+     }
+    },
+    {
      "id": "все",
      "имя": "⊕C₃",
      "≅": "SumC3",
@@ -4081,7 +4382,20 @@
    "абелианизация": "SumC3",
    "центр": "все",
    "коммутант": "1",
-   "фраттини": "1"
+   "фраттини": "1",
+   "элементы": [
+    {
+     "имя": "e₁",
+     "ord": 3,
+     "central": true,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "⟨e₁⟩",
+     "cent": "все",
+     "почему": "абелева группа: x ~ x⁻¹ ⇔ 2x = 0; коммутатор только 0"
+    }
+   ]
   },
   {
    "id": "QxQ",
@@ -4159,6 +4473,25 @@
      "фактор": "Q"
     },
     {
+     "id": "⟨(1,0)⟩",
+     "имя": "ℤ × 0",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": false
+     },
+     "почему": {
+      "characteristic": "GL₂(ℚ) переводит (1, 0) в (1/2, 0)",
+      "maximal": "ℤ × 0 ⊊ ℚ × 0",
+      "complemented": "фактор по дополнению был бы ≅ ℤ, а фактор делимой группы делим"
+     }
+    },
+    {
      "id": "все",
      "имя": "ℚ²",
      "≅": "QxQ",
@@ -4181,7 +4514,30 @@
     "QxQ": "Q4",
     "Q3": "Q5"
    },
-   "почему произведения": "ℚ² × ℚⁿ = ℚⁿ⁺²"
+   "почему произведения": "ℚ² × ℚⁿ = ℚⁿ⁺²",
+   "элементы": [
+    {
+     "имя": "(1, 0)",
+     "ord": 0,
+     "central": true,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "⟨(1,0)⟩",
+     "cent": "все",
+     "почему": "абелева группа: x ~ x⁻¹ ⇔ 2x = 0; коммутатор только 0"
+    }
+   ],
+   "⩽": [
+    [
+     "⟨(1,0)⟩",
+     "ось",
+     true
+    ]
+   ],
+   "aut": "GL2Q",
+   "out": "GL2Q",
+   "почему aut": "аддитивные отображения ℚ² ℚ-линейны; Inn = 1"
   },
   {
    "id": "Q3",
@@ -4244,6 +4600,25 @@
      "фактор": "Q3"
     },
     {
+     "id": "⟨e₁⟩",
+     "имя": "ℤe₁",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": false
+     },
+     "почему": {
+      "characteristic": "e₁ ↦ e₁/2",
+      "maximal": "ℤe₁ ⊊ ℚe₁",
+      "complemented": "фактор по дополнению был бы ≅ ℤ, а фактор делимой группы делим"
+     }
+    },
+    {
      "id": "все",
      "имя": "ℚ³",
      "≅": "Q3",
@@ -4261,7 +4636,23 @@
    "абелианизация": "Q3",
    "центр": "все",
    "коммутант": "1",
-   "фраттини": "все"
+   "фраттини": "все",
+   "элементы": [
+    {
+     "имя": "e₁",
+     "ord": 0,
+     "central": true,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "⟨e₁⟩",
+     "cent": "все",
+     "почему": "абелева группа: x ~ x⁻¹ ⇔ 2x = 0; коммутатор только 0"
+    }
+   ],
+   "aut": "GL3Q",
+   "out": "GL3Q",
+   "почему aut": "аддитивные отображения ℚ³ ℚ-линейны; Inn = 1"
   },
   {
    "id": "UT3Q",
@@ -4984,7 +5375,9 @@
      true
     ]
    ],
-   "фраттини": "0"
+   "фраттини": "0",
+   "out": "4:2",
+   "почему aut": "⟨x⟩ характеристична, поэтому автоморфизм — x ↦ x^ε, y ↦ xᵏy^δ (ε, δ = ±1, k ∈ ℤ, все допустимы); внутренние — ε любое, k чётное, δ = 1; Out ≅ C₂ × C₂ (порождён y ↦ xy и y ↦ y⁻¹, оба инволютивны по модулю Inn); Aut ≅ D∞ × C₂"
   },
   {
    "id": "C2xF2",
@@ -5183,6 +5576,41 @@
      }
     },
     {
+     "id": "C₂×⟨a⟩",
+     "имя": "C₂ × ⟨a⟩",
+     "≅": "ZxC2",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "(0, bab⁻¹) ∉",
+      "maximal": "⊊ C₂ × ⟨⟨a⟩⟩",
+      "finite-index": "⟨a⟩ бесконечного индекса в F₂"
+     }
+    },
+    {
+     "id": "⟨ca⟩",
+     "имя": "⟨(c, a)⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "(c, bab⁻¹) ∉",
+      "maximal": "⊊ C₂ × ⟨a⟩"
+     }
+    },
+    {
      "id": "все",
      "имя": "C₂ × F₂",
      "≅": "C2xF2",
@@ -5208,6 +5636,28 @@
      "gen": "центр",
      "cent": "все",
      "почему": "c ↦ ненулевой элемент абелианизации ℤ² × C₂"
+    },
+    {
+     "имя": "a",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "1×⟨a⟩",
+     "cent": "C₂×⟨a⟩",
+     "почему": "Gᵃᵇ ≅ ℤ² × C₂, a ↦ (1, 0, 0), a⁻¹ ↦ (−1, 0, 0); C(a) = C₂ × C_{F₂}(a) = C₂ × ⟨a⟩; bab⁻¹ не перестановочен с a"
+    },
+    {
+     "имя": "(c, a)",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "⟨ca⟩",
+     "cent": "C₂×⟨a⟩",
+     "почему": "Gᵃᵇ ≅ ℤ² × C₂, (c, a) ↦ (1, 0, 1), обратный ↦ (−1, 0, 1); C((c, a)) = C₂ × ⟨a⟩; (c, bab⁻¹) не перестановочен"
     }
    ],
    "центр": "центр",
@@ -5256,6 +5706,26 @@
     [
      "центр",
      "1×⟨⟨a⟩⟩",
+     false
+    ],
+    [
+     "1×⟨a⟩",
+     "C₂×⟨a⟩",
+     true
+    ],
+    [
+     "⟨ca⟩",
+     "C₂×⟨a⟩",
+     true
+    ],
+    [
+     "центр",
+     "C₂×⟨a⟩",
+     true
+    ],
+    [
+     "⟨ca⟩",
+     "множитель",
      false
     ]
    ],
@@ -6720,6 +7190,42 @@
      "почему": "S₃ ≅ ⟨(1 2 3), (1 2)(4 5)⟩ ⩽ A₅; копии на непересекающихся пятёрках точек коммутируют"
     },
     {
+     "id": "⟨(123)⟩",
+     "имя": "⟨(1 2 3)⟩",
+     "≅": "3:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "A_∞ проста",
+      "maximal": "лежит в A₅ ⊊ A_∞"
+     }
+    },
+    {
+     "id": "C((123))",
+     "имя": "C((1 2 3)) = ⟨(1 2 3)⟩ × A(ℕ ∖ {1, 2, 3})",
+     "≅": "C3xAinf",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "≅": "g коммутирует с (1 2 3) ⇔ g сохраняет {1, 2, 3} и действует на нём степенью (1 2 3) (чётной), тогда g на остальном чётна",
+      "normal": "A_∞ проста",
+      "maximal": "⊊ (S₃ × Sym_fin(ℕ ∖ {1, 2, 3})) ∩ A_∞ ∋ (1 2)(4 5)",
+      "finite-index": "у бесконечной простой группы нет собственных подгрупп конечного индекса"
+     }
+    },
+    {
      "id": "все",
      "имя": "A_∞",
      "≅": "Ainf",
@@ -6740,7 +7246,31 @@
    "короткий довод": [
     "linear"
    ],
-   "фраттини": "1"
+   "фраттини": "1",
+   "элементы": [
+    {
+     "имя": "(1 2 3)",
+     "ord": 3,
+     "central": false,
+     "real": true,
+     "comm": true,
+     "nc": true,
+     "gen": "⟨(123)⟩",
+     "cent": "C((123))",
+     "почему": "(2 3)(4 5) сопрягает с (1 3 2); (1 2 3) = [(2 3 4), (1 5 2)] в A₅; сопряжённый (1 2 4) не перестановочен"
+    }
+   ],
+   "⩽": [
+    [
+     "⟨(123)⟩",
+     "C((123))",
+     true
+    ]
+   ],
+   "произведения": {
+    "3:1": "C3xAinf"
+   },
+   "почему произведения": "C₃ × A_∞ — запись библиотеки"
   },
   {
    "id": "PSL2Z",
@@ -8424,6 +8954,27 @@
      }
     },
     {
+     "id": "A3×ℤ",
+     "имя": "A₃ × ℤ = C(σ)",
+     "≅": "C3xZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": true,
+      "prime-index": true,
+      "complemented": true
+     },
+     "фактор": "2:1",
+     "почему": {
+      "characteristic": "централизатор коммутанта A₃ × 0",
+      "complemented": "дополнение ⟨(τ, 0)⟩"
+     }
+    },
+    {
      "id": "все",
      "имя": "S₃ × ℤ",
      "≅": "S3xZ",
@@ -8471,6 +9022,17 @@
      "gen": "0×2Z",
      "cent": "все",
      "почему": "образ в абелианизации C₂ × ℤ имеет бесконечный порядок"
+    },
+    {
+     "имя": "(σ, 0)",
+     "ord": 3,
+     "central": false,
+     "real": true,
+     "comm": true,
+     "nc": false,
+     "gen": "коммутант",
+     "cent": "A3×ℤ",
+     "почему": "σ = (1 2 3) = [τ, σ] (τστ⁻¹ = σ⁻¹); класс {σ, σ⁻¹} — оба перестановочны с σ; C(σ) = A₃ × ℤ"
     }
    ],
    "центр": "центр",
@@ -8539,6 +9101,21 @@
      "⟨τ⟩",
      "кручение",
      true
+    ],
+    [
+     "коммутант",
+     "A3×ℤ",
+     true
+    ],
+    [
+     "центр",
+     "A3×ℤ",
+     true
+    ],
+    [
+     "⟨τ⟩",
+     "A3×ℤ",
+     false
     ]
    ],
    "aut": "12:4",
@@ -8678,6 +9255,28 @@
      }
     },
     {
+     "id": "⟨c,t²⟩",
+     "имя": "⟨c, t²⟩ ≅ C₃ × ℤ",
+     "≅": "C3xZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": true,
+      "prime-index": true,
+      "complemented": false
+     },
+     "фактор": "2:1",
+     "почему": {
+      "≅": "t² централен, ⟨c⟩ ∩ ⟨t²⟩ = 1",
+      "characteristic": "централизатор кручения ⟨c⟩",
+      "complemented": "дополнение имело бы порядок 2, а элементы конечного порядка лежат в ⟨c⟩"
+     }
+    },
+    {
      "id": "все",
      "имя": "C₃ ⋊ ℤ",
      "≅": "C3sdZ",
@@ -8714,6 +9313,17 @@
      "gen": "центр",
      "cent": "все",
      "почему": "образ в G/⟨c⟩ ≅ ℤ равен 2"
+    },
+    {
+     "имя": "c",
+     "ord": 3,
+     "central": false,
+     "real": true,
+     "comm": true,
+     "nc": false,
+     "gen": "кручение",
+     "cent": "⟨c,t²⟩",
+     "почему": "tct⁻¹ = c⁻¹; [t, c] = c⁻² = c; класс {c, c⁻¹} перестановочен с c; C(c) = ⟨c, t²⟩ (cⁱtʲ с нечётным j обращает c)"
     }
    ],
    "центр": "центр",
@@ -8739,11 +9349,29 @@
      "кручение",
      "центр",
      false
+    ],
+    [
+     "кручение",
+     "⟨c,t²⟩",
+     true
+    ],
+    [
+     "центр",
+     "⟨c,t²⟩",
+     true
+    ],
+    [
+     "⟨t⟩",
+     "⟨c,t²⟩",
+     false
     ]
    ],
    "короткий довод": [
     "indecomposable"
-   ]
+   ],
+   "aut": "12:4",
+   "out": "2:1",
+   "почему aut": "⟨c⟩ характеристична, поэтому автоморфизм — c ↦ c^ε, t ↦ cᵏt^δ (ε, δ = ±1, k ∈ ℤ/3); это C₃ ⋊ (C₂ × C₂), ε обращает k, δ центральна: S₃ × C₂ ≅ D₁₂; Inn = G/Z ≅ S₃ (δ = 1), Out = C₂"
   },
   {
    "id": "S3xZ2",
@@ -10374,6 +11002,19 @@
      "индекс 2",
      false
     ]
+   ],
+   "элементы": [
+    {
+     "имя": "x₁",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "⟨x₁⟩",
+     "cent": "⟨x₁⟩",
+     "почему": "x₁ ∉ F₃′; x₂x₁x₂⁻¹ не перестановочен с x₁; в свободной группе x ~ x⁻¹ только при x = 1; C(x) — циклическая, порождена корнем из x"
+    }
    ]
   },
   {
@@ -11200,6 +11841,57 @@
      "почему": "Aff(ℚ) дважды транзитивна на ℚ, значит, примитивна, и стабилизатор точки максимален; орбита ℚ бесконечна"
     },
     {
+     "id": "⟨2x⟩",
+     "имя": "⟨x ↦ 2x⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "сопряжение сдвигом даёт x ↦ 2x + b",
+      "maximal": "⊊ стабилизатор 0"
+     }
+    },
+    {
+     "id": "⟨x+1⟩",
+     "имя": "⟨x ↦ x + 1⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "сопряжение x ↦ x/2 даёт x ↦ x + 1/2",
+      "maximal": "⊊ сдвиги"
+     }
+    },
+    {
+     "id": "⟨−x⟩",
+     "имя": "⟨x ↦ −x⟩",
+     "≅": "2:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "сопряжение сдвигом даёт x ↦ −x + b",
+      "maximal": "⊊ стабилизатор 0"
+     }
+    },
+    {
      "id": "все",
      "имя": "Aff(ℚ) = ℚ ⋊ ℚ*",
      "≅": "AffQ",
@@ -11217,7 +11909,59 @@
    "центр": "1",
    "коммутант": "сдвиги",
    "абелианизация": "Qmul",
-   "фраттини": "1"
+   "фраттини": "1",
+   "элементы": [
+    {
+     "имя": "x ↦ 2x",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "⟨2x⟩",
+     "cent": "стабилизатор 0",
+     "почему": "линейная часть — гомоморфизм на ℚ* = Gᵃᵇ, 2 ≠ 1/2; (x ↦ ux + b) коммутирует с x ↦ 2x ⇔ b = 0; сопряжённый x ↦ 2x + b не перестановочен"
+    },
+    {
+     "имя": "x ↦ x + 1",
+     "ord": 0,
+     "central": false,
+     "real": true,
+     "comm": true,
+     "nc": false,
+     "gen": "⟨x+1⟩",
+     "cent": "сдвиги",
+     "почему": "x ↦ −x сопрягает с x ↦ x − 1; [x ↦ 2x, x ↦ x + 1] — сдвиг на (2 − 1)·1; класс — сдвиги на q ≠ 0, все перестановочны; C = сдвиги"
+    },
+    {
+     "имя": "x ↦ −x",
+     "ord": 2,
+     "central": false,
+     "real": true,
+     "comm": false,
+     "nc": true,
+     "gen": "⟨−x⟩",
+     "cent": "стабилизатор 0",
+     "почему": "−1 ≠ 1 в ℚ* = Gᵃᵇ; C = {x ↦ ux}; сопряжённый x ↦ −x + b (b ≠ 0) не перестановочен"
+    }
+   ],
+   "⩽": [
+    [
+     "⟨2x⟩",
+     "стабилизатор 0",
+     true
+    ],
+    [
+     "⟨−x⟩",
+     "стабилизатор 0",
+     true
+    ],
+    [
+     "⟨x+1⟩",
+     "сдвиги",
+     true
+    ]
+   ]
   },
   {
    "id": "DihPruf2",
@@ -11981,7 +12725,20 @@
     ]
    ],
    "абелианизация": "Z3",
-   "фраттини": "коммутант"
+   "фраттини": "коммутант",
+   "элементы": [
+    {
+     "имя": "I + e₁₄",
+     "ord": 0,
+     "central": true,
+     "real": false,
+     "comm": true,
+     "nc": false,
+     "gen": "центр",
+     "cent": "все",
+     "почему": "I + e₁₄ = [I + e₁₂, I + e₂₄]; центральный и не равен обратному"
+    }
+   ]
   },
   {
    "id": "Lamp",
@@ -13526,7 +14283,20 @@
     "linear"
    ],
    "абелианизация": "Zoo",
-   "фраттини": "центр"
+   "фраттини": "центр",
+   "элементы": [
+    {
+     "имя": "z",
+     "ord": 0,
+     "central": true,
+     "real": false,
+     "comm": true,
+     "nc": false,
+     "gen": "центр",
+     "cent": "все",
+     "почему": "z = [x₁, y₁]; центральный и не равен обратному"
+    }
+   ]
   },
   {
    "id": "SLinfC",
@@ -15241,6 +16011,40 @@
      "почему": "G′ ⊆ ℤ² (фактор ℤ абелев) и G′ ⊇ (A − E)ℤ² = ℤ²"
     },
     {
+     "id": "⟨t⟩",
+     "имя": "⟨t⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "vtv⁻¹ = (v − Av)t ∉ ⟨t⟩ при v ≠ 0",
+      "maximal": "⟨t⟩ ⊊ 2ℤ² ⋊ ⟨t⟩"
+     }
+    },
+    {
+     "id": "⟨e₁⟩",
+     "имя": "⟨e₁⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "te₁t⁻¹ = Ae₁ = (2, 1)",
+      "maximal": "⟨e₁⟩ ⊊ ℤ²"
+     }
+    },
+    {
      "id": "все",
      "имя": "ℤ² ⋊_A ℤ, A = (2 1; 1 1)",
      "≅": "Sol",
@@ -15258,7 +16062,43 @@
    "центр": "1",
    "коммутант": "коммутант",
    "абелианизация": "Z",
-   "фраттини": "1"
+   "фраттини": "1",
+   "элементы": [
+    {
+     "имя": "t",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "⟨t⟩",
+     "cent": "⟨t⟩",
+     "почему": "t ↦ 1 в Gᵃᵇ ≅ ℤ; (v, n) коммутирует с t ⇔ Av = v ⇔ v = 0 (у A нет собственного значения 1); сопряжённый (v − Av)t, v ≠ 0, не перестановочен"
+    },
+    {
+     "имя": "e₁",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": true,
+     "nc": false,
+     "gen": "⟨e₁⟩",
+     "cent": "коммутант",
+     "почему": "сопряжение действует на ℤ² степенями A с положительными собственными значениями, −1 среди них нет; e₁ = [t, (A − E)⁻¹e₁] (det(A − E) = −1); класс в абелевой ℤ²; C(e₁) = ℤ²"
+    }
+   ],
+   "⩽": [
+    [
+     "⟨e₁⟩",
+     "коммутант",
+     true
+    ],
+    [
+     "⟨t⟩",
+     "коммутант",
+     false
+    ]
+   ]
   },
   {
    "id": "UT3QmodZ",
@@ -15450,6 +16290,40 @@
      "почему": "G′ = [ℤ[ω], ω] = (ω − 1)ℤ[ω] индекса 3 в ℤ[ω]; G/G′ = ℤ[ω]/(ω − 1) × C₃ ≅ C₃ × C₃"
     },
     {
+     "id": "⟨r⟩",
+     "имя": "⟨r⟩, r: x ↦ ωx",
+     "≅": "3:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "vrv⁻¹ = (v − ωv)r",
+      "maximal": "⟨r⟩ ⊊ (ω − 1)ℤ[ω] ⋊ ⟨r⟩"
+     }
+    },
+    {
+     "id": "⟨1⟩",
+     "имя": "⟨1⟩ ⊂ ℤ[ω]",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "r·1 = ω",
+      "maximal": "⊊ ℤ[ω]"
+     }
+    },
+    {
      "id": "все",
      "имя": "ℤ[ω] ⋊ C₃",
      "≅": "Z2C3",
@@ -15470,6 +16344,47 @@
    "фраттини": "1",
    "короткий довод": [
     "indecomposable"
+   ],
+   "элементы": [
+    {
+     "имя": "r",
+     "ord": 3,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "⟨r⟩",
+     "cent": "⟨r⟩",
+     "почему": "r ↦ (0, 1), r⁻¹ ↦ (0, 2) в Gᵃᵇ ≅ C₃ × C₃ (= ℤ[ω]/(ω − 1) × C₃); (v, g) коммутирует с r ⇔ g ∈ ⟨r⟩, ωv = v ⇔ v = 0; сопряжённый (v − ωv)r не перестановочен"
+    },
+    {
+     "имя": "1",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "⟨1⟩",
+     "cent": "ℤ[ω]",
+     "почему": "класс 1 — {1, ω, ω²}, −1 не там; 1 ∉ (ω − 1)ℤ[ω] = G′ (норма ω − 1 равна 3); класс в абелевой ℤ[ω]; C = ℤ[ω]"
+    }
+   ],
+   "⩽": [
+    [
+     "⟨1⟩",
+     "ℤ[ω]",
+     true
+    ],
+    [
+     "⟨1⟩",
+     "коммутант",
+     false
+    ],
+    [
+     "⟨r⟩",
+     "ℤ[ω]",
+     false
+    ]
    ]
   },
   {
@@ -15570,6 +16485,40 @@
      "почему": "S₃ = ⟨r: x ↦ ωx, f: x ↦ −x̄⟩. (r − 1)ℤ[ω] + (f − 1)ℤ[ω] ⊇ (ω − 1)ℤ[ω] + {−(x + x̄)} ∋ 1, то есть это весь ℤ[ω]; поэтому Gᵃᵇ = (ℤ[ω])_{S₃} × S₃ᵃᵇ = C₂ и G′ = ℤ[ω] ⋊ C₃"
     },
     {
+     "id": "⟨r⟩",
+     "имя": "⟨r⟩, r: x ↦ ωx",
+     "≅": "3:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "vrv⁻¹ = (v − ωv)r",
+      "maximal": "⟨r⟩ ⊊ S₃ = ⟨r, f⟩"
+     }
+    },
+    {
+     "id": "⟨1⟩",
+     "имя": "⟨1⟩ ⊂ ℤ[ω]",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "r·1 = ω",
+      "maximal": "⊊ ℤ[ω]"
+     }
+    },
+    {
      "id": "все",
      "имя": "ℤ[ω] ⋊ S₃ (p3m1)",
      "≅": "Z2S3",
@@ -15590,6 +16539,47 @@
    "фраттини": "1",
    "короткий довод": [
     "indecomposable"
+   ],
+   "элементы": [
+    {
+     "имя": "r",
+     "ord": 3,
+     "central": false,
+     "real": true,
+     "comm": true,
+     "nc": true,
+     "gen": "⟨r⟩",
+     "cent": "⟨r⟩",
+     "почему": "f r f⁻¹ = r⁻¹, [f, r] = r⁻² = r; (v, g) коммутирует с r ⇔ g ∈ ⟨r⟩ и v = 0; сопряжённый (v − ωv)r не перестановочен"
+    },
+    {
+     "имя": "1",
+     "ord": 0,
+     "central": false,
+     "real": true,
+     "comm": true,
+     "nc": false,
+     "gen": "⟨1⟩",
+     "cent": "ℤ[ω]",
+     "почему": "f: x ↦ −x̄ переводит 1 в −1; [f, ω] = f(ω) − ω = −ω̄ − ω = 1; стабилизатор 1 в S₃ тривиален, C = ℤ[ω]; класс в абелевой ℤ[ω]"
+    }
+   ],
+   "⩽": [
+    [
+     "⟨r⟩",
+     "коммутант",
+     true
+    ],
+    [
+     "⟨1⟩",
+     "ℤ[ω]",
+     true
+    ],
+    [
+     "⟨r⟩",
+     "ℤ[ω]",
+     false
+    ]
    ]
   },
   {
@@ -18093,6 +19083,59 @@
      }
     },
     {
+     "id": "стабилизатор 0",
+     "имя": "стабилизатор 0: {x ↦ ux}",
+     "≅": "ZxC2",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "≅": "ℤ[1/2]^× = ±2^ℤ",
+      "normal": "сопряжение сдвигом даёт x ↦ ux + b",
+      "maximal": "⊊ {g : g(0) ∈ 3ℤ[1/2]} — разбиение ℤ[1/2] на классы по 3ℤ[1/2] — блоки",
+      "finite-index": "орбита 0 — всё ℤ[1/2]"
+     }
+    },
+    {
+     "id": "⟨x+1⟩",
+     "имя": "⟨x ↦ x + 1⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "сопряжение x ↦ x/2 даёт x ↦ x + 1/2",
+      "maximal": "⊊ сдвиги"
+     }
+    },
+    {
+     "id": "⟨2x⟩",
+     "имя": "⟨x ↦ 2x⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "сопряжение сдвигом даёт x ↦ 2x + b",
+      "maximal": "⊊ стабилизатор 0"
+     }
+    },
+    {
      "id": "все",
      "имя": "Aff(ℤ[1/2])",
      "≅": "AffZ12",
@@ -18109,7 +19152,64 @@
    ],
    "центр": "1",
    "коммутант": "сдвиги",
-   "абелианизация": "ZxC2"
+   "абелианизация": "ZxC2",
+   "элементы": [
+    {
+     "имя": "x ↦ −x",
+     "ord": 2,
+     "central": false,
+     "real": true,
+     "comm": false,
+     "nc": true,
+     "gen": "отражение",
+     "cent": "стабилизатор 0",
+     "почему": "−x ↦ (0, 1) ≠ 0 в Gᵃᵇ ≅ ℤ × C₂; C = {x ↦ ux}; сопряжённый сдвигом на c — x ↦ −x + 2c, не перестановочен"
+    },
+    {
+     "имя": "x ↦ x + 1",
+     "ord": 0,
+     "central": false,
+     "real": true,
+     "comm": true,
+     "nc": false,
+     "gen": "⟨x+1⟩",
+     "cent": "сдвиги",
+     "почему": "x ↦ −x сопрягает с x ↦ x − 1; [x ↦ 2x, x ↦ x + 1] — сдвиг на 1; класс — сдвиги, все перестановочны; C = сдвиги"
+    },
+    {
+     "имя": "x ↦ 2x",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "⟨2x⟩",
+     "cent": "стабилизатор 0",
+     "почему": "2 ↦ (1, 0) в Gᵃᵇ ≅ ℤ × C₂, 1/2 ↦ (−1, 0); C = {x ↦ ux}; сопряжённый x ↦ 2x + b не перестановочен"
+    }
+   ],
+   "⩽": [
+    [
+     "отражение",
+     "стабилизатор 0",
+     true
+    ],
+    [
+     "⟨2x⟩",
+     "стабилизатор 0",
+     true
+    ],
+    [
+     "⟨x+1⟩",
+     "сдвиги",
+     true
+    ],
+    [
+     "⟨2x⟩",
+     "BS12",
+     true
+    ]
+   ]
   },
   {
    "id": "PGL2Z",
@@ -18202,6 +19302,24 @@
      "фактор": "2:1"
     },
     {
+     "id": "⟨T⟩",
+     "имя": "⟨T⟩, T = ±(1 1; 0 1)",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "S T S⁻¹ = ±(1 0; −1 1) ∉ ⟨T⟩",
+      "maximal": "⟨T⟩ ⊊ PSL₂(ℤ)",
+      "finite-index": "PSL₂(ℤ) не почти циклическая"
+     }
+    },
+    {
      "id": "все",
      "имя": "PGL₂(ℤ)",
      "≅": "PGL2Z",
@@ -18224,7 +19342,30 @@
      "коммутант",
      "PSL2",
      true
+    ],
+    [
+     "⟨T⟩",
+     "PSL2",
+     true
+    ],
+    [
+     "⟨T⟩",
+     "коммутант",
+     false
     ]
+   ],
+   "элементы": [
+    {
+     "имя": "T",
+     "ord": 0,
+     "central": false,
+     "real": true,
+     "comm": false,
+     "nc": true,
+     "gen": "⟨T⟩",
+     "cent": "⟨T⟩",
+     "почему": "diag(1, −1) сопрягает T с T⁻¹; gTg⁻¹ = ±T даёт gTg⁻¹ = T (след), откуда g = ±(1 n; 0 1): C(T) = ⟨T⟩; в PSL₂(ℤ) ≅ ⟨S⟩ ∗ ⟨ST⟩ элемент T = S⁻¹·ST ↦ 1 при отображении на C₂, так что T ∉ C₃ ∗ C₃ = G′; STS⁻¹ не перестановочен с T"
+    }
    ]
   },
   {
@@ -18790,6 +19931,24 @@
      }
     },
     {
+     "id": "C(s)",
+     "имя": "⟨s⟩ × {(a, a)}",
+     "≅": "ZxC2",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "сопряжение (1, 0) переводит s в (1, −1)s",
+      "maximal": "⊊ {(x, y) : x ≡ y (mod 2)} ⋊ ⟨s⟩",
+      "finite-index": "пересечение с базой — диагональ, бесконечного индекса в ℤ²"
+     }
+    },
+    {
      "id": "все",
      "имя": "ℤ ≀ C₂",
      "≅": "ZwrC2",
@@ -18826,6 +19985,17 @@
      "gen": "коммутант",
      "cent": "база",
      "почему": "(1, −1) = [(1, 0), s]; s(1, −1)s = (−1, 1); класс в абелевой базе; C = база"
+    },
+    {
+     "имя": "s",
+     "ord": 2,
+     "central": false,
+     "real": true,
+     "comm": false,
+     "nc": true,
+     "gen": "s",
+     "cent": "C(s)",
+     "почему": "s ∉ база ⊇ G′; vsv⁻¹ = (v − sv)s; (u)s коммутирует с s ⇔ su = u, а (1, −1) не диагонален; C(s) = {v sᵉ : sv = v} = диагональ × ⟨s⟩"
     }
    ],
    "центр": "центр",
@@ -18854,6 +20024,2387 @@
     [
      "центр",
      "база",
+     true
+    ],
+    [
+     "s",
+     "C(s)",
+     true
+    ],
+    [
+     "центр",
+     "C(s)",
+     true
+    ]
+   ]
+  },
+  {
+   "id": "C3xZ",
+   "имя": "ℤ × C₃",
+   "заметка": "Централизатор 3-цикла в A₅ × ℤ и в S₃ × ℤ, централизатор c в C₃ ⋊ ℤ, абелианизация ℤ ∗ C₃, C₃ ≀ ℤ и ℤ ≀ C₃.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "polycyclic": true,
+    "linear": true,
+    "hopfian": true,
+    "co-hopfian": false,
+    "locally-cyclic": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": false,
+    "metabelian": true
+   },
+   "почему": {
+    "hopfian": "к. п. ф. а. (Мальцев)",
+    "amenable": "абелева",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "property-t": "бесконечна и аменабельна",
+    "residually-nilpotent": "абелева",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "есть и кручение, и элементы бесконечного порядка",
+    "indecomposable": "прямое произведение",
+    "linear": "к. п. абелева: ℤ ↦ (1 n; 0 1), циклические — корнями из 1",
+    "residually-finite": "к. п. абелева",
+    "polycyclic": "к. п. абелева",
+    "co-hopfian": "(n, c) ↦ (2n, c)",
+    "фраттини": "у к. п. абелевой A подгруппа Фраттини — ⋂ pA = 0 (3A = 3ℤ × 0, ⋂ pℤ = 0)"
+   },
+   "подгруппы": [
+    {
+     "id": "0",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "C3xZ"
+    },
+    {
+     "id": "кручение",
+     "имя": "0 × C₃",
+     "≅": "3:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "фактор": "Z",
+     "почему": {
+      "complemented": "дополнение ℤ × 0"
+     }
+    },
+    {
+     "id": "ось",
+     "имя": "ℤ × 0",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "central": true,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": true,
+      "complemented": true
+     },
+     "фактор": "3:1",
+     "почему": {
+      "characteristic": "автоморфизм (n, c) ↦ (n, c + n) переводит (1, 0) в (1, 1)",
+      "complemented": "дополнение 0 × C₃"
+     }
+    },
+    {
+     "id": "2G",
+     "имя": "2ℤ × C₃ = 2G",
+     "≅": "C3xZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": true,
+      "prime-index": true,
+      "complemented": false
+     },
+     "фактор": "2:1",
+     "почему": {
+      "characteristic": "2G вполне инвариантна",
+      "complemented": "дополнение имело бы порядок 2, а инволюций нет"
+     }
+    },
+    {
+     "id": "3G",
+     "имя": "3ℤ × 0 = 3G",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": false,
+      "complemented": false
+     },
+     "фактор": "9:2",
+     "почему": {
+      "characteristic": "3G вполне инвариантна",
+      "maximal": "3ℤ × 0 ⊊ ℤ × 0",
+      "complemented": "дополнение было бы ≅ G/3G ≅ C₃ × C₃, а кручение — C₃"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "ℤ × C₃",
+     "≅": "C3xZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "элементы": [
+    {
+     "имя": "(0, 1)",
+     "ord": 3,
+     "central": true,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "кручение",
+     "cent": "все",
+     "почему": "абелева группа: x ~ x⁻¹ ⇔ 2x = 0; коммутатор только 0"
+    },
+    {
+     "имя": "(1, 0)",
+     "ord": 0,
+     "central": true,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "ось",
+     "cent": "все",
+     "почему": "абелева группа: x ~ x⁻¹ ⇔ 2x = 0; коммутатор только 0"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "0",
+   "кручение": "кручение",
+   "абелианизация": "C3xZ",
+   "фраттини": "0",
+   "aut": "12:4",
+   "out": "12:4",
+   "почему aut": "Hom(C₃, ℤ) = 0, поэтому автоморфизм — (n, c) ↦ (εn, δc + hn), ε = ±1, δ ∈ Aut(C₃), h ∈ C₃; группа C₃ ⋊ (C₂ × C₂), где (ε, δ) действует на h умножением на εδ: S₃ × C₂ ≅ D₁₂; Inn = 1",
+   "⩽": [
+    [
+     "3G",
+     "ось",
+     true
+    ],
+    [
+     "кручение",
+     "ось",
+     false
+    ],
+    [
+     "кручение",
+     "2G",
+     true
+    ],
+    [
+     "3G",
+     "2G",
+     false
+    ]
+   ]
+  },
+  {
+   "id": "C5xZ",
+   "имя": "ℤ × C₅",
+   "заметка": "Централизатор 5-цикла в A₅ × ℤ.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "polycyclic": true,
+    "linear": true,
+    "hopfian": true,
+    "co-hopfian": false,
+    "locally-cyclic": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": false,
+    "metabelian": true
+   },
+   "почему": {
+    "hopfian": "к. п. ф. а. (Мальцев)",
+    "amenable": "абелева",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "property-t": "бесконечна и аменабельна",
+    "residually-nilpotent": "абелева",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "есть и кручение, и элементы бесконечного порядка",
+    "indecomposable": "прямое произведение",
+    "linear": "к. п. абелева: ℤ ↦ (1 n; 0 1), циклические — корнями из 1",
+    "residually-finite": "к. п. абелева",
+    "polycyclic": "к. п. абелева",
+    "co-hopfian": "(n, c) ↦ (2n, c)",
+    "фраттини": "у к. п. абелевой A подгруппа Фраттини — ⋂ pA = 0"
+   },
+   "подгруппы": [
+    {
+     "id": "0",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "C5xZ"
+    },
+    {
+     "id": "кручение",
+     "имя": "0 × C₅",
+     "≅": "5:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "фактор": "Z",
+     "почему": {
+      "complemented": "дополнение ℤ × 0"
+     }
+    },
+    {
+     "id": "ось",
+     "имя": "ℤ × 0",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "central": true,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": true,
+      "complemented": true
+     },
+     "фактор": "5:1",
+     "почему": {
+      "characteristic": "автоморфизм (n, c) ↦ (n, c + n) переводит (1, 0) в (1, 1)",
+      "complemented": "дополнение 0 × C₅"
+     }
+    },
+    {
+     "id": "2G",
+     "имя": "2ℤ × C₅ = 2G",
+     "≅": "C5xZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": true,
+      "prime-index": true,
+      "complemented": false
+     },
+     "фактор": "2:1",
+     "почему": {
+      "characteristic": "2G вполне инвариантна",
+      "complemented": "дополнение имело бы порядок 2, а инволюций нет"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "ℤ × C₅",
+     "≅": "C5xZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "элементы": [
+    {
+     "имя": "(0, 1)",
+     "ord": 5,
+     "central": true,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "кручение",
+     "cent": "все",
+     "почему": "абелева группа: x ~ x⁻¹ ⇔ 2x = 0; коммутатор только 0"
+    },
+    {
+     "имя": "(1, 0)",
+     "ord": 0,
+     "central": true,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "ось",
+     "cent": "все",
+     "почему": "абелева группа: x ~ x⁻¹ ⇔ 2x = 0; коммутатор только 0"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "0",
+   "кручение": "кручение",
+   "абелианизация": "C5xZ",
+   "фраттини": "0",
+   "aut": "40:12",
+   "out": "40:12",
+   "почему aut": "Hom(C₅, ℤ) = 0, поэтому автоморфизм — (n, c) ↦ (εn, δc + hn), ε = ±1, δ ∈ Aut(C₅) ≅ C₄, h ∈ C₅; (ε, δ) действует на h умножением на εδ, ядро действия ⟨(−1, −1)⟩ центрально: Aut ≅ (C₅ ⋊ C₄) × C₂ = C₂ × F₂₀ (SmallGroup(40, 12): центр порядка 2, а у C₂ × Dic₅ = 40:7 — порядка 4); Inn = 1",
+   "⩽": [
+    [
+     "кручение",
+     "ось",
+     false
+    ],
+    [
+     "кручение",
+     "2G",
+     true
+    ]
+   ]
+  },
+  {
+   "id": "V4xZ",
+   "имя": "ℤ × V₄",
+   "заметка": "ℤ × C₂ × C₂: централизатор инволюции в A₅ × ℤ.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "polycyclic": true,
+    "linear": true,
+    "hopfian": true,
+    "co-hopfian": false,
+    "locally-cyclic": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": false,
+    "metabelian": true
+   },
+   "почему": {
+    "hopfian": "к. п. ф. а. (Мальцев)",
+    "amenable": "абелева",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "property-t": "бесконечна и аменабельна",
+    "residually-nilpotent": "абелева",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "есть и кручение, и элементы бесконечного порядка",
+    "indecomposable": "прямое произведение",
+    "linear": "к. п. абелева: ℤ ↦ (1 n; 0 1), циклические — корнями из 1",
+    "residually-finite": "к. п. абелева",
+    "polycyclic": "к. п. абелева",
+    "co-hopfian": "(n, v) ↦ (2n, v)",
+    "фраттини": "у к. п. абелевой A подгруппа Фраттини — ⋂ pA = 0"
+   },
+   "подгруппы": [
+    {
+     "id": "0",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "V4xZ"
+    },
+    {
+     "id": "кручение",
+     "имя": "0 × V₄",
+     "≅": "4:2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "фактор": "Z",
+     "почему": {
+      "complemented": "дополнение ℤ × 0"
+     }
+    },
+    {
+     "id": "⟨a⟩",
+     "имя": "0 × ⟨a⟩",
+     "≅": "2:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "фактор": "ZxC2",
+     "почему": {
+      "characteristic": "автоморфизм V₄, переставляющий a и b",
+      "maximal": "⟨a⟩ ⊊ V₄",
+      "complemented": "дополнение ℤ × ⟨b⟩"
+     }
+    },
+    {
+     "id": "ℤ×⟨a⟩",
+     "имя": "ℤ × ⟨a⟩",
+     "≅": "ZxC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "central": true,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": true,
+      "prime-index": true,
+      "complemented": true
+     },
+     "фактор": "2:1",
+     "почему": {
+      "characteristic": "автоморфизм V₄, переставляющий a и b",
+      "complemented": "дополнение ⟨b⟩"
+     }
+    },
+    {
+     "id": "ось",
+     "имя": "ℤ × 0",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": false,
+      "complemented": true
+     },
+     "фактор": "4:2",
+     "почему": {
+      "characteristic": "автоморфизм (n, v) ↦ (n, v + na) переводит (1, 0) в (1, a)",
+      "maximal": "ℤ × 0 ⊊ ℤ × ⟨a⟩",
+      "complemented": "дополнение 0 × V₄"
+     }
+    },
+    {
+     "id": "2G",
+     "имя": "2ℤ × 0 = 2G",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": false,
+      "complemented": false
+     },
+     "фактор": "8:5",
+     "почему": {
+      "characteristic": "2G вполне инвариантна",
+      "фактор": "G/2G ≅ C₂³",
+      "complemented": "дополнение было бы ≅ C₂³, а кручение — V₄"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "ℤ × V₄",
+     "≅": "V4xZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "элементы": [
+    {
+     "имя": "(0, a)",
+     "ord": 2,
+     "central": true,
+     "real": true,
+     "comm": false,
+     "nc": false,
+     "gen": "⟨a⟩",
+     "cent": "все",
+     "почему": "абелева группа: x ~ x⁻¹ ⇔ 2x = 0; коммутатор только 0"
+    },
+    {
+     "имя": "(1, 0)",
+     "ord": 0,
+     "central": true,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "ось",
+     "cent": "все",
+     "почему": "абелева группа: x ~ x⁻¹ ⇔ 2x = 0; коммутатор только 0"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "0",
+   "кручение": "кручение",
+   "абелианизация": "V4xZ",
+   "фраттини": "0",
+   "aut": "48:48",
+   "out": "48:48",
+   "почему aut": "Hom(V₄, ℤ) = 0, поэтому автоморфизм — (n, v) ↦ (εn, Av + hn), ε = ±1, A ∈ GL₂(𝔽₂), h ∈ V₄; ε централен и на h не действует (−h = h), а пары (h, A) образуют AGL₂(𝔽₂) ≅ S₄: Aut ≅ S₄ × C₂; Inn = 1",
+   "⩽": [
+    [
+     "⟨a⟩",
+     "кручение",
+     true
+    ],
+    [
+     "⟨a⟩",
+     "ℤ×⟨a⟩",
+     true
+    ],
+    [
+     "ось",
+     "ℤ×⟨a⟩",
+     true
+    ],
+    [
+     "2G",
+     "ось",
+     true
+    ],
+    [
+     "кручение",
+     "ℤ×⟨a⟩",
+     false
+    ]
+   ]
+  },
+  {
+   "id": "C3xAinf",
+   "имя": "C₃ × A_∞",
+   "заметка": "Централизатор 3-цикла в A_∞: ⟨(1 2 3)⟩ × A(ℕ ∖ {1, 2, 3}). Локально конечная, не простая, с центром C₃ и коммутантом A_∞ индекса 3.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": false,
+    "indecomposable": false,
+    "linear": false,
+    "hopfian": true,
+    "bounded-exponent": false,
+    "p-group": false,
+    "polycyclic": false,
+    "amenable": true,
+    "co-hopfian": false,
+    "locally-finite": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": false,
+    "locally-cyclic": false,
+    "metabelian": false
+   },
+   "почему": {
+    "fin-gen": "A_∞ не к. п., а она — фактор",
+    "perfect": "абелианизация C₃",
+    "divisible": "(c, 1) не куб: третья степень любого элемента имеет первую координату 1",
+    "residually-finite": "подгруппа A_∞ бесконечна и проста, у неё нет собственных подгрупп конечного индекса",
+    "linear": "содержит A_∞, а она не линейна",
+    "bounded-exponent": "содержит A_∞",
+    "p-group": "есть элементы порядков 2 и 3",
+    "hopfian": "нормальные подгруппы — 1, C₃, A_∞ и вся (N ∩ A_∞ ∈ {1, A_∞}, а при N ∩ A_∞ = 1 подгруппа N централизует A_∞, то есть лежит в C₃); фактор по C₃ совершенен, по A_∞ конечен — ни один не ≅ G, поэтому ядро сюръекции тривиально",
+    "co-hopfian": "id × (инъекция ℕ → ℕ, n ↦ n + 1)",
+    "amenable": "локально конечна",
+    "locally-finite": "расширение локально конечной A_∞ с помощью C₃",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "property-t": "не конечно порождена (счётная группа со свойством T к. п.)",
+    "residually-nilpotent": "содержит совершенную A_∞ ≠ 1",
+    "locally-cyclic": "неабелева",
+    "indecomposable": "C₃ × A_∞",
+    "solvable": "содержит A₅",
+    "metabelian": "неразрешима",
+    "фраттини": "максимальны 1 × A_∞ и C₃ × M для максимальных M ⩽ A_∞, а Φ(A_∞) = 1"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "C3xAinf"
+    },
+    {
+     "id": "центр",
+     "имя": "C₃ × 1",
+     "≅": "3:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "фактор": "Ainf",
+     "почему": {
+      "complemented": "дополнение 1 × A_∞"
+     }
+    },
+    {
+     "id": "коммутант",
+     "имя": "1 × A_∞",
+     "≅": "Ainf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": true,
+      "complemented": true
+     },
+     "фактор": "3:1",
+     "почему": {
+      "complemented": "дополнение C₃ × 1",
+      "maximal": "простой индекс 3"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "C₃ × A_∞",
+     "≅": "C3xAinf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "элементы": [
+    {
+     "имя": "(c, 1)",
+     "ord": 3,
+     "central": true,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "центр",
+     "cent": "все",
+     "почему": "центральный: класс {x}, x⁻¹ = (c², 1) ≠ x; не лежит в коммутанте 1 × A_∞"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "коммутант",
+   "кручение": "все",
+   "абелианизация": "3:1",
+   "фраттини": "1",
+   "короткий довод": [
+    "linear"
+   ],
+   "ссылки": [
+    "прямое произведение"
+   ],
+   "⩽": [
+    [
+     "центр",
+     "коммутант",
+     false
+    ],
+    [
+     "коммутант",
+     "центр",
+     false
+    ]
+   ]
+  },
+  {
+   "id": "GL2Q",
+   "имя": "GL₂(ℚ)",
+   "заметка": "Aut(ℚ^2): эндоморфизмы делимой группы без кручения ℚ^2 — ℚ-линейные отображения.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": false,
+    "linear": true,
+    "polycyclic": false,
+    "amenable": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "metabelian": false
+   },
+   "почему": {
+    "fin-gen": "det: GL → ℚ* сюръективен, а ℚ* не к. п.",
+    "perfect": "det: GL → ℚ* сюръективен",
+    "simple": "центр — скаляры, нетривиален и не всё",
+    "solvable": "содержит SL₂(ℤ) ⊃ F₂",
+    "amenable": "содержит F₂",
+    "divisible": "diag(2, 1) не квадрат: квадратный корень перестановочен с diag(2, 1), поэтому сохраняет его собственные подпространства и на первом действует числом a, a² = 2",
+    "residually-finite": "содержит ℚ (унитреугольные (1 x; 0 1)), а ℚ не ф. а.; ф. а. наследуется подгруппами",
+    "linear": "по определению",
+    "polycyclic": "не к. п.",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "torsion-free": "−E",
+    "periodic": "2E",
+    "property-t": "не конечно порождена (счётная группа со свойством T к. п.)",
+    "residually-nilpotent": "содержит S₃ (перестановки координат на {x₁ + x₂ + x₃ = 0}), а конечные подгруппы финитно-нильпотентной группы нильпотентны",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "metabelian": "неразрешима",
+    "centerless": "скаляры ℚ*E центральны",
+    "абелианизация": "GL₂(ℚ)′ = SL (поле из более чем трёх элементов), GL/SL ≅ ℚ* через det"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "GL2Q"
+    },
+    {
+     "id": "центр",
+     "имя": "скаляры ℚ*E",
+     "≅": "Qmul",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "PGL2Q",
+     "почему": {
+      "maximal": "ℚ*E ⊊ ℚ*E · SL ⊊ GL₂(ℚ): определители скаляров — квадраты, а det сюръективен",
+      "finite-index": "фактор по скалярам содержит образ SL₂(ℤ), бесконечный"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "GL₂(ℚ)",
+     "≅": "GL2Q",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "абелианизация": "Qmul",
+   "ссылки": [
+    "стандартный пример"
+   ]
+  },
+  {
+   "id": "GL3Q",
+   "имя": "GL₃(ℚ)",
+   "заметка": "Aut(ℚ^3): эндоморфизмы делимой группы без кручения ℚ^3 — ℚ-линейные отображения.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": false,
+    "linear": true,
+    "polycyclic": false,
+    "amenable": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "metabelian": false
+   },
+   "почему": {
+    "fin-gen": "det: GL → ℚ* сюръективен, а ℚ* не к. п.",
+    "perfect": "det: GL → ℚ* сюръективен",
+    "simple": "центр — скаляры, нетривиален и не всё",
+    "solvable": "содержит SL₂(ℤ) ⊃ F₂",
+    "amenable": "содержит F₂",
+    "divisible": "diag(2, 1, 1) не квадрат: квадратный корень перестановочен с diag(2, 1, 1), поэтому сохраняет его собственные подпространства и на первом действует числом a, a² = 2",
+    "residually-finite": "содержит ℚ (унитреугольные (1 x; 0 1)), а ℚ не ф. а.; ф. а. наследуется подгруппами",
+    "linear": "по определению",
+    "polycyclic": "не к. п.",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "torsion-free": "−E",
+    "periodic": "2E",
+    "property-t": "не конечно порождена (счётная группа со свойством T к. п.)",
+    "residually-nilpotent": "содержит S₃ (перестановки координат на {x₁ + x₂ + x₃ = 0}), а конечные подгруппы финитно-нильпотентной группы нильпотентны",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "metabelian": "неразрешима",
+    "centerless": "скаляры ℚ*E центральны",
+    "абелианизация": "GL₃(ℚ)′ = SL (поле из более чем трёх элементов), GL/SL ≅ ℚ* через det"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "GL3Q"
+    },
+    {
+     "id": "центр",
+     "имя": "скаляры ℚ*E",
+     "≅": "Qmul",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "maximal": "ℚ*E ⊊ ℚ*E · SL ⊊ GL₃(ℚ): определители скаляров — кубы, а det сюръективен",
+      "finite-index": "фактор по скалярам содержит образ SL₂(ℤ), бесконечный"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "GL₃(ℚ)",
+     "≅": "GL3Q",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "абелианизация": "Qmul",
+   "ссылки": [
+    "стандартный пример"
+   ]
+  },
+  {
+   "id": "ZfC3",
+   "имя": "ℤ ∗ C₃",
+   "заметка": "⟨t, c | c³ = 1⟩. Ядро отображения на C₃ (t ↦ 0, c ↦ 1) свободно ранга 3 (χ = 3 · (1/3 − 1) = −2); коммутант свободен бесконечного ранга.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "indecomposable": true,
+    "hopfian": true,
+    "linear": true,
+    "polycyclic": false,
+    "amenable": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "metabelian": false,
+    "co-hopfian": false
+   },
+   "почему": {
+    "centerless": "свободное произведение нетривиальных групп",
+    "amenable": "содержит F₂",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "residually-finite": "к. п. линейная (Мальцев)",
+    "hopfian": "к. п. ф. а. (Мальцев)",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "indecomposable": "свободное произведение нетривиальных групп, отличное от C₂ ∗ C₂: централизатор нетривиальной нормальной подгруппы тривиален (нормальная форма), а при G = H × K каждый множитель централизует другой",
+    "solvable": "содержит F₂",
+    "polycyclic": "неразрешима",
+    "metabelian": "неразрешима",
+    "фраттини": "Хигман — Нейман: подгруппа Фраттини свободного произведения нетривиальных групп тривиальна (G. Higman, B. H. Neumann, On two questions of Itô, J. London Math. Soc. 29, 1954)",
+    "linear": "содержит F₃ индекса 3 (ядро t ↦ 0, c ↦ 1), индуцированное представление",
+    "property-t": "фактор ℤ",
+    "perfect": "Gᵃᵇ ≅ ℤ × C₃",
+    "free": "есть кручение",
+    "residually-nilpotent": "Грюнберг: свободное произведение финитно-3 групп (ℤ и C₃) финитно-3",
+    "co-hopfian": "t ↦ t², c ↦ c: ⟨t²⟩ ∗ ⟨c⟩ по нормальной форме, t не входит (образ в Gᵃᵇ → ℤ чётен)",
+    "divisible": "образ t в ℤ = Gᵃᵇ/кручение не делится на 2"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "ZfC3"
+    },
+    {
+     "id": "c",
+     "имя": "⟨c⟩",
+     "≅": "3:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "tct⁻¹ ∉ ⟨c⟩"
+     }
+    },
+    {
+     "id": "t",
+     "имя": "⟨t⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "ctc⁻¹ ∉ ⟨t⟩"
+     }
+    },
+    {
+     "id": "коммутант",
+     "имя": "[G, G]",
+     "≅": "Foo",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "C3xZ",
+     "почему": "Курош: не пересекает сопряжённых ⟨c⟩ и ⟨t⟩ (они вкладываются в Gᵃᵇ = ℤ × C₃), поэтому свободна; нормальная ≠ 1 бесконечного индекса в к. п. свободной F₃, значит, не к. п."
+    },
+    {
+     "id": "F3",
+     "имя": "ядро t ↦ 0, c ↦ 1 в C₃",
+     "≅": "F3",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": true,
+      "complemented": true
+     },
+     "фактор": "3:1",
+     "почему": {
+      "≅": "без кручения (элементы конечного порядка сопряжены степеням c), χ = 3 · (0 + 1/3 − 1) = −2 = 1 − 3",
+      "characteristic": "автоморфизм t ↦ tc, c ↦ c переводит её в ядро t ↦ 1, c ↦ 1, а t лежит лишь в первом",
+      "complemented": "дополнение ⟨c⟩"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "ℤ ∗ C₃",
+     "≅": "ZfC3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "элементы": [
+    {
+     "имя": "c",
+     "ord": 3,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "c",
+     "cent": "c",
+     "почему": "Gᵃᵇ ≅ ℤ × C₃: c ↦ (0, 1), c⁻¹ ↦ (0, 2); tct⁻¹ не перестановочен с c; в свободном произведении централизатор неединичного элемента сомножителя лежит в этом сомножителе"
+    },
+    {
+     "имя": "t",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "t",
+     "cent": "t",
+     "почему": "Gᵃᵇ ≅ ℤ × C₃: t ↦ (1, 0); ctc⁻¹ не перестановочен с t; в свободном произведении централизатор неединичного элемента сомножителя лежит в этом сомножителе"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "коммутант",
+   "абелианизация": "C3xZ",
+   "фраттини": "1",
+   "свободное произведение": [
+    "Z",
+    "3:1"
+   ],
+   "ссылки": [
+    "стандартный пример"
+   ],
+   "⩽": [
+    [
+     "коммутант",
+     "F3",
+     true
+    ],
+    [
+     "t",
+     "F3",
+     true
+    ],
+    [
+     "c",
+     "F3",
+     false
+    ]
+   ]
+  },
+  {
+   "id": "C2fC4",
+   "имя": "C₂ ∗ C₄",
+   "заметка": "⟨s, u | s² = u⁴ = 1⟩. Коммутант — ядро C₂ ∗ C₄ → C₂ × C₄ — свободен ранга (2 − 1)(4 − 1) = 3.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "indecomposable": true,
+    "hopfian": true,
+    "linear": true,
+    "polycyclic": false,
+    "amenable": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "metabelian": false
+   },
+   "почему": {
+    "centerless": "свободное произведение нетривиальных групп",
+    "amenable": "содержит F₂",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "residually-finite": "к. п. линейная (Мальцев)",
+    "hopfian": "к. п. ф. а. (Мальцев)",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "indecomposable": "свободное произведение нетривиальных групп, отличное от C₂ ∗ C₂: централизатор нетривиальной нормальной подгруппы тривиален (нормальная форма), а при G = H × K каждый множитель централизует другой",
+    "solvable": "содержит F₂",
+    "polycyclic": "неразрешима",
+    "metabelian": "неразрешима",
+    "фраттини": "Хигман — Нейман: подгруппа Фраттини свободного произведения нетривиальных групп тривиальна (G. Higman, B. H. Neumann, On two questions of Itô, J. London Math. Soc. 29, 1954)",
+    "linear": "содержит F₃ индекса 8 (коммутант), индуцированное представление",
+    "property-t": "содержит F₃ конечного индекса, а свойство T наследуется подгруппами конечного индекса; у F₃ бесконечная абелианизация",
+    "perfect": "Gᵃᵇ ≅ C₂ × C₄",
+    "free": "есть кручение",
+    "periodic": "su бесконечного порядка",
+    "residually-nilpotent": "Грюнберг: свободное произведение конечных 2-групп финитно-2",
+    "divisible": "образ s в Gᵃᵇ = C₂ × C₄ не квадрат"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "C2fC4"
+    },
+    {
+     "id": "s",
+     "имя": "⟨s⟩",
+     "≅": "2:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "usu⁻¹ ∉ ⟨s⟩"
+     }
+    },
+    {
+     "id": "u",
+     "имя": "⟨u⟩",
+     "≅": "4:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "sus ∉ ⟨u⟩"
+     }
+    },
+    {
+     "id": "u²",
+     "имя": "⟨u²⟩",
+     "≅": "2:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "su²s ∉ ⟨u⟩",
+      "maximal": "⟨u²⟩ ⊊ ⟨u⟩"
+     }
+    },
+    {
+     "id": "коммутант",
+     "имя": "ядро C₂ ∗ C₄ → C₂ × C₄",
+     "≅": "F3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": false
+     },
+     "фактор": "8:2",
+     "почему": "Курош: не пересекает сопряжённых сомножителей, свободна; ранг по эйлеровой характеристике 8 · (1/2 + 1/4 − 1) = −2 = 1 − 3"
+    },
+    {
+     "id": "все",
+     "имя": "C₂ ∗ C₄",
+     "≅": "C2fC4",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "элементы": [
+    {
+     "имя": "s",
+     "ord": 2,
+     "central": false,
+     "real": true,
+     "comm": false,
+     "nc": true,
+     "gen": "s",
+     "cent": "s",
+     "почему": "Gᵃᵇ ≅ C₂ × C₄: s ↦ (1, 0) ≠ 0; usu⁻¹ не перестановочен с s; в свободном произведении централизатор неединичного элемента сомножителя лежит в этом сомножителе"
+    },
+    {
+     "имя": "u",
+     "ord": 4,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "u",
+     "cent": "u",
+     "почему": "Gᵃᵇ ≅ C₂ × C₄: u ↦ (0, 1), u⁻¹ ↦ (0, 3); sus не перестановочен с u; в свободном произведении централизатор неединичного элемента сомножителя лежит в этом сомножителе"
+    },
+    {
+     "имя": "u²",
+     "ord": 2,
+     "central": false,
+     "real": true,
+     "comm": false,
+     "nc": true,
+     "gen": "u²",
+     "cent": "u",
+     "почему": "u² ↦ (0, 2) ≠ 0 в Gᵃᵇ; su²s не перестановочен с u²; C(u²) ⊆ ⟨u⟩ по свойству свободного произведения и ⟨u⟩ абелева"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "коммутант",
+   "абелианизация": "8:2",
+   "фраттини": "1",
+   "свободное произведение": [
+    "2:1",
+    "4:1"
+   ],
+   "ссылки": [
+    "стандартный пример"
+   ],
+   "⩽": [
+    [
+     "u²",
+     "u",
+     true
+    ],
+    [
+     "s",
+     "коммутант",
+     false
+    ],
+    [
+     "u²",
+     "коммутант",
+     false
+    ]
+   ]
+  },
+  {
+   "id": "ZxZfZ",
+   "имя": "ℤ² ∗ ℤ",
+   "заметка": "⟨a, b, c | [a, b] = 1⟩ — прямоугольная группа Артина. Без кручения, не свободна (содержит ℤ²), без центра.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": true,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "indecomposable": true,
+    "hopfian": true,
+    "linear": true,
+    "polycyclic": false,
+    "amenable": false,
+    "left-orderable": true,
+    "bi-orderable": true,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "co-hopfian": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "metabelian": false
+   },
+   "почему": {
+    "centerless": "свободное произведение нетривиальных групп",
+    "amenable": "содержит F₂",
+    "hopfian": "к. п. ф. а. (Мальцев)",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "indecomposable": "свободное произведение нетривиальных групп, отличное от C₂ ∗ C₂: централизатор нетривиальной нормальной подгруппы тривиален (нормальная форма), а при G = H × K каждый множитель централизует другой",
+    "solvable": "содержит F₂",
+    "polycyclic": "неразрешима",
+    "metabelian": "неразрешима",
+    "фраттини": "Хигман — Нейман: подгруппа Фраттини свободного произведения нетривиальных групп тривиальна (G. Higman, B. H. Neumann, On two questions of Itô, J. London Math. Soc. 29, 1954)",
+    "free": "содержит ℤ², а абелевы подгруппы свободной группы циклические",
+    "residually-finite": "Грюнберг: свободное произведение ф. а. групп ф. а. (K. W. Gruenberg, Residual properties of infinite soluble groups, Proc. LMS 1957)",
+    "linear": "Нисневич: свободное произведение линейных групп над полями характеристики 0 линейно (В. Л. Нисневич, Матем. сб. 8, 1940)",
+    "left-orderable": "двусторонне упорядочиваема",
+    "bi-orderable": "Виноградов: свободное произведение упорядоченных групп упорядочиваемо (А. А. Виноградов, Матем. сб. 25, 1949)",
+    "residually-nilpotent": "Грюнберг: свободное произведение финитно-p групп финитно-p (ℤ² и ℤ — финитно-2)",
+    "property-t": "фактор ℤ",
+    "perfect": "Gᵃᵇ ≅ ℤ³",
+    "divisible": "Gᵃᵇ ≅ ℤ³ не делима",
+    "co-hopfian": "a, b ↦ a, b; c ↦ c²: ℤ² ∗ ⟨c²⟩, c не входит (образ в Gᵃᵇ)",
+    "torsion-free": "элементы конечного порядка свободного произведения сопряжены элементам сомножителей"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "ZxZfZ"
+    },
+    {
+     "id": "ℤ²",
+     "имя": "⟨a, b⟩ ≅ ℤ²",
+     "≅": "ZxZ",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "cac⁻¹ ∉ ⟨a, b⟩",
+      "maximal": "⟨a, b⟩ ⊊ ядро G → C₂ (a, b ↦ 0, c ↦ 1) ⊊ G"
+     }
+    },
+    {
+     "id": "a",
+     "имя": "⟨a⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "maximal": "⟨a⟩ ⊊ ⟨a, b⟩"
+     }
+    },
+    {
+     "id": "c",
+     "имя": "⟨c⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "maximal": "⟨c⟩ ⊊ ⟨a, c⟩ ⊊ G (b ∉ ⟨a, c⟩: ретракция b ↦ 1 тождественна на ⟨a, c⟩)"
+     }
+    },
+    {
+     "id": "коммутант",
+     "имя": "[G, G]",
+     "≅": "Foo",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z3",
+     "почему": "Курош: не пересекает сопряжённых ⟨a, b⟩ и ⟨c⟩ (они вкладываются в Gᵃᵇ = ℤ³), поэтому свободна; не к. п.: ретракция r: G → ⟨a, c⟩ ≅ F₂ (b ↦ 1) переводит G′ на F₂′ ≅ F_∞, а он не к. п."
+    },
+    {
+     "id": "все",
+     "имя": "ℤ² ∗ ℤ",
+     "≅": "ZxZfZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "элементы": [
+    {
+     "имя": "a",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "a",
+     "cent": "ℤ²",
+     "почему": "Gᵃᵇ ≅ ℤ³: a ↦ e₁, a⁻¹ ↦ −e₁; cac⁻¹ не перестановочен с a; в свободном произведении централизатор неединичного элемента сомножителя лежит в этом сомножителе, то есть C(a) = ℤ²"
+    },
+    {
+     "имя": "c",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "c",
+     "cent": "c",
+     "почему": "Gᵃᵇ ≅ ℤ³: c ↦ e₃; aca⁻¹ не перестановочен с c; в свободном произведении централизатор неединичного элемента сомножителя лежит в этом сомножителе"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "коммутант",
+   "абелианизация": "Z3",
+   "фраттини": "1",
+   "свободное произведение": [
+    "ZxZ",
+    "Z"
+   ],
+   "трудно": [
+    "residually-finite",
+    "hopfian",
+    "linear",
+    "left-orderable",
+    "bi-orderable"
+   ],
+   "ссылки": [
+    "K. W. Gruenberg, 1957",
+    "В. Л. Нисневич, 1940",
+    "А. А. Виноградов, 1949"
+   ],
+   "⩽": [
+    [
+     "a",
+     "ℤ²",
+     true
+    ],
+    [
+     "c",
+     "ℤ²",
+     false
+    ],
+    [
+     "коммутант",
+     "ℤ²",
+     false
+    ]
+   ]
+  },
+  {
+   "id": "C3wrZ",
+   "имя": "C₃ ≀ ℤ",
+   "заметка": "База ⊕_ℤ C₃ ≅ 𝔽₃[t, t⁻¹], t сдвигает. Двупорождённая метабелева, без центра.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "indecomposable": true,
+    "hopfian": true,
+    "linear": true,
+    "polycyclic": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "co-hopfian": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "metabelian": true
+   },
+   "почему": {
+    "linear": "f ↦ (1 f; 0 1), t ↦ (t 0; 0 1) над 𝔽₃(t)",
+    "residually-finite": "факторы C₃ ≀ C_{3ᵏ} (по t^{3ᵏ} − 1 = (t − 1)^{3ᵏ}) разделяют элементы",
+    "residually-nilpotent": "те же факторы C₃ ≀ C_{3ᵏ} — конечные 3-группы",
+    "hopfian": "к. п. ф. а. (Мальцев)",
+    "centerless": "f tᵏ (k ≠ 0) не коммутирует с ненулевой лампой; ненулевая f из базы не коммутирует с t",
+    "indecomposable": "нетривиальная нормальная подгруппа пересекает базу ([f tᵐ, g] = (tᵐ − 1)g); элемент f tᵐ (m ≠ 0) не коммутирует с ненулевыми элементами базы; при G = H × K оба множителя поэтому лежат в базе — противоречие",
+    "polycyclic": "база не к. п.",
+    "amenable": "разрешима",
+    "metabelian": "база абелева, фактор ℤ",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "property-t": "бесконечна и аменабельна",
+    "co-hopfian": "t ↦ t², f(t) ↦ f(t²): образ ⟨e₀, t²⟩ ∌ t",
+    "nilpotent": "неабелева без центра",
+    "locally-finite": "t бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "divisible": "образ t в Gᵃᵇ → ℤ не делится на 2"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "C3wrZ"
+    },
+    {
+     "id": "база",
+     "имя": "⊕_ℤ C₃",
+     "≅": "SumC3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "фактор": "Z",
+     "почему": {
+      "characteristic": "множество элементов конечного порядка (f tᵐ, m ≠ 0, бесконечного порядка)",
+      "complemented": "дополнение ⟨t⟩"
+     }
+    },
+    {
+     "id": "⟨t⟩",
+     "имя": "⟨t⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "почему": {
+      "normal": "t сопрягается лампой e₀ в e₀ t e₀⁻¹ = (e₀ − e₁)t",
+      "maximal": "⟨t⟩ ⊊ (t − 1)𝔽₃[t^{±1}] ⋊ ⟨t⟩",
+      "complemented": "дополнение — база"
+     }
+    },
+    {
+     "id": "коммутант",
+     "имя": "(t − 1)𝔽₃[t^{±1}]",
+     "≅": "SumC3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "C3xZ",
+     "почему": "[t, f] = (t − 1)f, поэтому коммутант — идеал (t − 1) базы (фактор по нему абелев); база/(t − 1) ≅ 𝔽₃, фактор ℤ × C₃"
+    },
+    {
+     "id": "лампа",
+     "имя": "⟨e₀⟩",
+     "≅": "3:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "t e₀ t⁻¹ = e₁",
+      "maximal": "⟨e₀⟩ ⊊ база"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "C₃ ≀ ℤ",
+     "≅": "C3wrZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "элементы": [
+    {
+     "имя": "t",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "⟨t⟩",
+     "cent": "⟨t⟩",
+     "почему": "Gᵃᵇ ≅ ℤ × C₃, t ↦ (1, 0); C(t) = ⟨t⟩ (финитная f, инвариантная относительно сдвига, — 0); e₀te₀⁻¹ не перестановочен с t"
+    },
+    {
+     "имя": "e₀",
+     "ord": 3,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "лампа",
+     "cent": "база",
+     "почему": "класс e₀ — {eₖ} (сопряжение действует на базе сдвигами), −e₀ туда не входит; e₀ ∉ G′ (сумма коэффициентов 1); класс в абелевой базе; C(e₀) = база"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "коммутант",
+   "кручение": "база",
+   "абелианизация": "C3xZ",
+   "сплетение": [
+    "3:1",
+    "Z"
+   ],
+   "короткий довод": [
+    "indecomposable"
+   ],
+   "ссылки": [
+    "стандартный пример"
+   ],
+   "⩽": [
+    [
+     "коммутант",
+     "база",
+     true
+    ],
+    [
+     "лампа",
+     "база",
+     true
+    ],
+    [
+     "лампа",
+     "коммутант",
+     false
+    ]
+   ]
+  },
+  {
+   "id": "ZwrC3",
+   "имя": "ℤ ≀ C₃ = ℤ³ ⋊ C₃",
+   "заметка": "σ циклически переставляет координаты ℤ³. Центр — диагональ, G/Z ≅ ℤ[ω] ⋊ C₃, коммутант {Σvᵢ = 0} ≅ ℤ², Gᵃᵇ ≅ ℤ × C₃.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "indecomposable": true,
+    "hopfian": true,
+    "linear": true,
+    "polycyclic": true,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "co-hopfian": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "metabelian": true
+   },
+   "почему": {
+    "linear": "аффинные преобразования ℤ³: подгруппа GL₄(ℤ)",
+    "residually-finite": "полициклическая",
+    "hopfian": "к. п. ф. а. (Мальцев)",
+    "polycyclic": "ℤ³ ⋊ C₃",
+    "nilpotent": "фактор по центру ℤ[ω] ⋊ C₃ без центра и неабелев",
+    "residually-nilpotent": "факторы (ℤ/3ᵏ) ≀ C₃ — конечные 3-группы — разделяют элементы",
+    "co-hopfian": "v σⁱ ↦ 2v σⁱ",
+    "amenable": "разрешима",
+    "metabelian": "ℤ³ абелева, фактор C₃",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "property-t": "бесконечна и аменабельна",
+    "indecomposable": "нетривиальная нормальная подгруппа пересекает базу; если оба множителя H × K содержат элементы вне базы, то H ∩ ℤ³ и K ∩ ℤ³ лежат в диагонали D и пересекаются; значит, K ⊆ D и ℤ³ = L ⊕ K с σ-инвариантной L ⊇ G′ = {Σvᵢ = 0}; но L ∋ v с Σv ≢ 0 (mod 3), и тогда (Σv)(1, 1, 1) = 3v − (3v − (Σv)(1, 1, 1)) ∈ L ∩ D",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "divisible": "образ (1, 0, 0) в Gᵃᵇ → ℤ (сумма координат) равен 1, не делится на 2"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "ZwrC3"
+    },
+    {
+     "id": "центр",
+     "имя": "диагональ {(a, a, a)}",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z2C3",
+     "почему": {
+      "≅": "vσⁱ (i ≠ 0) не коммутирует с базой; v централен ⇔ σv = v",
+      "фактор": "ℤ³/D ≅ ℤ[x]/(1 + x + x²) = ℤ[ω], σ — умножение на ω"
+     }
+    },
+    {
+     "id": "коммутант",
+     "имя": "{v : v₁ + v₂ + v₃ = 0}",
+     "≅": "ZxZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "C3xZ",
+     "почему": "[σ, v] = σv − v; фактор по (σ − 1)ℤ³ абелев: ℤ³/(σ − 1)ℤ³ ≅ ℤ (сумма координат), σ действует тривиально"
+    },
+    {
+     "id": "база",
+     "имя": "ℤ³",
+     "≅": "Z3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": true,
+      "complemented": true
+     },
+     "фактор": "3:1",
+     "почему": {
+      "characteristic": "централизатор коммутанта (σ действует на нём нетривиально)",
+      "complemented": "дополнение ⟨σ⟩"
+     }
+    },
+    {
+     "id": "σ",
+     "имя": "⟨σ⟩",
+     "≅": "3:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "vσv⁻¹ = (v − σv)σ",
+      "maximal": "⟨σ⟩ ⊊ C(σ)"
+     }
+    },
+    {
+     "id": "C(σ)",
+     "имя": "D × ⟨σ⟩",
+     "≅": "C3xZ",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "сопряжение вектором v ∉ D переводит σ в (v − σv)σ ∉ D × ⟨σ⟩",
+      "maximal": "D × ⟨σ⟩ ⊊ {Σvᵢ ≡ 0 (mod 3)} ⋊ ⟨σ⟩ ⊊ G",
+      "finite-index": "пересечение с базой — D бесконечного индекса"
+     }
+    },
+    {
+     "id": "⟨(1,−1,0)⟩",
+     "имя": "⟨(1, −1, 0)⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "σ(1, −1, 0) = (0, 1, −1)",
+      "maximal": "⊊ коммутант"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "ℤ ≀ C₃",
+     "≅": "ZwrC3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "элементы": [
+    {
+     "имя": "σ",
+     "ord": 3,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "σ",
+     "cent": "C(σ)",
+     "почему": "Gᵃᵇ ≅ ℤ × C₃, σ ↦ (0, 1), σ⁻¹ ↦ (0, 2); C(σ) = {vσⁱ : σv = v} = D × ⟨σ⟩; сопряжённый (v − σv)σ при v ∉ D не перестановочен с σ"
+    },
+    {
+     "имя": "(1, 1, 1)",
+     "ord": 0,
+     "central": true,
+     "real": false,
+     "comm": false,
+     "nc": false,
+     "gen": "центр",
+     "cent": "все",
+     "почему": "центральный, (1, 1, 1)⁻¹ ≠ (1, 1, 1); D ∩ G′ = 0"
+    },
+    {
+     "имя": "(1, −1, 0)",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": true,
+     "nc": false,
+     "gen": "⟨(1,−1,0)⟩",
+     "cent": "база",
+     "почему": "(1, −1, 0) = [σ, (0, 1, 1)] = σw − w; класс {(1, −1, 0), (0, 1, −1), (−1, 0, 1)} не содержит (−1, 1, 0); класс в абелевой базе; C = база"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "коммутант",
+   "абелианизация": "C3xZ",
+   "сплетение": [
+    "Z",
+    "3:1"
+   ],
+   "короткий довод": [
+    "indecomposable"
+   ],
+   "ссылки": [
+    "стандартный пример"
+   ],
+   "⩽": [
+    [
+     "центр",
+     "коммутант",
+     false
+    ],
+    [
+     "коммутант",
+     "центр",
+     false
+    ],
+    [
+     "коммутант",
+     "база",
+     true
+    ],
+    [
+     "центр",
+     "база",
+     true
+    ],
+    [
+     "σ",
+     "C(σ)",
+     true
+    ],
+    [
+     "центр",
+     "C(σ)",
+     true
+    ],
+    [
+     "⟨(1,−1,0)⟩",
+     "коммутант",
+     true
+    ]
+   ]
+  },
+  {
+   "id": "C2wrZ2",
+   "имя": "C₂ ≀ ℤ²",
+   "заметка": "База ⊕_{ℤ²} C₂ ≅ 𝔽₂[x^{±1}, y^{±1}], ℤ² = ⟨x, y⟩ сдвигает. Трёхпорождённая метабелева, без центра; Gᵃᵇ ≅ ℤ² × C₂.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "indecomposable": true,
+    "hopfian": true,
+    "linear": true,
+    "polycyclic": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "co-hopfian": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "metabelian": true
+   },
+   "почему": {
+    "linear": "f ↦ (1 f; 0 1), xᵐyⁿ ↦ (xᵐyⁿ 0; 0 1) над 𝔽₂(x, y)",
+    "residually-finite": "факторы C₂ ≀ (C_{2ᵏ})² разделяют элементы",
+    "residually-nilpotent": "те же факторы C₂ ≀ (C_{2ᵏ})² — конечные 2-группы",
+    "hopfian": "к. п. ф. а. (Мальцев)",
+    "centerless": "f·b (b ≠ 0) не коммутирует с ненулевой лампой (сдвиг на b ≠ 0 не сохраняет конечное непустое множество); ненулевая f не коммутирует со сдвигами",
+    "indecomposable": "нетривиальная нормальная подгруппа пересекает базу ([f b, g] = (b − 1)g); f·b (b ≠ 0) не коммутирует с ненулевыми элементами базы; при G = H × K оба множителя поэтому лежат в базе — противоречие",
+    "polycyclic": "база не к. п.",
+    "amenable": "разрешима",
+    "metabelian": "база абелева, фактор ℤ²",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "property-t": "бесконечна и аменабельна",
+    "co-hopfian": "b ↦ 2b, f(x, y) ↦ f(x², y²): инъекция, образ не содержит x",
+    "nilpotent": "неабелева без центра",
+    "locally-finite": "x бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "divisible": "образ x в Gᵃᵇ → ℤ² не делится на 2"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "C2wrZ2"
+    },
+    {
+     "id": "база",
+     "имя": "⊕_{ℤ²} C₂",
+     "≅": "SumC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "фактор": "ZxZ",
+     "почему": {
+      "characteristic": "множество элементов конечного порядка (f·b, b ≠ 0, бесконечного порядка)",
+      "complemented": "дополнение ℤ²"
+     }
+    },
+    {
+     "id": "ℤ²",
+     "имя": "ℤ² = ⟨x, y⟩",
+     "≅": "ZxZ",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "почему": {
+      "normal": "e₀ x e₀ = (e₀ + e_x)x",
+      "maximal": "ℤ² ⊊ I ⋊ ℤ² для идеала I = (x − 1, y − 1)",
+      "complemented": "дополнение — база"
+     }
+    },
+    {
+     "id": "коммутант",
+     "имя": "(x − 1, y − 1) — идеал аугментации",
+     "≅": "SumC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z2xC2",
+     "почему": "[b, f] = (b − 1)f; фактор базы по идеалу аугментации — 𝔽₂, поэтому Gᵃᵇ ≅ ℤ² × C₂"
+    },
+    {
+     "id": "лампа",
+     "имя": "⟨e₀⟩",
+     "≅": "2:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "x e₀ x⁻¹ = e_x",
+      "maximal": "⟨e₀⟩ ⊊ база"
+     }
+    },
+    {
+     "id": "x",
+     "имя": "⟨x⟩",
+     "≅": "Z",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "maximal": "⟨x⟩ ⊊ ℤ²"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "C₂ ≀ ℤ²",
+     "≅": "C2wrZ2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "элементы": [
+    {
+     "имя": "x",
+     "ord": 0,
+     "central": false,
+     "real": false,
+     "comm": false,
+     "nc": true,
+     "gen": "x",
+     "cent": "ℤ²",
+     "почему": "Gᵃᵇ ≅ ℤ² × C₂, x ↦ (1, 0, 0); f·b коммутирует с x ⇔ f инвариантна относительно сдвига на x ⇔ f = 0, так что C(x) = ℤ²; e₀xe₀ = (e₀ + e_x)x не перестановочен с x"
+    },
+    {
+     "имя": "e₀",
+     "ord": 2,
+     "central": false,
+     "real": true,
+     "comm": false,
+     "nc": false,
+     "gen": "лампа",
+     "cent": "база",
+     "почему": "одна лампа: e₀ ∉ G′ (сумма коэффициентов 1); класс {e_b} в абелевой базе; C(e₀) = база"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "коммутант",
+   "кручение": "база",
+   "абелианизация": "Z2xC2",
+   "сплетение": [
+    "2:1",
+    "ZxZ"
+   ],
+   "короткий довод": [
+    "indecomposable"
+   ],
+   "ссылки": [
+    "стандартный пример"
+   ],
+   "⩽": [
+    [
+     "коммутант",
+     "база",
+     true
+    ],
+    [
+     "лампа",
+     "база",
+     true
+    ],
+    [
+     "лампа",
+     "коммутант",
+     false
+    ],
+    [
+     "x",
+     "ℤ²",
      true
     ]
    ]
