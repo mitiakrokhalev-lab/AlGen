@@ -719,7 +719,23 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             rows = rows[m[rows, j]]
         return rows.size > 0 and not m[rows, g ^ 1].any()
 
-    def go(prem, rows, start, depth, pm=0):
+    # Столбцы как битовые множества строк (uint64): пересечение посылок и
+    # проверка «есть ли строка, где посылки верны, а цель ложна» — по словам,
+    # без копирования подматрицы (у GN — 143 тыс. строк × 348 литералов).
+    nr = m.shape[0]
+    words = max(1, (nr + 63) // 64)
+    packed = np.packbits(m, axis=0, bitorder="little")
+    pad = np.zeros((words * 8 - packed.shape[0], n_lit), dtype=np.uint8)
+    PT = np.ascontiguousarray(np.vstack([packed, pad]).T).view(np.uint64)  # (n_lit, words)
+    neg_idx = np.arange(n_lit) ^ 1
+    buf = np.empty_like(PT)
+
+    def to_bits(idx):
+        mask = np.zeros(words * 64, dtype=bool)
+        mask[idx] = True
+        return np.packbits(mask, bitorder="little").view(np.uint64)
+
+    def go(prem, R, start, depth, pm=0):
         nonlocal count
         if need:
             miss = full & ~pm
@@ -730,10 +746,9 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             have = set(prem) | set(form.fixed)
             if not all(form.req.get(i, set()) <= have for i in atoms):
                 return
-            if rows.size == 0:
+            if not R.any():
                 empty.append(tuple(prem))
                 return
-            sub = m[rows]
             gc = goal_cols
             if need:
                 miss = full & ~pm
@@ -741,11 +756,13 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 gc = [g for g in goal_cols if ok[g]]
                 if not gc:
                     return
-            negs = sub[:, [g ^ 1 for g in range(n_lit)]].any(axis=0) if len(gc) > 40 else None
+            np.bitwise_and(PT, R, out=buf)
+            hits = buf.any(axis=1)  # литерал верен хотя бы в одной строке посылок
+            negs = hits[neg_idx]
             for g in gc:
                 if g // 2 in atoms or not form.req.get(g // 2, set()) <= have:
                     continue
-                if (negs[g] if negs is not None else sub[:, g ^ 1].any()):
+                if negs[g]:
                     continue
                 count += 1
                 key = (tuple(prem), g)
@@ -756,17 +773,19 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                         continue
                 elif any((q, g) in lower for q in proper_subsets(prem)):
                     continue
-                alive[key] = int(sub[:, g].sum())
+                alive[key] = int(np.bitwise_count(buf[g]).sum())
             return
+        if prem and not R.any():
+            return  # посылки уже несовместны в библиотеке: продолжения — тоже
         for j in range(start, n_lit):
             if j // 2 in {x // 2 for x in prem} or j in const or j ^ 1 in const or j // 2 in deferred:
                 continue
-            nxt = rows[m[rows, j]] if prem else np.flatnonzero(m[:, j])
-            go(prem + [j], nxt, j + 1, depth, pm | (int(lmask[j]) if need else 0))
+            go(prem + [j], PT[j] & R, j + 1, depth, pm | (int(lmask[j]) if need else 0))
 
     start = np.flatnonzero(m[:, form.fixed].all(axis=1)) if form.fixed else np.arange(m.shape[0])
+    R0 = to_bits(start)
     for depth in range(1, max_prem + 1):
-        go([], start, 0, depth)
+        go([], R0, 0, depth)
     form.n_alive = count
     return alive, empty
 
