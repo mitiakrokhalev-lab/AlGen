@@ -13,6 +13,9 @@ on:
 env:
   ARGS: "--без bounded-exponent"
   BASES: "G,GN,AB"   # перебор схем; таблицы строятся для всех баз
+  K: "2"             # посылок в схеме (или «k0,k1,k2» по числу верхних термов)
+  UNTIL: "200"       # минут: после этого часть не начинает новых схем и выгружает результат
+  LIMIT: "600"       # секунд на одну схему (дольше — «таймаут», схема в сводке отдельно)
 
 jobs:
   build:
@@ -61,7 +64,7 @@ jobs:
       - name: перебор
         run: |
           cd py
-          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 4 $ARGS
+          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 4.5 --посылок $K --до $UNTIL --предел $LIMIT $ARGS
       - uses: actions/upload-artifact@v4
         if: always()
         with:

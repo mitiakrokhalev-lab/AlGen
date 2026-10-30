@@ -618,7 +618,9 @@ GROUP_PROPS = ("trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "sim
                # арифметика порядка: p-группа (порядки элементов — степени одного простого),
                # |G| простое, p², pq (p ≠ q), не больше двух простых делителей, нечётный
                "p-group", "prime-order", "order-p2", "order-pq", "two-primes", "odd-order",
-               "exponent-2", "exponent-3", "clt")
+               "exponent-2", "exponent-3", "clt",
+               # 30.10: дедекиндовы, метабелевы, ступени ⩽ 2, аменабельные, левоупорядочиваемые
+               "dedekind", "metabelian", "class-2", "amenable", "left-orderable")
 
 _LIB = _SCENE = None
 

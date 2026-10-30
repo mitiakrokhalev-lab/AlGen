@@ -17,6 +17,7 @@
 import argparse
 import io
 import json
+import signal
 import multiprocessing as mp
 import os
 import pickle
@@ -267,18 +268,35 @@ def k_for(ks, n_top):
     return ks[min(n_top, len(ks) - 1)]
 
 
+class SchemeTimeout(Exception):
+    pass
+
+
+def _alarm(signum, frame):
+    raise SchemeTimeout()
+
+
 def _one(job):
     base, sid, terms, k, outdir, fp = job
     out, err = io.StringIO(), io.StringIO()
     t0 = time.time()
+    limit = _STATE.get("limit") or 0
+    if limit:
+        signal.signal(signal.SIGALRM, _alarm)
+        signal.alarm(int(limit))
     try:
         form = view(_STATE["forms"][base], terms)
         form, alive, empty, report = E.run(k, _STATE["lib"], _STATE["vocab"], form)
         summary = E.render(form, alive, empty, report, out=out, err=err, registry=_STATE["registry"])
         status = "ok"
+    except SchemeTimeout:
+        summary, status = {}, f"таймаут {limit} с"
     except Exception:
         summary, status = {}, "ошибка"
         err.write(traceback.format_exc())
+    finally:
+        if limit:
+            signal.alarm(0)
     rec = {"id": sid, "условие": BASES[base], "термы": terms, "посылок": k, "без": sorted(E.SKIP),
            "отпечаток": fp, "секунд": round(time.time() - t0, 1), "статус": status, **summary}
     p = Path(outdir) / sid
@@ -349,7 +367,12 @@ def run_schemes(a):
     size = max(1, min(50, len(jobs) // (a.jobs * 4) or 1))
     queue = [jobs[i:i + size] for i in range(0, len(jobs), size)]
     running, done = {}, 0
+    _STATE["limit"] = a.limit
+    deadline = t0 + a.until * 60 if a.until else None
     while queue or running:
+        if deadline and time.time() > deadline and queue:
+            print(f"срок вышел: не начато схем {sum(len(c) for c in queue)}", file=sys.stderr, flush=True)
+            queue = []
         while queue and len(running) < a.jobs:
             chunk = queue.pop(0)
             p = ctx.Process(target=worker, args=(chunk,))
@@ -427,6 +450,8 @@ def main():
     s.add_argument("--без", dest="skip", default="")
     s.add_argument("--заново", dest="force", action="store_true")
     s.add_argument("--память", dest="mem", type=float, default=0)
+    s.add_argument("--до", dest="until", type=float, default=0, help="минут: после этого новые схемы не начинать")
+    s.add_argument("--предел", dest="limit", type=float, default=0, help="секунд на одну схему")
     a = ap.parse_args()
     E.SKIP.update(x.strip() for x in getattr(a, "skip", "").split(",") if x.strip())
     vocab = Vocab.section("grp")
