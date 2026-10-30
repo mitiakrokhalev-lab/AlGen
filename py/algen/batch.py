@@ -136,7 +136,15 @@ def run_batch(a):
 def aggregate(a):
     """Общая сводка: решающие значения по всем схемам (повторы складываются),
     вопросы реестра, кластеры без кандидата, таблица схем."""
-    recs = [json.loads(p.read_text(encoding="utf-8")) for p in sorted(Path(a.dir).glob("*.json"))]
+    recs = []
+    for p in sorted(Path(a.dir).glob("*.json")):
+        try:
+            r = json.loads(p.read_text(encoding="utf-8"))
+        except Exception as e:
+            print(f"{p.name}: не читается ({e})", file=sys.stderr)
+            continue
+        if isinstance(r, dict) and "id" in r:
+            recs.append(r)
     vals = defaultdict(lambda: {"схем": 0, "запретов": 0, "пример": None})
     reg = defaultdict(lambda: {"схем": 0, "запретов": 0})
     hidden = defaultdict(lambda: {"схем": 0, "запретов": 0})
@@ -166,8 +174,8 @@ def aggregate(a):
     head = (f"Схем: {len(recs)}; " + ", ".join(f"{k}: {n}" for k, n in st.most_common()) +
             f". Выводится: {sum(r.get('вердикты', {}).get('выводится', 0) for r in ok)}, "
             f"остаток: {sum(r.get('остаток') or 0 for r in ok)}, "
-            f"секунд на схему: среднее {round(sum(r.get('секунд') or 0 for r in recs) / max(1, len(recs)))}, "
-            f"наибольшее {max((r.get('секунд') or 0 for r in recs), default=0)}.\n")
+            f"секунд на схему: среднее {round(sum(float(r.get('секунд') or 0) for r in recs) / max(1, len(recs)))}, "
+            f"наибольшее {max((float(r.get('секунд') or 0) for r in recs), default=0)}.\n")
     md = [f"# Сводка пакетного прогона\n\n{head}",
           "## Решающие значения (по всем схемам)\n", "| значение | схем | запретов | пример |", "|---|---|---|---|"]
     for name, x in sorted(vals.items(), key=lambda kv: (-kv[1]["запретов"], kv[0])):

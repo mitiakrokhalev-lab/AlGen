@@ -125,12 +125,14 @@ jobs:
           pattern: part-*
           path: parts
       - run: |
-          mkdir -p all && cp parts/*/*.json parts/*/*.txt all/ 2>/dev/null || true
-          cd py && python3 -m algen.batch сводка ../all
+          mkdir -p all
+          find parts -name '*.json' -exec cp {} all/ \; || true
+          find parts -name '*.txt' -exec cp {} all/ \; || true
+          cd py && python3 -m algen.batch сводка ../all || echo "сводка упала" > ../all/сводка.md
       - name: результаты в ветку «results-…»
         run: |
           tar czf results.tar.gz all
-          cp all/сводка.md сводка.md
+          cp all/сводка.md сводка.md || echo "нет сводки" > сводка.md
           git config user.name "algen-bot"
           git config user.email "algen-bot@users.noreply.github.com"
           git checkout --orphan "results-${GITHUB_REF_NAME}"
