@@ -229,7 +229,8 @@ class Library:
             o["центр"] = whole if p.get("abelian") else one if p.get("centerless") or simple else None
         if o.get("коммутант") is None:
             o["коммутант"] = one if p.get("abelian") else whole if p.get("perfect") or simple else None
-        if o.get("кручение") is None and p.get("abelian"):
+        if o.get("кручение") is None:
+            # периодическая — кручение вся группа, без кручения — 1 (у любой, не только абелевой)
             o["кручение"] = whole if p.get("periodic") else one if p.get("torsion-free") else None
         for f in ("центр", "коммутант", "кручение"):
             if f in o and o[f] is None:
@@ -874,6 +875,14 @@ class Search:
             ks = [self._obj(a) for a in args]
             if None in ks:
                 return None
+            # тривиальный множитель: A × 1 = A ∗ 1 = A, A ≀ 1 = A, 1 ≀ B = B
+            triv = [lib.obj[k]["свойства"].get("trivial") for k in ks]
+            if triv[1]:
+                return ("obj", ks[0])
+            if triv[0] and t.op != "wreath":
+                return ("obj", ks[1])
+            if triv[0] and t.op == "wreath":
+                return ("obj", ks[1])
             p = {"prod": lib.prod, "freeprod": lib.fprod, "wreath": lib.wreath}[t.op].get((ks[0], ks[1]))
             return ("obj", p) if p else None
         if t.op in ("aut", "ab", "inn") and self._obj(args[0]):
