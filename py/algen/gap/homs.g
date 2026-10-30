@@ -11,8 +11,8 @@
 # "check": [[тип, размер класса], …]} или "endos": null, если группа велика.
 
 if not IsBound(MAXCLASSES) then MAXCLASSES := 300; fi;
-if not IsBound(MAXNONAB) then MAXNONAB := 512; fi;
-if not IsBound(MAXENDO) then MAXENDO := 60; fi;
+if not IsBound(MAXNONAB) then MAXNONAB := 100; fi;
+if not IsBound(MAXENDO) then MAXENDO := 40; fi;
 Key := G -> Concatenation(String(Size(G)), ":", String(IdGroup(G)[2]));
 B := b -> ShallowCopy(String(b));
 

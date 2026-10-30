@@ -53,6 +53,7 @@ GSET_PROPS = ("transitive", "faithful", "free-act", "regular", "primitive", "sin
 RELATIONS = True  # атомы-отношения между термами схемы (⩽, =, ≅)
 DIVERSE = 4  # моделей «наоборот» в _derive
 REFRESH = 200  # выводов строк до пересоздания решателя
+REDUCE = True  # сводить «неизвестно» к вопросу «посылки ⇒ переменная вырождена?»
 # Атомы, значение которых известно меньше чем в DEFER доле строк, откладываются:
 # условия с ними — почти сплошь «неизвестно» (шум), а стоят решателя каждое.
 # Они возвращаются в перебор, когда библиотека заполнится.
@@ -988,6 +989,15 @@ def run(max_prem, lib=None, vocab=None, form=None):
             degen.append((("p", "trivial", t), True))
         elif sort == "Grp.sub":
             degen += [(("p", "trivial", t), True), (("p", "whole", t), True)]
+    # вырождения для сведения остатка: группа тривиальна, подгруппа тривиальна или вся
+    degen_all = []
+    for t in sorted(allvars, key=str):
+        sort = graph.terms[t].sort
+        if sort == "Grp.obj":
+            degen_all.append((("p", "trivial", t), True))
+        elif sort == "Grp.sub":
+            degen_all += [(("p", "trivial", t), True), (("p", "whole", t), True)]
+    degen_all = [d for d in degen_all if form.sc.T.lit(d[0]) is not None] if REDUCE else []
     if getattr(form, "pairs", None):
         try:
             add_pairs(form, form.pairs)
@@ -1022,6 +1032,14 @@ def run(max_prem, lib=None, vocab=None, form=None):
             if hint is not None:
                 r["заполнить"] = {"где": form.where(hint), "атом": atom_name(goal[0])}
             # Решающие значения: строки, где неизвестен ровно один литерал запрета.
+            # Сведение к вырожденности: если посылки вместе с «v нетривиальна» уже
+            # дают отрицание цели, вопрос условия — «посылки ⇒ v тривиальна?»
+            # (десятки «третьих» вида ¬abelian(G ∗ G), ¬cyclic(G ∗ G)… — один вопрос).
+            for d in degen_all:
+                if decide(form.sc.T, fixed + prem_l + [(d[0], not d[1])], (goal[0], not goal[1]),
+                          form.sc.s).kind == "выводится":
+                    r["сводится"] = sorted(lit_name(*x) for x in prem_l) + [lit_name(*d)]
+                    break
             r["значения"] = sorted({form.value_name(x, form.lit(c)[0]) if form.lit(c)[0][0] != "pair" else
                                     form.value_name(x, form.lits(c)[0][0])
                                     for x, c in form.one_unknown(list(prem) + [g ^ 1], limit=60)})
@@ -1118,11 +1136,14 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
                        "выводится": sum(r["вердикт"] == "выводится" for r in report)},
                       f, ensure_ascii=False, indent=1)
     seen, hints, vals = {}, defaultdict(set), defaultdict(set)
+    reduced = {}
     for r in report:
         if r["вердикт"] != "неизвестно":
             continue
         t = r["класс"]
         seen.setdefault(t, r["примеров"])
+        if r.get("сводится"):
+            reduced.setdefault(t, tuple(r["сводится"]))
         vals[t] |= set(r.get("значения", ()))
         if r.get("заполнить"):
             h = r["заполнить"]
@@ -1147,6 +1168,15 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
           f"без кандидата {len(bare_fresh)}; уже в реестре {sum(len(x) for x in known.values())} ==")
     for v, ts in fresh:
         print(f"значение {v} — запретов {len(ts)}; например: {' & '.join(ts[0])}")
+    # Сведённые к вырожденности: один вопрос «посылки ⇒ вырождено?» на много запретов.
+    red = defaultdict(list)
+    for t in bare_fresh:
+        if t in reduced:
+            red[reduced[t]].append(t)
+    bare_fresh = [t for t in bare_fresh if t not in reduced]
+    print(f"== сводятся к вырожденности: {len(red)} вопросов на {sum(len(ts) for ts in red.values())} запретов ==")
+    for q, ts in sorted(red.items(), key=lambda x: (-len(x[1]), x[0])):
+        print(f"вырождено? {' & '.join(q[:-1])} ⇒ {q[-1]}   [запретов {len(ts)}]")
     print(f"== без кандидата: нужен пример или правило ==")
     cl = clusters(bare_fresh)
     for pair, thirds in cl:
@@ -1165,6 +1195,7 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
         "запретов": len(classes), "вердикты": dict(tally), "остаток": len(seen),
         "значения": [{"имя": v, "запретов": len(ts), "пример": " & ".join(ts[0])} for v, ts in fresh],
         "без кандидата": [{"пара": list(pair), "третьи": thirds} for pair, thirds in cl],
+        "вырождено": [{"вопрос": list(q), "запретов": len(ts)} for q, ts in red.items()],
         "реестр": {k: len(ts) for k, ts in known.items()},
         "отложено": getattr(form, "deferred", []),
     }
