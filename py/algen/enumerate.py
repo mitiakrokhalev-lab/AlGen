@@ -928,7 +928,10 @@ def run(max_prem, lib=None, vocab=None, form=None):
         elif sort == "Grp.sub":
             degen += [(("p", "trivial", t), True), (("p", "whole", t), True)]
     if getattr(form, "pairs", None):
-        add_pairs(form, form.pairs)
+        try:
+            add_pairs(form, form.pairs)
+        except Exception as e:  # парные атомы — добавка: при сбое перебор идёт без них
+            print(f"парные атомы не добавлены: {e!r}", file=sys.stderr)
     alive, empty = enumerate_form(form, max_prem)
     mins = minimal(alive)
     mins = generic_filter(form, mins)
