@@ -122,6 +122,16 @@ def maximal(g, elems):
     return [t for t in elems if t not in low]
 
 
+# Симметрии баз: перестановка переменных, переводящая запись базы в себя.
+SWAP = {"AB": ("A", "B"), "GHK": ("H", "K")}
+
+
+def _swap(s, pair):
+    import re
+    a, b = pair
+    return re.sub(rf"\b({a}|{b})\b", lambda m: b if m.group(1) == a else a, s)
+
+
 def schemes(vocab, base, k=2):
     """Схемы базы: (id, термы-строки) — замыкания наборов из ⩽ k + 1 термов
     вселенной, без повторов. id — номера термов вселенной через «-»."""
@@ -132,6 +142,7 @@ def schemes(vocab, base, k=2):
     num = {t: i + 1 for i, t in enumerate(ts)}
     vars_ = [t for t in g.terms if isinstance(t, Var)]
     seen, out = set(), []
+    swap = SWAP.get(base)
     for r in range(0, k + 2):
         for pick in combinations(ts, r):
             cl = closure(g, list(pick) + vars_)
@@ -142,6 +153,16 @@ def schemes(vocab, base, k=2):
             if key in seen:
                 continue
             seen.add(key)
+            if swap:
+                # схема, симметричная уже взятой (A ↔ B, H ↔ K), — тот же набор задач
+                try:
+                    tw = tuple(sorted({term(g, _swap(str(t), swap), names, "grp") for t in terms_}, key=num.get))
+                except Exception:
+                    tw = None
+                if tw is not None and tw != key and tw in seen:
+                    continue
+                if tw is not None:
+                    seen.add(tw)
             sid = base + ("-" + "-".join(str(num[t]) for t in terms_) if terms_ else "")
             out.append((sid, [str(t) for t in terms_]))
     return out
@@ -307,6 +328,7 @@ def _one(job):
 def run_schemes(a):
     vocab = Vocab.section("grp")
     lib = built_library(vocab)
+    E.DEFER = getattr(a, "defer", 0) or 0
     _STATE.update(lib=lib, vocab=vocab, registry=E.load_registry(), forms={})
     outdir = Path(a.out)
     outdir.mkdir(parents=True, exist_ok=True)
@@ -317,7 +339,7 @@ def run_schemes(a):
     except (FileNotFoundError, ValueError) as e:
         print(f"нет таблицы G для фильтра: {e}", file=sys.stderr)
     for base in a.bases.split(","):
-        fp = _fp(base) + f":{a.k}"
+        fp = _fp(base) + f":{a.k}" + (f":d{a.defer}" if a.defer else "")
         todo = schemes(vocab, base, ks[-1])
         g0, _, _ = scheme(vocab, {"раздел": "grp", "условие": BASES[base]})
         n0 = {str(t): t for t in g0.terms}
@@ -453,6 +475,8 @@ def main():
     s.add_argument("--без", dest="skip", default="")
     s.add_argument("--заново", dest="force", action="store_true")
     s.add_argument("--память", dest="mem", type=float, default=0)
+    s.add_argument("--отложить", dest="defer", type=float, default=0,
+                   help="откладывать атомы, известные меньше чем в этой доле строк (например 0.15)")
     s.add_argument("--до", dest="until", type=float, default=0, help="минут: после этого новые схемы не начинать")
     s.add_argument("--предел", dest="limit", type=float, default=0, help="секунд на одну схему")
     a = ap.parse_args()

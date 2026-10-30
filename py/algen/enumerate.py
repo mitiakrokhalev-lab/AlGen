@@ -50,6 +50,10 @@ SKIP = set()
 MOR_PROPS = ("injective", "surjective", "iso", "zero-mor")
 RELATIONS = True  # атомы-отношения между термами схемы (⩽, =, ≅)
 DIVERSE = 4  # моделей «наоборот» в _derive
+# Атомы, значение которых известно меньше чем в DEFER доле строк, откладываются:
+# условия с ними — почти сплошь «неизвестно» (шум), а стоят решателя каждое.
+# Они возвращаются в перебор, когда библиотека заполнится.
+DEFER = 0.0
 CORE_PROPS = {"trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable", "nilpotent",
               "perfect", "torsion-free", "periodic", "divisible", "centerless", "residually-finite",
               "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent", "free-abelian", "p-group"}
@@ -678,6 +682,15 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     form.const = sorted(const)
     if const:
         goal_cols = [g for g in goal_cols if g not in const and g ^ 1 not in const]
+    # Отложенные атомы: известны меньше чем в DEFER доле строк (кроме посылок записи).
+    deferred = set()
+    if DEFER > 0 and m.shape[0]:
+        frac = (m[:, 0::2] | m[:, 1::2]).mean(axis=0)
+        keep = {j // 2 for j in getattr(form, "fixed", [])}
+        deferred = {i for i in np.flatnonzero(frac < DEFER).tolist() if i not in keep}
+    form.deferred = sorted(atom_name(form.atoms[i]) for i in deferred)
+    if deferred:
+        goal_cols = [g for g in goal_cols if g // 2 not in deferred]
     alive, empty, lower = {}, [], set()
     count = 0
     # Покрытие (схемы из таблицы базы): условие должно касаться каждого
@@ -746,7 +759,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 alive[key] = int(sub[:, g].sum())
             return
         for j in range(start, n_lit):
-            if j // 2 in {x // 2 for x in prem} or j in const or j ^ 1 in const:
+            if j // 2 in {x // 2 for x in prem} or j in const or j ^ 1 in const or j // 2 in deferred:
                 continue
             nxt = rows[m[rows, j]] if prem else np.flatnonzero(m[:, j])
             go(prem + [j], nxt, j + 1, depth, pm | (int(lmask[j]) if need else 0))
@@ -983,6 +996,7 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
         "значения": [{"имя": v, "запретов": len(ts), "пример": " & ".join(ts[0])} for v, ts in fresh],
         "без кандидата": [{"пара": list(pair), "третьи": thirds} for pair, thirds in cl],
         "реестр": {k: len(ts) for k, ts in known.items()},
+        "отложено": getattr(form, "deferred", []),
     }
     groups = clusters(list(seen))
     if full:
