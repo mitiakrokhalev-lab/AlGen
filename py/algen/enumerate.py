@@ -427,13 +427,22 @@ class SchemeForm(Form):
                 self.req[i] = need
         self.fixed = [2 * self.index[a] + (0 if v else 1) for a, v in fixed if a in self.index]
         self.fixed_lits = fixed
-        levels = {"m": (), "s": ("трудно",), "e": MARKS}
-        rows, self.envs, self.skipped = {k: [] for k in levels}, [], []
+        self.envs, self.skipped = [], []
         self._facts = {}  # записанные значения строк — лениво, только для разбора помеченных
-        derived = self._derived = {}  # кэш вывода: одинаковые наборы записанных значений — одна строка
+        self._derived = {}  # кэш вывода: одинаковые наборы записанных значений — одна строка
         self.own = own
         if not with_rows:
             return
+        self.fill_rows(part, max_subs)
+
+    def fill_rows(self, part=None, max_subs=None):
+        """Строки формы: подстановки библиотеки (part = (i, n) — каждая n-я)
+        и выведенные значения атомов. Каркас (теория, атомы) уже построен —
+        его можно строить один раз и раздавать частям через fork."""
+        T = self.sc.T
+        levels = {"m": (), "s": ("трудно",), "e": MARKS}
+        rows, self.envs, self.skipped = {k: [] for k in levels}, [], []
+        derived = self._derived
         for n_env, env in enumerate(self.search._assign(0, {})):
             if part and n_env % part[1] != part[0] - 1:
                 continue

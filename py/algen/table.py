@@ -185,9 +185,16 @@ def _fp(base):
     return f"{_fingerprint()}:{base}:{','.join(sorted(E.SKIP))}"
 
 
-def build(lib, vocab, base, part, outdir):
+def build(lib, vocab, base, part, outdir, skel=None):
+    """Часть таблицы базы. skel — готовый каркас (теория строится один раз на
+    базу, части получают его через fork); иначе строится здесь."""
     t0 = time.time()
-    f = skeleton(lib, vocab, base, part=part, with_rows=True)
+    if skel is not None:
+        f = skel
+        f.sc.s = f.sc.T.solver()  # свой решатель в дочернем процессе
+        f.fill_rows(part)
+    else:
+        f = skeleton(lib, vocab, base, part=part, with_rows=True)
     path = Path(outdir) / f"{base}.{part[0]}-{part[1]}.pickle"
     path.parent.mkdir(parents=True, exist_ok=True)
     data = {"отпечаток": _fp(base), "атомов": len(f.atoms), "envs": f.envs, "skipped": f.skipped,
@@ -208,13 +215,18 @@ def build_all(lib, vocab, job, jobs, outdir, threads):
     mine = tasks[job - 1::jobs]
     ctx = mp.get_context("fork")
     running = []
+    skel = {}
     for b, part in mine:
         while True:
             running = [p for p in running if p.exitcode is None]
             if len(running) < threads:
                 break
             time.sleep(0.5)
-        p = ctx.Process(target=build, args=(lib, vocab, b, part, outdir))
+        if b not in skel:  # каркас базы — один раз на машину
+            t = time.time()
+            skel[b] = skeleton(lib, vocab, b)
+            print(f"{b}: каркас {round(time.time() - t)} с", file=sys.stderr, flush=True)
+        p = ctx.Process(target=build, args=(lib, vocab, b, part, outdir, skel[b]))
         p.start()
         running.append(p)
     for p in running:
