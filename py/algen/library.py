@@ -83,6 +83,22 @@ class Library:
             raw = json.load(f)
             for r in raw["группы"]:
                 self.obj[r["id"]] = {"key": r["id"], "конечная": False, **r}
+                # Элементы бесконечной группы (классы сопряжённости): ⟨x⟩ и C(x) —
+                # по id подгрупп записи; размер класса — 1 у центральных, иначе «много».
+                if r.get("элементы"):
+                    ids = {x["id"]: i for i, x in enumerate(r.get("подгруппы") or [])}
+                    els = []
+                    for e in r["элементы"]:
+                        e = dict(e)
+                        for f in ("gen", "cent"):
+                            if isinstance(e.get(f), str):
+                                e[f] = ids.get(e[f])
+                        e.setdefault("size", 1 if e.get("central") else 2)
+                        e.setdefault("ord", 0)
+                        if e.get("gen") is None or e.get("cent") is None:
+                            raise KeyError(f"{r['id']}: элемент {e.get('имя')}: нет подгруппы ⟨x⟩ или C(x)")
+                        els.append(e)
+                    self.obj[r["id"]]["элементы"] = els
         self.fam = {f["id"]: f for f in raw.get("семейства", [])}
         self.prod = load_products()
         # Свободные произведения и сплетения: поля записи «свободное произведение»
@@ -982,8 +998,8 @@ class Search:
             if im[0] == "elt":
                 c = self.lib.obj[im[1]]["элементы"][im[2]]
                 for p, v in (("identity-elt", c["ord"] == 1), ("involution", c["ord"] == 2),
-                             ("central-elt", c["size"] == 1), ("torsion-elt", True),
-                             ("real-elt", c["real"]), ("commutator-elt", c["comm"]),
+                             ("central-elt", c["size"] == 1), ("torsion-elt", c["ord"] != 0),
+                             ("real-elt", c.get("real")), ("commutator-elt", c.get("comm")),
                              ("generator", self.lib.obj[im[1]]["подгруппы"][c["gen"]]["свойства"].get("whole"))):
                     if v is not None and p in self.g.v.props:
                         out[("p", p, t)] = v
@@ -1177,7 +1193,10 @@ class Search:
             return " ⊔ ".join(f"{g}/{subs[j].get('имя') or self._name(('obj', subs[j]['≅']))}" for j in im[2])
         if im[0] == "elt":
             c = self.lib.obj[im[1]]["элементы"][im[2]]
-            return ("ещё один элемент" if im[3:] else "элемент") + f" порядка {c['ord']} (класс из {c['size']})"
+            if c.get("имя"):
+                return ("ещё один элемент класса " if im[3:] else "") + c["имя"]
+            o = "бесконечного порядка" if c["ord"] == 0 else f"порядка {c['ord']}"
+            return ("ещё один элемент" if im[3:] else "элемент") + f" {o} (класс из {c['size']})"
         if im[0] == "pt":
             subs = self.lib.obj[im[1][1]]["подгруппы"]
             h = subs[im[1][2][im[2]]]
