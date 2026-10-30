@@ -354,6 +354,8 @@ def run_schemes(a):
             import resource
             resource.setrlimit(resource.RLIMIT_AS, (limit, limit))
         for job in chunk:
+            if _STATE.get("deadline") and time.time() > _STATE["deadline"]:
+                break  # срок вышел: схемы пачки после него не начинаем
             try:
                 _one(job)
             except MemoryError:
@@ -369,6 +371,7 @@ def run_schemes(a):
     running, done = {}, 0
     _STATE["limit"] = a.limit
     deadline = t0 + a.until * 60 if a.until else None
+    _STATE["deadline"] = deadline  # видят и дочерние процессы (fork)
     while queue or running:
         if deadline and time.time() > deadline and queue:
             print(f"срок вышел: не начато схем {sum(len(c) for c in queue)}", file=sys.stderr, flush=True)
