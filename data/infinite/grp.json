@@ -11711,7 +11711,8 @@
     "locally-cyclic": "неабелева",
     "dedekind": "подгруппа ⟨x₀⟩ не нормальна",
     "metabelian": "неразрешима",
-    "class-2": "неразрешима"
+    "class-2": "неразрешима",
+    "aut": "M. Brin, The chameleon groups of Richard J. Thompson: automorphisms and dynamics, Publ. IHES 84 (1996); J. Burillo, S. Cleary, The automorphism group of Thompson's group F (arXiv:1107.4336), теоремы 1.1–1.2"
    },
    "трудно": [
     "hopfian",
@@ -11834,7 +11835,10 @@
      "F′",
      false
     ]
-   ]
+   ],
+   "aut": "AutF",
+   "out": "TwrC2",
+   "почему aut": "M. Brin, The chameleon groups of Richard J. Thompson: automorphisms and dynamics, Publ. IHES 84 (1996); J. Burillo, S. Cleary, The automorphism group of Thompson's group F (arXiv:1107.4336), теоремы 1.1–1.2: Out(F) ≅ (T × T) ⋊ C₂"
   },
   {
    "id": "SL3Z",
@@ -24120,6 +24124,206 @@
    "центр": "все",
    "коммутант": "1",
    "абелианизация": "AutAutCp"
+  },
+  {
+   "id": "TwrC2",
+   "имя": "T ≀ C₂ = (T × T) ⋊ C₂ (= Out F)",
+   "заметка": "Out(F) группы Томпсона F: Aut⁺(F)/F ≅ T × T (Брин), отражение x ↦ 1 − x переставляет множители.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "fin-pres": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": false,
+    "indecomposable": true,
+    "hopfian": true,
+    "linear": false,
+    "polycyclic": false,
+    "amenable": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false
+   },
+   "почему": {
+    "fin-gen": "T к. п., расширение T × T конечной группой",
+    "fin-pres": "T конечно задана (Cannon–Floyd–Parry), конечное расширение T × T",
+    "perfect": "абелианизация C₂: T совершенна, перестановка множителей даёт эпиморфизм на C₂",
+    "centerless": "T без центра, а инволюция переставляет множители",
+    "residually-finite": "содержит T, бесконечную простую",
+    "indecomposable": "нормальные подгруппы — 1, T × T и вся группа (N ∩ T × T нормальна и инвариантна при перестановке; если N ∩ (T × T) = 1, то N ⩽ C(T × T) = 1)",
+    "hopfian": "ядро сюръективного эндоморфизма — нормальная подгруппа: 1, T × T или всё; первые не дают сюръекцию, кроме 1",
+    "linear": "содержит T, а T не линейна",
+    "amenable": "содержит T, а T не аменабельна (содержит PSL₂(ℤ))",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "property-t": "T не обладает (T) (Farley); фактор по T × T конечен — (T) переходило бы на подгруппу конечного индекса",
+    "torsion-free": "инволюция",
+    "metabelian": "содержит простую неабелеву T",
+    "class-2": "неразрешима",
+    "dedekind": "T × 1 не нормальна",
+    "solvable": "содержит T",
+    "simple": "T × T — собственная нормальная",
+    "locally-finite": "содержит ℤ",
+    "locally-cyclic": "неабелева"
+   },
+   "трудно": [
+    "amenable",
+    "property-t",
+    "linear"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "TwrC2"
+    },
+    {
+     "id": "все",
+     "имя": "T ≀ C₂",
+     "≅": "TwrC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "абелианизация": "2:1",
+   "сплетение": [
+    "ThompsonT",
+    "2:1"
+   ],
+   "почему абелианизация": "T совершенна; Gᵃᵇ = (Tᵃᵇ × Tᵃᵇ)_{C₂} × C₂ = C₂"
+  },
+  {
+   "id": "AutF",
+   "имя": "Aut(F) (F — группа Томпсона)",
+   "заметка": "По Брину Aut(F) ≅ нормализатор F в PL₂(ℝ); 1 → F → Aut⁺(F) → T × T → 1, [Aut F : Aut⁺ F] = 2.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "fin-pres": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "torsion-free": false,
+    "periodic": false,
+    "centerless": true,
+    "residually-finite": false,
+    "linear": false,
+    "polycyclic": false,
+    "amenable": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false
+   },
+   "почему": {
+    "fin-gen": "Aut⁺(F) конечно задана (8 образующих, 35 соотношений, Burillo–Cleary, предл. 3.1), индекс 2",
+    "fin-pres": "то же",
+    "torsion-free": "сопряжение отражением x ↦ 1 − x — инволюция",
+    "centerless": "F без центра: централизатор Inn(F) в Aut(F) тривиален",
+    "residually-finite": "содержит F′ — бесконечную простую",
+    "linear": "содержит F",
+    "amenable": "фактор T × T не аменабелен",
+    "solvable": "содержит F",
+    "simple": "Inn(F) — собственная нормальная",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима",
+    "dedekind": "содержит F, не дедекиндову",
+    "locally-finite": "содержит ℤ",
+    "locally-cyclic": "неабелева"
+   },
+   "трудно": [
+    "fin-gen",
+    "fin-pres",
+    "amenable"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "AutF"
+    },
+    {
+     "id": "Inn",
+     "имя": "Inn(F) ≅ F",
+     "≅": "ThompsonF",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "TwrC2",
+     "почему": "Out(F) = Aut(F)/Inn(F) ≅ T ≀ C₂ бесконечна"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(F)",
+     "≅": "AutF",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1"
   }
  ],
  "семейства": [
