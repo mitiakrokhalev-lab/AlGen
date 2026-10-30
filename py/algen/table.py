@@ -418,7 +418,12 @@ def run_schemes(a):
     def worker(chunk):
         if limit:
             import resource
-            resource.setrlimit(resource.RLIMIT_AS, (limit, limit))
+            vm = 0
+            with open("/proc/self/status") as fh:
+                for line in fh:
+                    if line.startswith("VmSize:"):
+                        vm = int(line.split()[1]) * 1024
+            resource.setrlimit(resource.RLIMIT_AS, (vm + limit, vm + limit))
         for job in chunk:
             if _STATE.get("deadline") and time.time() > _STATE["deadline"]:
                 break  # срок вышел: схемы пачки после него не начинаем
