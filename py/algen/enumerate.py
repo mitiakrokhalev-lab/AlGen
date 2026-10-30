@@ -50,6 +50,7 @@ SKIP = set()
 MOR_PROPS = ("injective", "surjective", "iso", "zero-mor")
 RELATIONS = True  # атомы-отношения между термами схемы (⩽, =, ≅)
 DIVERSE = 4  # моделей «наоборот» в _derive
+REFRESH = 200  # выводов строк до пересоздания решателя
 # Атомы, значение которых известно меньше чем в DEFER доле строк, откладываются:
 # условия с ними — почти сплошь «неизвестно» (шум), а стоят решателя каждое.
 # Они возвращаются в перебор, когда библиотека заполнится.
@@ -453,6 +454,11 @@ class SchemeForm(Form):
                 row = derived.get(key)
                 if row is None:
                     row = derived[key] = self._derive(f)
+                    # временные клаузы «хотя бы один меняет значение» копятся в
+                    # решателе; свежий решатель через каждые REFRESH выводов
+                    if REFRESH and len(derived) % REFRESH == 0:
+                        self.sc.s.delete()
+                        self.sc.s = T.solver()
                 rows[k].append(row)
                 full = full or row
             self.envs.append(dict(env))
