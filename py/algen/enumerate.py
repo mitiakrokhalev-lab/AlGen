@@ -908,6 +908,38 @@ def minimal(alive):
     return out
 
 
+def pair_minimal(form, mins):
+    """Условия с парной посылкой «P(A) и P(B)»: минимальность и по литералам —
+    если без одной половины пары цель всё ещё не опровергается, условие не
+    минимально («A тривиальна и A, B абелевы ⇒ …» — хватает «B абелева»)."""
+    m, pairs = form.m, form.pair_atoms
+    out = {}
+    for (prem, g), sup in mins.items():
+        if not any(j // 2 in pairs for j in prem):
+            out[prem, g] = sup
+            continue
+        cols = []
+        for j in prem:
+            if j // 2 in pairs:
+                _, p, x, y, pol = form.atoms[j // 2]
+                cols += [2 * form.index[("p", p, x)] + (0 if pol else 1),
+                         2 * form.index[("p", p, y)] + (0 if pol else 1)]
+            else:
+                cols.append(j)
+        cols += list(form.fixed)
+        redundant = False
+        for c in set(cols) - set(form.fixed):
+            rest = [x for x in cols if x != c]
+            rows = m[:, rest].all(axis=1) if rest else np.ones(m.shape[0], dtype=bool)
+            if rows.any() and not m[rows, g ^ 1].any():
+                redundant = True
+                break
+        if not redundant:
+            out[prem, g] = sup
+    form.n_pair_dropped = len(mins) - len(out)
+    return out
+
+
 def generic_filter(form, mins):
     """Условие только о свойствах одного терма t (не переменной) — по сути
     условие о группах вообще. Оставляем его в схеме терма, только если общая
@@ -961,6 +993,8 @@ def run(max_prem, lib=None, vocab=None, form=None):
             print(f"парные атомы не добавлены: {e!r}", file=sys.stderr)
     alive, empty = enumerate_form(form, max_prem)
     mins = minimal(alive)
+    if getattr(form, "pair_atoms", None):
+        mins = pair_minimal(form, mins)
     mins = generic_filter(form, mins)
     report = []
     for (prem, g), support in mins.items():
