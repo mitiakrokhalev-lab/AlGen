@@ -12,10 +12,12 @@ on:
 
 env:
   ARGS: "--без bounded-exponent"
-  BASES: "G,GN,AB"   # перебор схем; таблицы строятся для всех баз
+  BASES: "G,GN,AB,GHF,GMN,GHK,Fam"   # перебор схем; таблицы строятся для всех баз
   K: "2"             # посылок в схеме (или «k0,k1,k2» по числу верхних термов)
-  UNTIL: "200"       # минут: после этого часть не начинает новых схем и выгружает результат
+  UNTIL: "300"       # минут: после этого часть не начинает новых схем и выгружает результат
   LIMIT: "600"       # секунд на одну схему (дольше — «таймаут», схема в сводке отдельно)
+  DEFER: "0.15"      # откладывать атомы, известные меньше чем в этой доле строк
+  PREV_RUN: ""       # продолжение: номер прошлого запуска — его таблицы и готовые схемы берутся, а не считаются заново
 
 jobs:
   build:
@@ -32,10 +34,12 @@ jobs:
           python-version: "3.12"
       - run: pip install numpy python-sat pyyaml
       - name: таблицы
+        if: env.PREV_RUN == ''
         run: |
           cd py
           python3 -m algen.table строить-все --задание ${{ matrix.job }}/20 --каталог ../tab --нитей 4 $ARGS
       - uses: actions/upload-artifact@v4
+        if: env.PREV_RUN == ''
         with:
           name: tab-${{ matrix.job }}
           path: tab
@@ -44,6 +48,9 @@ jobs:
 
   enum:
     needs: build
+    permissions:
+      actions: read
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -57,14 +64,31 @@ jobs:
           python-version: "3.12"
       - run: pip install numpy python-sat pyyaml
       - uses: actions/download-artifact@v4
+        if: env.PREV_RUN == ''
         with:
           pattern: tab-*
           path: tab
           merge-multiple: true
+      - uses: actions/download-artifact@v4
+        if: env.PREV_RUN != ''
+        with:
+          pattern: tab-*
+          path: tab
+          merge-multiple: true
+          run-id: ${{ env.PREV_RUN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        if: env.PREV_RUN != ''
+        continue-on-error: true
+        with:
+          name: part-${{ matrix.part }}
+          path: out
+          run-id: ${{ env.PREV_RUN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: перебор
         run: |
           cd py
-          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 4.5 --посылок $K --до $UNTIL --предел $LIMIT $ARGS
+          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 4.5 --посылок $K --до $UNTIL --предел $LIMIT --отложить $DEFER $ARGS
       - uses: actions/upload-artifact@v4
         if: always()
         with:
