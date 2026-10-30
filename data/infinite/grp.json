@@ -31,7 +31,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "co-hopfian": "x ↦ 2x",
@@ -43,7 +46,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -268,7 +274,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "co-hopfian": "x ↦ 2x",
@@ -280,7 +289,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -534,7 +546,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "co-hopfian": "x ↦ 2x",
@@ -545,7 +560,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "содержит ℤ²"
+    "locally-cyclic": "содержит ℤ²",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -776,7 +794,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "фраттини": "у абелевой A подгруппа Фраттини — ⋂ pA",
@@ -788,7 +809,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -1043,7 +1067,10 @@
     "left-orderable": false,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "фраттини": "Φ(A × B) ⊆ Φ(A) × Φ(B) = 1",
@@ -1056,7 +1083,10 @@
     "left-orderable": "есть кручение",
     "bi-orderable": "есть кручение",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨τ⟩ × ℤ, τ ∈ A₅ инволюция не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -1511,7 +1541,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "унипотентные матрицы 2×2 над ℚ",
@@ -1526,7 +1559,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -1692,7 +1728,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": true
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "корни из 1 в ℂ*",
@@ -1708,7 +1747,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "периодическая разрешимая"
+    "locally-finite": "периодическая разрешимая",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -1914,7 +1956,10 @@
      "C3",
      false
     ]
-   ]
+   ],
+   "aut": "ZhatU",
+   "out": "ZhatU",
+   "почему aut": "End(ℚ/ℤ) = ∏_p End(ℤ(p^∞)) = ∏ ℤ_p = ℤ̂, Aut = ℤ̂^×; абелева, Out = Aut"
   },
   {
    "id": "QmodZ2",
@@ -1949,7 +1994,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": true
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "корни из 1 нечётной степени в ℂ*",
@@ -1967,7 +2015,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "периодическая разрешимая"
+    "locally-finite": "периодическая разрешимая",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -2059,7 +2110,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": true
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром",
@@ -2076,7 +2130,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "периодическая разрешимая"
+    "locally-finite": "периодическая разрешимая",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -2206,7 +2263,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "абелева без кручения мощности ⩽ 𝔠 вкладывается в ℚ^(𝔠) ≅ ℝ, а ℝ — в унипотентные матрицы над ℝ",
@@ -2220,7 +2280,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -2286,7 +2349,10 @@
    "центр": "все",
    "коммутант": "0",
    "абелианизация": "R",
-   "фраттини": "все"
+   "фраттини": "все",
+   "aut": "AutR",
+   "out": "AutR",
+   "почему aut": "аддитивные биекции ℝ ℚ-линейны: Aut = GL_ℚ(ℝ); абелева, Out = Aut"
   },
   {
    "id": "U",
@@ -2318,7 +2384,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром",
@@ -2331,7 +2400,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -2474,7 +2546,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "x ↦ x² (x ↦ 2x) сюръективно с нетривиальным ядром",
@@ -2487,7 +2562,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -2636,7 +2714,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "ℚ* ≅ C₂ × ⊕ℤ, сдвиг на ⊕ℤ",
@@ -2649,7 +2730,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -2763,7 +2847,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром",
@@ -2777,7 +2864,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -2866,7 +2956,10 @@
     "hopfian": true,
     "polycyclic": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "co-hopfian": "a ↦ a², b ↦ b² — инъекция с собственным образом",
@@ -2879,7 +2972,10 @@
     "hopfian": "свободная конечного ранга хопфова (Нильсен; или к. п. ф. а., Мальцев)",
     "polycyclic": "неразрешима",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨a⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -3297,7 +3393,10 @@
     "residually-nilpotent": true,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром",
@@ -3310,7 +3409,10 @@
     "residually-nilpotent": "Магнус",
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨x₁⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -3450,7 +3552,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "сдвиг координат (образующих) на одну влево сюръективен с нетривиальным ядром",
@@ -3464,7 +3569,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -3676,7 +3784,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "фраттини": "⟨r⟩ и ⟨rᵖ, s⟩ (p нечётное простое) максимальны, их пересечение тривиально",
@@ -3688,7 +3799,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨s⟩ не нормальна",
+    "metabelian": "G′ = ⟨r²⟩ абелев",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -3947,7 +4061,13 @@
      "⟨r², s⟩",
      false
     ]
-   ]
+   ],
+   "произведения": {
+    "2:1": "DinfxC2"
+   },
+   "почему произведения": {
+    "2:1": "запись DinfxC2"
+   }
   },
   {
    "id": "Zpow",
@@ -3981,7 +4101,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "абелева без кручения мощности ⩽ 𝔠 вкладывается в ℚ^(𝔠) ≅ ℝ, а ℝ — в унипотентные матрицы над ℝ",
@@ -3996,7 +4119,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -4086,7 +4212,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": true
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "элементарная абелева 2-группа мощности ⩽ 𝔠 — аддитивная группа поля характеристики 2, то есть унипотентные матрицы над ним",
@@ -4103,7 +4232,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "периодическая разрешимая"
+    "locally-finite": "периодическая разрешимая",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -4305,7 +4437,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": true
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "унитреугольные [[1, a], [0, 1]], a ∈ 𝔽₃[t]",
@@ -4321,7 +4456,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "периодическая разрешимая"
+    "locally-finite": "периодическая разрешимая",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -4428,7 +4566,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "эндоморфизмы — ℚ-линейные отображения ℚ²",
@@ -4441,7 +4582,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -4570,7 +4714,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "сюръективный эндоморфизм ℚ-линеен (ℤ-линейное отображение делимых групп без кручения), а сюръективное линейное отображение ℚ³ → ℚ³ инъективно",
@@ -4582,7 +4729,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -4685,7 +4835,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "по определению подгруппа GL₃(ℚ)",
@@ -4698,7 +4851,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа {(1 a 0; 0 1 0; 0 0 1)} не нормальна",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ = Z(G) = {e₁₃}"
    },
    "подгруппы": [
     {
@@ -4792,7 +4948,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "divisible": "(x, y, z)ⁿ = (nx, ny, nz + C(n, 2)xy) решается относительно x, y, z",
@@ -4805,7 +4964,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "{(1 a 0; 0 1 0; 0 0 1)} не нормальна: сопряжение с (1 0 0; 0 1 b; 0 0 1) даёт угол −ab ≠ 0",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ = Z(G) = {e₁₃}"
    },
    "подгруппы": [
     {
@@ -4888,7 +5050,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "divisible": "u = exp(X) для нильпотентной X, и u = exp(X/n)ⁿ, а exp(X/n) рационален",
@@ -4903,7 +5068,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит UT₃(ℚ) (левый верхний блок), где ⟨e₁₂⟩ не нормальна",
+    "metabelian": "G′ — матрицы с нулевой первой наддиагональю, а они коммутируют (произведение таких eᵢⱼ в 4 × 4 нулевое)",
+    "class-2": "e₂₄ = [e₂₃, e₃₄] ∈ G′ не централен: [e₁₂, e₂₄] = e₁₄"
    },
    "подгруппы": [
     {
@@ -5013,7 +5181,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": true,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "residually-finite": "нетривиальная нормальная подгруппа нильпотентной группы пересекает центр C₂ = ⟨z⟩, то есть содержит z; подгруппы конечного индекса нетривиальны",
@@ -5029,7 +5200,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "периодическая разрешимая",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит ⟨x₁, y₁⟩ ≅ D₈, где ⟨x₁⟩ не нормальна",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ = Z(G) = ⟨z⟩"
    },
    "подгруппы": [
     {
@@ -5115,7 +5289,10 @@
     "amenable": true,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "linear": "кристаллографическая группа на плоскости, подгруппа аффинной GL₃(ℝ)",
@@ -5128,7 +5305,10 @@
     "amenable": "разрешима",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨y⟩ не нормальна",
+    "metabelian": "G′ ⩽ ⟨x⟩, фактор K/⟨x⟩ ≅ ℤ",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -5377,7 +5557,8 @@
    ],
    "фраттини": "0",
    "out": "4:2",
-   "почему aut": "⟨x⟩ характеристична, поэтому автоморфизм — x ↦ x^ε, y ↦ xᵏy^δ (ε, δ = ±1, k ∈ ℤ, все допустимы); внутренние — ε любое, k чётное, δ = 1; Out ≅ C₂ × C₂ (порождён y ↦ xy и y ↦ y⁻¹, оба инволютивны по модулю Inn); Aut ≅ D∞ × C₂"
+   "почему aut": "⟨x⟩ характеристична, поэтому автоморфизм — x ↦ x^ε, y ↦ xᵏy^δ (ε, δ = ±1, k ∈ ℤ, все допустимы); внутренние — ε любое, k чётное, δ = 1; Out ≅ C₂ × C₂ (порождён y ↦ xy и y ↦ y⁻¹, оба инволютивны по модулю Inn); Aut ≅ D∞ × C₂",
+   "aut": "DinfxC2"
   },
   {
    "id": "C2xF2",
@@ -5410,7 +5591,10 @@
     "left-orderable": false,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "абелианизация": "C₂ × F₂ᵃᵇ = C₂ × ℤ²",
@@ -5424,7 +5608,10 @@
     "left-orderable": "есть кручение",
     "bi-orderable": "есть кручение",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа 1 × ⟨a⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -5763,7 +5950,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "hopfian": "нормальные подгруппы — N₁ × N₂ (A₅ проста и без центра); фактор по 1 × H, H ≠ 0, имеет центр ℚ/H с кручением, по A₅ × H — абелев, поэтому сюръекция A₅ × ℚ на себя инъективна",
@@ -5776,7 +5966,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит A₅ (проста, ⟨(1 2)(3 4)⟩ не нормальна)",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -5888,7 +6081,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": true
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "indecomposable": "прямое произведение по определению",
@@ -5904,7 +6100,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "периодическая разрешимая"
+    "locally-finite": "периодическая разрешимая",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -6001,7 +6200,10 @@
     "residually-nilpotent": false,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "indecomposable": "GL₂(ℤ) виртуально свободна, поэтому нет ℤ², и один множитель конечен; наибольшая конечная нормальная подгруппа {±E}, но её дополнение индекса 2 невозможно: оба характера GL₂(ℤ) → C₂ тривиальны на −E",
@@ -6013,7 +6215,10 @@
     "residually-nilpotent": "содержит S₃",
     "bi-orderable": "есть кручение",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨diag(1, −1)⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -6258,7 +6463,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "residually-finite": "⋂ Γ(n) = 1, SL₂(ℤ)/Γ(n) ⊂ SL₂(ℤ/n) конечны",
@@ -6275,7 +6483,10 @@
     "polycyclic": "неразрешима",
     "locally-finite": "есть элемент бесконечного порядка",
     "locally-cyclic": "неабелева",
-    "free": "есть кручение"
+    "free": "есть кручение",
+    "dedekind": "подгруппа ⟨(0 −1; 1 0)⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -6540,7 +6751,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "indecomposable": "ℤ₂/2ℤ₂ ≅ C₂, поэтому в A ⊕ B один слагаемый 2-делим; он и q-делим для нечётных q, т. е. делим, а ℤ₂ редуцирована (⋂ 2ⁿℤ₂ = 0)",
@@ -6556,7 +6770,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -6658,7 +6875,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "divisible": "exp: sl₂(ℝ) → PSL₂(ℝ) сюръективна: из A и −A след одной ⩾ 0 > −2, а такие элементы SL₂(ℝ) лежат в образе exp; x = exp(X) ⇒ x = exp(X/n)ⁿ (в старой библиотеке было False)",
@@ -6671,7 +6891,10 @@
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа поворот порядка 2 не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -6840,7 +7063,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "hopfian": "a ↦ a², t ↦ t — эпиморфизм с нетривиальным ядром [tat⁻¹, a] (Баумслаг–Солитэр, 1962)",
@@ -6850,7 +7076,10 @@
     "property-t": "фактор ℤ",
     "residually-nilpotent": "к. п. и не ф. а., а к. п. нильпотентные группы ф. а.",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨a⟩ ≅ ℤ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -6940,7 +7169,10 @@
     "amenable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "объединение строго возрастающей цепочки амальгам ⟨a₋ₙ, …, aₙ⟩",
@@ -6951,7 +7183,10 @@
     "amenable": "иначе BS(2, 3) — расширение аменабельной с помощью ℤ — была бы аменабельна",
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "неабелева без кручения: неабелева дедекиндова группа периодична (Дедекинд — Бэр)",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -7017,7 +7252,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "linear": "содержит ⊕ (C₂ × C₂) и ⊕ C₃ на непересекающихся носителях; бесконечная элементарная абелева p-подгруппа для двух разных p; в характеристике, отличной от p, она диагонализуема, и её ранг ограничен степенью",
@@ -7032,7 +7270,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа A₅ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -7302,7 +7543,10 @@
     "residually-nilpotent": false,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "property-t": "почти свободна и бесконечна",
@@ -7314,7 +7558,10 @@
     "residually-nilpotent": "в нильпотентном факторе образы C₂ и C₃ коммутируют, поэтому γₙ = γ₂ ≠ 1",
     "bi-orderable": "есть кручение",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨S⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -7587,7 +7834,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": true
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "элементарная абелева 2-группа мощности ⩽ 𝔠 — аддитивная группа поля характеристики 2, то есть унипотентные матрицы над ним",
@@ -7603,7 +7853,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "периодическая разрешимая"
+    "locally-finite": "периодическая разрешимая",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -7723,7 +7976,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "residually-finite": "содержит бесконечную простую PSL₂(ℚ), а подгруппа ф. а. группы ф. а.",
@@ -7737,7 +7993,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит простую PSL₂(ℚ), где ⟨±(1 1; 0 1)⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -7814,7 +8073,11 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false,
+    "solvable": false
    },
    "почему": {
     "fin-gen": "подгруппа конечного индекса к. п. группы",
@@ -7830,7 +8093,11 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "к. п. бесконечная",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "к. п. (индекс 8 в 𝒢), бесконечна и периодична, а у периодической дедекиндовой ⟨x, y⟩ = ⟨x⟩⟨y⟩ конечна, то есть она локально конечна",
+    "metabelian": "𝒢/𝒢′ абелев, и при метабелевом 𝒢′ группа 𝒢 была бы разрешима",
+    "class-2": "не метабелева",
+    "solvable": "𝒢/𝒢′ абелев, разрешимость 𝒢′ влекла бы разрешимость 𝒢"
    },
    "трудно": [
     "hopfian",
@@ -7897,7 +8164,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "simple": "PSL₂(K) проста при |K| > 3",
@@ -7913,7 +8183,10 @@
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "проста и неабелева: ⟨±(1 1; 0 1)⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -7981,7 +8254,10 @@
     "residually-nilpotent": true,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "indecomposable": "группа Григорчука почти бесконечна (все собственные факторы конечны), а A × B с бесконечной G даёт бесконечный фактор",
@@ -7994,7 +8270,10 @@
     "residually-nilpotent": "финитно-2: факторы по стабилизаторам уровней",
     "bi-orderable": "есть кручение",
     "locally-finite": "к. п. бесконечная",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨a⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -8141,7 +8420,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "residually-finite": "⋂ 3ⁿℤ[1/2] = 0 и ℤ[1/2]/3ⁿℤ[1/2] ≅ C_{3ⁿ}",
@@ -8159,7 +8441,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -8297,7 +8582,10 @@
     "left-orderable": true,
     "co-hopfian": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "residually-finite": "к. п. линейная группа (вкладывается в GL₂(ℚ)), теорема Мальцева",
@@ -8315,7 +8603,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "co-hopfian": "(a, 2ᵏ) ↦ (3a, 2ᵏ)",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨t⟩ не нормальна",
+    "metabelian": "G′ = ℤ[1/2] абелев",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -8537,7 +8828,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "simple": "SO(3) абстрактно проста (классический факт, напр. Хамфрис; доказательство через то, что нормальная подгруппа с нетривиальным вращением содержит все вращения на малые углы)",
@@ -8553,7 +8847,10 @@
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа вращения вокруг одной оси не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -8642,7 +8939,10 @@
     "left-orderable": false,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "perfect": "абелианизация ℤ",
@@ -8655,7 +8955,10 @@
     "left-orderable": "есть кручение",
     "bi-orderable": "есть кручение",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит SL(2, 5), где силовская 3-подгруппа не нормальна (их 10)",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -8769,7 +9072,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "фраттини": "Φ(A × B) ⊆ Φ(A) × Φ(B) = 1",
@@ -8781,7 +9087,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨τ⟩ × ℤ не нормальна",
+    "metabelian": "G′ = C₃",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -9155,7 +9464,9 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "metabelian": true
+    "metabelian": true,
+    "dedekind": false,
+    "class-2": false
    },
    "почему": {
     "metabelian": "C₃ и G/C₃ ≅ ℤ абелевы",
@@ -9175,7 +9486,9 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨t⟩ не нормальна",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -9403,7 +9716,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "абелианизация": "S₃ᵃᵇ × ℤ² = C₂ × ℤ²",
@@ -9416,7 +9732,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит S₃ (⟨(1 2)⟩ не нормальна)",
+    "metabelian": "G′ = C₃",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -9565,7 +9884,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": true,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "residually-finite": "подгруппа ∏S₃, а произведение конечных ф. а.",
@@ -9583,7 +9905,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "периодическая разрешимая",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит S₃ (⟨(1 2)⟩ не нормальна)",
+    "metabelian": "G′ = ⊕C₃",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -9671,7 +9996,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "residually-finite": "возьмём неперестановочные a, a′ ∈ S₃ в координате 0. В любом конечном факторе образ сдвига b имеет конечный порядок m, поэтому [a, a′] и [a, b⁻ᵐa′bᵐ] = 1 имеют один образ: [a, a′] ≠ 1 лежит в ядре каждого конечного фактора (K. W. Gruenberg, Residual properties of infinite soluble groups, 1957)",
@@ -9687,7 +10015,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит S₃ (⟨(1 2)⟩ не нормальна)",
+    "metabelian": "G′ неабелев: содержит 3-цикл в слагаемом 0 и τ₀τ₁ (пару транспозиций), они не коммутируют",
+    "class-2": "не метабелева"
    },
    "подгруппы": [
     {
@@ -9799,7 +10130,10 @@
     "residually-nilpotent": false,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "residually-finite": "к. п. линейная (Мальцев); или через конгруэнц-подгруппы",
@@ -9816,7 +10150,10 @@
     "residually-nilpotent": "содержит S₃ (перестановочные матрицы)",
     "bi-orderable": "есть кручение",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит SL₂(ℤ) = Sp₂(ℤ) (блок), где ⟨(1 1; 0 1)⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -9932,7 +10269,10 @@
     "bi-orderable": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "residually-finite": "P. Deligne, Extensions centrales non résiduellement finies de groupes arithmétiques, C. R. Acad. Sci. 1978",
@@ -9947,7 +10287,10 @@
     "bi-orderable": "есть кручение",
     "residually-nilpotent": "к. п. и не ф. а., а к. п. нильпотентные группы ф. а.",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "фактор Sp₄(ℤ) не дедекиндов (содержит SL₂(ℤ)), а фактор дедекиндовой группы дедекиндов",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -10029,7 +10372,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "residually-finite": "перестановки базиса дают Sym(ℕ) ⊃ A_∞, бесконечную простую",
@@ -10045,7 +10391,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит GL₃(𝔽₂) (на трёх координатах) ⊇ S₃",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -10125,7 +10474,10 @@
     "left-orderable": false,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "residually-finite": "Aut к. п. ф. а. группы ф. а. (G. Baumslag, 1963)",
@@ -10141,7 +10493,10 @@
     "left-orderable": "есть кручение",
     "bi-orderable": "есть кручение",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит Inn(F₃) ≅ F₃, где ⟨x₁⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "трудно": [
     "hopfian",
@@ -10163,6 +10518,23 @@
       "finite-index": false
      },
      "фактор": "AutF3"
+    },
+    {
+     "id": "Inn",
+     "имя": "Inn(F₃)",
+     "≅": "F3",
+     "свойства": {
+      "normal": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "OutF3",
+     "почему": {
+      "maximal": "Inn ⊊ Inn·⟨σ⟩ ⊊ Aut(F₃) для перестановки базиса σ порядка 2: Out бесконечна",
+      "finite-index": "Out(F₃) ↠ GL₃(ℤ) бесконечна"
+     }
     },
     {
      "id": "коммутант",
@@ -10235,7 +10607,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": true
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "в характеристике 0 конечная абелева подгруппа GLₙ диагонализуема, поэтому p-ранг ⩽ n, а здесь p-ранг бесконечен; в характеристике p подгруппа ℤ(q^∞) для q ≠ p тоже диагонализуема, и q-ранг ограничен",
@@ -10251,7 +10626,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "периодическая разрешимая"
+    "locally-finite": "периодическая разрешимая",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -10341,7 +10719,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "hopfian": "сдвиг слагаемых сюръективен с ядром A₅",
@@ -10357,7 +10738,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит A₅ (проста, ⟨(1 2)(3 4)⟩ не нормальна)",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -10398,7 +10782,10 @@
    ],
    "абелианизация": "1:1",
    "коммутант": "все",
-   "фраттини": "1"
+   "фраттини": "1",
+   "aut": "AutSumA5",
+   "out": "OutSumA5",
+   "почему aut": "минимальные нормальные подгруппы — слагаемые A₅⁽ⁱ⁾, автоморфизм их переставляет и на каждом действует элементом Aut(A₅) = S₅: Aut ≅ (∏S₅) ⋊ Sym(ℕ); Inn ≅ ⊕A₅ (без центра)"
   },
   {
    "id": "ThompsonF1",
@@ -10429,7 +10816,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "simple": "J. W. Cannon, W. J. Floyd, W. R. Parry, Introductory notes on Richard Thompson's groups, 1996, теорема 4.5",
@@ -10445,7 +10835,10 @@
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа элементы F с носителем в [1/4, 3/4] не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "трудно": [
     "simple",
@@ -10553,7 +10946,10 @@
     "amenable": true,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "divisible": "корень n-й степени из x ↦ ax + b — x ↦ a^{1/n}x + b′ с подходящим b′",
@@ -10569,7 +10965,10 @@
     "amenable": "разрешима",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа x ↦ ax, a > 0 не нормальна",
+    "metabelian": "G′ ⩽ ℝ (сдвиги)",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -10669,7 +11068,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "perfect": "коммутант отображается на PSL₂(ℝ), а коммутант связной группы Ли с совершенной алгеброй Ли — вся группа",
@@ -10685,7 +11087,10 @@
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "фактор PSL₂(ℝ) не дедекиндов, а фактор дедекиндовой группы дедекиндов",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "трудно": [],
    "подгруппы": [
@@ -10755,7 +11160,10 @@
     "linear": false,
     "polycyclic": false,
     "residually-nilpotent": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "divisible": "В. С. Губа, Конечно порождённая полная группа, Изв. АН СССР, 1986",
@@ -10764,7 +11172,10 @@
     "linear": "к. п. линейная ф. а. (Мальцев), а делимая ф. а. группа тривиальна",
     "polycyclic": "полициклическая ф. а., а делимая ф. а. группа тривиальна",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "неабелева (совершенная, нетривиальная) без кручения: неабелева дедекиндова периодична (Дедекинд — Бэр)",
+    "metabelian": "совершенная и нетривиальная, поэтому неразрешима",
+    "class-2": "не метабелева"
    },
    "трудно": [
     "divisible",
@@ -10850,7 +11261,10 @@
     "property-t": false,
     "co-hopfian": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "indecomposable": "свободная группа ранга ⩾ 2 без центра, а прямое произведение двух нетривиальных подгрупп свободной группы содержит ℤ²",
@@ -10864,7 +11278,10 @@
     "property-t": "фактор ℤ³",
     "co-hopfian": "xᵢ ↦ xᵢ²",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨x₁⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -10979,7 +11396,7 @@
     "Z"
    ],
    "aut": "AutF3",
-   "почему aut": "по определению",
+   "почему aut": "Aut(F₃) — по определению; Out(F₃) = Aut(F₃)/Inn(F₃), Inn ≅ F₃ (без центра)",
    "абелианизация": "Z3",
    "центр": "1",
    "фраттини": "1",
@@ -11015,7 +11432,8 @@
      "cent": "⟨x₁⟩",
      "почему": "x₁ ∉ F₃′; x₂x₁x₂⁻¹ не перестановочен с x₁; в свободной группе x ~ x⁻¹ только при x = 1; C(x) — циклическая, порождена корнем из x"
     }
-   ]
+   ],
+   "out": "OutF3"
   },
   {
    "id": "F4",
@@ -11046,7 +11464,10 @@
     "property-t": false,
     "co-hopfian": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "indecomposable": "свободная группа ранга ⩾ 2 без центра, а прямое произведение двух нетривиальных подгрупп свободной группы содержит ℤ²",
@@ -11060,7 +11481,10 @@
     "property-t": "фактор ℤ⁴",
     "co-hopfian": "xᵢ ↦ xᵢ²",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "свободная неабелева: ⟨x₁⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -11152,7 +11576,10 @@
     "property-t": false,
     "co-hopfian": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "indecomposable": "свободная группа ранга ⩾ 2 без центра, а прямое произведение двух нетривиальных подгрупп свободной группы содержит ℤ²",
@@ -11166,7 +11593,10 @@
     "property-t": "фактор ℤ⁵",
     "co-hopfian": "xᵢ ↦ xᵢ²",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "свободная неабелева: ⟨x₁⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -11258,7 +11688,10 @@
     "left-orderable": true,
     "co-hopfian": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "residually-finite": "ядро конечного фактора пересекает простую бесконечную F′ по подгруппе конечного индекса, то есть содержит F′; поэтому F′ ≠ 1 лежит во всех ядрах",
@@ -11275,7 +11708,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "co-hopfian": "сопряжение гомеоморфизмом [0, 1] → [0, 1/2], продолженное тождественно на [1/2, 1]",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨x₀⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "трудно": [
     "hopfian",
@@ -11429,7 +11865,10 @@
     "bi-orderable": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "perfect": "порождается элементарными матрицами, а eᵢⱼ(1) = [eᵢₖ(1), eₖⱼ(1)] при n ⩾ 3",
@@ -11446,7 +11885,10 @@
     "bi-orderable": "есть кручение",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨diag(−1, −1, 1)⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -11660,7 +12102,10 @@
     "indecomposable": true,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "simple": "А. Ю. Ольшанский, Бесконечная группа с подгруппами простых порядков, Изв. АН СССР, 1980",
@@ -11679,7 +12124,10 @@
     "indecomposable": "проста",
     "bi-orderable": "есть кручение",
     "locally-finite": "к. п. бесконечная",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨x⟩ ≅ C_p не нормальна",
+    "metabelian": "проста и неабелева, поэтому неразрешима",
+    "class-2": "не метабелева"
    },
    "трудно": [
     "amenable",
@@ -11777,7 +12225,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "фактор ℚ* не конечно порождён",
@@ -11794,7 +12245,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа стабилизатор 0 (x ↦ ax) не нормальна",
+    "metabelian": "G′ = ℚ (сдвиги)",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -11961,7 +12415,10 @@
      "сдвиги",
      true
     ]
-   ]
+   ],
+   "aut": "AffQ",
+   "out": "1:1",
+   "почему aut": "N = ℚ = G′ характеристична; α|N — умножение на u ∈ ℚ*, после сопряжения m_u⁻¹ α|N = id; тогда α(m_a) = t_{c_a}m_a, c_{ab} = c_a + a c_b = c_b + b c_a, откуда c_a = (a − 1)c₂, и α — сопряжение сдвигом на −c₂. Aut = Inn ≅ Aff(ℚ) (центр 1), Out = 1"
   },
   {
    "id": "DihPruf2",
@@ -11996,7 +12453,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": true,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "nilpotent": "ступень подгрупп Dih(C_{2ⁿ}) растёт с n",
@@ -12015,7 +12475,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "периодическая разрешимая",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨s⟩ не нормальна",
+    "metabelian": "G′ = ℤ(2^∞) абелев",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -12181,7 +12644,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "divisible": "отражения — инволюции, а квадраты лежат в ℚ",
@@ -12198,7 +12664,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨s⟩ не нормальна",
+    "metabelian": "G′ = ℚ абелев",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -12313,7 +12782,10 @@
     "left-orderable": true,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "по определению подгруппа GL₃(ℤ)",
@@ -12327,7 +12799,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨x⟩ не нормальна",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ = Z(G) = ⟨z⟩"
    },
    "подгруппы": [
     {
@@ -12512,7 +12987,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "divisible": "G/Z(G) ≅ ℤ² не делима",
@@ -12527,7 +13005,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит UT₃(ℤ), где ⟨x⟩ не нормальна",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ ⩽ {c e₁₃} = Z(G)"
    },
    "подгруппы": [
     {
@@ -12637,7 +13118,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "indecomposable": "если UT₄(ℤ) = A × B, то ℤ ≅ Z(G) = Z(A) × Z(B), так что, скажем, Z(B) = 1; нильпотентная группа без центра тривиальна",
@@ -12649,7 +13133,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит UT₃(ℤ), где ⟨x⟩ не нормальна",
+    "metabelian": "G′ — матрицы с нулевой первой наддиагональю, а они коммутируют (произведение таких eᵢⱼ в 4 × 4 нулевое)",
+    "class-2": "e₂₄ = [e₂₃, e₃₄] ∈ G′ не централен: [e₁₂, e₂₄] = e₁₄"
    },
    "подгруппы": [
     {
@@ -12771,7 +13258,10 @@
     "co-hopfian": false,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "linear": "f ↦ (1 f; 0 1), t ↦ (t 0; 0 1) над 𝔽₂(t)",
@@ -12789,7 +13279,10 @@
     "co-hopfian": "f(t) tⁿ ↦ f(t³) t³ⁿ",
     "bi-orderable": "есть кручение",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨t⟩ не нормальна",
+    "metabelian": "база ⊕C₂ абелева, фактор ℤ",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -13078,7 +13571,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "simple": "образ Gᵢ в Sym(Gᵢ) при вложении Кэли лежит в Alt(Gᵢ) (циклы элемента порядка m — |Gᵢ|/m циклов длины m, их число чётно), поэтому U — объединение цепочки простых Alt(Gᵢ)",
@@ -13095,7 +13591,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа A₅ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -13228,7 +13727,10 @@
     "bi-orderable": false,
     "residually-nilpotent": true,
     "locally-cyclic": true,
-    "property-t": true
+    "property-t": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "p-group": "порядок p",
@@ -13245,7 +13747,10 @@
     "bi-orderable": "есть кручение",
     "residually-nilpotent": "нильпотентна",
     "locally-cyclic": "циклическая",
-    "property-t": "конечна"
+    "property-t": "конечна",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -13314,7 +13819,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "perfect": "[diag(2, ½), e₁₂(c)] = e₁₂(3c), так что все элементарные матрицы — коммутаторы",
@@ -13330,7 +13838,10 @@
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "фактор SL₂(ℂ) (xᵢ ↦ 0) не дедекиндов: ⟨(1 1; 0 1)⟩ не нормальна; фактор дедекиндовой дедекиндов",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -13416,7 +13927,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "hopfian": "отбросить первую координату и сдвинуть остальные — сюръекция с ядром SL(2, 5)",
@@ -13432,7 +13946,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит SL(2, 5), где силовская 3-подгруппа не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -13547,7 +14064,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "в линейной группе убывающие цепочки централизаторов стабилизируются (централизатор — пересечение с замкнутым по Зарисскому), а C(H₁) ⊋ C(H₁ ⊕ H₂) ⊋ … для неабелевых слагаемых",
@@ -13561,7 +14081,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит UT₃(ℤ), где ⟨x⟩ не нормальна",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "прямая сумма групп ступени 2"
    },
    "подгруппы": [
     {
@@ -13664,7 +14187,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": true
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "корни из 1 простых степеней в ℂ*",
@@ -13679,7 +14205,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "периодическая разрешимая"
+    "locally-finite": "периодическая разрешимая",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -13752,7 +14281,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": true,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "в линейной группе убывающие цепочки централизаторов стабилизируются (централизатор — пересечение с замкнутым по Зарисскому), а C(H₁) ⊋ C(H₁ ⊕ H₂) ⊋ … для неабелевых слагаемых",
@@ -13767,7 +14299,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "периодическая разрешимая",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит UT₃(𝔽₃), где ⟨e₁₂⟩ не нормальна",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "прямая сумма групп ступени 2"
    },
    "подгруппы": [
     {
@@ -13850,7 +14385,9 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "P. Hall, Finiteness conditions for soluble groups, 1954",
@@ -13864,7 +14401,9 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "к. п. и не ф. а., а к. п. нильпотентные группы ф. а.",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "неабелева и непериодична (содержит ℚ): неабелева дедекиндова периодична (Дедекинд — Бэр)",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -13967,7 +14506,10 @@
     "bi-orderable": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "simple": "Cannon, Floyd, Parry, Introductory notes on Richard Thompson's groups, 1996",
@@ -13984,7 +14526,10 @@
     "bi-orderable": "есть кручение",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа F — стабилизатор точки 0 не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -14116,7 +14661,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "hopfian": "сдвиг с отбрасыванием первого слагаемого",
@@ -14131,7 +14679,10 @@
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит простую PSL₂(ℝ)",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -14216,7 +14767,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "C(x₁, y₁) ⊋ C(x₁, y₁, x₂, y₂) ⊋ … — бесконечная убывающая цепочка централизаторов, а в линейной группе она стабилизируется",
@@ -14231,7 +14785,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит ⟨x₁, y₁⟩ ≅ UT₃(ℤ), где ⟨x₁⟩ не нормальна",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ = ⟨z⟩ централен"
    },
    "подгруппы": [
     {
@@ -14327,7 +14884,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "perfect": "объединение совершенных",
@@ -14342,7 +14902,10 @@
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит SL₂(ℂ), где ⟨(1 1; 0 1)⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -14425,7 +14988,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "simple": "объединение возрастающей цепочки простых групп PSL_{n!}(ℂ) просто",
@@ -14441,7 +15007,10 @@
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит простую неабелеву PSL₂(ℂ)",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -14507,7 +15076,11 @@
     "left-orderable": false,
     "bi-orderable": false,
     "property-t": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false,
+    "solvable": false
    },
    "почему": {
     "hopfian": "K × K ⊆ K: сдвиг слагаемых с отбрасыванием первого — сюръекция ⊕K → ⊕K с ядром K",
@@ -14522,7 +15095,11 @@
     "left-orderable": "есть кручение",
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит K — бесконечную к. п. (индекс 16 в 𝒢) периодическую, а периодическая дедекиндова локально конечна",
+    "metabelian": "K — подгруппа конечного индекса в 𝒢, 𝒢/ядро — конечная 2-группа; разрешимость K влекла бы разрешимость 𝒢",
+    "class-2": "не метабелева",
+    "solvable": "K — подгруппа индекса 16 в 𝒢, фактор — конечная 2-группа; разрешимость K влекла бы разрешимость 𝒢"
    },
    "подгруппы": [
     {
@@ -14581,7 +15158,10 @@
     "left-orderable": false,
     "bi-orderable": false,
     "residually-nilpotent": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "Higman, Neumann, Neumann, 1949; Линдон, Шупп, гл. IV",
@@ -14592,7 +15172,10 @@
     "left-orderable": "есть кручение",
     "bi-orderable": "есть кручение",
     "residually-nilpotent": "к. п. и не ф. а., а к. п. нильпотентные группы ф. а.",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит U ⊇ S₃",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -14712,7 +15295,10 @@
     "left-orderable": false,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "подгруппа конечного индекса 4 в к. п. GL₂(ℤ)",
@@ -14731,7 +15317,10 @@
     "left-orderable": "есть кручение",
     "bi-orderable": "есть кручение",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит F₄ (свой коммутант), где циклическая подгруппа базиса не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "трудно": [
     "hopfian",
@@ -14865,7 +15454,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": true,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "metabelian": true,
+    "class-2": false,
+    "dedekind": false
    },
    "почему": {
     "fin-gen": "бесконечная подгруппа локально конечной ⊕S₃",
@@ -14883,7 +15475,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "периодическая разрешимая",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "metabelian": "коммутант ⊕C₃ абелев",
+    "class-2": "не нильпотентна",
+    "dedekind": "⟨τ₀τ₁⟩ (транспозиции в слагаемых 0 и 1, чётная сумма знаков — элемент коммутанта) не нормальна: 3-цикл в слагаемом 0 (тоже из коммутанта) сопрягает её в ⟨τ₀′τ₁⟩"
    },
    "короткий довод": [
     "linear"
@@ -14959,7 +15554,10 @@
     "left-orderable": false,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "finite": "содержит A_∞ (совершенную) перестановок базиса",
@@ -14973,7 +15571,10 @@
     "left-orderable": "есть кручение",
     "bi-orderable": "есть кручение",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит GL₃(𝔽₂) = GL₃(𝔽₂)′ ⊇ S₃",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -15042,7 +15643,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": true,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "fin-gen": "фактор по D₈ — ℤ(2^∞)/C₂ ≅ ℤ(2^∞)",
@@ -15061,7 +15665,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "периодическая разрешимая",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит D₈",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ = ⟨z⟩ централен"
    },
    "подгруппы": [
     {
@@ -15172,7 +15779,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "periodic": "(1, 0, 0) бесконечного порядка",
@@ -15185,7 +15795,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "{(n, 0, 0)} не нормальна: (0, 1/2, 0)(1, 0, 0)(0, −1/2, 0) = (1, 0, −1/2)",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ ⩽ {(0, 0, c)} = Z(G)"
    },
    "подгруппы": [
     {
@@ -15269,7 +15882,10 @@
     "bi-orderable": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "индекс 2 в к. п. Aut(F₃)",
@@ -15288,7 +15904,10 @@
     "bi-orderable": "есть кручение",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит Inn(F₃) ≅ F₃ (внутренние автоморфизмы тождественны на F₃ᵃᵇ)",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -15362,7 +15981,10 @@
     "left-orderable": false,
     "bi-orderable": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "индекс 2 в к. п. Sp₄(ℤ)",
@@ -15378,7 +16000,10 @@
     "left-orderable": "есть кручение",
     "bi-orderable": "есть кручение",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит SL₂(ℤ)′ ≅ F₂ (блок Sp₂(ℤ))",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -15465,7 +16090,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "к. п. нильпотентная",
@@ -15478,7 +16106,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит UT₃(ℤ), где ⟨x⟩ не нормальна",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "UT₃(ℤ) ступени 2, ℤ³ абелева"
    },
    "подгруппы": [
     {
@@ -15589,7 +16220,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "hopfian": "к. п. нильпотентная",
@@ -15602,7 +16236,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит UT₃(ℤ), где ⟨x⟩ не нормальна",
+    "metabelian": "e₁₃, e₃₅ ∈ G′, [e₁₃, e₃₅] = e₁₅",
+    "class-2": "не метабелева"
    },
    "подгруппы": [
     {
@@ -15711,7 +16348,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "divisible": "оба множителя делимы",
@@ -15727,7 +16367,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит UT₃(ℚ), где ⟨e₁₂⟩ не нормальна",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "UT₃(ℚ) ступени 2, ℚ³ абелева"
    },
    "подгруппы": [
     {
@@ -15838,7 +16481,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "divisible": "унитреугольная над ℚ: корни через log/exp (ряды конечны)",
@@ -15854,7 +16500,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит UT₃(ℚ), где ⟨e₁₂⟩ не нормальна",
+    "metabelian": "e₁₃, e₃₅ ∈ G′, [e₁₃, e₃₅] = e₁₅",
+    "class-2": "не метабелева"
    },
    "подгруппы": [
     {
@@ -15962,7 +16611,10 @@
     "amenable": true,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "nilpotent": "A − E обратима над ℤ (det = −1), так что [ℤ², t] = ℤ² и нижний центральный ряд стабилизируется на ℤ²",
@@ -15978,7 +16630,10 @@
     "amenable": "разрешима",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨t⟩ не нормальна",
+    "metabelian": "G′ ⩽ ℤ², фактор ℤ",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -16127,7 +16782,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "divisible": "фактор делимой UT₃(ℚ)",
@@ -16141,7 +16799,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "{(a, 0, 0)} не нормальна: (0, 1, 0)(1/2, 0, 0)(0, 1, 0)⁻¹ = (1/2, 0, −1/2), −1/2 ≠ 0 в ℚ/ℤ",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ ⩽ {(0, 0, c)} ⩽ Z(G)"
    },
    "подгруппы": [
     {
@@ -16224,7 +16885,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "centerless": "C₃ действует точно, а умножение на ω не имеет ненулевых неподвижных точек",
@@ -16240,7 +16904,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨r⟩, r: x ↦ ωx не нормальна",
+    "metabelian": "G′ ⩽ ℤ[ω], фактор C₃",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -16418,7 +17085,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "centerless": "S₃ действует точно, а неподвижных векторов у ω нет",
@@ -16434,7 +17104,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "подгруппа ⟨r⟩, r: x ↦ ωx не нормальна",
+    "metabelian": "G′ ⊇ S₃′ = ⟨r⟩ и (1 − ω)ℤ[ω] = [ℤ[ω], r], а r не централизует ненулевые сдвиги",
+    "class-2": "не метабелева"
    },
    "подгруппы": [
     {
@@ -16612,7 +17285,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "free": "абелева нециклическая",
@@ -16624,7 +17300,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -16697,7 +17376,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": true
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "диагональные 2-примарные корни из 1 в GL₂(ℂ)",
@@ -16712,7 +17394,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "периодическая разрешимая"
+    "locally-finite": "периодическая разрешимая",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -16782,7 +17467,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": true,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "nilpotent": "t действует на A = ℤ(2^∞)² обращением, и [A, t, …, t] = 2ⁿA = A",
@@ -16801,7 +17489,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "периодическая разрешимая",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит Dih(C₄) = D₈",
+    "metabelian": "G′ = ℤ(2^∞)² абелев",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -16909,7 +17600,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "fin-gen": "фактор по центру ℤ[1/2]² не к. п.",
@@ -16923,7 +17617,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "{(a, 0, 0)} не нормальна: (0, 1, 0)(1/2, 0, 0)(0, 1, 0)⁻¹ = (1/2, 0, −1/2), −1/2 ≠ 0 в ℤ[1/2]/ℤ",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ ⩽ {(0, 0, c)} ⩽ Z(G)"
    },
    "подгруппы": [
     {
@@ -17005,7 +17702,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "2^ℤ × корни из 1 в ℂ*",
@@ -17019,7 +17719,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -17100,7 +17803,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "2^ℤ × 3^ℤ × корни из 1 в ℂ*",
@@ -17114,7 +17820,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -17195,7 +17904,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "фраттини": "у абелевой A подгруппа Фраттини — ⋂ pA",
@@ -17206,7 +17918,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -17272,7 +17987,10 @@
     "bi-orderable": false,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "torsion-free": "фундаментальная группа замкнутого плоского 3-многообразия (группа Бибербаха)",
@@ -17286,7 +18004,10 @@
     "bi-orderable": "не левоупорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "неабелева без кручения: неабелева дедекиндова периодична (Дедекинд — Бэр)",
+    "metabelian": "решётка ℤ³ абелева, фактор C₂ × C₂ абелев, значит G′ ⩽ ℤ³",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -17393,7 +18114,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "divisible": "компактная связная группа Ли: каждый элемент лежит в максимальном торе, а в торе извлекаются корни",
@@ -17409,7 +18133,10 @@
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
     "residually-nilpotent": "совершенна: γₙ = G ≠ 1",
     "locally-finite": "есть элемент бесконечного порядка",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "фактор SU(2)/{±1} ≅ SO(3) не дедекиндов",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -17500,7 +18227,10 @@
     "bi-orderable": false,
     "residually-nilpotent": true,
     "locally-cyclic": false,
-    "property-t": true
+    "property-t": true,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "indecomposable": "центр C₂ неразложим, группа нильпотентна",
@@ -17518,7 +18248,10 @@
     "bi-orderable": "есть кручение",
     "residually-nilpotent": "нильпотентна",
     "locally-cyclic": "неабелева",
-    "property-t": "конечна"
+    "property-t": "конечна",
+    "dedekind": "содержит UT₃(𝔽₂) ≅ D₈",
+    "metabelian": "e₁₃, e₃₅ ∈ G′, [e₁₃, e₃₅] = e₁₅",
+    "class-2": "не метабелева"
    },
    "подгруппы": [
     {
@@ -17628,7 +18361,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": true,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "bounded-exponent": "показатель 3 (характеристика 3, ступень 2)",
@@ -17645,7 +18381,10 @@
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
     "locally-finite": "периодическая разрешимая",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит UT₃(𝔽₃), где ⟨e₁₂⟩ не нормальна",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ ⩽ e₁₃(F) = Z(G)"
    },
    "подгруппы": [
     {
@@ -17725,7 +18464,10 @@
     "left-orderable": false,
     "bi-orderable": false,
     "property-t": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "hopfian": "x₁ ↦ 1, xᵢ₊₁ ↦ xᵢ — сюръективный эндоморфизм относительно свободной группы с нетривиальным ядром",
@@ -17743,7 +18485,10 @@
     "left-orderable": "есть кручение",
     "bi-orderable": "есть кручение",
     "property-t": "не конечно порождена (группа со свойством (T) к. п., BHV 1.3.1)",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "содержит B(2, n) (два образующих базиса) — бесконечную к. п. периодическую, а периодическая дедекиндова локально конечна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -17811,7 +18556,10 @@
     "bi-orderable": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "finite": "П. С. Новиков, С. И. Адян, 1968: B(m, n) бесконечна при m ⩾ 2 и нечётном n ⩾ 4381 (Адян: n ⩾ 665)",
@@ -17825,7 +18573,10 @@
     "bi-orderable": "есть кручение",
     "residually-nilpotent": "к. п. и не ф. а., а к. п. нильпотентные группы ф. а.",
     "locally-finite": "к. п. бесконечная",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "к. п., бесконечна и периодична, а периодическая дедекиндова локально конечна (⟨x, y⟩ = ⟨x⟩⟨y⟩)",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -17913,7 +18664,10 @@
     "bi-orderable": false,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "periodic": "(1, 1, 1, …) бесконечного порядка",
@@ -17929,7 +18683,10 @@
     "bi-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -18006,7 +18763,10 @@
     "linear": false,
     "polycyclic": false,
     "residually-nilpotent": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "word-problem": "П. С. Новиков (1955), У. Бун (1958)",
@@ -18014,12 +18774,18 @@
     "linear": "к. п. и не ф. а., а к. п. линейная ф. а. (Мальцев)",
     "polycyclic": "полициклическая ф. а.",
     "residually-nilpotent": "к. п. и не ф. а., а к. п. нильпотентные группы ф. а.",
-    "locally-cyclic": "неабелева"
+    "locally-cyclic": "неабелева",
+    "dedekind": "к. п. дедекиндова группа абелева или конечна (Бэр: Q₈ × E × A), и проблема слов в ней разрешима",
+    "metabelian": "к. п. метабелева группа ф. а. (P. Hall, 1959), а конечно определённая ф. а. группа имеет разрешимую проблему слов",
+    "class-2": "к. п. нильпотентная группа полициклична, и проблема слов в ней разрешима"
    },
    "трудно": [
     "linear",
     "polycyclic",
-    "word-problem"
+    "word-problem",
+    "dedekind",
+    "metabelian",
+    "class-2"
    ],
    "подгруппы": [
     {
@@ -18085,7 +18851,10 @@
     "bi-orderable": false,
     "residually-nilpotent": true,
     "locally-cyclic": true,
-    "property-t": true
+    "property-t": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "simple": "p − 1 чётно и больше 2",
@@ -18097,7 +18866,10 @@
     "bi-orderable": "есть кручение",
     "residually-nilpotent": "нильпотентна",
     "locally-cyclic": "циклическая",
-    "property-t": "конечна"
+    "property-t": "конечна",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -18131,7 +18903,10 @@
    ],
    "центр": "все",
    "коммутант": "1",
-   "абелианизация": "AutCp"
+   "абелианизация": "AutCp",
+   "aut": "AutAutCp",
+   "out": "AutAutCp",
+   "почему aut": "Aut(C_{p−1}) ≅ (ℤ/(p − 1))ˣ; абелева, Out = Aut"
   },
   {
    "id": "ZS",
@@ -18166,7 +18941,10 @@
     "left-orderable": true,
     "property-t": false,
     "residually-nilpotent": true,
-    "locally-finite": false
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "rec-pres-ctbl": "по р. п. копредставлению перечислялось бы S = {p : 1 делится на p}",
@@ -18183,7 +18961,10 @@
     "left-orderable": "двусторонне упорядочиваема",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "нильпотентна",
-    "locally-finite": "есть элемент бесконечного порядка"
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -18255,7 +19036,10 @@
     "residually-nilpotent": true,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "free": "абелева нециклическая",
@@ -18264,7 +19048,10 @@
     "bi-orderable": "абелева без кручения: лексикографический порядок на ℤ⁵",
     "property-t": "бесконечна и аменабельна",
     "locally-cyclic": "содержит ℤ²",
-    "фраттини": "у абелевой A подгруппа Фраттини — ⋂ pA"
+    "фраттини": "у абелевой A подгруппа Фраттини — ⋂ pA",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -18333,7 +19120,10 @@
     "residually-nilpotent": true,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "сюръективный эндоморфизм ℚ-линеен (ℤ-линейное отображение делимых групп без кручения), а сюръективное линейное отображение ℚⁿ → ℚⁿ инъективно",
@@ -18343,7 +19133,10 @@
     "bi-orderable": "абелева без кручения (Леви)",
     "property-t": "не конечно порождена",
     "locally-cyclic": "содержит ℤ²",
-    "фраттини": "делимая: максимальных подгрупп нет (фактор по ним был бы C_p, а он не делим)"
+    "фраттини": "делимая: максимальных подгрупп нет (фактор по ним был бы C_p, а он не делим)",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -18412,7 +19205,10 @@
     "residually-nilpotent": true,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "сюръективный эндоморфизм ℚ-линеен (ℤ-линейное отображение делимых групп без кручения), а сюръективное линейное отображение ℚⁿ → ℚⁿ инъективно",
@@ -18422,7 +19218,10 @@
     "bi-orderable": "абелева без кручения (Леви)",
     "property-t": "не конечно порождена",
     "locally-cyclic": "содержит ℤ²",
-    "фраттини": "делимая: максимальных подгрупп нет (фактор по ним был бы C_p, а он не делим)"
+    "фраттини": "делимая: максимальных подгрупп нет (фактор по ним был бы C_p, а он не делим)",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -18493,7 +19292,10 @@
     "residually-nilpotent": true,
     "property-t": false,
     "locally-finite": true,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "linear": "≅ (⊕_p C_p)² ⩽ (ℚ/ℤ)², диагональные матрицы из корней из 1 в GL₂(ℂ)",
@@ -18505,7 +19307,10 @@
     "locally-cyclic": "содержит C_p²",
     "locally-finite": "периодическая абелева",
     "left-orderable": "есть кручение",
-    "фраттини": "у абелевой A подгруппа Фраттини — ⋂ pA; pA не содержит p-компоненты"
+    "фраттини": "у абелевой A подгруппа Фраттини — ⋂ pA; pA не содержит p-компоненты",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -18574,7 +19379,10 @@
     "residually-nilpotent": true,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "fin-gen": "ℤ[1/2] не к. п.",
@@ -18587,7 +19395,10 @@
     "bi-orderable": "абелева без кручения (Леви)",
     "property-t": "не конечно порождена",
     "locally-cyclic": "содержит ℤ²",
-    "фраттини": "у абелевой A подгруппа Фраттини — ⋂ pA: 2A = A, ⋂_{p > 2} pA = 0"
+    "фраттини": "у абелевой A подгруппа Фраттини — ⋂ pA: 2A = A, ⋂_{p > 2} pA = 0",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -18658,7 +19469,10 @@
     "residually-nilpotent": true,
     "property-t": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
    },
    "почему": {
     "fin-gen": "несчётна",
@@ -18668,7 +19482,10 @@
     "co-hopfian": "(ε, x) ↦ (ε, 2x)",
     "left-orderable": "есть кручение",
     "locally-cyclic": "содержит ℤ × C₂",
-    "фраттини": "у абелевой A подгруппа Фраттини — ⋂ pA = 2A = {1} × 2ℤ₂"
+    "фраттини": "у абелевой A подгруппа Фраттини — ⋂ pA = 2A = {1} × 2ℤ₂",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -18786,7 +19603,10 @@
     "property-t": true,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "perfect": "Gᵃᵇ = C₂ (определитель)",
@@ -18797,7 +19617,10 @@
     "amenable": "содержит F₂",
     "left-orderable": "есть кручение",
     "property-t": "SL₃(ℤ) обладает (T), а (T) сохраняется при умножении на конечную группу (BHV, Kazhdan's Property (T), 1.7.6)",
-    "residually-nilpotent": "содержит совершенную SL₃(ℤ) ≠ 1"
+    "residually-nilpotent": "содержит совершенную SL₃(ℤ) ≠ 1",
+    "dedekind": "содержит SL₃(ℤ) (не дедекиндова)",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -18909,7 +19732,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "Нильсен: порождается элементарными преобразованиями",
@@ -18920,7 +19746,10 @@
     "amenable": "содержит Inn(F₂) ≅ F₂",
     "left-orderable": "есть кручение (a ↦ a⁻¹)",
     "property-t": "фактор GL₂(ℤ) почти свободен и бесконечен",
-    "residually-nilpotent": "σ: a ↦ b ↦ (ab)⁻¹ ↦ a и ρ: a ↦ b⁻¹, b ↦ a⁻¹ порождают S₃, а γₙ(S₃) = C₃"
+    "residually-nilpotent": "σ: a ↦ b ↦ (ab)⁻¹ ↦ a и ρ: a ↦ b⁻¹, b ↦ a⁻¹ порождают S₃, а γₙ(S₃) = C₃",
+    "dedekind": "содержит Inn(F₂) ≅ F₂",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -19009,7 +19838,10 @@
     "residually-nilpotent": false,
     "co-hopfian": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "порождается x ↦ x + 1, x ↦ 2x, x ↦ −x",
@@ -19022,7 +19854,10 @@
     "left-orderable": "есть кручение (x ↦ −x)",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "содержит BS(1, 2), а она не финитно нильпотентна",
-    "co-hopfian": "(a, u) ↦ (3a, u) — инъекция с собственным образом"
+    "co-hopfian": "(a, u) ↦ (3a, u) — инъекция с собственным образом",
+    "dedekind": "подгруппа ⟨x ↦ −x⟩ не нормальна",
+    "metabelian": "G′ = ℤ[1/2] абелев",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -19209,7 +20044,10 @@
      "BS12",
      true
     ]
-   ]
+   ],
+   "aut": "AffZ12",
+   "out": "1:1",
+   "почему aut": "N = ℤ[1/2] = G′ характеристична; α|N — умножение на единицу u = ±2ᵏ, т. е. сопряжение m_u; далее как у Aff(ℚ): c_a = (a − 1)c₂ (2 — единица, 2 − 1 = 1), α — сопряжение сдвигом. Aut = Inn ≅ Aff(ℤ[1/2]) (центр 1), Out = 1"
   },
   {
    "id": "PGL2Z",
@@ -19241,7 +20079,10 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "linear": "сопряжение на M₂(ℚ) — точное представление PGL₂(ℚ) ⊃ PGL₂(ℤ)",
@@ -19252,7 +20093,10 @@
     "amenable": "содержит PSL₂(ℤ) ⊃ F₂",
     "left-orderable": "есть кручение",
     "property-t": "почти свободна и бесконечна",
-    "residually-nilpotent": "содержит S₃ ≅ D₃"
+    "residually-nilpotent": "содержит S₃ ≅ D₃",
+    "dedekind": "подгруппа ⟨T⟩, T = ±(1 1; 0 1) не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -19399,7 +20243,10 @@
     "residually-nilpotent": true,
     "co-hopfian": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "centerless": "свободное произведение нетривиальных групп",
@@ -19412,7 +20259,10 @@
     "property-t": "фактор ℤ",
     "residually-nilpotent": "Грюнберг: свободное произведение финитно-2 групп финитно-2 (ℤ и C₂)",
     "co-hopfian": "t ↦ t², s ↦ s: ⟨t², s⟩ = ⟨t²⟩ ∗ ⟨s⟩ по нормальной форме, t не входит",
-    "фраттини": "Хигман — Нейман: подгруппа Фраттини свободного произведения нетривиальных групп тривиальна (G. Higman, B. H. Neumann, On two questions of Itô, J. London Math. Soc. 29, 1954)"
+    "фраттини": "Хигман — Нейман: подгруппа Фраттини свободного произведения нетривиальных групп тривиальна (G. Higman, B. H. Neumann, On two questions of Itô, J. London Math. Soc. 29, 1954)",
+    "dedekind": "подгруппа ⟨s⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -19568,7 +20418,10 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
    },
    "почему": {
     "centerless": "свободное произведение нетривиальных групп",
@@ -19580,7 +20433,10 @@
     "left-orderable": "есть кручение",
     "property-t": "почти свободна и бесконечна",
     "residually-nilpotent": "Грюнберг: свободное произведение конечных 3-групп финитно-3",
-    "фраттини": "Хигман — Нейман: подгруппа Фраттини свободного произведения нетривиальных групп тривиальна (G. Higman, B. H. Neumann, On two questions of Itô, J. London Math. Soc. 29, 1954)"
+    "фраттини": "Хигман — Нейман: подгруппа Фраттини свободного произведения нетривиальных групп тривиальна (G. Higman, B. H. Neumann, On two questions of Itô, J. London Math. Soc. 29, 1954)",
+    "dedekind": "подгруппа ⟨a⟩ не нормальна",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -19710,7 +20566,10 @@
     "residually-nilpotent": true,
     "co-hopfian": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "linear": "f ↦ (1 f; 0 1), t ↦ (t 0; 0 1) над ℚ(t)",
@@ -19722,7 +20581,10 @@
     "bi-orderable": "порядок на базе по знаку старшего коэффициента инвариантен относительно сдвига; лексикографически с ℤ",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "факторы (ℤ/pᵏ) ≀ C_{p^m} — конечные p-группы — разделяют элементы",
-    "co-hopfian": "f tⁿ ↦ (2f) tⁿ"
+    "co-hopfian": "f tⁿ ↦ (2f) tⁿ",
+    "dedekind": "подгруппа ⟨t⟩ не нормальна",
+    "metabelian": "база ⊕ℤ абелева, фактор ℤ",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -19843,7 +20705,10 @@
     "residually-nilpotent": true,
     "co-hopfian": false,
     "locally-finite": false,
-    "locally-cyclic": false
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
    },
    "почему": {
     "linear": "ℤ² ⋊ C₂ ⩽ GL₃(ℤ) аффинными матрицами",
@@ -19853,7 +20718,10 @@
     "left-orderable": "есть кручение",
     "property-t": "бесконечна и аменабельна",
     "residually-nilpotent": "γₙ = 2ⁿ⁻² · {(a, −a)}",
-    "co-hopfian": "v ↦ 3v на ℤ², s ↦ s"
+    "co-hopfian": "v ↦ 3v на ℤ², s ↦ s",
+    "dedekind": "подгруппа ⟨s⟩ не нормальна",
+    "metabelian": "база ℤ² абелева, фактор C₂",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -20070,7 +20938,9 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "metabelian": true
+    "metabelian": true,
+    "dedekind": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "к. п. ф. а. (Мальцев)",
@@ -20086,7 +20956,9 @@
     "residually-finite": "к. п. абелева",
     "polycyclic": "к. п. абелева",
     "co-hopfian": "(n, c) ↦ (2n, c)",
-    "фраттини": "у к. п. абелевой A подгруппа Фраттини — ⋂ pA = 0 (3A = 3ℤ × 0, ⋂ pℤ = 0)"
+    "фраттини": "у к. п. абелевой A подгруппа Фраттини — ⋂ pA = 0 (3A = 3ℤ × 0, ⋂ pℤ = 0)",
+    "dedekind": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -20287,7 +21159,9 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "metabelian": true
+    "metabelian": true,
+    "dedekind": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "к. п. ф. а. (Мальцев)",
@@ -20303,7 +21177,9 @@
     "residually-finite": "к. п. абелева",
     "polycyclic": "к. п. абелева",
     "co-hopfian": "(n, c) ↦ (2n, c)",
-    "фраттини": "у к. п. абелевой A подгруппа Фраттини — ⋂ pA = 0"
+    "фраттини": "у к. п. абелевой A подгруппа Фраттини — ⋂ pA = 0",
+    "dedekind": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -20472,7 +21348,9 @@
     "property-t": false,
     "residually-nilpotent": true,
     "locally-finite": false,
-    "metabelian": true
+    "metabelian": true,
+    "dedekind": true,
+    "class-2": true
    },
    "почему": {
     "hopfian": "к. п. ф. а. (Мальцев)",
@@ -20488,7 +21366,9 @@
     "residually-finite": "к. п. абелева",
     "polycyclic": "к. п. абелева",
     "co-hopfian": "(n, v) ↦ (2n, v)",
-    "фраттини": "у к. п. абелевой A подгруппа Фраттини — ⋂ pA = 0"
+    "фраттини": "у к. п. абелевой A подгруппа Фраттини — ⋂ pA = 0",
+    "dedekind": "абелева",
+    "class-2": "абелева"
    },
    "подгруппы": [
     {
@@ -20717,7 +21597,9 @@
     "property-t": false,
     "residually-nilpotent": false,
     "locally-cyclic": false,
-    "metabelian": false
+    "metabelian": false,
+    "dedekind": false,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "A_∞ не к. п., а она — фактор",
@@ -20739,7 +21621,9 @@
     "indecomposable": "C₃ × A_∞",
     "solvable": "содержит A₅",
     "metabelian": "неразрешима",
-    "фраттини": "максимальны 1 × A_∞ и C₃ × M для максимальных M ⩽ A_∞, а Φ(A_∞) = 1"
+    "фраттини": "максимальны 1 × A_∞ и C₃ × M для максимальных M ⩽ A_∞, а Φ(A_∞) = 1",
+    "dedekind": "содержит A_∞ (проста, не дедекиндова)",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -20876,7 +21760,9 @@
     "residually-nilpotent": false,
     "locally-finite": false,
     "locally-cyclic": false,
-    "metabelian": false
+    "metabelian": false,
+    "dedekind": false,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "det: GL → ℚ* сюръективен, а ℚ* не к. п.",
@@ -20898,7 +21784,9 @@
     "locally-cyclic": "неабелева",
     "metabelian": "неразрешима",
     "centerless": "скаляры ℚ*E центральны",
-    "абелианизация": "GL₂(ℚ)′ = SL (поле из более чем трёх элементов), GL/SL ≅ ℚ* через det"
+    "абелианизация": "GL₂(ℚ)′ = SL (поле из более чем трёх элементов), GL/SL ≅ ℚ* через det",
+    "dedekind": "содержит GL₂(ℤ) (не дедекиндова)",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -20983,7 +21871,9 @@
     "residually-nilpotent": false,
     "locally-finite": false,
     "locally-cyclic": false,
-    "metabelian": false
+    "metabelian": false,
+    "dedekind": false,
+    "class-2": false
    },
    "почему": {
     "fin-gen": "det: GL → ℚ* сюръективен, а ℚ* не к. п.",
@@ -21005,7 +21895,9 @@
     "locally-cyclic": "неабелева",
     "metabelian": "неразрешима",
     "centerless": "скаляры ℚ*E центральны",
-    "абелианизация": "GL₃(ℚ)′ = SL (поле из более чем трёх элементов), GL/SL ≅ ℚ* через det"
+    "абелианизация": "GL₃(ℚ)′ = SL (поле из более чем трёх элементов), GL/SL ≅ ℚ* через det",
+    "dedekind": "содержит GL₃(ℤ) ⊇ GL₂(ℤ)",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -21092,7 +21984,9 @@
     "locally-finite": false,
     "locally-cyclic": false,
     "metabelian": false,
-    "co-hopfian": false
+    "co-hopfian": false,
+    "dedekind": false,
+    "class-2": false
    },
    "почему": {
     "centerless": "свободное произведение нетривиальных групп",
@@ -21114,7 +22008,9 @@
     "free": "есть кручение",
     "residually-nilpotent": "Грюнберг: свободное произведение финитно-3 групп (ℤ и C₃) финитно-3",
     "co-hopfian": "t ↦ t², c ↦ c: ⟨t²⟩ ∗ ⟨c⟩ по нормальной форме, t не входит (образ в Gᵃᵇ → ℤ чётен)",
-    "divisible": "образ t в ℤ = Gᵃᵇ/кручение не делится на 2"
+    "divisible": "образ t в ℤ = Gᵃᵇ/кручение не делится на 2",
+    "dedekind": "подгруппа ⟨c⟩ не нормальна",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -21299,7 +22195,9 @@
     "residually-nilpotent": true,
     "locally-finite": false,
     "locally-cyclic": false,
-    "metabelian": false
+    "metabelian": false,
+    "dedekind": false,
+    "class-2": false
    },
    "почему": {
     "centerless": "свободное произведение нетривиальных групп",
@@ -21321,7 +22219,9 @@
     "free": "есть кручение",
     "periodic": "su бесконечного порядка",
     "residually-nilpotent": "Грюнберг: свободное произведение конечных 2-групп финитно-2",
-    "divisible": "образ s в Gᵃᵇ = C₂ × C₄ не квадрат"
+    "divisible": "образ s в Gᵃᵇ = C₂ × C₄ не квадрат",
+    "dedekind": "подгруппа ⟨s⟩ не нормальна",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -21515,7 +22415,9 @@
     "co-hopfian": false,
     "locally-finite": false,
     "locally-cyclic": false,
-    "metabelian": false
+    "metabelian": false,
+    "dedekind": false,
+    "class-2": false
    },
    "почему": {
     "centerless": "свободное произведение нетривиальных групп",
@@ -21538,7 +22440,9 @@
     "perfect": "Gᵃᵇ ≅ ℤ³",
     "divisible": "Gᵃᵇ ≅ ℤ³ не делима",
     "co-hopfian": "a, b ↦ a, b; c ↦ c²: ℤ² ∗ ⟨c²⟩, c не входит (образ в Gᵃᵇ)",
-    "torsion-free": "элементы конечного порядка свободного произведения сопряжены элементам сомножителей"
+    "torsion-free": "элементы конечного порядка свободного произведения сопряжены элементам сомножителей",
+    "dedekind": "подгруппа ⟨a, b⟩ ≅ ℤ² не нормальна",
+    "class-2": "неразрешима"
    },
    "подгруппы": [
     {
@@ -21728,7 +22632,9 @@
     "co-hopfian": false,
     "locally-finite": false,
     "locally-cyclic": false,
-    "metabelian": true
+    "metabelian": true,
+    "dedekind": false,
+    "class-2": false
    },
    "почему": {
     "linear": "f ↦ (1 f; 0 1), t ↦ (t 0; 0 1) над 𝔽₃(t)",
@@ -21747,7 +22653,9 @@
     "nilpotent": "неабелева без центра",
     "locally-finite": "t бесконечного порядка",
     "locally-cyclic": "неабелева",
-    "divisible": "образ t в Gᵃᵇ → ℤ не делится на 2"
+    "divisible": "образ t в Gᵃᵇ → ℤ не делится на 2",
+    "dedekind": "подгруппа ⟨t⟩ не нормальна",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -21937,7 +22845,9 @@
     "co-hopfian": false,
     "locally-finite": false,
     "locally-cyclic": false,
-    "metabelian": true
+    "metabelian": true,
+    "dedekind": false,
+    "class-2": false
    },
    "почему": {
     "linear": "аффинные преобразования ℤ³: подгруппа GL₄(ℤ)",
@@ -21955,7 +22865,9 @@
     "indecomposable": "нетривиальная нормальная подгруппа пересекает базу; если оба множителя H × K содержат элементы вне базы, то H ∩ ℤ³ и K ∩ ℤ³ лежат в диагонали D и пересекаются; значит, K ⊆ D и ℤ³ = L ⊕ K с σ-инвариантной L ⊇ G′ = {Σvᵢ = 0}; но L ∋ v с Σv ≢ 0 (mod 3), и тогда (Σv)(1, 1, 1) = 3v − (3v − (Σv)(1, 1, 1)) ∈ L ∩ D",
     "locally-finite": "есть элемент бесконечного порядка",
     "locally-cyclic": "неабелева",
-    "divisible": "образ (1, 0, 0) в Gᵃᵇ → ℤ (сумма координат) равен 1, не делится на 2"
+    "divisible": "образ (1, 0, 0) в Gᵃᵇ → ℤ (сумма координат) равен 1, не делится на 2",
+    "dedekind": "подгруппа ⟨σ⟩ не нормальна",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -22211,7 +23123,9 @@
     "co-hopfian": false,
     "locally-finite": false,
     "locally-cyclic": false,
-    "metabelian": true
+    "metabelian": true,
+    "dedekind": false,
+    "class-2": false
    },
    "почему": {
     "linear": "f ↦ (1 f; 0 1), xᵐyⁿ ↦ (xᵐyⁿ 0; 0 1) над 𝔽₂(x, y)",
@@ -22230,7 +23144,9 @@
     "nilpotent": "неабелева без центра",
     "locally-finite": "x бесконечного порядка",
     "locally-cyclic": "неабелева",
-    "divisible": "образ x в Gᵃᵇ → ℤ² не делится на 2"
+    "divisible": "образ x в Gᵃᵇ → ℤ² не делится на 2",
+    "dedekind": "подгруппа ℤ² = ⟨x, y⟩ не нормальна",
+    "class-2": "не нильпотентна"
    },
    "подгруппы": [
     {
@@ -22408,6 +23324,802 @@
      true
     ]
    ]
+  },
+  {
+   "id": "DinfxC2",
+   "имя": "D∞ × C₂",
+   "заметка": "D∞ = ⟨r, s | s² = 1, srs = r⁻¹⟩, C₂ = ⟨c⟩. Это Aut(K) для группы бутылки Клейна K (запись Klein): автоморфизмы x ↦ x^ε, y ↦ xᵏy^δ композируются как (ε, k, δ)(ε′, k′, δ′) = (εε′, εk′ + k, δδ′), то есть аффинная группа ℤ (≅ D∞) на δ = ±1.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "polycyclic": true,
+    "linear": true,
+    "co-hopfian": false,
+    "hopfian": true,
+    "locally-cyclic": false,
+    "amenable": true,
+    "bi-orderable": false,
+    "left-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "metabelian": true,
+    "dedekind": false,
+    "class-2": false
+   },
+   "почему": {
+    "nilpotent": "множитель D∞ не нильпотентен",
+    "centerless": "Z = Z(D∞) × C₂ = 1 × C₂",
+    "indecomposable": "D∞ × C₂",
+    "polycyclic": "⟨r⟩ × 1 ⊲ G, фактор C₂ × C₂ конечен",
+    "linear": "x ↦ ±x + k — матрицы (±1 k; 0 1), вместе с ±1 в третьем блоке: подгруппа GL₃(ℤ)",
+    "co-hopfian": "(r, s, c) ↦ (r², s, c) — инъективен, не сюръективен",
+    "hopfian": "к. п. ф. а. (Мальцев)",
+    "residually-finite": "полициклическая",
+    "amenable": "разрешима",
+    "bi-orderable": "есть кручение",
+    "left-orderable": "есть кручение",
+    "property-t": "бесконечна и аменабельна",
+    "residually-nilpotent": "отображения на D_{2^k} × C₂ (2-группы) с ядрами ⟨r^{2^k}⟩ × 1, их пересечение 1",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "bounded-exponent": "есть элемент бесконечного порядка",
+    "metabelian": "G′ = ⟨r²⟩ × 1 абелев",
+    "class-2": "не нильпотентна",
+    "dedekind": "⟨s⟩ не нормальна: rsr⁻¹ = r²s"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "DinfxC2"
+    },
+    {
+     "id": "центр",
+     "имя": "1 × C₂",
+     "≅": "2:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "фактор": "Dinf",
+     "почему": {
+      "complemented": "дополнение D∞ × 1"
+     }
+    },
+    {
+     "id": "коммутант",
+     "имя": "⟨r²⟩ × 1",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": false,
+      "complemented": false
+     },
+     "фактор": "8:5",
+     "почему": {
+      "фактор": "(D∞/⟨r²⟩) × C₂ = V₄ × C₂ = C₂³",
+      "complemented": "дополнение было бы конечной подгруппой порядка 8, а конечные подгруппы D∞ × C₂ порядка ⩽ 4",
+      "maximal": "⟨r²⟩ × 1 ⊊ ⟨r⟩ × 1"
+     }
+    },
+    {
+     "id": "⟨r⟩",
+     "имя": "⟨r⟩ × 1",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true,
+      "index-2": false,
+      "prime-index": false,
+      "complemented": true
+     },
+     "фактор": "4:2",
+     "почему": {
+      "characteristic": "автоморфизм (g, x) ↦ (g, x·χ(g)), χ: D∞ → C₂, χ(r) = c, χ(s) = 1, переводит r в (r, c)",
+      "maximal": "⟨r⟩ × 1 ⊊ ⟨r⟩ × C₂",
+      "complemented": "дополнение ⟨s⟩ × C₂ ≅ V₄"
+     }
+    },
+    {
+     "id": "D∞",
+     "имя": "D∞ × 1",
+     "≅": "Dinf",
+     "свойства": {
+      "normal": true,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": true,
+      "prime-index": true,
+      "complemented": true
+     },
+     "фактор": "2:1",
+     "почему": {
+      "characteristic": "автоморфизм (g, x) ↦ (g, x·χ(g)), χ(s) = c, χ(r) = 1, переводит s в (s, c)",
+      "complemented": "дополнение 1 × C₂"
+     }
+    },
+    {
+     "id": "⟨s⟩",
+     "имя": "⟨s⟩ × 1",
+     "≅": "2:1",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "normal": "rsr⁻¹ = r²s"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "D∞ × C₂",
+     "≅": "DinfxC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "коммутант",
+   "абелианизация": "8:5"
+  },
+  {
+   "id": "OutF3",
+   "имя": "Out(F₃)",
+   "заметка": "Out(F₃) = Aut(F₃)/Inn(F₃). Нильсен: Aut(F₃) → GL₃(ℤ) сюръективен, внутренние автоморфизмы действуют на F₃ᵃᵇ = ℤ³ тривиально, поэтому Out(F₃) ↠ GL₃(ℤ). Перестановки базиса дают S₃ ⩽ Out(F₃) (композиция с GL₃(ℤ) инъективна).",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "polycyclic": false,
+    "hopfian": true,
+    "amenable": false,
+    "bi-orderable": false,
+    "left-orderable": false,
+    "residually-nilpotent": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "bounded-exponent": false,
+    "metabelian": false,
+    "dedekind": false,
+    "class-2": false
+   },
+   "почему": {
+    "fin-gen": "фактор конечно порождённой Aut(F₃)",
+    "free": "есть кручение (инверсия x₁ ↦ x₁⁻¹ — элемент порядка 2, её образ diag(−1, 1, 1) ≠ 1)",
+    "simple": "SOut(F₃) — ядро знака определителя, нормальная подгруппа индекса 2",
+    "solvable": "фактор GL₃(ℤ) неразрешим",
+    "perfect": "знак определителя Out(F₃) ↠ GL₃(ℤ) → {±1} сюръективен",
+    "torsion-free": "образ инверсии x₁ ↦ x₁⁻¹ имеет порядок 2",
+    "periodic": "образ трансвекции x₁ ↦ x₁x₂ в GL₃(ℤ) бесконечного порядка",
+    "divisible": "фактор C₂ (знак определителя) не делим",
+    "centerless": "M. R. Bridson, K. Vogtmann, Automorphisms of automorphism groups of free groups, J. Algebra 229 (2000): Out(Fₙ) при n ⩾ 3 полна, в частности без центра",
+    "residually-finite": "E. K. Grossman, On the residual finiteness of certain mapping class groups, 1974: Out к. п. свободной группы ф. а.",
+    "hopfian": "к. п. ф. а. (Мальцев)",
+    "polycyclic": "неразрешима",
+    "amenable": "фактор GL₃(ℤ) ⊇ F₂ не аменабелен",
+    "bi-orderable": "есть кручение",
+    "left-orderable": "есть кручение",
+    "residually-nilpotent": "содержит S₃ (перестановки базиса), а конечная подгруппа финитно нильпотентной группы нильпотентна",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "bounded-exponent": "есть элемент бесконечного порядка",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима",
+    "dedekind": "содержит S₃",
+    "абелианизация": "Aut(F₃)ᵃᵇ = C₂ (запись AutF3), Out(F₃) — её фактор и отображается на C₂ знаком определителя"
+   },
+   "трудно": [
+    "centerless",
+    "residually-finite",
+    "hopfian"
+   ],
+   "ссылки": [
+    "M. R. Bridson, K. Vogtmann, J. Algebra 229 (2000)",
+    "E. K. Grossman, J. London Math. Soc. 1974"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "OutF3"
+    },
+    {
+     "id": "все",
+     "имя": "Out(F₃)",
+     "≅": "OutF3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "абелианизация": "2:1"
+  },
+  {
+   "id": "AutSumA5",
+   "имя": "Aut(⊕_ℕ A₅) = S₅ ≀ Sym(ℕ)",
+   "заметка": "Минимальные нормальные подгруппы ⊕A₅ — ровно слагаемые A₅⁽ⁱ⁾, поэтому автоморфизм переставляет их (σ ∈ Sym(ℕ)) и на каждом действует элементом Aut(A₅) = S₅; любые такие данные задают автоморфизм. Aut ≅ (∏_ℕ S₅) ⋊ Sym(ℕ) (неограниченное сплетение), Inn ≅ ⊕A₅.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": true,
+    "torsion-free": false,
+    "periodic": false,
+    "centerless": true,
+    "residually-finite": false,
+    "linear": false,
+    "polycyclic": false,
+    "amenable": false,
+    "bi-orderable": false,
+    "left-orderable": false,
+    "residually-nilpotent": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "bounded-exponent": false,
+    "metabelian": false,
+    "dedekind": false,
+    "class-2": false
+   },
+   "почему": {
+    "fin-gen": "несчётна (|∏S₅| = 2^ℵ₀)",
+    "free": "есть кручение",
+    "simple": "∏S₅ — собственная нетривиальная нормальная подгруппа",
+    "solvable": "содержит A₅",
+    "perfect": "Sym(ℕ) совершенна (O. Ore, 1951: каждый элемент — коммутатор), а каждый элемент ∏S₅ — коммутатор [x, σ] со сдвигом σ, все орбиты которого бесконечны: xᵢx_{σ⁻¹i}⁻¹ = sᵢ решается вдоль каждой орбиты",
+    "periodic": "сдвиг на ℤ-орбитах ℕ — элемент бесконечного порядка",
+    "centerless": "⊕A₅ без центра, а централизатор Inn(G) в Aut(G) у группы без центра тривиален (α·inn_g·α⁻¹ = inn_{α(g)})",
+    "residually-finite": "содержит A_∞ ⩽ Sym(ℕ), а A_∞ не ф. а.",
+    "linear": "содержит ⊕A₅ (нелинейна, см. запись SumA5)",
+    "polycyclic": "не к. п.",
+    "amenable": "Sym(ℕ) ⊇ F₂ (действие F₂ на себе)",
+    "bi-orderable": "есть кручение",
+    "left-orderable": "есть кручение",
+    "residually-nilpotent": "содержит A₅ (совершенная)",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "bounded-exponent": "есть элемент бесконечного порядка",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима",
+    "dedekind": "содержит A₅"
+   },
+   "трудно": [
+    "perfect"
+   ],
+   "ссылки": [
+    "O. Ore, Some remarks on commutators, Proc. AMS 2 (1951)"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "AutSumA5"
+    },
+    {
+     "id": "Inn",
+     "имя": "Inn = ⊕A₅",
+     "≅": "SumA5",
+     "свойства": {
+      "normal": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "OutSumA5",
+     "почему": {
+      "maximal": "⊕A₅ ⊊ ⊕S₅ ⊊ Aut",
+      "finite-index": "фактор содержит Sym(ℕ)"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "Aut(⊕A₅)",
+     "≅": "AutSumA5",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "все",
+   "абелианизация": "1:1"
+  },
+  {
+   "id": "OutSumA5",
+   "имя": "Out(⊕_ℕ A₅) = (∏S₅ ⋊ Sym(ℕ))/⊕A₅",
+   "заметка": "Фактор Aut(⊕A₅) = S₅ ≀ Sym(ℕ) по Inn ≅ ⊕A₅. Sym(ℕ) пересекает ∏S₅ тривиально и вкладывается в Out.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": true,
+    "torsion-free": false,
+    "periodic": false,
+    "residually-finite": false,
+    "linear": false,
+    "polycyclic": false,
+    "amenable": false,
+    "bi-orderable": false,
+    "left-orderable": false,
+    "residually-nilpotent": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "bounded-exponent": false,
+    "metabelian": false,
+    "dedekind": false,
+    "class-2": false
+   },
+   "почему": {
+    "fin-gen": "несчётна: фактор группы мощности 2^ℵ₀ по счётной",
+    "free": "есть кручение (транспозиция из Sym(ℕ))",
+    "simple": "∏S₅/⊕A₅ — собственная нетривиальная нормальная подгруппа",
+    "solvable": "содержит Sym(ℕ) ⊇ A₅",
+    "perfect": "фактор совершенной Aut(⊕A₅)",
+    "periodic": "содержит Sym(ℕ)",
+    "residually-finite": "содержит Sym(ℕ) ⊇ A_∞",
+    "linear": "содержит Sym(ℕ) ⊇ ⊕A₅",
+    "polycyclic": "не к. п.",
+    "amenable": "содержит Sym(ℕ) ⊇ F₂",
+    "bi-orderable": "есть кручение",
+    "left-orderable": "есть кручение",
+    "residually-nilpotent": "содержит A₅",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "bounded-exponent": "есть элемент бесконечного порядка",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима",
+    "dedekind": "содержит A₅"
+   },
+   "трудно": [
+    "perfect"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "OutSumA5"
+    },
+    {
+     "id": "все",
+     "имя": "Out(⊕A₅)",
+     "≅": "OutSumA5",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "коммутант": "все",
+   "абелианизация": "1:1"
+  },
+  {
+   "id": "ZhatU",
+   "имя": "ℤ̂^× = ∏_p ℤ_p^×",
+   "заметка": "Aut(ℚ/ℤ): ℚ/ℤ = ⊕_p ℤ(p^∞), End(ℤ(p^∞)) = ℤ_p, гомоморфизмы между разными примарными компонентами нулевые, поэтому End(ℚ/ℤ) = ∏ ℤ_p = ℤ̂ и Aut = ℤ̂^× = ∏_p ℤ_p^×, ℤ_p^× ≅ C_{p−1} × ℤ_p (p > 2), ℤ₂^× ≅ C₂ × ℤ₂.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "linear": false,
+    "polycyclic": false,
+    "locally-cyclic": false,
+    "amenable": true,
+    "bi-orderable": false,
+    "left-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "free-abelian": false,
+    "metabelian": true,
+    "dedekind": true,
+    "class-2": true
+   },
+   "почему": {
+    "fin-gen": "несчётна",
+    "torsion-free": "−1",
+    "periodic": "1 + 4ℤ₂ ≅ ℤ₂ без кручения",
+    "divisible": "фактор ℤ₂^×/(1 + 4ℤ₂) ≅ C₂ не делим",
+    "residually-finite": "произведение проконечных",
+    "indecomposable": "ℤ₂^× × ∏_{p>2} ℤ_p^×",
+    "linear": "содержит бесконечные элементарные абелевы 2- и 3-подгруппы (−1 ∈ ℤ_p^× и корни из 1 степени 3 при p ≡ 1 mod 3); в характеристике ≠ 2 коммутирующие инволюции диагонализуемы (их не больше 2ⁿ), в характеристике 2 так же с элементами порядка 3",
+    "polycyclic": "не к. п.",
+    "locally-cyclic": "{±1} × {±1} ⊂ ℤ₃^× × ℤ₅^×",
+    "amenable": "абелева",
+    "bi-orderable": "есть кручение",
+    "left-orderable": "есть кручение",
+    "property-t": "бесконечна и аменабельна",
+    "residually-nilpotent": "абелева",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "bounded-exponent": "есть элемент бесконечного порядка",
+    "free-abelian": "есть кручение",
+    "metabelian": "абелева",
+    "class-2": "абелева",
+    "dedekind": "абелева"
+   },
+   "короткий довод": [
+    "linear"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "ZhatU"
+    },
+    {
+     "id": "ℤ₂^×",
+     "имя": "ℤ₂^× × 1",
+     "≅": "Z2adicU",
+     "свойства": {
+      "normal": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": true
+     },
+     "почему": {
+      "complemented": "дополнение ∏_{p>2} ℤ_p^×"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "ℤ̂^×",
+     "≅": "ZhatU",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "абелианизация": "ZhatU"
+  },
+  {
+   "id": "AutR",
+   "имя": "Aut(ℝ⁺) = GL_ℚ(ℝ)",
+   "заметка": "ℝ⁺ — векторное пространство над ℚ размерности 2^ℵ₀, аддитивные биекции — ℚ-линейные, поэтому Aut(ℝ⁺) = GL(V), dim_ℚ V = 2^ℵ₀. Так как ℝⁿ ≅ ℝ (≅ ℂ⁺) как группы, это и Aut(ℝⁿ).",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "torsion-free": false,
+    "periodic": false,
+    "centerless": false,
+    "residually-finite": false,
+    "linear": false,
+    "polycyclic": false,
+    "amenable": false,
+    "bi-orderable": false,
+    "left-orderable": false,
+    "residually-nilpotent": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "bounded-exponent": false,
+    "metabelian": false,
+    "dedekind": false,
+    "class-2": false
+   },
+   "почему": {
+    "fin-gen": "несчётна",
+    "free": "−1 порядка 2",
+    "simple": "центр — скаляры ℚ*",
+    "solvable": "содержит GL₂(ℚ) (разложение V = ℚ² ⊕ W)",
+    "torsion-free": "−1",
+    "periodic": "умножение на 2",
+    "centerless": "скаляры ℚ* централизуют всё",
+    "residually-finite": "перестановки базиса: Sym(базиса) ⊇ A_∞",
+    "linear": "перестановки базиса: содержит ⊕A₅ (нелинейна, см. запись SumA5)",
+    "polycyclic": "не к. п.",
+    "amenable": "содержит GL₂(ℤ) ⊇ F₂",
+    "bi-orderable": "есть кручение",
+    "left-orderable": "есть кручение",
+    "residually-nilpotent": "содержит A₅ (перестановки базиса)",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "locally-cyclic": "неабелева",
+    "bounded-exponent": "есть элемент бесконечного порядка",
+    "metabelian": "неразрешима",
+    "class-2": "неразрешима",
+    "dedekind": "содержит S₃ (перестановки базиса)"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "AutR"
+    },
+    {
+     "id": "центр",
+     "имя": "скаляры ℚ*",
+     "≅": "Qmul",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": {
+      "maximal": "ℚ* ⊊ ℚ*·⟨σ⟩ ⊊ GL(V), σ — перестановка двух векторов базиса (ℚ*·⟨σ⟩ абелева)"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "GL_ℚ(ℝ)",
+     "≅": "AutR",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр"
+  },
+  {
+   "id": "AutAutCp",
+   "имя": "Aut(C_{p−1}) ≅ (ℤ/(p−1))ˣ (p > 10⁷⁵)",
+   "заметка": "Aut(Aut(C_p)) для простого p из монстра Тарского. Порядок φ(p − 1); циклична ли — зависит от p (n = p − 1 ⩾ 3: (ℤ/n)ˣ циклична ⇔ n = 4, qᵏ, 2qᵏ), поэтому это и другие зависящие от p значения не записаны.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "finite": true,
+    "fin-gen": true,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "polycyclic": true,
+    "hopfian": true,
+    "linear": true,
+    "prime-order": false,
+    "order-p2": false,
+    "odd-order": false,
+    "exponent-2": false,
+    "exponent-3": false,
+    "amenable": true,
+    "locally-finite": true,
+    "co-hopfian": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "residually-nilpotent": true,
+    "property-t": true,
+    "bounded-exponent": true,
+    "free-abelian": false,
+    "metabelian": true,
+    "dedekind": true,
+    "class-2": true
+   },
+   "почему": {
+    "trivial": "−1 ≠ 1 в ℤ/(p − 1)",
+    "simple": "порядок φ(p − 1) не простой: он чётен и φ(n) = 2 только при n = 3, 4, 6",
+    "odd-order": "−1 — элемент порядка 2",
+    "prime-order": "φ(n) = 2 только при n = 3, 4, 6",
+    "order-p2": "φ(n) чётен, а φ(n) = 4 только при n = 5, 8, 10, 12",
+    "exponent-2": "(ℤ/n)ˣ периода 2 только при n | 24",
+    "exponent-3": "чётный порядок",
+    "amenable": "конечна",
+    "locally-finite": "конечна",
+    "co-hopfian": "конечна",
+    "property-t": "конечна",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "residually-nilpotent": "абелева",
+    "free-abelian": "конечна и нетривиальна",
+    "metabelian": "абелева",
+    "class-2": "абелева",
+    "dedekind": "абелева"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "AutAutCp"
+    },
+    {
+     "id": "все",
+     "имя": "(ℤ/(p−1))ˣ",
+     "≅": "AutAutCp",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "абелианизация": "AutAutCp"
   }
  ],
  "семейства": [
