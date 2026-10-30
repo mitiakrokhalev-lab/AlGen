@@ -47,7 +47,9 @@ from .logic import App, Theory, Var, Vocab, decide
 # Свойства, которые не входят в атомы формы (флаг --без): схемы с большим
 # числом термов растут комбинаторно с каждым свойством.
 SKIP = set()
-MOR_PROPS = ("injective", "surjective", "iso", "zero-mor")
+MOR_PROPS = ("injective", "surjective", "iso", "zero-mor", "idempotent", "inner-aut")
+ELT_PROPS = ("identity-elt", "involution", "central-elt", "real-elt", "commutator-elt", "generator")
+GSET_PROPS = ("transitive", "faithful", "free-act", "regular", "primitive", "singleton-set", "finite-set")
 RELATIONS = True  # атомы-отношения между термами схемы (⩽, =, ≅)
 DIVERSE = 4  # моделей «наоборот» в _derive
 REFRESH = 200  # выводов строк до пересоздания решателя
@@ -77,6 +79,13 @@ def relation_atoms(g, terms):
         for b in objs[i + 1:]:
             x, y = sorted((a, b), key=str)
             out.append(("r", "iso", x, y))
+    # элементы одной группы: перестановочны, сопряжены, равны
+    elts = [t for t in terms if g.terms[t].sort == "Grp.elt"]
+    for i, a in enumerate(elts):
+        for b in elts[i + 1:]:
+            if g.terms[a].links.get("ambient") == g.terms[b].links.get("ambient"):
+                x, y = sorted((a, b), key=str)
+                out += [("r", r, x, y) for r in ("commute", "conjugate", "eq-elt") if r in g.v.rels]
     # вложение A ↪ B — только если одна из групп — переменная схемы (иначе пар слишком много)
     if "embeds" in g.v.rels:
         seen = set()
@@ -417,6 +426,10 @@ class SchemeForm(Form):
                 self.atoms += [("p", p, t) for p in MOR_PROPS]
             elif sort == "Grp.fam":
                 self.atoms += [("p", p, t) for p in ps + ["finite-fam"] if g.v.prop_fits(p, sort)]
+            elif sort == "Grp.elt":
+                self.atoms += [("p", p, t) for p in ELT_PROPS if p in g.v.props]
+            elif sort == "Grp.gset":
+                self.atoms += [("p", p, t) for p in GSET_PROPS if p in g.v.props]
         if RELATIONS:
             self.atoms += relation_atoms(g, own)
         self.index = {a: i for i, a in enumerate(self.atoms)}
@@ -800,19 +813,22 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     # проверка «есть ли строка, где посылки верны, а цель ложна» — по словам,
     # без копирования подматрицы (у GN — 143 тыс. строк × 348 литералов).
     nr = m.shape[0]
-    words = max(1, (nr + 63) // 64)
-    packed = np.packbits(m, axis=0, bitorder="little")
-    pad = np.zeros((words * 8 - packed.shape[0], n_lit), dtype=np.uint8)
-    PT = np.ascontiguousarray(np.vstack([packed, pad]).T).view(np.uint64)  # (n_lit, words)
     neg_idx = np.arange(n_lit) ^ 1
-    buf = np.empty_like(PT)
+    bufs = {}
 
-    def to_bits(idx):
-        mask = np.zeros(words * 64, dtype=bool)
-        mask[idx] = True
+    def pack(rows):
+        """Столбцы по строкам rows (номера строк m) — матрица (n_lit, слов)."""
+        w = max(1, (len(rows) + 63) // 64)
+        pk = np.packbits(m[rows], axis=0, bitorder="little")
+        pad = np.zeros((w * 8 - pk.shape[0], n_lit), dtype=np.uint8)
+        return np.ascontiguousarray(np.vstack([pk, pad]).T).view(np.uint64)
+
+    def ones(n):
+        mask = np.zeros(max(1, (n + 63) // 64) * 64, dtype=bool)
+        mask[:n] = True
         return np.packbits(mask, bitorder="little").view(np.uint64)
 
-    def go(prem, R, start, depth, pm=0):
+    def go(prem, R, start, depth, pm, P, rows_map):
         nonlocal count
         if need:
             miss = full & ~pm
@@ -833,7 +849,10 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 gc = [g for g in goal_cols if ok[g]]
                 if not gc:
                     return
-            np.bitwise_and(PT, R, out=buf)
+            buf = bufs.get(P.shape)
+            if buf is None:
+                buf = bufs[P.shape] = np.empty(P.shape, dtype=np.uint64)
+            np.bitwise_and(P, R, out=buf)
             hits = buf.any(axis=1)  # литерал верен хотя бы в одной строке посылок
             negs = hits[neg_idx]
             for g in gc:
@@ -854,20 +873,28 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                     continue
                 alive[key] = int(np.bitwise_count(buf[g]).sum())
             return
-        if prem and not R.any():
-            return  # посылки уже несовместны в библиотеке: продолжения — тоже
+        if prem:
+            if not R.any():
+                return  # посылки уже несовместны в библиотеке: продолжения — тоже
+            # Строк посылок мало — сжать матрицу до них: всё поддерево работает
+            # с короткими строками битов (k = 3: тройки — по строкам пары).
+            n_on = int(np.bitwise_count(R).sum())
+            if n_on * 4 < len(rows_map) and P.shape[1] > 4:
+                bits = np.unpackbits(R.view(np.uint8), bitorder="little")[:len(rows_map)].astype(bool)
+                rows_map = rows_map[bits]
+                P, R = pack(rows_map), ones(len(rows_map))
         used = {x // 2 for x in prem}
         for j in range(start, n_lit):
             if j // 2 in used or j in const or j ^ 1 in const or j // 2 in deferred:
                 continue
             if pairs and ((j // 2 in pairs and j % 2) or clash.get(j // 2, set()) & used):
                 continue
-            go(prem + [j], PT[j] & R, j + 1, depth, pm | (int(lmask[j]) if need else 0))
+            go(prem + [j], P[j] & R, j + 1, depth, pm | (int(lmask[j]) if need else 0), P, rows_map)
 
-    start = np.flatnonzero(m[:, form.fixed].all(axis=1)) if form.fixed else np.arange(m.shape[0])
-    R0 = to_bits(start)
+    start = np.flatnonzero(m[:, form.fixed].all(axis=1)) if form.fixed else np.arange(nr)
+    P0 = pack(start)
     for depth in range(1, max_prem + 1):
-        go([], R0, 0, depth)
+        go([], ones(len(start)), 0, depth, 0, P0, start)
     form.n_alive = count
     return alive, empty
 

@@ -42,11 +42,17 @@ BASES = {
     "GMN": "∀ G : Grp; ∀ M : Sub(G); ∀ N : Sub(M)",
     "GHF": "∀ G : Grp; ∀ H : Grp; ∀ F : Mor(G, H)",
     "Fam": "∀ F : Fam",
+    # новые сорта: действие (со скрытой точкой x_A), элемент, эндоморфизм
+    # (два элемента «Gxy» — позже: пар классов слишком много для таблицы)
+    "GX": "∀ G : Grp; ∀ A : GSet(G)",
+    "Gx": "∀ G : Grp; ∀ x : Elt(G)",
+    "GE": "∀ G : Grp; ∀ F : Mor(G, G)",
 }
 
 # Конструкции вселенной (термы-«вершины» схем).
 CONS = ["center", "commutator", "ab", "aut", "inn", "quotient", "prod", "freeprod", "wreath",
-        "meet", "join", "normalizer", "centralizer", "normal-closure", "ker", "im", "torsion", "frattini", "prod-fam", "sum-fam"]
+        "meet", "join", "normalizer", "centralizer", "normal-closure", "ker", "im", "torsion", "frattini", "prod-fam", "sum-fam",
+        "stab", "act-ker", "gen", "centralizer-elt"]
 SYMMETRIC = {"prod", "freeprod"}            # A × B ≅ B × A: берём один порядок
 SYMMETRIC_SUB = {"meet", "join"}            # meet(G, H, K) = meet(G, K, H)
 
@@ -209,8 +215,9 @@ def build(lib, vocab, base, part, outdir, skel=None):
 # Подобрано по цене «строк × атомов» (замер 30.10: G 12 тыс. × 659, GN 148 тыс. × 1412,
 # AB 89 тыс. × 1225, GHK 53 тыс. × 3494, GMN 24 тыс. × 3196, GHF 92 тыс. × 1301):
 # части примерно равной цены, по 4 на машину при 20 машинах.
-PARTS = {"G": 2, "GN": 24, "AB": 12, "GHK": 21, "GMN": 9, "GHF": 14, "Fam": 1}
-COST = {"G": 8.0, "GN": 209.5, "AB": 108.8, "GHK": 185.0, "GMN": 76.7, "GHF": 119.8, "Fam": 0.01}
+PARTS = {"G": 2, "GN": 24, "AB": 12, "GHK": 21, "GMN": 9, "GHF": 14, "Fam": 1, "GX": 1, "Gx": 3, "GE": 2}
+COST = {"G": 8.0, "GN": 209.5, "AB": 108.8, "GHK": 185.0, "GMN": 76.7, "GHF": 119.8, "Fam": 0.01,
+        "GX": 2.7, "Gx": 22.4, "GE": 14.8}
 
 
 def assignment(jobs):
