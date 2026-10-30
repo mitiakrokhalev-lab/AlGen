@@ -294,7 +294,7 @@ class Form:
             return f"{atom_name(atom)} у {where}"
         im = self._image(r, atom[2])
         t = atom[2]
-        if im is not None and im[0] in ("mor", "fam"):
+        if im is not None and im[0] not in ("obj", "sub"):  # гомоморфизм, семейство, действие, элемент…
             return f"{atom_name(atom)} у {self.where(r)}"
         if im is None and isinstance(t, App) and t.op in ("center", "commutator", "quotient"):
             # Не записан центр или коммутант: приписываем это группе, у которой его нет.
