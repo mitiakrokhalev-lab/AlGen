@@ -5475,10 +5475,11 @@
       "characteristic": true,
       "central": true,
       "whole": false,
-      "maximal": false,
+      "maximal": true,
       "finite-index": true
      },
-     "фактор": "2:1"
+     "фактор": "2:1",
+     "почему": "максимальна: индекс простой (фактор — циклическая группа простого порядка)"
     },
     {
      "id": "⊕ℤ",
@@ -14476,10 +14477,11 @@
       "characteristic": true,
       "central": false,
       "whole": false,
-      "maximal": false,
+      "maximal": true,
       "finite-index": true
      },
-     "фактор": "3:1"
+     "фактор": "3:1",
+     "почему": "максимальна: индекс простой (фактор — циклическая группа простого порядка)"
     },
     {
      "id": "коммутант",
