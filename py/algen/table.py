@@ -191,6 +191,58 @@ def _fp(base):
     return f"{_fingerprint()}:{base}:{','.join(sorted(E.SKIP))}"
 
 
+def theory_fp(base):
+    """Хэш того, от чего зависит вывод строки по её записанным значениям:
+    правила и словарь, код теории и атомов — но не данные библиотеки.
+    Кэш выводов с этим отпечатком переживает круги заполнения библиотеки."""
+    import hashlib
+    root = Path(__file__).resolve().parents[2]
+    files = [root / "data" / "grp.json", root / "data" / "new" / "grp.json", root / "data" / "vocab" / "grp.json",
+             *(Path(__file__).parent / f for f in ("logic.py", "enumerate.py", "library.py", "table.py", "etalon.py"))]
+    h = hashlib.sha256()
+    for f in files:
+        if f.exists():
+            h.update(f.name.encode())
+            h.update(f.read_bytes())
+    h.update(f"{base}:{','.join(sorted(E.SKIP))}".encode())
+    return h.hexdigest()[:16]
+
+
+def _pack_rows(d):
+    """{ключ: [True/False/None, …]} → {ключ: (биты «верно», биты «ложно»)}."""
+    out = {}
+    for k, row in d.items():
+        t = np.packbits(np.array([v is True for v in row], dtype=bool))
+        f = np.packbits(np.array([v is False for v in row], dtype=bool))
+        out[k] = (t.tobytes(), f.tobytes(), len(row))
+    return out
+
+
+def _unpack_rows(d):
+    out = {}
+    for k, (t, f, n) in d.items():
+        tt = np.unpackbits(np.frombuffer(t, dtype=np.uint8))[:n]
+        ff = np.unpackbits(np.frombuffer(f, dtype=np.uint8))[:n]
+        out[k] = [True if a else (False if b else None) for a, b in zip(tt, ff)]
+    return out
+
+
+def load_cache(base, cdir):
+    """Выводы строк базы из кэша прошлых прогонов (только с тем же theory_fp)."""
+    if not cdir or not Path(cdir).exists():
+        return {}
+    fp, rows = theory_fp(base), {}
+    for path in Path(cdir).rglob(f"{base}.*.dcache"):
+        try:
+            with open(path, "rb") as fh:
+                data = pickle.load(fh)
+        except Exception:
+            continue
+        if data.get("отпечаток") == fp:
+            rows.update(data["строки"])
+    return _unpack_rows(rows)
+
+
 def build(lib, vocab, base, part, outdir, skel=None):
     """Часть таблицы базы. skel — готовый каркас (теория строится один раз на
     базу, части получают его через fork); иначе строится здесь."""
@@ -207,7 +259,12 @@ def build(lib, vocab, base, part, outdir, skel=None):
             **{k: np.packbits(getattr(f, k), axis=1) for k in "mse"}}
     with open(path, "wb") as fh:
         pickle.dump(data, fh, protocol=pickle.HIGHEST_PROTOCOL)
-    print(f"{base} {part[0]}/{part[1]}: строк {len(f.envs)}, атомов {len(f.atoms)}, "
+    # кэш выводов этой части (ключ — записанные значения строки) для следующих прогонов
+    used = {k: f._derived[k] for k in getattr(f, "_used", ()) if k in f._derived}
+    new = [k for k in used if k not in getattr(f, "_cached_keys", ())]
+    with open(Path(outdir) / f"{base}.{part[0]}-{part[1]}.dcache", "wb") as fh:
+        pickle.dump({"отпечаток": theory_fp(base), "строки": _pack_rows(used)}, fh, protocol=pickle.HIGHEST_PROTOCOL)
+    print(f"{base} {part[0]}/{part[1]}: строк {len(f.envs)}, атомов {len(f.atoms)}, новых выводов {len(new)}, "
           f"{round(time.time() - t0)} с → {path}", file=sys.stderr)
 
 
@@ -236,7 +293,7 @@ def assignment(jobs):
     return out
 
 
-def build_all(lib, vocab, job, jobs, outdir, threads):
+def build_all(lib, vocab, job, jobs, outdir, threads, cache=None):
     """Задание job из jobs: части таблиц job, job + jobs, … по threads процессов."""
     mine = assignment(jobs)[job - 1]
     ctx = mp.get_context("fork")
@@ -251,7 +308,10 @@ def build_all(lib, vocab, job, jobs, outdir, threads):
         if b not in skel:  # каркас базы — один раз на машину
             t = time.time()
             skel[b] = skeleton(lib, vocab, b)
-            print(f"{b}: каркас {round(time.time() - t)} с", file=sys.stderr, flush=True)
+            cached = load_cache(b, cache)
+            skel[b]._derived.update(cached)
+            skel[b]._cached_keys = set(cached)
+            print(f"{b}: каркас {round(time.time() - t)} с, из кэша выводов {len(cached)}", file=sys.stderr, flush=True)
         p = ctx.Process(target=build, args=(lib, vocab, b, part, outdir, skel[b]))
         p.start()
         running.append(p)
@@ -369,18 +429,22 @@ def _one(job):
 
 
 def run_schemes(a):
+    """Перебор схем по таблицам баз. Базы — по одной: таблица базы загружается,
+    её схемы перебираются, таблица выгружается (в памяти машины — одна база,
+    а не все сразу: иначе 16 ГБ машины GitHub не хватало)."""
+    import gc
     vocab = Vocab.section("grp")
     lib = built_library(vocab)
     E.DEFER = getattr(a, "defer", 0) or 0
     _STATE.update(lib=lib, vocab=vocab, registry=E.load_registry(), forms={})
     outdir = Path(a.out)
     outdir.mkdir(parents=True, exist_ok=True)
-    jobs = []
     ks = [int(x) for x in str(a.k).split(",")]
     try:  # таблица базы G — для фильтра условий об одном терме (generic_filter)
         _STATE["generic"] = load(lib, vocab, "G", a.dir)
     except (FileNotFoundError, ValueError) as e:
         print(f"нет таблицы G для фильтра: {e}", file=sys.stderr)
+    by_base = {}
     for base in a.bases.split(","):
         fp = _fp(base) + f":{a.k}" + (f":d{a.defer}" if a.defer else "")
         todo = schemes(vocab, base, ks[-1])
@@ -394,6 +458,7 @@ def run_schemes(a):
         if a.part:
             i, n = map(int, a.part.split("/"))
             todo = todo[i - 1::n]
+        jobs = []
         for sid, terms in todo:
             j = outdir / f"{sid}.json"
             if j.exists() and not a.force:
@@ -404,19 +469,44 @@ def run_schemes(a):
                 except Exception:
                     pass
             jobs.append((base, sid, terms, k_for(ks, tops[sid]), str(outdir), fp))
-        if any(j[0] == base for j in jobs) or (base == "G" and a.bases != "G"):
-            t = time.time()
-            _STATE["forms"][base] = load(lib, vocab, base, a.dir)
-            _STATE.setdefault("base_of", {})[id(_STATE["forms"][base])] = base
-            print(f"{base}: таблица {_STATE['forms'][base].e.shape}, {round(time.time() - t)} с",
-                  file=sys.stderr, flush=True)
-    print(f"схем к перебору {len(jobs)}, нитей {a.jobs}", file=sys.stderr, flush=True)
+        if jobs:
+            by_base[base] = jobs
+    total = sum(len(j) for j in by_base.values())
+    print(f"схем к перебору {total}, нитей {a.jobs}: " + ", ".join(f"{b} {len(j)}" for b, j in by_base.items()),
+          file=sys.stderr, flush=True)
     t0 = time.time()
+    _STATE["limit"] = a.limit
+    deadline = t0 + a.until * 60 if a.until else None
+    _STATE["deadline"] = deadline  # видят и дочерние процессы (fork)
+    done = 0
+    for base, jobs in by_base.items():
+        if deadline and time.time() > deadline:
+            print(f"срок вышел: база {base} не начата ({len(jobs)} схем)", file=sys.stderr, flush=True)
+            continue
+        t = time.time()
+        if base == "G" and _STATE.get("generic") is not None:
+            _STATE["forms"][base] = _STATE["generic"]
+        else:
+            _STATE["forms"][base] = load(lib, vocab, base, a.dir)
+        _STATE.setdefault("base_of", {})[id(_STATE["forms"][base])] = base
+        print(f"{base}: таблица {_STATE['forms'][base].e.shape}, {round(time.time() - t)} с",
+              file=sys.stderr, flush=True)
+        done = _run_pool(jobs, a, deadline, t0, done, total)
+        if base != "G":
+            del _STATE["forms"][base]
+        gc.collect()
+    print(f"готово за {round(time.time() - t0)} с", file=sys.stderr)
+
+
+def _run_pool(jobs, a, deadline, t0, done, total):
+    """Схемы jobs по a.jobs процессам (fork от родителя с загруженной таблицей)."""
     ctx = mp.get_context("fork")  # таблицы наследуются без копирования
     limit = int(a.mem * 2**30) if a.mem else 0
 
     def worker(chunk):
         if limit:
+            # предел — сверх уже занятого: таблицы баз унаследованы от родителя (fork)
+            # и входят в адресное пространство, хотя памяти не занимают повторно
             import resource
             vm = 0
             with open("/proc/self/status") as fh:
@@ -437,12 +527,9 @@ def run_schemes(a):
         os._exit(0)
 
     # Дочерний процесс берёт пачку схем (форк на каждую схему дорог при тысячах схем).
-    size = max(1, min(50, len(jobs) // (a.jobs * 4) or 1))
+    size = max(1, min(20, len(jobs) // (a.jobs * 4) or 1))
     queue = [jobs[i:i + size] for i in range(0, len(jobs), size)]
-    running, done = {}, 0
-    _STATE["limit"] = a.limit
-    deadline = t0 + a.until * 60 if a.until else None
-    _STATE["deadline"] = deadline  # видят и дочерние процессы (fork)
+    running = {}
     while queue or running:
         if deadline and time.time() > deadline and queue:
             print(f"срок вышел: не начато схем {sum(len(c) for c in queue)}", file=sys.stderr, flush=True)
@@ -464,9 +551,9 @@ def run_schemes(a):
                         j.write_text(json.dumps({"id": job[1], "условие": BASES[job[0]], "термы": job[2],
                                                  "отпечаток": job[5], "статус": f"ошибка: код {p.exitcode}"},
                                                 ensure_ascii=False), encoding="utf-8")
-            print(f"[{done}/{len(jobs)}] {round(time.time() - t0)} с", file=sys.stderr, flush=True)
+            print(f"[{done}/{total}] {round(time.time() - t0)} с", file=sys.stderr, flush=True)
         time.sleep(0.2)
-    print(f"готово за {round(time.time() - t0)} с", file=sys.stderr)
+    return done
 
 
 def completeness(lib, vocab, base, tdir, top=15):
@@ -509,6 +596,7 @@ def main():
     s.add_argument("--каталог", dest="dir", required=True)
     s.add_argument("--нитей", dest="jobs", type=int, default=mp.cpu_count())
     s.add_argument("--без", dest="skip", default="")
+    s.add_argument("--кэш", dest="cache", default=None, help="каталог с *.dcache прошлых прогонов")
     s = sub.add_parser("полнота")
     s.add_argument("base")
     s.add_argument("--каталог", dest="dir", required=True)
@@ -548,7 +636,7 @@ def main():
             print("    больше всего неизвестных: " + "; ".join(f"{g} {n}" for g, n in miss[:8]))
     elif a.cmd == "строить-все":
         j, n = map(int, a.job.split("/"))
-        build_all(built_library(vocab), vocab, j, n, a.dir, a.jobs)
+        build_all(built_library(vocab), vocab, j, n, a.dir, a.jobs, a.cache)
     else:
         run_schemes(a)
 

@@ -12,15 +12,19 @@ on:
 
 env:
   ARGS: "--без bounded-exponent"
-  BASES: "G,GX,Gx,GE,GN,AB,GHF,GMN,GHK,Fam"   # перебор схем; таблицы строятся для всех баз
+  BASES: "G,GX,Gx,GE,Fam,GHF,AB,GN,GMN,GHK"   # перебор схем; таблицы строятся для всех баз
   K: "2"             # посылок в схеме (или «k0,k1,k2» по числу верхних термов)
   UNTIL: "300"       # минут: после этого часть не начинает новых схем и выгружает результат
   LIMIT: "600"       # секунд на одну схему (дольше — «таймаут», схема в сводке отдельно)
   DEFER: "0.15"      # откладывать атомы, известные меньше чем в этой доле строк
   PREV_RUN: "41068502923"       # продолжение: номер прошлого запуска — его таблицы и готовые схемы берутся, а не считаются заново
+  CACHE_RUN: ""      # номер прошлого запуска, чьи выводы строк (*.dcache) брать при построении таблиц
 
 jobs:
   build:
+    permissions:
+      actions: read
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -33,11 +37,19 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        if: env.PREV_RUN == '' && env.CACHE_RUN != ''
+        continue-on-error: true
+        with:
+          pattern: tab-*
+          path: cache
+          run-id: ${{ env.CACHE_RUN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: таблицы
         if: env.PREV_RUN == ''
         run: |
           cd py
-          python3 -m algen.table строить-все --задание ${{ matrix.job }}/20 --каталог ../tab --нитей 4 $ARGS
+          python3 -m algen.table строить-все --задание ${{ matrix.job }}/20 --каталог ../tab --нитей 4 --кэш ../cache $ARGS
       - uses: actions/upload-artifact@v4
         if: env.PREV_RUN == ''
         with:
@@ -81,20 +93,66 @@ jobs:
         if: env.PREV_RUN != ''
         continue-on-error: true
         with:
-          name: part-${{ matrix.part }}
+          pattern: part-${{ matrix.part }}-*
           path: out
+          merge-multiple: true
           run-id: ${{ env.PREV_RUN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: перебор
+      # Перебор частями по 70 минут с выгрузкой после каждой: если машина GitHub
+      # падает (нехватка памяти), посчитанное раньше не пропадает. Каждая следующая
+      # часть пропускает схемы, уже посчитанные в ../out.
+      - name: перебор 1
+        if: always()
+        continue-on-error: true
         run: |
           cd py
-          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 4.5 --посылок $K --до $UNTIL --предел $LIMIT --отложить $DEFER $ARGS
+          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER $ARGS
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: part-${{ matrix.part }}
+          name: part-${{ matrix.part }}-1
           path: out
           retention-days: 30
+          compression-level: 1
+      - name: перебор 2
+        if: always()
+        continue-on-error: true
+        run: |
+          cd py
+          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER $ARGS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: part-${{ matrix.part }}-2
+          path: out
+          retention-days: 30
+          compression-level: 1
+      - name: перебор 3
+        if: always()
+        continue-on-error: true
+        run: |
+          cd py
+          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER $ARGS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: part-${{ matrix.part }}-3
+          path: out
+          retention-days: 30
+          compression-level: 1
+      - name: перебор 4
+        if: always()
+        continue-on-error: true
+        run: |
+          cd py
+          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER $ARGS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: part-${{ matrix.part }}-4
+          path: out
+          retention-days: 30
+          compression-level: 1
 
   summary:
     needs: enum
