@@ -429,18 +429,22 @@ def _one(job):
 
 
 def run_schemes(a):
+    """Перебор схем по таблицам баз. Базы — по одной: таблица базы загружается,
+    её схемы перебираются, таблица выгружается (в памяти машины — одна база,
+    а не все сразу: иначе 16 ГБ машины GitHub не хватало)."""
+    import gc
     vocab = Vocab.section("grp")
     lib = built_library(vocab)
     E.DEFER = getattr(a, "defer", 0) or 0
     _STATE.update(lib=lib, vocab=vocab, registry=E.load_registry(), forms={})
     outdir = Path(a.out)
     outdir.mkdir(parents=True, exist_ok=True)
-    jobs = []
     ks = [int(x) for x in str(a.k).split(",")]
     try:  # таблица базы G — для фильтра условий об одном терме (generic_filter)
         _STATE["generic"] = load(lib, vocab, "G", a.dir)
     except (FileNotFoundError, ValueError) as e:
         print(f"нет таблицы G для фильтра: {e}", file=sys.stderr)
+    by_base = {}
     for base in a.bases.split(","):
         fp = _fp(base) + f":{a.k}" + (f":d{a.defer}" if a.defer else "")
         todo = schemes(vocab, base, ks[-1])
@@ -454,6 +458,7 @@ def run_schemes(a):
         if a.part:
             i, n = map(int, a.part.split("/"))
             todo = todo[i - 1::n]
+        jobs = []
         for sid, terms in todo:
             j = outdir / f"{sid}.json"
             if j.exists() and not a.force:
@@ -464,14 +469,37 @@ def run_schemes(a):
                 except Exception:
                     pass
             jobs.append((base, sid, terms, k_for(ks, tops[sid]), str(outdir), fp))
-        if any(j[0] == base for j in jobs) or (base == "G" and a.bases != "G"):
-            t = time.time()
-            _STATE["forms"][base] = load(lib, vocab, base, a.dir)
-            _STATE.setdefault("base_of", {})[id(_STATE["forms"][base])] = base
-            print(f"{base}: таблица {_STATE['forms'][base].e.shape}, {round(time.time() - t)} с",
-                  file=sys.stderr, flush=True)
-    print(f"схем к перебору {len(jobs)}, нитей {a.jobs}", file=sys.stderr, flush=True)
+        if jobs:
+            by_base[base] = jobs
+    total = sum(len(j) for j in by_base.values())
+    print(f"схем к перебору {total}, нитей {a.jobs}: " + ", ".join(f"{b} {len(j)}" for b, j in by_base.items()),
+          file=sys.stderr, flush=True)
     t0 = time.time()
+    _STATE["limit"] = a.limit
+    deadline = t0 + a.until * 60 if a.until else None
+    _STATE["deadline"] = deadline  # видят и дочерние процессы (fork)
+    done = 0
+    for base, jobs in by_base.items():
+        if deadline and time.time() > deadline:
+            print(f"срок вышел: база {base} не начата ({len(jobs)} схем)", file=sys.stderr, flush=True)
+            continue
+        t = time.time()
+        if base == "G" and _STATE.get("generic") is not None:
+            _STATE["forms"][base] = _STATE["generic"]
+        else:
+            _STATE["forms"][base] = load(lib, vocab, base, a.dir)
+        _STATE.setdefault("base_of", {})[id(_STATE["forms"][base])] = base
+        print(f"{base}: таблица {_STATE['forms'][base].e.shape}, {round(time.time() - t)} с",
+              file=sys.stderr, flush=True)
+        done = _run_pool(jobs, a, deadline, t0, done, total)
+        if base != "G":
+            del _STATE["forms"][base]
+        gc.collect()
+    print(f"готово за {round(time.time() - t0)} с", file=sys.stderr)
+
+
+def _run_pool(jobs, a, deadline, t0, done, total):
+    """Схемы jobs по a.jobs процессам (fork от родителя с загруженной таблицей)."""
     ctx = mp.get_context("fork")  # таблицы наследуются без копирования
     limit = int(a.mem * 2**30) if a.mem else 0
 
@@ -499,12 +527,9 @@ def run_schemes(a):
         os._exit(0)
 
     # Дочерний процесс берёт пачку схем (форк на каждую схему дорог при тысячах схем).
-    size = max(1, min(50, len(jobs) // (a.jobs * 4) or 1))
+    size = max(1, min(20, len(jobs) // (a.jobs * 4) or 1))
     queue = [jobs[i:i + size] for i in range(0, len(jobs), size)]
-    running, done = {}, 0
-    _STATE["limit"] = a.limit
-    deadline = t0 + a.until * 60 if a.until else None
-    _STATE["deadline"] = deadline  # видят и дочерние процессы (fork)
+    running = {}
     while queue or running:
         if deadline and time.time() > deadline and queue:
             print(f"срок вышел: не начато схем {sum(len(c) for c in queue)}", file=sys.stderr, flush=True)
@@ -526,9 +551,9 @@ def run_schemes(a):
                         j.write_text(json.dumps({"id": job[1], "условие": BASES[job[0]], "термы": job[2],
                                                  "отпечаток": job[5], "статус": f"ошибка: код {p.exitcode}"},
                                                 ensure_ascii=False), encoding="utf-8")
-            print(f"[{done}/{len(jobs)}] {round(time.time() - t0)} с", file=sys.stderr, flush=True)
+            print(f"[{done}/{total}] {round(time.time() - t0)} с", file=sys.stderr, flush=True)
         time.sleep(0.2)
-    print(f"готово за {round(time.time() - t0)} с", file=sys.stderr)
+    return done
 
 
 def completeness(lib, vocab, base, tdir, top=15):
