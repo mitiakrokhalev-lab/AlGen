@@ -54,6 +54,9 @@ RELATIONS = True  # атомы-отношения между термами сх
 DIVERSE = 4  # моделей «наоборот» в _derive
 REFRESH = 200  # выводов строк до пересоздания решателя
 REDUCE = True  # сводить «неизвестно» к вопросу «посылки ⇒ переменная вырождена?»
+# Посылки только из свойств (без отношений ⩽, ≅, ↪ между термами), начиная с этой
+# глубины: для k = 3 отношения в посылках раздувают перебор, а задачи с ними — редкость.
+PROPS_ONLY_FROM = 0
 # Атомы, значение которых известно меньше чем в DEFER доле строк, откладываются:
 # условия с ними — почти сплошь «неизвестно» (шум), а стоят решателя каждое.
 # Они возвращаются в перебор, когда библиотека заполнится.
@@ -891,6 +894,8 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             if j // 2 in used or j in const or j ^ 1 in const or j // 2 in deferred:
                 continue
             if pairs and ((j // 2 in pairs and j % 2) or clash.get(j // 2, set()) & used):
+                continue
+            if PROPS_ONLY_FROM and len(prem) + 1 >= PROPS_ONLY_FROM and form.atoms[j // 2][0] == "r":
                 continue
             go(prem + [j], P[j] & R, j + 1, depth, pm | (int(lmask[j]) if need else 0), P, rows_map)
 

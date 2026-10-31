@@ -161,17 +161,46 @@ def build_aut(jobs):
                 out.write(json.dumps(recs[k], ensure_ascii=False, separators=(",", ":")) + "\n")
 
 
-def build_table(script, target, jobs):
-    """Данные по всем группам таблицы скриптом GAP (KEYS, OUT) → target (jsonl)."""
+def build_table(script, target, jobs, stall=None, deadline=None):
+    """Данные по всем группам таблицы скриптом GAP (KEYS, OUT) → target (jsonl).
+
+    stall — сколько секунд ждать строку об очередной группе: группа, на которой GAP
+    застрял дольше, пропускается (строка с «"skipped": true»), остаток пачки
+    считается заново. deadline — время (time.time()), после которого записывается
+    то, что есть (недосчитанные группы просто отсутствуют)."""
+    import time
     keys = sorted(load(extra=True), key=lambda k: tuple(map(int, k.split(":"))))
     chunks = [keys[i::jobs * 4] for i in range(jobs * 4)]
     with tempfile.TemporaryDirectory() as tmp:
         def one(i):
             path = os.path.join(tmp, f"{i}.jsonl")
-            ks = ", ".join(f"[{k.replace(':', ', ')}]" for k in chunks[i])
-            prog = f'KEYS:=[{ks}];; OUT:="{path}";; Read("{script}");\n'
-            subprocess.run(["gap", "-q", "-o", "8g"], input=prog, text=True, check=True,
-                           stdout=subprocess.DEVNULL)
+            todo, done, part = list(chunks[i]), [], 0
+            while todo and (deadline is None or time.time() < deadline):
+                part += 1
+                ppath = f"{path}.{part}"
+                ks = ", ".join(f"[{k.replace(':', ', ')}]" for k in todo)
+                prog = f'KEYS:=[{ks}];; OUT:="{ppath}";; Read("{script}");\n'
+                pr = subprocess.Popen(["gap", "-q", "-o", "8g"], stdin=subprocess.PIPE, text=True,
+                                      stdout=subprocess.DEVNULL)
+                pr.stdin.write(prog); pr.stdin.close()
+                seen, last = 0, time.time()
+                while pr.poll() is None:
+                    time.sleep(2)
+                    n = sum(1 for _ in open(ppath)) if os.path.exists(ppath) else 0
+                    if n > seen:
+                        seen, last = n, time.time()
+                    if (stall and time.time() - last > stall) or (deadline and time.time() > deadline):
+                        pr.kill(); pr.wait()
+                        break
+                lines = open(ppath).read().splitlines() if os.path.exists(ppath) else []
+                lines = [x for x in lines if x.endswith("}")]
+                done += lines
+                todo = todo[len(lines):]
+                if pr.returncode not in (0, None) and todo and (deadline is None or time.time() < deadline):
+                    done.append(json.dumps({"key": todo[0], "skipped": True}))
+                    todo = todo[1:]
+            with open(path, "w") as f:
+                f.write("\n".join(done) + ("\n" if done else ""))
             return path
         with ThreadPoolExecutor(jobs) as ex:
             paths = list(ex.map(one, range(len(chunks))))
@@ -179,12 +208,15 @@ def build_table(script, target, jobs):
         for path in paths:
             with open(path) as f:
                 for line in f:
-                    r = json.loads(line)
-                    recs[r["key"]] = r
+                    if line.strip():
+                        r = json.loads(line)
+                        recs[r["key"]] = r
     with target.open("w") as out:
         for k in keys:
             if k in recs:
                 out.write(json.dumps(recs[k], ensure_ascii=False, separators=(",", ":")) + "\n")
+    skipped = sum(1 for r in recs.values() if r.get("skipped"))
+    print(f"групп {len(keys)}, записано {len(recs)}, пропущено (застряли) {skipped}")
 
 
 def present_tasks():
@@ -342,6 +374,10 @@ if __name__ == "__main__":
                     help="эндоморфизмы всех групп таблицы в data/finite/grp-homs.jsonl")
     ap.add_argument("--авт", dest="aut", action="store_true",
                     help="посчитать Aut, Inn, Out всех групп таблицы в data/finite/grp-aut.jsonl")
+    ap.add_argument("--застой", dest="stall", type=int, default=300,
+                    help="пропускать группу, на которой GAP думает дольше стольких секунд")
+    ap.add_argument("--минут", dest="minutes", type=int, default=300,
+                    help="через столько минут записать то, что есть")
     a = ap.parse_args()
     if a.present:
         build_present()
@@ -352,7 +388,8 @@ if __name__ == "__main__":
         print(COMPL, sum(1 for _ in COMPL.open()))
         raise SystemExit
     if a.homs:
-        build_table(HOMS_SCRIPT, HOMS, a.jobs)
+        import time
+        build_table(HOMS_SCRIPT, HOMS, a.jobs, stall=a.stall, deadline=time.time() + a.minutes * 60)
         print(HOMS, sum(1 for _ in HOMS.open()))
         raise SystemExit
     if a.elts:
