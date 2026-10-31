@@ -1106,6 +1106,8 @@ class Search:
                 elif all(self.lib.obj[k].get("конечная") and not self.lib.obj[k].get("неканонический")
                          for k in (ka, kb)):
                     out[("r", "iso", x, y)] = False
+                elif self._differ(ka, kb):
+                    out[("r", "iso", x, y)] = False  # свойство различает: не изоморфны
         # Порядки: у термов без образа в библиотеке (C₈₅ × C₈₅, C₂ ≀ C₇, …) порядок
         # часто известен по множителям — разные порядки, значит, не изоморфны;
         # |A| ∤ |B| (или A бесконечна, B конечна) — A не вкладывается в B.
@@ -1203,11 +1205,19 @@ class Search:
             return None
         return self._key_order(self.lib.obj[im[1]]["подгруппы"][im[2]]["≅"])
 
+    def _differ(self, ka, kb):
+        """Есть свойство, известное у обеих групп записей и различающее их."""
+        pa, pb = self.lib.obj[ka]["свойства"], self.lib.obj[kb]["свойства"]
+        return any(pa.get(p) is not None and pb.get(p) is not None and pa[p] != pb[p] for p in GROUP_PROPS)
+
     def _embeds(self, ka, kb):
         lib = self.lib
         if ka == kb or ka == "1:1":
             return True
         oa, ob = lib.obj[ka], lib.obj[kb]
+        # свойство, наследуемое подгруппами, есть у B и нет у A — A не вкладывается в B
+        if any(ob["свойства"].get(p) and oa["свойства"].get(p) is False for p in Theory.SUB_CLOSED):
+            return False
         if ob.get("конечная") and oa["свойства"].get("finite") is False:
             return False
         if oa.get("конечная") and ob.get("конечная") and ":" in ka and ":" in kb:
