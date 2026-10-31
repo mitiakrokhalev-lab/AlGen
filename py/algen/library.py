@@ -1106,6 +1106,24 @@ class Search:
                 elif all(self.lib.obj[k].get("конечная") and not self.lib.obj[k].get("неканонический")
                          for k in (ka, kb)):
                     out[("r", "iso", x, y)] = False
+        # Порядки: у термов без образа в библиотеке (C₈₅ × C₈₅, C₂ ≀ C₇, …) порядок
+        # часто известен по множителям — разные порядки, значит, не изоморфны;
+        # |A| ∤ |B| (или A бесконечна, B конечна) — A не вкладывается в B.
+        ords = {}
+        for t in terms or self.g.terms:
+            if self.g.v.fits(self.g.terms[t].sort, "Grp.obj"):
+                n = self._order(t, env)
+                if n is not None:
+                    ords[t] = n
+        oi = list(ords.items())
+        for i, (a, na) in enumerate(oi):
+            for b, nb in oi[i + 1:]:
+                x, y = sorted((a, b), key=str)
+                if na != nb:
+                    out.setdefault(("r", "iso", x, y), False)
+                for u, nu, v, nv in ((a, na, b, nb), (b, nb, a, na)):
+                    if nv != "inf" and (nu == "inf" or nv % nu):
+                        out.setdefault(("r", "embeds", u, v), False)
         # A ↪ B: та же группа; конечные — по таблице подгрупп B; бесконечная не вкладывается
         # в конечную, большая конечная — в меньшую; запись «подгруппы» бесконечной B
         for atom in [a for a in self.T.atoms if a[0] == "r" and a[1] == "embeds"] if terms is None else []:
@@ -1131,6 +1149,59 @@ class Search:
                     # Inn ⊴ Aut максимальна ⇔ Out не имеет собственных нетривиальных подгрупп ⇔ |Out| простое
                     out[("p", "maximal", t)] = arith_sub_props(n, n // i)["prime-index"]
         return out, hard
+
+    def _key_order(self, k):
+        """Порядок группы записи: n у «n:i», произведение у построенных A × B,
+        "inf" у бесконечной, None — неизвестно."""
+        o = self.lib.obj.get(k)
+        if o is None:
+            return None
+        if o["свойства"].get("finite") is False:
+            return "inf"
+        head = k.split(":")
+        if o.get("конечная") and len(head) == 2 and head[0].isdigit() and head[1].isdigit():
+            return int(head[0])
+        rev = self.__dict__.setdefault("_prod_of", {v: kk for kk, v in self.lib.prod.items()})
+        if k in rev:
+            a, b = (self._key_order(x) for x in rev[k])
+            if None in (a, b):
+                return None
+            return "inf" if "inf" in (a, b) else a * b
+        return None
+
+    def _order(self, t, env, depth=0):
+        """Порядок группы-терма t в строке env (как в _key_order) — по образу, а если
+        образа нет, по множителям: |A × B| = |A||B|, |A ≀ B| = |A|^|B| |B|,
+        A ∗ B бесконечна при нетривиальных, |G/N| = |G| / |N|."""
+        im = self._image(t, env)
+        k = self._obj(im) if im is not None else None
+        if k is not None:
+            return self._key_order(k)
+        if depth > 3 or not isinstance(t, App):
+            return None
+        if t.op in ("prod", "wreath", "freeprod") and len(t.args) == 2:
+            a, b = (self._order(x, env, depth + 1) for x in t.args)
+            if None in (a, b):
+                return None
+            if t.op == "freeprod":
+                return a * b if 1 in (a, b) and "inf" not in (a, b) else "inf"
+            if "inf" in (a, b):
+                return "inf" if 1 not in (a, b) else (b if a == 1 else a)
+            if t.op == "prod":
+                return a * b
+            return a ** b * b if b < 64 else None
+        if t.op == "quotient" and len(t.args) == 2:
+            g = self._order(t.args[0], env, depth + 1)
+            n = self._sub_order(t.args[1], env)
+            if isinstance(g, int) and isinstance(n, int) and n and g % n == 0:
+                return g // n
+        return None
+
+    def _sub_order(self, t, env):
+        im = self._image(t, env)
+        if im is None or im[0] != "sub":
+            return None
+        return self._key_order(self.lib.obj[im[1]]["подгруппы"][im[2]]["≅"])
 
     def _embeds(self, ka, kb):
         lib = self.lib

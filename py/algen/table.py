@@ -455,6 +455,8 @@ def run_schemes(a):
             ts = [term(g0, x, n0, "grp") for x in terms]
             tops[sid] = sum(1 for t in maximal(g0, closure(g0, ts + [t for t in g0.terms if isinstance(t, Var)]))
                             if isinstance(t, App))
+        if getattr(a, "sample", 1) > 1:  # каждая N-я схема базы: круг библиотеки по всем базам сразу
+            todo = todo[::a.sample]
         if a.part:
             i, n = map(int, a.part.split("/"))
             todo = todo[i - 1::n]
@@ -616,6 +618,7 @@ def main():
                    help="откладывать атомы, известные меньше чем в этой доле строк (например 0.15)")
     s.add_argument("--до", dest="until", type=float, default=0, help="минут: после этого новые схемы не начинать")
     s.add_argument("--предел", dest="limit", type=float, default=0, help="секунд на одну схему")
+    s.add_argument("--выборка", dest="sample", type=int, default=1, help="брать каждую N-ю схему базы")
     a = ap.parse_args()
     E.SKIP.update(x.strip() for x in getattr(a, "skip", "").split(",") if x.strip())
     vocab = Vocab.section("grp")

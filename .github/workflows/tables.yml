@@ -18,6 +18,7 @@ env:
   LIMIT: "600"       # секунд на одну схему (дольше — «таймаут», схема в сводке отдельно)
   DEFER: "0.15"      # откладывать атомы, известные меньше чем в этой доле строк
   PREV_RUN: ""       # продолжение: номер прошлого запуска — его таблицы и готовые схемы берутся, а не считаются заново
+  SAMPLE: "1"        # перебирать каждую N-ю схему базы (круг библиотеки по выборке; 1 — все)
   CACHE_RUN: ""      # номер прошлого запуска, чьи выводы строк (*.dcache) брать при построении таблиц
 
 jobs:
@@ -106,7 +107,7 @@ jobs:
         continue-on-error: true
         run: |
           cd py
-          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER $ARGS
+          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER --выборка $SAMPLE $ARGS
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -119,7 +120,7 @@ jobs:
         continue-on-error: true
         run: |
           cd py
-          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER $ARGS
+          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER --выборка $SAMPLE $ARGS
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -132,7 +133,7 @@ jobs:
         continue-on-error: true
         run: |
           cd py
-          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER $ARGS
+          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER --выборка $SAMPLE $ARGS
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -145,7 +146,7 @@ jobs:
         continue-on-error: true
         run: |
           cd py
-          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER $ARGS
+          python3 -m algen.table перебор $BASES --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей 3 --память 3 --посылок $K --до 70 --предел $LIMIT --отложить $DEFER --выборка $SAMPLE $ARGS
       - uses: actions/upload-artifact@v4
         if: always()
         with:
