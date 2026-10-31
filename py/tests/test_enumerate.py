@@ -1,0 +1,62 @@
+"""Перебор условий: отсев по матрице библиотеки и минимальность.
+
+    cd py && python3 -m unittest discover tests
+"""
+
+import unittest
+
+import numpy as np
+
+from algen.enumerate import clusters, cover, enumerate_form, minimal
+
+
+class FakeForm:
+    """Три атома a, b, c; строки — объекты библиотеки (верно / ложно / None)."""
+
+    def __init__(self, rows):
+        self.req, self.fixed = {}, []
+        m = np.zeros((len(rows), 6), dtype=bool)
+        for r, row in enumerate(rows):
+            for i, v in enumerate(row):
+                if v is not None:
+                    m[r, 2 * i + (0 if v else 1)] = True
+        self.e = self.m = m
+
+
+class EnumerateTest(unittest.TestCase):
+    def test_refuted_and_minimal(self):
+        # a ⇒ c на всех строках, b ⇒ c опровергается последней строкой.
+        form = FakeForm([(True, True, True), (True, False, True), (False, True, False)])
+        alive, empty = enumerate_form(form, 2, goals=[4])
+        self.assertIn(((0,), 4), alive)
+        self.assertNotIn(((2,), 4), alive)
+        # a, b ⇒ c не минимально (хватает a): не хранится, но учтено в счётчике.
+        self.assertNotIn(((0, 2), 4), alive)
+        self.assertGreater(form.n_alive, len(alive))
+        mins = minimal(alive)
+        self.assertIn(((0,), 4), mins)
+        self.assertNotIn(((0, 2), 4), mins)
+
+    def test_unknown_value_does_not_refute(self):
+        # Значение цели не записано: строка не опровергает.
+        form = FakeForm([(True, None, None)])
+        alive, _ = enumerate_form(form, 1, goals=[4, 5])
+        self.assertIn(((0,), 4), alive)
+        self.assertIn(((0,), 5), alive)
+
+    def test_cover_prefers_shared_fact(self):
+        # Условия 0 и 1 держатся на x или y, условие 2 — только на y:
+        # хватает одного факта y.
+        x, y, z = (frozenset([n]) for n in "xyz")
+        out = cover([[x, y], [y, z], [y]])
+        self.assertEqual(out, [y, y, y])
+
+    def test_clusters_share_pair(self):
+        ts = [("a", "b", "c"), ("a", "b", "d"), ("a", "b", "e"), ("c", "f", "g")]
+        out = clusters(ts)
+        self.assertEqual(out[0], (("a", "b"), ["c", "d", "e"]))
+        self.assertEqual(len(out), 2)
+
+
+if __name__ == "__main__":
+    unittest.main()

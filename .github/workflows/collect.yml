@@ -1,0 +1,45 @@
+name: collect
+
+# Сводка по готовым частям перебора другого запуска (если сводка там упала).
+# Запуск: пуш в ветку «collect-…»; номер запуска — в файле .github/collect-run.
+
+on:
+  push:
+    branches: ["collect-*"]
+
+jobs:
+  summary:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - run: echo "RUN=$(cat .github/collect-run)" >> $GITHUB_ENV
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: part-*
+          path: parts
+          run-id: ${{ env.RUN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          mkdir -p all
+          find parts -name '*.json' -exec cp {} all/ \; || true
+          find parts -name '*.txt' -exec cp {} all/ \; || true
+          ls all | wc -l
+          cd py && python3 -m algen.batch сводка ../all || echo "сводка упала" > ../all/сводка.md
+      - name: результаты в ветку «results-…»
+        run: |
+          tar czf results.tar.gz all
+          cp all/сводка.md сводка.md || echo "нет сводки" > сводка.md
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e results.tar.gz -e сводка.md
+          git add results.tar.gz сводка.md
+          git commit -qm "Результаты перебора запуска ${RUN}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"

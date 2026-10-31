@@ -1,0 +1,10 @@
+# id | условие | термы
+основная |  |
+ZC | ∀ G : Grp | center(G); commutator(G); G / center(G)
+Ab | ∀ G : Grp | commutator(G); ab(G)
+AxB | ∀ A : Grp; ∀ B : Grp | A × B
+Hom | ∀ G : Grp; ∀ H : Grp; ∀ F : Mor(G, H) | ker(F); im(F)
+Цепь | ∀ G : Grp; ∀ M : Sub(G); ∀ N : Sub(M) |
+HK | ∀ G : Grp; ∀ H : Sub(G); ∀ K : Sub(G) | meet(G, H, K); join(G, H, K)
+Нормализатор | ∀ G : Grp; ∀ H : Sub(G) | normalizer(G, H); centralizer(G, H)
+AfB | ∀ A : Grp; ∀ B : Grp | A ∗ B

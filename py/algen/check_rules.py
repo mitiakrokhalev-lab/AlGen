@@ -332,8 +332,16 @@ def main():
         drop = {x["id"] for x in patch.get("снять", [])}
         new = {x["id"] for x in patch.get("добавить", [])}
         rules = [r for r in rules if r["id"] not in drop] + [r for r in v.rules if r["id"] in new]
+    # сцена записи базы может быть словарём {"N": {"sort": …, "ambient": "X"}}
+    rules = [{**r, "scene": [{"name": k, "sort": v} if isinstance(v, str) else {"name": k, **v}
+                             for k, v in r["scene"].items()]} if isinstance(r["scene"], dict) else r
+             for r in rules]
+    # связь-терм в сцене («H ⩽ A ∗ B») таблица конечных групп не перебирает
+    skip = [r for r in rules if any(isinstance(x.get(k), dict) for x in r["scene"] for k in ("ambient", "dom", "cod"))]
+    rules = [r for r in rules if r not in skip]
     with Pool(a.jobs) as pool:
         report = pool.map(_one, rules, chunksize=1)
+    report += [{"id": r["id"], "итог": "не проверяется"} for r in skip]
     if a.as_json:
         json.dump(report, sys.stdout, ensure_ascii=False, indent=1)
         return

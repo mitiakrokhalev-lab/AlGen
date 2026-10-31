@@ -50,6 +50,7 @@ class Vocab:
         self.rels = {r["id"]: r for r in d["relations"]}
         self.cons = {c["id"]: c for c in d["constructions"]}
         self.degen = d["degenerations"]
+        self.quantified = {}
         self.rules = [r for r in d["rules"]]
         for c in d.get("gives", []):
             scene = [{"name": s["role"], "sort": s["sort"],
@@ -83,7 +84,8 @@ class Vocab:
                 raise KeyError(f"свойство {p['id']} уже есть в словаре")
             self.props[p["id"]] = p["sort"] if isinstance(p["sort"], list) else [p["sort"]]
         drop = {x["id"] for x in patch.get("снять", [])}
-        missing = drop - {r["id"] for r in self.rules}
+        # правила «X:даёт:p» строятся из конструкций и могут быть не построены (check_rules)
+        missing = {x for x in drop - {r["id"] for r in self.rules} if ":даёт:" not in x and ":сохраняет:" not in x}
         if missing:
             raise KeyError(f"снимаемых правил нет в базе: {sorted(missing)}")
         added = []
@@ -94,6 +96,63 @@ class Vocab:
                          for k, v in scene.items()]
             added.append({**r, "scene": scene})
         self.rules = [r for r in self.rules if r["id"] not in drop] + added
+        # Равенства конструкций (как «вырождения» словаря): «Gᵃᵇ = G/G′».
+        self.degen = self.degen + patch.get("вырождения", [])
+        # Новые отношения (например, вложение A ↪ B).
+        for r in patch.get("отношения", []):
+            if r["id"] in self.rels:
+                raise KeyError(f"отношение {r['id']} уже есть в словаре")
+            self.rels[r["id"]] = r
+        # Свойства с квантором по подгруппам: Q(G) ⇔ ∀ H ⩽ G (фильтр(H) ⇒ P(H)).
+        for q in patch.get("кванторные", []):
+            self._quantified(q)
+        # Новые конструкции (например, сплетение); «gives» — как в словаре.
+        for c in patch.get("конструкции", []):
+            if c["id"] in self.cons:
+                raise KeyError(f"конструкция {c['id']} уже есть в словаре")
+            self.cons[c["id"]] = c
+            scene = [{"name": x["role"], "sort": x["sort"], **{k: x[k] for k in LINKS if k in x}} for x in c["in"]]
+            t = {"op": c["id"], "args": [x["role"] for x in c["in"]]}
+            for p, v in (c.get("gives") or {}).items():
+                self.rules.append({"id": f"{c['id']}:даёт:{p}", "scene": scene, "if": [],
+                                   "then": {"p": p, "t": t, "значение": v}})
+            # «preserves»: свойство всех аргументов-подгрупп переходит к результату
+            subs = [x["role"] for x in c["in"] if x["sort"] == "Grp.sub"]
+            for p in c.get("preserves") or []:
+                self.rules.append({"id": f"{c['id']}:сохраняет:{p}", "scene": scene,
+                                   "if": [{"p": p, "t": r} for r in subs], "then": {"p": p, "t": t}})
+
+    def _quantified(self, q):
+        """Свойство «всякая подгруппа H с фильтром обладает P» (локально конечна,
+        все собственные подгруппы абелевы, …) и его правила:
+          исключение  Q(G), H ⩽ G, фильтр(H) ⇒ P(H);
+          на себя     Q(G), фильтр(G) ⇒ P(G) (если фильтр не требует H ≠ G);
+          наследование Q(G), H ⩽ G ⇒ Q(H) («наследуется»: фильтр в H влечёт фильтр в G);
+          введение    P(G) ⇒ Q(G) («из p»: P наследуется подгруппами)."""
+        qid, p, filt = q["id"], q["p"], q.get("фильтр", [])
+        if qid in self.props:
+            raise KeyError(f"свойство {qid} уже есть в словаре")
+        self.props[qid] = ["Grp.obj"]
+        X = {"name": "X", "sort": "Grp.obj"}
+        H = {"name": "H", "sort": "Grp.sub", "ambient": "X"}
+
+        def lit(x, t):
+            return {"p": x["p"], "t": t, **({"значение": False} if x.get("значение") is False else {})}
+        self.rules.append({"id": f"{qid}:исключение", "scene": [X, H],
+                           "if": [{"p": qid, "t": "X"}] + [lit(x, "H") for x in filt],
+                           "then": {"p": p, "t": "H"}})
+        if not any(x["p"] == "whole" for x in filt):
+            self.rules.append({"id": f"{qid}:на себя", "scene": [X],
+                               "if": [{"p": qid, "t": "X"}] + [lit(x, "X") for x in filt],
+                               "then": {"p": p, "t": "X"}})
+        if q.get("наследуется"):
+            self.rules.append({"id": f"{qid}:наследуется", "scene": [X, H],
+                               "if": [{"p": qid, "t": "X"}], "then": {"p": qid, "t": "H"}})
+        if q.get("из p"):
+            self.rules.append({"id": f"{qid}:из {p}", "scene": [X],
+                               "if": [{"p": p, "t": "X"}], "then": {"p": qid, "t": "X"}})
+        self.quantified = getattr(self, "quantified", {})
+        self.quantified[qid] = q
 
     def fits(self, have, want):
         return have == want or want in self.up.get(have, ())
@@ -114,6 +173,20 @@ class Var:
     def __str__(self):
         return self.name
 
+    def __hash__(self):  # кэш: термы — ключи словарей в горячих циклах
+        h = self.__dict__.get("_h")
+        if h is None:
+            h = hash(("Var", self.name))
+            object.__setattr__(self, "_h", h)
+        return h
+
+    def __getstate__(self):  # хэш строк зависит от процесса: кэш не сохраняем
+        return {k: v for k, v in self.__dict__.items() if k != "_h"}
+
+    def __setstate__(self, st):
+        for k, v in st.items():
+            object.__setattr__(self, k, v)
+
 
 @dataclass(frozen=True)
 class App:
@@ -121,6 +194,20 @@ class App:
 
     op: str
     args: tuple
+
+    def __hash__(self):
+        h = self.__dict__.get("_h")
+        if h is None:
+            h = hash((self.op, self.args))
+            object.__setattr__(self, "_h", h)
+        return h
+
+    def __getstate__(self):  # хэш строк зависит от процесса: кэш не сохраняем
+        return {k: v for k, v in self.__dict__.items() if k != "_h"}
+
+    def __setstate__(self, st):
+        for k, v in st.items():
+            object.__setattr__(self, k, v)
 
     def __str__(self):
         return f"{self.op}({', '.join(map(str, self.args))})"
@@ -205,6 +292,12 @@ class Graph:
 
     def requires(self, t):
         """Условия существования терма: [(свойство, терм)], рекурсивно."""
+        memo = self.__dict__.setdefault("_req", {})
+        if t not in memo:
+            memo[t] = self._requires(t)
+        return memo[t]
+
+    def _requires(self, t):
         out = []
         if isinstance(t, App):
             c = self.v.cons[t.op]
@@ -221,61 +314,203 @@ class Graph:
 class Theory:
     """Пропозициональная теория графа: переменные-атомы и клаузы."""
 
-    def __init__(self, graph, grow=1):
+    def __init__(self, graph, grow=1, extra=(), grow_ops=None):
         self.g = graph
+        self.grow_ops = grow_ops  # какие конструкции можно достраивать (None — все)
         self.v = graph.v
         self.grow = grow
         self.var = {}
+        self._lc = {}  # кэш lit: атом → номер переменной (0 — тождественно верный)
         self.atoms = []
         self.clauses = []
         self.origin = []  # id правила для каждой клаузы
+        for a in extra:  # атомы перебора (отношения), которым нужны аксиомы равенства
+            self.lit(a)
         self._build()
 
     # атомы ---------------------------------------------------------------
 
     def lit(self, atom, value=True):
+        n = self._lc.get(atom)
+        if n is None:
+            n = self._lc[atom] = self._var_of(atom)
+        if n == 0:
+            return None if value else False  # t ≅ t верно всегда
+        return n if value else -n
+
+    def _var_of(self, atom):
         if atom[0] == "r" and atom[1] in ("iso", "eq-sub") and str(atom[3]) < str(atom[2]):
             atom = (atom[0], atom[1], atom[3], atom[2])  # симметричные отношения
         if atom[0] == "r" and atom[1] in ("iso", "eq-sub") and atom[2] == atom[3]:
-            return None if value else False  # t ≅ t верно всегда
+            return 0
         if atom not in self.var:
             self.var[atom] = len(self.atoms) + 1
             self.atoms.append(atom)
-        n = self.var[atom]
-        return n if value else -n
+        return self.var[atom]
 
     # заземление правил ----------------------------------------------------
 
-    def _bindings(self, scene):
+    def _bindings(self, scene, pats=(), shallow=(), limit=None):
+        """Подстановки термов графа в роли сцены. pats — образцы термов правила
+        ({"op", "args"}): если задать, роли из аргументов образца берутся из уже
+        построенных термов с этой конструкцией (для заземления без роста:
+        подстановка, при которой образца нет в графе, всё равно отбрасывается)."""
         roles = sorted(scene, key=lambda r: sum(1 for k in LINKS if k in r))
         names = {r["name"] for r in roles}
+        def link_roles(x):
+            if isinstance(x, dict):
+                return set().union(*[link_roles(a) for a in x.get("args", [])]) if x.get("args") else set()
+            return {x.split()[-1]}
+
+        def ref(x, env):
+            """Связь роли: как Graph._ref, но образец-терм только ищется, не строится."""
+            if isinstance(x, dict):
+                args = [ref(a, env) for a in x.get("args", [])]
+                if any(a is None for a in args):
+                    return None
+                t = App(x["op"], tuple(args))
+                return t if t in self.g.terms else None
+            return self.g._ref(x, env)
+
         for r in roles:
             for k in LINKS:
-                if k in r and r[k].split()[-1] not in names:
+                if k in r and not link_roles(r[k]) <= names:
                     return
         terms = list(self.g.terms.items())
+        by_sort, by_link = {}, {}
 
-        def go(i, env):
-            if i == len(roles):
+        def cands(r, env):
+            lst = by_sort.get(r["sort"])
+            if lst is None:
+                lst = by_sort[r["sort"]] = [(t, i) for t, i in terms if self.v.fits(i.sort, r["sort"])]
+            # связь на уже выбранную роль: только термы с этой связью (индекс)
+            for k in LINKS:
+                if k in r:
+                    try:
+                        want = ref(r[k], env)
+                    except KeyError:
+                        continue
+                    idx = by_link.get((r["sort"], k))
+                    if idx is None:
+                        idx = by_link[r["sort"], k] = {}
+                        for t, i in lst:
+                            idx.setdefault(i.links.get(k), []).append((t, i))
+                    lst = idx.get(want, [])
+                    break
+            if r["name"] in shallow:
+                # аргумент образца: новый терм глубины ⩽ limit строится только
+                # из термов глубины < limit
+                return [(t, i) for t, i in lst if i.depth < limit]
+            return lst
+
+        def fits(r, t, info, env):
+            if not self.v.fits(info.sort, r["sort"]):
+                return False
+            for k in LINKS:
+                if k in r:
+                    want = ref(r[k], env)
+                    if want is None or info.links.get(k) != want:
+                        return False
+            return True
+
+        def go(i, env, order):
+            if i == len(order):
                 yield dict(env)
                 return
-            r = roles[i]
-            for t, info in terms:
-                if not self.v.fits(info.sort, r["sort"]):
-                    continue
-                ok = True
-                for k in LINKS:
-                    if k in r:
-                        want = self.g._ref(r[k], env)
-                        if want is None or info.links.get(k) != want:
-                            ok = False
-                            break
-                if ok:
+            r = order[i]
+            if r["name"] in env:
+                if fits(r, env[r["name"]], self.g.terms[env[r["name"]]], env):
+                    yield from go(i + 1, env, order)
+                return
+            for t, info in cands(r, env):
+                if fits(r, t, info, env):
                     env[r["name"]] = t
-                    yield from go(i + 1, env)
+                    yield from go(i + 1, env, order)
                     del env[r["name"]]
 
-        yield from go(0, {})
+        # образец с наибольшим числом ролей среди аргументов
+        best = None
+        for pat in pats:
+            args = pat.get("args", [])
+            if "bind" in pat or not args or not all(isinstance(a, str) and a in names for a in args):
+                continue
+            if best is None or len(set(args)) > len(set(best["args"])):
+                best = pat
+        if best is None or len(set(best["args"])) < 2:
+            yield from go(0, {}, roles)
+            return
+        for t in self._by_op().get(best["op"], ()):
+            env = {}
+            ok = True
+            for a, x in zip(best["args"], t.args):
+                if env.setdefault(a, x) != x:
+                    ok = False
+                    break
+            if ok and len(t.args) == len(best["args"]):
+                yield from go(0, env, roles)
+
+    def _by_op(self):
+        n = len(self.g.terms)
+        if getattr(self, "_op_n", None) != n:
+            idx = {}
+            for t in self.g.terms:
+                if isinstance(t, App):
+                    idx.setdefault(t.op, []).append(t)
+            self._op_idx, self._op_n = idx, n
+        return self._op_idx
+
+    @staticmethod
+    def _all_patterns(r):
+        """Все образцы-термы правила (верхнего уровня) по порядку, как их строит _atom."""
+        out = []
+        concl = r["then"]["или"] if "или" in r["then"] else [r["then"]]
+        for a in list(r["if"]) + concl:
+            for x in ([a["t"]] if "t" in a else a.get("args", [])):
+                if isinstance(x, dict):
+                    out.append(x)
+        return out
+
+    @staticmethod
+    def _pat_roles(p):
+        out = set()
+        for a in p.get("args", []):
+            if isinstance(a, str):
+                out.add(a)
+            elif isinstance(a, dict):
+                out |= Theory._pat_roles(a)
+        return out
+
+    @staticmethod
+    def _patterns(r):
+        """Образцы-термы правила (dict с op) в посылках и выводах, без вложенных."""
+        out = []
+        concl = r["then"]["или"] if "или" in r["then"] else [r["then"]]
+        for a in list(r["if"]) + concl:
+            for x in ([a["t"]] if "t" in a else a.get("args", [])):
+                if isinstance(x, dict) and "op" in x:
+                    out.append(x)
+        return out
+
+    def _grow_term(self, pat, env):
+        """Достройка: новый терм строится, только если среди его аргументов не
+        больше одного построенного терма (Z(X/N), X × Z(X) — да; Z(X) × X′ — нет).
+        Иначе граф большой схемы растёт квадратично, а такие термы выводу почти
+        не нужны."""
+        if isinstance(pat, str):
+            return env.get(pat)
+        if "bind" in pat:
+            return None
+        args = [self._grow_term(a, env) for a in pat.get("args", [])]
+        if any(a is None for a in args):
+            return None
+        t = App(pat["op"], tuple(args))
+        if t in self.g.terms:
+            return t
+        if sum(isinstance(a, App) for a in args) > 1:
+            return None
+        if self.grow_ops is not None and pat["op"] not in self.grow_ops:
+            return None
+        return self.g.make(pat["op"], args, depth_limit=self.grow)
 
     def _term(self, pat, env, limit):
         if isinstance(pat, str):
@@ -299,10 +534,11 @@ class Theory:
             return None
         return ("p", a["p"], t), a.get("значение", True), [t]
 
-    def _ground_rule(self, r, limit):
-        """(посылки, выводы): вывод правила — атом или {"или": [атомы]}."""
+    def _ground_rule(self, r, limit, grow=True):
+        """(посылки, выводы): вывод правила — атом или {"или": [атомы]}.
+        grow=False — без построения новых термов (все термы правила уже в графе)."""
         concl = r["then"]["или"] if "или" in r["then"] else [r["then"]]
-        for env in self._bindings(r["scene"]):
+        for env in self._bindings(r["scene"], () if grow else self._patterns(r)):
             prem = [self._atom(a, env, limit) for a in r["if"]]
             outs = [self._atom(a, env, limit) for a in concl]
             if any(p is None for p in prem + outs):
@@ -337,20 +573,35 @@ class Theory:
         # затем заземляем всё на получившемся графе без роста.
         for _ in range(self.grow):
             before = len(self.g.terms)
+            # Достройка создаёт только термы-образцы правил; правила с одинаковой
+            # сценой и образцами (например, «× сохраняет P» для разных P)
+            # строят одно и то же — их обходим один раз.
+            seen = set()
             for r in self.v.rules:
-                list(self._ground_rule(r, self.grow))
+                pats = self._all_patterns(r)
+                if not pats:
+                    continue
+                key = json.dumps([r["scene"], pats], sort_keys=True, ensure_ascii=False)
+                if key in seen:
+                    continue
+                seen.add(key)
+                inner = {x for p in pats for x in self._pat_roles(p)}
+                for env in self._bindings(r["scene"], (), shallow=inner, limit=self.grow):
+                    for p in pats:
+                        self._grow_term(p, env)
             for d in self.v.degen:
                 list(self._degen(d, self.grow))
             if len(self.g.terms) == before:
                 break
         limit = max(i.depth for i in self.g.terms.values())
         for r in self.v.rules:
-            for parts in self._ground_rule(r, limit):
+            for parts in self._ground_rule(r, 0, grow=False):  # без новых термов
                 self._clause(parts, r["id"])
         for d in self.v.degen:
             for cond, t, s in self._degen(d, limit):
                 self._equal(cond, t, s, f"вырождение {d['op']}: {d.get('почему', '')}")
         self._equality_axioms()
+        self._embeds_axioms()
 
     # вырождения и равенства ----------------------------------------------
 
@@ -392,6 +643,46 @@ class Theory:
         lits.append(self.lit(("r", rel, t, s)))
         self._add(lits, origin)
 
+    # свойства, которые наследует подгруппа (и потому всякая вложимая группа)
+    SUB_CLOSED = ("trivial", "abelian", "cyclic", "finite", "solvable", "nilpotent", "torsion-free",
+                  "periodic", "residually-finite", "linear", "free", "free-abelian", "p-group",
+                  "exponent-2", "exponent-3", "bounded-exponent", "polycyclic", "odd-order", "two-primes",
+                  "countable", "left-orderable", "bi-orderable", "amenable", "residually-nilpotent",
+                  "metabelian", "class-2", "dedekind")
+
+    def _embeds_axioms(self):
+        """Вложение A ↪ B: только для атомов, которые уже есть (иначе пар — квадрат
+        числа термов). Наследование свойств подгрупп, ≅ ⇒ ↪, подгруппа и множители
+        вкладываются, взаимное вложение конечных — ≅, тривиальная вкладывается всюду."""
+        emb = [a for a in self.atoms if a[0] == "r" and a[1] == "embeds"]
+        props = {}
+        for a in self.atoms:
+            if a[0] == "p":
+                props.setdefault(a[2], set()).add(a[1])
+        for atom in emb:
+            _, _, a, b = atom
+            e = self.var[atom]
+            why = "вложение"
+            for p in self.SUB_CLOSED:
+                if p in props.get(b, ()) and self.v.prop_fits(p, self.g.terms[a].sort):
+                    self._add([-e, -self.lit(("p", p, b)), self.lit(("p", p, a))], f"{why}: наследует {p}")
+            iso = self.lit(("r", "iso", a, b)) if ("r", "iso", *sorted((a, b), key=str)) in self.var else None
+            if iso is not None and iso is not False:
+                self._add([-iso, e], f"{why}: ≅ ⇒ ↪")
+                if ("r", "embeds", b, a) in self.var:
+                    self._add([-e, -self.lit(("r", "embeds", b, a)), -self.lit(("p", "finite", a)), iso],
+                              f"{why}: взаимное вложение конечных ⇒ ≅")
+            self._add([-self.lit(("p", "trivial", a)), e], f"{why}: тривиальная вкладывается")
+            # Хигман (⇒): к. п. подгруппа к. о. группы рекурсивно определена
+            if {"fin-pres"} <= props.get(b, set()) and {"fin-gen", "rec-pres"} <= props.get(a, set()):
+                self._add([-e, -self.lit(("p", "fin-pres", b)), -self.lit(("p", "fin-gen", a)),
+                           self.lit(("p", "rec-pres", a))], f"{why}: Хигман, к. п. подгруппа к. о. — р. о.")
+            info = self.g.terms[a]
+            if info.links.get("ambient") == b:
+                self._add([e], f"{why}: подгруппа")
+            if isinstance(b, App) and b.op in ("prod", "freeprod", "wreath") and a in b.args:
+                self._add([e], f"{why}: множитель {b.op}")
+
     def _equality_axioms(self):
         """≅ и = на термах: перенос свойств, симметрия уже в записи, транзитивность."""
         pairs = [a for a in self.atoms if a[0] == "r" and a[1] in ("iso", "eq-sub")]
@@ -419,8 +710,27 @@ class Theory:
         by_rel = {}
         for _, rel, a, b in pairs:
             by_rel.setdefault(rel, set()).add((a, b))
+        # вложение: транзитивность по тройкам, где оба звена уже есть
+        emb = {(a[2], a[3]) for a in self.atoms if a[0] == "r" and a[1] == "embeds"}
+        succ = {}
+        for a, b in emb:
+            succ.setdefault(a, []).append(b)
+        for a, b in emb:
+            for c in succ.get(b, []):
+                if c != a and (a, c) in emb:
+                    self._add([-self.lit(("r", "embeds", a, b)), -self.lit(("r", "embeds", b, c)),
+                               self.lit(("r", "embeds", a, c))], "embeds: транзитивность")
+        groups = []
         for rel, ps in by_rel.items():
             nodes = {x for p in ps for x in p}
+            if rel == "eq-sub":  # равенство — только у подгрупп одной группы
+                amb = {}
+                for x in nodes:
+                    amb.setdefault(self.g.terms[x].links.get("ambient"), set()).add(x)
+                groups += [(rel, ns) for ns in amb.values()]
+            else:
+                groups.append((rel, nodes))
+        for rel, nodes in groups:
             if len(nodes) > 40:
                 continue
             for a, b, c in itertools.permutations(nodes, 3):

@@ -1,0 +1,42 @@
+name: gap
+
+# Данные о конечных группах, которые считает GAP (py/algen/finite.py).
+# Запуск: пуш в ветку «gap-…»; команда — в файле .github/gap-command
+# (по умолчанию «--авт»). Результат (data/finite/*.jsonl) — в ветку «gapdata-<ветка>».
+
+on:
+  push:
+    branches: ["gap-*"]
+
+jobs:
+  gap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: GAP
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q gap
+          sudo apt-get install -y -q gap-smallgrp || true
+          echo 'Print(NrSmallGroups(64), " ", IdGroupsAvailable(20160), "\n");' | gap -q
+      - name: расчёт
+        run: |
+          cd py
+          python3 -m algen.finite $(cat ../.github/gap-command 2>/dev/null || echo --авт) --нитей 4
+      - name: результат в ветку «gapdata-…»
+        run: |
+          mkdir -p /tmp/out && cp data/finite/*.jsonl /tmp/out/
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "gapdata-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq
+          cp /tmp/out/*.jsonl .
+          git add *.jsonl
+          git commit -qm "Данные GAP: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/gapdata-${GITHUB_REF_NAME}"

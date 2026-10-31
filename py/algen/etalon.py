@@ -27,11 +27,14 @@ from .logic import DATA, Graph, Theory, Vocab, decide
 
 ETALON = DATA / "etalon" / "эталон.jsonl"
 SORTS = {"grp": {"Grp": ("Grp.obj", None), "Sub": ("Grp.sub", "ambient"), "Fam": ("Grp.fam", None),
-                 "Mor": ("Grp.mor", ("dom", "cod"))}}
+                 "Mor": ("Grp.mor", ("dom", "cod")),
+                 "GSet": ("Grp.gset", "ambient"), "Pt": ("Grp.pt", "ambient"),
+                 "Elt": ("Grp.elt", "ambient"), "Diag": ("Grp.diag", None), "Num": ("Grp.num", None), "Pres": ("Grp.pres", None),
+                 "Act": ("Grp.act", ("dom", "cod"))}}
 # Короткие обозначения конструкций в записи эталона.
-OPS = {"grp": {"Z": "center", "Inn": "inn", "Aut": "aut", "ab": "ab", "∏": "prod-fam", "⊕": "sum-fam",
+OPS = {"grp": {"Z": "center", "Φ": "frattini", "Inn": "inn", "Aut": "aut", "ab": "ab", "∏": "prod-fam", "⊕": "sum-fam",
                "ker": "ker", "im": "im", "commutator": "commutator", "center": "center"}}
-INFIX = {"grp": {"×": "prod", "∗": "freeprod", "/": "quotient"}}
+INFIX = {"grp": {"×": "prod", "∗": "freeprod", "≀": "wreath", "/": "quotient"}}
 
 
 class Unsupported(Exception):
@@ -52,10 +55,48 @@ def split_top(s, sep):
     return [x.strip() for x in out + [cur] if x.strip()]
 
 
+def _amb(g, t):
+    return g.terms[t].links.get("ambient")
+
+
+def _num(g, s, names, section):
+    """Числовые термы: |G|, |H|, |G : H|, |x|, |HK| (H, K — имена подгрупп), a · b."""
+    parts = split_top(s, "·")
+    if len(parts) > 1:
+        t = _num(g, parts[0], names, section)
+        for p in parts[1:]:
+            t = g.given(g.make("num-mul", [t, _num(g, p, names, section)]))
+        return t
+    s = s.strip()
+    if not (s.startswith("|") and s.endswith("|")):
+        return None
+    inner = s[1:-1].strip()
+    if ":" in inner:
+        a, b = (term(g, x, names, section) for x in inner.split(":", 1))
+        return g.given(g.make("index", [a, b]))
+    for i in range(1, len(inner)):
+        a, b = inner[:i].strip(), inner[i:].strip()
+        if a in names and b in names and g.terms[names[a]].sort == "Grp.sub":
+            return g.given(g.make("prod-card", [_amb(g, names[a]), names[a], names[b]]))
+    t = term(g, inner, names, section)
+    if g.terms[t].sort == "Grp.elt":
+        return g.given(g.make("eltord", [_amb(g, t), t]))
+    return g.given(g.make("ord", [t]))
+
+
 def term(g, s, names, section):
     s = s.strip()
     if s in names:
         return names[s]
+    if s.startswith("|") or "·" in s:
+        t = _num(g, s, names, section)
+        if t is not None:
+            return t
+    for sym, op in (("∩", "meet"),):
+        parts = split_top(s, sym)
+        if len(parts) == 2:
+            a, b = (term(g, x, names, section) for x in parts)
+            return g.given(g.make(op, [_amb(g, a), a, b]))
     for sym, op in INFIX[section].items():
         parts = split_top(s, sym)
         if len(parts) == 2:
@@ -63,19 +104,51 @@ def term(g, s, names, section):
             break
     else:
         m = re.fullmatch(r"(\w[\w-]*|∏|⊕)\s*\((.*)\)", s) or re.fullmatch(r"(∏|⊕)\s*(\w+)", s)
-        if not m or m.group(1) not in OPS[section]:
+        op = m and (OPS[section].get(m.group(1)) or (m.group(1) if m.group(1) in g.v.cons else None))
+        if not op:
             raise Unsupported(f"терм {s!r}")
-        t = g.make(OPS[section][m.group(1)],
-                   [term(g, a, names, section) for a in split_top(m.group(2), ",")])
+        t = g.make(op, [term(g, a, names, section) for a in split_top(m.group(2), ",")])
     if t is None:
         raise Unsupported(f"терм {s!r} не строится")
     return g.given(t)
 
 
+REL_INFIX = (("⩽", "le", False), ("≤", "le", False), ("⩾", "le", True), ("≥", "le", True),
+         ("≅", "iso", False), ("↪", "embeds", False), ("=", "=", False))
+# «=» и ⩽ по сорту левой части: числа — num-eq / num-le, элементы — eq-elt, подгруппы — eq-sub
+BY_SORT = {("=", "Grp.num"): "num-eq", ("=", "Grp.elt"): "eq-elt", ("=", "Grp.sub"): "eq-sub",
+           ("le", "Grp.num"): "num-le"}
+
+
+def _infix(s):
+    """Инфиксная запись отношения вне скобок: «A ⩽ B», «X ≅ Y», «H ↪ G»."""
+    depth = 0
+    for i, ch in enumerate(s):
+        depth += ch == "("
+        depth -= ch == ")"
+        if depth == 0:
+            for sym, rel, flip in REL_INFIX:
+                if s.startswith(sym, i):
+                    a, b = s[:i].strip(), s[i + len(sym):].strip()
+                    return (rel, b, a) if flip else (rel, a, b)
+    return None
+
+
 def literal(g, s, names, section):
     s = s.strip()
     value = not s.startswith("¬")
-    m = re.fullmatch(r"([\w-]+)\((.*)\)", s.lstrip("¬").strip())
+    body = s.lstrip("¬").strip()
+    if body.startswith("(") and body.endswith(")") and _infix(body[1:-1]):
+        body = body[1:-1].strip()
+    inf = _infix(body)
+    if inf:
+        rel, a, b = inf
+        ta, tb = term(g, a, names, section), term(g, b, names, section)
+        rel = BY_SORT.get((rel, g.terms[ta].sort), rel)
+        if rel not in g.v.rels:
+            raise Unsupported(f"нет в словаре: {rel}")
+        return ("r", rel, ta, tb), value
+    m = re.fullmatch(r"([\w-]+)\((.*)\)", body)
     if not m:
         raise Unsupported(f"литерал {s!r}")
     args = [term(g, a, names, section) for a in split_top(m.group(2), ",")]
@@ -94,23 +167,28 @@ def scheme(vocab, fact):
     g, names, prem = Graph(vocab), {}, []
     for decl in fact["условие"].split(";"):
         head, _, lits = decl.partition("|")
-        m = re.fullmatch(r"\s*∀\s*(\w+)\s*:\s*(\w+)(?:\(([\w\s,]+)\))?\s*", head)
+        m = re.fullmatch(r"\s*∀\s*(\w+(?:\s*,\s*\w+)*)\s*:\s*(\w+)(?:\((.+)\))?\s*", head)
         if not m:
             raise Unsupported(f"объявление {head!r}")
-        name, sort, parents = m.groups()
+        many, sort, parents = m.groups()
         if sort not in SORTS[section]:
             raise Unsupported(f"сорт {sort}")
         s, link = SORTS[section][sort]
         links = {}
         if parents:
-            ps = [x.strip() for x in parents.split(",")]
+            ps = split_top(parents, ",")
             keys = link if isinstance(link, tuple) else (link,)
             if len(ps) != len(keys):
                 raise Unsupported(f"объявление {head!r}")
-            links = {k: names[x] for k, x in zip(keys, ps)}
-        names[name] = g.var(name, s, **links)
+            # родитель — переменная или терм: «∀ H : Sub(A ∗ B)»
+            links = {k: names[x] if x in names else term(g, x, names, section) for k, x in zip(keys, ps)}
+        # «∀ H, K : Sub(G) | …» — несколько переменных одного сорта, посылки после всех
+        for name in (x.strip() for x in many.split(",")):
+            names[name] = g.var(name, s, **links)
+            if s == "Grp.gset":  # G-множество непусто: точка x_A для правил о стабилизаторах
+                g.var(f"x_{name}", "Grp.pt", ambient=names[name])
         prem += [literal(g, x, names, section) for x in split_top(lits, ",")]
-    goal = literal(g, fact["цель"], names, section)
+    goal = literal(g, fact["цель"], names, section) if fact.get("цель") else None
     return g, prem, goal
 
 
