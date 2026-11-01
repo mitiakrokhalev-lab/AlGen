@@ -367,6 +367,7 @@ def view(base_form, terms):
     v.fixed = [2 * v.index[a] + (0 if val else 1) for a, val in b.fixed_lits if a in v.index]
     cols = np.array([2 * b.index[a] + d for a in v.atoms for d in (0, 1)], dtype=np.int64)
     v.m, v.s, v.e = b.m[:, cols], b.s[:, cols], b.e[:, cols]
+    v._base, v._base_cols = b, cols
     top = maximal(g, elems)
     v.need = [{i for i, a in enumerate(v.atoms) if t in a[2:]} for t in top]
     sw = SWAP.get(_STATE.get("base_of", {}).get(id(b)))
@@ -377,7 +378,7 @@ def view(base_form, terms):
     gb = _STATE.get("forms", {}).get("G") or _STATE.get("generic")
     if gb is not None:
         GV = next(t for t in gb.own if isinstance(t, Var))
-        v.generic = (gb.e, {a[1]: i for i, a in enumerate(gb.atoms) if a[0] == "p" and a[2] == GV})
+        v.generic = (gb.m if E.CLOSE_MARKED else gb.e, {a[1]: i for i, a in enumerate(gb.atoms) if a[0] == "p" and a[2] == GV})
     return v
 
 

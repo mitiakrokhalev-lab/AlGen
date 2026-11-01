@@ -57,6 +57,7 @@ REDUCE = True  # сводить «неизвестно» к вопросу «п�
 # Посылки только из свойств (без отношений ⩽, ≅, ↪ между термами), начиная с этой
 # глубины: для k = 3 отношения в посылках раздувают перебор, а задачи с ними — редкость.
 PROPS_ONLY_FROM = 0
+CLOSE_MARKED = True  # помеченные контрпримеры закрывают условия (см. run)
 # Атомы, значение которых известно меньше чем в DEFER доле строк, откладываются:
 # условия с ними — почти сплошь «неизвестно» (шум), а стоят решателя каждое.
 # Они возвращаются в перебор, когда библиотека заполнится.
@@ -612,6 +613,11 @@ class SchemeForm(Form):
 
     def row_keeping(self, r, keep, mark):
         k = (r, keep, mark)
+        base = getattr(self, "_base", None)
+        if base is not None and k not in self._kept:
+            # схема-вид: строка выводится один раз по атомам базы (кэш базы общий
+            # для всех схем), отсюда берутся столбцы схемы
+            self._kept[k] = base.row_keeping(r, keep, mark)[self._base_cols]
         if k not in self._kept:
             facts, hard = self.row_facts(r)
             drop = ("трудно",) if mark == "трудно" else MARKS
@@ -805,15 +811,28 @@ def enumerate_form(form, max_prem, goals=None, m=None):
         for r in range(1, len(prem)):
             yield from combinations(prem, r)
 
+    direct_memo, rows_memo, Pall = {}, {}, None
+
     def alive_direct(q, g):
         """Подусловие (q, g) не опровергнуто (для минимальности при покрытии)."""
         have = set(q) | set(form.fixed)
         if not all(form.req.get(j // 2, set()) <= have for j in list(q) + [g]):
             return False
-        rows = every
-        for j in q:
-            rows = rows[m[rows, j]]
-        return rows.size > 0 and not m[rows, g ^ 1].any()
+        key = (q, g)
+        hit = direct_memo.get(key)
+        if hit is not None:
+            return hit
+        R = rows_memo.get(q)
+        if R is None:
+            nonlocal Pall
+            if Pall is None:
+                Pall = pack(every)  # столбцы по всем строкам, битами
+            R = Pall[q[0]].copy()
+            for j in q[1:]:
+                R &= Pall[j]
+            R = rows_memo[q] = R if R.any() else None
+        hit = direct_memo[key] = R is not None and not (R & Pall[g ^ 1]).any()
+        return hit
 
     # Столбцы как битовые множества строк (uint64): пересечение посылок и
     # проверка «есть ли строка, где посылки верны, а цель ложна» — по словам,
@@ -1008,7 +1027,11 @@ def run(max_prem, lib=None, vocab=None, form=None):
             add_pairs(form, form.pairs)
         except Exception as e:  # парные атомы — добавка: при сбое перебор идёт без них
             print(f"парные атомы не добавлены: {e!r}", file=sys.stderr)
-    alive, empty = enumerate_form(form, max_prem)
+    # Контрпример с помеченным значением («трудно», «короткий довод») закрывает
+    # условие: нетривиален сам контрпример, он записан в библиотеке и идёт в
+    # архив один раз, а не с каждым условием, которое опровергает (решение Димы
+    # 1.11.2026). CLOSE_MARKED = False — прежнее поведение с корзинами.
+    alive, empty = enumerate_form(form, max_prem, m=form.m if CLOSE_MARKED else None)
     mins = minimal(alive)
     if getattr(form, "pair_atoms", None):
         mins = pair_minimal(form, mins)
