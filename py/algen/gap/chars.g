@@ -77,7 +77,7 @@ Record1 := function(job, out)
     if i > 1 then Append(s, ","); fi;
     Append(s, Concatenation("{\"order\":", String(Size(H)), ",\"group\":", KeyOrNull(H),
       ",\"gprops\":", JsonProps(Props(H)),
-      ",\"props\":{\"normal\":true,\"characteristic\":true,\"maximal\":", B(Size(Q) > 1 and IsSimpleGroup(Q)),
+      ",\"props\":{\"normal\":true,\"characteristic\":true,\"maximal\":", B(IsPrimeInt(Size(Q))),
       ",\"whole\":", B(Size(H) = Size(G)), ",\"central\":", B(IsSubset(Z, H)), ",\"finite-index\":true}",
       ",\"qorder\":", String(Size(Q)), ",\"quotient\":", KeyOrNull(Q), ",\"qprops\":", JsonProps(Props(Q)),
       ",\"le\":["));

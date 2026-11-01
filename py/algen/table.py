@@ -271,24 +271,29 @@ def build(lib, vocab, base, part, outdir, skel=None):
     path.parent.mkdir(parents=True, exist_ok=True)
     data = {"отпечаток": _fp(base), "атомов": len(f.atoms), "envs": f.envs, "skipped": f.skipped,
             **{k: np.packbits(getattr(f, k), axis=1) for k in "mse"}}
-    with open(path, "wb") as fh:
+    tmp = path.with_suffix(".tmp")  # атомарно: задание, убитое по времени, не оставит обрывка
+    with open(tmp, "wb") as fh:
         pickle.dump(data, fh, protocol=pickle.HIGHEST_PROTOCOL)
     # кэш выводов этой части (ключ — записанные значения строки) для следующих прогонов
     used = {k: f._derived[k] for k in getattr(f, "_used", ()) if k in f._derived}
     new = [k for k in used if k not in getattr(f, "_cached_keys", ())]
-    with open(Path(outdir) / f"{base}.{part[0]}-{part[1]}.dcache", "wb") as fh:
+    dpath = Path(outdir) / f"{base}.{part[0]}-{part[1]}.dcache"
+    with open(dpath.with_suffix(".dtmp"), "wb") as fh:
         pickle.dump({"отпечаток": theory_fp(base, f), "строки": _pack_rows(used)}, fh, protocol=pickle.HIGHEST_PROTOCOL)
+    os.replace(dpath.with_suffix(".dtmp"), dpath)
+    os.replace(tmp, path)  # часть готова, когда есть её .pickle
     print(f"{base} {part[0]}/{part[1]}: строк {len(f.envs)}, атомов {len(f.atoms)}, новых выводов {len(new)}, "
           f"{round(time.time() - t0)} с → {path}", file=sys.stderr)
 
 
 # Частей таблицы на базу (по числу строк и цене строки).
-# Подобрано по цене «строк × атомов» (замер 30.10: G 12 тыс. × 659, GN 148 тыс. × 1412,
-# AB 89 тыс. × 1225, GHK 53 тыс. × 3494, GMN 24 тыс. × 3196, GHF 92 тыс. × 1301):
-# части примерно равной цены, по 4 на машину при 20 машинах.
-PARTS = {"G": 2, "GN": 24, "AB": 12, "GHK": 21, "GMN": 9, "GHF": 14, "Fam": 1, "GX": 1, "Gx": 3, "GE": 2}
-COST = {"G": 8.0, "GN": 209.5, "AB": 108.8, "GHK": 185.0, "GMN": 76.7, "GHF": 119.8, "Fam": 0.01,
-        "GX": 2.7, "Gx": 22.4, "GE": 14.8}
+# COST — ядро-часы на базу: замер 1.11 (проба ~30 строк, × 3 — поправка по
+# полной таблице G: проба дала 0,9, вышло 2,7). Части по ~1,5 ядро-часа:
+# задание GitHub длится не больше 6 часов, готовые части выгружаются, а
+# повторный запуск (PREV_BUILD) досчитывает недостающие.
+COST = {"G": 2.7, "GN": 148.0, "AB": 27.0, "GHK": 225.0, "GMN": 77.0, "GHF": 61.0, "Fam": 0.01,
+        "GX": 0.6, "Gx": 2.4, "GE": 4.8}
+PARTS = {b: max(1, round(c / 1.5)) for b, c in COST.items()}
 
 
 def assignment(jobs):
@@ -309,17 +314,30 @@ def assignment(jobs):
 
 def build_all(lib, vocab, job, jobs, outdir, threads, cache=None):
     """Задание job из jobs: части таблиц job, job + jobs, … по threads процессов."""
-    mine = assignment(jobs)[job - 1]
+    # дешёвые базы первыми: их таблицы будут готовы, даже если задание не уложится по времени
+    mine = sorted(assignment(jobs)[job - 1], key=lambda t: (COST[t[0]], t[0], t[1]))
     ctx = mp.get_context("fork")
     running = []
     skel = {}
     for b, part in mine:
+        done = Path(outdir) / f"{b}.{part[0]}-{part[1]}.pickle"
+        if done.exists():
+            try:
+                with open(done, "rb") as fh:
+                    if pickle.load(fh)["отпечаток"] == _fp(b):
+                        print(f"{b} {part[0]}/{part[1]}: уже есть", file=sys.stderr, flush=True)
+                        continue
+            except Exception:
+                pass
         while True:
             running = [p for p in running if p.exitcode is None]
             if len(running) < threads:
                 break
             time.sleep(0.5)
-        if b not in skel:  # каркас базы — один раз на машину
+        if b not in skel:  # каркас базы — один раз на машину; прошлый не держим (части — копии через fork)
+            skel.clear()
+            import gc
+            gc.collect()
             t = time.time()
             skel[b] = skeleton(lib, vocab, b)
             cached = load_cache(b, cache, skel[b])
@@ -348,8 +366,15 @@ def load(lib, vocab, base, tdir):
     for p in parts:
         with open(p, "rb") as fh:
             d = pickle.load(fh)
-        if d["отпечаток"] != _fp(base) or d["атомов"] != len(f.atoms):
-            raise ValueError(f"{p}: таблица от другого кода или данных")
+        if d["атомов"] != len(f.atoms):
+            raise ValueError(f"{p}: таблица от другого словаря (атомов {d['атомов']}, а не {len(f.atoms)})")
+        if d["отпечаток"] != _fp(base):
+            # ALGEN_STALE=1: таблица прошлых правил. Верно, если с тех пор правила только
+            # добавлялись, а данные библиотеки не правились: выведенные значения строк
+            # остаются выводами, просто часть новых не выведена. Иначе — ошибка.
+            if not os.environ.get("ALGEN_STALE"):
+                raise ValueError(f"{p}: таблица от другого кода или данных")
+            print(f"{p}: таблица прошлых правил (ALGEN_STALE)", file=sys.stderr)
         f.envs += d["envs"]
         f.skipped += d["skipped"]
         for k in "mse":
@@ -598,6 +623,47 @@ def completeness(lib, vocab, base, tdir, top=15):
     return out
 
 
+def k1_base(a):
+    """Остаток k = 1 по всей базе (одна задача на базу, без схем): запреты из двух
+    литералов, которые не выводятся и не опровергаются, с вопросами «какие группы
+    бывают с S». Пишет k1-<база>.json и k1-<база>-вопросы.txt в a.out."""
+    from collections import Counter
+    from . import fast
+    vocab = Vocab.section("grp")
+    lib = built_library(vocab)
+    fast.install()
+    E.DEFER = 0.15
+    t = time.time()
+    f = load(lib, vocab, a.base, a.dir)
+    gen = f if a.base == "G" else load(lib, vocab, "G", a.dir)
+    _STATE.update(forms={a.base: f}, generic=gen, base_of={id(f): a.base})
+    form, alive, empty, rep = E.run(1, lib, vocab, f)
+    res = {}
+    for r in rep:
+        if r["вердикт"] == "неизвестно":  # компактно: у больших баз остаток — сотни тысяч запретов
+            q = r.get("вопрос")
+            res.setdefault(tuple(r["запрет"]), {"запрет": r["запрет"], "цель": r["цель"], "вопрос": q,
+                                                 "значения": r.get("значения", [])[:3]})
+    groups = {}
+    for r in res.values():
+        q = r.get("вопрос")
+        if q:
+            groups.setdefault(q["S"], [0, q])[0] += 1
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    summary = {"база": a.base, "секунд": round(time.time() - t), "строк": len(f.envs), "атомов": len(f.atoms),
+               "пропущено строк": len(f.skipped), "вердикты": dict(Counter(r["вердикт"] for r in rep)),
+               "запретов": len(res), "с вопросом": sum(1 for r in res.values() if r.get("вопрос")),
+               "вопросов": len(groups)}
+    with open(out / f"k1-{a.base}.json", "w") as fh:
+        json.dump({"сводка": summary, "пропущено": f.skipped[:200], "остаток": list(res.values())},
+                  fh, ensure_ascii=False, default=lambda x: x.item() if hasattr(x, "item") else str(x))
+    with open(out / f"k1-{a.base}-вопросы.txt", "w") as fh:
+        for S, (c, q) in sorted(groups.items(), key=lambda x: -x[1][0]):
+            fh.write(f"{c}\t{q['групп']}\t{q.get('неизвестно')}\t{S}\t{'; '.join(q['группы'])}\n")
+    print(json.dumps(summary, ensure_ascii=False), file=sys.stderr)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -616,6 +682,11 @@ def main():
     s.add_argument("--нитей", dest="jobs", type=int, default=mp.cpu_count())
     s.add_argument("--без", dest="skip", default="")
     s.add_argument("--кэш", dest="cache", default=None, help="каталог с *.dcache прошлых прогонов")
+    s = sub.add_parser("k1", help="остаток k = 1 по всей базе")
+    s.add_argument("base")
+    s.add_argument("--каталог", dest="dir", required=True)
+    s.add_argument("--выход", dest="out", required=True)
+    s.add_argument("--без", dest="skip", default="")
     s = sub.add_parser("полнота")
     s.add_argument("base")
     s.add_argument("--каталог", dest="dir", required=True)
@@ -654,6 +725,8 @@ def main():
         for t, k, im, miss in completeness(built_library(vocab), vocab, a.base, a.dir):
             print(f"{t:36s} известно {k:.0%}, образ в библиотеке {im:.0%}")
             print("    больше всего неизвестных: " + "; ".join(f"{g} {n}" for g, n in miss[:8]))
+    elif a.cmd == "k1":
+        k1_base(a)
     elif a.cmd == "строить-все":
         j, n = map(int, a.job.split("/"))
         build_all(built_library(vocab), vocab, j, n, a.dir, a.jobs, a.cache)

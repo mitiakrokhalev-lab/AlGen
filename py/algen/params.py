@@ -33,7 +33,12 @@ class ParseError(ValueError):
 
 
 def primes(n):
-    return [p for p in range(2, n + 1) if all(p % d for d in range(2, int(p ** 0.5) + 1))]
+    return [p for p in range(2, n + 1) if is_prime(p)]
+
+
+def is_prime(n):
+    """Проверка делением до √n: порядки и индексы бывают ~10¹⁰, список простых до n не строим."""
+    return n >= 2 and all(n % d for d in range(2, math.isqrt(n) + 1))
 
 
 def phi(n):
@@ -374,7 +379,7 @@ class Model:
             if any(x is None for x in args):
                 return None
             if name in ("prime", "простое"):
-                return args[0][1] in set(primes(max(args[0][1], 2)))
+                return is_prime(args[0][1])
             if name in ("even", "чётно"):
                 return args[0][1] % 2 == 0
             if name in ("odd", "нечётно"):

@@ -260,6 +260,8 @@ class Library:
                 g = obj_of(x["order"], x["group"], x["gprops"], f"{x['order']}:{name}({k})")
                 q = obj_of(x["qorder"], x["quotient"], x["qprops"], f"{x['qorder']}:{k}/{name}")
                 props = dict(x["props"])
+                # нормальная H максимальна ⇔ |G/H| простое (chars.g до 1.11 писал «G/H проста»)
+                props["maximal"] = arith_props(x["qorder"])["prime-order"]
                 for p, v in arith_sub_props(n, x["order"]).items():
                     props.setdefault(p, v)
                 subs.append({"id": str(i), "≅": g, "свойства": props, "фактор": q, "над": [str(j) for j in x["le"]]})
@@ -342,6 +344,13 @@ class Library:
                     props[p] = True
                 elif not s.solve(assumptions=assume + [l]):
                     props[p] = False
+            # конечное × конечное: порядок известен, арифметика порядка — из него
+            if oa["конечная"] and ob["конечная"]:
+                n = int(a.split(":")[0]) * int(b.split(":")[0])
+                for p, v in arith_props(n).items():
+                    if props.get(p, v) != v:
+                        raise ValueError(f"{key}: {p} выведено {props[p]}, а по порядку {n} — {v}")
+                    props[p] = v
             marks = {m: sorted(set(oa.get(m, [])) | set(ob.get(m, []))) for m in MARKS}
 
             def factor(own, other, okey, name):
@@ -918,7 +927,10 @@ class Search:
                 return None
             if t.op == "sum-fam" and f.get("∏"):
                 # ⊕F ⩽ ∏F: подгруппа записи ∏F, изоморфная ⊕F
-                idx = self._sub_index(f["∏"], lambda x: x["≅"] == k)
+                # конечное семейство: ⊕F = ∏F — вся группа, а не изоморфная ей собственная подгруппа (2ℤ × ℤ ⩽ ℤ²)
+                idx = self._sub_index(f["∏"], lambda x: x["свойства"].get("whole")) if k == f["∏"] else None
+                if idx is None:
+                    idx = self._sub_index(f["∏"], lambda x: x["≅"] == k)
                 if idx is not None:
                     return ("sub", f["∏"], idx)
             return ("obj", k)

@@ -1,0 +1,119 @@
+name: build
+
+# Таблицы всех баз и остаток k = 1 по каждой базе целиком (python3 -m algen.table k1).
+#   1) build — 20 машин строят части таблиц; готовые части выгружаются, даже если
+#      задание не уложилось по времени. Повторный запуск с PREV_BUILD (номер прошлого
+#      запуска) берёт уже готовые части и досчитывает только недостающие.
+#   2) k1 — по машине на базу: остаток k = 1 и вопросы «какие группы бывают с S».
+#   3) results — всё в ветку «results-<ветка>».
+# Запуск: пуш в ветку «build-…».
+
+on:
+  push:
+    branches: ["build-*"]
+
+env:
+  ARGS: "--без bounded-exponent"
+  PREV_BUILD: ""     # номер прошлого запуска build: его готовые части таблиц не считаются заново
+
+jobs:
+  build:
+    permissions:
+      actions: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        job: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        if: env.PREV_BUILD != ''
+        continue-on-error: true
+        with:
+          name: tab-${{ matrix.job }}
+          path: tab
+          run-id: ${{ env.PREV_BUILD }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: таблицы
+        continue-on-error: true
+        run: |
+          mkdir -p tab && cd py
+          timeout -k 2m 325m python3 -m algen.table строить-все --задание ${{ matrix.job }}/20 --каталог ../tab --нитей 4 $ARGS || echo "не всё успели: $?"
+          ls ../tab/*.pickle | wc -l
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tab-${{ matrix.job }}
+          path: tab/*.pickle
+          retention-days: 14
+          compression-level: 1
+          if-no-files-found: ignore
+
+  k1:
+    needs: build
+    if: always()
+    permissions:
+      actions: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        base: [G, GX, Gx, GE, Fam, AB, GMN, GHF, GN, GHK]
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: tab-*
+          path: tab
+          merge-multiple: true
+      - name: остаток k = 1
+        continue-on-error: true
+        run: |
+          mkdir -p out && cd py
+          timeout 320m python3 -m algen.table k1 ${{ matrix.base }} --каталог ../tab --выход ../out $ARGS 2> ../out/k1-${{ matrix.base }}.log || echo "k1 ${{ matrix.base }}: $?" >> ../out/k1-${{ matrix.base }}.log
+          tail -n 3 ../out/k1-${{ matrix.base }}.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: k1-${{ matrix.base }}
+          path: out
+          retention-days: 30
+
+  results:
+    needs: k1
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: k1-*
+          path: all
+          merge-multiple: true
+      - name: результаты в ветку «results-…»
+        run: |
+          ls -la all
+          tar czf k1.tar.gz all
+          mkdir -p keep && cp all/*.txt all/*.log keep/ 2>/dev/null || true
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e k1.tar.gz -e keep
+          git add k1.tar.gz keep
+          git commit -qm "k = 1 по базам: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"
