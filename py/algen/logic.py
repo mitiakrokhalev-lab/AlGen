@@ -698,6 +698,12 @@ class Theory:
                      if obj_sort and any(self.v.fits(obj_sort, s) for s in sorts)}
         for _, rel, a, b in pairs:
             e = self.var[("r", rel, a, b)]
+            # тривиальные группы изоморфны — только для уже заведённых пар
+            # (правилом на все пары: квадрат атомов, и транзитивность ≅ отключается)
+            if rel == "iso" and "trivial" in obj_props and all(
+                    self.v.prop_fits("trivial", self.g.terms[x].sort) for x in (a, b)):
+                self._add([-self.lit(("p", "trivial", a)), -self.lit(("p", "trivial", b)), e],
+                          "iso: тривиальные изоморфны")
             ps = props.get(a, set()) | props.get(b, set())
             for p in ps:
                 if rel == "iso" and p not in obj_props:
