@@ -704,6 +704,11 @@ class Theory:
                     self.v.prop_fits("trivial", self.g.terms[x].sort) for x in (a, b)):
                 self._add([-self.lit(("p", "trivial", a)), -self.lit(("p", "trivial", b)), e],
                           "iso: тривиальные изоморфны")
+            # подгруппы одной группы: обе — вся группа или обе тривиальны ⇒ равны
+            if rel == "eq-sub":
+                for p in ("whole", "trivial"):
+                    if all(self.v.prop_fits(p, self.g.terms[x].sort) for x in (a, b)):
+                        self._add([-self.lit(("p", p, a)), -self.lit(("p", p, b)), e], f"eq-sub: обе {p}")
             ps = props.get(a, set()) | props.get(b, set())
             for p in ps:
                 if rel == "iso" and p not in obj_props:
@@ -738,6 +743,26 @@ class Theory:
                 groups.append((rel, nodes))
         for rel, nodes in groups:
             if len(nodes) > 40:
+                # много термов: все тройки — куб клауз; берём треугольники из уже
+                # заведённых пар (раньше транзитивность здесь выключалась целиком)
+                key = lambda x, y: ("r", rel, *sorted((x, y), key=str))
+                adj = {}
+                for x in nodes:
+                    for y in nodes:
+                        if x != y and key(x, y) in self.var:
+                            adj.setdefault(x, set()).add(y)
+                order = {x: i for i, x in enumerate(sorted(nodes, key=str))}
+                for a in adj:
+                    for b in adj[a]:
+                        if order[b] <= order[a]:
+                            continue
+                        for c in adj[a] & adj.get(b, set()):
+                            if order[c] <= order[b]:
+                                continue
+                            ab, bc, ac = self.lit(key(a, b)), self.lit(key(b, c)), self.lit(key(a, c))
+                            self._add([-ab, -bc, ac], f"{rel}: транзитивность (треугольники)")
+                            self._add([-ab, -ac, bc], f"{rel}: транзитивность (треугольники)")
+                            self._add([-bc, -ac, ab], f"{rel}: транзитивность (треугольники)")
                 continue
             for a, b, c in itertools.permutations(nodes, 3):
                 ab, bc, ac = (self.lit(("r", rel, *sorted((a, b), key=str))),

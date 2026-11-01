@@ -24365,6 +24365,189 @@
     }
    ],
    "центр": "1"
+  },
+  {
+   "id": "McLain2",
+   "имя": "группа Маклейна M(ℚ, 𝔽₂)",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": true,
+    "torsion-free": false,
+    "periodic": true,
+    "bounded-exponent": false,
+    "p-group": true,
+    "locally-finite": true,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "metabelian": false,
+    "class-2": false,
+    "locally-cyclic": false,
+    "dedekind": false,
+    "property-t": false,
+    "polycyclic": false,
+    "residually-nilpotent": false
+   },
+   "почему": {
+    "perfect": "[1 + e_ij, 1 + e_jk] = 1 + e_ik при i < j < k, а между i < k в ℚ всегда есть j",
+    "bounded-exponent": "содержит UT_n(𝔽₂) для всех n, их экспоненты 2^⌈log₂ n⌉ не ограничены",
+    "p-group": "порождена элементами порядка 2 и локально конечна, всякая конечная подгруппа — в UT_n(𝔽₂)",
+    "locally-finite": "конечное множество элементов лежит в UT_n(𝔽₂) по конечному набору индексов",
+    "фраттини": "в локально нильпотентной группе максимальная подгруппа нормальна с фактором простого порядка; группа совершенна, поэтому максимальных подгрупп нет и Φ = G",
+    "dedekind": "⟨1 + e₀₁⟩ не нормальна: сопряжение элементом 1 + e₋₁,₀ даёт 1 + e₀₁ + e₋₁,₁",
+    "residually-nilpotent": "совершенна: γₙ = G",
+    "property-t": "не конечно порождена",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "amenable": "локально конечна",
+    "polycyclic": "не к. п.",
+    "metabelian": "совершенна и нетривиальна",
+    "class-2": "совершенна и нетривиальна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "McLain2"
+    },
+    {
+     "id": "все",
+     "имя": "вся группа",
+     "≅": "McLain2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "коммутант": "все",
+   "фраттини": "все",
+   "ссылки": [
+    "McLain, A characteristically-simple group, Proc. Cambridge Philos. Soc. 50 (1954)"
+   ],
+   "трудно": [
+    "perfect"
+   ],
+   "статус": "не проверено: записала нейросеть (1.11)"
+  },
+  {
+   "id": "FreeC2inf",
+   "имя": "∗_ℕ C₂",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "indecomposable": true,
+    "linear": true,
+    "hopfian": false,
+    "co-hopfian": false,
+    "polycyclic": false,
+    "amenable": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "residually-nilpotent": true,
+    "property-t": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false,
+    "bounded-exponent": false,
+    "p-group": false
+   },
+   "почему": {
+    "periodic": "a₁a₂ бесконечного порядка",
+    "centerless": "свободное произведение двух нетривиальных групп, не C₂ ∗ C₂ (C₂ ∗ (∗_{i>1} C₂)), без центра",
+    "residually-finite": "Грюнберг: свободное произведение финитно аппроксимируемых",
+    "residually-nilpotent": "Грюнберг: свободное произведение конечных 2-групп аппроксимируется конечными 2-группами",
+    "indecomposable": "нетривиальное свободное произведение, кроме C₂ ∗ C₂, не раскладывается в прямое",
+    "linear": "≅ нормальное замыкание a в C₂ ∗ ℤ = ⟨a⟩ ∗ ⟨t⟩ (∗ по tⁿ a t⁻ⁿ); C₂ ∗ ℤ ⩽ C₂ ∗ C₂ ∗ C₂ ⩽ PSL₂(ℤ)",
+    "hopfian": "a₁ ↦ 1, aᵢ ↦ aᵢ₋₁ сюръективен с ядром",
+    "co-hopfian": "aᵢ ↦ aᵢ₊₁",
+    "amenable": "⟨a₁a₂, a₁a₃⟩ — свободная ранга 2",
+    "фраттини": "Хигман — Нейман: Φ свободного произведения нетривиальных групп тривиальна",
+    "X ∗ X ≅ X": "ℕ ⊔ ℕ ≅ ℕ",
+    "абелианизация": "⊕_ℕ C₂",
+    "divisible": "фактор C₂",
+    "perfect": "фактор C₂",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "property-t": "не к. п.",
+    "solvable": "содержит F₂"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "FreeC2inf"
+    },
+    {
+     "id": "все",
+     "имя": "вся группа",
+     "≅": "FreeC2inf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "фраттини": "1",
+   "абелианизация": "SumC2",
+   "свободное произведение": [
+    "FreeC2inf",
+    "FreeC2inf"
+   ],
+   "короткий довод": [
+    "linear",
+    "indecomposable"
+   ],
+   "статус": "не проверено: записала нейросеть (1.11)"
   }
  ],
  "семейства": [
