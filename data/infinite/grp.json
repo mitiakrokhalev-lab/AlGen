@@ -13701,6 +13701,20 @@
      "почему": "U содержит копию каждой счётной локально конечной группы (Ф. Холл, 1959); U проста, так что собственная нетривиальная подгруппа не нормальна; индекс бесконечен (U проста и бесконечна)"
     },
     {
+     "id": "UwrU",
+     "имя": "копия U ≀ U",
+     "≅": "HallUwrU",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "Холл: (U ≀ U) × C₂ счётна и локально конечна, вкладывается в U; образ U ≀ U × 1 лежит в собственной подгруппе — образе (U ≀ U) × C₂ (он ≠ U, так как U проста), поэтому не максимален"
+    },
+    {
      "id": "все",
      "имя": "универсальная группа Холла U",
      "≅": "HallU",
@@ -24548,6 +24562,369 @@
     "indecomposable"
    ],
    "статус": "не проверено: записала нейросеть (1.11)"
+  },
+  {
+   "id": "SumC6",
+   "имя": "⊕_ℕ C₆",
+   "заметка": "Абелева, не линейна ни над каким полем: пример к «абелева ⇒ линейна» в базах.",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "hopfian": false,
+    "linear": false,
+    "bounded-exponent": true,
+    "p-group": false,
+    "polycyclic": false,
+    "co-hopfian": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "locally-finite": true,
+    "locally-cyclic": false,
+    "solvable": true,
+    "metabelian": true,
+    "perfect": false,
+    "abelian": true,
+    "nilpotent": true,
+    "centerless": false,
+    "residually-nilpotent": true,
+    "dedekind": true,
+    "class-2": true,
+    "exponent-2": false
+   },
+   "почему": {
+    "residually-finite": "подгруппа произведения конечных групп",
+    "hopfian": "сдвиг слагаемых влево сюръективен с ядром",
+    "co-hopfian": "переиндексация n ↦ 2n",
+    "linear": "в характеристике p ≠ q бесконечная элементарная абелева q-подгруппа состоит из коммутирующих полупростых матриц, диагонализуема и имеет ранг ⩽ n; ⊕C₂ исключает все характеристики, кроме 2, ⊕C₃ — кроме 3",
+    "polycyclic": "не к. п.",
+    "property-t": "бесконечна и аменабельна",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "X × X ≅ X": "ℕ ⊔ ℕ ≅ ℕ",
+    "bounded-exponent": "показатель 6",
+    "p-group": "есть элементы порядков 2 и 3"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC6"
+    },
+    {
+     "id": "2",
+     "имя": "⊕C₂ (2-часть)",
+     "≅": "SumC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC3",
+     "почему": "примарная часть абелевой группы вполне инвариантна"
+    },
+    {
+     "id": "3",
+     "имя": "⊕C₃ (3-часть)",
+     "≅": "SumC3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC2",
+     "почему": "примарная часть абелевой группы вполне инвариантна"
+    },
+    {
+     "id": "все",
+     "имя": "⊕C₆",
+     "≅": "SumC6",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "абелианизация": "SumC6",
+   "фраттини": "1",
+   "произведения": {
+    "SumC6": "SumC6"
+   },
+   "ссылки": [
+    "прямая сумма"
+   ],
+   "короткий довод": [
+    "linear"
+   ]
+  },
+  {
+   "id": "SumS3D8",
+   "имя": "⊕_ℕ (S₃ × D₈)",
+   "заметка": "G′ = Z(G′) = ⊕C₆ не линейна: пример к «Z(G′) линейна».",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "hopfian": false,
+    "linear": false,
+    "bounded-exponent": true,
+    "p-group": false,
+    "polycyclic": false,
+    "co-hopfian": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "locally-finite": true,
+    "locally-cyclic": false,
+    "solvable": true,
+    "metabelian": true,
+    "perfect": false,
+    "abelian": false,
+    "nilpotent": false,
+    "centerless": false,
+    "residually-nilpotent": false,
+    "dedekind": false,
+    "class-2": false
+   },
+   "почему": {
+    "residually-finite": "подгруппа произведения конечных групп",
+    "hopfian": "сдвиг слагаемых влево сюръективен с ядром",
+    "co-hopfian": "переиндексация n ↦ 2n",
+    "linear": "содержит G′ ≅ ⊕C₆; в характеристике p ≠ q бесконечная элементарная абелева q-подгруппа состоит из коммутирующих полупростых матриц, диагонализуема и имеет ранг ⩽ n; ⊕C₂ исключает все характеристики, кроме 2, ⊕C₃ — кроме 3",
+    "polycyclic": "не к. п.",
+    "property-t": "бесконечна и аменабельна",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "X × X ≅ X": "ℕ ⊔ ℕ ≅ ℕ",
+    "bounded-exponent": "показатель 24",
+    "p-group": "есть элементы порядков 2 и 3",
+    "residually-nilpotent": "содержит S₃",
+    "dedekind": "⟨(1 2)⟩ ⩽ S₃ не нормальна",
+    "metabelian": "G′ = ⊕(C₃ × C₂) абелев",
+    "абелианизация": "⊕(C₂ × C₂²) — счётная элементарная абелева 2-группа"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumS3D8"
+    },
+    {
+     "id": "центр",
+     "имя": "⊕(1 × Z(D₈))",
+     "≅": "SumC2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "центр суммы — сумма центров"
+    },
+    {
+     "id": "коммутант",
+     "имя": "⊕(A₃ × Z(D₈))",
+     "≅": "SumC6",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC2",
+     "почему": "коммутант суммы — сумма коммутантов"
+    },
+    {
+     "id": "все",
+     "имя": "⊕(S₃ × D₈)",
+     "≅": "SumS3D8",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "коммутант",
+   "абелианизация": "SumC2",
+   "⩽": [
+    [
+     "центр",
+     "коммутант",
+     true
+    ]
+   ],
+   "произведения": {
+    "SumS3D8": "SumS3D8"
+   },
+   "ссылки": [
+    "прямая сумма"
+   ],
+   "короткий довод": [
+    "linear"
+   ]
+  },
+  {
+   "id": "HallUwrU",
+   "имя": "U ≀ U (U — группа Холла)",
+   "заметка": "Счётная локально конечная, поэтому вкладывается в U (Холл): пример к «G ≀ G ↪ G ⇒ G = 1».",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": true,
+    "torsion-free": false,
+    "periodic": true,
+    "centerless": true,
+    "residually-finite": false,
+    "polycyclic": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "linear": false,
+    "amenable": true,
+    "co-hopfian": false,
+    "locally-finite": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": false,
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false
+   },
+   "почему": {
+    "perfect": "(A ≀ B)ᵃᵇ = Aᵃᵇ × Bᵃᵇ = 1",
+    "centerless": "верхняя группа бесконечна",
+    "residually-finite": "содержит U, бесконечную простую",
+    "linear": "содержит U",
+    "locally-finite": "расширение локально конечной базы с локально конечным фактором",
+    "co-hopfian": "U ≀ U ↪ U (Холл) ↪ U ≀ U как верхняя группа — собственный образ",
+    "residually-nilpotent": "совершенна и нетривиальна",
+    "dedekind": "верхняя U не нормальна",
+    "property-t": "бесконечна и аменабельна",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "HallUwrU"
+    },
+    {
+     "id": "верх",
+     "имя": "верхняя группа U",
+     "≅": "HallU",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "не максимальна: лежит в U · K^(U) для собственной K ≠ 1"
+    },
+    {
+     "id": "все",
+     "имя": "U ≀ U",
+     "≅": "HallUwrU",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "все",
+   "абелианизация": "1:1",
+   "сплетение": [
+    "HallU",
+    "HallU"
+   ],
+   "ссылки": [
+    "P. Hall, Some constructions for locally finite groups, 1959"
+   ]
   }
  ],
  "семейства": [
