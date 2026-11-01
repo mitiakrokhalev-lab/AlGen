@@ -28,8 +28,6 @@ from pathlib import Path
 from pysat.solvers import Solver
 
 LINKS = ("ambient", "dom", "cod", "base")
-import os as _os
-SOLVER = _os.environ.get("ALGEN_SOLVER", "g4")  # решатель pysat (g4, cd19, mgh, …)
 DATA = Path(__file__).resolve().parents[2] / "data"
 
 
@@ -746,7 +744,7 @@ class Theory:
     # вопросы --------------------------------------------------------------
 
     def solver(self):
-        s = Solver(name=SOLVER, bootstrap_with=self.clauses)
+        s = Solver(name="g4", bootstrap_with=self.clauses)
         return s
 
 
