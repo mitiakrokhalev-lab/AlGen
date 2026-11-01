@@ -1050,7 +1050,8 @@ def run(max_prem, lib=None, vocab=None, form=None):
         if any(decide(form.sc.T, whole, d, form.sc.s).kind == "выводится" for d in degen):
             continue
         v = decide(form.sc.T, fixed + prem_l, goal, form.sc.s)
-        r = {"посылки": [lit_name(*x) for x in prem_l], "цель": lit_name(*goal),
+        r = {"_cols": list(prem) + [g ^ 1],
+             "посылки": [lit_name(*x) for x in prem_l], "цель": lit_name(*goal),
              "запрет": sorted([lit_name(*x) for x in prem_l] + [lit_name(goal[0], not goal[1])]),
              "класс": klass(prem_l + [(goal[0], not goal[1])], perms),
              "примеров": support, "вердикт": v.kind,
@@ -1089,7 +1090,54 @@ def run(max_prem, lib=None, vocab=None, form=None):
             r["контрпример"] = {"где": form.where(r["_держится"][1][fact]), mark: sorted(fact)}
     for r in report:
         r.pop("_держится", None)
+    questions(form, report)
+    for r in report:
+        r.pop("_cols", None)
     return form, alive, empty, report
+
+
+# Вопрос запрета: наименьшее подмножество S его литералов, которому в библиотеке
+# удовлетворяют не больше QUESTION_ROWS групп. Запрет тогда держится на том, что
+# известных групп с S мало: вопрос «какие группы бывают с S?» закрывает разом все
+# запреты с этим S (правилом «S ⇒ …» или новой группой). Для одного S таких
+# запретов десятки, и S повторяется во многих схемах базы — сводка их складывает.
+QUESTION_ROWS = 10
+
+
+def questions(form, report, limit=None):
+    limit = QUESTION_ROWS if limit is None else limit
+    if not limit:
+        return
+    m = form.m
+    base = m[:, form.fixed].all(axis=1) if form.fixed else np.ones(m.shape[0], dtype=bool)
+    cache = {}
+
+    def rows(S):
+        if S not in cache:
+            R = base.copy()
+            for j in S:
+                R &= m[:, j]
+            cache[S] = np.flatnonzero(R)
+        return cache[S]
+
+    for r in report:
+        if r["вердикт"] != "неизвестно" or "_cols" not in r:
+            continue
+        F = tuple(sorted(r["_cols"]))
+        for size in range(1, len(F)):
+            cand = [(len(rows(S)), S) for S in combinations(F, size) if len(rows(S)) <= limit]
+            if cand:
+                n, S = min(cand)
+                names = sorted(lit_name(*l) for j in S for l in form.lits(j))
+                # строки, где S не опровергнуто, но и не известно: много таких —
+                # вопрос скорее о незаписанных значениях (правило вроде «linear(G) ⇒
+                # linear(G ∗ G)»), чем о редкости групп с S
+                maybe = base.copy()
+                for j in S:
+                    maybe &= ~m[:, j ^ 1]
+                r["вопрос"] = {"S": " & ".join(names), "групп": n, "неизвестно": int(maybe.sum()) - n,
+                               "группы": [form.where(int(x)) for x in rows(S)[:3]]}
+                break
 
 
 def clusters(triples):
@@ -1227,6 +1275,18 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
         "реестр": {k: len(ts) for k, ts in known.items()},
         "отложено": getattr(form, "deferred", []),
     }
+    qs = {}
+    for r in classes.values():
+        q = r.get("вопрос")
+        if r["вердикт"] != "неизвестно" or not q:
+            continue
+        x = qs.setdefault(q["S"], {"запретов": 0, "групп": q["групп"], "неизвестно": q.get("неизвестно"), "группы": q["группы"],
+                                   "пример": " & ".join(r["запрет"])})
+        x["запретов"] += 1
+    summary["вопросы"] = qs
+    summary["без вопроса"] = sum(1 for r in classes.values() if r["вердикт"] == "неизвестно" and not r.get("вопрос"))
+    print(f"вопросов «какие группы бывают с S»: {len(qs)} на {sum(x['запретов'] for x in qs.values())} запретов; "
+          f"без вопроса {summary['без вопроса']}", file=sys.stderr)
     groups = clusters(list(seen))
     if full:
         print("== все запреты остатка ==")
