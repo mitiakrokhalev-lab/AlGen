@@ -191,15 +191,29 @@ def _fp(base):
     return f"{_fingerprint()}:{base}:{','.join(sorted(E.SKIP))}"
 
 
-def theory_fp(base):
-    """Хэш того, от чего зависит вывод строки по её записанным значениям:
-    правила и словарь, код теории и атомов — но не данные библиотеки.
-    Кэш выводов с этим отпечатком переживает круги заполнения библиотеки."""
+def theory_fp(base, form=None):
+    """Хэш того, от чего зависит вывод строки по её записанным значениям.
+
+    С каркасом базы (form) хэш смысловой: клаузы теории, нумерация её атомов,
+    атомы таблицы и код `_derive`. Правки остального кода (перебор, сводка)
+    кэш не сбрасывают, а любая правка правил или словаря — сбрасывает.
+    Без каркаса — по файлам, как раньше."""
     import hashlib
+    import inspect
+    h = hashlib.sha256()
+    if form is not None:
+        T = form.sc.T
+        h.update(repr([str(a) for a in T.atoms]).encode())
+        for c in sorted(tuple(sorted(c)) for c in T.clauses):  # порядок заземления не важен
+            h.update(repr(c).encode())
+        h.update(repr([str(a) for a in form.atoms]).encode())
+        h.update(inspect.getsource(E.SchemeForm._derive).encode())
+        h.update(f"{E.DIVERSE}:{E.REFRESH}".encode())
+        h.update(f"{base}:{','.join(sorted(E.SKIP))}".encode())
+        return "т" + h.hexdigest()[:15]
     root = Path(__file__).resolve().parents[2]
     files = [root / "data" / "grp.json", root / "data" / "new" / "grp.json", root / "data" / "vocab" / "grp.json",
              *(Path(__file__).parent / f for f in ("logic.py", "enumerate.py", "library.py", "table.py", "etalon.py"))]
-    h = hashlib.sha256()
     for f in files:
         if f.exists():
             h.update(f.name.encode())
@@ -227,11 +241,11 @@ def _unpack_rows(d):
     return out
 
 
-def load_cache(base, cdir):
+def load_cache(base, cdir, form=None):
     """Выводы строк базы из кэша прошлых прогонов (только с тем же theory_fp)."""
     if not cdir or not Path(cdir).exists():
         return {}
-    fp, rows = theory_fp(base), {}
+    fp, rows = theory_fp(base, form), {}
     for path in Path(cdir).rglob(f"{base}.*.dcache"):
         try:
             with open(path, "rb") as fh:
@@ -263,7 +277,7 @@ def build(lib, vocab, base, part, outdir, skel=None):
     used = {k: f._derived[k] for k in getattr(f, "_used", ()) if k in f._derived}
     new = [k for k in used if k not in getattr(f, "_cached_keys", ())]
     with open(Path(outdir) / f"{base}.{part[0]}-{part[1]}.dcache", "wb") as fh:
-        pickle.dump({"отпечаток": theory_fp(base), "строки": _pack_rows(used)}, fh, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump({"отпечаток": theory_fp(base, f), "строки": _pack_rows(used)}, fh, protocol=pickle.HIGHEST_PROTOCOL)
     print(f"{base} {part[0]}/{part[1]}: строк {len(f.envs)}, атомов {len(f.atoms)}, новых выводов {len(new)}, "
           f"{round(time.time() - t0)} с → {path}", file=sys.stderr)
 
@@ -308,7 +322,7 @@ def build_all(lib, vocab, job, jobs, outdir, threads, cache=None):
         if b not in skel:  # каркас базы — один раз на машину
             t = time.time()
             skel[b] = skeleton(lib, vocab, b)
-            cached = load_cache(b, cache)
+            cached = load_cache(b, cache, skel[b])
             skel[b]._derived.update(cached)
             skel[b]._cached_keys = set(cached)
             print(f"{b}: каркас {round(time.time() - t)} с, из кэша выводов {len(cached)}", file=sys.stderr, flush=True)
