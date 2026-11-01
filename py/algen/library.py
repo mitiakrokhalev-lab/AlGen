@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_compl, load_endo, load_elts, load_homs, load_products
+from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_chars, load_compl, load_endo, load_elts, load_homs, load_products
 from .logic import DATA, App, Graph, Theory, Var, Vocab
 
 INFINITE = DATA / "infinite" / "grp.json"
@@ -82,6 +82,7 @@ class Library:
                     [[x["group"], x["class_size"]] for x in r["subs"]] == h["check"]:
                 self.obj[k]["эндоморфизмы"] = h["endos"]
         self._aut_out()
+        self._chars()
         with open(infinite, encoding="utf-8") as f:
             raw = json.load(f)
             for r in raw["группы"]:
@@ -199,6 +200,11 @@ class Library:
             o = self.obj.get(k)
             if o is None:
                 continue
+            self._apply_aut(k, o, r)
+
+    def _apply_aut(self, k, o, r):
+        """Запись GAP об Aut, Inn, Out группы k (o — её запись в библиотеке)."""
+        if True:
             for fld, name in (("aut", r.get("aut_name")), ("out", None)):
                 ak = r.get(fld)
                 if not ak or ak not in self.obj:
@@ -217,6 +223,51 @@ class Library:
             o["inn = aut"] = r["inn_whole"]
             o["inn центральна"] = r["inn_central"]
             o["|Aut|"], o["|Out|"] = r["aut_order"], r["out_order"]
+
+    def _chars(self):
+        """Конечные группы без таблицы подгрупп (порядок > 100): подгруппы 1, Z, G′,
+        Φ, G с факторами и Aut/Out — data/finite/grp-chars.jsonl (считает GAP,
+        `finite.py --характеристические`). Список подгрупп неполный. Группа,
+        которой нет в библиотеке, заводится записью только со свойствами."""
+        for k, r in load_chars().items():
+            o = self.obj.get(k)
+            if o is None or o["подгруппы"] is not None:
+                continue
+            n = r["order"]
+
+            def obj_of(order, key, props, name):
+                if order == 1:
+                    return "1:1"
+                if order == n:
+                    return k
+                if key and key in self.obj:
+                    return key
+                ak = key or name
+                if ak not in self.obj:
+                    props = dict(props)
+                    for p, f in FINITE_DERIVED.items():
+                        props.setdefault(p, f(props))
+                    for p, v in arith_props(order).items():
+                        props.setdefault(p, v)
+                    self.obj[ak] = {"key": ak, "имя": ak, "конечная": True, "свойства": props,
+                                    "подгруппы": None, "без произведений": True,
+                                    **({} if key else {"неканонический": True})}
+                return ak
+            role = {r["center"]: "Z", r["commutator"]: "G′", r["frattini"]: "Φ"}
+            subs = []
+            for i, x in enumerate(r["subs"]):
+                name = role.get(i, str(i))
+                g = obj_of(x["order"], x["group"], x["gprops"], f"{x['order']}:{name}({k})")
+                q = obj_of(x["qorder"], x["quotient"], x["qprops"], f"{x['qorder']}:{k}/{name}")
+                props = dict(x["props"])
+                for p, v in arith_sub_props(n, x["order"]).items():
+                    props.setdefault(p, v)
+                subs.append({"id": str(i), "≅": g, "свойства": props, "фактор": q, "над": [str(j) for j in x["le"]]})
+            o["подгруппы"] = subs
+            o["подгруппы неполные"] = True
+            o["центр"], o["коммутант"], o["фраттини"] = str(r["center"]), str(r["commutator"]), str(r["frattini"])
+            if "aut_order" in r and "aut" not in o:
+                self._apply_aut(k, o, r)
 
     @staticmethod
     def _center_commutator(o):

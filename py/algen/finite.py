@@ -282,6 +282,15 @@ def load_homs(path=HOMS):
         return {r["key"]: r for r in map(json.loads, f)}
 
 
+def load_chars(path=None):
+    """key → запись о подгруппах 1, Z, G′, Φ и Aut/Out (grp-chars.jsonl), если посчитано."""
+    path = path or Path(__file__).resolve().parents[2] / "data" / "finite" / "grp-chars.jsonl"
+    if not Path(path).exists():
+        return {}
+    with open(path) as f:
+        return {r["key"]: r for r in map(json.loads, f)}
+
+
 def load_aut(path=AUT):
     """key → запись об Aut, Inn, Out (если таблица посчитана)."""
     if not Path(path).exists():
@@ -355,6 +364,67 @@ def load(path=OUT, extra=False):
     return out
 
 
+CHARS = Path(__file__).resolve().parents[2] / "data" / "finite" / "grp-chars.jsonl"
+CHARS_SCRIPT = Path(__file__).resolve().parent / "gap" / "chars.g"
+
+
+def chars_jobs():
+    """Конечные группы библиотеки без таблицы подгрупп: [ключ, n, i, вид]."""
+    import re
+    from .library import built_library
+    from .logic import Vocab
+    lib = built_library(Vocab.section("grp"))
+    out = []
+    for k, o in lib.obj.items():
+        if not o["конечная"] or o["подгруппы"] is not None or k == "1:1":
+            continue
+        m = re.fullmatch(r"(\d+):(\d+)", k)
+        if m:
+            out.append([k, int(m[1]), int(m[2]), "G"])
+            continue
+        m = re.fullmatch(r"\d+:(Aut|Out)\((\d+):(\d+)\)", k)
+        if m:
+            out.append([k, int(m[2]), int(m[3]), m[1]])
+    return sorted(out, key=lambda j: int(j[0].split(":")[0]))
+
+
+def build_chars(jobs, per=300, chunk=4):
+    """Характеристические подгруппы и Aut/Out (gap/chars.g) → grp-chars.jsonl.
+    Пачка из chunk групп — один процесс GAP не дольше per секунд на группу;
+    записанное до остановки сохраняется (GAP пишет построчно)."""
+    todo = chars_jobs()
+    done = {}
+    if CHARS.exists():
+        done = {r["key"]: r for r in map(json.loads, CHARS.open())}
+    todo = [j for j in todo if j[0] not in done]
+    chunks = [todo[i:i + chunk] for i in range(0, len(todo), chunk)]
+    with tempfile.TemporaryDirectory() as tmp:
+        def one(i):
+            path = os.path.join(tmp, f"{i}.jsonl")
+            js = ", ".join(f'["{k}", {n}, {m}, "{v}"]' for k, n, m, v in chunks[i])
+            prog = f'JOBS:=[{js}];; OUT:="{path}";; Read("{CHARS_SCRIPT}");\n'
+            try:
+                subprocess.run(["gap", "-q", "-o", "8g"], input=prog, text=True, timeout=per * len(chunks[i]),
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except subprocess.TimeoutExpired:
+                pass
+            return path
+        with ThreadPoolExecutor(jobs) as ex:
+            paths = list(ex.map(one, range(len(chunks))))
+        for path in paths:
+            if os.path.exists(path):
+                for line in open(path):
+                    try:
+                        r = json.loads(line)
+                    except ValueError:
+                        continue
+                    done[r["key"]] = r
+    with CHARS.open("w") as out:
+        for k in sorted(done, key=lambda k: (int(k.split(":")[0]), k)):
+            out.write(json.dumps(done[k], ensure_ascii=False, separators=(",", ":")) + "\n")
+    print(f"посчитано {len(done)} из {len(chars_jobs())}")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--до", dest="upto", type=int, default=100)
@@ -378,7 +448,12 @@ if __name__ == "__main__":
                     help="пропускать группу, на которой GAP думает дольше стольких секунд")
     ap.add_argument("--минут", dest="minutes", type=int, default=300,
                     help="через столько минут записать то, что есть")
+    ap.add_argument("--характеристические", dest="chars", action="store_true",
+                    help="1, Z, G′, Φ, Aut, Out групп без таблицы подгрупп → data/finite/grp-chars.jsonl")
     a = ap.parse_args()
+    if a.chars:
+        build_chars(a.jobs, per=a.stall)
+        raise SystemExit
     if a.present:
         build_present()
         print(PRESENT, sum(1 for _ in PRESENT.open()))
