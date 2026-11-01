@@ -437,6 +437,8 @@ def run_schemes(a):
     vocab = Vocab.section("grp")
     lib = built_library(vocab)
     E.DEFER = getattr(a, "defer", 0) or 0
+    from . import fast
+    fast.install()  # вывод через банк моделей теории (ответы те же, что у logic.decide)
     _STATE.update(lib=lib, vocab=vocab, registry=E.load_registry(), forms={})
     outdir = Path(a.out)
     outdir.mkdir(parents=True, exist_ok=True)
