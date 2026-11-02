@@ -59,7 +59,29 @@ BASES = {
     "pqG": "∀ p, q : Num; ∀ G : Grp",
     "pGH": "∀ p : Num; ∀ G : Grp; ∀ H : Sub(G)",
     "pqGH": "∀ p, q : Num; ∀ G : Grp; ∀ H : Sub(G)",
+    # 2.11: остальные объявления с n ⩽ 3 (полнота по n; перечень — все сорта Grp, Num, Sub, Elt, GSet, Mor, Pt)
+    "GxA": "∀ G : Grp; ∀ x : Elt(G); ∀ A : GSet(G)",
+    "GxF": "∀ G : Grp; ∀ x : Elt(G); ∀ F : Mor(G, G)",
+    "GAB": "∀ G : Grp; ∀ A : GSet(G); ∀ B : GSet(G)",
+    "GAF": "∀ G : Grp; ∀ A : GSet(G); ∀ F : Mor(G, G)",
+    "GAa": "∀ G : Grp; ∀ A : GSet(G); ∀ a : Pt(A)",
+    "GHx": "∀ G : Grp; ∀ H : Grp; ∀ x : Elt(G)",
+    "GHA": "∀ G : Grp; ∀ H : Grp; ∀ A : GSet(G)",
+    "GHE": "∀ G : Grp; ∀ H : Grp; ∀ F : Mor(G, G)",
+    "GHn": "∀ G : Grp; ∀ H : Grp; ∀ n : Num",
+    "GHK2": "∀ G : Grp; ∀ H : Grp; ∀ K : Sub(G)",
+    "GFE": "∀ G : Grp; ∀ F : Mor(G, G); ∀ E : Mor(G, G)",
+    "Gnx": "∀ G : Grp; ∀ n : Num; ∀ x : Elt(G)",
+    "GnA": "∀ G : Grp; ∀ n : Num; ∀ A : GSet(G)",
+    "GnF": "∀ G : Grp; ∀ n : Num; ∀ F : Mor(G, G)",
+    "GNx": "∀ G : Grp; ∀ N : Sub(G); ∀ x : Elt(G)",
+    "GNy": "∀ G : Grp; ∀ N : Sub(G); ∀ x : Elt(N)",
+    "GNA": "∀ G : Grp; ∀ N : Sub(G); ∀ A : GSet(G)",
+    "GNF": "∀ G : Grp; ∀ N : Sub(G); ∀ F : Mor(G, G)",
+    "lmn": "∀ l, m, n : Num",
 }
+NEW_N = ["GxA", "GxF", "GAB", "GAF", "GAa", "GHx", "GHA", "GHE", "GHn", "GHK2", "GFE", "Gnx", "GnA", "GnF",
+         "GNx", "GNy", "GNA", "GNF", "lmn"]
 
 # Конструкции вселенной (термы-«вершины» схем).
 CONS = ["center", "commutator", "ab", "aut", "inn", "quotient", "prod", "freeprod", "wreath",
