@@ -28451,6 +28451,235 @@
      "фактор": "1:1"
     }
    ]
+  },
+  {
+   "id": "SymN*SymN",
+   "имя": "Sym(ℕ) ∗ Sym(ℕ)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "countable": false,
+    "free": false,
+    "free-abelian": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "perfect": true,
+    "centerless": true,
+    "indecomposable": true,
+    "divisible": false,
+    "amenable": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "torsion-free": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "linear": false
+   },
+   "почему": {
+    "perfect": "(A ∗ B)ᵃᵇ = Aᵃᵇ × Bᵃᵇ = 1",
+    "centerless": "центр свободного произведения нетривиальных множителей тривиален",
+    "indecomposable": "нетривиальная нормальная подгруппа A ∗ B (A, B ≠ 1, не обе C₂) содержит гиперболический элемент h, его централизатор циклический, а нормальной бесконечной циклической подгруппы нет; поэтому A ∗ B = H × K невозможно",
+    "simple": "ядро A ∗ B → A × B (декартова подгруппа) нетривиально: [a, b] ≠ 1",
+    "divisible": "ab (a ∈ A∖1, b ∈ B∖1) — циклически несократимое слово длины 2, у него нет квадратного корня: длина xⁿ кратна n при гиперболическом x, а эллиптический x даёт эллиптический x²",
+    "periodic": "ab бесконечного порядка",
+    "torsion-free": "есть кручение множителей",
+    "free": "есть кручение",
+    "countable": "содержит множитель мощности 2^ℵ₀",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "residually-nilpotent": "совершенна и нетривиальна",
+    "left-orderable": "есть кручение",
+    "amenable": "содержит F₂ (в Sym(ℕ))",
+    "residually-finite": "содержит Sym(ℕ), а она не финитно аппроксимируема",
+    "linear": "содержит Sym(ℕ)",
+    "≇ SymN": "Sym(Ω) не раскладывается в амальгаму, в частности в свободное произведение (Koppelberg, Tits, Indag. Math. 36 (1974); см. также Macpherson, Neumann, J. London Math. Soc. 42 (1990): несчётная конфинальность, отсюда свойство FA), а A ∗ B с A, B ≠ 1 действует на дереве Басса — Серра без неподвижной точки"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "SymN*SymN"
+    },
+    {
+     "id": "A ∗ 1",
+     "имя": "Sym(ℕ) ∗ 1",
+     "≅": "SymN",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "whole": false,
+      "central": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "множитель не нормален; A ⊊ A ∗ ⟨b⟩ ⊊ A ∗ B для элемента b ∈ B порядка 2 (⟨b⟩ ≠ B)"
+    },
+    {
+     "id": "все",
+     "имя": "Sym(ℕ) ∗ Sym(ℕ)",
+     "≅": "SymN*SymN",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "все",
+   "абелианизация": "1:1",
+   "свободное произведение": [
+    "SymN",
+    "SymN"
+   ],
+   "≇": [
+    "SymN"
+   ],
+   "ссылки": [
+    "Koppelberg, Tits, Indag. Math. 36 (1974)",
+    "Macpherson, Neumann, J. London Math. Soc. 42 (1990)"
+   ]
+  },
+  {
+   "id": "SO3*SO3",
+   "имя": "SO(3) ∗ SO(3)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "countable": false,
+    "free": false,
+    "free-abelian": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "perfect": true,
+    "centerless": true,
+    "indecomposable": true,
+    "divisible": false,
+    "amenable": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "torsion-free": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false
+   },
+   "почему": {
+    "perfect": "(A ∗ B)ᵃᵇ = Aᵃᵇ × Bᵃᵇ = 1",
+    "centerless": "центр свободного произведения нетривиальных множителей тривиален",
+    "indecomposable": "нетривиальная нормальная подгруппа A ∗ B (A, B ≠ 1, не обе C₂) содержит гиперболический элемент h, его централизатор циклический, а нормальной бесконечной циклической подгруппы нет; поэтому A ∗ B = H × K невозможно",
+    "simple": "ядро A ∗ B → A × B (декартова подгруппа) нетривиально: [a, b] ≠ 1",
+    "divisible": "ab (a ∈ A∖1, b ∈ B∖1) — циклически несократимое слово длины 2, у него нет квадратного корня: длина xⁿ кратна n при гиперболическом x, а эллиптический x даёт эллиптический x²",
+    "periodic": "ab бесконечного порядка",
+    "torsion-free": "есть кручение множителей",
+    "free": "есть кручение",
+    "countable": "содержит множитель мощности 2^ℵ₀",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "residually-nilpotent": "совершенна и нетривиальна",
+    "left-orderable": "есть кручение",
+    "amenable": "содержит C₂ ∗ C₃ ⊃ F₂",
+    "residually-finite": "содержит SO(3), а она не финитно аппроксимируема",
+    "↪̸ SO3": "ван дер Варден (Math. Z. 36, 1933): всякий абстрактный гомоморфизм компактной полупростой группы Ли в компактную группу Ли непрерывен. Поэтому вложение φ: SO(3) ∗ SO(3) → SO(3) на первом множителе — непрерывное инъективное SO(3) → SO(3); его образ — замкнутая подгруппа размерности 3, то есть вся SO(3). Тогда φ(B) ⊆ φ(A), и φ не инъективно на A ∗ B"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "SO3*SO3"
+    },
+    {
+     "id": "A ∗ 1",
+     "имя": "SO(3) ∗ 1",
+     "≅": "SO3",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "whole": false,
+      "central": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "множитель не нормален; A ⊊ A ∗ ⟨b⟩ ⊊ A ∗ B для элемента b ∈ B порядка 2 (⟨b⟩ ≠ B)"
+    },
+    {
+     "id": "все",
+     "имя": "SO(3) ∗ SO(3)",
+     "≅": "SO3*SO3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "все",
+   "абелианизация": "1:1",
+   "свободное произведение": [
+    "SO3",
+    "SO3"
+   ],
+   "↪̸": [
+    "SO3"
+   ],
+   "ссылки": [
+    "van der Waerden, Math. Z. 36 (1933)"
+   ]
   }
  ],
  "семейства": [

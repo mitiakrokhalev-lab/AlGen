@@ -136,6 +136,7 @@ class Library:
                 for f in ("центр", "коммутант", "фраттини", "кручение"):
                     if o.get(f) is not None and o[f] not in ids:
                         raise KeyError(f"{o['key']}: {f} = {o[f]!r}, такой подгруппы нет")
+        self._check_negations()
         for o in self.obj.values():
             self._center_commutator(o)
         self._quantified_props()
@@ -149,6 +150,23 @@ class Library:
             for k in ("injective-sys", "surjective-sys", "constant-sys"):
                 if f.get(k) is not None:
                     f["свойства"][k] = f[k]
+
+    def _check_negations(self):
+        """Поля «≇» и «↪̸» бесконечных групп обходят вывод, поэтому у каждой записи
+        должна быть причина в «почему» (ключ «≇ K» или «↪̸ K»), а сама запись не
+        должна спорить с библиотекой: «≇» с той же группой, «↪̸» в группу, у
+        которой A записана подгруппой, или в группу A вкладывается сама в себя."""
+        for k, o in self.obj.items():
+            for f in ("≇", "↪̸"):
+                for other in o.get(f, ()):
+                    if other not in self.obj:
+                        raise KeyError(f"{k}: {f} {other}: нет такой группы")
+                    if not isinstance(o.get("почему"), dict) or not o["почему"].get(f"{f} {other}"):
+                        raise KeyError(f"{k}: {f} {other}: нет причины в «почему»")
+                    if other == k:
+                        raise ValueError(f"{k}: {f} самой себе")
+                    if f == "↪̸" and any(x["≅"] == k for x in self.obj[other]["подгруппы"] or []):
+                        raise ValueError(f"{k} ↪̸ {other}, но {k} записана подгруппой {other}")
 
     SUM_MAX = 24  # ⊕_ℕ H для всех конечных H порядка ⩽ SUM_MAX
 
@@ -1409,8 +1427,8 @@ class Search:
                 elif all(self.lib.obj[k].get("конечная") and not self.lib.obj[k].get("неканонический")
                          for k in (ka, kb)):
                     out[("r", "iso", x, y)] = False
-                elif self._differ(ka, kb):
-                    out[("r", "iso", x, y)] = False  # свойство различает: не изоморфны
+                elif self._differ(ka, kb) or self._noniso(ka, kb):
+                    out[("r", "iso", x, y)] = False  # свойство или запись «≇» различает: не изоморфны
         # Порядки: у термов без образа в библиотеке (C₈₅ × C₈₅, C₂ ≀ C₇, …) порядок
         # часто известен по множителям — разные порядки, значит, не изоморфны;
         # |A| ∤ |B| (или A бесконечна, B конечна) — A не вкладывается в B.
@@ -1513,11 +1531,17 @@ class Search:
         pa, pb = self.lib.obj[ka]["свойства"], self.lib.obj[kb]["свойства"]
         return any(pa.get(p) is not None and pb.get(p) is not None and pa[p] != pb[p] for p in GROUP_PROPS)
 
+    def _noniso(self, ka, kb):
+        """Запись «≇» у одной из групп: доказано, что они не изоморфны."""
+        return kb in self.lib.obj[ka].get("≇", ()) or ka in self.lib.obj[kb].get("≇", ())
+
     def _embeds(self, ka, kb):
         lib = self.lib
         if ka == kb or ka == "1:1":
             return True
         oa, ob = lib.obj[ka], lib.obj[kb]
+        if kb in oa.get("↪̸", ()):
+            return False  # запись «↪̸»: доказано, что A не вкладывается в B
         # свойство, наследуемое подгруппами, есть у B и нет у A — A не вкладывается в B
         if any(ob["свойства"].get(p) and oa["свойства"].get(p) is False for p in Theory.SUB_CLOSED):
             return False
