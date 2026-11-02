@@ -25745,7 +25745,8 @@
     "indecomposable": "X ≀ Y с бесконечной не-FC группой Y прямо неразложима",
     "divisible": "X ≀ Y не делима при X, Y ≠ 1",
     "centerless": "верхняя группа бесконечна",
-    "perfect": "Wᵃᵇ = lim G_kᵃᵇ ≠ 0"
+    "perfect": "Wᵃᵇ = lim G_kᵃᵇ ≠ 0",
+    "коммутант": "Wᵃᵇ ≅ ⊕_ℕ C₂: (X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, предел вложений прямыми слагаемыми"
    },
    "подгруппы": [
     {
@@ -25761,6 +25762,21 @@
       "finite-index": false
      },
      "фактор": "W2"
+    },
+    {
+     "id": "W′",
+     "имя": "W′",
+     "≅": "W2c",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "whole": false,
+      "central": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "(X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, и ι_k на абелианизациях — вложения прямыми слагаемыми, поэтому Wᵃᵇ = lim C₂^(2^k) ≅ ⊕_ℕ C₂; фактор бесконечен и не прост: W′ не максимальна и бесконечного индекса; W′ ≠ 1 и Z(W) = 1: не центральна",
+     "фактор": "SumC2"
     },
     {
      "id": "все",
@@ -25784,7 +25800,9 @@
    ],
    "ссылки": [
     "построение: неподвижная точка X ↦ X ≀ X"
-   ]
+   ],
+   "коммутант": "W′",
+   "абелианизация": "SumC2"
   },
   {
    "id": "W2inf",
@@ -25834,7 +25852,8 @@
     "indecomposable": "X ≀ Y с бесконечной не-FC группой Y прямо неразложима",
     "divisible": "X ≀ Y не делима при X, Y ≠ 1",
     "centerless": "верхняя группа бесконечна",
-    "фраттини": "в локально нильпотентной группе максимальная подгруппа нормальна простого индекса, а Wᵃᵇ делима и ≠ 0"
+    "фраттини": "в локально нильпотентной группе максимальная подгруппа нормальна простого индекса, а Wᵃᵇ делима и ≠ 0",
+    "коммутант": "Wᵃᵇ ≅ ⊕_ℕ ℤ(2^∞): (X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, предел вложений прямыми слагаемыми"
    },
    "подгруппы": [
     {
@@ -25850,6 +25869,21 @@
       "finite-index": false
      },
      "фактор": "W2inf"
+    },
+    {
+     "id": "W′",
+     "имя": "W′",
+     "≅": "W2infc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "whole": false,
+      "central": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "(X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, и ι_k на абелианизациях — вложения прямыми слагаемыми, поэтому Wᵃᵇ = lim ℤ(2^∞)^(2^k) ≅ ⊕_ℕ ℤ(2^∞); фактор бесконечен и не прост: W′ не максимальна и бесконечного индекса; W′ ≠ 1 и Z(W) = 1: не центральна",
+     "фактор": "SumPruf2"
     },
     {
      "id": "все",
@@ -25874,7 +25908,9 @@
    "ссылки": [
     "построение: неподвижная точка X ↦ X ≀ X"
    ],
-   "фраттини": "все"
+   "фраттини": "все",
+   "коммутант": "W′",
+   "абелианизация": "SumPruf2"
   },
   {
    "id": "WA5",
@@ -26014,7 +26050,8 @@
     "divisible": "X ≀ Y не делима при X, Y ≠ 1",
     "centerless": "верхняя группа бесконечна",
     "torsion-free": "(f, y)ⁿ = 1 ⇒ y = 1 ⇒ f = 1",
-    "amenable": "локально разрешима"
+    "amenable": "локально разрешима",
+    "коммутант": "Wᵃᵇ ≅ ⊕ℤ: (X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, предел вложений прямыми слагаемыми"
    },
    "подгруппы": [
     {
@@ -26030,6 +26067,21 @@
       "finite-index": false
      },
      "фактор": "WZ"
+    },
+    {
+     "id": "W′",
+     "имя": "W′",
+     "≅": "WZc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "whole": false,
+      "central": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "(X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, и ι_k на абелианизациях — вложения прямыми слагаемыми, поэтому Wᵃᵇ = lim ℤ^(2^k) ≅ ⊕ℤ; фактор бесконечен и не прост: W′ не максимальна и бесконечного индекса; W′ ≠ 1 и Z(W) = 1: не центральна",
+     "фактор": "Zoo"
     },
     {
      "id": "все",
@@ -26053,7 +26105,9 @@
    ],
    "ссылки": [
     "построение: неподвижная точка X ↦ X ≀ X"
-   ]
+   ],
+   "коммутант": "W′",
+   "абелианизация": "Zoo"
   },
   {
    "id": "Qsf",
@@ -27706,6 +27760,299 @@
    "трудно": [
     "aut",
     "co-hopfian"
+   ]
+  },
+  {
+   "id": "SumPruf2",
+   "имя": "⊕_ℕ ℤ(2^∞)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Абелианизация W(ℤ(2^∞)). Счётная делимая абелева 2-группа бесконечного ранга.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": true,
+    "centerless": false,
+    "residually-finite": false,
+    "indecomposable": false,
+    "hopfian": false,
+    "linear": false,
+    "polycyclic": false,
+    "bounded-exponent": false,
+    "p-group": true,
+    "co-hopfian": false,
+    "locally-cyclic": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true,
+    "free-abelian": false,
+    "countable": true
+   },
+   "почему": {
+    "linear": "в характеристике ≠ 2 конечная элементарная абелева 2-подгруппа GLₙ диагонализуема, её ранг ⩽ n, а здесь 2-ранг бесконечен; в характеристике 2 ℤ(2^∞) ⊄ GLₙ: 2-элементы унипотентны, их порядок ⩽ 2^⌈log₂ n⌉",
+    "hopfian": "сдвиг слагаемых",
+    "co-hopfian": "сдвиг слагаемых",
+    "residually-finite": "делима и нетривиальна",
+    "bounded-exponent": "содержит ℤ(2^∞)",
+    "locally-cyclic": "содержит C₂²",
+    "фраттини": "делимая: максимальных подгрупп нет",
+    "X × X ≅ X": "ℕ ⊔ ℕ ≅ ℕ"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "SumPruf2"
+    },
+    {
+     "id": "все",
+     "имя": "⊕ℤ(2^∞)",
+     "≅": "SumPruf2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "фраттини": "все",
+   "абелианизация": "SumPruf2",
+   "произведения": {
+    "SumPruf2": "SumPruf2"
+   },
+   "ссылки": [
+    "стандартный пример"
+   ],
+   "короткий довод": [
+    "linear"
+   ]
+  },
+  {
+   "id": "W2c",
+   "имя": "W′ для W = W(C₂)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Коммутант W(C₂). Изоморфный тип не определён; записаны только доказанные значения.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "countable": true,
+    "amenable": true,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "p-group": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false
+   },
+   "почему": {
+    "abelian": "W не метабелева, значит W″ ≠ 1",
+    "solvable": "W/W′ абелева, а W неразрешима",
+    "fin-gen": "W′ = ⋃ G_k′; к. п. W′ лежала бы в одном G_k′ и была бы разрешима вместе с G_k",
+    "finite": "бесконечна: неразрешима и локально конечна (конечная 2-группа разрешима)",
+    "free": "есть кручение",
+    "amenable": "подгруппа аменабельной W",
+    "countable": "подгруппа счётной W"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "W2c"
+    },
+    {
+     "id": "все",
+     "имя": "W′",
+     "≅": "W2c",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
+  },
+  {
+   "id": "W2infc",
+   "имя": "W′ для W = W(ℤ(2^∞))",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Коммутант W(ℤ(2^∞)). Изоморфный тип не определён; записаны только доказанные значения.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "countable": true,
+    "amenable": true,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "p-group": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false
+   },
+   "почему": {
+    "abelian": "W не метабелева, значит W″ ≠ 1",
+    "solvable": "W/W′ абелева, а W неразрешима",
+    "fin-gen": "W′ = ⋃ G_k′; к. п. W′ лежала бы в одном G_k′ и была бы разрешима вместе с G_k",
+    "finite": "бесконечна: неразрешима и локально конечна (конечная 2-группа разрешима)",
+    "free": "есть кручение",
+    "amenable": "подгруппа аменабельной W",
+    "countable": "подгруппа счётной W"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "W2infc"
+    },
+    {
+     "id": "все",
+     "имя": "W′",
+     "≅": "W2infc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
+  },
+  {
+   "id": "WZc",
+   "имя": "W′ для W = W(ℤ)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Коммутант W(ℤ). Изоморфный тип не определён; записаны только доказанные значения.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "countable": true,
+    "amenable": true,
+    "periodic": false,
+    "torsion-free": true,
+    "locally-finite": false,
+    "free-abelian": false
+   },
+   "почему": {
+    "abelian": "W не метабелева, значит W″ ≠ 1",
+    "solvable": "W/W′ абелева, а W неразрешима",
+    "fin-gen": "W′ = ⋃ G_k′; к. п. W′ лежала бы в одном G_k′ и была бы разрешима вместе с G_k",
+    "finite": "бесконечна: нетривиальна и без кручения",
+    "free": "содержит (ℤ ≀ ℤ)′ = {f ∈ ℤ^(ℤ) : Σf = 0} ≅ ⊕ℤ",
+    "amenable": "подгруппа аменабельной W",
+    "countable": "подгруппа счётной W"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "WZc"
+    },
+    {
+     "id": "все",
+     "имя": "W′",
+     "≅": "WZc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
    ]
   }
  ],
