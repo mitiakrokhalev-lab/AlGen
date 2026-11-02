@@ -558,83 +558,91 @@ class SchemeForm(Form):
                 assume = assume + extra
         if not s.solve(assumptions=assume):
             return [facts.get(a) for a in self.atoms]
-        model = set(s.get_model())
+        model = s.get_model()
         # Единичное распространение даёт большую часть следствий почти даром.
         ok, implied = s.propagate(assumptions=assume)
         implied = set(implied or ())
-        for a, l in list(lits.items()):
-            if l in implied:
-                val[a] = True
-                del lits[a]
-            elif -l in implied:
-                val[a] = False
-                del lits[a]
-        seen_t = {a for a, l in lits.items() if l in model}      # встречалось «верно»
-        seen_f = {a for a, l in lits.items() if -l in model}     # встречалось «ложно»
+        # Дальше — по номерам переменных и векторами numpy: модель решателя —
+        # массив, без множеств из миллиона чисел на каждый вызов.
+        V = np.array(sorted(set(lits.values())), dtype=np.int64)
+        n = len(V)
+        res = np.zeros(n, dtype=np.int8)  # 1 — верно, -1 — ложно, 0 — не выведено
+        if n:
+            imp = np.fromiter(implied, dtype=np.int64, count=len(implied))
+            res[np.isin(V, imp)] = 1
+            res[np.isin(-V, imp)] = -1
+        act_m = res == 0  # ещё не решены
+        st = np.zeros(n, dtype=bool)
+        sf = np.zeros(n, dtype=bool)
+
+        def see(model):
+            M = np.asarray(model, dtype=np.int64)
+            pres = V <= len(M)
+            idx = np.where(pres, V - 1, 0)
+            pos = M[idx] > 0
+            return pres & pos, pres & ~pos
+
+        t, f_ = see(model)
+        st |= t
+        sf |= f_
         # Модели «наоборот»: решателю предлагаем противоположные значения всех
         # атомов, у которых пока одно значение, — одна модель снимает сразу многие.
         for _ in range(DIVERSE):
-            one = [(a, l) for a, l in lits.items() if (a in seen_t) != (a in seen_f)]
-            if not one:
+            one = act_m & (st != sf)
+            if not one.any():
                 break
-            s.set_phases([-l if a in seen_t else l for a, l in one])
+            s.set_phases(np.where(st[one], -V[one], V[one]).tolist())
             if not s.solve(assumptions=assume):
                 break
-            m = set(s.get_model())
-            new = 0
-            for a, l in one:
-                if a in seen_t and -l in m:
-                    seen_f.add(a)
-                    new += 1
-                elif a in seen_f and l in m:
-                    seen_t.add(a)
-                    new += 1
-            if new == 0:
+            t, f_ = see(s.get_model())
+            new = one & ((st & f_) | (sf & t))
+            st |= t & one
+            sf |= f_ & one
+            if not new.any():
                 break
         # Остальные атомы с одним значением проверяем пачкой: временная клауза
         # «хотя бы один из них меняет значение». Модель снимает сразу многие;
         # противоречие — все оставшиеся выводятся.
         while True:
-            one = [(a, l) for a, l in lits.items() if (a in seen_t) != (a in seen_f)]
-            if len(one) < 3:
+            one = act_m & (st != sf)
+            if one.sum() < 3:
                 break
             act = T.lit(("act", len(T.atoms)))
-            flip = [-l if a in seen_t else l for a, l in one]
+            flip = np.where(st[one], -V[one], V[one]).tolist()
             s.add_clause([-act] + flip)
             s.set_phases(flip)
             ok = s.solve(assumptions=assume + [act])
-            m = set(s.get_model()) if ok else None
+            mdl = s.get_model() if ok else None
             s.add_clause([-act])  # клауза больше не нужна
             if not ok:
-                for a, l in one:
-                    val[a] = a in seen_t
-                    del lits[a]
+                res[one] = np.where(st[one], 1, -1)
+                act_m &= ~one
                 break
-            for a, l in one:
-                if a in seen_t and -l in m:
-                    seen_f.add(a)
-                elif a in seen_f and l in m:
-                    seen_t.add(a)
-        for a, l in lits.items():
-            if a in seen_t and a in seen_f:
+            t, f_ = see(mdl)
+            st |= t & one
+            sf |= f_ & one
+        for i in np.flatnonzero(act_m):
+            if st[i] and sf[i]:
                 continue
-            if a not in seen_t and a not in seen_f:
+            v = int(V[i])
+            if not st[i] and not sf[i]:
                 # переменной нет в модели (решатель её не видел): две проверки
-                if not s.solve(assumptions=assume + [-l]):
-                    val[a] = True
-                elif not s.solve(assumptions=assume + [l]):
-                    val[a] = False
+                if not s.solve(assumptions=assume + [-v]):
+                    res[i] = 1
+                elif not s.solve(assumptions=assume + [v]):
+                    res[i] = -1
                 continue
-            want = a in seen_t  # единственное пока значение
-            if s.solve(assumptions=assume + [-l if want else l]):
-                m = set(s.get_model())
-                for b, lb in lits.items():
-                    if lb in m:
-                        seen_t.add(b)
-                    elif -lb in m:
-                        seen_f.add(b)
+            want = bool(st[i])  # единственное пока значение
+            if s.solve(assumptions=assume + [-v if want else v]):
+                t, f_ = see(s.get_model())
+                st |= t
+                sf |= f_
             else:
-                val[a] = want
+                res[i] = 1 if want else -1
+        by_var = {int(v): (r == 1) for v, r in zip(V, res) if r}
+        for a, l in lits.items():
+            if l in by_var:
+                val[a] = by_var[l]
         return [facts[a] if a in facts else val.get(a) for a in self.atoms]
 
     def synthetic(self, r):
