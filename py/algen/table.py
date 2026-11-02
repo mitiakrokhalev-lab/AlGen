@@ -400,7 +400,7 @@ def view(base_form, terms):
     v.index = {a: i for i, a in enumerate(v.atoms)}
     v.req = {}
     for i, a in enumerate(v.atoms):
-        need = {2 * v.index[("p", p, u)] for p, u in g.requires(a[2]) if ("p", p, u) in v.index}
+        need = {2 * v.index[("p", p, u)] for t in a[2:] if not isinstance(t, (str, int)) for p, u in g.requires(t) if ("p", p, u) in v.index}
         if need:
             v.req[i] = need
     v.fixed = [2 * v.index[a] + (0 if val else 1) for a, val in b.fixed_lits if a in v.index]

@@ -440,7 +440,7 @@ class SchemeForm(Form):
         self.index = {a: i for i, a in enumerate(self.atoms)}
         self.req = {}
         for i, a in enumerate(self.atoms):
-            need = {2 * self.index[("p", p, u)] for p, u in g.requires(a[2]) if ("p", p, u) in self.index}
+            need = {2 * self.index[("p", p, u)] for t in a[2:] if not isinstance(t, (str, int)) for p, u in g.requires(t) if ("p", p, u) in self.index}
             if need:
                 self.req[i] = need
         self.fixed = [2 * self.index[a] + (0 if v else 1) for a, v in fixed if a in self.index]
