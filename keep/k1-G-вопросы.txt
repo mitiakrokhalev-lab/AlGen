@@ -1,0 +1,87 @@
+693	0	4160	¬linear(center(commutator(G)))	
+691	0	11900	¬nilpotent(frattini(G))	
+659	0	9476	¬solvable(frattini(G))	
+393	1	16162	iso(aut(G), wreath(G, G))	G = 1
+393	1	11362	embeds(wreath(G, G), G)	G = 1
+391	1	11997	divisible(wreath(G, G))	G = 1
+391	1	6975	iso(freeprod(G, G), wreath(G, G))	G = 1
+391	1	7321	iso(freeprod(G, G), torsion(G))	G = 1
+391	1	9386	iso(frattini(G), wreath(G, G))	G = 1
+390	1	6801	iso(inn(G), wreath(G, G))	G = 1
+390	1	17637	iso(freeprod(G, G), quotient(aut(G), inn(G)))	G = 1
+389	1	17555	iso(aut(G), freeprod(G, G))	G = 1
+389	1	7846	iso(frattini(G), freeprod(G, G))	G = 1
+389	1	4583	iso(commutator(commutator(G)), wreath(G, G))	G = 1
+386	1	4009	iso(prod(G, G), wreath(G, G))	G = 1
+384	1	3970	iso(G, wreath(G, G))	G = 1
+384	1	4446	iso(commutator(G), wreath(G, G))	G = 1
+345	1	3195	iso(aut(G), center(G))	G = 1
+345	1	3404	iso(ab(G), aut(G))	G = 1
+345	1	3404	iso(aut(G), quotient(G, commutator(G)))	G = 1
+247	2	13930	divisible(aut(G))	G = 1; G = C2
+247	2	10837	iso(aut(G), commutator(G))	G = 1; G = C2
+247	2	9041	iso(aut(G), commutator(commutator(G)))	G = 1; G = C2
+246	2	5402	torsion-free(aut(G))	G = 1; G = C2
+213	3	15783	iso(aut(G), frattini(G))	G = 1; G = C2; G = C4
+208	9	5583	simple(aut(G))	G = C3; G = C4; G = C6
+200	2	2459	free(aut(G))	G = 1; G = C2
+196	2	1710	iso(aut(G), center(quotient(G, center(G))))	G = 1; G = C2
+193	2	671	iso(aut(G), center(commutator(G)))	G = 1; G = C2
+188	2	434	free-abelian(aut(G))	G = 1; G = C2
+159	3	15997	iso(frattini(G), prod(G, G))	G = 1; G = ℝ⁺; G = ⊕_ℕ ℚ/ℤ
+152	2	8956	embeds(freeprod(G, G), G)	G = 1; G = F_∞
+150	2	8771	iso(freeprod(G, G), quotient(G, frattini(G)))	G = 1; G = F_∞
+147	2	3454	iso(freeprod(G, G), inn(G))	G = 1; G = F_∞
+147	2	3454	iso(freeprod(G, G), quotient(G, center(G)))	G = 1; G = F_∞
+145	2	3387	iso(commutator(commutator(G)), freeprod(G, G))	G = 1; G = F_∞
+131	5	17413	iso(commutator(G), quotient(aut(G), inn(G)))	G = 1; G = (C2 x C2 x C2) : C4; G = C4 x A4
+127	2	2999	iso(commutator(G), freeprod(G, G))	G = 1; G = F_∞
+118	2	29	iso(G, freeprod(G, G))	G = 1; G = F_∞
+106	9	17424	iso(inn(G), quotient(aut(G), inn(G)))	G = 1; G = C3 x D8; G = C2 x C2 x S4
+79	4	6848	iso(commutator(G), prod(G, G))	G = 1; G = ⊕_ℕ SL(2, 5); G = ⊕_ℕ PSL₂(ℝ)
+79	4	8247	iso(inn(G), prod(G, G))	G = 1; G = ⊕_ℤ S₃; G = ⊕_ℕ PSL₂(ℝ)
+79	4	8247	iso(prod(G, G), quotient(G, center(G)))	G = 1; G = ⊕_ℤ S₃; G = ⊕_ℕ PSL₂(ℝ)
+78	4	5631	iso(commutator(commutator(G)), prod(G, G))	G = 1; G = ⊕_ℕ SL(2, 5); G = ⊕_ℕ PSL₂(ℝ)
+45	10	16974	iso(prod(G, G), quotient(G, frattini(G)))	G = 1; G = ℚ*₊; G = ⊕C₂
+44	8	13242	iso(prod(G, G), torsion(G))	G = 1; G = ⊕C₂; G = ∏C₂
+44	2	34	solvable(freeprod(G, G))	G = 1; G = C2
+44	2	34	polycyclic(freeprod(G, G))	G = 1; G = C2
+24	2	33	trivial(aut(G))	G = 1; G = C2
+22	8	56	order-p2(G)	G = C2 x C2; G = C9; G = C25
+9	9	1840	iso(center(G), prod(G, G))	G = 1; G = ℝ⁺; G = ℚ*₊
+9	9	1840	iso(ab(G), prod(G, G))	G = 1; G = ℝ⁺; G = ℚ*₊
+9	9	1840	iso(prod(G, G), quotient(G, commutator(G)))	G = 1; G = ℝ⁺; G = ℚ*₊
+5	7	1	free(G)	G = 1; G = F_∞; G = F₃
+5	7	1	free(freeprod(G, G))	G = 1; G = F_∞; G = F₃
+4	1	0	trivial(G)	G = 1
+4	1	0	trivial(prod(G, G))	G = 1
+4	1	0	cyclic(prod(G, G))	G = 1
+4	1	0	free(prod(G, G))	G = 1
+4	1	0	indecomposable(prod(G, G))	G = 1
+4	1	0	trivial(freeprod(G, G))	G = 1
+4	1	0	abelian(freeprod(G, G))	G = 1
+4	1	0	cyclic(freeprod(G, G))	G = 1
+4	1	0	finite(freeprod(G, G))	G = 1
+4	1	0	nilpotent(freeprod(G, G))	G = 1
+4	1	0	periodic(freeprod(G, G))	G = 1
+4	1	0	divisible(freeprod(G, G))	G = 1
+4	1	0	free-abelian(freeprod(G, G))	G = 1
+4	1	0	p-group(freeprod(G, G))	G = 1
+4	1	0	trivial(wreath(G, G))	G = 1
+4	1	0	abelian(wreath(G, G))	G = 1
+4	1	0	cyclic(wreath(G, G))	G = 1
+4	1	0	free(wreath(G, G))	G = 1
+4	1	0	free-abelian(wreath(G, G))	G = 1
+4	1	0	iso(G, center(commutator(G)))	G = 1
+4	1	0	iso(G, center(quotient(G, center(G))))	G = 1
+4	1	0	iso(center(G), freeprod(G, G))	G = 1
+4	1	0	iso(center(G), wreath(G, G))	G = 1
+4	1	0	iso(ab(G), freeprod(G, G))	G = 1
+4	1	0	iso(ab(G), wreath(G, G))	G = 1
+4	1	0	iso(freeprod(G, G), prod(G, G))	G = 1
+4	1	0	iso(center(commutator(G)), prod(G, G))	G = 1
+4	1	0	iso(center(commutator(G)), freeprod(G, G))	G = 1
+4	1	0	iso(freeprod(G, G), quotient(G, commutator(G)))	G = 1
+4	1	0	iso(center(commutator(G)), wreath(G, G))	G = 1
+4	1	0	embeds(G, center(commutator(G)))	G = 1
+4	1	0	embeds(G, center(quotient(G, center(G))))	G = 1

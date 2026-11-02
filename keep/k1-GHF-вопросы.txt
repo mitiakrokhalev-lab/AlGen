@@ -1,0 +1,45 @@
+1343	0	0	¬iso(im(F), quotient(G, ker(F)))	
+1104	2	153	iso(im(F), wreath(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+1104	2	151	iso(im(F), wreath(H, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+431	6	80	iso(freeprod(G, H), quotient(G, ker(F)))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = F_∞, H = F_∞, F = id: F_∞ → F_∞
+427	6	80	iso(freeprod(G, H), im(F))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = F_∞, H = F_∞, F = id: F_∞ → F_∞
+229	3	1304	iso(ker(F), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = ℤ ≀ ℤ, H = ℤ, F = 1: ℤ ≀ ℤ → ℤ
+163	2	1649	iso(prod(G, G), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+163	2	3508	iso(prod(G, H), wreath(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+163	2	3576	iso(prod(G, H), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+163	2	1704	iso(prod(H, H), wreath(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+163	2	5279	iso(freeprod(G, G), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+163	2	30838	iso(freeprod(G, H), wreath(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+163	2	19284	iso(freeprod(G, H), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+163	2	5306	iso(freeprod(H, H), wreath(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+147	0	83202	¬characteristic(inn(H))	
+147	0	82868	¬complemented(inn(H))	
+147	0	42102	¬solvable(frattini(H))	
+147	0	44460	¬nilpotent(frattini(H))	
+126	0	83008	¬characteristic(inn(G))	
+126	0	82675	¬complemented(inn(G))	
+126	0	41745	¬solvable(frattini(G))	
+126	0	44112	¬nilpotent(frattini(G))	
+124	3	32716	iso(aut(H), wreath(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = 1, H = C2, F = 1: 1 → C2
+121	3	29191	iso(freeprod(H, H), wreath(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = 1, H = F_∞, F = 1: 1 → F_∞
+121	3	24104	iso(freeprod(H, H), wreath(H, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = 1, H = F_∞, F = 1: 1 → F_∞
+108	9	74359	iso(aut(H), freeprod(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = D8, F = 1: 1 → D8; G = 1, H = Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^×, F = 1: 1 → Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^×
+108	9	69030	iso(aut(H), wreath(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = D8, F = 1: 1 → D8; G = 1, H = Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^×, F = 1: 1 → Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^×
+108	9	69296	iso(aut(H), wreath(H, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = D8, F = 1: 1 → D8; G = 1, H = Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^×, F = 1: 1 → Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^×
+108	3	32901	iso(aut(G), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = C2, H = 1, F = 1: C2 → 1
+95	3	23881	iso(freeprod(G, G), wreath(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = F_∞, H = 1, F = 1: F_∞ → 1
+95	3	28957	iso(freeprod(G, G), wreath(H, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = F_∞, H = 1, F = 1: F_∞ → 1
+86	9	74519	iso(aut(G), freeprod(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = D∞, H = 1, F = 1: D∞ → 1; G = D8, H = 1, F = 1: D8 → 1
+86	9	69151	iso(aut(G), wreath(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = D∞, H = 1, F = 1: D∞ → 1; G = D8, H = 1, F = 1: D8 → 1
+86	9	68848	iso(aut(G), wreath(H, G))	G = 1, H = 1, F = 1: 1 → 1; G = D∞, H = 1, F = 1: D∞ → 1; G = D8, H = 1, F = 1: D8 → 1
+71	10	59730	iso(aut(H), prod(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = D8, F = 1: 1 → D8; G = 1, H = Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^×, F = 1: 1 → Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^×
+45	4	1464	iso(H, wreath(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = ℤ, H = ℤ ≀ ℤ, F = 1: ℤ → ℤ ≀ ℤ
+43	8	28167	iso(wreath(G, G), wreath(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = ℤ, H = ℤ, F = ℤ ↪ ℤ (подгруппа 4Z); G = 1, H = 1, F = id: 1 → 1
+43	8	39940	iso(wreath(G, G), wreath(H, G))	G = 1, H = 1, F = 1: 1 → 1; G = ℤ, H = ℤ, F = ℤ ↪ ℤ (подгруппа 4Z); G = 1, H = 1, F = id: 1 → 1
+43	8	7705	iso(wreath(G, G), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = ℤ, H = ℤ, F = ℤ ↪ ℤ (подгруппа 4Z); G = 1, H = 1, F = id: 1 → 1
+43	8	40233	iso(wreath(G, H), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = ℤ, H = ℤ, F = ℤ ↪ ℤ (подгруппа 4Z); G = 1, H = 1, F = id: 1 → 1
+43	8	28407	iso(wreath(H, G), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = ℤ, H = ℤ, F = ℤ ↪ ℤ (подгруппа 4Z); G = 1, H = 1, F = id: 1 → 1
+42	9	26570	iso(aut(H), prod(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = C2, H = C12, F = C2 ↪ C12 (подгруппа 1); G = 1, H = 1, F = id: 1 → 1
+40	6	44430	iso(aut(H), freeprod(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = C2, H = D∞, F = 1: C2 → D∞; G = C2, H = D∞, F = C2 ↪ D∞ (подгруппа отражение)
+38	6	44683	iso(aut(G), freeprod(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = D∞, H = C2, F = 1: D∞ → C2; G = D∞, H = C2, F = D∞ ↠ C2 (фактор по вращения)
+36	4	1414	iso(G, wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = ℤ ≀ ℤ, H = ℤ, F = 1: ℤ ≀ ℤ → ℤ
