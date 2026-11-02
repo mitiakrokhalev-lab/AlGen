@@ -359,6 +359,44 @@ def load_cache(base, cdir, form=None):
     return _unpack_rows(rows)
 
 
+def rules_fp(vocab):
+    """Отпечатки правил и вырождений словаря (по содержанию): кэш подсказок (A4)
+    годится, если все правила прошлого прогона есть и сейчас."""
+    import hashlib
+    out = set()
+    for r in list(vocab.rules) + list(vocab.degen):
+        out.add(hashlib.sha1(json.dumps(r, sort_keys=True, ensure_ascii=False, default=str).encode()).hexdigest()[:16])
+    return out
+
+
+def load_hints(base, cdir, form):
+    """Подсказки для _derive из *.hcache прошлых прогонов (A4): выведенные значения
+    по именам атомов, если правила того прогона — подмножество нынешних.
+    Атомы, которых нет в нынешней таблице, пропускаются; новых атомов в
+    подсказке нет — их ядро ищется заново."""
+    if not cdir or not Path(cdir).exists():
+        return {}
+    now = rules_fp(form.g.v)
+    by_name = {E.atom_name(a): a for a in form.atoms}
+    hints, used, skipped = {}, 0, 0
+    for path in Path(cdir).rglob(f"{base}.*.hcache"):
+        try:
+            with open(path, "rb") as fh:
+                data = pickle.load(fh)
+        except Exception:
+            continue
+        if not data["правила"] <= now:
+            skipped += 1
+            continue
+        used += 1
+        atoms = [by_name.get(n) for n in data["атомы"]]
+        for k, row in _unpack_rows(data["строки"]).items():
+            hints[k] = {a: v for a, v in zip(atoms, row) if a is not None and v is not None}
+    print(f"{base}: подсказок {len(hints)} из {used} файлов кэша (пропущено {skipped}: правила сняты или изменены)",
+          file=sys.stderr)
+    return hints
+
+
 def build(lib, vocab, base, part, outdir, skel=None):
     """Часть таблицы базы. skel — готовый каркас (теория строится один раз на
     базу, части получают его через fork); иначе строится здесь."""
@@ -383,6 +421,14 @@ def build(lib, vocab, base, part, outdir, skel=None):
     with open(dpath.with_suffix(".dtmp"), "wb") as fh:
         pickle.dump({"отпечаток": theory_fp(base, f), "строки": _pack_rows(used)}, fh, protocol=pickle.HIGHEST_PROTOCOL)
     os.replace(dpath.with_suffix(".dtmp"), dpath)
+    # A4: те же выводы по именам атомов — годятся прогонам с надмножеством правил
+    nk = getattr(f, "_nk", {})
+    rows2 = {nk[k]: v for k, v in used.items() if k in nk}
+    hpath = Path(outdir) / f"{base}.{part[0]}-{part[1]}.hcache"
+    with open(hpath.with_suffix(".htmp"), "wb") as fh:
+        pickle.dump({"правила": rules_fp(f.g.v), "атомы": [E.atom_name(a) for a in f.atoms],
+                     "строки": _pack_rows(rows2)}, fh, protocol=pickle.HIGHEST_PROTOCOL)
+    os.replace(hpath.with_suffix(".htmp"), hpath)
     os.replace(tmp, path)  # часть готова, когда есть её .pickle
     print(f"{base} {part[0]}/{part[1]}: строк {len(f.envs)}, атомов {len(f.atoms)}, новых выводов {len(new)}, "
           f"{round(time.time() - t0)} с → {path}", file=sys.stderr)
@@ -447,6 +493,7 @@ def build_all(lib, vocab, job, jobs, outdir, threads, cache=None):
             cached = load_cache(b, cache, skel[b])
             skel[b]._derived.update(cached)
             skel[b]._cached_keys = set(cached)
+            skel[b]._hints = load_hints(b, cache, skel[b])
             print(f"{b}: каркас {round(time.time() - t)} с, из кэша выводов {len(cached)}", file=sys.stderr, flush=True)
         p = ctx.Process(target=build, args=(lib, vocab, b, part, outdir, skel[b]))
         p.start()
@@ -855,6 +902,7 @@ def main():
     s.add_argument("--часть", dest="part", default="1/1")
     s.add_argument("--каталог", dest="dir", required=True)
     s.add_argument("--без", dest="skip", default="")
+    s.add_argument("--кэш", dest="cache", default=None, help="каталог с *.dcache / *.hcache прошлых прогонов")
     s = sub.add_parser("строить-все")
     s.add_argument("--задание", dest="job", required=True, help="j/N")
     s.add_argument("--каталог", dest="dir", required=True)
@@ -900,7 +948,15 @@ def main():
         print(f"# схем {len(ss)}", file=sys.stderr)
     elif a.cmd == "строить":
         i, n = map(int, a.part.split("/"))
-        build(built_library(vocab), vocab, a.base, (i, n), a.dir)
+        lib = built_library(vocab)
+        skel = None
+        if a.cache:
+            skel = skeleton(lib, vocab, a.base)
+            cached = load_cache(a.base, a.cache, skel)
+            skel._derived.update(cached)
+            skel._cached_keys = set(cached)
+            skel._hints = load_hints(a.base, a.cache, skel)
+        build(lib, vocab, a.base, (i, n), a.dir, skel)
     elif a.cmd == "полнота":
         for t, k, im, miss in completeness(built_library(vocab), vocab, a.base, a.dir):
             print(f"{t:36s} известно {k:.0%}, образ в библиотеке {im:.0%}")

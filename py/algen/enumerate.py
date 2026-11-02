@@ -405,6 +405,14 @@ class Form:
         return out
 
 
+def name_key(facts):
+    """Ключ записанных значений строки по именам атомов — не зависит от нумерации
+    переменных теории, поэтому годится между прогонами с разными правилами (A4)."""
+    import hashlib
+    items = sorted(f"{'' if v else '¬'}{atom_name(a)}" for a, v in facts.items())
+    return hashlib.sha1("\n".join(items).encode()).hexdigest()[:20]
+
+
 class SchemeForm(Form):
     """Форма по схеме: «∀ A : Grp; ∀ B : Grp» и термы вроде «A × B».
 
@@ -493,7 +501,10 @@ class SchemeForm(Form):
                 used.add(key)
                 row = derived.get(key)
                 if row is None:
-                    row = derived[key] = self._derive(f)
+                    nk = name_key(f)
+                    self.__dict__.setdefault("_nk", {})[key] = nk
+                    hints = self.__dict__.get("_hints")
+                    row = derived[key] = self._derive(f, hints.get(nk) if hints else None)
                     # временные клаузы «хотя бы один меняет значение» копятся в
                     # решателе; свежий решатель через каждые REFRESH выводов
                     if REFRESH and len(derived) % REFRESH == 0:
@@ -516,21 +527,41 @@ class SchemeForm(Form):
             self._facts[r] = self.search.facts(self.envs[r])
         return self._facts[r]
 
-    def _derive(self, facts):
+    def _derive(self, facts, hint=None):
         """Значения атомов, следующие из записанных: ядро («backbone») решателя.
         Одна модель задаёт кандидата для каждого атома; атом проверяется одним
-        вызовом, а атомы, которые разошлись с найденными моделями, — неизвестны."""
+        вызовом, а атомы, которые разошлись с найденными моделями, — неизвестны.
+
+        hint — значения, выведенные для этих же записанных значений прошлым
+        прогоном с подмножеством нынешних правил (кэш по именам атомов, A4). Они
+        следуют из записанных значений, поэтому берутся как посылки и не
+        проверяются; ядро ищется только по остальным атомам. Если с ними теория
+        противоречива (правило снято или исправлено), подсказка отбрасывается."""
         T, s = self.sc.T, self.sc.s
         assume = [l for a, v in facts.items() if (l := T.lit(a, v)) not in (None, False)]
-        lits = {a: T.lit(a) for a in self.atoms if a not in facts}
-        lits = {a: l for a, l in lits.items() if type(l) is int}  # 1 == True в Python: сравнивать нельзя
+        lit_of = self.__dict__.get("_lit_of")
+        if lit_of is None or len(lit_of) != len(self.atoms):
+            lit_of = self._lit_of = {a: T.lit(a) for a in self.atoms}
+        lits = {a: l for a in self.atoms if a not in facts and type(l := lit_of[a]) is int}  # 1 == True: сравнивать нельзя
+        val = {}
+        if hint:
+            extra = []
+            for a, v in hint.items():
+                l = lits.get(a)
+                if l is not None:
+                    extra.append(l if v else -l)
+            if extra and s.solve(assumptions=assume + extra):
+                for a, v in hint.items():
+                    if a in lits:
+                        val[a] = v
+                        del lits[a]
+                assume = assume + extra
         if not s.solve(assumptions=assume):
             return [facts.get(a) for a in self.atoms]
         model = set(s.get_model())
         # Единичное распространение даёт большую часть следствий почти даром.
         ok, implied = s.propagate(assumptions=assume)
         implied = set(implied or ())
-        val = {}
         for a, l in list(lits.items()):
             if l in implied:
                 val[a] = True
