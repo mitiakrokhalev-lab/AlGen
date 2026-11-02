@@ -405,11 +405,21 @@ class Form:
         return out
 
 
+_NAMES = {}
+
+
+def _atom_name_cached(a):
+    n = _NAMES.get(a)
+    if n is None:
+        n = _NAMES[a] = atom_name(a)
+    return n
+
+
 def name_key(facts):
     """Ключ записанных значений строки по именам атомов — не зависит от нумерации
     переменных теории, поэтому годится между прогонами с разными правилами (A4)."""
     import hashlib
-    items = sorted(f"{'' if v else '¬'}{atom_name(a)}" for a, v in facts.items())
+    items = sorted(f"{'' if v else '¬'}{_atom_name_cached(a)}" for a, v in facts.items())
     return hashlib.sha1("\n".join(items).encode()).hexdigest()[:20]
 
 
@@ -575,7 +585,14 @@ class SchemeForm(Form):
         st = np.zeros(n, dtype=bool)
         sf = np.zeros(n, dtype=bool)
 
+        from operator import itemgetter
+        get = itemgetter(*(V - 1).tolist()) if n > 1 else None
+
         def see(model):
+            # из модели (список ±v длины «число переменных») — только наши переменные
+            if n > 1 and len(model) >= V[-1]:
+                pos = np.array(get(model), dtype=np.int64) > 0
+                return pos, ~pos
             M = np.asarray(model, dtype=np.int64)
             pres = V <= len(M)
             idx = np.where(pres, V - 1, 0)
