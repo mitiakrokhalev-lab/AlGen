@@ -785,6 +785,10 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     pairs = getattr(form, "pair_atoms", None) or {}
     if pairs:
         goal_cols = [g for g in goal_cols if g // 2 not in pairs]
+    # равносильные литералы (table.drop_equiv): перебираются только представители
+    drop = getattr(form, "drop", None) or set()
+    if drop:
+        goal_cols = [g for g in goal_cols if g not in drop]
     # атомы, несовместимые в одной посылке с данным (парный и его составляющие)
     clash = {}
     for i, cs in pairs.items():
@@ -910,7 +914,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 P, R = pack(rows_map), ones(len(rows_map))
         used = {x // 2 for x in prem}
         for j in range(start, n_lit):
-            if j // 2 in used or j in const or j ^ 1 in const or j // 2 in deferred:
+            if j // 2 in used or j in const or j ^ 1 in const or j // 2 in deferred or j in drop:
                 continue
             if pairs and ((j // 2 in pairs and j % 2) or clash.get(j // 2, set()) & used):
                 continue

@@ -138,9 +138,10 @@ def _swap(s, pair):
     return re.sub(rf"\b({a}|{b})\b", lambda m: b if m.group(1) == a else a, s)
 
 
-def schemes(vocab, base, k=2):
-    """Схемы базы: (id, термы-строки) — замыкания наборов из ⩽ k + 1 термов
-    вселенной, без повторов. id — номера термов вселенной через «-»."""
+def schemes(vocab, base, k=2, t=None):
+    """Схемы базы: (id, термы-строки) — замыкания наборов из ⩽ t верхних термов
+    вселенной (по умолчанию t = k + 1), без повторов. id — номера термов вселенной через «-»."""
+    t = k + 1 if t is None else t
     g, _, _ = scheme(vocab, {"раздел": "grp", "условие": BASES[base]})
     names = {str(t): t for t in g.terms}
     uni = universe(vocab, base)
@@ -149,10 +150,10 @@ def schemes(vocab, base, k=2):
     vars_ = [t for t in g.terms if isinstance(t, Var)]
     seen, out = set(), []
     swap = SWAP.get(base)
-    for r in range(0, k + 2):
+    for r in range(0, t + 1):
         for pick in combinations(ts, r):
             cl = closure(g, list(pick) + vars_)
-            if len(maximal(g, cl)) > k + 1:
+            if len(maximal(g, cl)) > t:
                 continue
             terms_ = sorted((t for t in cl if isinstance(t, App)), key=num.get)
             key = tuple(terms_)
@@ -384,6 +385,73 @@ def load(lib, vocab, base, tdir):
     return f
 
 
+def equiv_reps(f):
+    """Классы равносильных литералов базы: rep[j] — представитель класса столбца j.
+
+    Кандидаты — литералы с одинаковыми столбцами строк (литерал и отрицание);
+    равносильность проверяется теорией базы в обе стороны (при посылках записи).
+    Представитель — литерал с наименьшим числом построенных термов, затем короче.
+    Набор с литералом и набор с его представителем — один факт: перебирать
+    достаточно представителей."""
+    from collections import defaultdict
+    from .logic import decide
+    n = f.m.shape[1]
+    name = lambda j: ("¬" if j % 2 else "") + E.atom_name(f.atoms[j // 2])
+
+    def napps(j):
+        out = set()
+        for x in f.atoms[j // 2][2:]:
+            if isinstance(x, App):
+                out |= {y for y in subterms(x) if isinstance(y, App)}
+        return len(out)
+
+    buckets = defaultdict(list)
+    for j in range(n):
+        buckets[(f.m[:, j].tobytes(), f.m[:, j ^ 1].tobytes())].append(j)
+    fixed = [f.lit(j) for j in f.fixed]
+    rep = list(range(n))
+    for js in buckets.values():
+        if len(js) < 2:
+            continue
+        js = sorted(js, key=lambda j: (napps(j), len(name(j)), j))
+        classes = []  # внутри корзины: несколько классов с одинаковыми столбцами
+        for j in js:
+            for c in classes:
+                r = c[0]
+                if decide(f.sc.T, fixed + [f.lit(r)], f.lit(j), f.sc.s).kind == "выводится" and \
+                        decide(f.sc.T, fixed + [f.lit(j)], f.lit(r), f.sc.s).kind == "выводится":
+                    c.append(j)
+                    rep[j] = r
+                    break
+            else:
+                classes.append([j])
+    f.rep = rep
+    f.rep_flat = {j for j in range(n) if napps(j) == 0}
+    return rep
+
+
+def drop_equiv(f, cols=None):
+    """Столбцы формы, которые не перебираются: у литерала есть равносильный
+    представитель в этой же форме или без построенных термов (он есть в каждой).
+    Литералы-требования других атомов (abelian(G) для ulm(G)) не отбрасываются."""
+    b = getattr(f, "_base", f)
+    rep = getattr(b, "rep", None)
+    if rep is None:
+        return set()
+    cols = list(range(len(rep))) if cols is None else [int(c) for c in cols]
+    where = {c: i for i, c in enumerate(cols)}
+    needed = set()
+    for r in (f.req or {}).values():
+        needed |= set(r) | {x ^ 1 for x in r}
+    needed |= set(f.fixed) | {x ^ 1 for x in f.fixed}
+    out = set()
+    for i, c in enumerate(cols):
+        r = rep[c]
+        if r != c and i not in needed and (r in where or r in b.rep_flat):
+            out.add(i)
+    return out
+
+
 def view(base_form, terms):
     """Схема-вид: столбцы таблицы для переменных базы и термов terms."""
     b = base_form
@@ -407,6 +475,7 @@ def view(base_form, terms):
     cols = np.array([2 * b.index[a] + d for a in v.atoms for d in (0, 1)], dtype=np.int64)
     v.m, v.s, v.e = b.m[:, cols], b.s[:, cols], b.e[:, cols]
     v._base, v._base_cols = b, cols
+    v.drop = drop_equiv(v, cols)
     top = maximal(g, elems)
     v.need = [{i for i, a in enumerate(v.atoms) if t in a[2:]} for t in top]
     sw = SWAP.get(_STATE.get("base_of", {}).get(id(b)))
@@ -489,7 +558,7 @@ def run_schemes(a):
     by_base = {}
     for base in a.bases.split(","):
         fp = _fp(base) + f":{a.k}" + (f":d{a.defer}" if a.defer else "")
-        todo = schemes(vocab, base, ks[-1])
+        todo = schemes(vocab, base, ks[-1], getattr(a, "t", None))
         g0, _, _ = scheme(vocab, {"раздел": "grp", "условие": BASES[base]})
         n0 = {str(t): t for t in g0.terms}
         tops = {}
@@ -637,6 +706,10 @@ def k1_base(a):
     f = load(lib, vocab, a.base, a.dir)
     gen = f if a.base == "G" else load(lib, vocab, "G", a.dir)
     _STATE.update(forms={a.base: f}, generic=gen, base_of={id(f): a.base})
+    if not getattr(a, "no_equiv", False):
+        equiv_reps(f)
+        f.drop = drop_equiv(f)
+        print(f"{a.base}: равносильных литералов не перебирается {len(f.drop)} из {f.m.shape[1]}", file=sys.stderr)
     form, alive, empty, rep = E.run(1, lib, vocab, f)
     res = {}
     for r in rep:
@@ -671,6 +744,7 @@ def main():
         s = sub.add_parser(name)
         s.add_argument("base")
         s.add_argument("--посылок", dest="k", type=int, default=2)
+        s.add_argument("--термов", dest="t", type=int, default=None, help="верхних термов в схеме (по умолчанию k + 1)")
     s = sub.add_parser("строить")
     s.add_argument("base")
     s.add_argument("--часть", dest="part", default="1/1")
@@ -707,6 +781,7 @@ def main():
     s.add_argument("--до", dest="until", type=float, default=0, help="минут: после этого новые схемы не начинать")
     s.add_argument("--предел", dest="limit", type=float, default=0, help="секунд на одну схему")
     s.add_argument("--выборка", dest="sample", type=int, default=1, help="брать каждую N-ю схему базы")
+    s.add_argument("--термов", dest="t", type=int, default=None, help="верхних термов в схеме (по умолчанию k + 1)")
     a = ap.parse_args()
     E.SKIP.update(x.strip() for x in getattr(a, "skip", "").split(",") if x.strip())
     vocab = Vocab.section("grp")
@@ -714,7 +789,7 @@ def main():
         for i, x in enumerate(universe(vocab, a.base)):
             print(i + 1, x)
     elif a.cmd == "схемы":
-        ss = schemes(vocab, a.base, a.k)
+        ss = schemes(vocab, a.base, a.k, a.t)
         for sid, ts in ss:
             print(f"{sid} | {BASES[a.base]} | {'; '.join(ts)}")
         print(f"# схем {len(ss)}", file=sys.stderr)

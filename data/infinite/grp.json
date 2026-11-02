@@ -24510,7 +24510,10 @@
    "статус": "не проверено: записала нейросеть (1.11)",
    "центр": "1",
    "абелианизация": "1:1",
-   "inn": "McLain2"
+   "inn": "McLain2",
+   "произведения": {
+    "2:1": "C2xMcL"
+   }
   },
   {
    "id": "FreeC2inf",
@@ -26442,6 +26445,1157 @@
    "ссылки": [
     "группы ранга 1 (Бэр)"
    ]
+  },
+  {
+   "id": "SumQ",
+   "имя": "⊕_ℕ ℚ",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "polycyclic": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "free-abelian": false,
+    "abelian": true,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "centerless": false,
+    "simple": false,
+    "amenable": true,
+    "residually-nilpotent": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true,
+    "torsion-free": true,
+    "periodic": false,
+    "divisible": true,
+    "residually-finite": false,
+    "indecomposable": false,
+    "linear": true,
+    "hopfian": false,
+    "co-hopfian": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "locally-finite": false,
+    "left-orderable": true,
+    "bi-orderable": true
+   },
+   "почему": {
+    "linear": "ℚ^(ℕ) ↪ ℂ^*",
+    "hopfian": "сдвиг влево",
+    "co-hopfian": "сдвиг вправо",
+    "residually-finite": "делима, конечных факторов нет",
+    "фраттини": "делима"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumQ"
+    },
+    {
+     "id": "все",
+     "имя": "⊕ℚ",
+     "≅": "SumQ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "фраттини": "все",
+   "абелианизация": "SumQ",
+   "произведения": {
+    "SumQ": "SumQ"
+   },
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+  },
+  {
+   "id": "SumCpp",
+   "имя": "⊕_p C_p^p",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "polycyclic": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "free-abelian": false,
+    "abelian": true,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "centerless": false,
+    "simple": false,
+    "amenable": true,
+    "residually-nilpotent": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "divisible": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "linear": false,
+    "hopfian": true,
+    "co-hopfian": true,
+    "bounded-exponent": false,
+    "p-group": false
+   },
+   "почему": {
+    "linear": "p-ранг p не ограничен; в GLₙ(K) при p ≠ char K элементарные абелевы p-подгруппы ранга ⩽ n",
+    "hopfian": "p-компоненты конечны и вполне инвариантны",
+    "co-hopfian": "p-компоненты конечны и вполне инвариантны",
+    "residually-finite": "сумма конечных",
+    "фраттини": "компоненты элементарные абелевы"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumCpp"
+    },
+    {
+     "id": "все",
+     "имя": "⊕_p C_p^p",
+     "≅": "SumCpp",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "фраттини": "1",
+   "абелианизация": "SumCpp",
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+  },
+  {
+   "id": "SumCp2p",
+   "имя": "⊕_p C_p^{2p}",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "polycyclic": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "free-abelian": false,
+    "abelian": true,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "centerless": false,
+    "simple": false,
+    "amenable": true,
+    "residually-nilpotent": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "divisible": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "linear": false,
+    "hopfian": true,
+    "co-hopfian": true,
+    "bounded-exponent": false,
+    "p-group": false
+   },
+   "почему": {
+    "linear": "p-ранг 2p не ограничен; в GLₙ(K) при p ≠ char K элементарные абелевы p-подгруппы ранга ⩽ n",
+    "hopfian": "p-компоненты конечны и вполне инвариантны",
+    "co-hopfian": "p-компоненты конечны и вполне инвариантны",
+    "residually-finite": "сумма конечных",
+    "фраттини": "компоненты элементарные абелевы"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumCp2p"
+    },
+    {
+     "id": "все",
+     "имя": "⊕_p C_p^{2p}",
+     "≅": "SumCp2p",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "фраттини": "1",
+   "абелианизация": "SumCp2p",
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+  },
+  {
+   "id": "SumUT3pp",
+   "имя": "⊕_p UT₃(𝔽_p)^p",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "polycyclic": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "free-abelian": false,
+    "abelian": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "centerless": false,
+    "simple": false,
+    "amenable": true,
+    "residually-nilpotent": true,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "divisible": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "linear": false,
+    "hopfian": true,
+    "co-hopfian": true,
+    "bounded-exponent": false,
+    "p-group": false
+   },
+   "почему": {
+    "hopfian": "силовские части UT₃(𝔽_p)^p конечны и вполне инвариантны",
+    "co-hopfian": "силовские части конечны и вполне инвариантны",
+    "linear": "центр ⊕_p C_p^p не линеен",
+    "фраттини": "Φ(⊕H_p) = ⊕Φ(H_p) для конечных H_p; Φ(UT₃(𝔽_p)^p) = Z = G′"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumUT3pp"
+    },
+    {
+     "id": "центр",
+     "имя": "⊕_p Z(UT₃(𝔽_p))^p",
+     "≅": "SumCpp",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumCp2p"
+    },
+    {
+     "id": "все",
+     "имя": "⊕_p UT₃(𝔽_p)^p",
+     "≅": "SumUT3pp",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "центр",
+   "фраттини": "центр",
+   "абелианизация": "SumCp2p",
+   "inn": "SumCp2p",
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+  },
+  {
+   "id": "HQD",
+   "имя": "H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ): [(v, w), (v′, w′)] = (vᵢw′ᵢ − v′ᵢwᵢ mod ℤ)ᵢ",
+   "заметка": "Прямая сумма групп Гейзенберга H(ℚ², ℚ/ℤ); делима, Φ = G, Z = G′ = ⊕ℚ/ℤ.",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "polycyclic": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "free-abelian": false,
+    "abelian": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "centerless": false,
+    "simple": false,
+    "amenable": true,
+    "residually-nilpotent": true,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true,
+    "periodic": false,
+    "torsion-free": false,
+    "locally-finite": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "divisible": true,
+    "residually-finite": false,
+    "indecomposable": false,
+    "linear": false,
+    "hopfian": false,
+    "co-hopfian": false,
+    "bounded-exponent": false,
+    "p-group": false
+   },
+   "почему": {
+    "linear": "центр ⊕ℚ/ℤ: бесконечная элементарная абелева 2- и 3-подгруппа: в характеристике ≠ p бесконечная элементарная абелева p-подгруппа диагонализуема и имеет ранг ⩽ n",
+    "residually-finite": "делима, конечных факторов нет",
+    "фраттини": "нильпотентна, Gᵃᵇ делима, максимальных подгрупп нет",
+    "центр": "(u, a) централен ⇔ vᵢw′ᵢ − v′ᵢwᵢ ∈ ℤ при всех рациональных v′, w′ ⇔ u = 0",
+    "divisible": "(u, d)ⁿ = (nu, nd + C(n,2)β(u,u)), D делима",
+    "hopfian": "сдвиг индексов влево",
+    "co-hopfian": "сдвиг индексов вправо",
+    "indecomposable": "прямая сумма блоков"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "HQD"
+    },
+    {
+     "id": "D",
+     "имя": "⊕ℚ/ℤ",
+     "≅": "SumQZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumQ"
+    },
+    {
+     "id": "все",
+     "имя": "HQD",
+     "≅": "HQD",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "D",
+   "коммутант": "D",
+   "фраттини": "все",
+   "абелианизация": "SumQ",
+   "inn": "SumQ",
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+  },
+  {
+   "id": "Hinf",
+   "имя": "H∞(ℚ): ⟨xᵢ, yᵢ, z | [xᵢ, yᵢ] = z⟩ над ℚ (Гейзенберг счётного ранга над ℚ)",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "polycyclic": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "free-abelian": false,
+    "abelian": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "centerless": false,
+    "simple": false,
+    "amenable": true,
+    "residually-nilpotent": true,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true,
+    "periodic": false,
+    "torsion-free": true,
+    "locally-finite": false,
+    "left-orderable": true,
+    "bi-orderable": true,
+    "divisible": true,
+    "residually-finite": false,
+    "indecomposable": true,
+    "linear": false,
+    "hopfian": true,
+    "co-hopfian": false,
+    "bounded-exponent": false,
+    "p-group": false
+   },
+   "почему": {
+    "linear": "бесконечная убывающая цепочка централизаторов C(x₁) ⊋ C(x₁, x₂) ⊋ …; в линейной группе её нет",
+    "residually-finite": "делима",
+    "фраттини": "нильпотентна, Gᵃᵇ делима",
+    "hopfian": "сюръективный ψ: ψ(Z) = ψ(G′) = G′ = Z ≅ ℚ, ψ|_Z — умножение на λ ≠ 0; нетривиальное ядро пересекало бы центр",
+    "co-hopfian": "сдвиг индексов вправо",
+    "indecomposable": "Z = G′ ≅ ℚ неразложима; абелев множитель лежал бы в Z, второй — без центра",
+    "bi-orderable": "нильпотентна без кручения"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Hinf"
+    },
+    {
+     "id": "Z",
+     "имя": "⟨z⟩ ≅ ℚ",
+     "≅": "Q",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumQ"
+    },
+    {
+     "id": "все",
+     "имя": "H∞(ℚ)",
+     "≅": "Hinf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "Z",
+   "коммутант": "Z",
+   "фраттини": "все",
+   "абелианизация": "SumQ",
+   "inn": "SumQ",
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+  },
+  {
+   "id": "HeisD",
+   "имя": "H(ℤ^(ℕ), ⊕ℚ/ℤ): [eᵢ, eⱼ] = (1/j!)δᵢ при i < j",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "polycyclic": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "free-abelian": false,
+    "abelian": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "centerless": false,
+    "simple": false,
+    "amenable": true,
+    "residually-nilpotent": true,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true,
+    "periodic": false,
+    "torsion-free": false,
+    "locally-finite": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "divisible": false,
+    "residually-finite": false,
+    "linear": false,
+    "bounded-exponent": false,
+    "p-group": false
+   },
+   "почему": {
+    "linear": "Z ⊇ ⊕ℚ/ℤ: бесконечная элементарная абелева 2- и 3-подгруппа: в характеристике ≠ p бесконечная элементарная абелева p-подгруппа диагонализуема и имеет ранг ⩽ n",
+    "residually-finite": "делимый центр гибнет в каждом конечном факторе",
+    "центр": "u ≠ 0, i₀ = min supp u: [u, eⱼ] имеет δ_{i₀}-компоненту m/j! ≢ 0 при больших j",
+    "коммутант": "δᵢ-компоненты 1/j!, j > i, порождают ℚ/ℤ",
+    "фраттини": "нильпотентна: Φ — прообраз Φ(ℤ^(ℕ)) = 0"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "HeisD"
+    },
+    {
+     "id": "D",
+     "имя": "⊕ℚ/ℤ",
+     "≅": "SumQZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Zoo"
+    },
+    {
+     "id": "все",
+     "имя": "HeisD",
+     "≅": "HeisD",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "D",
+   "коммутант": "D",
+   "фраттини": "D",
+   "абелианизация": "Zoo",
+   "inn": "Zoo",
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+  },
+  {
+   "id": "McLQ",
+   "имя": "группа Маклейна M(ℚ, ℚ)",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "polycyclic": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "free-abelian": false,
+    "abelian": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": true,
+    "centerless": true,
+    "amenable": true,
+    "residually-nilpotent": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false,
+    "periodic": false,
+    "torsion-free": true,
+    "locally-finite": false,
+    "left-orderable": true,
+    "bi-orderable": true,
+    "divisible": true,
+    "residually-finite": false,
+    "linear": false,
+    "bounded-exponent": false,
+    "p-group": false
+   },
+   "почему": {
+    "perfect": "[1 + a e_ij, 1 + b e_jk] = 1 + ab e_ik",
+    "centerless": "g = 1 + N: столбец j у N ненулевой, k больше всех индексов, тогда g не коммутирует с 1 + e_jk",
+    "torsion-free": "к. п. подгруппы лежат в UTₙ(ℚ)",
+    "divisible": "корни внутри UTₙ(ℚ)",
+    "residually-finite": "делима",
+    "linear": "бесконечная убывающая цепочка централизаторов C(x₁) ⊋ C(x₁, x₂) ⊋ …; в линейной группе её нет",
+    "solvable": "содержит UTₙ(ℚ) при всех n",
+    "bi-orderable": "локально нильпотентна без кручения",
+    "фраттини": "локально нильпотентна и совершенна: максимальных подгрупп нет"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "McLQ"
+    },
+    {
+     "id": "все",
+     "имя": "M(ℚ, ℚ)",
+     "≅": "McLQ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "все",
+   "фраттини": "все",
+   "абелианизация": "1:1",
+   "inn": "McLQ",
+   "ссылки": [
+    "McLain, Proc. Cambridge Philos. Soc. 50 (1954)"
+   ],
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+  },
+  {
+   "id": "SumMcL",
+   "имя": "⊕_ℕ M(ℚ, 𝔽₂)",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "polycyclic": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "free-abelian": false,
+    "abelian": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": true,
+    "centerless": true,
+    "amenable": true,
+    "residually-nilpotent": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "residually-finite": false,
+    "linear": false,
+    "hopfian": false,
+    "co-hopfian": false,
+    "indecomposable": false,
+    "bounded-exponent": false,
+    "p-group": true
+   },
+   "почему": {
+    "residually-finite": "содержит M(ℚ, 𝔽₂)",
+    "linear": "содержит M(ℚ, 𝔽₂)",
+    "hopfian": "сдвиг",
+    "co-hopfian": "сдвиг",
+    "фраттини": "локально нильпотентна и совершенна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumMcL"
+    },
+    {
+     "id": "все",
+     "имя": "⊕ M(ℚ, 𝔽₂)",
+     "≅": "SumMcL",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "все",
+   "фраттини": "все",
+   "абелианизация": "1:1",
+   "inn": "SumMcL",
+   "произведения": {
+    "SumMcL": "SumMcL"
+   },
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+  },
+  {
+   "id": "C2xMcL",
+   "имя": "C₂ × M(ℚ, 𝔽₂)",
+   "заметка": "Φ = 1 × M максимальна индекса 2 (лемма: Φ(A × B) = Φ(A) × Φ(B) при конечном A).",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "polycyclic": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "free-abelian": false,
+    "abelian": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": false,
+    "centerless": false,
+    "simple": false,
+    "amenable": true,
+    "residually-nilpotent": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "divisible": false,
+    "residually-finite": false,
+    "linear": false,
+    "indecomposable": false,
+    "bounded-exponent": false,
+    "p-group": true
+   },
+   "почему": {
+    "residually-finite": "содержит M",
+    "linear": "содержит M",
+    "фраттини": "Φ(C₂ × M) ⊆ Φ(C₂) × Φ(M) = 1 × M всегда; ⊇: максимальная M′ ∌ (1, m) проецируется на оба множителя, по Гурса даёт простой общий фактор без максимальных подгрупп, но у C₂ такого нет",
+    "residually-nilpotent": "γₙ = 1 × M"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "C2xMcL"
+    },
+    {
+     "id": "центр",
+     "имя": "C₂ × 1",
+     "≅": "2:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "McLain2"
+    },
+    {
+     "id": "M",
+     "имя": "1 × M",
+     "≅": "McLain2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": true,
+      "prime-index": true,
+      "complemented": true
+     },
+     "фактор": "2:1"
+    },
+    {
+     "id": "все",
+     "имя": "C₂ × M",
+     "≅": "C2xMcL",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "M",
+   "фраттини": "M",
+   "абелианизация": "2:1",
+   "inn": "McLain2",
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+  },
+  {
+   "id": "E3inf",
+   "имя": "E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩",
+   "заметка": "Группа Гейзенберга над 𝔽₃ счётного ранга, экспонента 3. Центр = коммутант = Φ = C₃.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "fin-gen": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": false,
+    "polycyclic": false,
+    "indecomposable": true,
+    "hopfian": true,
+    "linear": false,
+    "bounded-exponent": true,
+    "p-group": true,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": true,
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": true,
+    "exponent-3": true,
+    "exponent-2": false
+   },
+   "почему": {
+    "residually-finite": "нормальная N конечного индекса без z: N ∩ Z = 1 ⇒ [N, G] ⊆ N ∩ G′ = 1 ⇒ N ⊆ Z, противоречие с бесконечностью G",
+    "hopfian": "нетривиальное ядро содержит z = [x₁, y₁], и фактор абелев",
+    "indecomposable": "если G = A × B, то C₂ = Z(A) × Z(B), так что, скажем, Z(B) = 1, и нильпотентная B тривиальна",
+    "linear": "в линейной группе убывающие цепочки централизаторов обрываются (централизаторы замкнуты по Зарисскому), а C(x₁) ⊋ C(x₁, x₂) ⊋ … бесконечна: yₖ лежит в C(x₁, …, xₖ₋₁), но не в C(xₖ)",
+    "bounded-exponent": "показатель 3",
+    "p-group": "3-группа",
+    "фраттини": "в нильпотентной группе максимальные подгруппы нормальны индекса p и содержат G′, поэтому Φ(G) — прообраз Φ(Gᵃᵇ); Gᵃᵇ = ⊕C₂",
+    "amenable": "разрешима",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "property-t": "бесконечна и аменабельна",
+    "residually-nilpotent": "нильпотентна",
+    "locally-finite": "периодическая разрешимая",
+    "locally-cyclic": "неабелева",
+    "dedekind": "⟨x₁⟩ не нормальна",
+    "metabelian": "ступень 2: G′ ⩽ Z(G) абелев",
+    "class-2": "G′ = Z(G) = ⟨z⟩"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "E3inf"
+    },
+    {
+     "id": "центр",
+     "имя": "⟨z⟩",
+     "≅": "3:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC3",
+     "почему": "центр и коммутант: [xᵢ, yᵢ] = z; G/⟨z⟩ ≅ ⊕C₂ абелева, а форма коммутирования невырождена"
+    },
+    {
+     "id": "все",
+     "имя": "E_∞ (экстраспециальная 2-группа счётного ранга)",
+     "≅": "E3inf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "центр",
+   "коммутант": "центр",
+   "короткий довод": [
+    "linear"
+   ],
+   "абелианизация": "SumC3",
+   "фраттини": "центр",
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+  },
+  {
+   "id": "SymN",
+   "имя": "Sym(ℕ)",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "polycyclic": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "free-abelian": false,
+    "abelian": false,
+    "solvable": false,
+    "nilpotent": false,
+    "perfect": true,
+    "centerless": true,
+    "simple": false,
+    "amenable": false,
+    "residually-nilpotent": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false,
+    "periodic": false,
+    "torsion-free": false,
+    "locally-finite": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "divisible": false,
+    "residually-finite": false,
+    "linear": false,
+    "hopfian": true,
+    "co-hopfian": false,
+    "indecomposable": true,
+    "bounded-exponent": false,
+    "p-group": false,
+    "countable": false
+   },
+   "почему": {
+    "perfect": "Оре: всякий элемент — коммутатор",
+    "simple": "FSym ⊴",
+    "amenable": "содержит F₂",
+    "residually-finite": "нормальные 1 ⊂ FAlt ⊂ FSym ⊂ Sym (Шрейер — Улам — Бэр), бесконечные факторы",
+    "linear": "содержит все конечные группы (Жордан)",
+    "hopfian": "ядро ∈ {FAlt, FSym}: Sym/FSym прост, у Sym/FAlt нормальная C₂, а у Sym её нет",
+    "co-hopfian": "Sym(ℕ) ≅ Sym(2ℕ) ⊊ Sym(ℕ)",
+    "indecomposable": "всякая нетривиальная нормальная содержит FAlt",
+    "divisible": "(12) ≠ σ²: у квадрата число 2-циклов чётно (они идут парами из 4-циклов)",
+    "фраттини": "стабилизаторы точек максимальны (2-транзитивность), их пересечение 1",
+    "aut": "Шрейер — Улам: Aut = Inn"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SymN"
+    },
+    {
+     "id": "FAlt",
+     "имя": "FAlt(ℕ)",
+     "≅": "Ainf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     }
+    },
+    {
+     "id": "stab",
+     "имя": "стабилизатор точки",
+     "≅": "SymN",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": true,
+      "finite-index": false
+     }
+    },
+    {
+     "id": "все",
+     "имя": "Sym(ℕ)",
+     "≅": "SymN",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "⩽": [
+    [
+     "FAlt",
+     "stab",
+     false
+    ]
+   ],
+   "центр": "1",
+   "коммутант": "все",
+   "фраттини": "1",
+   "абелианизация": "1:1",
+   "aut": "SymN",
+   "out": "1:1",
+   "inn": "SymN",
+   "почему aut": "Шрейер — Улам: все автоморфизмы Sym(ℕ) внутренние, центр тривиален",
+   "ссылки": [
+    "Schreier, Ulam 1936; Ore 1951"
+   ],
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
   }
  ],
  "семейства": [
