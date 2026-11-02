@@ -258,6 +258,11 @@ def main():
         import re
         for line in Path(a.verdicts).read_text(encoding="utf-8").splitlines():
             m = re.match(r"^(\S+-[\w.′()]+)\s+(.+?)\s{2,}(.+?)\s{2,}(.*)$", line.rstrip())
+            # длинный тип («понятный контрпример») отделён от вердикта одним пробелом
+            m2 = re.match(r"^(\S+-[\w.′()]+)\s+(.+?)\s(закрыто \w+|факт|открыто|КРАСНЫЙ ФЛАГ)\s{2,}(.*)$", line.rstrip())
+            if m2 and (not m or m.group(3) not in ("закрыто генератором", "закрыто вычислением", "закрыто библиотекой",
+                                                     "факт", "открыто", "КРАСНЫЙ ФЛАГ")):
+                m = m2
             if m:
                 st = m.group(3).strip() or m.group(4).split(";")[0].strip()
                 closed[m.group(1)] = st
