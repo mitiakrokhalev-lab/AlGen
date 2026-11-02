@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_chars, load_compl, load_endo, load_elts, load_homs, load_products
+from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_chars, load_compl, load_endo, load_elts, load_homs, load_perm, load_products
 from math import gcd
 
 from .logic import DATA, App, Graph, Theory, Var, Vocab
@@ -53,7 +53,7 @@ class Library:
         self.obj = {}
         patch = DATA / "finite" / "grp-subs-patch.json"
         patch = json.loads(patch.read_text(encoding="utf-8"))["группы"] if patch.exists() else {}
-        compl, endo, elts, homs = load_compl(), load_endo(), load_elts(), load_homs()
+        compl, endo, elts, homs, perm = load_compl(), load_endo(), load_elts(), load_homs(), load_perm()
         for k, r in load_finite(extra=True).items():
             for data, field, prop in ((compl, "complemented", "complemented"),
                                       (endo, "fully_invariant", "fully-invariant"),
@@ -84,6 +84,10 @@ class Library:
             if e and e.get("classes") and r["subs"] is not None and \
                     [[x["group"], x["class_size"]] for x in r["subs"]] == e["check"]:
                 self.obj[k]["элементы"] = e["classes"]
+            q = perm.get(k)
+            if q and q.get("nonperm") is not None and r["subs"] is not None and \
+                    [[x["group"], x["class_size"]] for x in r["subs"]] == q["check"]:
+                self.obj[k]["неперестановочны"] = {tuple(x) for x in q["nonperm"]}
             h = homs.get(k)
             if h and h.get("endos") is not None and r["subs"] is not None and \
                     [[x["group"], x["class_size"]] for x in r["subs"]] == h["check"]:
@@ -136,6 +140,7 @@ class Library:
                 for f in ("центр", "коммутант", "фраттини", "кручение"):
                     if o.get(f) is not None and o[f] not in ids:
                         raise KeyError(f"{o['key']}: {f} = {o[f]!r}, такой подгруппы нет")
+        self._check_negations()
         for o in self.obj.values():
             self._center_commutator(o)
         self._quantified_props()
@@ -149,6 +154,23 @@ class Library:
             for k in ("injective-sys", "surjective-sys", "constant-sys"):
                 if f.get(k) is not None:
                     f["свойства"][k] = f[k]
+
+    def _check_negations(self):
+        """Поля «≇» и «↪̸» бесконечных групп обходят вывод, поэтому у каждой записи
+        должна быть причина в «почему» (ключ «≇ K» или «↪̸ K»), а сама запись не
+        должна спорить с библиотекой: «≇» с той же группой, «↪̸» в группу, у
+        которой A записана подгруппой, или в группу A вкладывается сама в себя."""
+        for k, o in self.obj.items():
+            for f in ("≇", "↪̸"):
+                for other in o.get(f, ()):
+                    if other not in self.obj:
+                        raise KeyError(f"{k}: {f} {other}: нет такой группы")
+                    if not isinstance(o.get("почему"), dict) or not o["почему"].get(f"{f} {other}"):
+                        raise KeyError(f"{k}: {f} {other}: нет причины в «почему»")
+                    if other == k:
+                        raise ValueError(f"{k}: {f} самой себе")
+                    if f == "↪̸" and any(x["≅"] == k for x in self.obj[other]["подгруппы"] or []):
+                        raise ValueError(f"{k} ↪̸ {other}, но {k} записана подгруппой {other}")
 
     SUM_MAX = 24  # ⊕_ℕ H для всех конечных H порядка ⩽ SUM_MAX
 
@@ -1343,6 +1365,9 @@ class Search:
                             out[("r", "le", a, b)] = out[("r", "le", b, a)] = False
                         continue
                     out[("r", "eq-sub", *sorted((a, b), key=str))] = ia[2] == ib[2]
+                    perm = self._permutes(a, ia, b, ib)
+                    if perm is not None and "permutes" in self.g.v.rels:
+                        out[("r", "permutes", *sorted((a, b), key=str))] = perm
                     if self.lib.obj[ia[1]].get("конечная"):
                         # классы сопряжённости таблицы различны
                         out[("r", "conj-sub", *sorted((a, b), key=str))] = ia[2] == ib[2]
@@ -1409,8 +1434,8 @@ class Search:
                 elif all(self.lib.obj[k].get("конечная") and not self.lib.obj[k].get("неканонический")
                          for k in (ka, kb)):
                     out[("r", "iso", x, y)] = False
-                elif self._differ(ka, kb):
-                    out[("r", "iso", x, y)] = False  # свойство различает: не изоморфны
+                elif self._differ(ka, kb) or self._noniso(ka, kb):
+                    out[("r", "iso", x, y)] = False  # свойство или запись «≇» различает: не изоморфны
         # Порядки: у термов без образа в библиотеке (C₈₅ × C₈₅, C₂ ≀ C₇, …) порядок
         # часто известен по множителям — разные порядки, значит, не изоморфны;
         # |A| ∤ |B| (или A бесконечна, B конечна) — A не вкладывается в B.
@@ -1513,11 +1538,32 @@ class Search:
         pa, pb = self.lib.obj[ka]["свойства"], self.lib.obj[kb]["свойства"]
         return any(pa.get(p) is not None and pb.get(p) is not None and pa[p] != pb[p] for p in GROUP_PROPS)
 
+    def _permutes(self, a, ia, b, ib):
+        """HK = KH: да, если H = K или одна из них нормальна; для двух подгрупп-переменных
+        конечной группы (это представители классов) — по таблице GAP (grp-perm.jsonl).
+        Подгруппа-терм (нормализатор, ⟨x⟩, …) — какой-то член своего класса, не обязательно
+        представитель, поэтому для неё таблица не годится."""
+        subs = self.lib.obj[ia[1]]["подгруппы"]
+        if ia[2] == ib[2] and ia[3:] == ib[3:] and "?" not in ia[3:]:
+            return True
+        if subs[ia[2]]["свойства"].get("normal") or subs[ib[2]]["свойства"].get("normal"):
+            return True
+        bad = self.lib.obj[ia[1]].get("неперестановочны")
+        if bad is None or len(ia) > 3 or len(ib) > 3 or a not in self.vars or b not in self.vars:
+            return None
+        return (min(ia[2], ib[2]), max(ia[2], ib[2])) not in bad
+
+    def _noniso(self, ka, kb):
+        """Запись «≇» у одной из групп: доказано, что они не изоморфны."""
+        return kb in self.lib.obj[ka].get("≇", ()) or ka in self.lib.obj[kb].get("≇", ())
+
     def _embeds(self, ka, kb):
         lib = self.lib
         if ka == kb or ka == "1:1":
             return True
         oa, ob = lib.obj[ka], lib.obj[kb]
+        if kb in oa.get("↪̸", ()):
+            return False  # запись «↪̸»: доказано, что A не вкладывается в B
         # свойство, наследуемое подгруппами, есть у B и нет у A — A не вкладывается в B
         if any(ob["свойства"].get(p) and oa["свойства"].get(p) is False for p in Theory.SUB_CLOSED):
             return False

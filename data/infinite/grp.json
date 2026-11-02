@@ -4399,7 +4399,8 @@
    "aut": "AutSumC2",
    "произведения": {
     "SumC2": "SumC2",
-    "2:1": "SumC2"
+    "2:1": "SumC2",
+    "SumC3": "SumC6"
    },
    "почему произведения": "⊕_ℕ C₂ ≅ (⊕_ℕ C₂)², перенумерация",
    "фраттини": "0",
@@ -4530,7 +4531,8 @@
    ],
    "произведения": {
     "SumC3": "SumC3",
-    "3:1": "SumC3"
+    "3:1": "SumC3",
+    "SumC2": "SumC6"
    },
    "почему произведения": "перенумерация слагаемых",
    "абелианизация": "SumC3",
@@ -24451,7 +24453,8 @@
     "linear": false,
     "residually-finite": false,
     "simple": false,
-    "countable": true
+    "countable": true,
+    "indecomposable": true
    },
    "почему": {
     "perfect": "[1 + e_ij, 1 + e_jk] = 1 + e_ik при i < j < k, а между i < k в ℚ всегда есть j",
@@ -24472,7 +24475,8 @@
     "linear": "g_k = 1 + e_{k,k+1}: 1 + e_{k+2,k+3} коммутирует с g₁…g_k, но не с g_{k+1} — бесконечная убывающая цепочка централизаторов",
     "residually-finite": "конечный фактор — конечная совершенная 2-группа, т. е. тривиален",
     "simple": "сечение ℚ = L ⊔ U (L < U): матрицы 1 + x с x на местах L × U образуют нормальную подгруппу (у g и g⁻¹ ненулевые места (α, λ) с α ⩽ λ и (μ, β) с μ ⩽ β), нетривиальную и собственную (McLain, 1954)",
-    "countable": "финитарные матрицы над счётным полем, индексы из ℚ"
+    "countable": "финитарные матрицы над счётным полем, индексы из ℚ",
+    "indecomposable": "пусть G = A × B, A, B ≠ 1. Нормальное замыкание g = 1 + N ≠ 1 содержит трансвекцию: β — наибольший столбец N с ненулевым столбцом, γ больше всех индексов g; [g, 1 + e_βγ] = 1 + v e_γᵀ, v = (1 − g⁻¹)e_β ≠ 0; сопряжение 1 + t e_ζα (α — наибольший индекс в носителе v, ζ < α) даёт 1 + t v_α e_ζγ. Коммутаторы [1 + a e_λζ, 1 + c e_ζγ] и [1 + c e_ζγ, 1 + a e_γμ] дают все 1 + s e_λμ с λ < ζ, μ > γ. Значит, A и B содержат все трансвекции 1 + s e_λμ при достаточно малом λ и большом μ, и A ∩ B ≠ 1"
    },
    "подгруппы": [
     {
@@ -24517,7 +24521,9 @@
    "inn": "McLain2",
    "произведения": {
     "2:1": "C2xMcL"
-   }
+   },
+   "aut": "AutMcLain2",
+   "почему aut": "Aut ⊇ Inn ≅ G и Aut(ℚ, <) (перестановки индексов); несчётна"
   },
   {
    "id": "FreeC2inf",
@@ -25745,7 +25751,8 @@
     "indecomposable": "X ≀ Y с бесконечной не-FC группой Y прямо неразложима",
     "divisible": "X ≀ Y не делима при X, Y ≠ 1",
     "centerless": "верхняя группа бесконечна",
-    "perfect": "Wᵃᵇ = lim G_kᵃᵇ ≠ 0"
+    "perfect": "Wᵃᵇ = lim G_kᵃᵇ ≠ 0",
+    "коммутант": "Wᵃᵇ ≅ ⊕_ℕ C₂: (X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, предел вложений прямыми слагаемыми"
    },
    "подгруппы": [
     {
@@ -25761,6 +25768,21 @@
       "finite-index": false
      },
      "фактор": "W2"
+    },
+    {
+     "id": "W′",
+     "имя": "W′",
+     "≅": "W2c",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "whole": false,
+      "central": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "(X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, и ι_k на абелианизациях — вложения прямыми слагаемыми, поэтому Wᵃᵇ = lim C₂^(2^k) ≅ ⊕_ℕ C₂; фактор бесконечен и не прост: W′ не максимальна и бесконечного индекса; W′ ≠ 1 и Z(W) = 1: не центральна",
+     "фактор": "SumC2"
     },
     {
      "id": "все",
@@ -25784,7 +25806,9 @@
    ],
    "ссылки": [
     "построение: неподвижная точка X ↦ X ≀ X"
-   ]
+   ],
+   "коммутант": "W′",
+   "абелианизация": "SumC2"
   },
   {
    "id": "W2inf",
@@ -25834,7 +25858,8 @@
     "indecomposable": "X ≀ Y с бесконечной не-FC группой Y прямо неразложима",
     "divisible": "X ≀ Y не делима при X, Y ≠ 1",
     "centerless": "верхняя группа бесконечна",
-    "фраттини": "в локально нильпотентной группе максимальная подгруппа нормальна простого индекса, а Wᵃᵇ делима и ≠ 0"
+    "фраттини": "в локально нильпотентной группе максимальная подгруппа нормальна простого индекса, а Wᵃᵇ делима и ≠ 0",
+    "коммутант": "Wᵃᵇ ≅ ⊕_ℕ ℤ(2^∞): (X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, предел вложений прямыми слагаемыми"
    },
    "подгруппы": [
     {
@@ -25850,6 +25875,21 @@
       "finite-index": false
      },
      "фактор": "W2inf"
+    },
+    {
+     "id": "W′",
+     "имя": "W′",
+     "≅": "W2infc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "whole": false,
+      "central": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "(X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, и ι_k на абелианизациях — вложения прямыми слагаемыми, поэтому Wᵃᵇ = lim ℤ(2^∞)^(2^k) ≅ ⊕_ℕ ℤ(2^∞); фактор бесконечен и не прост: W′ не максимальна и бесконечного индекса; W′ ≠ 1 и Z(W) = 1: не центральна",
+     "фактор": "SumPruf2"
     },
     {
      "id": "все",
@@ -25874,7 +25914,9 @@
    "ссылки": [
     "построение: неподвижная точка X ↦ X ≀ X"
    ],
-   "фраттини": "все"
+   "фраттини": "все",
+   "коммутант": "W′",
+   "абелианизация": "SumPruf2"
   },
   {
    "id": "WA5",
@@ -26014,7 +26056,8 @@
     "divisible": "X ≀ Y не делима при X, Y ≠ 1",
     "centerless": "верхняя группа бесконечна",
     "torsion-free": "(f, y)ⁿ = 1 ⇒ y = 1 ⇒ f = 1",
-    "amenable": "локально разрешима"
+    "amenable": "локально разрешима",
+    "коммутант": "Wᵃᵇ ≅ ⊕ℤ: (X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, предел вложений прямыми слагаемыми"
    },
    "подгруппы": [
     {
@@ -26030,6 +26073,21 @@
       "finite-index": false
      },
      "фактор": "WZ"
+    },
+    {
+     "id": "W′",
+     "имя": "W′",
+     "≅": "WZc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "whole": false,
+      "central": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "(X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ, и ι_k на абелианизациях — вложения прямыми слагаемыми, поэтому Wᵃᵇ = lim ℤ^(2^k) ≅ ⊕ℤ; фактор бесконечен и не прост: W′ не максимальна и бесконечного индекса; W′ ≠ 1 и Z(W) = 1: не центральна",
+     "фактор": "Zoo"
     },
     {
      "id": "все",
@@ -26053,7 +26111,9 @@
    ],
    "ссылки": [
     "построение: неподвижная точка X ↦ X ≀ X"
-   ]
+   ],
+   "коммутант": "W′",
+   "абелианизация": "Zoo"
   },
   {
    "id": "Qsf",
@@ -26889,7 +26949,9 @@
    "фраттини": "все",
    "абелианизация": "SumQ",
    "inn": "SumQ",
-   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть",
+   "aut": "AutHQD",
+   "почему aut": "Aut ⊇ Sym(ℕ) (перестановки слагаемых); несчётна"
   },
   {
    "id": "Hinf",
@@ -27116,7 +27178,8 @@
     "bounded-exponent": false,
     "p-group": false,
     "simple": false,
-    "countable": true
+    "countable": true,
+    "indecomposable": true
    },
    "почему": {
     "perfect": "[1 + a e_ij, 1 + b e_jk] = 1 + ab e_ik",
@@ -27129,7 +27192,8 @@
     "bi-orderable": "локально нильпотентна без кручения",
     "фраттини": "локально нильпотентна и совершенна: максимальных подгрупп нет",
     "simple": "сечение ℚ = L ⊔ U (L < U): матрицы 1 + x с x на местах L × U образуют нормальную подгруппу (у g и g⁻¹ ненулевые места (α, λ) с α ⩽ λ и (μ, β) с μ ⩽ β), нетривиальную и собственную (McLain, 1954)",
-    "countable": "финитарные матрицы над счётным полем, индексы из ℚ"
+    "countable": "финитарные матрицы над счётным полем, индексы из ℚ",
+    "indecomposable": "пусть G = A × B, A, B ≠ 1. Нормальное замыкание g = 1 + N ≠ 1 содержит трансвекцию: β — наибольший столбец N с ненулевым столбцом, γ больше всех индексов g; [g, 1 + e_βγ] = 1 + v e_γᵀ, v = (1 − g⁻¹)e_β ≠ 0; сопряжение 1 + t e_ζα (α — наибольший индекс в носителе v, ζ < α) даёт 1 + t v_α e_ζγ. Коммутаторы [1 + a e_λζ, 1 + c e_ζγ] и [1 + c e_ζγ, 1 + a e_γμ] дают все 1 + s e_λμ с λ < ζ, μ > γ. Значит, A и B содержат все трансвекции 1 + s e_λμ при достаточно малом λ и большом μ, и A ∩ B ≠ 1"
    },
    "подгруппы": [
     {
@@ -27169,7 +27233,9 @@
    "ссылки": [
     "McLain, Proc. Cambridge Philos. Soc. 50 (1954)"
    ],
-   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть",
+   "aut": "AutMcLQ",
+   "почему aut": "Aut ⊇ Inn ≅ G и Aut(ℚ, <) (перестановки индексов); несчётна"
   },
   {
    "id": "SumMcL",
@@ -27252,7 +27318,9 @@
    "произведения": {
     "SumMcL": "SumMcL"
    },
-   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть",
+   "aut": "AutSumMcL",
+   "почему aut": "Aut ⊇ Sym(ℕ) (перестановки слагаемых); несчётна"
   },
   {
    "id": "C2xMcL",
@@ -27707,6 +27775,1090 @@
     "aut",
     "co-hopfian"
    ]
+  },
+  {
+   "id": "SumPruf2",
+   "имя": "⊕_ℕ ℤ(2^∞)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Абелианизация W(ℤ(2^∞)). Счётная делимая абелева 2-группа бесконечного ранга.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": true,
+    "centerless": false,
+    "residually-finite": false,
+    "indecomposable": false,
+    "hopfian": false,
+    "linear": false,
+    "polycyclic": false,
+    "bounded-exponent": false,
+    "p-group": true,
+    "co-hopfian": false,
+    "locally-cyclic": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": true,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true,
+    "free-abelian": false,
+    "countable": true
+   },
+   "почему": {
+    "linear": "в характеристике ≠ 2 конечная элементарная абелева 2-подгруппа GLₙ диагонализуема, её ранг ⩽ n, а здесь 2-ранг бесконечен; в характеристике 2 ℤ(2^∞) ⊄ GLₙ: 2-элементы унипотентны, их порядок ⩽ 2^⌈log₂ n⌉",
+    "hopfian": "сдвиг слагаемых",
+    "co-hopfian": "сдвиг слагаемых",
+    "residually-finite": "делима и нетривиальна",
+    "bounded-exponent": "содержит ℤ(2^∞)",
+    "locally-cyclic": "содержит C₂²",
+    "фраттини": "делимая: максимальных подгрупп нет",
+    "X × X ≅ X": "ℕ ⊔ ℕ ≅ ℕ"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "SumPruf2"
+    },
+    {
+     "id": "все",
+     "имя": "⊕ℤ(2^∞)",
+     "≅": "SumPruf2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "фраттини": "все",
+   "абелианизация": "SumPruf2",
+   "произведения": {
+    "SumPruf2": "SumPruf2"
+   },
+   "ссылки": [
+    "стандартный пример"
+   ],
+   "короткий довод": [
+    "linear"
+   ]
+  },
+  {
+   "id": "W2c",
+   "имя": "W′ для W = W(C₂)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Коммутант W(C₂). Изоморфный тип не определён; записаны только доказанные значения.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "countable": true,
+    "amenable": true,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "p-group": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false
+   },
+   "почему": {
+    "abelian": "W не метабелева, значит W″ ≠ 1",
+    "solvable": "W/W′ абелева, а W неразрешима",
+    "fin-gen": "W′ = ⋃ G_k′; к. п. W′ лежала бы в одном G_k′ и была бы разрешима вместе с G_k",
+    "finite": "бесконечна: неразрешима и локально конечна (конечная 2-группа разрешима)",
+    "free": "есть кручение",
+    "amenable": "подгруппа аменабельной W",
+    "countable": "подгруппа счётной W"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "W2c"
+    },
+    {
+     "id": "все",
+     "имя": "W′",
+     "≅": "W2c",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
+  },
+  {
+   "id": "W2infc",
+   "имя": "W′ для W = W(ℤ(2^∞))",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Коммутант W(ℤ(2^∞)). Изоморфный тип не определён; записаны только доказанные значения.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "countable": true,
+    "amenable": true,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "p-group": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false
+   },
+   "почему": {
+    "abelian": "W не метабелева, значит W″ ≠ 1",
+    "solvable": "W/W′ абелева, а W неразрешима",
+    "fin-gen": "W′ = ⋃ G_k′; к. п. W′ лежала бы в одном G_k′ и была бы разрешима вместе с G_k",
+    "finite": "бесконечна: неразрешима и локально конечна (конечная 2-группа разрешима)",
+    "free": "есть кручение",
+    "amenable": "подгруппа аменабельной W",
+    "countable": "подгруппа счётной W"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "W2infc"
+    },
+    {
+     "id": "все",
+     "имя": "W′",
+     "≅": "W2infc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
+  },
+  {
+   "id": "WZc",
+   "имя": "W′ для W = W(ℤ)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Коммутант W(ℤ). Изоморфный тип не определён; записаны только доказанные значения.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "countable": true,
+    "amenable": true,
+    "periodic": false,
+    "torsion-free": true,
+    "locally-finite": false,
+    "free-abelian": false
+   },
+   "почему": {
+    "abelian": "W не метабелева, значит W″ ≠ 1",
+    "solvable": "W/W′ абелева, а W неразрешима",
+    "fin-gen": "W′ = ⋃ G_k′; к. п. W′ лежала бы в одном G_k′ и была бы разрешима вместе с G_k",
+    "finite": "бесконечна: нетривиальна и без кручения",
+    "free": "содержит (ℤ ≀ ℤ)′ = {f ∈ ℤ^(ℤ) : Σf = 0} ≅ ⊕ℤ",
+    "amenable": "подгруппа аменабельной W",
+    "countable": "подгруппа счётной W"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "WZc"
+    },
+    {
+     "id": "все",
+     "имя": "W′",
+     "≅": "WZc",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
+  },
+  {
+   "id": "AutMcLQ",
+   "имя": "Aut(M(ℚ, ℚ))",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Группа автоморфизмов группы Маклейна M(ℚ, ℚ). Несчётна, поэтому не вкладывается в G.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "countable": false,
+    "centerless": true,
+    "amenable": false,
+    "linear": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false,
+    "torsion-free": false
+   },
+   "почему": {
+    "countable": "Aut(ℚ, <) действует перестановкой индексов, e_λμ ↦ e_σλ,σμ, точно; |Aut(ℚ, <)| = 2^ℵ₀",
+    "centerless": "G без центра: централизатор Inn(G) в Aut(G) тривиален",
+    "amenable": "содержит Aut(ℚ, <), а в ней F₂ (всякая счётная левоупорядочиваемая группа действует на ℚ с сохранением порядка)",
+    "simple": "Inn(G) ≅ G — нетривиальная нормальная, собственная (Inn счётна)",
+    "periodic": "порядковый автоморфизм x ↦ x + 1 бесконечного порядка",
+    "solvable": "содержит Inn(G) ≅ G",
+    "linear": "содержит Inn(G) ≅ G",
+    "residually-finite": "содержит Inn(G) ≅ G",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "left-orderable": "есть кручение",
+    "residually-nilpotent": "содержит Inn(G) ≅ G",
+    "torsion-free": "сопряжение диагональной матрицей diag(dλ), d₀ = −1, остальные 1: 1 + a e_λμ ↦ 1 + dλ a dμ e_λμ, автоморфизм порядка 2"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "AutMcLQ"
+    },
+    {
+     "id": "Inn",
+     "имя": "Inn(G)",
+     "≅": "McLQ",
+     "свойства": {
+      "normal": true,
+      "whole": false,
+      "central": false,
+      "finite-index": false,
+      "maximal": false
+     },
+     "почему": "Inn счётна, Aut несчётна; Inn ⊊ ⟨Inn, σ⟩ ⊊ Aut для сдвига индексов σ: x ↦ x + 1 (σ не внутренний: внутренние автоморфизмы неподвижны на 1 + e_λμ при больших λ, μ, а ⟨Inn, σ⟩ счётна)"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(G)",
+     "≅": "AutMcLQ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "ссылки": [
+    "McLain, Proc. Cambridge Philos. Soc. 50 (1954)"
+   ]
+  },
+  {
+   "id": "AutMcLain2",
+   "имя": "Aut(M(ℚ, 𝔽₂))",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Группа автоморфизмов группы Маклейна M(ℚ, 𝔽₂). Несчётна, поэтому не вкладывается в G.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "countable": false,
+    "centerless": true,
+    "amenable": false,
+    "linear": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false,
+    "torsion-free": false
+   },
+   "почему": {
+    "countable": "Aut(ℚ, <) действует перестановкой индексов, e_λμ ↦ e_σλ,σμ, точно; |Aut(ℚ, <)| = 2^ℵ₀",
+    "centerless": "G без центра: централизатор Inn(G) в Aut(G) тривиален",
+    "amenable": "содержит Aut(ℚ, <), а в ней F₂ (всякая счётная левоупорядочиваемая группа действует на ℚ с сохранением порядка)",
+    "simple": "Inn(G) ≅ G — нетривиальная нормальная, собственная (Inn счётна)",
+    "periodic": "порядковый автоморфизм x ↦ x + 1 бесконечного порядка",
+    "solvable": "содержит Inn(G) ≅ G",
+    "linear": "содержит Inn(G) ≅ G",
+    "residually-finite": "содержит Inn(G) ≅ G",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "left-orderable": "содержит G с кручением",
+    "residually-nilpotent": "содержит Inn(G) ≅ G",
+    "torsion-free": "содержит Inn(G) ≅ G, а G — 2-группа"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "AutMcLain2"
+    },
+    {
+     "id": "Inn",
+     "имя": "Inn(G)",
+     "≅": "McLain2",
+     "свойства": {
+      "normal": true,
+      "whole": false,
+      "central": false,
+      "finite-index": false,
+      "maximal": false
+     },
+     "почему": "Inn счётна, Aut несчётна; Inn ⊊ ⟨Inn, σ⟩ ⊊ Aut для сдвига индексов σ: x ↦ x + 1 (σ не внутренний: внутренние автоморфизмы неподвижны на 1 + e_λμ при больших λ, μ, а ⟨Inn, σ⟩ счётна)"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(G)",
+     "≅": "AutMcLain2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "ссылки": [
+    "McLain, Proc. Cambridge Philos. Soc. 50 (1954)"
+   ]
+  },
+  {
+   "id": "AutSumMcL",
+   "имя": "Aut(⊕_ℕ M(ℚ, 𝔽₂))",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Группа автоморфизмов ⊕_ℕ M(ℚ, 𝔽₂). Несчётна, поэтому не вкладывается в G.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "countable": false,
+    "amenable": false,
+    "linear": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false,
+    "torsion-free": false,
+    "centerless": true
+   },
+   "почему": {
+    "amenable": "содержит Sym(ℕ) (перестановки слагаемых), а в ней F₂",
+    "linear": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "residually-finite": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "residually-nilpotent": "содержит Sym(ℕ) (перестановки слагаемых), а она совершенна",
+    "solvable": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "dedekind": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "torsion-free": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "left-orderable": "есть кручение",
+    "periodic": "содержит Sym(ℕ) (перестановки слагаемых), а в ней есть элементы бесконечного порядка",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "simple": "Inn(G) — нетривиальная нормальная, собственная (Inn счётна)",
+    "countable": "∏_ℕ Inn(M) ⊆ Aut действует покоординатно, |∏ M| = 2^ℵ₀",
+    "centerless": "G без центра: централизатор Inn(G) в Aut(G) тривиален"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "AutSumMcL"
+    },
+    {
+     "id": "Inn",
+     "имя": "Inn(G)",
+     "≅": "SumMcL",
+     "свойства": {
+      "normal": true,
+      "whole": false,
+      "finite-index": false
+     },
+     "почему": "Inn счётна, Aut несчётна"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(G)",
+     "≅": "AutSumMcL",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1"
+  },
+  {
+   "id": "AutHQD",
+   "имя": "Aut(H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ))",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Группа автоморфизмов H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ). Несчётна, поэтому не вкладывается в G.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "countable": false,
+    "amenable": false,
+    "linear": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false,
+    "torsion-free": false
+   },
+   "почему": {
+    "amenable": "содержит Sym(ℕ) (перестановки слагаемых), а в ней F₂",
+    "linear": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "residually-finite": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "residually-nilpotent": "содержит Sym(ℕ) (перестановки слагаемых), а она совершенна",
+    "solvable": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "dedekind": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "torsion-free": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "left-orderable": "есть кручение",
+    "periodic": "содержит Sym(ℕ) (перестановки слагаемых), а в ней есть элементы бесконечного порядка",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "simple": "Inn(G) — нетривиальная нормальная, собственная (Inn счётна)",
+    "countable": "центральные автоморфизмы g ↦ g·φ(gZ), φ ∈ Hom(G/Z, Z) = Hom(ℚ^(ℕ)², ⊕ℚ/ℤ) (обратный g ↦ g·φ(gZ)⁻¹, так как φ(Z) = 1), а Hom(ℚ, ℚ/ℤ) несчётна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "AutHQD"
+    },
+    {
+     "id": "Inn",
+     "имя": "Inn(G)",
+     "≅": "SumQ",
+     "свойства": {
+      "normal": true,
+      "whole": false,
+      "finite-index": false
+     },
+     "почему": "Inn счётна, Aut несчётна"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(G)",
+     "≅": "AutHQD",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ]
+  },
+  {
+   "id": "SymN*SymN",
+   "имя": "Sym(ℕ) ∗ Sym(ℕ)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "countable": false,
+    "free": false,
+    "free-abelian": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "perfect": true,
+    "centerless": true,
+    "indecomposable": true,
+    "divisible": false,
+    "amenable": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "torsion-free": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "linear": false
+   },
+   "почему": {
+    "perfect": "(A ∗ B)ᵃᵇ = Aᵃᵇ × Bᵃᵇ = 1",
+    "centerless": "центр свободного произведения нетривиальных множителей тривиален",
+    "indecomposable": "нетривиальная нормальная подгруппа A ∗ B (A, B ≠ 1, не обе C₂) содержит гиперболический элемент h, его централизатор циклический, а нормальной бесконечной циклической подгруппы нет; поэтому A ∗ B = H × K невозможно",
+    "simple": "ядро A ∗ B → A × B (декартова подгруппа) нетривиально: [a, b] ≠ 1",
+    "divisible": "ab (a ∈ A∖1, b ∈ B∖1) — циклически несократимое слово длины 2, у него нет квадратного корня: длина xⁿ кратна n при гиперболическом x, а эллиптический x даёт эллиптический x²",
+    "periodic": "ab бесконечного порядка",
+    "torsion-free": "есть кручение множителей",
+    "free": "есть кручение",
+    "countable": "содержит множитель мощности 2^ℵ₀",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "residually-nilpotent": "совершенна и нетривиальна",
+    "left-orderable": "есть кручение",
+    "amenable": "содержит F₂ (в Sym(ℕ))",
+    "residually-finite": "содержит Sym(ℕ), а она не финитно аппроксимируема",
+    "linear": "содержит Sym(ℕ)",
+    "≇ SymN": "Sym(Ω) не раскладывается в амальгаму, в частности в свободное произведение (Koppelberg, Tits, Indag. Math. 36 (1974); см. также Macpherson, Neumann, J. London Math. Soc. 42 (1990): несчётная конфинальность, отсюда свойство FA), а A ∗ B с A, B ≠ 1 действует на дереве Басса — Серра без неподвижной точки"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "SymN*SymN"
+    },
+    {
+     "id": "A ∗ 1",
+     "имя": "Sym(ℕ) ∗ 1",
+     "≅": "SymN",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "whole": false,
+      "central": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "множитель не нормален; A ⊊ A ∗ ⟨b⟩ ⊊ A ∗ B для элемента b ∈ B порядка 2 (⟨b⟩ ≠ B)"
+    },
+    {
+     "id": "все",
+     "имя": "Sym(ℕ) ∗ Sym(ℕ)",
+     "≅": "SymN*SymN",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "все",
+   "абелианизация": "1:1",
+   "свободное произведение": [
+    "SymN",
+    "SymN"
+   ],
+   "≇": [
+    "SymN"
+   ],
+   "ссылки": [
+    "Koppelberg, Tits, Indag. Math. 36 (1974)",
+    "Macpherson, Neumann, J. London Math. Soc. 42 (1990)"
+   ]
+  },
+  {
+   "id": "SO3*SO3",
+   "имя": "SO(3) ∗ SO(3)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "countable": false,
+    "free": false,
+    "free-abelian": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "perfect": true,
+    "centerless": true,
+    "indecomposable": true,
+    "divisible": false,
+    "amenable": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "torsion-free": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false
+   },
+   "почему": {
+    "perfect": "(A ∗ B)ᵃᵇ = Aᵃᵇ × Bᵃᵇ = 1",
+    "centerless": "центр свободного произведения нетривиальных множителей тривиален",
+    "indecomposable": "нетривиальная нормальная подгруппа A ∗ B (A, B ≠ 1, не обе C₂) содержит гиперболический элемент h, его централизатор циклический, а нормальной бесконечной циклической подгруппы нет; поэтому A ∗ B = H × K невозможно",
+    "simple": "ядро A ∗ B → A × B (декартова подгруппа) нетривиально: [a, b] ≠ 1",
+    "divisible": "ab (a ∈ A∖1, b ∈ B∖1) — циклически несократимое слово длины 2, у него нет квадратного корня: длина xⁿ кратна n при гиперболическом x, а эллиптический x даёт эллиптический x²",
+    "periodic": "ab бесконечного порядка",
+    "torsion-free": "есть кручение множителей",
+    "free": "есть кручение",
+    "countable": "содержит множитель мощности 2^ℵ₀",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "residually-nilpotent": "совершенна и нетривиальна",
+    "left-orderable": "есть кручение",
+    "amenable": "содержит C₂ ∗ C₃ ⊃ F₂",
+    "residually-finite": "содержит SO(3), а она не финитно аппроксимируема",
+    "↪̸ SO3": "ван дер Варден (Math. Z. 36, 1933): всякий абстрактный гомоморфизм компактной полупростой группы Ли в компактную группу Ли непрерывен. Поэтому вложение φ: SO(3) ∗ SO(3) → SO(3) на первом множителе — непрерывное инъективное SO(3) → SO(3); его образ — замкнутая подгруппа размерности 3, то есть вся SO(3). Тогда φ(B) ⊆ φ(A), и φ не инъективно на A ∗ B"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "SO3*SO3"
+    },
+    {
+     "id": "A ∗ 1",
+     "имя": "SO(3) ∗ 1",
+     "≅": "SO3",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "whole": false,
+      "central": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "множитель не нормален; A ⊊ A ∗ ⟨b⟩ ⊊ A ∗ B для элемента b ∈ B порядка 2 (⟨b⟩ ≠ B)"
+    },
+    {
+     "id": "все",
+     "имя": "SO(3) ∗ SO(3)",
+     "≅": "SO3*SO3",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "все",
+   "абелианизация": "1:1",
+   "свободное произведение": [
+    "SO3",
+    "SO3"
+   ],
+   "↪̸": [
+    "SO3"
+   ],
+   "ссылки": [
+    "van der Waerden, Math. Z. 36 (1933)"
+   ]
+  },
+  {
+   "id": "Corner",
+   "имя": "группа Корнера A (ранг 2)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Абелева без кручения ранга 2, хопфова, а A × A не хопфова (Корнер, 1965). Записаны только значения, которые следуют из этого описания.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "free-abelian": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "metabelian": true,
+    "class-2": true,
+    "dedekind": true,
+    "perfect": false,
+    "centerless": false,
+    "torsion-free": true,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "divisible": false,
+    "polycyclic": false,
+    "amenable": true,
+    "linear": true,
+    "left-orderable": true,
+    "bi-orderable": true,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "countable": true,
+    "hopfian": true
+   },
+   "почему": {
+    "divisible": "делимая без кручения конечного ранга — ℚⁿ, а она вместе с ℚⁿ × ℚⁿ хопфова",
+    "fin-gen": "к. п. без кручения — ℤⁿ, а ℤⁿ × ℤⁿ хопфова",
+    "linear": "счётная без кручения абелева вкладывается в (ℝ, +) ⊂ UT₂(ℝ)",
+    "bi-orderable": "абелева без кручения (Леви)",
+    "property-t": "бесконечна и аменабельна",
+    "hopfian": "Корнер (1965)"
+   },
+   "трудно": [
+    "hopfian"
+   ],
+   "ссылки": [
+    "A. L. S. Corner, Three examples on hopficity in torsion-free abelian groups, Acta Math. Acad. Sci. Hungar. 16 (1965)"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "Corner"
+    },
+    {
+     "id": "все",
+     "имя": "вся",
+     "≅": "Corner",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "абелианизация": "Corner",
+   "произведения": {
+    "Corner": "Corner2"
+   }
+  },
+  {
+   "id": "Corner2",
+   "имя": "A × A для группы Корнера A",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Абелева без кручения ранга 4, не хопфова (Корнер, 1965).",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "free-abelian": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "metabelian": true,
+    "class-2": true,
+    "dedekind": true,
+    "perfect": false,
+    "centerless": false,
+    "torsion-free": true,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "divisible": false,
+    "polycyclic": false,
+    "amenable": true,
+    "linear": true,
+    "left-orderable": true,
+    "bi-orderable": true,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "countable": true,
+    "hopfian": false,
+    "indecomposable": false
+   },
+   "почему": {
+    "divisible": "делимая без кручения конечного ранга — ℚⁿ, а она вместе с ℚⁿ × ℚⁿ хопфова",
+    "fin-gen": "к. п. без кручения — ℤⁿ, а ℤⁿ × ℤⁿ хопфова",
+    "linear": "счётная без кручения абелева вкладывается в (ℝ, +) ⊂ UT₂(ℝ)",
+    "bi-orderable": "абелева без кручения (Леви)",
+    "property-t": "бесконечна и аменабельна",
+    "hopfian": "Корнер (1965)",
+    "indecomposable": "A × A, A ≠ 1"
+   },
+   "трудно": [
+    "hopfian"
+   ],
+   "ссылки": [
+    "A. L. S. Corner, Three examples on hopficity in torsion-free abelian groups, Acta Math. Acad. Sci. Hungar. 16 (1965)"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "Corner2"
+    },
+    {
+     "id": "все",
+     "имя": "вся",
+     "≅": "Corner2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "абелианизация": "Corner2"
   }
  ],
  "семейства": [
