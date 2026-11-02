@@ -1,0 +1,120 @@
+2130	0	70500	¬le(centralizer(G, N), normalizer(G, N))	
+2127	0	68253	¬le(N, normalizer(G, N))	
+2126	0	61865	¬embeds(N, normalizer(G, N))	
+2125	0	148187	¬le(center(G), centralizer(G, N))	
+2120	0	52244	¬le(center(G), normalizer(G, N))	
+2080	0	66674	¬embeds(N, normal-closure(G, N))	
+1541	0	139230	¬nilpotent(frattini(G))	
+1536	0	108088	¬solvable(frattini(G))	
+1525	0	143716	¬characteristic(inn(N))	
+1525	0	143343	¬complemented(inn(N))	
+1464	0	63816	¬nilpotent(frattini(N))	
+1441	0	52814	¬solvable(frattini(N))	
+1107	1	126405	iso(aut(N), prod(G, G))	G = 1, N = 1
+1107	1	126385	iso(aut(N), prod(G, N))	G = 1, N = 1
+1106	1	113272	iso(aut(N), wreath(G, G))	G = 1, N = 1
+1106	1	101913	iso(aut(N), wreath(G, N))	G = 1, N = 1
+1106	1	119203	iso(aut(N), wreath(N, G))	G = 1, N = 1
+1106	1	73879	iso(normalizer(G, N), wreath(G, G))	G = 1, N = 1
+1106	1	99144	iso(centralizer(G, N), wreath(G, G))	G = 1, N = 1
+1106	1	57497	iso(normalizer(G, N), wreath(N, N))	G = 1, N = 1
+1106	1	117557	iso(centralizer(G, N), wreath(N, N))	G = 1, N = 1
+1105	1	57442	iso(normal-closure(G, N), wreath(G, G))	G = 1, N = 1
+1105	1	52319	iso(normal-closure(G, N), wreath(G, N))	G = 1, N = 1
+1105	1	71480	iso(normal-closure(G, N), wreath(N, G))	G = 1, N = 1
+1102	1	23695	iso(inn(N), wreath(G, G))	G = 1, N = 1
+1102	1	23945	iso(inn(N), wreath(G, N))	G = 1, N = 1
+1102	1	24771	iso(inn(N), wreath(N, G))	G = 1, N = 1
+1102	1	71786	iso(freeprod(G, N), wreath(G, G))	G = 1, N = 1
+1102	1	41710	iso(freeprod(N, N), wreath(N, G))	G = 1, N = 1
+1101	1	15212	iso(commutator(N), wreath(G, G))	G = 1, N = 1
+1101	1	15416	iso(commutator(N), wreath(G, N))	G = 1, N = 1
+1101	1	15248	iso(commutator(N), wreath(N, G))	G = 1, N = 1
+1101	1	38009	iso(freeprod(N, N), wreath(G, N))	G = 1, N = 1
+1101	1	38920	iso(frattini(N), wreath(G, G))	G = 1, N = 1
+1101	1	38920	iso(frattini(N), wreath(G, N))	G = 1, N = 1
+1101	1	38920	iso(frattini(N), wreath(N, G))	G = 1, N = 1
+1100	1	11568	iso(prod(G, G), wreath(N, N))	G = 1, N = 1
+1100	1	34312	iso(freeprod(N, N), wreath(G, G))	G = 1, N = 1
+1099	1	89921	iso(centralizer(G, N), freeprod(N, N))	G = 1, N = 1
+1098	1	18704	iso(prod(N, N), wreath(G, G))	G = 1, N = 1
+1098	1	9564	iso(prod(N, N), wreath(G, N))	G = 1, N = 1
+1098	1	20134	iso(prod(N, N), wreath(N, G))	G = 1, N = 1
+1097	1	30325	iso(freeprod(G, G), wreath(N, N))	G = 1, N = 1
+1097	1	32147	iso(freeprod(G, N), wreath(N, N))	G = 1, N = 1
+1094	1	132087	iso(aut(N), freeprod(G, G))	G = 1, N = 1
+1094	1	132221	iso(aut(N), freeprod(G, N))	G = 1, N = 1
+1093	1	54020	iso(prod(G, N), wreath(G, G))	G = 1, N = 1
+1093	1	8672	iso(prod(G, N), wreath(N, N))	G = 1, N = 1
+1093	1	37273	iso(frattini(N), freeprod(G, G))	G = 1, N = 1
+1093	1	37273	iso(frattini(N), freeprod(G, N))	G = 1, N = 1
+1093	1	42144	embeds(wreath(G, G), N)	G = 1, N = 1
+1093	1	42144	embeds(wreath(G, N), N)	G = 1, N = 1
+1093	1	42144	embeds(wreath(N, G), N)	G = 1, N = 1
+1084	1	7219	iso(N, wreath(G, G))	G = 1, N = 1
+1084	1	8346	iso(N, wreath(G, N))	G = 1, N = 1
+1084	1	7880	iso(N, wreath(N, G))	G = 1, N = 1
+1076	1	61471	trivial(normalizer(G, N))	G = 1, N = 1
+818	1	64384	iso(G, wreath(G, G))	G = 1, N = 1
+818	1	33400	iso(commutator(G), wreath(G, G))	G = 1, N = 1
+818	1	223607	iso(aut(G), prod(G, G))	G = 1, N = 1
+818	1	186878	iso(aut(G), wreath(G, G))	G = 1, N = 1
+818	1	71824	iso(inn(G), wreath(G, G))	G = 1, N = 1
+818	1	64447	iso(prod(G, G), wreath(G, G))	G = 1, N = 1
+818	1	103576	iso(frattini(G), wreath(G, G))	G = 1, N = 1
+818	1	146515	embeds(wreath(G, G), G)	G = 1, N = 1
+815	1	131266	divisible(wreath(G, G))	G = 1, N = 1
+815	1	205891	iso(aut(G), freeprod(G, G))	G = 1, N = 1
+815	1	85644	iso(frattini(G), freeprod(G, G))	G = 1, N = 1
+790	1	24597	iso(aut(G), center(G))	G = 1, N = 1
+790	1	26477	iso(ab(G), aut(G))	G = 1, N = 1
+734	2	116157	iso(aut(G), wreath(N, N))	G = 1, N = 1; G = C2, N = 1
+609	2	77954	iso(freeprod(G, G), wreath(N, G))	G = 1, N = 1; G = F_∞, N = 1
+608	2	61124	iso(freeprod(G, G), wreath(G, N))	G = 1, N = 1; G = F_∞, N = 1
+606	2	87431	iso(centralizer(G, N), freeprod(G, G))	G = 1, N = 1; G = F_∞, N = 1
+529	2	11043	iso(G, wreath(N, N))	G = 1, N = 1; G = ℤ ≀ ℤ, N = ⟨t⟩
+522	3	50107	iso(aut(G), commutator(N))	G = 1, N = 1; G = C2, N = 1; G = C2, N = C2
+522	6	210712	iso(wreath(G, G), wreath(G, N))	G = 1, N = 1; G = ℤ, N = 2ℤ; G = ℤ, N = 3ℤ
+522	6	214417	iso(wreath(G, G), wreath(N, G))	G = 1, N = 1; G = ℤ, N = 2ℤ; G = ℤ, N = 3ℤ
+521	6	124479	iso(wreath(G, G), wreath(N, N))	G = 1, N = 1; G = ℤ, N = 2ℤ; G = ℤ, N = 3ℤ
+521	6	105054	iso(wreath(G, N), wreath(N, N))	G = 1, N = 1; G = ℤ, N = 2ℤ; G = ℤ, N = 3ℤ
+521	6	135911	iso(wreath(N, G), wreath(N, N))	G = 1, N = 1; G = ℤ, N = 2ℤ; G = ℤ, N = 3ℤ
+458	4	74029	iso(aut(G), frattini(N))	G = 1, N = 1; G = C2, N = 1; G = C2, N = C2
+435	4	145372	iso(aut(G), freeprod(N, N))	G = 1, N = 1; G = C2, N = 1; G = D∞, N = ⟨s⟩
+428	4	35180	iso(freeprod(N, N), normalizer(G, N))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = F_∞′
+427	4	37385	iso(freeprod(G, G), normal-closure(G, N))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = F_∞′
+427	4	37420	iso(freeprod(G, N), normal-closure(G, N))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = F_∞′
+425	3	63119	iso(frattini(N), prod(G, G))	G = 1, N = 1; G = ⊕_ℕ ℚ/ℤ, N = ⊕ℚ/ℤ; G = ℝ⁺, N = ℝ⁺
+425	3	63131	iso(frattini(N), prod(G, N))	G = 1, N = 1; G = ⊕_ℕ ℚ/ℤ, N = ⊕ℚ/ℤ; G = ℝ⁺, N = ℝ⁺
+413	5	14298	iso(commutator(N), freeprod(G, G))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+413	5	14360	iso(commutator(N), freeprod(G, N))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+412	5	20633	iso(freeprod(G, G), inn(N))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+412	5	20913	iso(freeprod(G, N), inn(N))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+406	5	49036	embeds(freeprod(G, G), N)	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+406	5	49036	embeds(freeprod(G, N), N)	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+369	6	17299	iso(aut(G), center(N))	G = 1, N = 1; G = C18, N = C6; G = C2, N = 1
+369	6	19155	iso(ab(N), aut(G))	G = 1, N = 1; G = C18, N = C6; G = C2, N = 1
+367	5	2182	iso(N, freeprod(G, G))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+367	5	2220	iso(N, freeprod(G, N))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+344	3	22641	free(aut(G))	G = 1, N = 1; G = C2, N = 1; G = C2, N = C2
+344	3	53301	torsion-free(aut(G))	G = 1, N = 1; G = C2, N = 1; G = C2, N = C2
+344	3	150293	divisible(aut(G))	G = 1, N = 1; G = C2, N = 1; G = C2, N = C2
+344	3	113801	iso(aut(G), commutator(G))	G = 1, N = 1; G = C2, N = 1; G = C2, N = C2
+332	7	208096	¬hopfian(aut(G))	G = ℚ⁺, N = 0; G = ℚ⁺, N = ℤ; G = ℚ⁺, N = ℤ[1/p : p ∈ S], S не р. п.
+325	5	32979	iso(freeprod(G, G), normalizer(G, N))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = F_∞′
+316	3	3606	free-abelian(aut(G))	G = 1, N = 1; G = C2, N = 1; G = C2, N = C2
+305	4	25674	iso(inn(N), prod(G, G))	G = 1, N = 1; G = ⊕_ℤ S₃, N = ⊕S₃; G = ⊕_ℕ A₅, N = ⊕A₅
+305	4	26280	iso(inn(N), prod(G, N))	G = 1, N = 1; G = ⊕_ℤ S₃, N = ⊕S₃; G = ⊕_ℕ A₅, N = ⊕A₅
+293	6	172167	iso(aut(G), frattini(G))	G = 1, N = 1; G = C2, N = 1; G = C2, N = C2
+285	4	23083	iso(commutator(N), prod(G, G))	G = 1, N = 1; G = ⊕_ℕ SL(2, 5), N = ⊕_ℕ SL(2, 5); G = ⊕_ℕ A₅, N = ⊕A₅
+283	4	24002	iso(commutator(N), prod(G, N))	G = 1, N = 1; G = ⊕_ℕ SL(2, 5), N = ⊕_ℕ SL(2, 5); G = ⊕_ℕ A₅, N = ⊕A₅
+247	7	6	free(wreath(N, G))	G = 1, N = 1; G = ℤ, N = 0; G = F₃, N = 1
+186	8	173881	iso(frattini(G), prod(G, G))	G = 1, N = 1; G = ⊕_ℕ ℚ/ℤ, N = 1; G = ⊕_ℕ ℚ/ℤ, N = ⊕_ℕ (½ℤ/ℤ)
+156	7	25798	iso(commutator(G), freeprod(G, G))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+156	7	31476	iso(freeprod(G, G), inn(G))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+156	7	103440	embeds(freeprod(G, G), G)	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+150	7	123	iso(G, freeprod(G, G))	G = 1, N = 1; G = F_∞, N = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, N = прообраз стабилизатора точки при F_∞ ↠ A_∞
+104	9	86899	iso(inn(G), prod(G, G))	G = 1, N = 1; G = ⊕_ℤ S₃, N = ⊕S₃; G = ⊕_ℕ A₅, N = 1
+20	3	76	solvable(freeprod(G, G))	G = 1, N = 1; G = C2, N = 1; G = C2, N = C2
+20	3	76	polycyclic(freeprod(G, G))	G = 1, N = 1; G = C2, N = 1; G = C2, N = C2
+15	3	74	trivial(aut(G))	G = 1, N = 1; G = C2, N = 1; G = C2, N = C2

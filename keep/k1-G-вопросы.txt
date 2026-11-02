@@ -1,0 +1,41 @@
+588	0	11900	¬nilpotent(frattini(G))	
+584	0	4160	¬linear(center(commutator(G)))	
+558	0	9476	¬solvable(frattini(G))	
+336	1	16162	iso(aut(G), wreath(G, G))	G = 1
+336	1	11362	embeds(wreath(G, G), G)	G = 1
+334	1	11997	divisible(wreath(G, G))	G = 1
+334	1	9386	iso(frattini(G), wreath(G, G))	G = 1
+333	1	6801	iso(inn(G), wreath(G, G))	G = 1
+332	1	17555	iso(aut(G), freeprod(G, G))	G = 1
+332	1	7846	iso(frattini(G), freeprod(G, G))	G = 1
+332	1	4583	iso(commutator(commutator(G)), wreath(G, G))	G = 1
+329	1	4009	iso(prod(G, G), wreath(G, G))	G = 1
+327	1	3970	iso(G, wreath(G, G))	G = 1
+327	1	4446	iso(commutator(G), wreath(G, G))	G = 1
+288	1	3195	iso(aut(G), center(G))	G = 1
+288	1	3404	iso(ab(G), aut(G))	G = 1
+221	2	13930	divisible(aut(G))	G = 1; G = C2
+221	2	10837	iso(aut(G), commutator(G))	G = 1; G = C2
+221	2	9041	iso(aut(G), commutator(commutator(G)))	G = 1; G = C2
+220	2	5402	torsion-free(aut(G))	G = 1; G = C2
+199	3	15783	iso(aut(G), frattini(G))	G = 1; G = C2; G = C4
+187	9	5583	simple(aut(G))	G = C3; G = C4; G = C6
+175	2	2459	free(aut(G))	G = 1; G = C2
+166	2	671	iso(aut(G), center(commutator(G)))	G = 1; G = C2
+162	2	434	free-abelian(aut(G))	G = 1; G = C2
+147	3	15997	iso(frattini(G), prod(G, G))	G = 1; G = ℝ⁺; G = ⊕_ℕ ℚ/ℤ
+130	2	8956	embeds(freeprod(G, G), G)	G = 1; G = F_∞
+125	2	3454	iso(freeprod(G, G), inn(G))	G = 1; G = F_∞
+123	2	3387	iso(commutator(commutator(G)), freeprod(G, G))	G = 1; G = F_∞
+105	2	2999	iso(commutator(G), freeprod(G, G))	G = 1; G = F_∞
+95	2	29	iso(G, freeprod(G, G))	G = 1; G = F_∞
+68	4	6848	iso(commutator(G), prod(G, G))	G = 1; G = ⊕_ℕ SL(2, 5); G = ⊕_ℕ PSL₂(ℝ)
+67	4	5631	iso(commutator(commutator(G)), prod(G, G))	G = 1; G = ⊕_ℕ SL(2, 5); G = ⊕_ℕ PSL₂(ℝ)
+66	4	8247	iso(inn(G), prod(G, G))	G = 1; G = ⊕_ℤ S₃; G = ⊕_ℕ PSL₂(ℝ)
+15	2	34	solvable(freeprod(G, G))	G = 1; G = C2
+15	2	34	polycyclic(freeprod(G, G))	G = 1; G = C2
+6	8	56	order-p2(G)	G = C2 x C2; G = C9; G = C25
+4	9	1840	iso(center(G), prod(G, G))	G = 1; G = ℝ⁺; G = ℚ*₊
+4	9	1840	iso(ab(G), prod(G, G))	G = 1; G = ℝ⁺; G = ℚ*₊
+3	7	1	free(G)	G = 1; G = F_∞; G = F₃
+3	7	1	free(freeprod(G, G))	G = 1; G = F_∞; G = F₃

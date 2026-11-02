@@ -1,0 +1,35 @@
+366	2	4412	iso(im(F), wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+365	2	3970	iso(ker(F), wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+315	2	0	eq-sub(im(F), ker(F))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+210	0	21878	¬solvable(frattini(G))	
+210	0	27761	¬nilpotent(frattini(G))	
+149	3	29	iso(freeprod(G, G), ker(F))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1; G = F_∞, F = 1: F_∞ → F_∞
+147	3	1	iso(im(F), ker(F))	G = 1, F = 1: 1 → 1; G = ⊕C₂, F = ⊕C₂ ↠ ⊕C₂ (фактор по чётные); G = 1, F = id: 1 → 1
+142	6	31	iso(freeprod(G, G), im(F))	G = 1, F = 1: 1 → 1; G = F_∞, F = F_∞ ↪ F_∞ (подгруппа индекс 2); G = 1, F = id: 1 → 1
+105	2	27905	divisible(wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+105	2	8382	iso(G, wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+105	2	9548	iso(commutator(G), wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+105	2	37047	iso(aut(G), wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+105	2	14819	iso(inn(G), wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+105	2	8461	iso(prod(G, G), wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+105	2	18071	iso(frattini(G), freeprod(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+105	2	21098	iso(frattini(G), wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+105	2	25054	embeds(wreath(G, G), G)	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+101	2	7643	iso(aut(G), center(G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+101	2	8097	iso(ab(G), aut(G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+42	4	5659	free(aut(G))	G = 1, F = 1: 1 → 1; G = C2, F = id: C2 → C2; G = 1, F = id: 1 → 1
+42	4	12619	torsion-free(aut(G))	G = 1, F = 1: 1 → 1; G = C2, F = id: C2 → C2; G = 1, F = id: 1 → 1
+42	4	32666	divisible(aut(G))	G = 1, F = 1: 1 → 1; G = C2, F = id: C2 → C2; G = 1, F = id: 1 → 1
+42	4	24462	iso(aut(G), commutator(G))	G = 1, F = 1: 1 → 1; G = C2, F = id: C2 → C2; G = 1, F = id: 1 → 1
+40	6	36896	iso(aut(G), frattini(G))	G = 1, F = 1: 1 → 1; G = C2, F = id: C2 → C2; G = C4, F = 1: C4 → C4
+38	4	1053	free-abelian(aut(G))	G = 1, F = 1: 1 → 1; G = C2, F = id: C2 → C2; G = 1, F = id: 1 → 1
+22	8	37601	iso(frattini(G), prod(G, G))	G = 1, F = 1: 1 → 1; G = ℝ⁺, F = id: ℝ⁺ → ℝ⁺; G = ⊕_ℕ ℚ/ℤ, F = 1: ⊕_ℕ ℚ/ℤ → ⊕_ℕ ℚ/ℤ
+21	7	6615	iso(commutator(G), freeprod(G, G))	G = 1, F = 1: 1 → 1; G = F_∞, F = F_∞ ↪ F_∞ (подгруппа индекс 2); G = 1, F = id: 1 → 1
+21	7	7711	iso(freeprod(G, G), inn(G))	G = 1, F = 1: 1 → 1; G = F_∞, F = F_∞ ↪ F_∞ (подгруппа индекс 2); G = 1, F = id: 1 → 1
+21	7	20616	embeds(freeprod(G, G), G)	G = 1, F = 1: 1 → 1; G = F_∞, F = F_∞ ↪ F_∞ (подгруппа индекс 2); G = 1, F = id: 1 → 1
+19	7	60	iso(G, freeprod(G, G))	G = 1, F = 1: 1 → 1; G = F_∞, F = F_∞ ↪ F_∞ (подгруппа индекс 2); G = 1, F = id: 1 → 1
+13	9	18440	iso(inn(G), prod(G, G))	G = 1, F = 1: 1 → 1; G = ⊕_ℤ S₃, F = 1: ⊕_ℤ S₃ → ⊕_ℤ S₃; G = ⊕_ℕ A₅, F = 1: ⊕_ℕ A₅ → ⊕_ℕ A₅
+11	10	14993	iso(commutator(G), prod(G, G))	G = 1, F = 1: 1 → 1; G = ⊕_ℕ A₅, F = 1: ⊕_ℕ A₅ → ⊕_ℕ A₅; G = ⊕_ℕ SL(2, 5), F = id: ⊕_ℕ SL(2, 5) → ⊕_ℕ SL(2, 5)
+1	4	66	trivial(aut(G))	G = 1, F = 1: 1 → 1; G = C2, F = id: C2 → C2; G = 1, F = id: 1 → 1
+1	4	68	solvable(freeprod(G, G))	G = 1, F = 1: 1 → 1; G = C2, F = id: C2 → C2; G = 1, F = id: 1 → 1
+1	4	68	polycyclic(freeprod(G, G))	G = 1, F = 1: 1 → 1; G = C2, F = id: C2 → C2; G = 1, F = id: 1 → 1

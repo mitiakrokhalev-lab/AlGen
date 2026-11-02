@@ -1,0 +1,46 @@
+1319	0	80764	¬characteristic(inn(B))	
+1319	0	80433	¬complemented(inn(B))	
+1319	0	80764	¬characteristic(inn(A))	
+1319	0	80433	¬complemented(inn(A))	
+1295	0	43030	¬nilpotent(frattini(B))	
+1295	0	43030	¬nilpotent(frattini(A))	
+1281	0	40713	¬solvable(frattini(B))	
+1281	0	40713	¬solvable(frattini(A))	
+991	1	30121	iso(freeprod(A, B), wreath(A, A))	A = 1, B = 1
+991	1	18453	iso(freeprod(A, B), wreath(B, B))	A = 1, B = 1
+989	1	4919	iso(freeprod(A, A), wreath(B, B))	A = 1, B = 1
+989	1	4919	iso(freeprod(B, B), wreath(A, A))	A = 1, B = 1
+987	1	1490	iso(prod(A, A), wreath(B, B))	A = 1, B = 1
+987	1	1490	iso(prod(B, B), wreath(A, A))	A = 1, B = 1
+975	1	3270	iso(prod(A, B), wreath(A, A))	A = 1, B = 1
+975	1	3270	iso(prod(A, B), wreath(B, B))	A = 1, B = 1
+670	2	31605	iso(aut(B), wreath(A, A))	A = 1, B = 1; A = 1, B = C2
+670	2	31605	iso(aut(A), wreath(B, B))	A = 1, B = 1; A = C2, B = 1
+558	2	28167	iso(freeprod(B, B), wreath(A, B))	A = 1, B = 1; A = 1, B = F_∞
+558	2	23182	iso(freeprod(B, B), wreath(B, A))	A = 1, B = 1; A = 1, B = F_∞
+558	2	23182	iso(freeprod(A, A), wreath(A, B))	A = 1, B = 1; A = F_∞, B = 1
+558	2	28167	iso(freeprod(A, A), wreath(B, A))	A = 1, B = 1; A = F_∞, B = 1
+463	2	26447	iso(wreath(A, A), wreath(A, B))	A = 1, B = 1; A = ℤ, B = ℤ
+463	2	38212	iso(wreath(A, A), wreath(B, A))	A = 1, B = 1; A = ℤ, B = ℤ
+463	2	6657	iso(wreath(A, A), wreath(B, B))	A = 1, B = 1; A = ℤ, B = ℤ
+463	2	38212	iso(wreath(A, B), wreath(B, B))	A = 1, B = 1; A = ℤ, B = ℤ
+463	2	26447	iso(wreath(B, A), wreath(B, B))	A = 1, B = 1; A = ℤ, B = ℤ
+405	8	67043	iso(aut(B), wreath(A, B))	A = 1, B = 1; A = 1, B = 120:34; A = 1, B = D∞
+405	8	67389	iso(aut(B), wreath(B, A))	A = 1, B = 1; A = 1, B = 120:34; A = 1, B = D∞
+405	8	67389	iso(aut(A), wreath(A, B))	A = 1, B = 1; A = 120:34, B = 1; A = D∞, B = 1
+405	8	67043	iso(aut(A), wreath(B, A))	A = 1, B = 1; A = 120:34, B = 1; A = D∞, B = 1
+404	8	72167	iso(aut(B), freeprod(A, B))	A = 1, B = 1; A = 1, B = 120:34; A = 1, B = D∞
+404	8	72513	iso(aut(A), freeprod(A, B))	A = 1, B = 1; A = 120:34, B = 1; A = D∞, B = 1
+397	5	25509	iso(aut(A), prod(B, B))	A = 1, B = 1; A = C8, B = C2; A = C12, B = C2
+397	5	25509	iso(aut(B), prod(A, A))	A = 1, B = 1; A = C2, B = C12; A = C2, B = C8
+379	2	1282	iso(B, wreath(A, A))	A = 1, B = 1; A = ℤ, B = ℤ ≀ ℤ
+379	2	1282	iso(A, wreath(B, B))	A = 1, B = 1; A = ℤ ≀ ℤ, B = ℤ
+363	3	43034	iso(aut(B), freeprod(A, A))	A = 1, B = 1; A = C2, B = D∞; A = 1, B = C2
+363	3	43034	iso(aut(A), freeprod(B, B))	A = 1, B = 1; A = D∞, B = C2; A = C2, B = 1
+239	9	57942	iso(aut(B), prod(A, B))	A = 1, B = 1; A = 1, B = 120:34; A = 1, B = D∞
+239	9	57942	iso(aut(A), prod(A, B))	A = 1, B = 1; A = 120:34, B = 1; A = D∞, B = 1
+185	5	15958	iso(freeprod(A, A), freeprod(B, B))	A = 1, B = 1; A = C3, B = C3; A = F_∞, B = F_∞
+162	6	61851	iso(freeprod(A, A), freeprod(A, B))	A = 1, B = 1; A = F_∞, B = 1; A = C3, B = C3
+162	6	46615	iso(freeprod(A, B), freeprod(B, B))	A = 1, B = 1; A = C3, B = C3; A = F_∞, B = F_∞
+143	5	1041	iso(A, freeprod(B, B))	A = 1, B = 1; A = C₃ ∗ C₃, B = C3; A = D∞, B = C2
+143	5	1041	iso(B, freeprod(A, A))	A = 1, B = 1; A = C3, B = C₃ ∗ C₃; A = C2, B = D∞
