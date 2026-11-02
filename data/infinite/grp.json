@@ -24925,6 +24925,324 @@
    "ссылки": [
     "P. Hall, Some constructions for locally finite groups, 1959"
    ]
+  },
+  {
+   "id": "SumC36",
+   "имя": "⊕_ℕ C₃₆",
+   "заметка": "Φ = 6A ≅ ⊕C₆ не линейна: пример к «Φ(G) линейна».",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "hopfian": false,
+    "linear": false,
+    "bounded-exponent": true,
+    "p-group": false,
+    "polycyclic": false,
+    "co-hopfian": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "locally-finite": true,
+    "locally-cyclic": false,
+    "solvable": true,
+    "metabelian": true,
+    "perfect": false,
+    "abelian": true,
+    "nilpotent": true,
+    "centerless": false,
+    "residually-nilpotent": true,
+    "dedekind": true,
+    "class-2": true,
+    "exponent-2": false
+   },
+   "почему": {
+    "residually-finite": "подгруппа произведения конечных групп",
+    "hopfian": "сдвиг слагаемых влево сюръективен с ядром",
+    "co-hopfian": "переиндексация n ↦ 2n",
+    "linear": "содержит ⊕C₆: в характеристике p ≠ q бесконечная элементарная абелева q-подгруппа диагонализуема и имеет ранг ⩽ n; ⊕C₂ исключает все характеристики, кроме 2, ⊕C₃ — кроме 3",
+    "polycyclic": "не к. п.",
+    "p-group": "есть элементы порядков 2 и 3",
+    "property-t": "бесконечна и аменабельна",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "X × X ≅ X": "ℕ ⊔ ℕ ≅ ℕ",
+    "bounded-exponent": "показатель 36",
+    "фраттини": "у абелевой A максимальные подгруппы — ядра A → C_p, поэтому Φ(A) = ∩ pA = 2A ∩ 3A = 6A ≅ ⊕C₆"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "0",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC36"
+    },
+    {
+     "id": "фраттини",
+     "имя": "6A",
+     "≅": "SumC6",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC6",
+     "почему": "∩ pA по простым p"
+    },
+    {
+     "id": "все",
+     "имя": "⊕C₃₆",
+     "≅": "SumC36",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "абелианизация": "SumC36",
+   "фраттини": "фраттини",
+   "произведения": {
+    "SumC36": "SumC36"
+   },
+   "ссылки": [
+    "прямая сумма"
+   ],
+   "короткий довод": [
+    "linear"
+   ]
+  },
+  {
+   "id": "SumS3A4",
+   "имя": "⊕_ℕ (S₃ × A₄)",
+   "заметка": "Без центра, Gᵃᵇ ≅ G′ ≅ ⊕C₆ не линейны.",
+   "свойства": {
+    "trivial": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "residually-finite": true,
+    "indecomposable": false,
+    "hopfian": false,
+    "linear": false,
+    "bounded-exponent": true,
+    "p-group": false,
+    "polycyclic": false,
+    "co-hopfian": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "locally-finite": true,
+    "locally-cyclic": false,
+    "solvable": true,
+    "metabelian": true,
+    "perfect": false,
+    "abelian": false,
+    "nilpotent": false,
+    "centerless": true,
+    "residually-nilpotent": false,
+    "dedekind": false,
+    "class-2": false
+   },
+   "почему": {
+    "residually-finite": "подгруппа произведения конечных групп",
+    "hopfian": "сдвиг слагаемых влево сюръективен с ядром",
+    "co-hopfian": "переиндексация n ↦ 2n",
+    "linear": "G′ ≅ ⊕C₆; содержит ⊕C₆: в характеристике p ≠ q бесконечная элементарная абелева q-подгруппа диагонализуема и имеет ранг ⩽ n; ⊕C₂ исключает все характеристики, кроме 2, ⊕C₃ — кроме 3",
+    "polycyclic": "не к. п.",
+    "p-group": "есть элементы порядков 2 и 3",
+    "property-t": "бесконечна и аменабельна",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "X × X ≅ X": "ℕ ⊔ ℕ ≅ ℕ",
+    "bounded-exponent": "показатель 6",
+    "residually-nilpotent": "содержит S₃",
+    "dedekind": "⟨(1 2)⟩ ⩽ S₃ не нормальна",
+    "metabelian": "G′ = ⊕(A₃ × V₄) абелев",
+    "centerless": "Z(S₃ × A₄) = 1",
+    "абелианизация": "⊕(C₂ × C₃) ≅ ⊕C₆"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumS3A4"
+    },
+    {
+     "id": "коммутант",
+     "имя": "⊕(A₃ × V₄)",
+     "≅": "SumC6",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC6",
+     "почему": "коммутант суммы — сумма коммутантов; ⊕(C₃ × C₂²) ≅ ⊕C₆"
+    },
+    {
+     "id": "все",
+     "имя": "⊕(S₃ × A₄)",
+     "≅": "SumS3A4",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "коммутант",
+   "абелианизация": "SumC6",
+   "произведения": {
+    "SumS3A4": "SumS3A4"
+   },
+   "ссылки": [
+    "прямая сумма"
+   ],
+   "короткий довод": [
+    "linear"
+   ]
+  },
+  {
+   "id": "QwrQ",
+   "имя": "ℚ ≀ ℚ",
+   "заметка": "База ℚ[t^ℚ], t^q сдвигает. Линейна, не к. п.: пример к «G ≀ G линейна ⇒ G к. п.».",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": true,
+    "periodic": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": false,
+    "polycyclic": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "linear": true,
+    "amenable": true,
+    "locally-finite": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
+   },
+   "почему": {
+    "linear": "K = ∪ ℚ(t^{1/n}) — поле; f ∈ ℚ[t^ℚ], q ∈ ℚ ↦ (t^q f; 0 1) ∈ GL₂(K), ядро тривиально, так как t^q линейно независимы",
+    "divisible": "(g, r)ⁿ = (δ₀, q), q ≠ 0, требует (1 + u + … + u^{n−1}) g = 1 в ℚ[ℚ], u = t^{q/n}; обратимые ℚ[ℚ] — одночлены",
+    "residually-finite": "содержит ℚ",
+    "centerless": "верхняя группа бесконечна",
+    "dedekind": "верхняя ℚ не нормальна",
+    "metabelian": "база абелева, фактор ℚ",
+    "абелианизация": "(A ≀ B)ᵃᵇ = Aᵃᵇ × Bᵃᵇ = ℚ²"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "QwrQ"
+    },
+    {
+     "id": "верх",
+     "имя": "верхняя ℚ",
+     "≅": "Q",
+     "свойства": {
+      "normal": false,
+      "characteristic": false,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "не максимальна: лежит в ℚ · (ℤ-значные функции) — собственной подгруппе"
+    },
+    {
+     "id": "все",
+     "имя": "ℚ ≀ ℚ",
+     "≅": "QwrQ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "абелианизация": "QxQ",
+   "сплетение": [
+    "Q",
+    "Q"
+   ]
   }
  ],
  "семейства": [
