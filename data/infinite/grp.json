@@ -8062,7 +8062,12 @@
    ],
    "центр": "1",
    "коммутант": "коммутант",
-   "абелианизация": "SumC2"
+   "абелианизация": "SumC2",
+   "aut": "PGL2Q",
+   "почему aut": "PGL₂(ℚ) полна (агент-нейросеть)",
+   "трудно": [
+    "aut"
+   ]
   },
   {
    "id": "Grigc",
@@ -8238,7 +8243,12 @@
    "абелианизация": "1:1",
    "центр": "1",
    "коммутант": "все",
-   "фраттини": "1"
+   "фраттини": "1",
+   "aut": "PGL2Q",
+   "почему aut": "автоморфизмы PSL₂ над ℚ — из PΓL₂(ℚ) = PGL₂(ℚ) (у ℚ нет автоморфизмов поля) (агент-нейросеть)",
+   "трудно": [
+    "aut"
+   ]
   },
   {
    "id": "Grig",
@@ -8925,8 +8935,11 @@
     "стандартный пример"
    ],
    "трудно": [
-    "simple"
-   ]
+    "simple",
+    "aut"
+   ],
+   "aut": "SO3",
+   "почему aut": "ван дер Варден (1933): абстрактные автоморфизмы компактной полупростой группы Ли непрерывны; у 𝔰𝔬(3) все автоморфизмы внутренние"
   },
   {
    "id": "SL25xZ",
@@ -9060,6 +9073,11 @@
      "центр",
      false
     ]
+   ],
+   "aut": "480:1186",
+   "почему aut": "Aut(SL(2,5) × ℤ) = Aut(SL(2,5)) × Aut(ℤ) × Hom(ℤ, Z(SL(2,5))) ≅ S₅ × C₂ × C₂ (Hom(SL(2,5), ℤ) = 0) (агент-нейросеть)",
+   "трудно": [
+    "aut"
    ]
   },
   {
@@ -10526,7 +10544,8 @@
     "hopfian",
     "linear",
     "residually-finite",
-    "property-t"
+    "property-t",
+    "aut"
    ],
    "подгруппы": [
     {
@@ -10597,7 +10616,9 @@
     "E. Formanek, C. Procesi, 1992"
    ],
    "коммутант": "коммутант",
-   "абелианизация": "2:1"
+   "абелианизация": "2:1",
+   "aut": "AutF3",
+   "почему aut": "Дайер — Форманек (1975): Aut(F_n) полна при n ⩾ 2 (агент-нейросеть)"
   },
   {
    "id": "SumQZ",
@@ -11103,7 +11124,8 @@
     "locally-cyclic": false,
     "dedekind": false,
     "metabelian": false,
-    "class-2": false
+    "class-2": false,
+    "linear": false
    },
    "почему": {
     "perfect": "коммутант отображается на PSL₂(ℝ), а коммутант связной группы Ли с совершенной алгеброй Ли — вся группа",
@@ -11122,7 +11144,9 @@
     "locally-cyclic": "неабелева",
     "dedekind": "фактор PSL₂(ℝ) не дедекиндов, а фактор дедекиндовой группы дедекиндов",
     "metabelian": "неразрешима",
-    "class-2": "неразрешима"
+    "class-2": "неразрешима",
+    "linear": "классика: у S̃L₂(ℝ) нет точных конечномерных представлений",
+    "фраттини": "совершенна ⇒ Z ⊆ Φ; Φ/Z ⊆ Φ(PSL₂(ℝ)) = 1 (стабилизатор точки ℝP¹ максимален, PSL₂(ℝ) проста)"
    },
    "трудно": [],
    "подгруппы": [
@@ -11174,7 +11198,8 @@
     "стандартный пример"
    ],
    "абелианизация": "1:1",
-   "коммутант": "все"
+   "коммутант": "все",
+   "фраттини": "центр"
   },
   {
    "id": "Guba",
@@ -18249,7 +18274,12 @@
    "ссылки": [
     "стандартный пример"
    ],
-   "абелианизация": "1:1"
+   "абелианизация": "1:1",
+   "aut": "SO3",
+   "почему aut": "ван дер Варден (1933): автоморфизмы непрерывны, все внутренние; Inn = SU(2)/{±1} ≅ SO(3)",
+   "трудно": [
+    "aut"
+   ]
   },
   {
    "id": "UT5F2",
@@ -19862,12 +19892,15 @@
    "трудно": [
     "linear",
     "residually-finite",
-    "hopfian"
+    "hopfian",
+    "aut"
    ],
    "ссылки": [
     "J. Nielsen, 1924",
     "D. Krammer, The braid group B₄ is linear, 2000"
-   ]
+   ],
+   "aut": "AutF2",
+   "почему aut": "Дайер — Форманек (1975): Aut(F_n) полна при n ⩾ 2 (агент-нейросеть)"
   },
   {
    "id": "AffZ12",
@@ -23639,7 +23672,8 @@
    "трудно": [
     "centerless",
     "residually-finite",
-    "hopfian"
+    "hopfian",
+    "aut"
    ],
    "ссылки": [
     "M. R. Bridson, K. Vogtmann, J. Algebra 229 (2000)",
@@ -23676,7 +23710,9 @@
     }
    ],
    "центр": "1",
-   "абелианизация": "2:1"
+   "абелианизация": "2:1",
+   "aut": "OutF3",
+   "почему aut": "Бридсон — Фогтманн (2000): Out(F_n) полна при n ⩾ 3 (агент-нейросеть)"
   },
   {
    "id": "AutSumA5",
@@ -24410,7 +24446,10 @@
     "dedekind": false,
     "property-t": false,
     "polycyclic": false,
-    "residually-nilpotent": false
+    "residually-nilpotent": false,
+    "centerless": true,
+    "linear": false,
+    "residually-finite": false
    },
    "почему": {
     "perfect": "[1 + e_ij, 1 + e_jk] = 1 + e_ik при i < j < k, а между i < k в ℚ всегда есть j",
@@ -24426,7 +24465,10 @@
     "amenable": "локально конечна",
     "polycyclic": "не к. п.",
     "metabelian": "совершенна и нетривиальна",
-    "class-2": "совершенна и нетривиальна"
+    "class-2": "совершенна и нетривиальна",
+    "centerless": "характеристически проста (Маклейн), центр характеристичен и собственный",
+    "linear": "g_k = 1 + e_{k,k+1}: 1 + e_{k+2,k+3} коммутирует с g₁…g_k, но не с g_{k+1} — бесконечная убывающая цепочка централизаторов",
+    "residually-finite": "конечный фактор — конечная совершенная 2-группа, т. е. тривиален"
    },
    "подгруппы": [
     {
@@ -24465,7 +24507,10 @@
    "трудно": [
     "perfect"
    ],
-   "статус": "не проверено: записала нейросеть (1.11)"
+   "статус": "не проверено: записала нейросеть (1.11)",
+   "центр": "1",
+   "абелианизация": "1:1",
+   "inn": "McLain2"
   },
   {
    "id": "FreeC2inf",
@@ -24824,7 +24869,9 @@
    ],
    "короткий довод": [
     "linear"
-   ]
+   ],
+   "фраттини": "центр",
+   "почему фраттини": "Φ(⊕H) = ⊕Φ(H) для конечной H: ⊆ через максимальные M × ∏_{j≠i} H_j, ⊇ потому что конечный кусок H^n выделяется прямым множителем с конечным H^n; Φ(S₃ × D₈) = 1 × Z(D₈)"
   },
   {
    "id": "HallUwrU",
@@ -25122,7 +25169,8 @@
       "central": false,
       "whole": false,
       "maximal": false,
-      "finite-index": false
+      "finite-index": false,
+      "complemented": true
      },
      "фактор": "SumC6",
      "почему": "коммутант суммы — сумма коммутантов; ⊕(C₃ × C₂²) ≅ ⊕C₆"
@@ -25153,7 +25201,9 @@
    ],
    "короткий довод": [
     "linear"
-   ]
+   ],
+   "фраттини": "1",
+   "почему фраттини": "Φ(⊕Hᵢ) ⊆ ⊕Φ(Hᵢ) (максимальные M × ∏_{j≠i} H_j), Φ(S₃ × A₄) = 1"
   },
   {
    "id": "QwrQ",
@@ -25287,7 +25337,7 @@
    },
    "почему": {
     "centerless": "Z(C₄² ⋊ C₃) = 1 (A без неподвижных точек), Z(D₁₈) = 1",
-    "фраттини": "Φ(A × B) = Φ(A) × Φ(B) для любых групп, поэтому Φ(⊕Hᵢ) ⊇ ⊕Φ(Hᵢ), а ⊆ — прообразы максимальных при проекциях; Φ(C₄² ⋊ C₃) = 2C₄² (фактор A₄), Φ(D₁₈) = C₃ (фактор S₃)",
+    "фраттини": "Φ(A × B) = Φ(A) × Φ(B) для конечных сомножителей, поэтому Φ(⊕Hᵢ) ⊇ ⊕Φ(Hᵢ), а ⊆ — прообразы максимальных при проекциях; Φ(C₄² ⋊ C₃) = 2C₄² (фактор A₄), Φ(D₁₈) = C₃ (фактор S₃)",
     "metabelian": "H′ = C₄² × C₉ абелев ((A − 1)C₄² = C₄²)",
     "linear": "содержит ⊕C₆: в характеристике p ≠ q бесконечная элементарная абелева q-подгруппа диагонализуема и имеет ранг ⩽ n; ⊕C₂ исключает все характеристики, кроме 2, ⊕C₃ — кроме 3",
     "residually-finite": "подгруппа произведения конечных групп",
@@ -25382,6 +25432,1015 @@
    ],
    "короткий довод": [
     "linear"
+   ]
+  },
+  {
+   "id": "Z3adic",
+   "имя": "ℤ₃ (целые 3-адические)",
+   "заметка": "Обратный предел ℤ/3ⁿ.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": true,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "indecomposable": true,
+    "linear": true,
+    "hopfian": true,
+    "free-abelian": false,
+    "polycyclic": false,
+    "co-hopfian": false,
+    "locally-cyclic": false,
+    "amenable": true,
+    "bi-orderable": true,
+    "left-orderable": true,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
+   },
+   "почему": {
+    "indecomposable": "ℤ₃/2ℤ₃ ≅ C₂, поэтому в A ⊕ B один слагаемый 2-делим; он и q-делим для нечётных q, т. е. делим, а ℤ₃ редуцирована (⋂ 3ⁿℤ₃ = 0)",
+    "linear": "абелева без кручения мощности ⩽ 𝔠 вкладывается в ℚ^(𝔠) ≅ ℝ, а ℝ — в унипотентные матрицы над ℝ",
+    "hopfian": "сюръективный эндоморфизм — умножение на 2-адическое число u (непрерывность не нужна: φ(x) = x·φ(1) на ℤ, а ℤ плотна и φ(3ⁿℤ₃) ⊆ 3ⁿℤ₃, так как 3ⁿℤ₃ — множество 3ⁿ-делимых); u обратимо, раз образ — всё",
+    "free-abelian": "1 ∈ ℤ₃ делится на все нечётные n, а в ⊕ℤ ненулевой элемент делится лишь на конечное число n.",
+    "фраттини": "у абелевой A подгруппа Фраттини — ⋂ pA: pℤ₃ = ℤ₃ при нечётном p",
+    "polycyclic": "не к. п.",
+    "co-hopfian": "x ↦ 2x",
+    "locally-cyclic": "содержит ℤ²",
+    "amenable": "разрешима",
+    "bi-orderable": "абелева без кручения (Леви)",
+    "left-orderable": "двусторонне упорядочиваема",
+    "property-t": "бесконечна и аменабельна",
+    "residually-nilpotent": "нильпотентна",
+    "locally-finite": "есть элемент бесконечного порядка",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева"
+   },
+   "подгруппы": [
+    {
+     "id": "0",
+     "имя": "0",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z3adic"
+    },
+    {
+     "id": "3Z3",
+     "имя": "3ℤ₃",
+     "≅": "Z3adic",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true
+     },
+     "фактор": "3:1",
+     "почему": "максимальна: индекс простой (фактор — циклическая группа простого порядка)"
+    },
+    {
+     "id": "⊕ℤ",
+     "имя": "⊕ℤ (счётная независимая система)",
+     "≅": "Zoo",
+     "свойства": {
+      "normal": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "ранг ℤ₂ континуален, счётная независимая система порождает ⊕ℤ; индекс несчётен"
+    },
+    {
+     "id": "все",
+     "имя": "ℤ₃",
+     "≅": "Z3adic",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "0",
+   "абелианизация": "Z3adic",
+   "фраттини": "3Z3",
+   "aut": "Z3adicU",
+   "out": "Z3adicU",
+   "почему aut": "эндоморфизм ℤ₃ сохраняет 3ⁿℤ₃, значит непрерывен и равен умножению на φ(1); Aut = ℤ₃^×",
+   "произведения": {
+    "2:1": "Z3adicU"
+   },
+   "почему произведения": "ℤ₃ × C₂ ≅ ℤ₃^× = {±1} × (1 + 3ℤ₃)"
+  },
+  {
+   "id": "Z3adicU",
+   "имя": "ℤ₃^× ≅ C₂ × ℤ₃",
+   "заметка": "Aut(ℤ₃ × C₂) = Aut(ℤ₃) × Aut(C₂) (Hom(ℤ₃, C₂) = 0, так как ℤ₃ = 2ℤ₃) = ℤ₃^× ≅ ℤ₃ × C₂: Aut(G) ≅ G = Z(G) = Gᵃᵇ.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "centerless": false,
+    "indecomposable": false,
+    "free": false,
+    "fin-gen": false,
+    "torsion-free": false,
+    "periodic": false,
+    "divisible": false,
+    "residually-finite": true,
+    "polycyclic": false,
+    "linear": true,
+    "hopfian": true,
+    "free-abelian": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "co-hopfian": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "residually-nilpotent": true,
+    "property-t": false,
+    "locally-finite": false,
+    "locally-cyclic": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true
+   },
+   "почему": {
+    "linear": "ℤ₃ без кручения мощности 𝔠 вкладывается в ℝ, C₂ × ℤ₃ ↪ ℝ*",
+    "hopfian": "End = ℤ₃ × 𝔽₂, сюръективный эндоморфизм обратим",
+    "co-hopfian": "(ε, x) ↦ (ε, 3x)",
+    "фраттини": "∩ pA = 2A ∩ 3A = 3ℤ₃ × 0",
+    "aut": "см. заметку"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z3adicU"
+    },
+    {
+     "id": "±1",
+     "имя": "{±1}",
+     "≅": "2:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Z3adic"
+    },
+    {
+     "id": "Z3",
+     "имя": "1 + 3ℤ₃ ≅ ℤ₃",
+     "≅": "Z3adic",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": true,
+      "prime-index": true
+     },
+     "фактор": "2:1",
+     "почему": {
+      "characteristic": "Aut = Aut(ℤ₃) × Aut(C₂) сохраняет множитель"
+     }
+    },
+    {
+     "id": "Φ",
+     "имя": "1 + 9ℤ₃",
+     "≅": "Z3adic",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "6:2"
+    },
+    {
+     "id": "все",
+     "имя": "ℤ₃^×",
+     "≅": "Z3adicU",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "абелианизация": "Z3adicU",
+   "фраттини": "Φ",
+   "кручение": "±1",
+   "aut": "Z3adicU"
+  },
+  {
+   "id": "W2",
+   "имя": "W(C₂): W ≅ W ≀ W",
+   "заметка": "Неподвижная точка X ↦ X ≀ X над C₂. Счётная локально конечная 2-группа.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": false,
+    "indecomposable": true,
+    "hopfian": false,
+    "co-hopfian": false,
+    "linear": false,
+    "polycyclic": false,
+    "bounded-exponent": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "p-group": true,
+    "perfect": false
+   },
+   "почему": {
+    "сплетение": "G₀ = H, G_{k+1} = G_k ≀ G_k, ι₀ — вложение в вершину, ι_{k+1} = ι_k ≀ ι_k; W = lim G_k, и W ≀ W = lim (G_k ≀ G_k) = W",
+    "fin-gen": "объединение строго возрастающей цепочки G_k",
+    "hopfian": "W ≅ W ≀ W ↠ W с ядром-базой",
+    "co-hopfian": "W ↪ W ≀ W ≅ W как вершина",
+    "solvable": "ступень H ≀ Y больше ступени H",
+    "linear": "содержит ⊕_ℕ W: строго убывающая цепочка централизаторов",
+    "residually-finite": "Грюнберг: W неабелева, W бесконечна",
+    "indecomposable": "X ≀ Y с бесконечной не-FC группой Y прямо неразложима",
+    "divisible": "X ≀ Y не делима при X, Y ≠ 1",
+    "centerless": "верхняя группа бесконечна",
+    "perfect": "Wᵃᵇ = lim G_kᵃᵇ ≠ 0"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "W2"
+    },
+    {
+     "id": "все",
+     "имя": "W",
+     "≅": "W2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "сплетение": [
+    "W2",
+    "W2"
+   ],
+   "ссылки": [
+    "построение: неподвижная точка X ↦ X ≀ X"
+   ]
+  },
+  {
+   "id": "W2inf",
+   "имя": "W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W)",
+   "заметка": "Неподвижная точка X ↦ X ≀ X над ℤ(2^∞). Локально нильпотентна, Wᵃᵇ делима, максимальных подгрупп нет: Φ(W) = W.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": false,
+    "indecomposable": true,
+    "hopfian": false,
+    "co-hopfian": false,
+    "linear": false,
+    "polycyclic": false,
+    "bounded-exponent": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "p-group": true,
+    "perfect": false
+   },
+   "почему": {
+    "сплетение": "G₀ = H, G_{k+1} = G_k ≀ G_k, ι₀ — вложение в вершину, ι_{k+1} = ι_k ≀ ι_k; W = lim G_k, и W ≀ W = lim (G_k ≀ G_k) = W",
+    "fin-gen": "объединение строго возрастающей цепочки G_k",
+    "hopfian": "W ≅ W ≀ W ↠ W с ядром-базой",
+    "co-hopfian": "W ↪ W ≀ W ≅ W как вершина",
+    "solvable": "ступень H ≀ Y больше ступени H",
+    "linear": "содержит ⊕_ℕ W: строго убывающая цепочка централизаторов",
+    "residually-finite": "Грюнберг: W неабелева, W бесконечна",
+    "indecomposable": "X ≀ Y с бесконечной не-FC группой Y прямо неразложима",
+    "divisible": "X ≀ Y не делима при X, Y ≠ 1",
+    "centerless": "верхняя группа бесконечна",
+    "фраттини": "в локально нильпотентной группе максимальная подгруппа нормальна простого индекса, а Wᵃᵇ делима и ≠ 0"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "W2inf"
+    },
+    {
+     "id": "все",
+     "имя": "W",
+     "≅": "W2inf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "сплетение": [
+    "W2inf",
+    "W2inf"
+   ],
+   "ссылки": [
+    "построение: неподвижная точка X ↦ X ≀ X"
+   ],
+   "фраттини": "все"
+  },
+  {
+   "id": "WA5",
+   "имя": "W(A₅): W ≅ W ≀ W = W′",
+   "заметка": "Неподвижная точка X ↦ X ≀ X над A₅. Совершенна, локально конечна.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": false,
+    "indecomposable": true,
+    "hopfian": false,
+    "co-hopfian": false,
+    "linear": false,
+    "polycyclic": false,
+    "bounded-exponent": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false,
+    "periodic": true,
+    "torsion-free": false,
+    "locally-finite": true,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "p-group": false,
+    "perfect": true
+   },
+   "почему": {
+    "сплетение": "G₀ = H, G_{k+1} = G_k ≀ G_k, ι₀ — вложение в вершину, ι_{k+1} = ι_k ≀ ι_k; W = lim G_k, и W ≀ W = lim (G_k ≀ G_k) = W",
+    "fin-gen": "объединение строго возрастающей цепочки G_k",
+    "hopfian": "W ≅ W ≀ W ↠ W с ядром-базой",
+    "co-hopfian": "W ↪ W ≀ W ≅ W как вершина",
+    "solvable": "ступень H ≀ Y больше ступени H",
+    "linear": "содержит ⊕_ℕ W: строго убывающая цепочка централизаторов",
+    "residually-finite": "Грюнберг: W неабелева, W бесконечна",
+    "indecomposable": "X ≀ Y с бесконечной не-FC группой Y прямо неразложима",
+    "divisible": "X ≀ Y не делима при X, Y ≠ 1",
+    "centerless": "верхняя группа бесконечна",
+    "perfect": "(X ≀ Y)ᵃᵇ = Xᵃᵇ × Yᵃᵇ"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "WA5"
+    },
+    {
+     "id": "все",
+     "имя": "W",
+     "≅": "WA5",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "сплетение": [
+    "WA5",
+    "WA5"
+   ],
+   "ссылки": [
+    "построение: неподвижная точка X ↦ X ≀ X"
+   ],
+   "коммутант": "все",
+   "абелианизация": "1:1"
+  },
+  {
+   "id": "WZ",
+   "имя": "W(ℤ): W ≅ W ≀ W без кручения",
+   "заметка": "Неподвижная точка X ↦ X ≀ X над ℤ. Без кручения, локально разрешима.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": false,
+    "indecomposable": true,
+    "hopfian": false,
+    "co-hopfian": false,
+    "linear": false,
+    "polycyclic": false,
+    "bounded-exponent": false,
+    "property-t": false,
+    "locally-cyclic": false,
+    "dedekind": false,
+    "metabelian": false,
+    "class-2": false,
+    "periodic": false,
+    "torsion-free": true,
+    "locally-finite": false,
+    "amenable": true,
+    "p-group": false,
+    "perfect": false
+   },
+   "почему": {
+    "сплетение": "G₀ = H, G_{k+1} = G_k ≀ G_k, ι₀ — вложение в вершину, ι_{k+1} = ι_k ≀ ι_k; W = lim G_k, и W ≀ W = lim (G_k ≀ G_k) = W",
+    "fin-gen": "объединение строго возрастающей цепочки G_k",
+    "hopfian": "W ≅ W ≀ W ↠ W с ядром-базой",
+    "co-hopfian": "W ↪ W ≀ W ≅ W как вершина",
+    "solvable": "ступень H ≀ Y больше ступени H",
+    "linear": "содержит ⊕_ℕ W: строго убывающая цепочка централизаторов",
+    "residually-finite": "Грюнберг: W неабелева, W бесконечна",
+    "indecomposable": "X ≀ Y с бесконечной не-FC группой Y прямо неразложима",
+    "divisible": "X ≀ Y не делима при X, Y ≠ 1",
+    "centerless": "верхняя группа бесконечна",
+    "torsion-free": "(f, y)ⁿ = 1 ⇒ y = 1 ⇒ f = 1",
+    "amenable": "локально разрешима"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "WZ"
+    },
+    {
+     "id": "все",
+     "имя": "W",
+     "≅": "WZ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "сплетение": [
+    "WZ",
+    "WZ"
+   ],
+   "ссылки": [
+    "построение: неподвижная точка X ↦ X ≀ X"
+   ]
+  },
+  {
+   "id": "Qsf",
+   "имя": "Q_sf = ⟨1/p : p простое⟩ = {a/n : n бесквадратно} ⊂ ℚ",
+   "заметка": "Ранг 1, Aut = C₂: пример к «Aut циклична» среди бесконечных групп; Φ = ℤ.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": true,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "linear": true,
+    "hopfian": true,
+    "free-abelian": false,
+    "polycyclic": false,
+    "co-hopfian": false,
+    "amenable": true,
+    "bi-orderable": true,
+    "left-orderable": true,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true,
+    "indecomposable": true,
+    "locally-cyclic": true
+   },
+   "почему": {
+    "co-hopfian": "x ↦ 2x инъективен, 1 не в образе",
+    "polycyclic": "не к. п.",
+    "amenable": "абелева",
+    "bi-orderable": "абелева без кручения (Леви)",
+    "left-orderable": "двусторонне упорядочиваема",
+    "property-t": "бесконечна и аменабельна",
+    "residually-nilpotent": "абелева",
+    "locally-finite": "без кручения",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева",
+    "linear": "абелева без кручения",
+    "residually-finite": "⋂_k p^k A = 0",
+    "hopfian": "сюръективный эндоморфизм — умножение на ±1",
+    "divisible": "1/p не делится на p",
+    "indecomposable": "подгруппа ℚ, ранг 1",
+    "locally-cyclic": "подгруппа ℚ",
+    "fin-gen": "к. п. подгруппа ℚ циклична",
+    "free-abelian": "ранг 1 и не циклична",
+    "фраттини": "у абелевой Φ = ⋂ pA, pA = {x : v_p(x) ⩾ 0}"
+   },
+   "подгруппы": [
+    {
+     "id": "0",
+     "имя": "0",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Qsf"
+    },
+    {
+     "id": "Z",
+     "имя": "ℤ",
+     "≅": "Z",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": false
+     },
+     "фактор": "SumCp",
+     "почему": {
+      "characteristic": "Aut = {±1}",
+      "complemented": "ненулевые подгруппы ℚ пересекаются",
+      "фактор": "A/ℤ = ⊕_p (p⁻¹ℤ/ℤ)"
+     }
+    },
+    {
+     "id": "2A",
+     "имя": "2A = {x : v₂(x) ⩾ 0}",
+     "≅": "Qsf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": true,
+      "prime-index": true,
+      "complemented": false
+     },
+     "фактор": "2:1",
+     "почему": {
+      "≅": "умножение на 2",
+      "complemented": "ненулевые подгруппы ℚ пересекаются"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "Q_sf",
+     "≅": "Qsf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "0",
+   "абелианизация": "Qsf",
+   "фраттини": "Z",
+   "aut": "2:1",
+   "out": "2:1",
+   "почему aut": "r · (1/p) ∈ A для всех p ⇒ v_p(r) ⩾ 0, поэтому End = ℤ и Aut = {±1}",
+   "⩽": [
+    [
+     "Z",
+     "2A",
+     true
+    ]
+   ],
+   "ссылки": [
+    "группы ранга 1 (Бэр)"
+   ]
+  },
+  {
+   "id": "Qcf",
+   "имя": "Q_cf = ⟨1/p² : p простое⟩ = {a/n : n бескубно} ⊂ ℚ",
+   "заметка": "Ранг 1, Aut = C₂, Φ = Q_sf не к. п.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": true,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "linear": true,
+    "hopfian": true,
+    "free-abelian": false,
+    "polycyclic": false,
+    "co-hopfian": false,
+    "amenable": true,
+    "bi-orderable": true,
+    "left-orderable": true,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true,
+    "indecomposable": true,
+    "locally-cyclic": true
+   },
+   "почему": {
+    "co-hopfian": "x ↦ 2x инъективен, 1 не в образе",
+    "polycyclic": "не к. п.",
+    "amenable": "абелева",
+    "bi-orderable": "абелева без кручения (Леви)",
+    "left-orderable": "двусторонне упорядочиваема",
+    "property-t": "бесконечна и аменабельна",
+    "residually-nilpotent": "абелева",
+    "locally-finite": "без кручения",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева",
+    "linear": "абелева без кручения",
+    "residually-finite": "⋂_k p^k A = 0",
+    "hopfian": "сюръективный эндоморфизм — умножение на ±1",
+    "divisible": "1/p² не делится на p",
+    "indecomposable": "подгруппа ℚ, ранг 1",
+    "locally-cyclic": "подгруппа ℚ",
+    "fin-gen": "к. п. подгруппа ℚ циклична",
+    "free-abelian": "ранг 1 и не циклична",
+    "фраттини": "pA = {x : v_p(x) ⩾ −1}, ⋂ pA = Q_sf"
+   },
+   "подгруппы": [
+    {
+     "id": "0",
+     "имя": "0",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Qcf"
+    },
+    {
+     "id": "Qsf",
+     "имя": "Q_sf",
+     "≅": "Qsf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false,
+      "complemented": false
+     },
+     "фактор": "SumCp",
+     "почему": {
+      "characteristic": "Aut = {±1}",
+      "complemented": "ненулевые подгруппы ℚ пересекаются"
+     }
+    },
+    {
+     "id": "2A",
+     "имя": "2A = {x : v₂(x) ⩾ −1}",
+     "≅": "Qcf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": true,
+      "finite-index": true,
+      "index-2": true,
+      "prime-index": true,
+      "complemented": false
+     },
+     "фактор": "2:1",
+     "почему": {
+      "≅": "умножение на 2",
+      "complemented": "ненулевые подгруппы ℚ пересекаются"
+     }
+    },
+    {
+     "id": "все",
+     "имя": "Q_cf",
+     "≅": "Qcf",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "0",
+   "абелианизация": "Qcf",
+   "фраттини": "Qsf",
+   "aut": "2:1",
+   "out": "2:1",
+   "почему aut": "r · (1/p) ∈ A для всех p ⇒ v_p(r) ⩾ 0, поэтому End = ℤ и Aut = {±1}",
+   "⩽": [
+    [
+     "Qsf",
+     "2A",
+     true
+    ]
+   ],
+   "ссылки": [
+    "группы ранга 1 (Бэр)"
+   ]
+  },
+  {
+   "id": "Rsum",
+   "имя": "⊕_i R_{P_i}, R_P = ⟨1/p : p ∈ P⟩, P_i — непересекающиеся бесконечные множества простых",
+   "заметка": "Бесконечная абелева с Aut = ∏C₂ (абелева, ограниченного периода, бесконечная).",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "perfect": false,
+    "torsion-free": true,
+    "periodic": false,
+    "divisible": false,
+    "centerless": false,
+    "residually-finite": true,
+    "linear": true,
+    "hopfian": true,
+    "free-abelian": false,
+    "polycyclic": false,
+    "co-hopfian": false,
+    "amenable": true,
+    "bi-orderable": true,
+    "left-orderable": true,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "locally-finite": false,
+    "dedekind": true,
+    "metabelian": true,
+    "class-2": true,
+    "indecomposable": false,
+    "locally-cyclic": false
+   },
+   "почему": {
+    "co-hopfian": "x ↦ 2x инъективен, 1 не в образе",
+    "polycyclic": "не к. п.",
+    "amenable": "абелева",
+    "bi-orderable": "абелева без кручения (Леви)",
+    "left-orderable": "двусторонне упорядочиваема",
+    "property-t": "бесконечна и аменабельна",
+    "residually-nilpotent": "абелева",
+    "locally-finite": "без кручения",
+    "dedekind": "абелева",
+    "metabelian": "абелева",
+    "class-2": "абелева",
+    "linear": "абелева без кручения",
+    "residually-finite": "сумма ф. а. групп ранга 1",
+    "divisible": "1/p ∈ R_P не делится на p",
+    "indecomposable": "прямая сумма",
+    "locally-cyclic": "содержит R_{P₁} ⊕ R_{P₂} ранга 2",
+    "hopfian": "End = ∏ End R_{P_i} = ∏ℤ (Hom(R_{P_i}, R_{P_j}) = 0 при i ≠ j: r/p ∈ R_{P_j} для бесконечно многих p ∉ P_j ⇒ r = 0); сюръективен ⇔ все nᵢ = ±1",
+    "free-abelian": "R_{P₁} ⩽ не свободна",
+    "fin-gen": "бесконечная прямая сумма",
+    "фраттини": "pR_P = {v_p ⩾ 1} при p ∉ P, а таких p бесконечно много, поэтому Φ(R_P) = 0 и Φ ⊆ ⊕Φ(R_{P_i}) = 0"
+   },
+   "подгруппы": [
+    {
+     "id": "0",
+     "имя": "0",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "Rsum"
+    },
+    {
+     "id": "все",
+     "имя": "⊕R_{P_i}",
+     "≅": "Rsum",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "0",
+   "абелианизация": "Rsum",
+   "фраттини": "0",
+   "aut": "ProdC2",
+   "out": "ProdC2",
+   "почему aut": "End = ∏_i ℤ (по слагаемым), Aut = ∏_i {±1}",
+   "ссылки": [
+    "группы ранга 1 (Бэр)"
    ]
   }
  ],

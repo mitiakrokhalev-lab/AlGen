@@ -104,6 +104,7 @@ class Library:
                         els.append(e)
                     self.obj[r["id"]]["элементы"] = els
         self.fam = {f["id"]: f for f in raw.get("семейства", [])}
+        self._sums()
         self.prod = load_products()
         # Свободные произведения и сплетения: поля записи «свободное произведение»
         # и «сплетение»: [A, B]. Сплетение A ≀ B не симметрично.
@@ -141,6 +142,108 @@ class Library:
             for k in ("injective-sys", "surjective-sys", "constant-sys"):
                 if f.get(k) is not None:
                     f["свойства"][k] = f[k]
+
+    SUM_MAX = 24  # ⊕_ℕ H для всех конечных H порядка ⩽ SUM_MAX
+
+    def _sums(self):
+        """Прямые суммы ⊕_ℕ H счётного числа копий конечной H ≠ 1, без ручных записей.
+
+        Значения следуют из H: ⊕H ≅ H × ⊕H (разложима, не хопфова и не кохопфова —
+        сдвиг слагаемых), периодическая, локально конечная, ф. а., ограниченного
+        показателя, не к. п.; абелевость, разрешимость, нильпотентность,
+        совершенность, отсутствие центра, p-группа и показатели — как у H.
+        Z, G′, Φ и Gᵃᵇ — суммы соответствующих подгрупп и факторов H
+        (Φ(A × B) = Φ(A) × Φ(B), поэтому Φ(⊕H) = ⊕Φ(H)). Линейна, если H
+        элементарная абелева p-группа (⊕C_p ⊂ (𝔽_p(t), +) ⊂ UT₂), и не линейна,
+        если |H| делится на два простых (⊕C_p × ⊕C_q). Уже записанные руками
+        суммы (семейства с одним членом) берутся как есть."""
+        hand = {f["члены"][0]: f["⊕"] for f in self.fam.values()
+                if f.get("бесконечное") and len(f["члены"]) == 1 and f.get("⊕")}
+        hand.update({"6:2": "SumC6", "36:2": "SumC36"})
+        hand = {h: k for h, k in hand.items() if k in self.obj}
+        keys = [k for k, o in list(self.obj.items()) if o["конечная"] and ":" in k and k != "1:1"
+                and int(k.split(":")[0]) <= self.SUM_MAX and o.get("подгруппы")]
+        key = {h: hand.get(h, f"Sum_{h.replace(':', '_')}") for h in keys}
+        key["1:1"] = "1:1"
+        copy = ("abelian", "solvable", "nilpotent", "perfect", "centerless", "p-group", "metabelian", "class-2",
+                "exponent-2", "exponent-3", "exponent-4", "exponent-6")
+        for h in keys:
+            if h in hand:
+                continue
+            o = self.obj[h]
+            hp = o["свойства"]
+            p = {x: hp[x] for x in copy if hp.get(x) is not None}
+            p.update({"trivial": False, "cyclic": False, "finite": False, "fin-gen": False, "free": False,
+                      "simple": False, "torsion-free": False, "periodic": True, "divisible": False,
+                      "residually-finite": True, "indecomposable": False, "hopfian": False, "co-hopfian": False,
+                      "bounded-exponent": True, "polycyclic": False, "amenable": True, "left-orderable": False,
+                      "bi-orderable": False, "property-t": False, "locally-finite": True, "locally-cyclic": False,
+                      "free-abelian": False, "countable": True})
+            if hp.get("nilpotent") is not None:
+                p["residually-nilpotent"] = hp["nilpotent"]
+            if hp.get("abelian") is not None:
+                p["dedekind"] = hp["abelian"]
+            n = int(h.split(":")[0])
+            primes = {q for q in range(2, n + 1) if n % q == 0 and all(q % r for r in range(2, q))}
+            if len(primes) >= 2:
+                p["linear"] = False
+            elif hp.get("abelian") and any(hp.get(f"exponent-{q}") for q in primes):
+                p["linear"] = True
+            subs = o["подгруппы"]
+            by = {x["id"]: x for x in subs}
+            c = by.get(o.get("коммутант"))
+            if c is not None and self.obj.get(c["≅"]):
+                p["metabelian"] = bool(self.obj[c["≅"]]["свойства"].get("abelian"))
+                p["class-2"] = bool(c["свойства"].get("central"))
+            canon = {}
+            for f in ("центр", "коммутант", "фраттини"):
+                sid = o.get(f)
+                if sid is None or sid not in by:
+                    continue
+                x = by[sid]
+                if x["≅"] == "1:1":
+                    canon[f] = "1"
+                elif x["свойства"].get("whole"):
+                    canon[f] = "все"
+                else:
+                    canon[f] = f
+            out = [{"id": "1", "имя": "1", "≅": "1:1", "свойства": {"normal": True, "characteristic": True,
+                    "central": True, "whole": False, "maximal": False, "finite-index": False}, "фактор": key[h]}]
+            for f, cid in canon.items():
+                if cid != f:
+                    continue
+                x = by[o[f]]
+                fac = x.get("фактор")
+                out.append({"id": f, "имя": f"⊕ {f}", "≅": key.get(x["≅"]), "фактор": key.get(fac) if fac else None,
+                            "свойства": {"normal": True, "characteristic": True,
+                                         "central": bool(x["свойства"].get("central")),
+                                         "whole": False, "maximal": False, "finite-index": False}})
+            out.append({"id": "все", "имя": "все", "≅": key[h], "фактор": "1:1",
+                        "свойства": {"normal": True, "characteristic": True, "central": bool(hp.get("abelian")),
+                                     "whole": True, "maximal": False, "finite-index": True}})
+            if any(x["≅"] is None for x in out):
+                continue
+            for x in out:
+                if x["фактор"] is None:
+                    del x["фактор"]
+            ab = None
+            if "коммутант" in canon:
+                c = canon["коммутант"]
+                ab = key[h] if c == "1" else ("1:1" if c == "все" else key.get(by[o["коммутант"]].get("фактор")))
+            r = {"id": key[h], "key": key[h], "конечная": False, "синтез сумм": h, "без произведений": True,
+                 "имя": f"⊕_ℕ {o.get('имя', h)}", "свойства": p, "подгруппы": out,
+                 "произведения": {key[h]: key[h]}, **canon}
+            if ab:
+                r["абелианизация"] = ab
+            self.obj[key[h]] = r
+        while True:  # сумма, ссылающаяся на непостроенную, выбрасывается
+            bad = [k for k, r in self.obj.items() if r.get("синтез сумм") and (
+                any(x["≅"] not in self.obj or x.get("фактор", "1:1") not in self.obj for x in r["подгруппы"])
+                or r.get("абелианизация", "1:1") not in self.obj)]
+            if not bad:
+                break
+            for k in bad:
+                del self.obj[k]
 
     def _quantified_props(self):
         """Свойства с квантором по подгруппам («кванторные» в data/new/grp.json):
