@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_chars, load_compl, load_endo, load_elts, load_homs, load_products
+from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_chars, load_compl, load_endo, load_elts, load_homs, load_perm, load_products
 from math import gcd
 
 from .logic import DATA, App, Graph, Theory, Var, Vocab
@@ -53,7 +53,7 @@ class Library:
         self.obj = {}
         patch = DATA / "finite" / "grp-subs-patch.json"
         patch = json.loads(patch.read_text(encoding="utf-8"))["группы"] if patch.exists() else {}
-        compl, endo, elts, homs = load_compl(), load_endo(), load_elts(), load_homs()
+        compl, endo, elts, homs, perm = load_compl(), load_endo(), load_elts(), load_homs(), load_perm()
         for k, r in load_finite(extra=True).items():
             for data, field, prop in ((compl, "complemented", "complemented"),
                                       (endo, "fully_invariant", "fully-invariant"),
@@ -84,6 +84,10 @@ class Library:
             if e and e.get("classes") and r["subs"] is not None and \
                     [[x["group"], x["class_size"]] for x in r["subs"]] == e["check"]:
                 self.obj[k]["элементы"] = e["classes"]
+            q = perm.get(k)
+            if q and q.get("nonperm") is not None and r["subs"] is not None and \
+                    [[x["group"], x["class_size"]] for x in r["subs"]] == q["check"]:
+                self.obj[k]["неперестановочны"] = {tuple(x) for x in q["nonperm"]}
             h = homs.get(k)
             if h and h.get("endos") is not None and r["subs"] is not None and \
                     [[x["group"], x["class_size"]] for x in r["subs"]] == h["check"]:
@@ -1361,6 +1365,9 @@ class Search:
                             out[("r", "le", a, b)] = out[("r", "le", b, a)] = False
                         continue
                     out[("r", "eq-sub", *sorted((a, b), key=str))] = ia[2] == ib[2]
+                    perm = self._permutes(a, ia, b, ib)
+                    if perm is not None and "permutes" in self.g.v.rels:
+                        out[("r", "permutes", *sorted((a, b), key=str))] = perm
                     if self.lib.obj[ia[1]].get("конечная"):
                         # классы сопряжённости таблицы различны
                         out[("r", "conj-sub", *sorted((a, b), key=str))] = ia[2] == ib[2]
@@ -1530,6 +1537,21 @@ class Search:
         """Есть свойство, известное у обеих групп записей и различающее их."""
         pa, pb = self.lib.obj[ka]["свойства"], self.lib.obj[kb]["свойства"]
         return any(pa.get(p) is not None and pb.get(p) is not None and pa[p] != pb[p] for p in GROUP_PROPS)
+
+    def _permutes(self, a, ia, b, ib):
+        """HK = KH: да, если H = K или одна из них нормальна; для двух подгрупп-переменных
+        конечной группы (это представители классов) — по таблице GAP (grp-perm.jsonl).
+        Подгруппа-терм (нормализатор, ⟨x⟩, …) — какой-то член своего класса, не обязательно
+        представитель, поэтому для неё таблица не годится."""
+        subs = self.lib.obj[ia[1]]["подгруппы"]
+        if ia[2] == ib[2] and ia[3:] == ib[3:] and "?" not in ia[3:]:
+            return True
+        if subs[ia[2]]["свойства"].get("normal") or subs[ib[2]]["свойства"].get("normal"):
+            return True
+        bad = self.lib.obj[ia[1]].get("неперестановочны")
+        if bad is None or len(ia) > 3 or len(ib) > 3 or a not in self.vars or b not in self.vars:
+            return None
+        return (min(ia[2], ib[2]), max(ia[2], ib[2])) not in bad
 
     def _noniso(self, ka, kb):
         """Запись «≇» у одной из групп: доказано, что они не изоморфны."""
