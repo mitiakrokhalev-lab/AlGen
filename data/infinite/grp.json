@@ -8290,7 +8290,8 @@
     "locally-cyclic": "неабелева",
     "dedekind": "подгруппа ⟨a⟩ не нормальна",
     "metabelian": "неразрешима",
-    "class-2": "неразрешима"
+    "class-2": "неразрешима",
+    "фраттини": "Первова (2000): максимальные подгруппы 𝒢 конечного индекса, а в 2-группе это индекс 2; 𝒢/𝒢′ ≅ C₂³ элементарна, поэтому пересечение подгрупп индекса 2 — это 𝒢′"
    },
    "подгруппы": [
     {
@@ -8394,7 +8395,8 @@
     "linear",
     "periodic",
     "property-t",
-    "residually-finite"
+    "residually-finite",
+    "фраттини"
    ],
    "коммутант": "коммутант",
    "⩽": [
@@ -8403,7 +8405,8 @@
      "⟨a, d⟩",
      true
     ]
-   ]
+   ],
+   "фраттини": "коммутант"
   },
   {
    "id": "Z12",
@@ -25242,6 +25245,143 @@
    "сплетение": [
     "Q",
     "Q"
+   ]
+  },
+  {
+   "id": "SumHD18",
+   "имя": "⊕_ℕ ((C₄² ⋊ C₃) × D₁₈)",
+   "заметка": "H = (C₄² ⋊ C₃) × D₁₈, C₃ действует матрицей A без неподвижных точек (det(A − 1) = 3 обратим по модулю 4). Без центра, Φ(G) = ⊕Φ(H) = ⊕(C₂² × C₃) ≅ ⊕C₆ не линейна.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": false,
+    "perfect": false,
+    "torsion-free": false,
+    "periodic": true,
+    "divisible": false,
+    "centerless": true,
+    "residually-finite": true,
+    "indecomposable": false,
+    "hopfian": false,
+    "linear": false,
+    "bounded-exponent": true,
+    "p-group": false,
+    "polycyclic": false,
+    "co-hopfian": false,
+    "amenable": true,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "property-t": false,
+    "locally-finite": true,
+    "locally-cyclic": false,
+    "residually-nilpotent": false,
+    "dedekind": false,
+    "metabelian": true,
+    "class-2": false
+   },
+   "почему": {
+    "centerless": "Z(C₄² ⋊ C₃) = 1 (A без неподвижных точек), Z(D₁₈) = 1",
+    "фраттини": "Φ(A × B) = Φ(A) × Φ(B) для любых групп, поэтому Φ(⊕Hᵢ) ⊇ ⊕Φ(Hᵢ), а ⊆ — прообразы максимальных при проекциях; Φ(C₄² ⋊ C₃) = 2C₄² (фактор A₄), Φ(D₁₈) = C₃ (фактор S₃)",
+    "metabelian": "H′ = C₄² × C₉ абелев ((A − 1)C₄² = C₄²)",
+    "linear": "содержит ⊕C₆: в характеристике p ≠ q бесконечная элементарная абелева q-подгруппа диагонализуема и имеет ранг ⩽ n; ⊕C₂ исключает все характеристики, кроме 2, ⊕C₃ — кроме 3",
+    "residually-finite": "подгруппа произведения конечных групп",
+    "hopfian": "сдвиг слагаемых влево",
+    "co-hopfian": "переиндексация n ↦ 2n",
+    "residually-nilpotent": "содержит D₁₈",
+    "dedekind": "отражение в D₁₈ не нормально",
+    "bounded-exponent": "показатель 36",
+    "p-group": "есть элементы порядков 2 и 3",
+    "polycyclic": "не к. п.",
+    "property-t": "бесконечна и аменабельна",
+    "left-orderable": "есть кручение",
+    "bi-orderable": "есть кручение",
+    "абелианизация": "Hᵃᵇ = C₃ × C₂",
+    "X × X ≅ X": "ℕ ⊔ ℕ ≅ ℕ"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": true,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumHD18"
+    },
+    {
+     "id": "фраттини",
+     "имя": "⊕(2C₄² × C₃)",
+     "≅": "SumC6",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "почему": "Φ ≠ 1 и центр тривиален"
+    },
+    {
+     "id": "коммутант",
+     "имя": "⊕(C₄² × C₉)",
+     "≅": "SumC36",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": false,
+      "maximal": false,
+      "finite-index": false
+     },
+     "фактор": "SumC6",
+     "почему": "⊕(C₄ ⊕ C₄ ⊕ C₉) ≅ ⊕C₃₆"
+    },
+    {
+     "id": "все",
+     "имя": "G",
+     "≅": "SumHD18",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "central": false,
+      "whole": true,
+      "maximal": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "коммутант": "коммутант",
+   "фраттини": "фраттини",
+   "абелианизация": "SumC6",
+   "⩽": [
+    [
+     "фраттини",
+     "коммутант",
+     true
+    ]
+   ],
+   "произведения": {
+    "SumHD18": "SumHD18"
+   },
+   "ссылки": [
+    "прямая сумма"
+   ],
+   "короткий довод": [
+    "linear"
    ]
   }
  ],
