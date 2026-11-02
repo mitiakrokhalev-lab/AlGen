@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/AlGen/AlGen/py/algen/table.py", line 738, in <module>
+    main()
+  File "/home/runner/work/AlGen/AlGen/py/algen/table.py", line 729, in main
+    k1_base(a)
+  File "/home/runner/work/AlGen/AlGen/py/algen/table.py", line 637, in k1_base
+    f = load(lib, vocab, a.base, a.dir)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/AlGen/AlGen/py/algen/table.py", line 362, in load
+    raise FileNotFoundError(f"{base}: частей {len(parts)} из {n}")
+FileNotFoundError: GHK: частей 116 из 150
+k1 GHK: 1
