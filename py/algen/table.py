@@ -215,6 +215,10 @@ def schemes(vocab, base, k=2, t=None):
     uni = universe(vocab, base)
     ts = [term(g, x, names, "grp") for x in uni]
     num = {t: i + 1 for i, t in enumerate(ts)}
+    # термы самой записи базы (A ∗ B в «H : Sub(A ∗ B)») входят во все схемы; номер — после вселенной
+    for x in g.terms:
+        if isinstance(x, App) and x not in num:
+            num[x] = len(num) + 1
     vars_ = [t for t in g.terms if isinstance(t, Var)]
     seen, out = set(), []
     swap = SWAP.get(base)
