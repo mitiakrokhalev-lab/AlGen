@@ -35,7 +35,23 @@ def setup():
     E.SKIP.update(x for x in os.environ.get("SKIP", "").split(",") if x)  # как --без у построения таблиц
     vocab = Vocab.section("grp")
     lib = built_library(vocab)
-    f = TB.load(lib, vocab, base, tdir)
+    try:
+        f = TB.load(lib, vocab, base, tdir)
+    except FileNotFoundError as ex:  # не все части готовы — прототипу хватит готовых
+        print(f"{ex}; берём готовые части", flush=True)
+        import glob
+        import pickle
+        f = TB.skeleton(lib, vocab, base)
+        mats = {k: [] for k in "mse"}
+        f.envs, f.skipped = [], []
+        for path in sorted(glob.glob(f"{tdir}/{base}.*-*.pickle")):
+            with open(path, "rb") as fh:
+                d = pickle.load(fh)
+            assert d["атомов"] == len(f.atoms) and d["отпечаток"] == TB._fp(base), path
+            f.envs += d["envs"]
+            for k in "mse":
+                mats[k].append(np.unpackbits(d[k], axis=1, count=2 * len(f.atoms)).astype(bool))
+        f.m, f.s, f.e = (np.concatenate(mats[k]) for k in "mse")
     T = f.sc.T
     L = f.e.shape[1]
     sat = []
