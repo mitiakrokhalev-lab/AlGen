@@ -544,12 +544,68 @@ class Theory:
         """(посылки, выводы): вывод правила — атом или {"или": [атомы]}.
         grow=False — без построения новых термов (все термы правила уже в графе)."""
         concl = r["then"]["или"] if "или" in r["then"] else [r["then"]]
-        for env in self._bindings(r["scene"], () if grow else self._patterns(r)):
-            prem = [self._atom(a, env, limit) for a in r["if"]]
-            outs = [self._atom(a, env, limit) for a in concl]
-            if any(p is None for p in prem + outs):
-                continue
-            yield prem, outs
+        # «только заведённые»: отношения правила берутся только среди уже заведённых
+        # атомов (столбцы таблицы и выводы прежних правил). Аксиомы вроде
+        # транзитивности ⩽ на всех числовых термах иначе заводят атомы на все пары
+        # и клаузы на все тройки (у G: 107³ ≈ 1,2 млн клауз на правило).
+        known = r.get("только заведённые")
+        envs = self._known_envs(r, concl) if known else None
+        if envs is None:
+            envs = self._bindings(r["scene"], () if grow else self._patterns(r))
+        for env in envs:
+            prem = []
+            for a in r["if"]:
+                x = self._atom(a, env, limit)
+                if x is None or (known and x[0][0] == "r" and not self._known(x[0])):
+                    break
+                prem.append(x)
+            else:
+                outs = [self._atom(a, env, limit) for a in concl]
+                if any(o is None or (known and o[0][0] == "r" and not self._known(o[0])) for o in outs):
+                    continue
+                yield prem, outs
+
+    def _known_envs(self, r, concl):
+        """Подстановки для правила «только заведённые»: соединение по уже заведённым
+        атомам его отношений, без перебора всех пар и троек термов сцены. None —
+        если какая-то роль сцены не входит в отношения (тогда обычный перебор)."""
+        rels = [a for a in r["if"] + concl if "rel" in a]
+        if not rels or not all(isinstance(x, str) for a in rels for x in a["args"]):
+            return None
+        sorts = {x["name"]: x["sort"] for x in r["scene"]}
+        if not all(isinstance(v, str) for v in sorts.values()) or \
+                set(sorts) - {x for a in rels for x in a["args"]}:
+            return None
+        idx = {}
+        for a in self.atoms:
+            if a[0] == "r" and any(a[1] == b["rel"] for b in rels):
+                idx.setdefault(a[1], []).append(a[2:])
+                if a[1] in SYMMETRIC:
+                    idx[a[1]].append(a[2:][::-1])
+        envs = [{}]
+        for a in sorted(rels, key=lambda a: len(idx.get(a["rel"], ()))):
+            nxt = []
+            for env in envs:
+                for tup in idx.get(a["rel"], ()):
+                    e = dict(env)
+                    for x, t in zip(a["args"], tup):
+                        if e.setdefault(x, t) != t or not self.v.fits(self.g.terms[t].sort, sorts[x]):
+                            break
+                    else:
+                        nxt.append(e)
+            envs = nxt
+            if not envs:
+                break
+        # роль сцены, встретившаяся дважды в одном атоме (m ⩽ m), уже отсеяна setdefault
+        return envs
+
+    def _known(self, atom):
+        """Атом уже заведён (или тождественно верен) — без заведения нового."""
+        if atom[0] == "r" and atom[1] in SYMMETRIC and str(atom[3]) < str(atom[2]):
+            atom = (atom[0], atom[1], atom[3], atom[2])
+        if atom[0] == "r" and atom[1] in REFLEXIVE and atom[2] == atom[3]:
+            return True
+        return atom in self.var
 
     def _add(self, lits, origin):
         if any(l is None for l in lits):

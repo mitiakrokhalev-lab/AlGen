@@ -274,7 +274,14 @@ def schemes(vocab, base, k=2, t=None):
 def grow_ops(vocab):
     """Достраивать служебные конструкции и дешёвые унарные (Z, ′, кручение),
     но не конструкции вселенной: их термы уже даны."""
-    return set(vocab.cons) - set(CONS) | {"center", "commutator", "torsion"}
+    return set(vocab.cons) - set(CONS) - NO_GROW | {"center", "commutator", "torsion"}
+
+
+# Семейства C(n), S(n), A(n), D(n) и n!, n + n не достраиваются: правила о них
+# (партия 18) со сценой «∀ n : Num» иначе строят их от каждого числового терма
+# базы (у G — 113 чисел, ≈ 900 новых термов, каркас — больше 9 ГБ вместо 0,7).
+# Правила применяются к членам семейств, которые уже есть во вселенной.
+NO_GROW = {"cyc", "sym-n", "alt", "dih", "num-fact", "num-add"}
 
 
 def skeleton(lib, vocab, base, part=None, with_rows=False):
