@@ -31,7 +31,7 @@ from collections import Counter
 
 from .etalon import Unsupported, judge, scheme
 from .params import Model, ParseError as PError, check
-from .identities import FREE_NILPOTENT, ParseError, holds, parse, show_poly, show_word, variety
+from .identities import FREE_NILPOTENT, ParseError, holds, nielsen_basis, parse, show_poly, show_word, tietze_iso, variety
 from .library import Library, Search
 from .logic import Graph, Theory, Var, Vocab, decide
 from . import formula as FM
@@ -42,6 +42,36 @@ MUST_CLOSE = {"правило", "следствие", "понятный конт
 
 def lit_str(a, v):
     return f"{'' if v else '¬'}{a[1]}({', '.join(map(str, a[2:]))})"
+
+
+def count_homs(gens, rels, n):
+    """Число гомоморфизмов ⟨gens | rels⟩ → Sₙ: перебор наборов перестановок."""
+    from itertools import permutations, product
+    perms = list(permutations(range(n)))
+    ident = tuple(range(n))
+
+    def mul(p, q):  # сначала p, потом q
+        return tuple(q[p[i]] for i in range(n))
+
+    def inv_p(p):
+        r = [0] * n
+        for i, x in enumerate(p):
+            r[x] = i
+        return tuple(r)
+
+    count = 0
+    for imgs in product(perms, repeat=len(gens)):
+        env = dict(zip(gens, imgs))
+        ok = True
+        for r in rels:
+            acc = ident
+            for x, e in r:
+                acc = mul(acc, env[x] if e > 0 else inv_p(env[x]))
+            if acc != ident:
+                ok = False
+                break
+        count += ok
+    return count
 
 
 def run_card(c, vocab, lib):
@@ -65,6 +95,32 @@ def run_card(c, vocab, lib):
         if bad:
             return {**out, "корзина": "КРАСНЫЙ ФЛАГ", "почему": "; ".join(bad)}
         return {**out, "корзина": "закрыто вычислением", "вердикт": "GAP", "детали": "; ".join(got)}
+    if c.get("базисы"):
+        # Наборы слов — базисы свободной группы: преобразования Нильсена (identities.nielsen_basis).
+        got, bad = [], []
+        for b in c["базисы"]:
+            ok, steps = nielsen_basis([parse(w) for w in b["слова"]], b["ранг"])
+            (got if ok else bad).append("{" + ", ".join(b["слова"]) + "}" + (f": {', '.join(steps)}" if ok else ""))
+        if bad:
+            return {**out, "корзина": "КРАСНЫЙ ФЛАГ", "почему": "Нильсен не дошёл до базиса: " + "; ".join(bad)}
+        return {**out, "корзина": "закрыто вычислением", "вердикт": "Нильсен", "детали": "; ".join(got)}
+    if c.get("тице"):
+        # Изоморфизм копредставлений: взаимно обратные подстановки (identities.tietze_iso).
+        t = c["тице"]
+        maps = {k: {x: parse(w) for x, w in t[k].items()} for k in ("G→H", "H→G")}
+        ok, why = tietze_iso(t["G"], t["H"], maps["G→H"], maps["H→G"])
+        if not ok:
+            return {**out, "корзина": "КРАСНЫЙ ФЛАГ", "почему": f"Тице: {why}"}
+        return {**out, "корзина": "закрыто вычислением", "вердикт": "Тице", "детали": f"соотношения H после подстановки: {why}"}
+    if c.get("гомоморфизмы"):
+        got = []
+        for h in c["гомоморфизмы"]:
+            for k in h.get("k", [None]):
+                for n in h["n"]:
+                    rels = [parse(r.replace("^-k", f"^{-k}").replace("^k", f"^{k}") if k is not None else r)
+                            for r in h["соотношения"]]
+                    got.append(f"k = {k}, n = {n}: {count_homs(h['образующие'], rels, n)}")
+        return {**out, "корзина": "закрыто вычислением", "вердикт": "перебор", "детали": "; ".join(got)}
     if c.get("библиотека"):
         # Утверждение о конкретной группе: сверка с записью библиотеки.
         # [ключ, свойство, значение] или [ключ, «поле подгруппы», свойство, значение].

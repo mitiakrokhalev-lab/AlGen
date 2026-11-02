@@ -57,6 +57,84 @@ def reduce(w):
     return out
 
 
+def nielsen_basis(words, rank):
+    """Набор слов — базис свободной группы ранга rank? Жадные преобразования
+    Нильсена (uᵢ ↦ uᵢuⱼ^±1, uⱼ^±1uᵢ, пока длина уменьшается). Дошли до
+    {x₁^±1, …, x_rank^±1} — набор получен из базиса автоморфизмом: да (с цепочкой
+    шагов). Иначе — None: жадный спуск не решает задачу (нужна полная редукция)."""
+    ws = [reduce(w) for w in words]
+    steps = []
+    changed = True
+    while changed:
+        changed = False
+        for i in range(len(ws)):
+            for j in range(len(ws)):
+                if i == j:
+                    continue
+                for e in (1, -1):
+                    for side in ("r", "l"):
+                        v = power(ws[j], e)
+                        c = reduce(ws[i] + v if side == "r" else v + ws[i])
+                        if len(c) < len(ws[i]):
+                            steps.append(f"u{i + 1} ↦ " + (f"u{i + 1}·u{j + 1}^{e}" if side == "r" else f"u{j + 1}^{e}·u{i + 1}"))
+                            ws[i] = c
+                            changed = True
+    letters = {w[0][0] for w in ws if len(w) == 1}
+    if len(ws) == rank and all(len(w) == 1 for w in ws) and len(letters) == rank:
+        return True, steps
+    return None, steps
+
+
+def subst(w, images):
+    """Подстановка слов вместо переменных: images — {переменная: слово}."""
+    out = []
+    for x, e in w:
+        out += power(images[x], e)
+    return reduce(out)
+
+
+def cyclic_reduce(w):
+    w = reduce(w)
+    while len(w) > 1 and w[0] == (w[-1][0], -w[-1][1]):
+        w = w[1:-1]
+    return w
+
+
+def same_relator(u, v):
+    """u и v — одно соотношение: циклическая перестановка, может быть, обратного."""
+    u, v = cyclic_reduce(u), cyclic_reduce(v)
+    if len(u) != len(v):
+        return False
+    for w in (v, inv(v)):
+        if any(u == w[i:] + w[:i] for i in range(max(1, len(w)))):
+            return True
+    return False
+
+
+def tietze_iso(G, H, gh, hg):
+    """⟨X | R⟩ ≅ ⟨Y | S⟩ преобразованиями Тице. gh: x ↦ слово от Y, hg: y ↦ слово от X.
+    Достаточно: hg∘gh = id на X и gh∘hg = id на Y свободно, а S после подстановки hg —
+    ровно R (с точностью до циклической перестановки и обращения). Тогда
+    ⟨Y | S⟩ = ⟨X, Y | S, x = gh(x)⟩ = ⟨X | S(hg)⟩ = ⟨X | R⟩. Возвращает (да/нет, пояснение)."""
+    for x in G["образующие"]:
+        if subst(subst([(x, 1)], gh), hg) != [(x, 1)]:
+            return False, f"hg∘gh({x}) ≠ {x} свободно"
+    for y in H["образующие"]:
+        if subst(subst([(y, 1)], hg), gh) != [(y, 1)]:
+            return False, f"gh∘hg({y}) ≠ {y} свободно"
+    R = [parse(r) for r in G["соотношения"]]
+    S = [subst(parse(r), hg) for r in H["соотношения"]]
+    used = set()
+    for s_ in S:
+        j = next((j for j, r in enumerate(R) if j not in used and same_relator(r, s_)), None)
+        if j is None:
+            return False, f"соотношение {show_word(s_)} не из списка G"
+        used.add(j)
+    if len(used) != len(R):
+        return False, "не все соотношения G получены"
+    return True, "; ".join(show_word(x) for x in S)
+
+
 def parse(s, convention="x⁻¹y⁻¹xy"):
     """Слово в нотации задачника: ab, a⁻¹, a^3, a^b = b⁻¹ab, [a, b], [a, b, c] = [[a, b], c]."""
     s = s.replace("^-1", "⁻¹").replace("^{-1}", "⁻¹")

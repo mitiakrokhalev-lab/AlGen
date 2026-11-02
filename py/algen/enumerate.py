@@ -42,7 +42,7 @@ import numpy as np
 from types import SimpleNamespace
 
 from .library import GROUP_PROPS, MARKS, SUB_PROPS, Library, Scene, Search, built_library, jobs
-from .logic import App, Theory, Var, Vocab, decide
+from .logic import SYMMETRIC, App, Theory, Var, Vocab, decide
 
 # Свойства, которые не входят в атомы формы (флаг --без): схемы с большим
 # числом термов растут комбинаторно с каждым свойством.
@@ -80,6 +80,9 @@ def relation_atoms(g, terms):
                 out.append(("r", "le", a, b))
                 if str(a) < str(b):
                     out.append(("r", "eq-sub", a, b))
+                    # сопряжённость и перестановочность — если одна из подгрупп переменная схемы
+                    if isinstance(a, Var) or isinstance(b, Var):
+                        out += [("r", r, a, b) for r in ("conj-sub", "permutes") if r in g.v.rels]
     for i, a in enumerate(objs):
         for b in objs[i + 1:]:
             x, y = sorted((a, b), key=str)
@@ -91,6 +94,14 @@ def relation_atoms(g, terms):
             if g.terms[a].links.get("ambient") == g.terms[b].links.get("ambient"):
                 x, y = sorted((a, b), key=str)
                 out += [("r", r, x, y) for r in ("commute", "conjugate", "eq-elt") if r in g.v.rels]
+    # числа: =, ⩽, делимость, взаимная простота
+    nums = [t for t in terms if g.terms[t].sort == "Grp.num"]
+    for a in nums:
+        for b in nums:
+            if a != b:
+                out += [("r", r, a, b) for r in ("num-le", "num-divides") if r in g.v.rels]
+                if str(a) < str(b):
+                    out += [("r", r, a, b) for r in ("num-eq", "num-coprime") if r in g.v.rels]
     # вложение A ↪ B — только если одна из групп — переменная схемы (иначе пар слишком много)
     if "embeds" in g.v.rels:
         seen = set()
@@ -157,7 +168,7 @@ def canon_atom(a, perm):
     """Строка атома с переименованными переменными; у симметричных отношений
     аргументы упорядочены."""
     args = [canon(x, perm) for x in a[2:]]
-    if a[0] == "r" and a[1] in ("iso", "eq-sub"):
+    if a[0] == "r" and a[1] in SYMMETRIC:
         args.sort()
     return f"{a[1]}({', '.join(args)})"
 
@@ -770,6 +781,17 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 continue
             if decide(form.sc.T, fixed_l, form.lit(int(j)), form.sc.s).kind == "выводится":
                 const.add(int(j))
+    # Замкнутые числовые литералы (2 ⩽ 3, 6 = 2 · 3, простое ли 7): значение — арифметика,
+    # одно во всех строках; ни посылкой, ни целью они не нужны.
+    def ground(t):
+        return isinstance(t, App) and all(ground(a) for a in t.args)
+    for i, a in enumerate(getattr(form, "atoms", None) or []):
+        if all(ground(x) for x in a[2:] if not isinstance(x, (str, int))) and any(
+                isinstance(x, App) and form.g.terms.get(x) is not None and form.g.terms[x].sort == "Grp.num"
+                for x in a[2:]):
+            for j in (2 * i, 2 * i + 1):
+                if m.shape[0] and m[:, j].all():
+                    const.add(j)
     form.const = sorted(const)
     if const:
         goal_cols = [g for g in goal_cols if g not in const and g ^ 1 not in const]

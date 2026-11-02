@@ -47,6 +47,18 @@ BASES = {
     "GX": "∀ G : Grp; ∀ A : GSet(G)",
     "Gx": "∀ G : Grp; ∀ x : Elt(G)",
     "GE": "∀ G : Grp; ∀ F : Mor(G, G)",
+    "GXxy": "∀ G : Grp; ∀ A : GSet(G); ∀ x, y : Pt(A)",
+    "Gxy": "∀ G : Grp; ∀ x, y : Elt(G)",
+    "D": "∀ D : Diag",
+    "MN": "∀ m, n : Num",
+    "ABH": "∀ A : Grp; ∀ B : Grp; ∀ H : Sub(A ∗ B)",
+    "ABC": "∀ A : Grp; ∀ B : Grp; ∀ C : Grp",
+    # числа-параметры: семейства S(n), D(n), группы порядка p q, p^k, …
+    "n": "∀ n : Num",
+    "pG": "∀ p : Num; ∀ G : Grp",
+    "pqG": "∀ p, q : Num; ∀ G : Grp",
+    "pGH": "∀ p : Num; ∀ G : Grp; ∀ H : Sub(G)",
+    "pqGH": "∀ p, q : Num; ∀ G : Grp; ∀ H : Sub(G)",
 }
 
 # Конструкции вселенной (термы-«вершины» схем).
@@ -58,7 +70,14 @@ SYMMETRIC_SUB = {"meet", "join"}            # meet(G, H, K) = meet(G, K, H)
 
 # Термы глубины 2, известные по задачам (подтермы добавляются сами).
 DEPTH2 = {
-    "G": ["center(commutator(G))", "commutator(commutator(G))", "G / center(G)",
+    "G": ["commutator(commutator(commutator(G)))", "comm(G, commutator(G), whole-sub(G))",
+          "meet(G, center(G), commutator(G))", "join(G, center(G), commutator(G))",
+          "meet(G, center(G), frattini(G))", "meet(G, commutator(G), frattini(G))",
+          "centralizer(G, commutator(G))", "centralizer(G, frattini(G))",
+          "aut(center(G))", "aut(commutator(G))", "ab(commutator(G))", "frattini(commutator(G))",
+          "center(frattini(G))", "aut(ab(G))", "center(aut(G))", "commutator(aut(G))",
+          "commutator(G / center(G))", "frattini(G / frattini(G))", "torsion(ab(G))",
+          "center(commutator(G))", "commutator(commutator(G))", "G / center(G)",
           "center(G / center(G))", "G / commutator(G)", "aut(G) / inn(G)",
           "G / frattini(G)"],
     "AB": ["center(A × B)", "commutator(A × B)"],
@@ -68,12 +87,17 @@ DEPTH2 = {
 }
 
 
+# Базы, у которых вселенная — только термы задач архива и DEPTH2, без всех
+# конструкций глубины 1 (у ABH их 69: 4851 атом — таблица не нужна такая)
+ARCHIVE_ONLY = {"ABH", "ABC", "n", "pG", "pqG", "pGH", "pqGH", "MN"}
+
+
 def universe(vocab, base):
     """Термы вселенной базы (строки) в порядке построения."""
     g, _, _ = scheme(vocab, {"раздел": "grp", "условие": BASES[base]})
     vars_ = list(g.terms)
     out = []
-    for op in CONS:
+    for op in (() if base in ARCHIVE_ONLY else CONS):
         c = vocab.cons.get(op)
         if not c:
             continue
@@ -86,12 +110,56 @@ def universe(vocab, base):
             if t is not None and t not in out:
                 out.append(t)
     names = {str(t): t for t in g.terms}
-    for x in DEPTH2.get(base, []):
+    for x in DEPTH2.get(base, []) + archive_terms(vocab, base):
         t = term(g, x, names, "grp")
         for s in subterms(t):
             if isinstance(s, App) and s not in out:
                 out.append(s)
+    # термы замыкания (область, кообласть: profinite-map(G) ⇒ profinite(G)) — тоже во вселенной
+    for t in list(out):
+        for s in closure(g, [t] + [v for v in g.terms if isinstance(v, Var)]):
+            if isinstance(s, App) and s not in out:
+                out.append(s)
     return [str(t) for t in out]
+
+
+_ARCHIVE = {}
+
+
+def archive_terms(vocab, base):
+    """Термы карточек архива (data/archive/grp), переменные которых — переменные базы
+    (после переименования): вселенная базы содержит все термы её задач."""
+    if base in _ARCHIVE:
+        return _ARCHIVE[base]
+    from itertools import permutations
+    from .coverage import cards, shape, _rename, _sub, variants
+    from .logic import DATA
+    _, bvs, _, _ = shape(vocab, BASES[base])
+    out = []
+    for c in (x for _f, c0 in cards(DATA / "archive" / "grp") for x in variants(c0)):
+        if not c.get("условие") or not c.get("цель"):
+            continue
+        try:
+            g, prem, goal = scheme(vocab, {"раздел": "grp", "условие": c["условие"], "цель": c["цель"]})
+        except Exception:
+            continue
+        vs = [(t.name, g.terms[t].sort, {k: str(v) for k, v in g.terms[t].links.items()})
+              for t in g.terms if isinstance(t, Var)]
+        if len(vs) != len(bvs):
+            continue
+        used = set()
+        for at, _v in prem + [goal]:
+            for x in at[2:]:
+                if isinstance(x, App):
+                    used |= {y for y in _sub(x) if isinstance(y, App)}
+        for perm in permutations(range(len(bvs))):
+            ren = {vs[i][0]: bvs[perm[i]][0] for i in range(len(vs))}
+            if all(vs[i][1] == bvs[perm[i]][1] and
+                   {k: ren.get(v, v) for k, v in vs[i][2].items()} == bvs[perm[i]][2] for i in range(len(vs))):
+                out += [_rename(t, ren) for t in sorted(used, key=str) if _rename(t, ren) not in out]
+                break
+    _ARCHIVE[base] = out
+    return out
 
 
 def subterms(t):
@@ -155,7 +223,7 @@ def schemes(vocab, base, k=2, t=None):
             cl = closure(g, list(pick) + vars_)
             if len(maximal(g, cl)) > t:
                 continue
-            terms_ = sorted((t for t in cl if isinstance(t, App)), key=num.get)
+            terms_ = sorted((t for t in cl if isinstance(t, App)), key=lambda x: (num.get(x, 10 ** 6), str(x)))
             key = tuple(terms_)
             if key in seen:
                 continue
@@ -292,8 +360,10 @@ def build(lib, vocab, base, part, outdir, skel=None):
 # полной таблице G: проба дала 0,9, вышло 2,7). Части по ~1,5 ядро-часа:
 # задание GitHub длится не больше 6 часов, готовые части выгружаются, а
 # повторный запуск (PREV_BUILD) досчитывает недостающие.
-COST = {"G": 2.7, "GN": 148.0, "AB": 27.0, "GHK": 225.0, "GMN": 77.0, "GHF": 61.0, "Fam": 0.01,
-        "GX": 0.6, "Gx": 2.4, "GE": 4.8}
+# Часов на одну нить (замер 2.11: доля таблицы локально × 1,25 — машины GitHub медленнее)
+COST = {"G": 13.0, "GN": 145.0, "AB": 43.0, "GHK": 230.0, "GMN": 44.0, "GHF": 61.0, "Fam": 0.01,
+        "GX": 0.3, "Gx": 2.0, "GE": 7.0, "GXxy": 2.0, "Gxy": 0.5, "D": 0.01, "MN": 0.01, "ABH": 0.1,
+        "ABC": 0.5, "n": 0.01, "pG": 0.05, "pqG": 0.4, "pGH": 0.3, "pqGH": 1.4}
 PARTS = {b: max(1, round(c / 1.5)) for b, c in COST.items()}
 
 
@@ -602,6 +672,8 @@ def run_schemes(a):
         else:
             _STATE["forms"][base] = load(lib, vocab, base, a.dir)
         _STATE.setdefault("base_of", {})[id(_STATE["forms"][base])] = base
+        if not getattr(a, "no_equiv", False) and getattr(_STATE["forms"][base], "rep", None) is None:
+            equiv_reps(_STATE["forms"][base])
         print(f"{base}: таблица {_STATE['forms'][base].e.shape}, {round(time.time() - t)} с",
               file=sys.stderr, flush=True)
         done = _run_pool(jobs, a, deadline, t0, done, total)

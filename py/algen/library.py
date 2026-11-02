@@ -23,7 +23,14 @@ from pathlib import Path
 from multiprocessing import Pool
 
 from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_chars, load_compl, load_endo, load_elts, load_homs, load_products
+from math import gcd
+
 from .logic import DATA, App, Graph, Theory, Var, Vocab
+
+# Числа (сорт Num) в перебора: малые и ∞; BS(m, n) — группы библиотеки
+INF = "∞"
+NUMS = (1, 2, 3, 4, 5, 6, 7, INF)
+BS = {(1, 1): "ZxZ", (1, 2): "BS12", (2, 1): "BS12", (2, 3): "BS23", (3, 2): "BS23"}
 
 INFINITE = DATA / "infinite" / "grp.json"
 # Конечные множители произведений сверх малых и простых: A₄, S₄, SL(2, 3) (коммутант Q₈
@@ -842,13 +849,19 @@ class Search:
         # Несколько групп или больше двух переменных (цепочки подгрупп, гомоморфизмы):
         # строк иначе миллионы, берём сокращённый набор объектов.
         many = (sum(1 for t in self.vars if graph.terms[t].sort == "Grp.obj") > 1
-                or len(self.vars) > 2)
+                or len(self.vars) > 2 or any(graph.terms[t].sort == "Grp.num" for t in self.vars))
         # Для схем с несколькими группами — бесконечные и малые конечные.
         # Неразрешимые конечные порядка ⩽ 120 (A₅, S₅, SL(2, 5), …) нужны всегда.
         self.objects = [k for k, o in lib.obj.items()
                         if not many or (not o.get("синтез") and (
                             not o["конечная"] or int(k.split(":")[0]) <= max_order
                             or (o["свойства"].get("solvable") is False and int(k.split(":")[0]) <= 120)))]
+        if sum(1 for t in self.vars if graph.terms[t].sort == "Grp.obj") >= 3:
+            # Три группы и больше: строк — куб числа объектов; берём конечные порядка ⩽ 12
+            # и бесконечные из CORE (A × B ≅ A × C — по ключам построенных произведений).
+            self.objects = [k for k, o in lib.obj.items() if not o.get("синтез") and (
+                (o["конечная"] and int(k.split(":")[0]) <= 12) or (not o["конечная"] and k in CORE))]
+            many = False
         if many:
             # Разложимые примеры: построенные произведения небольшого набора групп.
             have = set(self.objects)
@@ -922,6 +935,10 @@ class Search:
                 return
             for f in self.morphisms(d, c):
                 env[t] = f
+                yield from self._assign(i + 1, env)
+        elif info.sort == "Grp.num":
+            for n in NUMS:
+                env[t] = ("num", n)
                 yield from self._assign(i + 1, env)
         elif info.sort == "Grp.diag":
             for k in self.lib.diag:
@@ -1020,6 +1037,56 @@ class Search:
             k = x and lib.obj[x].get("out")
             return ("obj", k) if k else None
         args = [self._image(a, env) for a in t.args]
+        if t.op.startswith("num:"):
+            return ("num", int(t.op[4:]))
+        if t.op in ("alt", "sym-n", "cyc") and args[0] and args[0][0] == "num":
+            if not hasattr(self, "_by_name"):
+                self._by_name = {o.get("имя"): k for k, o in lib.obj.items() if o.get("конечная")}
+            n = args[0][1]
+            k = self._by_name.get({"alt": "A", "sym-n": "S", "cyc": "C"}[t.op] + str(n)) if n != INF else None
+            return ("obj", k) if k else None
+        if t.op == "dih" and args[0] and args[0][0] == "num":
+            if not hasattr(self, "_by_name"):
+                self._by_name = {o.get("имя"): k for k, o in lib.obj.items() if o.get("конечная")}
+            n = args[0][1]
+            k = None if n == INF else (self._by_name.get("C2") if n == 1 else
+                                        self._by_name.get("C2 x C2") if n == 2 else self._by_name.get(f"D{2 * n}"))
+            return ("obj", k) if k else None
+        if t.op in ("num-add", "num-sub", "num-pow", "num-gcd") and all(a and a[0] == "num" for a in args):
+            a, b = args[0][1], args[1][1]
+            if INF in (a, b):
+                return ("num", INF) if t.op in ("num-add", "num-pow") and a != 1 else None
+            v = {"num-add": a + b, "num-sub": a - b, "num-pow": a ** b if b < 64 else None,
+                 "num-gcd": gcd(a, b)}[t.op]
+            return ("num", v) if v is not None and v >= 1 else None
+        if t.op == "num-phi" and args[0] and args[0][0] == "num" and args[0][1] != INF:
+            n = args[0][1]
+            return ("num", sum(1 for i in range(1, n + 1) if gcd(i, n) == 1))
+        if t.op == "num-sylow" and args[0] and args[0][0] == "num" and args[0][1] != INF:
+            p, key = args[0][1], self._obj(args[1])
+            o = key and lib.obj[key]
+            if not o or not o.get("конечная") or not o.get("подгруппы") or p < 2 or any(p % d == 0 for d in range(2, p)):
+                return None
+            n = int(key.split(":")[0])
+            pp = 1
+            while n % (pp * p) == 0:
+                pp *= p
+            for x in o["подгруппы"]:
+                if int(x["≅"].split(":")[0]) == pp:
+                    nid = x.get("нормализатор")
+                    nx = next((y for y in o["подгруппы"] if y["id"] == nid), None) if nid is not None else None
+                    if x["свойства"].get("normal"):
+                        return ("num", 1)
+                    return ("num", n // int(nx["≅"].split(":")[0])) if nx else None
+            return None
+        if t.op == "num-fact" and args[0] and args[0][0] == "num":
+            n = args[0][1]
+            if n == INF:
+                return ("num", INF)
+            from math import factorial
+            return ("num", factorial(n))
+        if t.op in ("ord", "index", "num-mul", "prod-card", "bs"):
+            return self._num_image(t, args, env)
         if t.op in ("colim", "lim") and args[0] and args[0][0] == "diag":
             k = lib.diag[args[0][1]].get("прямой предел" if t.op == "colim" else "обратный предел")
             return ("obj", k) if k else None
@@ -1143,6 +1210,48 @@ class Search:
             return None
         return None
 
+    def _im_order(self, im):
+        """Порядок группы образа: число, INF или None."""
+        k = self._obj(im)
+        if k is None:
+            return None
+        o = self.lib.obj[k]
+        if o.get("конечная"):
+            return int(k.split(":")[0])
+        fin = o["свойства"].get("finite")
+        return INF if fin is False else None
+
+    def _num_image(self, t, args, env):
+        lib = self.lib
+        if t.op == "ord":
+            n = self._im_order(args[0])
+            return ("num", n) if n is not None else None
+        if t.op == "index" and args[1] and args[1][0] == "sub":
+            key, j = args[1][1], args[1][2]
+            x = lib.obj[key]["подгруппы"][j]
+            if x["свойства"].get("finite-index") is False:
+                return ("num", INF)
+            a, b = self._im_order(("obj", key)), self._im_order(args[1])
+            if isinstance(a, int) and isinstance(b, int):
+                return ("num", a // b)
+            return None
+        if t.op == "num-mul" and all(a and a[0] == "num" for a in args):
+            a, b = args[0][1], args[1][1]
+            return ("num", INF if INF in (a, b) else a * b)
+        if t.op == "prod-card" and args[1] and args[2] and args[1][0] == args[2][0] == "sub":
+            # |HK| = |H| |K| / |H ∩ K|
+            m = self._image(App("meet", t.args), env)
+            h, k, w = self._im_order(args[1]), self._im_order(args[2]), self._im_order(m)
+            if INF in (h, k):
+                return ("num", INF)
+            if all(isinstance(x, int) for x in (h, k, w)):
+                return ("num", h * k // w)
+            return None
+        if t.op == "bs" and all(a and a[0] == "num" for a in args):
+            k = BS.get((args[0][1], args[1][1]))
+            return ("obj", k) if k and k in lib.obj else None
+        return None
+
     def _mor_facts(self, f):
         _, kind, d, c, j = f
         td = self.lib.obj[d]["свойства"].get("trivial")
@@ -1166,7 +1275,7 @@ class Search:
     def facts(self, env, terms=None):
         """{атом: значение} по записям библиотеки и {атом: (пометка, значение)}
         для значений с пометками из MARKS."""
-        out, hard, subs, elts = {}, {}, {}, {}
+        out, hard, subs, elts, nums = {}, {}, {}, {}, {}
         for t in terms or self.g.terms:
             im = self._image(t, env)
             if im is None:
@@ -1175,6 +1284,16 @@ class Search:
                 for p, v in (self.lib.fam if im[0] == "fam" else self.lib.diag)[im[1]]["свойства"].items():
                     if self.g.v.prop_fits(p, self.g.terms[t].sort):
                         out[("p", p, t)] = v
+                continue
+            if im[0] == "num":
+                n = im[1]
+                fin = n != INF
+                for p, v in (("num-finite", fin), ("num-one", n == 1), ("num-two", n == 2),
+                             ("num-prime", fin and n > 1 and all(n % d for d in range(2, n))),
+                             ("num-even", n % 2 == 0 if fin else None)):
+                    if v is not None and p in self.g.v.props:
+                        out[("p", p, t)] = v
+                nums[t] = n
                 continue
             if im[0] == "pt":
                 continue
@@ -1259,6 +1378,21 @@ class Search:
                 elif ia[2] == ib[2] and cls[ia[2]].get("nc"):
                     # «другой элемент класса» берётся не перестановочным с x
                     out[("r", "commute", x, y)] = False
+        # числа: равенство, делимость, взаимная простота, порядок (∞ — бесконечная мощность,
+        # мощности ∞ между собой не сравниваются)
+        for a, x in nums.items():
+            for b, y in nums.items():
+                if a == b:
+                    continue
+                fin = INF not in (x, y)
+                rels = {"num-le": (x <= y) if fin else (True if y == INF and x != INF else None),
+                        "num-divides": (y % x == 0) if fin else None}
+                if str(a) < str(b):
+                    rels["num-eq"] = (x == y) if fin else (False if x != y else None)
+                    rels["num-coprime"] = (gcd(x, y) == 1) if fin else None
+                for r, v in rels.items():
+                    if v is not None and r in self.g.v.rels:
+                        out[("r", r, a, b)] = v
         # ≅ между группами: один ключ — изоморфны; разные ключи конечных таблиц — нет
         objs = {}
         for t in terms or self.g.terms:
@@ -1431,6 +1565,8 @@ class Search:
         return out
 
     def _name(self, im):
+        if im[0] == "num":
+            return str(im[1])
         if im[0] == "mor":
             _, kind, d, c, j = im
             nd, nc = (self.lib.obj[x].get("имя", x) for x in (d, c))

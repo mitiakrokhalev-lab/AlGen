@@ -311,6 +311,12 @@ class Graph:
 # --- заземление --------------------------------------------------------------
 
 
+# Симметричные отношения: атом — с аргументами по возрастанию строки;
+# рефлексивные: R(t, t) верно всегда.
+SYMMETRIC = {"iso", "eq-sub", "conj-sub", "permutes", "commute", "conjugate", "eq-elt", "num-eq", "num-coprime"}
+REFLEXIVE = SYMMETRIC - {"num-coprime"}
+
+
 class Theory:
     """Пропозициональная теория графа: переменные-атомы и клаузы."""
 
@@ -339,9 +345,9 @@ class Theory:
         return n if value else -n
 
     def _var_of(self, atom):
-        if atom[0] == "r" and atom[1] in ("iso", "eq-sub") and str(atom[3]) < str(atom[2]):
+        if atom[0] == "r" and atom[1] in SYMMETRIC and str(atom[3]) < str(atom[2]):
             atom = (atom[0], atom[1], atom[3], atom[2])  # симметричные отношения
-        if atom[0] == "r" and atom[1] in ("iso", "eq-sub") and atom[2] == atom[3]:
+        if atom[0] == "r" and atom[1] in REFLEXIVE and atom[2] == atom[3]:
             return 0
         if atom not in self.var:
             self.var[atom] = len(self.atoms) + 1
