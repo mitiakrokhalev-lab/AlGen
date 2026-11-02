@@ -24451,7 +24451,8 @@
     "linear": false,
     "residually-finite": false,
     "simple": false,
-    "countable": true
+    "countable": true,
+    "indecomposable": true
    },
    "почему": {
     "perfect": "[1 + e_ij, 1 + e_jk] = 1 + e_ik при i < j < k, а между i < k в ℚ всегда есть j",
@@ -24472,7 +24473,8 @@
     "linear": "g_k = 1 + e_{k,k+1}: 1 + e_{k+2,k+3} коммутирует с g₁…g_k, но не с g_{k+1} — бесконечная убывающая цепочка централизаторов",
     "residually-finite": "конечный фактор — конечная совершенная 2-группа, т. е. тривиален",
     "simple": "сечение ℚ = L ⊔ U (L < U): матрицы 1 + x с x на местах L × U образуют нормальную подгруппу (у g и g⁻¹ ненулевые места (α, λ) с α ⩽ λ и (μ, β) с μ ⩽ β), нетривиальную и собственную (McLain, 1954)",
-    "countable": "финитарные матрицы над счётным полем, индексы из ℚ"
+    "countable": "финитарные матрицы над счётным полем, индексы из ℚ",
+    "indecomposable": "пусть G = A × B, A, B ≠ 1. Нормальное замыкание g = 1 + N ≠ 1 содержит трансвекцию: β — наибольший столбец N с ненулевым столбцом, γ больше всех индексов g; [g, 1 + e_βγ] = 1 + v e_γᵀ, v = (1 − g⁻¹)e_β ≠ 0; сопряжение 1 + t e_ζα (α — наибольший индекс в носителе v, ζ < α) даёт 1 + t v_α e_ζγ. Коммутаторы [1 + a e_λζ, 1 + c e_ζγ] и [1 + c e_ζγ, 1 + a e_γμ] дают все 1 + s e_λμ с λ < ζ, μ > γ. Значит, A и B содержат все трансвекции 1 + s e_λμ при достаточно малом λ и большом μ, и A ∩ B ≠ 1"
    },
    "подгруппы": [
     {
@@ -24517,7 +24519,9 @@
    "inn": "McLain2",
    "произведения": {
     "2:1": "C2xMcL"
-   }
+   },
+   "aut": "AutMcLain2",
+   "почему aut": "Aut ⊇ Inn ≅ G и Aut(ℚ, <) (перестановки индексов); несчётна"
   },
   {
    "id": "FreeC2inf",
@@ -27170,7 +27174,8 @@
     "bounded-exponent": false,
     "p-group": false,
     "simple": false,
-    "countable": true
+    "countable": true,
+    "indecomposable": true
    },
    "почему": {
     "perfect": "[1 + a e_ij, 1 + b e_jk] = 1 + ab e_ik",
@@ -27183,7 +27188,8 @@
     "bi-orderable": "локально нильпотентна без кручения",
     "фраттини": "локально нильпотентна и совершенна: максимальных подгрупп нет",
     "simple": "сечение ℚ = L ⊔ U (L < U): матрицы 1 + x с x на местах L × U образуют нормальную подгруппу (у g и g⁻¹ ненулевые места (α, λ) с α ⩽ λ и (μ, β) с μ ⩽ β), нетривиальную и собственную (McLain, 1954)",
-    "countable": "финитарные матрицы над счётным полем, индексы из ℚ"
+    "countable": "финитарные матрицы над счётным полем, индексы из ℚ",
+    "indecomposable": "пусть G = A × B, A, B ≠ 1. Нормальное замыкание g = 1 + N ≠ 1 содержит трансвекцию: β — наибольший столбец N с ненулевым столбцом, γ больше всех индексов g; [g, 1 + e_βγ] = 1 + v e_γᵀ, v = (1 − g⁻¹)e_β ≠ 0; сопряжение 1 + t e_ζα (α — наибольший индекс в носителе v, ζ < α) даёт 1 + t v_α e_ζγ. Коммутаторы [1 + a e_λζ, 1 + c e_ζγ] и [1 + c e_ζγ, 1 + a e_γμ] дают все 1 + s e_λμ с λ < ζ, μ > γ. Значит, A и B содержат все трансвекции 1 + s e_λμ при достаточно малом λ и большом μ, и A ∩ B ≠ 1"
    },
    "подгруппы": [
     {
@@ -27223,7 +27229,9 @@
    "ссылки": [
     "McLain, Proc. Cambridge Philos. Soc. 50 (1954)"
    ],
-   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть",
+   "aut": "AutMcLQ",
+   "почему aut": "Aut ⊇ Inn ≅ G и Aut(ℚ, <) (перестановки индексов); несчётна"
   },
   {
    "id": "SumMcL",
@@ -28053,6 +28061,204 @@
      },
      "фактор": "1:1"
     }
+   ]
+  },
+  {
+   "id": "AutMcLQ",
+   "имя": "Aut(M(ℚ, ℚ))",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Группа автоморфизмов группы Маклейна M(ℚ, ℚ). Несчётна, поэтому не вкладывается в G.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "countable": false,
+    "centerless": true,
+    "amenable": false,
+    "linear": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false,
+    "torsion-free": false
+   },
+   "почему": {
+    "countable": "Aut(ℚ, <) действует перестановкой индексов, e_λμ ↦ e_σλ,σμ, точно; |Aut(ℚ, <)| = 2^ℵ₀",
+    "centerless": "G без центра: централизатор Inn(G) в Aut(G) тривиален",
+    "amenable": "содержит Aut(ℚ, <), а в ней F₂ (всякая счётная левоупорядочиваемая группа действует на ℚ с сохранением порядка)",
+    "simple": "Inn(G) ≅ G — нетривиальная нормальная, собственная (Inn счётна)",
+    "periodic": "порядковый автоморфизм x ↦ x + 1 бесконечного порядка",
+    "solvable": "содержит Inn(G) ≅ G",
+    "linear": "содержит Inn(G) ≅ G",
+    "residually-finite": "содержит Inn(G) ≅ G",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "left-orderable": "есть кручение",
+    "residually-nilpotent": "содержит Inn(G) ≅ G",
+    "torsion-free": "сопряжение диагональной матрицей diag(dλ), d₀ = −1, остальные 1: 1 + a e_λμ ↦ 1 + dλ a dμ e_λμ, автоморфизм порядка 2"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "AutMcLQ"
+    },
+    {
+     "id": "Inn",
+     "имя": "Inn(G)",
+     "≅": "McLQ",
+     "свойства": {
+      "normal": true,
+      "whole": false,
+      "central": false,
+      "finite-index": false,
+      "maximal": false
+     },
+     "почему": "Inn счётна, Aut несчётна; Inn ⊊ ⟨Inn, σ⟩ ⊊ Aut для сдвига индексов σ: x ↦ x + 1 (σ не внутренний: внутренние автоморфизмы неподвижны на 1 + e_λμ при больших λ, μ, а ⟨Inn, σ⟩ счётна)"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(G)",
+     "≅": "AutMcLQ",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "ссылки": [
+    "McLain, Proc. Cambridge Philos. Soc. 50 (1954)"
+   ]
+  },
+  {
+   "id": "AutMcLain2",
+   "имя": "Aut(M(ℚ, 𝔽₂))",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Группа автоморфизмов группы Маклейна M(ℚ, 𝔽₂). Несчётна, поэтому не вкладывается в G.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "countable": false,
+    "centerless": true,
+    "amenable": false,
+    "linear": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false,
+    "torsion-free": false
+   },
+   "почему": {
+    "countable": "Aut(ℚ, <) действует перестановкой индексов, e_λμ ↦ e_σλ,σμ, точно; |Aut(ℚ, <)| = 2^ℵ₀",
+    "centerless": "G без центра: централизатор Inn(G) в Aut(G) тривиален",
+    "amenable": "содержит Aut(ℚ, <), а в ней F₂ (всякая счётная левоупорядочиваемая группа действует на ℚ с сохранением порядка)",
+    "simple": "Inn(G) ≅ G — нетривиальная нормальная, собственная (Inn счётна)",
+    "periodic": "порядковый автоморфизм x ↦ x + 1 бесконечного порядка",
+    "solvable": "содержит Inn(G) ≅ G",
+    "linear": "содержит Inn(G) ≅ G",
+    "residually-finite": "содержит Inn(G) ≅ G",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "left-orderable": "содержит G с кручением",
+    "residually-nilpotent": "содержит Inn(G) ≅ G",
+    "torsion-free": "содержит Inn(G) ≅ G, а G — 2-группа"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "AutMcLain2"
+    },
+    {
+     "id": "Inn",
+     "имя": "Inn(G)",
+     "≅": "McLain2",
+     "свойства": {
+      "normal": true,
+      "whole": false,
+      "central": false,
+      "finite-index": false,
+      "maximal": false
+     },
+     "почему": "Inn счётна, Aut несчётна; Inn ⊊ ⟨Inn, σ⟩ ⊊ Aut для сдвига индексов σ: x ↦ x + 1 (σ не внутренний: внутренние автоморфизмы неподвижны на 1 + e_λμ при больших λ, μ, а ⟨Inn, σ⟩ счётна)"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(G)",
+     "≅": "AutMcLain2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1",
+   "ссылки": [
+    "McLain, Proc. Cambridge Philos. Soc. 50 (1954)"
    ]
   }
  ],
