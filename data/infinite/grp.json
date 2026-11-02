@@ -26947,7 +26947,9 @@
    "фраттини": "все",
    "абелианизация": "SumQ",
    "inn": "SumQ",
-   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть",
+   "aut": "AutHQD",
+   "почему aut": "Aut ⊇ Sym(ℕ) (перестановки слагаемых); несчётна"
   },
   {
    "id": "Hinf",
@@ -27314,7 +27316,9 @@
    "произведения": {
     "SumMcL": "SumMcL"
    },
-   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть"
+   "статус": "не проверено: группа предложена агентом-нейросетью, доводы проверила нейросеть",
+   "aut": "AutSumMcL",
+   "почему aut": "Aut ⊇ Sym(ℕ) (перестановки слагаемых); несчётна"
   },
   {
    "id": "C2xMcL",
@@ -28259,6 +28263,193 @@
    "центр": "1",
    "ссылки": [
     "McLain, Proc. Cambridge Philos. Soc. 50 (1954)"
+   ]
+  },
+  {
+   "id": "AutSumMcL",
+   "имя": "Aut(⊕_ℕ M(ℚ, 𝔽₂))",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Группа автоморфизмов ⊕_ℕ M(ℚ, 𝔽₂). Несчётна, поэтому не вкладывается в G.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "countable": false,
+    "amenable": false,
+    "linear": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false,
+    "torsion-free": false,
+    "centerless": true
+   },
+   "почему": {
+    "amenable": "содержит Sym(ℕ) (перестановки слагаемых), а в ней F₂",
+    "linear": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "residually-finite": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "residually-nilpotent": "содержит Sym(ℕ) (перестановки слагаемых), а она совершенна",
+    "solvable": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "dedekind": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "torsion-free": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "left-orderable": "есть кручение",
+    "periodic": "содержит Sym(ℕ) (перестановки слагаемых), а в ней есть элементы бесконечного порядка",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "simple": "Inn(G) — нетривиальная нормальная, собственная (Inn счётна)",
+    "countable": "∏_ℕ Inn(M) ⊆ Aut действует покоординатно, |∏ M| = 2^ℵ₀",
+    "centerless": "G без центра: централизатор Inn(G) в Aut(G) тривиален"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "AutSumMcL"
+    },
+    {
+     "id": "Inn",
+     "имя": "Inn(G)",
+     "≅": "SumMcL",
+     "свойства": {
+      "normal": true,
+      "whole": false,
+      "finite-index": false
+     },
+     "почему": "Inn счётна, Aut несчётна"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(G)",
+     "≅": "AutSumMcL",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "1"
+  },
+  {
+   "id": "AutHQD",
+   "имя": "Aut(H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ))",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Группа автоморфизмов H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ). Несчётна, поэтому не вкладывается в G.",
+   "свойства": {
+    "trivial": false,
+    "abelian": false,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "simple": false,
+    "solvable": false,
+    "nilpotent": false,
+    "polycyclic": false,
+    "metabelian": false,
+    "class-2": false,
+    "dedekind": false,
+    "countable": false,
+    "amenable": false,
+    "linear": false,
+    "residually-finite": false,
+    "residually-nilpotent": false,
+    "property-t": false,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "left-orderable": false,
+    "bi-orderable": false,
+    "free-abelian": false,
+    "torsion-free": false
+   },
+   "почему": {
+    "amenable": "содержит Sym(ℕ) (перестановки слагаемых), а в ней F₂",
+    "linear": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "residually-finite": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "residually-nilpotent": "содержит Sym(ℕ) (перестановки слагаемых), а она совершенна",
+    "solvable": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "dedekind": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "torsion-free": "содержит Sym(ℕ) (перестановки слагаемых)",
+    "left-orderable": "есть кручение",
+    "periodic": "содержит Sym(ℕ) (перестановки слагаемых), а в ней есть элементы бесконечного порядка",
+    "fin-gen": "несчётна",
+    "property-t": "несчётна, значит, не к. п.",
+    "simple": "Inn(G) — нетривиальная нормальная, собственная (Inn счётна)",
+    "countable": "центральные автоморфизмы g ↦ g·φ(gZ), φ ∈ Hom(G/Z, Z) = Hom(ℚ^(ℕ)², ⊕ℚ/ℤ) (обратный g ↦ g·φ(gZ)⁻¹, так как φ(Z) = 1), а Hom(ℚ, ℚ/ℤ) несчётна"
+   },
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "AutHQD"
+    },
+    {
+     "id": "Inn",
+     "имя": "Inn(G)",
+     "≅": "SumQ",
+     "свойства": {
+      "normal": true,
+      "whole": false,
+      "finite-index": false
+     },
+     "почему": "Inn счётна, Aut несчётна"
+    },
+    {
+     "id": "все",
+     "имя": "Aut(G)",
+     "≅": "AutHQD",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": false,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
    ]
   }
  ],
