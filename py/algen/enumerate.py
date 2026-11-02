@@ -1162,7 +1162,8 @@ def questions(form, report, limit=None):
                 for j in S:
                     maybe &= ~m[:, j ^ 1]
                 r["вопрос"] = {"S": " & ".join(names), "групп": n, "неизвестно": int(maybe.sum()) - n,
-                               "группы": [form.where(int(x)) for x in rows(S)[:3]]}
+                               "группы": [form.where(int(x)) for x in rows(S)[:3]],
+                               "все группы": sorted(form.where(int(x)) for x in rows(S))}
                 break
 
 
@@ -1307,7 +1308,7 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
         if r["вердикт"] != "неизвестно" or not q:
             continue
         x = qs.setdefault(q["S"], {"запретов": 0, "групп": q["групп"], "неизвестно": q.get("неизвестно"), "группы": q["группы"],
-                                   "пример": " & ".join(r["запрет"])})
+                                   "все группы": q.get("все группы"), "пример": " & ".join(r["запрет"])})
         x["запретов"] += 1
     summary["вопросы"] = qs
     summary["без вопроса"] = sum(1 for r in classes.values() if r["вердикт"] == "неизвестно" and not r.get("вопрос"))
