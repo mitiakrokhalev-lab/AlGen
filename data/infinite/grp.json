@@ -4399,7 +4399,8 @@
    "aut": "AutSumC2",
    "произведения": {
     "SumC2": "SumC2",
-    "2:1": "SumC2"
+    "2:1": "SumC2",
+    "SumC3": "SumC6"
    },
    "почему произведения": "⊕_ℕ C₂ ≅ (⊕_ℕ C₂)², перенумерация",
    "фраттини": "0",
@@ -4530,7 +4531,8 @@
    ],
    "произведения": {
     "SumC3": "SumC3",
-    "3:1": "SumC3"
+    "3:1": "SumC3",
+    "SumC2": "SumC6"
    },
    "почему произведения": "перенумерация слагаемых",
    "абелианизация": "SumC3",
@@ -28680,6 +28682,183 @@
    "ссылки": [
     "van der Waerden, Math. Z. 36 (1933)"
    ]
+  },
+  {
+   "id": "Corner",
+   "имя": "группа Корнера A (ранг 2)",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Абелева без кручения ранга 2, хопфова, а A × A не хопфова (Корнер, 1965). Записаны только значения, которые следуют из этого описания.",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "free-abelian": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "metabelian": true,
+    "class-2": true,
+    "dedekind": true,
+    "perfect": false,
+    "centerless": false,
+    "torsion-free": true,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "divisible": false,
+    "polycyclic": false,
+    "amenable": true,
+    "linear": true,
+    "left-orderable": true,
+    "bi-orderable": true,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "countable": true,
+    "hopfian": true
+   },
+   "почему": {
+    "divisible": "делимая без кручения конечного ранга — ℚⁿ, а она вместе с ℚⁿ × ℚⁿ хопфова",
+    "fin-gen": "к. п. без кручения — ℤⁿ, а ℤⁿ × ℤⁿ хопфова",
+    "linear": "счётная без кручения абелева вкладывается в (ℝ, +) ⊂ UT₂(ℝ)",
+    "bi-orderable": "абелева без кручения (Леви)",
+    "property-t": "бесконечна и аменабельна",
+    "hopfian": "Корнер (1965)"
+   },
+   "трудно": [
+    "hopfian"
+   ],
+   "ссылки": [
+    "A. L. S. Corner, Three examples on hopficity in torsion-free abelian groups, Acta Math. Acad. Sci. Hungar. 16 (1965)"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "Corner"
+    },
+    {
+     "id": "все",
+     "имя": "вся",
+     "≅": "Corner",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "абелианизация": "Corner",
+   "произведения": {
+    "Corner": "Corner2"
+   }
+  },
+  {
+   "id": "Corner2",
+   "имя": "A × A для группы Корнера A",
+   "статус": "не проверено: записала нейросеть (2.11, тред библиотеки)",
+   "заметка": "Абелева без кручения ранга 4, не хопфова (Корнер, 1965).",
+   "свойства": {
+    "trivial": false,
+    "abelian": true,
+    "cyclic": false,
+    "locally-cyclic": false,
+    "finite": false,
+    "fin-gen": false,
+    "free": false,
+    "free-abelian": false,
+    "simple": false,
+    "solvable": true,
+    "nilpotent": true,
+    "metabelian": true,
+    "class-2": true,
+    "dedekind": true,
+    "perfect": false,
+    "centerless": false,
+    "torsion-free": true,
+    "periodic": false,
+    "locally-finite": false,
+    "bounded-exponent": false,
+    "p-group": false,
+    "divisible": false,
+    "polycyclic": false,
+    "amenable": true,
+    "linear": true,
+    "left-orderable": true,
+    "bi-orderable": true,
+    "property-t": false,
+    "residually-nilpotent": true,
+    "countable": true,
+    "hopfian": false,
+    "indecomposable": false
+   },
+   "почему": {
+    "divisible": "делимая без кручения конечного ранга — ℚⁿ, а она вместе с ℚⁿ × ℚⁿ хопфова",
+    "fin-gen": "к. п. без кручения — ℤⁿ, а ℤⁿ × ℤⁿ хопфова",
+    "linear": "счётная без кручения абелева вкладывается в (ℝ, +) ⊂ UT₂(ℝ)",
+    "bi-orderable": "абелева без кручения (Леви)",
+    "property-t": "бесконечна и аменабельна",
+    "hopfian": "Корнер (1965)",
+    "indecomposable": "A × A, A ≠ 1"
+   },
+   "трудно": [
+    "hopfian"
+   ],
+   "ссылки": [
+    "A. L. S. Corner, Three examples on hopficity in torsion-free abelian groups, Acta Math. Acad. Sci. Hungar. 16 (1965)"
+   ],
+   "подгруппы": [
+    {
+     "id": "1",
+     "имя": "1",
+     "≅": "1:1",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": false,
+      "central": true,
+      "finite-index": false
+     },
+     "фактор": "Corner2"
+    },
+    {
+     "id": "все",
+     "имя": "вся",
+     "≅": "Corner2",
+     "свойства": {
+      "normal": true,
+      "characteristic": true,
+      "maximal": false,
+      "whole": true,
+      "central": true,
+      "finite-index": true
+     },
+     "фактор": "1:1"
+    }
+   ],
+   "центр": "все",
+   "коммутант": "1",
+   "абелианизация": "Corner2"
   }
  ],
  "семейства": [
