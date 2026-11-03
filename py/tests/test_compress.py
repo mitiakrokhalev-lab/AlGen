@@ -329,3 +329,22 @@ class TestCopies(unittest.TestCase):
         self.assertEqual(C.verify(f, rep), [])
         C.reopen(rep, [q1["№"]])
         self.assertFalse(q2["свёрнута"] or q2c["свёрнута"])
+
+
+class TestRegress(unittest.TestCase):
+    def test_regress_clean_and_catches_loss(self):
+        rng = random.Random(3)
+        for _ in range(50):
+            cl = [[rng.choice(["", "-"]) + rng.choice(ATOMS) for _ in range(2)] for _ in range(rng.randint(0, 4))]
+            f = FakeForm(ATOMS, cl)
+            rows = []
+            for _ in range(rng.randint(1, 8)):
+                prem = rng.sample(ATOMS, rng.randint(1, 3))
+                goal = rng.choice([a for a in ATOMS if a not in prem])
+                rows.append(row(f, prem, goal, rng.choice(["неизвестно", "выводится", "опровергается"]), rng.randint(0, 5)))
+            before = copy.deepcopy(rows)
+            C.compress(f, rows)
+            self.assertEqual(C.regress(before, rows), [])
+        self.assertTrue(C.regress(before, rows[:-1]) or len(rows) == 0)
+        rows[0]["вердикт"] = "выводится" if rows[0]["вердикт"] != "выводится" else "неизвестно"
+        self.assertTrue(C.regress(before, rows))

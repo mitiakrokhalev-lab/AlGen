@@ -395,3 +395,32 @@ def verify(form, report, sample=None, rng=None):
         finally:
             s.delete()
     return bad
+
+
+ADDED = {"№", "свёрнута", "следует из", "сжатие", "экземпляр", "опровергнут", "вернулась", "ОШИБКА сжатия"}
+
+
+def regress(before, after):
+    """Сверка выдачи до/после сжатия: ни одна строка не потеряна, ни одно
+    прежнее поле (в том числе вердикт) не изменилось, у каждой свёрнутой
+    строки цепочка «следует из» кончается на несвёрнутых строках или на
+    экземпляре. Карточка архива, попавшая в выдачу, поэтому не может ни
+    потеряться, ни стать опровергнутой. Возвращает список нарушений."""
+    bad = []
+    if len(before) != len(after):
+        bad.append(("строк", len(before), len(after)))
+    for i, (b, a) in enumerate(zip(before, after)):
+        for k, v in b.items():
+            if k.startswith("_") or k in ADDED:
+                continue
+            if a.get(k) != v:
+                bad.append((i, "поле изменено", k))
+        extra = set(a) - set(b) - ADDED - {"_cols"}
+        if extra:
+            bad.append((i, "лишние поля", sorted(extra)))
+    kept = {r["№"] for r in after if "№" in r and not r.get("свёрнута")}
+    for i, r in enumerate(after):
+        if r.get("свёрнута") and not r.get("экземпляр"):
+            if not r.get("следует из") or any(d not in kept for d in r["следует из"]):
+                bad.append((i, "цепочка не кончается на оставленных"))
+    return bad
