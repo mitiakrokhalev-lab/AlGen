@@ -34,23 +34,30 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install numpy python-sat pyyaml
-      - uses: actions/download-artifact@v4
-        with:
-          pattern: tab-*
-          path: tab
-          merge-multiple: true
-          run-id: ${{ env.TABLES_RUN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: только таблицы (*.pickle) из артефактов сборки
+        # артефакт части — 1,4 ГБ (кэши значений), 20 частей не влезают на диск машины перебора
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p tab
+          df -h / /mnt || true
+          for i in $(seq 1 20); do
+            sudo mkdir -p /mnt/t && sudo chmod 777 /mnt/t
+            gh run download $TABLES_RUN -R $GITHUB_REPOSITORY -n tab-$i -D /mnt/t
+            find /mnt/t -name "$BASE.*.pickle" -exec mv {} tab/ \;
+            rm -rf /mnt/t/*
+          done
+          ls -la tab | head -30; du -sh tab
       - name: классы равносильных
         run: |
           cd py
-          timeout 320m python3 -m algen.table равносильные $BASE --каталог ../tab $ARGS
-          mkdir -p ../rep && cp ../tab/$BASE.rep.pickle ../rep/
+          timeout 300m python3 -m algen.table равносильные $BASE --каталог ../tab $ARGS
       - uses: actions/upload-artifact@v4
         with:
-          name: rep
-          path: rep
+          name: tabs
+          path: tab
           retention-days: 7
+          compression-level: 1
 
   enum:
     needs: prep
@@ -72,14 +79,7 @@ jobs:
       - run: pip install numpy python-sat pyyaml
       - uses: actions/download-artifact@v4
         with:
-          pattern: tab-*
-          path: tab
-          merge-multiple: true
-          run-id: ${{ env.TABLES_RUN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/download-artifact@v4
-        with:
-          name: rep
+          name: tabs
           path: tab
       - name: перебор
         continue-on-error: true
