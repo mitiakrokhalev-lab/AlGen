@@ -41,6 +41,8 @@ ELTS_SCRIPT = Path(__file__).with_name("gap") / "elts.g"
 ELTS = ROOT / "data" / "finite" / "grp-elts.jsonl"
 HOMS_SCRIPT = Path(__file__).with_name("gap") / "homs.g"
 HOMS = ROOT / "data" / "finite" / "grp-homs.jsonl"
+HK_SCRIPT = Path(__file__).with_name("gap") / "hk.g"
+HK = ROOT / "data" / "finite" / "grp-hk.jsonl"
 PERM_SCRIPT = Path(__file__).with_name("gap") / "perm.g"
 PERM = ROOT / "data" / "finite" / "grp-perm.jsonl"
 PRESENT_SCRIPT = Path(__file__).with_name("gap") / "present.g"
@@ -277,6 +279,14 @@ def load_elts(path=ELTS):
         return {r["key"]: r for r in map(json.loads, f)}
 
 
+def load_hk(path=HK):
+    """key → H ∩ K, ⟨H, K⟩, [H, K] для пар представителей классов подгрупп (если посчитано)."""
+    if not Path(path).exists():
+        return {}
+    with open(path) as f:
+        return {r["key"]: r for r in map(json.loads, f)}
+
+
 def load_perm(path=PERM):
     """key → неперестановочные пары представителей классов подгрупп (если посчитано)."""
     if not Path(path).exists():
@@ -454,6 +464,8 @@ if __name__ == "__main__":
                     help="классы сопряжённых элементов всех групп таблицы в data/finite/grp-elts.jsonl")
     ap.add_argument("--гомоморфизмы", dest="homs", action="store_true",
                     help="эндоморфизмы всех групп таблицы в data/finite/grp-homs.jsonl")
+    ap.add_argument("--пересечения", dest="hk", action="store_true",
+                    help="H ∩ K, ⟨H, K⟩, [H, K] для пар представителей классов в data/finite/grp-hk.jsonl")
     ap.add_argument("--перестановочность", dest="perm", action="store_true",
                     help="перестановочность представителей классов подгрупп в data/finite/grp-perm.jsonl")
     ap.add_argument("--авт", dest="aut", action="store_true",
@@ -488,6 +500,10 @@ if __name__ == "__main__":
     if a.endo:
         build_table(ENDO_SCRIPT, ENDO, a.jobs)
         print(ENDO, sum(1 for _ in ENDO.open()))
+        raise SystemExit
+    if a.hk:
+        build_table(HK_SCRIPT, HK, a.jobs, stall=a.stall)
+        print(HK, sum(1 for _ in HK.open()))
         raise SystemExit
     if a.perm:
         build_table(PERM_SCRIPT, PERM, a.jobs, stall=a.stall)
