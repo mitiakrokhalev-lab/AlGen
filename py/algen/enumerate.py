@@ -74,7 +74,37 @@ CORE_PROPS = {"trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simp
 CORE_SUB = {"normal", "characteristic", "maximal", "whole", "central", "finite-index", "complemented"}
 
 
+# Полный класс по размеру (ALGEN_SIZE): у каждого терма — все свойства словаря его сорта
+# (не только известные библиотеке и не только основные у построенных термов), вложения — между
+# любыми группами одной схемы. Иначе перебор пропускает утверждения класса (сверка с архивом 3.11).
+FULL_PROPS = bool(os.environ.get("ALGEN_SIZE"))
+
+# Пары термов, между которыми заводятся отношения (None — все пары). При мере размера
+# (ALGEN_SIZE) это пары из одной схемы: отношение термов разных схем не входит ни в одно
+# перебираемое утверждение, а атомов таких пар — квадрат вселенной.
+PAIR_FILTER = None
+
+
 def relation_atoms(g, terms):
+    if PAIR_FILTER is None:
+        return _relation_atoms(g, terms)
+    # только пары из одной схемы: идём по парам фильтра, а не по квадрату вселенной
+    by = {str(t): t for t in terms}
+    idx = {x: i for i, x in enumerate(by)}
+    # порядок атомов — как у термов (не как у множества: у частей таблицы он должен совпадать)
+    pairs = sorted(tuple(sorted(pr, key=idx.get)) for pr in PAIR_FILTER if all(x in idx for x in pr))
+    pairs.sort(key=lambda p: (idx[p[0]], idx[p[1]]))
+    out, seen = [], set()
+    for x, y in pairs:
+        if True:
+            for a in _relation_atoms(g, [by[x], by[y]]):
+                if a not in seen:
+                    seen.add(a)
+                    out.append(a)
+    return out
+
+
+def _relation_atoms(g, terms):
     """⩽ и = для подгрупп одной группы, ≅ для групп (в том числе подгрупп как
     групп). Симметричные — с аргументами по возрастанию строки, как в Theory.lit."""
     out = []
@@ -115,7 +145,7 @@ def relation_atoms(g, terms):
             for b in objs:
                 # одна из групп — переменная схемы, или вложение структурное:
                 # подгруппа в объемлющую, множитель в произведение (звенья транзитивности)
-                if a != b and (isinstance(a, Var) or isinstance(b, Var)
+                if a != b and (FULL_PROPS or isinstance(a, Var) or isinstance(b, Var)
                                or g.terms[a].links.get("ambient") == b
                                or (isinstance(b, App) and b.op in ("prod", "freeprod", "wreath") and a in b.args)):
                     if (a, b) not in seen:
@@ -454,6 +484,9 @@ class SchemeForm(Form):
         self.atoms = []
         for t in own:
             sort = g.terms[t].sort
+            if FULL_PROPS:  # полный класс (ALGEN_SIZE): все свойства словаря, подходящие сорту терма
+                self.atoms += [("p", p, t) for p in g.v.props if p not in SKIP and g.v.prop_fits(p, sort)]
+                continue
             # у построенных термов — только основные свойства (арифметика порядка,
             # экспоненты, индексы — у переменных схемы): иначе шум растёт кратно
             ps = props() if isinstance(t, Var) else [p for p in props() if p in CORE_PROPS]

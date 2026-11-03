@@ -132,11 +132,31 @@ def app_nodes(t):
         if t.args or not str(t.op).startswith("num:"):
             out.add(t)
         args = t.args
-        if t.op == "quotient" and len(args) == 2 and isinstance(args[1], App) and args[1].op in CANON_SUB:
+        # как в мере по архиву: X / c(X, …) — подгруппа, построенная от самой X, не считается
+        if t.op == "quotient" and len(args) == 2 and isinstance(args[1], App) and args[0] in args[1].args:
             args = (args[0],) + tuple(args[1].args)
         for a in args:
             out |= app_nodes(a)
     return out
+
+
+# Конструкции класса s ⩽ 2 сверх CONS: числа (|G|, |G : H|, порядок элемента, ранг,
+# арифметика), подгруппы (ядро, взаимный коммутант), морфизмы и действия, семейства по
+# числу. Свидетели (hnn-hull и т. п.) и служебные choose-* — не конструкции утверждений.
+SIZE_EXTRA = ["ord", "index", "eltord", "rank", "prod-card", "core", "comm", "nc", "profinite", "sym",
+              "ulm", "image-of", "preimage", "compose", "apply-mor", "conj-mor", "id-mor", "proj", "incl",
+              "coset-act", "regular-act", "num-mul", "num-add", "num-sub", "num-pow", "num-gcd", "num-phi",
+              "num-fact", "num-sylow", "cyc", "sym-n", "alt", "dih", "bs"]
+
+
+WITNESS_OPS = {"hnn-hull", "higman-hull", "free-cover", "free-cover-map", "cayley"}
+
+
+def _has_op(t, ops):
+    return isinstance(t, App) and (t.op in ops or any(_has_op(a, ops) for a in t.args))
+
+
+DEGENERATE_EQ = {"num-sub", "num-gcd", "num-pow", "bs"}
 
 
 def size_universe(vocab, base, smax):
@@ -152,8 +172,8 @@ def size_universe(vocab, base, smax):
         new = set()
         # аргумент терма из ⩽ smax конструкций сам из ⩽ smax − 1 (кроме c(Y) в Y/c(Y))
         small = [t for t in prev if len(nodes[t]) < smax]
-        canon = [t for t in prev if isinstance(t, App) and t.op in CANON_SUB and len(nodes[t]) <= smax]
-        for op in CONS:
+        canon = [t for t in prev if isinstance(t, App) and g.terms[t].sort == "Grp.sub" and len(nodes[t]) <= smax]
+        for op in CONS + SIZE_EXTRA:
             c = vocab.cons.get(op)
             if not c:
                 continue
@@ -163,11 +183,13 @@ def size_universe(vocab, base, smax):
             for args in product(*pools):
                 if not fresh.intersection(args):
                     continue  # такой набор аргументов уже пробовали в прошлом раунде
+                if op in DEGENERATE_EQ and args[0] == args[1]:
+                    continue  # x − x, НОД(x, x), x^x, BS(x, x): вырожденные или неестественные
                 if op in SYMMETRIC and str(args[0]) > str(args[1]):
                     continue
                 if op in SYMMETRIC_SUB and not str(args[1]) < str(args[2]):
                     continue
-                if op == "quotient" and isinstance(args[1], App) and args[1].op in CANON_SUB:
+                if op == "quotient" and isinstance(args[1], App) and args[0] in args[1].args:
                     n = len(nodes[args[0]] | set().union(*(app_nodes(a) for a in args[1].args))) + 1
                 else:
                     n = len(frozenset().union(*(nodes[a] for a in args))) + 1
@@ -187,6 +209,18 @@ def size_universe(vocab, base, smax):
         fresh = new
     allt.sort(key=lambda t: sz[t])
     out = [t for t in allt if isinstance(t, App)]
+    # термы задач архива из ⩽ smax конструкций — с их числовыми константами (|G : Z(G)| = 5)
+    names = {str(t): t for t in g.terms}
+    for x in archive_terms(vocab, base):
+        try:
+            t = term(g, x, names, "grp")
+        except Exception:
+            continue
+        if t is None or len(app_nodes(t)) > smax or _has_op(t, WITNESS_OPS):
+            continue
+        for y in subterms(t):
+            if isinstance(y, App) and y not in out:
+                out.append(y)
     for t in list(out):
         for x in closure(g, [t] + vars_):
             if isinstance(x, App) and x not in out:
@@ -333,15 +367,18 @@ def schemes(vocab, base, k=2, t=None):
     vars_ = [t for t in g.terms if isinstance(t, Var)]
     seen, out = set(), []
     swap = SWAP.get(base)
+    # константы задач архива (60 в |G| = 60, 4 в |G : H| ⩽ 4) — размер 0: во всех схемах базы
+    consts = [x for x in ts if not app_nodes(x)] if SIZE else []
+    pool = [x for x in ts if x not in consts]
     for r in range(0, (SIZE if SIZE else t) + 1):
-        for pick in combinations(ts, r):
+        for pick in combinations(pool, r):
             if SIZE:
                 if len(set().union(*(app_nodes(x) for x in pick))) > SIZE if pick else False:
                     continue
                 # набор, где один терм — подтерм другого, даёт ту же схему, что больший терм
                 if any(x in subterms(y) for x in pick for y in pick if x != y):
                     continue
-            cl = closure(g, list(pick) + vars_)
+            cl = closure(g, list(pick) + vars_ + consts)
             if not SIZE and len(maximal(g, cl)) > t:
                 continue
             terms_ = sorted((t for t in cl if isinstance(t, App)), key=lambda x: (num.get(x, 10 ** 6), str(x)))
@@ -379,9 +416,50 @@ def grow_ops(vocab):
 NO_GROW = {"cyc", "sym-n", "alt", "dih", "num-fact", "num-add"}
 
 
+def scheme_pairs(vocab, base):
+    """Пары термов (строки), которые встречаются вместе хотя бы в одной схеме базы."""
+    g, _, _ = scheme(vocab, {"раздел": "grp", "условие": BASES[base]})
+    vs = [str(t) for t in g.terms if isinstance(t, Var)]
+    out = set()
+    for _, ts in schemes(vocab, base, 3):
+        xs = vs + ts
+        out |= {frozenset((x, y)) for i, x in enumerate(xs) for y in xs[i + 1:]}
+    return out
+
+
+# ALGEN_SKEL=каталог: каркас базы (теория и атомы) строится один раз и берётся из
+# <каталог>/<база>.skel.pickle — у G при мере размера его постройка — десятки минут.
+SKEL_DIR = os.environ.get("ALGEN_SKEL", "")
+
+
 def skeleton(lib, vocab, base, part=None, with_rows=False):
-    return E.SchemeForm(lib, vocab, BASES[base], universe(vocab, base),
-                        grow_ops=grow_ops(vocab), part=part, with_rows=with_rows)
+    E.PAIR_FILTER = scheme_pairs(vocab, base) if SIZE else None
+    from . import logic as L
+    L.PAIR_FILTER = E.PAIR_FILTER
+    L.PAIR_UNI = set(universe(vocab, base)) if SIZE else None
+    path = (Path(SKEL_DIR) / f"{base}.skel.pickle"
+            if SKEL_DIR and not with_rows and part is None else None)
+    if path is not None and path.exists():
+        with open(path, "rb") as fh:
+            d = pickle.load(fh)
+        if d["отпечаток"] == _fp(base):
+            from .library import Search
+            f = d["каркас"]
+            f.lib, f.sc.s = lib, f.sc.T.solver()
+            f.search = Search(f.g, f.sc.T, lib)
+            return f
+        print(f"{path}: каркас от другого кода или данных, строю заново", file=sys.stderr)
+    f = E.SchemeForm(lib, vocab, BASES[base], universe(vocab, base),
+                     grow_ops=grow_ops(vocab), part=part, with_rows=with_rows)
+    if path is not None:
+        keep = (f.sc.s, f.lib, f.search)
+        f.sc.s = f.lib = f.search = None
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(str(path) + ".tmp", "wb") as fh:
+            pickle.dump({"отпечаток": _fp(base), "каркас": f}, fh, protocol=pickle.HIGHEST_PROTOCOL)
+        os.replace(str(path) + ".tmp", path)
+        f.sc.s, f.lib, f.search = keep
+    return f
 
 
 def _fp(base):
@@ -830,7 +908,11 @@ def run_schemes(a):
     _STATE.update(lib=lib, vocab=vocab, registry=E.load_registry(), forms={})
     outdir = Path(a.out)
     outdir.mkdir(parents=True, exist_ok=True)
-    ks = [int(x) for x in str(a.k).split(",")]
+    # «--посылок 3/2» (при ALGEN_SIZE): k = 3 у схем из ⩽ 1 конструкции, k = 2 у остальных.
+    # По архиву это те же 89 %, что k ⩽ 3 везде (480 карточек против 482), а k = 3 —
+    # только у пары десятков схем базы.
+    by_size = "/" in str(a.k)
+    ks = [int(x) for x in str(a.k).replace("/", ",").split(",")]
     try:  # таблица базы G — для фильтра условий об одном терме (generic_filter)
         _STATE["generic"] = load(lib, vocab, "G", a.dir)
     except (FileNotFoundError, ValueError) as e:
@@ -861,7 +943,13 @@ def run_schemes(a):
                         continue
                 except Exception:
                     pass
-            jobs.append((base, sid, terms, k_for(ks, tops[sid]), str(outdir), fp))
+            if by_size:
+                ts = [term(g0, x, n0, "grp") for x in terms]
+                sz = len(set().union(*(app_nodes(t) for t in ts))) if ts else 0
+                k = ks[0] if sz <= 1 else ks[-1]
+            else:
+                k = k_for(ks, tops[sid])
+            jobs.append((base, sid, terms, k, str(outdir), fp))
         if jobs:
             by_base[base] = jobs
     total = sum(len(j) for j in by_base.values())
@@ -1045,6 +1133,9 @@ def main():
     s.add_argument("--каталог", dest="dir", required=True)
     s.add_argument("--выход", dest="out", required=True)
     s.add_argument("--без", dest="skip", default="")
+    s = sub.add_parser("каркас", help="только каркас базы — в кэш ALGEN_SKEL, для раздачи машинам")
+    s.add_argument("base")
+    s.add_argument("--без", dest="skip", default="")
     s = sub.add_parser("равносильные", help="классы равносильных литералов базы — один раз, в файл <база>.rep.pickle")
     s.add_argument("base")
     s.add_argument("--каталог", dest="dir", required=True)
@@ -1081,12 +1172,17 @@ def main():
         for sid, ts in ss:
             print(f"{sid} | {BASES[a.base]} | {'; '.join(ts)}")
         print(f"# схем {len(ss)}", file=sys.stderr)
+    elif a.cmd == "каркас":
+        if not SKEL_DIR:
+            sys.exit("нужен ALGEN_SKEL — каталог кэша каркасов")
+        t = time.time()
+        f = skeleton(built_library(vocab), vocab, a.base)
+        print(f"{a.base}: каркас {round(time.time() - t)} с, атомов {len(f.atoms)}", file=sys.stderr)
     elif a.cmd == "строить":
         i, n = map(int, a.part.split("/"))
         lib = built_library(vocab)
-        skel = None
+        skel = skeleton(lib, vocab, a.base)  # с ALGEN_SKEL — из кэша на диске
         if a.cache:
-            skel = skeleton(lib, vocab, a.base)
             cached = load_cache(a.base, a.cache, skel)
             skel._derived.update(cached)
             skel._cached_keys = set(cached)

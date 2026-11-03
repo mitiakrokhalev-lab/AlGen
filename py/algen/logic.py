@@ -34,6 +34,30 @@ DATA = Path(__file__).resolve().parents[2] / "data"
 # --- словарь -----------------------------------------------------------------
 
 
+
+# Мера размера (algen.table, ALGEN_SIZE): правило с несколькими термами вселенной
+# заземляется только на термах, которые встречаются вместе хотя бы в одной схеме базы.
+# Термы вне вселенной (достроенные теорией) и переменные — без ограничений. Вывод
+# остаётся верным; теряются лишь выводы через термы чужих схем.
+PAIR_FILTER = None   # множество frozenset({str, str})
+PAIR_UNI = None      # строки термов вселенной
+_STR = {}
+
+
+def _pair_ok(t, env):
+    s = _STR.get(t)
+    if s is None:
+        s = _STR[t] = str(t)
+    if s not in PAIR_UNI:
+        return True
+    for u in env.values():
+        su = _STR.get(u)
+        if su is None:
+            su = _STR[u] = str(u)
+        if su != s and su in PAIR_UNI and frozenset((s, su)) not in PAIR_FILTER:
+            return False
+    return True
+
 class Vocab:
     """Словарь раздела: сорта, свойства, конструкции, вырождения, правила.
 
@@ -429,7 +453,7 @@ class Theory:
                     yield from go(i + 1, env, order)
                 return
             for t, info in cands(r, env):
-                if fits(r, t, info, env):
+                if fits(r, t, info, env) and (PAIR_FILTER is None or _pair_ok(t, env)):
                     env[r["name"]] = t
                     yield from go(i + 1, env, order)
                     del env[r["name"]]
@@ -619,7 +643,7 @@ class Theory:
         prem, outs = parts
         lits = []
         terms = [t for _, _, ts in prem + outs for t in ts]
-        for p, t in {x for t in terms for x in self.g.requires(t)}:
+        for p, t in sorted({x for t in terms for x in self.g.requires(t)}, key=str):
             lits.append(self.lit(("p", p, t), False))
         for atom, val, _ in prem:
             l = self.lit(atom, val)
@@ -700,7 +724,7 @@ class Theory:
         rel = "eq-sub" if st == ss and st.endswith(".sub") else "iso"
         if rel == "iso" and not (self.v.fits(st, "Grp.obj") and self.v.fits(ss, "Grp.obj")):
             return
-        lits = [self.lit(("p", p, x), False) for p, x in {x for y in (t, s) for x in self.g.requires(y)}]
+        lits = [self.lit(("p", p, x), False) for p, x in sorted({x for y in (t, s) for x in self.g.requires(y)}, key=str)]
         lits += [self.lit(("p", p, x), not v) for _, p, x, v in cond]
         lits.append(self.lit(("r", rel, t, s)))
         self._add(lits, origin)
@@ -772,7 +796,7 @@ class Theory:
                     if all(self.v.prop_fits(p, self.g.terms[x].sort) for x in (a, b)):
                         self._add([-self.lit(("p", p, a)), -self.lit(("p", p, b)), e], f"eq-sub: обе {p}")
             ps = props.get(a, set()) | props.get(b, set())
-            for p in ps:
+            for p in sorted(ps):  # порядок — для одной нумерации атомов на всех машинах
                 if rel == "iso" and p not in obj_props:
                     continue
                 if not (self.v.prop_fits(p, self.g.terms[a].sort) and self.v.prop_fits(p, self.g.terms[b].sort)):
@@ -786,20 +810,21 @@ class Theory:
         # вложение: транзитивность по тройкам, где оба звена уже есть
         emb = {(a[2], a[3]) for a in self.atoms if a[0] == "r" and a[1] == "embeds"}
         succ = {}
-        for a, b in emb:
+        emb_order = sorted(emb, key=str)
+        for a, b in emb_order:
             succ.setdefault(a, []).append(b)
-        for a, b in emb:
+        for a, b in emb_order:
             for c in succ.get(b, []):
                 if c != a and (a, c) in emb:
                     self._add([-self.lit(("r", "embeds", a, b)), -self.lit(("r", "embeds", b, c)),
                                self.lit(("r", "embeds", a, c))], "embeds: транзитивность")
         groups = []
         for rel, ps in by_rel.items():
-            nodes = {x for p in ps for x in p}
+            nodes = sorted({x for p in ps for x in p}, key=str)
             if rel == "eq-sub":  # равенство — только у подгрупп одной группы
                 amb = {}
                 for x in nodes:
-                    amb.setdefault(self.g.terms[x].links.get("ambient"), set()).add(x)
+                    amb.setdefault(self.g.terms[x].links.get("ambient"), []).append(x)
                 groups += [(rel, ns) for ns in amb.values()]
             else:
                 groups.append((rel, nodes))
@@ -815,10 +840,10 @@ class Theory:
                             adj.setdefault(x, set()).add(y)
                 order = {x: i for i, x in enumerate(sorted(nodes, key=str))}
                 for a in adj:
-                    for b in adj[a]:
+                    for b in sorted(adj[a], key=str):
                         if order[b] <= order[a]:
                             continue
-                        for c in adj[a] & adj.get(b, set()):
+                        for c in sorted(adj[a] & adj.get(b, set()), key=str):
                             if order[c] <= order[b]:
                                 continue
                             ab, bc, ac = self.lit(key(a, b)), self.lit(key(b, c)), self.lit(key(a, c))
