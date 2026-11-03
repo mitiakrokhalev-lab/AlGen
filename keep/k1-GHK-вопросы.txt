@@ -1,0 +1,400 @@
+5649	0	56781	¬num-le(ord(H), prod-card(G, H, K))	
+5649	0	56781	¬num-le(ord(K), prod-card(G, H, K))	
+5619	0	57963	¬eq-sub(comm(G, H, H), comm(G, K, K))	
+5619	0	56777	¬eq-sub(comm(G, H, K), comm(G, K, K))	
+5618	0	57963	¬iso(comm(G, H, H), comm(G, K, K))	
+5618	0	56777	¬iso(comm(G, H, K), comm(G, K, K))	
+5618	0	52806	¬num-eq(num-mul(ord(H), ord(K)), num-mul(prod-card(G, H, K), ord(meet(G, H, K))))	
+5577	0	52265	¬trivial(comm(G, H, K))	
+5577	0	53491	¬eq-sub(comm(G, H, H), comm(G, H, K))	
+5577	0	52305	¬eq-sub(comm(G, H, K), meet(G, comm(G, H, H), comm(G, K, K)))	
+5576	0	51510	¬cyclic(comm(G, H, K))	
+5576	0	52255	¬perfect(comm(G, H, K))	
+5576	0	52261	¬divisible(comm(G, H, K))	
+5576	0	51777	¬free-abelian(comm(G, H, K))	
+5576	0	53491	¬eq-sub(comm(G, H, H), meet(G, comm(G, H, H), comm(G, K, K)))	
+5576	0	53491	¬iso(comm(G, H, H), comm(G, H, K))	
+5576	0	52305	¬iso(comm(G, H, K), meet(G, comm(G, H, H), comm(G, K, K)))	
+5575	0	52255	¬complemented(comm(G, H, K))	
+5575	0	53491	¬eq-sub(comm(G, K, K), meet(G, comm(G, H, H), comm(G, K, K)))	
+5575	0	53491	¬iso(comm(G, H, H), meet(G, comm(G, H, H), comm(G, K, K)))	
+5574	0	53491	¬iso(comm(G, K, K), meet(G, comm(G, H, H), comm(G, K, K)))	
+5573	0	51812	¬free(comm(G, H, K))	
+5573	0	50843	¬le(comm(G, H, H), meet(G, H, K))	
+5573	0	50843	¬le(comm(G, K, K), meet(G, H, K))	
+5572	0	50794	¬characteristic(comm(G, H, K))	
+5572	0	53491	¬le(comm(G, H, H), comm(G, H, K))	
+5572	0	53491	¬le(comm(G, H, H), meet(G, comm(G, H, H), comm(G, K, K)))	
+5572	0	44636	¬le(comm(G, H, K), meet(G, H, K))	
+5572	0	52265	¬le(comm(G, H, K), meet(G, comm(G, H, H), comm(G, K, K)))	
+5572	0	53491	¬le(comm(G, K, K), comm(G, H, K))	
+5571	0	49019	¬trivial(meet(G, comm(G, H, H), comm(G, K, K)))	
+5571	0	53491	¬le(comm(G, K, K), meet(G, comm(G, H, H), comm(G, K, K)))	
+5570	0	52255	¬centerless(comm(G, H, K))	
+5570	0	49009	¬perfect(meet(G, comm(G, H, H), comm(G, K, K)))	
+5570	0	49015	¬divisible(meet(G, comm(G, H, H), comm(G, K, K)))	
+5569	0	44062	¬torsion-free(comm(G, H, K))	
+5569	0	49009	¬complemented(meet(G, comm(G, H, H), comm(G, K, K)))	
+5568	0	48567	¬cyclic(meet(G, comm(G, H, H), comm(G, K, K)))	
+5568	0	48780	¬free-abelian(meet(G, comm(G, H, H), comm(G, K, K)))	
+5567	0	41008	¬le(comm(G, H, H), K)	
+5567	0	53491	¬le(comm(G, H, H), comm(G, K, K))	
+5567	0	52265	¬le(comm(G, H, K), comm(G, H, H))	
+5567	0	52265	¬le(comm(G, H, K), comm(G, K, K))	
+5567	0	41008	¬le(comm(G, K, K), H)	
+5567	0	53491	¬le(comm(G, K, K), comm(G, H, H))	
+5566	0	51802	¬indecomposable(comm(G, H, K))	
+5566	0	47894	¬characteristic(meet(G, comm(G, H, H), comm(G, K, K)))	
+5566	0	38321	¬le(comm(G, H, K), K)	
+5565	0	48748	¬free(meet(G, comm(G, H, H), comm(G, K, K)))	
+5564	0	49009	¬centerless(meet(G, comm(G, H, H), comm(G, K, K)))	
+5564	0	46256	¬le(meet(G, comm(G, H, H), comm(G, K, K)), meet(G, H, K))	
+5563	0	50272	¬p-group(comm(G, H, K))	
+5562	0	48669	¬polycyclic(comm(G, H, K))	
+5562	0	36309	¬le(comm(G, H, K), H)	
+5562	0	48944	¬le(meet(G, comm(G, H, H), comm(G, K, K)), comm(G, H, K))	
+5559	0	39571	¬le(comm(G, H, H), normal-closure(G, K))	
+5559	0	39571	¬le(comm(G, K, K), normal-closure(G, H))	
+5558	0	48738	¬indecomposable(meet(G, comm(G, H, H), comm(G, K, K)))	
+5558	0	36884	¬le(comm(G, H, K), normal-closure(G, K))	
+5557	0	49031	¬central(comm(G, H, K))	
+5557	0	41461	¬torsion-free(meet(G, comm(G, H, H), comm(G, K, K)))	
+5556	0	48143	¬finite(comm(G, H, K))	
+5555	0	47418	¬p-group(meet(G, comm(G, H, H), comm(G, K, K)))	
+5555	0	34638	¬le(comm(G, H, K), normal-closure(G, H))	
+5553	0	32484	¬permutes(H, meet(G, H, K))	
+5553	0	30003	¬permutes(H, join(G, H, K))	
+5553	0	32484	¬permutes(K, meet(G, H, K))	
+5553	0	30003	¬permutes(K, join(G, H, K))	
+5552	0	46155	¬polycyclic(meet(G, comm(G, H, H), comm(G, K, K)))	
+5552	0	48045	¬le(comm(G, H, H), centralizer(G, K))	
+5552	0	48850	¬le(comm(G, H, K), centralizer(G, H))	
+5552	0	47378	¬le(comm(G, H, K), centralizer(G, K))	
+5552	0	48045	¬le(comm(G, K, K), centralizer(G, H))	
+5551	0	30003	¬le(comm(G, H, H), join(G, H, K))	
+5551	0	30003	¬le(comm(G, H, K), join(G, H, K))	
+5551	0	30003	¬le(comm(G, K, K), join(G, H, K))	
+5550	0	47285	simple(comm(G, H, K))	
+5549	0	33972	¬le(meet(G, comm(G, H, H), comm(G, K, K)), H)	
+5549	0	33972	¬le(meet(G, comm(G, H, H), comm(G, K, K)), K)	
+5548	0	48966	¬abelian(comm(G, H, K))	
+5548	0	46995	¬fin-gen(comm(G, H, K))	
+5548	0	46988	¬hopfian(comm(G, H, K))	
+5548	0	45429	¬finite(meet(G, comm(G, H, H), comm(G, K, K)))	
+5547	0	46951	¬central(meet(G, comm(G, H, H), comm(G, K, K)))	
+5546	0	43396	¬normal(comm(G, H, K))	
+5544	0	49188	¬le(comm(G, H, K), frattini(G))	
+5542	0	37186	¬periodic(comm(G, H, K))	
+5542	0	46792	¬embeds(comm(G, H, H), K)	
+5542	0	45056	¬embeds(comm(G, H, K), H)	
+5542	0	45566	¬embeds(comm(G, H, K), K)	
+5542	0	46792	¬embeds(comm(G, K, K), H)	
+5540	0	44547	simple(meet(G, comm(G, H, H), comm(G, K, K)))	
+5539	0	48707	¬nilpotent(comm(G, H, K))	
+5538	0	36399	¬residually-finite(comm(G, H, K))	
+5538	0	46766	¬le(meet(G, comm(G, H, H), comm(G, K, K)), centralizer(G, H))	
+5538	0	46766	¬le(meet(G, comm(G, H, H), comm(G, K, K)), centralizer(G, K))	
+5537	0	35463	¬permutes(H, comm(G, H, K))	
+5537	0	33253	¬le(comm(G, H, H), normalizer(G, K))	
+5537	0	33253	¬le(comm(G, H, K), normalizer(G, K))	
+5537	0	33253	¬le(comm(G, K, K), normalizer(G, H))	
+5537	0	32535	¬le(meet(G, comm(G, H, H), comm(G, K, K)), normal-closure(G, H))	
+5537	0	32535	¬le(meet(G, comm(G, H, H), comm(G, K, K)), normal-closure(G, K))	
+5536	0	41276	¬normal(meet(G, comm(G, H, H), comm(G, K, K)))	
+5536	0	44602	¬fin-gen(meet(G, comm(G, H, H), comm(G, K, K)))	
+5536	0	44595	¬hopfian(meet(G, comm(G, H, H), comm(G, K, K)))	
+5535	0	32174	¬permutes(H, centralizer(G, K))	
+5535	0	32174	¬permutes(K, centralizer(G, H))	
+5533	0	27183	¬linear(comm(G, H, K))	
+5533	0	33343	¬permutes(K, comm(G, H, K))	
+5533	0	35376	¬le(comm(G, H, K), normalizer(G, H))	
+5533	0	46638	¬le(meet(G, comm(G, H, H), comm(G, K, K)), frattini(G))	
+5531	0	25378	¬permutes(H, normalizer(G, K))	
+5531	0	25378	¬permutes(K, normalizer(G, H))	
+5530	0	35203	¬periodic(meet(G, comm(G, H, H), comm(G, K, K)))	
+5528	0	42320	¬embeds(meet(G, comm(G, H, H), comm(G, K, K)), H)	
+5528	0	42320	¬embeds(meet(G, comm(G, H, H), comm(G, K, K)), K)	
+5527	0	33343	¬permutes(H, meet(G, comm(G, H, H), comm(G, K, K)))	
+5527	0	33343	¬permutes(K, meet(G, comm(G, H, H), comm(G, K, K)))	
+5526	0	25654	¬le(meet(G, comm(G, H, H), comm(G, K, K)), join(G, H, K))	
+5522	0	25410	¬permutes(H, comm(G, K, K))	
+5522	0	25410	¬permutes(K, comm(G, H, H))	
+5520	0	46893	¬abelian(meet(G, comm(G, H, H), comm(G, K, K)))	
+5520	0	34602	¬residually-finite(meet(G, comm(G, H, H), comm(G, K, K)))	
+5515	0	26079	¬linear(meet(G, comm(G, H, H), comm(G, K, K)))	
+5512	0	46748	¬solvable(comm(G, H, K))	
+5509	0	46652	¬nilpotent(meet(G, comm(G, H, H), comm(G, K, K)))	
+5508	0	33253	¬le(meet(G, comm(G, H, H), comm(G, K, K)), normalizer(G, H))	
+5508	0	33253	¬le(meet(G, comm(G, H, H), comm(G, K, K)), normalizer(G, K))	
+5478	0	44797	¬solvable(meet(G, comm(G, H, H), comm(G, K, K)))	
+4218	0	46185	¬num-le(ord(H), num-mul(ord(H), ord(K)))	
+4218	0	53930	¬num-divides(ord(H), num-mul(ord(H), ord(K)))	
+4218	0	46185	¬num-le(ord(K), num-mul(ord(H), ord(K)))	
+4218	0	53930	¬num-divides(ord(K), num-mul(ord(H), ord(K)))	
+4146	0	25654	¬permutes(H, K)	
+3730	0	47595	¬characteristic(comm(G, K, K))	
+3730	0	53432	¬complemented(comm(G, K, K))	
+3730	0	53491	¬trivial(comm(G, K, K))	
+3730	0	52916	¬cyclic(comm(G, K, K))	
+3730	0	53432	¬perfect(comm(G, K, K))	
+3730	0	53470	¬divisible(comm(G, K, K))	
+3730	0	53175	¬free-abelian(comm(G, K, K))	
+3730	0	53491	¬iso(comm(G, K, K), commutator(K))	
+3730	0	47595	¬characteristic(comm(G, H, H))	
+3730	0	53432	¬complemented(comm(G, H, H))	
+3730	0	53491	¬trivial(comm(G, H, H))	
+3730	0	52916	¬cyclic(comm(G, H, H))	
+3730	0	53432	¬perfect(comm(G, H, H))	
+3730	0	53470	¬divisible(comm(G, H, H))	
+3730	0	53175	¬free-abelian(comm(G, H, H))	
+3730	0	53491	¬iso(comm(G, H, H), commutator(H))	
+3729	0	53182	¬free(comm(G, K, K))	
+3729	0	45126	¬torsion-free(comm(G, K, K))	
+3729	0	53182	¬free(comm(G, H, H))	
+3729	0	45126	¬torsion-free(comm(G, H, H))	
+3727	0	53432	¬centerless(comm(G, K, K))	
+3727	0	49893	¬polycyclic(comm(G, K, K))	
+3727	0	53432	¬centerless(comm(G, H, H))	
+3727	0	49893	¬polycyclic(comm(G, H, H))	
+3726	0	50693	¬central(comm(G, K, K))	
+3726	0	53123	¬indecomposable(comm(G, K, K))	
+3726	0	50491	¬le(comm(G, K, K), centralizer(G, K))	
+3726	0	50693	¬central(comm(G, H, H))	
+3726	0	53123	¬indecomposable(comm(G, H, H))	
+3726	0	50491	¬le(comm(G, H, H), centralizer(G, H))	
+3725	0	49275	¬finite(comm(G, K, K))	
+3725	0	51375	¬p-group(comm(G, K, K))	
+3725	0	36309	¬le(comm(G, K, K), K)	
+3725	0	34638	¬le(comm(G, K, K), normal-closure(G, K))	
+3725	0	49275	¬finite(comm(G, H, H))	
+3725	0	51375	¬p-group(comm(G, H, H))	
+3725	0	36309	¬le(comm(G, H, H), H)	
+3725	0	34638	¬le(comm(G, H, H), normal-closure(G, H))	
+3724	0	50614	¬abelian(comm(G, K, K))	
+3724	0	50268	¬le(comm(G, K, K), frattini(G))	
+3724	0	50614	¬abelian(comm(G, H, H))	
+3724	0	50268	¬le(comm(G, H, H), frattini(G))	
+3723	0	48193	¬fin-gen(comm(G, K, K))	
+3723	0	48152	¬hopfian(comm(G, K, K))	
+3723	0	48193	¬fin-gen(comm(G, H, H))	
+3723	0	48152	¬hopfian(comm(G, H, H))	
+3722	0	50287	¬nilpotent(comm(G, K, K))	
+3722	0	50287	¬nilpotent(comm(G, H, H))	
+3721	0	38172	¬periodic(comm(G, K, K))	
+3721	0	35376	¬permutes(K, normalizer(G, K))	
+3721	0	35163	¬permutes(K, centralizer(G, K))	
+3721	0	35376	¬le(comm(G, K, K), normalizer(G, K))	
+3721	0	38172	¬periodic(comm(G, H, H))	
+3721	0	35376	¬permutes(H, normalizer(G, H))	
+3721	0	35163	¬permutes(H, centralizer(G, H))	
+3721	0	35376	¬le(comm(G, H, H), normalizer(G, H))	
+3720	0	37206	¬residually-finite(comm(G, K, K))	
+3720	0	37206	¬residually-finite(comm(G, H, H))	
+3719	0	45860	¬embeds(comm(G, K, K), K)	
+3719	0	45860	¬embeds(comm(G, H, H), H)	
+3718	0	35463	¬normal(comm(G, K, K))	
+3718	0	48563	simple(comm(G, K, K))	
+3718	0	48007	¬solvable(comm(G, K, K))	
+3718	0	28005	¬linear(comm(G, K, K))	
+3718	0	35463	¬permutes(K, comm(G, K, K))	
+3718	0	35463	¬normal(comm(G, H, H))	
+3718	0	48563	simple(comm(G, H, H))	
+3718	0	48007	¬solvable(comm(G, H, H))	
+3718	0	28005	¬linear(comm(G, H, H))	
+3718	0	35463	¬permutes(H, comm(G, H, H))	
+2748	1	48686	iso(comm(G, H, K), prod(G, G))	G = 1, H = 1, K = 1
+2748	1	46625	iso(meet(G, comm(G, H, H), comm(G, K, K)), prod(G, G))	G = 1, H = 1, K = 1
+2748	1	48686	iso(comm(G, H, K), prod(G, H))	G = 1, H = 1, K = 1
+2748	1	50308	iso(comm(G, K, K), prod(G, H))	G = 1, H = 1, K = 1
+2748	1	46625	iso(meet(G, comm(G, H, H), comm(G, K, K)), prod(G, H))	G = 1, H = 1, K = 1
+2748	1	50308	iso(comm(G, H, H), prod(G, K))	G = 1, H = 1, K = 1
+2748	1	48698	iso(comm(G, H, K), prod(G, K))	G = 1, H = 1, K = 1
+2748	1	46625	iso(meet(G, comm(G, H, H), comm(G, K, K)), prod(G, K))	G = 1, H = 1, K = 1
+2748	1	29366	iso(comm(G, H, K), wreath(G, G))	G = 1, H = 1, K = 1
+2748	1	28123	iso(meet(G, comm(G, H, H), comm(G, K, K)), wreath(G, G))	G = 1, H = 1, K = 1
+2748	1	39491	iso(comm(G, H, K), wreath(G, H))	G = 1, H = 1, K = 1
+2748	1	41120	iso(comm(G, K, K), wreath(G, H))	G = 1, H = 1, K = 1
+2748	1	37765	iso(meet(G, comm(G, H, H), comm(G, K, K)), wreath(G, H))	G = 1, H = 1, K = 1
+2748	1	41120	iso(comm(G, H, H), wreath(G, K))	G = 1, H = 1, K = 1
+2748	1	39715	iso(comm(G, H, K), wreath(G, K))	G = 1, H = 1, K = 1
+2748	1	37765	iso(meet(G, comm(G, H, H), comm(G, K, K)), wreath(G, K))	G = 1, H = 1, K = 1
+2748	1	40704	iso(comm(G, H, K), wreath(H, G))	G = 1, H = 1, K = 1
+2748	1	42516	iso(comm(G, K, K), wreath(H, G))	G = 1, H = 1, K = 1
+2748	1	38850	iso(meet(G, comm(G, H, H), comm(G, K, K)), wreath(H, G))	G = 1, H = 1, K = 1
+2748	1	42516	iso(comm(G, H, H), wreath(K, G))	G = 1, H = 1, K = 1
+2748	1	40935	iso(comm(G, H, K), wreath(K, G))	G = 1, H = 1, K = 1
+2748	1	38850	iso(meet(G, comm(G, H, H), comm(G, K, K)), wreath(K, G))	G = 1, H = 1, K = 1
+2748	1	49529	iso(comm(G, H, K), normalizer(G, H))	G = 1, H = 1, K = 1
+2748	1	51000	iso(comm(G, K, K), normalizer(G, H))	G = 1, H = 1, K = 1
+2748	1	47315	iso(meet(G, comm(G, H, H), comm(G, K, K)), normalizer(G, H))	G = 1, H = 1, K = 1
+2748	1	51000	iso(comm(G, H, H), normalizer(G, K))	G = 1, H = 1, K = 1
+2748	1	49388	iso(comm(G, H, K), normalizer(G, K))	G = 1, H = 1, K = 1
+2748	1	47315	iso(meet(G, comm(G, H, H), comm(G, K, K)), normalizer(G, K))	G = 1, H = 1, K = 1
+2746	1	48966	embeds(G, comm(G, H, K))	G = 1, H = 1, K = 1
+2745	1	48966	iso(G, comm(G, H, K))	G = 1, H = 1, K = 1
+2740	1	30802	iso(comm(G, H, K), freeprod(G, G))	G = 1, H = 1, K = 1
+2740	1	29660	iso(freeprod(G, G), meet(G, comm(G, H, H), comm(G, K, K)))	G = 1, H = 1, K = 1
+2740	1	30802	iso(comm(G, H, K), freeprod(G, H))	G = 1, H = 1, K = 1
+2740	1	32743	iso(comm(G, K, K), freeprod(G, H))	G = 1, H = 1, K = 1
+2740	1	29660	iso(freeprod(G, H), meet(G, comm(G, H, H), comm(G, K, K)))	G = 1, H = 1, K = 1
+2740	1	32743	iso(comm(G, H, H), freeprod(G, K))	G = 1, H = 1, K = 1
+2740	1	31388	iso(comm(G, H, K), freeprod(G, K))	G = 1, H = 1, K = 1
+2740	1	29660	iso(freeprod(G, K), meet(G, comm(G, H, H), comm(G, K, K)))	G = 1, H = 1, K = 1
+2740	1	46893	embeds(G, meet(G, comm(G, H, H), comm(G, K, K)))	G = 1, H = 1, K = 1
+2739	1	32041	le(normalizer(G, H), comm(G, H, K))	G = 1, H = 1, K = 1
+2739	1	31346	le(normalizer(G, H), comm(G, K, K))	G = 1, H = 1, K = 1
+2739	1	31346	le(normalizer(G, K), comm(G, H, H))	G = 1, H = 1, K = 1
+2739	1	31224	le(normalizer(G, K), comm(G, H, K))	G = 1, H = 1, K = 1
+2739	1	46893	iso(G, meet(G, comm(G, H, H), comm(G, K, K)))	G = 1, H = 1, K = 1
+2737	1	30596	eq-sub(comm(G, H, H), normalizer(G, K))	G = 1, H = 1, K = 1
+2737	1	32041	eq-sub(comm(G, H, K), normalizer(G, H))	G = 1, H = 1, K = 1
+2737	1	31224	eq-sub(comm(G, H, K), normalizer(G, K))	G = 1, H = 1, K = 1
+2737	1	30596	eq-sub(comm(G, K, K), normalizer(G, H))	G = 1, H = 1, K = 1
+2730	0	39210	¬characteristic(inn(K))	
+2730	0	39206	¬complemented(inn(K))	
+2730	0	39210	¬characteristic(inn(H))	
+2730	0	39206	¬complemented(inn(H))	
+2729	1	30220	le(normalizer(G, H), meet(G, comm(G, H, H), comm(G, K, K)))	G = 1, H = 1, K = 1
+2729	1	30220	le(normalizer(G, K), meet(G, comm(G, H, H), comm(G, K, K)))	G = 1, H = 1, K = 1
+2727	1	30220	eq-sub(meet(G, comm(G, H, H), comm(G, K, K)), normalizer(G, H))	G = 1, H = 1, K = 1
+2727	1	30220	eq-sub(meet(G, comm(G, H, H), comm(G, K, K)), normalizer(G, K))	G = 1, H = 1, K = 1
+2711	1	11300	whole(comm(G, H, K))	G = 1, H = 1, K = 1
+2677	1	10296	whole(meet(G, comm(G, H, H), comm(G, K, K)))	G = 1, H = 1, K = 1
+1828	1	48270	eq-sub(centralizer(G, K), comm(G, K, K))	G = 1, H = 1, K = 1
+1828	1	33980	iso(centralizer(G, K), wreath(K, K))	G = 1, H = 1, K = 1
+1828	1	53179	iso(centralizer(G, K), comm(G, K, K))	G = 1, H = 1, K = 1
+1828	1	48270	eq-sub(centralizer(G, H), comm(G, H, H))	G = 1, H = 1, K = 1
+1828	1	33980	iso(centralizer(G, H), wreath(H, H))	G = 1, H = 1, K = 1
+1828	1	53179	iso(centralizer(G, H), comm(G, H, H))	G = 1, H = 1, K = 1
+1826	1	31219	iso(centralizer(G, K), freeprod(K, K))	G = 1, H = 1, K = 1
+1826	1	31219	iso(centralizer(G, H), freeprod(H, H))	G = 1, H = 1, K = 1
+1823	1	29935	iso(aut(K), prod(G, G))	G = 1, H = 1, K = 1
+1823	1	29902	iso(aut(K), prod(G, K))	G = 1, H = 1, K = 1
+1823	1	29013	iso(aut(K), wreath(G, G))	G = 1, H = 1, K = 1
+1823	1	29084	iso(aut(K), wreath(G, K))	G = 1, H = 1, K = 1
+1823	1	29113	iso(aut(K), wreath(K, G))	G = 1, H = 1, K = 1
+1823	1	4793	iso(prod(G, G), wreath(K, K))	G = 1, H = 1, K = 1
+1823	1	50269	iso(comm(G, K, K), prod(G, G))	G = 1, H = 1, K = 1
+1823	1	4777	iso(prod(G, K), wreath(K, K))	G = 1, H = 1, K = 1
+1823	1	50269	iso(comm(G, K, K), prod(G, K))	G = 1, H = 1, K = 1
+1823	1	3114	iso(prod(K, K), wreath(G, G))	G = 1, H = 1, K = 1
+1823	1	4289	iso(prod(K, K), wreath(G, K))	G = 1, H = 1, K = 1
+1823	1	4464	iso(prod(K, K), wreath(K, G))	G = 1, H = 1, K = 1
+1823	1	30083	iso(comm(G, K, K), wreath(G, G))	G = 1, H = 1, K = 1
+1823	1	40524	iso(comm(G, K, K), wreath(G, K))	G = 1, H = 1, K = 1
+1823	1	41794	iso(comm(G, K, K), wreath(K, G))	G = 1, H = 1, K = 1
+1823	1	51177	iso(comm(G, K, K), normalizer(G, K))	G = 1, H = 1, K = 1
+1823	1	29935	iso(aut(H), prod(G, G))	G = 1, H = 1, K = 1
+1823	1	29902	iso(aut(H), prod(G, H))	G = 1, H = 1, K = 1
+1823	1	29013	iso(aut(H), wreath(G, G))	G = 1, H = 1, K = 1
+1823	1	29084	iso(aut(H), wreath(G, H))	G = 1, H = 1, K = 1
+1823	1	29113	iso(aut(H), wreath(H, G))	G = 1, H = 1, K = 1
+1823	1	4793	iso(prod(G, G), wreath(H, H))	G = 1, H = 1, K = 1
+1823	1	50269	iso(comm(G, H, H), prod(G, G))	G = 1, H = 1, K = 1
+1823	1	4777	iso(prod(G, H), wreath(H, H))	G = 1, H = 1, K = 1
+1823	1	50269	iso(comm(G, H, H), prod(G, H))	G = 1, H = 1, K = 1
+1823	1	3114	iso(prod(H, H), wreath(G, G))	G = 1, H = 1, K = 1
+1823	1	4289	iso(prod(H, H), wreath(G, H))	G = 1, H = 1, K = 1
+1823	1	4464	iso(prod(H, H), wreath(H, G))	G = 1, H = 1, K = 1
+1823	1	30083	iso(comm(G, H, H), wreath(G, G))	G = 1, H = 1, K = 1
+1823	1	40524	iso(comm(G, H, H), wreath(G, H))	G = 1, H = 1, K = 1
+1823	1	41794	iso(comm(G, H, H), wreath(H, G))	G = 1, H = 1, K = 1
+1823	1	51177	iso(comm(G, H, H), normalizer(G, H))	G = 1, H = 1, K = 1
+1822	1	50614	iso(G, comm(G, K, K))	G = 1, H = 1, K = 1
+1822	1	50614	embeds(G, comm(G, K, K))	G = 1, H = 1, K = 1
+1822	1	50614	iso(G, comm(G, H, H))	G = 1, H = 1, K = 1
+1822	1	50614	embeds(G, comm(G, H, H))	G = 1, H = 1, K = 1
+1821	1	32163	le(normalizer(G, K), comm(G, K, K))	G = 1, H = 1, K = 1
+1821	1	32163	eq-sub(comm(G, K, K), normalizer(G, K))	G = 1, H = 1, K = 1
+1821	1	32163	le(normalizer(G, H), comm(G, H, H))	G = 1, H = 1, K = 1
+1821	1	32163	eq-sub(comm(G, H, H), normalizer(G, H))	G = 1, H = 1, K = 1
+1820	1	31777	iso(comm(G, K, K), freeprod(G, G))	G = 1, H = 1, K = 1
+1820	1	31777	iso(comm(G, K, K), freeprod(G, K))	G = 1, H = 1, K = 1
+1820	1	10581	iso(freeprod(K, K), wreath(G, K))	G = 1, H = 1, K = 1
+1820	1	10816	iso(freeprod(K, K), wreath(K, G))	G = 1, H = 1, K = 1
+1820	1	31777	iso(comm(G, H, H), freeprod(G, G))	G = 1, H = 1, K = 1
+1820	1	31777	iso(comm(G, H, H), freeprod(G, H))	G = 1, H = 1, K = 1
+1820	1	10581	iso(freeprod(H, H), wreath(G, H))	G = 1, H = 1, K = 1
+1820	1	10816	iso(freeprod(H, H), wreath(H, G))	G = 1, H = 1, K = 1
+1819	1	32471	iso(aut(K), freeprod(G, G))	G = 1, H = 1, K = 1
+1819	1	32731	iso(aut(K), freeprod(G, K))	G = 1, H = 1, K = 1
+1819	1	5369	iso(freeprod(G, G), wreath(K, K))	G = 1, H = 1, K = 1
+1819	1	11253	iso(frattini(K), freeprod(G, G))	G = 1, H = 1, K = 1
+1819	1	9893	iso(freeprod(G, K), wreath(K, K))	G = 1, H = 1, K = 1
+1819	1	11253	iso(frattini(K), freeprod(G, K))	G = 1, H = 1, K = 1
+1819	1	4623	iso(freeprod(K, K), wreath(G, G))	G = 1, H = 1, K = 1
+1819	1	32471	iso(aut(H), freeprod(G, G))	G = 1, H = 1, K = 1
+1819	1	32731	iso(aut(H), freeprod(G, H))	G = 1, H = 1, K = 1
+1819	1	5369	iso(freeprod(G, G), wreath(H, H))	G = 1, H = 1, K = 1
+1819	1	11253	iso(frattini(H), freeprod(G, G))	G = 1, H = 1, K = 1
+1819	1	9893	iso(freeprod(G, H), wreath(H, H))	G = 1, H = 1, K = 1
+1819	1	11253	iso(frattini(H), freeprod(G, H))	G = 1, H = 1, K = 1
+1819	1	4623	iso(freeprod(H, H), wreath(G, G))	G = 1, H = 1, K = 1
+1810	1	11422	whole(comm(G, K, K))	G = 1, H = 1, K = 1
+1810	1	11422	whole(comm(G, H, H))	G = 1, H = 1, K = 1
+1118	6	4096	iso(meet(G, H, K), wreath(G, H))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = W
+1118	6	4096	iso(meet(G, H, K), wreath(G, K))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = W
+1118	6	4096	iso(meet(G, H, K), wreath(H, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = W
+1118	6	4096	iso(meet(G, H, K), wreath(K, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = W
+1110	1	54975	iso(aut(G), prod(G, G))	G = 1, H = 1, K = 1
+1110	1	53860	iso(aut(G), freeprod(G, G))	G = 1, H = 1, K = 1
+1110	1	47675	iso(aut(G), wreath(G, G))	G = 1, H = 1, K = 1
+1110	1	28371	iso(frattini(G), freeprod(G, G))	G = 1, H = 1, K = 1
+965	8	3072	iso(meet(G, H, K), wreath(G, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = W
+903	8	2817	iso(prod(G, K), wreath(H, H))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = 1
+902	8	2817	iso(prod(G, H), wreath(K, K))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W; G = W(ℤ): W ≅ W ≀ W без кручения, H = 1, K = W
+902	8	8932	iso(freeprod(G, K), wreath(H, H))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = 1
+901	5	47943	iso(aut(G), comm(G, H, K))	G = 1, H = 1, K = 1; G = C2, H = 1, K = 1; G = C2, H = 1, K = C2
+901	5	45738	iso(aut(G), meet(G, comm(G, H, H), comm(G, K, K)))	G = 1, H = 1, K = 1; G = C2, H = 1, K = 1; G = C2, H = 1, K = C2
+901	8	8932	iso(freeprod(G, H), wreath(K, K))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W; G = W(ℤ): W ≅ W ≀ W без кручения, H = 1, K = W
+660	3	22782	iso(aut(G), wreath(K, K))	G = 1, H = 1, K = 1; G = C2, H = 1, K = 1; G = C2, H = C2, K = 1
+660	3	22782	iso(aut(G), wreath(H, H))	G = 1, H = 1, K = 1; G = C2, H = 1, K = 1; G = C2, H = 1, K = C2
+641	3	3133	iso(commutator(K), wreath(G, K))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = W
+641	3	3133	iso(commutator(K), wreath(K, G))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = W
+641	3	3133	iso(commutator(H), wreath(G, H))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = W
+641	3	3133	iso(commutator(H), wreath(H, G))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = W
+514	3	8543	iso(frattini(K), wreath(G, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = 1, K = W
+514	3	11642	iso(frattini(K), wreath(G, K))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = 1, K = W
+514	3	11642	iso(frattini(K), wreath(K, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = 1, K = W
+514	3	8543	iso(frattini(H), wreath(G, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+514	3	11642	iso(frattini(H), wreath(G, H))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+514	3	11642	iso(frattini(H), wreath(H, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+481	9	4502	iso(inn(K), wreath(G, K))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+481	9	4502	iso(inn(K), wreath(K, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+481	9	8216	iso(prod(G, K), wreath(G, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = 1
+481	9	28817	iso(centralizer(G, K), wreath(G, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = 1
+481	9	23553	iso(normal-closure(G, K), wreath(G, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+481	9	30943	iso(normal-closure(G, K), wreath(G, K))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+481	9	32355	iso(normal-closure(G, K), wreath(K, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+481	9	26959	iso(normalizer(G, K), wreath(K, K))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+481	9	4502	iso(inn(H), wreath(G, H))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+481	9	4502	iso(inn(H), wreath(H, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+481	9	8216	iso(prod(G, H), wreath(G, G))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+481	9	28817	iso(centralizer(G, H), wreath(G, G))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+481	9	23553	iso(normal-closure(G, H), wreath(G, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+481	9	30943	iso(normal-closure(G, H), wreath(G, H))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+481	9	32355	iso(normal-closure(G, H), wreath(H, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+481	9	26959	iso(normalizer(G, H), wreath(H, H))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+479	9	24320	iso(freeprod(G, K), wreath(G, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = 1
+479	9	24320	iso(freeprod(G, H), wreath(G, G))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+464	5	49498	iso(aut(G), comm(G, K, K))	G = 1, H = 1, K = 1; G = C2, H = 1, K = 1; G = C2, H = 1, K = C2
+464	5	49498	iso(aut(G), comm(G, H, H))	G = 1, H = 1, K = 1; G = C2, H = 1, K = 1; G = C2, H = 1, K = C2
+463	9	3862	iso(K, wreath(G, K))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+463	9	3862	iso(K, wreath(K, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+463	9	3862	iso(H, wreath(G, H))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+463	9	3862	iso(H, wreath(H, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+403	9	19329	iso(freeprod(G, G), wreath(G, K))	G = 1, H = 1, K = 1; G = ∗_ℕ C₂, H = 1, K = 1; G = ∗_ℕ C₂, H = вся группа, K = 1
+403	9	20784	iso(freeprod(G, G), wreath(K, G))	G = 1, H = 1, K = 1; G = ∗_ℕ C₂, H = 1, K = 1; G = ∗_ℕ C₂, H = вся группа, K = 1
+403	9	31092	iso(centralizer(G, K), freeprod(G, G))	G = 1, H = 1, K = 1; G = ∗_ℕ C₂, H = 1, K = 1; G = ∗_ℕ C₂, H = вся группа, K = 1
+402	9	19329	iso(freeprod(G, G), wreath(G, H))	G = 1, H = 1, K = 1; G = F_∞, H = 1, K = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, H = 1, K = прообраз стабилизатора точки при F_∞ ↠ A_∞
+402	9	20784	iso(freeprod(G, G), wreath(H, G))	G = 1, H = 1, K = 1; G = F_∞, H = 1, K = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, H = 1, K = прообраз стабилизатора точки при F_∞ ↠ A_∞
+402	9	31092	iso(centralizer(G, H), freeprod(G, G))	G = 1, H = 1, K = 1; G = F_∞, H = 1, K = ядро x₁ ↦ 1, xᵢ ↦ 0 в C₂; G = F_∞, H = 1, K = прообраз стабилизатора точки при F_∞ ↠ A_∞
+396	10	2254	iso(commutator(H), wreath(G, G))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = W
+395	10	2254	iso(commutator(K), wreath(G, G))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W; G = W(A₅): W ≅ W ≀ W = W′, H = W, K = W
+372	8	16430	iso(aut(G), frattini(K))	G = 1, H = 1, K = 1; G = C4, H = 1, K = C4; G = C4, H = C2, K = C4
+372	8	16430	iso(aut(G), frattini(H))	G = 1, H = 1, K = 1; G = C4, H = C4, K = 1; G = C4, H = C4, K = C2
+171	5	12635	torsion-free(aut(G))	G = 1, H = 1, K = 1; G = C2, H = 1, K = 1; G = C2, H = 1, K = C2
+139	5	12103	iso(commutator(G), wreath(G, G))	G = 1, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = 1; G = W(A₅): W ≅ W ≀ W = W′, H = 1, K = W
+91	5	29320	iso(frattini(G), wreath(G, G))	G = 1, H = 1, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W, K = W
+8	5	4	solvable(freeprod(G, G))	G = 1, H = 1, K = 1; G = C2, H = 1, K = 1; G = C2, H = 1, K = C2
+6	5	0	free(aut(G))	G = 1, H = 1, K = 1; G = C2, H = 1, K = 1; G = C2, H = 1, K = C2

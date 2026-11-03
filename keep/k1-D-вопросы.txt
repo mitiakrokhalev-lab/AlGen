@@ -1,0 +1,23 @@
+32	0	1	perfect(colim(D))	
+32	0	1	centerless(colim(D))	
+30	0	0	¬abelian(colim(D))	
+29	0	0	¬nilpotent(colim(D))	
+28	0	1	finite(colim(D))	
+28	0	1	simple(colim(D))	
+28	0	1	¬linear(colim(D))	
+27	0	0	¬solvable(colim(D))	
+17	0	1	trivial(colim(D))	
+11	1	1	fin-gen(colim(D))	D = ℤ = ℤ = ℤ = … (тождественные)
+8	1	1	free(colim(D))	D = ℤ = ℤ = ℤ = … (тождественные)
+8	1	1	free-abelian(colim(D))	D = ℤ = ℤ = ℤ = … (тождественные)
+8	1	1	¬indecomposable(colim(D))	D = C₂ ⊂ C₂² ⊂ C₂³ ⊂ …
+7	1	1	cyclic(colim(D))	D = ℤ = ℤ = ℤ = … (тождественные)
+7	1	1	polycyclic(colim(D))	D = ℤ = ℤ = ℤ = … (тождественные)
+3	2	1	torsion-free(colim(D))	D = ℤ → ℤ → ℤ → … (умножение на 2, 3, 4, …); D = ℤ = ℤ = ℤ = … (тождественные)
+3	2	1	¬torsion-free(colim(D))	D = C₂ ⊂ C₄ ⊂ C₈ ⊂ …; D = C₂ ⊂ C₂² ⊂ C₂³ ⊂ …
+2	2	1	hopfian(colim(D))	D = ℤ → ℤ → ℤ → … (умножение на 2, 3, 4, …); D = ℤ = ℤ = ℤ = … (тождественные)
+1	2	1	¬p-group(colim(D))	D = ℤ → ℤ → ℤ → … (умножение на 2, 3, 4, …); D = ℤ = ℤ = ℤ = … (тождественные)
+1	2	0	¬periodic(colim(D))	D = ℤ → ℤ → ℤ → … (умножение на 2, 3, 4, …); D = ℤ = ℤ = ℤ = … (тождественные)
+1	2	1	divisible(colim(D))	D = ℤ → ℤ → ℤ → … (умножение на 2, 3, 4, …); D = C₂ ⊂ C₄ ⊂ C₈ ⊂ …
+1	2	1	¬divisible(colim(D))	D = ℤ = ℤ = ℤ = … (тождественные); D = C₂ ⊂ C₂² ⊂ C₂³ ⊂ …
+1	2	1	¬hopfian(colim(D))	D = C₂ ⊂ C₄ ⊂ C₈ ⊂ …; D = C₂ ⊂ C₂² ⊂ C₂³ ⊂ …

@@ -1,0 +1,484 @@
+570	0	2	¬centerless(dih(num-add(num-mul(num:2(), n), num:1())))	
+570	0	2	¬indecomposable(dih(num-add(num-mul(num:2(), n), num:1())))	
+570	0	6	¬indecomposable(sym-n(n))	
+570	0	6	¬centerless(alt(n))	
+570	0	6	¬maximal(commutator(sym-n(n)))	
+570	0	6	¬complemented(commutator(sym-n(n)))	
+570	0	6	perfect(commutator(sym-n(n)))	
+570	0	6	simple(aut(sym-n(n)))	
+570	0	6	¬solvable(aut(sym-n(n)))	
+570	0	6	perfect(aut(sym-n(n)))	
+570	0	6	¬indecomposable(aut(sym-n(n)))	
+570	0	6	¬whole(inn(sym-n(n)))	
+570	0	6	simple(inn(sym-n(n)))	
+570	0	6	perfect(inn(sym-n(n)))	
+570	0	6	¬indecomposable(inn(sym-n(n)))	
+570	0	2	iso(dih(num-add(num-mul(num:2(), n), num:1())), dih(num-mul(num:2(), n)))	
+570	0	6	iso(dih(num-add(num-mul(num:2(), n), num:1())), sym-n(n))	
+570	0	6	iso(commutator(sym-n(n)), dih(num-add(num-mul(num:2(), n), num:1())))	
+570	0	6	iso(aut(sym-n(n)), dih(num-add(num-mul(num:2(), n), num:1())))	
+570	0	6	iso(dih(num-add(num-mul(num:2(), n), num:1())), inn(sym-n(n)))	
+570	0	6	iso(dih(num-mul(num:2(), n)), sym-n(n))	
+570	0	6	iso(commutator(sym-n(n)), dih(num-mul(num:2(), n)))	
+570	0	6	iso(aut(sym-n(n)), dih(num-mul(num:2(), n)))	
+570	0	6	iso(dih(num-mul(num:2(), n)), inn(sym-n(n)))	
+570	0	6	iso(commutator(sym-n(n)), sym-n(n))	
+570	0	6	¬iso(aut(sym-n(n)), sym-n(n))	
+570	0	6	¬iso(inn(sym-n(n)), sym-n(n))	
+570	0	6	iso(aut(sym-n(n)), commutator(sym-n(n)))	
+570	0	6	iso(commutator(sym-n(n)), inn(sym-n(n)))	
+570	0	2	iso(aut(cyc(n)), cyc(n))	
+570	0	1	¬num-le(n, num-mul(num:2(), n))	
+570	0	1	¬num-divides(n, num-mul(num:2(), n))	
+570	0	1	num-eq(n, num-mul(num:2(), n))	
+570	0	1	¬num-coprime(n, num:1())	
+570	0	1	¬num-le(n, num-add(num-mul(num:2(), n), num:1()))	
+570	0	1	num-eq(n, num-add(num-mul(num:2(), n), num:1()))	
+570	0	1	¬num-coprime(n, num-add(num-mul(num:2(), n), num:1()))	
+570	0	2	num-le(n, ord(aut(cyc(n))))	
+570	0	2	num-divides(n, ord(aut(cyc(n))))	
+570	0	1	num-eq(n, ord(aut(cyc(n))))	
+570	0	0	¬num-le(num:2(), num-mul(num:2(), n))	
+570	0	1	¬num-divides(num:2(), num-mul(num:2(), n))	
+570	0	0	¬num-le(num:2(), num-add(num-mul(num:2(), n), num:1()))	
+570	0	1	num-divides(num:2(), num-add(num-mul(num:2(), n), num:1()))	
+570	0	1	¬num-le(num:2(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	¬num-divides(num:2(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-coprime(num:2(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-le(num-mul(num:2(), n), n)	
+570	0	1	num-divides(num-mul(num:2(), n), n)	
+570	0	1	num-coprime(num-mul(num:2(), n), num:2())	
+570	0	1	num-le(num-mul(num:2(), n), num:1())	
+570	0	1	num-divides(num-mul(num:2(), n), num:1())	
+570	0	0	num-eq(num-mul(num:2(), n), num:1())	
+570	0	1	¬num-coprime(num-mul(num:2(), n), num:1())	
+570	0	1	¬num-le(num-mul(num:2(), n), num-add(num-mul(num:2(), n), num:1()))	
+570	0	1	num-divides(num-mul(num:2(), n), num-add(num-mul(num:2(), n), num:1()))	
+570	0	0	num-eq(num-mul(num:2(), n), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-coprime(num-mul(num:2(), n), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-divides(num-mul(num:2(), n), num:3())	
+570	0	0	num-eq(num-mul(num:2(), n), num:3())	
+570	0	1	num-le(num-mul(num:2(), n), num-phi(n))	
+570	0	1	num-divides(num-mul(num:2(), n), num-phi(n))	
+570	0	1	num-eq(num-mul(num:2(), n), num-phi(n))	
+570	0	2	num-le(num-mul(num:2(), n), ord(aut(cyc(n))))	
+570	0	2	num-divides(num-mul(num:2(), n), ord(aut(cyc(n))))	
+570	0	1	num-eq(num-mul(num:2(), n), ord(aut(cyc(n))))	
+570	0	1	num-coprime(num-mul(num:2(), n), num:6())	
+570	0	1	num-divides(num-mul(num:2(), n), num:5())	
+570	0	0	num-eq(num-mul(num:2(), n), num:5())	
+570	0	0	¬num-le(num:1(), n)	
+570	0	1	¬num-divides(num:1(), n)	
+570	0	0	¬num-le(num:1(), num-mul(num:2(), n))	
+570	0	1	¬num-divides(num:1(), num-mul(num:2(), n))	
+570	0	0	¬num-le(num:1(), num-add(num-mul(num:2(), n), num:1()))	
+570	0	1	¬num-divides(num:1(), num-add(num-mul(num:2(), n), num:1()))	
+570	0	1	¬num-le(num:1(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	¬num-divides(num:1(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-eq(num:1(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	¬num-coprime(num:1(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	¬num-le(num:1(), num-phi(n))	
+570	0	1	¬num-divides(num:1(), num-phi(n))	
+570	0	2	¬num-le(num:1(), ord(aut(cyc(n))))	
+570	0	2	¬num-divides(num:1(), ord(aut(cyc(n))))	
+570	0	2	¬num-coprime(num:1(), ord(aut(cyc(n))))	
+570	0	1	num-le(num-add(num-mul(num:2(), n), num:1()), n)	
+570	0	1	num-divides(num-add(num-mul(num:2(), n), num:1()), n)	
+570	0	1	num-le(num-add(num-mul(num:2(), n), num:1()), num:2())	
+570	0	1	num-divides(num-add(num-mul(num:2(), n), num:1()), num:2())	
+570	0	0	num-eq(num-add(num-mul(num:2(), n), num:1()), num:2())	
+570	0	1	¬num-coprime(num-add(num-mul(num:2(), n), num:1()), num:2())	
+570	0	1	num-le(num-add(num-mul(num:2(), n), num:1()), num-mul(num:2(), n))	
+570	0	1	num-divides(num-add(num-mul(num:2(), n), num:1()), num-mul(num:2(), n))	
+570	0	1	num-eq(num-add(num-mul(num:2(), n), num:1()), num-mul(num:2(), n))	
+570	0	1	¬num-coprime(num-add(num-mul(num:2(), n), num:1()), num-mul(num:2(), n))	
+570	0	1	num-le(num-add(num-mul(num:2(), n), num:1()), num:1())	
+570	0	1	num-divides(num-add(num-mul(num:2(), n), num:1()), num:1())	
+570	0	0	num-eq(num-add(num-mul(num:2(), n), num:1()), num:1())	
+570	0	1	¬num-coprime(num-add(num-mul(num:2(), n), num:1()), num:1())	
+570	0	1	num-divides(num-add(num-mul(num:2(), n), num:1()), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	0	num-eq(num-add(num-mul(num:2(), n), num:1()), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	¬num-coprime(num-add(num-mul(num:2(), n), num:1()), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-le(num-add(num-mul(num:2(), n), num:1()), num-phi(n))	
+570	0	1	num-divides(num-add(num-mul(num:2(), n), num:1()), num-phi(n))	
+570	0	1	num-eq(num-add(num-mul(num:2(), n), num:1()), num-phi(n))	
+570	0	2	num-le(num-add(num-mul(num:2(), n), num:1()), ord(aut(cyc(n))))	
+570	0	2	num-divides(num-add(num-mul(num:2(), n), num:1()), ord(aut(cyc(n))))	
+570	0	1	num-eq(num-add(num-mul(num:2(), n), num:1()), ord(aut(cyc(n))))	
+570	0	0	num-eq(num-add(num-mul(num:2(), n), num:1()), num:6())	
+570	0	1	num-le(ord(center(dih(num-mul(num:2(), n)))), num:1())	
+570	0	1	num-divides(ord(center(dih(num-mul(num:2(), n)))), num:1())	
+570	0	1	num-divides(ord(center(dih(num-mul(num:2(), n)))), num-add(num-mul(num:2(), n), num:1()))	
+570	0	1	num-divides(ord(center(dih(num-mul(num:2(), n)))), num:3())	
+570	0	1	¬num-le(ord(center(dih(num-mul(num:2(), n)))), num:6())	
+570	0	1	¬num-le(ord(center(dih(num-mul(num:2(), n)))), num:5())	
+570	0	1	num-divides(ord(center(dih(num-mul(num:2(), n)))), num:5())	
+570	0	0	¬num-le(num:3(), num-add(num-mul(num:2(), n), num:1()))	
+570	0	1	num-divides(num:3(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-eq(num:3(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	¬num-coprime(num:3(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	2	num-eq(num:3(), ord(aut(cyc(n))))	
+570	0	1	¬num-le(num-phi(n), n)	
+570	0	1	¬num-le(num-phi(n), num-mul(num:2(), n))	
+570	0	1	¬num-coprime(num-phi(n), num:1())	
+570	0	1	¬num-le(num-phi(n), num-add(num-mul(num:2(), n), num:1()))	
+570	0	1	num-eq(num-phi(n), num:3())	
+570	0	2	¬num-le(num-phi(n), ord(aut(cyc(n))))	
+570	0	2	¬num-divides(num-phi(n), ord(aut(cyc(n))))	
+570	0	2	¬num-eq(num-phi(n), ord(aut(cyc(n))))	
+570	0	1	¬num-le(num-phi(n), num:6())	
+570	0	1	num-eq(num-phi(n), num:5())	
+570	0	1	¬num-coprime(num-phi(n), num:5())	
+570	0	2	¬num-le(ord(aut(cyc(n))), n)	
+570	0	2	¬num-le(ord(aut(cyc(n))), num-mul(num:2(), n))	
+570	0	2	¬num-le(ord(aut(cyc(n))), num-add(num-mul(num:2(), n), num:1()))	
+570	0	2	¬num-le(ord(aut(cyc(n))), num-phi(n))	
+570	0	2	¬num-divides(ord(aut(cyc(n))), num-phi(n))	
+570	0	2	¬num-le(ord(aut(cyc(n))), num:6())	
+570	0	1	num-divides(num:6(), num-add(num-mul(num:2(), n), num:1()))	
+570	0	1	num-le(num:6(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-divides(num:6(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-eq(num:6(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-coprime(num:6(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-le(num:5(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-divides(num:5(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-eq(num:5(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	¬num-coprime(num:5(), ord(center(dih(num-mul(num:2(), n)))))	
+570	0	1	num-divides(num:5(), num-phi(n))	
+570	0	2	num-divides(num:5(), ord(aut(cyc(n))))	
+570	0	2	num-eq(num:5(), ord(aut(cyc(n))))	
+570	0	2	¬num-coprime(num:5(), ord(aut(cyc(n))))	
+569	0	2	nilpotent(dih(num-add(num-mul(num:2(), n), num:1())))	
+569	0	6	nilpotent(sym-n(n))	
+569	0	6	¬centerless(sym-n(n))	
+569	0	6	nilpotent(alt(n))	
+569	0	6	¬indecomposable(alt(n))	
+569	0	6	¬indecomposable(commutator(sym-n(n)))	
+569	0	6	¬characteristic(inn(sym-n(n)))	
+569	0	6	maximal(inn(sym-n(n)))	
+569	0	6	¬complemented(inn(sym-n(n)))	
+569	0	6	¬solvable(inn(sym-n(n)))	
+569	0	6	¬centerless(inn(sym-n(n)))	
+569	0	6	¬iso(aut(sym-n(n)), inn(sym-n(n)))	
+568	0	2	p-group(dih(num-add(num-mul(num:2(), n), num:1())))	
+568	0	1	¬p-group(center(dih(num-mul(num:2(), n))))	
+568	0	6	simple(sym-n(n))	
+568	0	6	abelian(alt(n))	
+568	0	6	p-group(alt(n))	
+568	0	6	¬centerless(aut(sym-n(n)))	
+568	0	6	nilpotent(inn(sym-n(n)))	
+568	0	6	iso(alt(n), dih(num-add(num-mul(num:2(), n), num:1())))	
+568	0	6	iso(alt(n), dih(num-mul(num:2(), n)))	
+568	0	6	iso(center(dih(num-mul(num:2(), n))), commutator(sym-n(n)))	
+568	0	6	iso(aut(cyc(n)), commutator(sym-n(n)))	
+568	0	2	abelian(dih(num-add(num-mul(num:2(), n), num:1())))	
+567	0	6	perfect(sym-n(n))	
+567	0	6	p-group(sym-n(n))	
+567	0	6	cyclic(alt(n))	
+567	0	6	central(commutator(sym-n(n)))	
+567	0	2	¬cyclic(aut(cyc(n)))	
+567	0	6	nilpotent(aut(sym-n(n)))	
+567	0	6	abelian(inn(sym-n(n)))	
+567	0	6	p-group(inn(sym-n(n)))	
+567	0	6	iso(alt(n), center(dih(num-mul(num:2(), n))))	
+567	0	6	iso(alt(n), aut(cyc(n)))	
+567	0	2	iso(center(dih(num-mul(num:2(), n))), dih(num-add(num-mul(num:2(), n), num:1())))	
+567	0	2	cyclic(dih(num-add(num-mul(num:2(), n), num:1())))	
+566	0	1	cyclic(dih(num-mul(num:2(), n)))	
+566	0	6	central(inn(sym-n(n)))	
+566	0	6	cyclic(inn(sym-n(n)))	
+566	0	6	iso(center(dih(num-mul(num:2(), n))), inn(sym-n(n)))	
+566	0	6	iso(alt(n), cyc(n))	
+566	0	6	iso(aut(cyc(n)), inn(sym-n(n)))	
+566	0	2	iso(aut(cyc(n)), dih(num-add(num-mul(num:2(), n), num:1())))	
+566	0	2	iso(cyc(n), dih(num-add(num-mul(num:2(), n), num:1())))	
+565	0	6	p-group(aut(sym-n(n)))	
+565	0	2	iso(aut(cyc(n)), dih(num-mul(num:2(), n)))	
+565	0	6	iso(cyc(n), inn(sym-n(n)))	
+565	0	2	simple(dih(num-add(num-mul(num:2(), n), num:1())))	
+564	0	6	abelian(aut(sym-n(n)))	
+564	0	1	iso(cyc(n), dih(num-mul(num:2(), n)))	
+563	0	1	centerless(dih(num-mul(num:2(), n)))	
+563	0	6	¬solvable(sym-n(n))	
+563	0	6	free(alt(n))	
+563	0	6	iso(aut(sym-n(n)), center(dih(num-mul(num:2(), n))))	
+563	0	6	iso(aut(cyc(n)), aut(sym-n(n)))	
+562	0	2	free(cyc(n))	
+562	0	6	free(inn(sym-n(n)))	
+561	0	1	simple(dih(num-mul(num:2(), n)))	
+561	0	6	abelian(sym-n(n))	
+560	0	6	iso(center(dih(num-mul(num:2(), n))), sym-n(n))	
+560	0	6	iso(aut(cyc(n)), sym-n(n))	
+555	0	6	cyclic(sym-n(n))	
+554	0	6	cyclic(aut(sym-n(n)))	
+554	0	6	iso(cyc(n), sym-n(n))	
+553	0	6	iso(aut(sym-n(n)), cyc(n))	
+544	0	6	free(aut(sym-n(n)))	
+540	0	6	free(sym-n(n))	
+346	1	1	¬simple(center(dih(num-mul(num:2(), n))))	n = 1
+345	1	1	¬indecomposable(center(dih(num-mul(num:2(), n))))	n = 1
+344	1	1	abelian(dih(num-mul(num:2(), n)))	n = 1
+343	1	1	¬cyclic(center(dih(num-mul(num:2(), n))))	n = 1
+319	1	1	num-coprime(n, num-mul(num:2(), n))	n = 1
+319	1	1	num-le(n, num:1())	n = 1
+319	1	1	num-divides(n, num:1())	n = 1
+319	1	0	num-eq(n, num:1())	n = 1
+319	1	1	num-divides(n, num-add(num-mul(num:2(), n), num:1()))	n = 1
+317	1	1	num-le(n, num-phi(n))	n = 1
+317	1	1	num-divides(n, num-phi(n))	n = 1
+317	1	1	num-eq(n, num-phi(n))	n = 1
+313	1	0	¬num-le(num:2(), n)	n = 1
+313	1	1	¬num-eq(num:2(), ord(center(dih(num-mul(num:2(), n)))))	n = 1
+310	1	1	num-le(num-mul(num:2(), n), num:2())	n = 1
+310	1	1	num-divides(num-mul(num:2(), n), num:2())	n = 1
+310	1	0	num-eq(num-mul(num:2(), n), num:2())	n = 1
+310	1	1	num-le(num-mul(num:2(), n), ord(center(dih(num-mul(num:2(), n)))))	n = 1
+310	1	1	num-divides(num-mul(num:2(), n), ord(center(dih(num-mul(num:2(), n)))))	n = 1
+310	1	1	num-le(num-mul(num:2(), n), num:3())	n = 1
+306	1	1	num-le(num-add(num-mul(num:2(), n), num:1()), ord(center(dih(num-mul(num:2(), n)))))	n = 1
+306	1	1	num-le(num-add(num-mul(num:2(), n), num:1()), num:3())	n = 1
+306	1	1	num-divides(num-add(num-mul(num:2(), n), num:1()), num:3())	n = 1
+306	1	0	num-eq(num-add(num-mul(num:2(), n), num:1()), num:3())	n = 1
+304	1	1	num-divides(num-add(num-mul(num:2(), n), num:1()), num:6())	n = 1
+302	1	1	¬num-le(ord(center(dih(num-mul(num:2(), n)))), n)	n = 1
+302	1	1	¬num-le(ord(center(dih(num-mul(num:2(), n)))), num:2())	n = 1
+302	1	1	¬num-divides(ord(center(dih(num-mul(num:2(), n)))), num:2())	n = 1
+302	1	1	¬num-le(ord(center(dih(num-mul(num:2(), n)))), num-mul(num:2(), n))	n = 1
+302	1	1	¬num-divides(ord(center(dih(num-mul(num:2(), n)))), num-mul(num:2(), n))	n = 1
+302	1	1	¬num-le(ord(center(dih(num-mul(num:2(), n)))), num-add(num-mul(num:2(), n), num:1()))	n = 1
+302	1	1	¬num-le(ord(center(dih(num-mul(num:2(), n)))), num:3())	n = 1
+300	1	1	¬num-divides(ord(center(dih(num-mul(num:2(), n)))), num:6())	n = 1
+300	1	0	¬num-le(num:3(), num-mul(num:2(), n))	n = 1
+300	1	1	num-le(num:3(), ord(center(dih(num-mul(num:2(), n)))))	n = 1
+275	1	0	¬num-le(num:5(), num-add(num-mul(num:2(), n), num:1()))	n = 1
+244	1	6	simple(alt(n))	n = 5
+243	1	6	¬solvable(alt(n))	n = 5
+242	1	6	perfect(alt(n))	n = 5
+239	1	2	¬indecomposable(cyc(n))	n = 6
+239	1	2	¬p-group(cyc(n))	n = 6
+237	1	2	¬indecomposable(aut(cyc(n)))	n = 7
+237	1	2	¬p-group(aut(cyc(n)))	n = 7
+237	1	1	iso(center(dih(num-mul(num:2(), n))), cyc(n))	n = 2
+236	1	2	free(aut(cyc(n)))	n = 2
+235	1	0	num-eq(n, num:2())	n = 2
+230	1	0	num-eq(n, ord(center(dih(num-mul(num:2(), n)))))	n = 2
+224	1	1	¬num-le(n, num:6())	n = 7
+223	1	0	num-eq(n, num:6())	n = 6
+220	1	2	¬num-le(num:2(), ord(aut(cyc(n))))	n = 2
+220	1	2	¬num-divides(num:2(), ord(aut(cyc(n))))	n = 2
+220	1	2	num-coprime(num:2(), ord(aut(cyc(n))))	n = 2
+214	1	2	num-coprime(num-mul(num:2(), n), ord(aut(cyc(n))))	n = 2
+212	1	2	num-eq(num:1(), ord(aut(cyc(n))))	n = 2
+208	1	0	num-eq(n, num:5())	n = 5
+208	1	1	¬num-coprime(n, num:5())	n = 5
+205	1	1	num-divides(num-add(num-mul(num:2(), n), num:1()), num:5())	n = 2
+205	1	0	num-eq(num-add(num-mul(num:2(), n), num:1()), num:5())	n = 2
+202	1	1	¬num-coprime(num-add(num-mul(num:2(), n), num:1()), num-phi(n))	n = 7
+202	1	2	¬num-coprime(num-add(num-mul(num:2(), n), num:1()), ord(aut(cyc(n))))	n = 7
+198	1	2	¬num-le(ord(center(dih(num-mul(num:2(), n)))), ord(aut(cyc(n))))	n = 2
+198	1	2	¬num-divides(ord(center(dih(num-mul(num:2(), n)))), ord(aut(cyc(n))))	n = 2
+195	1	1	¬num-coprime(num-mul(num:2(), n), num:5())	n = 5
+191	1	2	num-coprime(num-phi(n), ord(aut(cyc(n))))	n = 2
+188	1	2	num-le(ord(aut(cyc(n))), num:1())	n = 2
+188	1	2	num-divides(ord(aut(cyc(n))), num:1())	n = 2
+188	1	2	num-divides(ord(aut(cyc(n))), num-add(num-mul(num:2(), n), num:1()))	n = 2
+188	1	2	num-coprime(ord(aut(cyc(n))), ord(center(dih(num-mul(num:2(), n)))))	n = 2
+188	1	2	num-divides(ord(aut(cyc(n))), num:3())	n = 2
+187	1	1	num-divides(num:3(), num-phi(n))	n = 7
+187	1	2	num-divides(num:3(), ord(aut(cyc(n))))	n = 7
+187	1	2	¬num-coprime(num:3(), ord(aut(cyc(n))))	n = 7
+187	1	1	¬num-coprime(num-phi(n), num:3())	n = 7
+186	1	2	num-divides(ord(aut(cyc(n))), num:5())	n = 2
+185	1	1	num-eq(num-phi(n), num:6())	n = 7
+185	1	1	¬num-le(num-phi(n), num:5())	n = 7
+180	1	6	abelian(commutator(sym-n(n)))	n = 3
+180	1	2	num-coprime(num:6(), ord(aut(cyc(n))))	n = 2
+179	1	6	cyclic(commutator(sym-n(n)))	n = 3
+179	1	6	simple(commutator(sym-n(n)))	n = 3
+179	1	2	¬num-le(ord(aut(cyc(n))), num:5())	n = 7
+178	1	6	nilpotent(commutator(sym-n(n)))	n = 3
+177	1	6	¬centerless(commutator(sym-n(n)))	n = 3
+177	1	1	num-le(num:6(), num-phi(n))	n = 7
+177	1	1	num-divides(num:6(), num-phi(n))	n = 7
+177	1	2	num-le(num:6(), ord(aut(cyc(n))))	n = 7
+177	1	2	num-divides(num:6(), ord(aut(cyc(n))))	n = 7
+177	1	2	num-eq(num:6(), ord(aut(cyc(n))))	n = 7
+176	1	6	p-group(commutator(sym-n(n)))	n = 3
+173	1	1	num-le(num:5(), num-phi(n))	n = 7
+173	1	2	num-le(num:5(), ord(aut(cyc(n))))	n = 7
+172	1	6	¬simple(alt(n))	n = 4
+171	1	6	solvable(alt(n))	n = 4
+170	1	6	¬perfect(alt(n))	n = 4
+169	1	6	iso(commutator(sym-n(n)), cyc(n))	n = 3
+169	1	1	num-divides(num:6(), n)	n = 6
+168	1	1	¬num-divides(num-phi(n), num:6())	n = 5
+167	1	6	¬abelian(commutator(sym-n(n)))	n = 4
+167	1	6	¬cyclic(commutator(sym-n(n)))	n = 4
+167	1	6	¬simple(commutator(sym-n(n)))	n = 4
+165	1	6	centerless(commutator(sym-n(n)))	n = 4
+164	1	6	¬nilpotent(commutator(sym-n(n)))	n = 4
+164	1	6	¬p-group(commutator(sym-n(n)))	n = 4
+161	1	0	num-eq(n, num:3())	n = 3
+161	1	2	¬num-divides(ord(aut(cyc(n))), num:6())	n = 5
+157	1	6	¬iso(commutator(sym-n(n)), cyc(n))	n = 4
+152	1	1	num-divides(num:5(), n)	n = 5
+152	1	1	num-divides(num:5(), num-mul(num:2(), n))	n = 5
+142	1	0	num-eq(num-mul(num:2(), n), num:6())	n = 3
+77	2	1	num-le(n, num:2())	n = 1; n = 2
+77	2	1	num-divides(n, num:2())	n = 1; n = 2
+77	2	1	num-le(n, ord(center(dih(num-mul(num:2(), n)))))	n = 1; n = 2
+77	2	1	num-divides(n, ord(center(dih(num-mul(num:2(), n)))))	n = 1; n = 2
+73	2	1	¬num-le(num:2(), num-phi(n))	n = 1; n = 2
+73	2	1	¬num-divides(num:2(), num-phi(n))	n = 1; n = 2
+72	2	1	num-coprime(num-mul(num:2(), n), num-phi(n))	n = 1; n = 2
+72	2	1	num-le(num-mul(num:2(), n), num:5())	n = 1; n = 2
+72	2	1	num-le(num-add(num-mul(num:2(), n), num:1()), num:6())	n = 1; n = 2
+72	2	1	num-le(num-add(num-mul(num:2(), n), num:1()), num:5())	n = 1; n = 2
+72	2	1	¬num-le(ord(center(dih(num-mul(num:2(), n)))), num-phi(n))	n = 1; n = 2
+72	2	1	¬num-divides(ord(center(dih(num-mul(num:2(), n)))), num-phi(n))	n = 1; n = 2
+72	2	0	¬num-le(num:3(), n)	n = 1; n = 2
+66	2	1	num-coprime(num-phi(n), num:2())	n = 1; n = 2
+65	2	1	num-le(num-phi(n), num:1())	n = 1; n = 2
+65	2	1	num-divides(num-phi(n), num:1())	n = 1; n = 2
+65	2	1	num-eq(num-phi(n), num:1())	n = 1; n = 2
+65	2	1	num-divides(num-phi(n), num-add(num-mul(num:2(), n), num:1()))	n = 1; n = 2
+63	2	1	num-coprime(num-phi(n), ord(center(dih(num-mul(num:2(), n)))))	n = 1; n = 2
+63	2	2	¬simple(cyc(n))	n = 4; n = 6
+62	2	1	num-divides(num-phi(n), num:3())	n = 1; n = 2
+62	2	1	num-coprime(num-phi(n), num:6())	n = 1; n = 2
+62	2	1	num-divides(num-phi(n), num:5())	n = 1; n = 2
+58	2	1	¬num-coprime(n, num-phi(n))	n = 4; n = 6
+58	2	2	¬num-coprime(n, ord(aut(cyc(n))))	n = 4; n = 6
+56	2	0	¬num-le(num:6(), num-mul(num:2(), n))	n = 1; n = 2
+55	2	1	¬num-coprime(n, num:3())	n = 3; n = 6
+55	2	0	¬num-le(num:6(), num-add(num-mul(num:2(), n), num:1()))	n = 1; n = 2
+55	2	0	¬num-le(num:5(), num-mul(num:2(), n))	n = 1; n = 2
+52	2	1	¬num-coprime(num-mul(num:2(), n), num:3())	n = 3; n = 6
+52	2	6	¬abelian(sym-n(n))	n = 3; n = 4
+52	2	6	¬cyclic(sym-n(n))	n = 3; n = 4
+52	2	6	¬free(sym-n(n))	n = 3; n = 4
+52	2	6	¬simple(sym-n(n))	n = 3; n = 4
+52	2	6	solvable(sym-n(n))	n = 3; n = 4
+52	2	6	¬nilpotent(sym-n(n))	n = 3; n = 4
+52	2	6	¬perfect(sym-n(n))	n = 3; n = 4
+52	2	6	centerless(sym-n(n))	n = 3; n = 4
+52	2	6	indecomposable(sym-n(n))	n = 3; n = 4
+52	2	6	¬p-group(sym-n(n))	n = 3; n = 4
+52	2	6	maximal(commutator(sym-n(n)))	n = 3; n = 4
+52	2	6	¬central(commutator(sym-n(n)))	n = 3; n = 4
+52	2	6	complemented(commutator(sym-n(n)))	n = 3; n = 4
+52	2	6	¬perfect(commutator(sym-n(n)))	n = 3; n = 4
+52	2	6	indecomposable(commutator(sym-n(n)))	n = 3; n = 4
+52	2	6	¬abelian(aut(sym-n(n)))	n = 3; n = 4
+52	2	6	¬cyclic(aut(sym-n(n)))	n = 3; n = 4
+52	2	6	¬free(aut(sym-n(n)))	n = 3; n = 4
+52	2	6	¬simple(aut(sym-n(n)))	n = 3; n = 4
+52	2	6	solvable(aut(sym-n(n)))	n = 3; n = 4
+52	2	6	¬nilpotent(aut(sym-n(n)))	n = 3; n = 4
+52	2	6	¬perfect(aut(sym-n(n)))	n = 3; n = 4
+52	2	6	centerless(aut(sym-n(n)))	n = 3; n = 4
+52	2	6	indecomposable(aut(sym-n(n)))	n = 3; n = 4
+52	2	6	¬p-group(aut(sym-n(n)))	n = 3; n = 4
+52	2	6	characteristic(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬maximal(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	whole(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬central(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	complemented(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬abelian(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬cyclic(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬free(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬simple(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	solvable(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬nilpotent(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬perfect(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	centerless(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	indecomposable(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬p-group(inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬iso(dih(num-add(num-mul(num:2(), n), num:1())), sym-n(n))	n = 3; n = 4
+52	2	6	¬iso(commutator(sym-n(n)), dih(num-add(num-mul(num:2(), n), num:1())))	n = 3; n = 4
+52	2	6	¬iso(aut(sym-n(n)), dih(num-add(num-mul(num:2(), n), num:1())))	n = 3; n = 4
+52	2	6	¬iso(dih(num-add(num-mul(num:2(), n), num:1())), inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬iso(dih(num-mul(num:2(), n)), sym-n(n))	n = 3; n = 4
+52	2	6	¬iso(commutator(sym-n(n)), dih(num-mul(num:2(), n)))	n = 3; n = 4
+52	2	6	¬iso(aut(sym-n(n)), dih(num-mul(num:2(), n)))	n = 3; n = 4
+52	2	6	¬iso(dih(num-mul(num:2(), n)), inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬iso(center(dih(num-mul(num:2(), n))), sym-n(n))	n = 3; n = 4
+52	2	6	¬iso(center(dih(num-mul(num:2(), n))), commutator(sym-n(n)))	n = 3; n = 4
+52	2	6	¬iso(aut(sym-n(n)), center(dih(num-mul(num:2(), n))))	n = 3; n = 4
+52	2	6	¬iso(center(dih(num-mul(num:2(), n))), inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬iso(commutator(sym-n(n)), sym-n(n))	n = 3; n = 4
+52	2	6	¬iso(cyc(n), sym-n(n))	n = 3; n = 4
+52	2	6	¬iso(aut(cyc(n)), sym-n(n))	n = 3; n = 4
+52	2	6	iso(aut(sym-n(n)), sym-n(n))	n = 3; n = 4
+52	2	6	iso(inn(sym-n(n)), sym-n(n))	n = 3; n = 4
+52	2	6	¬iso(aut(cyc(n)), commutator(sym-n(n)))	n = 3; n = 4
+52	2	6	¬iso(aut(sym-n(n)), commutator(sym-n(n)))	n = 3; n = 4
+52	2	6	¬iso(commutator(sym-n(n)), inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬iso(aut(sym-n(n)), cyc(n))	n = 3; n = 4
+52	2	6	¬iso(cyc(n), inn(sym-n(n)))	n = 3; n = 4
+52	2	6	¬iso(aut(cyc(n)), aut(sym-n(n)))	n = 3; n = 4
+52	2	6	¬iso(aut(cyc(n)), inn(sym-n(n)))	n = 3; n = 4
+52	2	6	iso(aut(sym-n(n)), inn(sym-n(n)))	n = 3; n = 4
+47	2	1	num-le(num:3(), num-phi(n))	n = 5; n = 7
+47	2	2	num-le(num:3(), ord(aut(cyc(n))))	n = 5; n = 7
+47	2	1	¬num-le(num-phi(n), num:2())	n = 5; n = 7
+47	2	1	¬num-divides(num-phi(n), num:2())	n = 5; n = 7
+46	2	1	¬num-divides(num-phi(n), num-mul(num:2(), n))	n = 5; n = 7
+44	2	1	num-divides(num:3(), n)	n = 3; n = 6
+44	2	1	num-divides(num:3(), num-mul(num:2(), n))	n = 3; n = 6
+42	2	1	¬num-le(num-phi(n), ord(center(dih(num-mul(num:2(), n)))))	n = 5; n = 7
+42	2	1	¬num-divides(num-phi(n), ord(center(dih(num-mul(num:2(), n)))))	n = 5; n = 7
+41	2	1	¬num-le(num-phi(n), num:3())	n = 5; n = 7
+39	2	6	¬abelian(alt(n))	n = 4; n = 5
+39	2	6	¬cyclic(alt(n))	n = 4; n = 5
+39	2	6	¬free(alt(n))	n = 4; n = 5
+39	2	6	¬nilpotent(alt(n))	n = 4; n = 5
+39	2	6	centerless(alt(n))	n = 4; n = 5
+39	2	6	indecomposable(alt(n))	n = 4; n = 5
+39	2	6	¬p-group(alt(n))	n = 4; n = 5
+39	2	6	¬iso(alt(n), dih(num-add(num-mul(num:2(), n), num:1())))	n = 4; n = 5
+39	2	6	¬iso(alt(n), dih(num-mul(num:2(), n)))	n = 4; n = 5
+39	2	6	¬iso(alt(n), center(dih(num-mul(num:2(), n))))	n = 4; n = 5
+39	2	6	¬iso(alt(n), cyc(n))	n = 4; n = 5
+39	2	6	¬iso(alt(n), aut(cyc(n)))	n = 4; n = 5
+38	2	2	¬num-le(ord(aut(cyc(n))), num:2())	n = 5; n = 7
+38	2	2	¬num-divides(ord(aut(cyc(n))), num:2())	n = 5; n = 7
+38	2	2	¬num-divides(ord(aut(cyc(n))), num-mul(num:2(), n))	n = 5; n = 7
+38	2	2	¬num-le(ord(aut(cyc(n))), ord(center(dih(num-mul(num:2(), n)))))	n = 5; n = 7
+38	2	2	¬num-divides(ord(aut(cyc(n))), ord(center(dih(num-mul(num:2(), n)))))	n = 5; n = 7
+38	2	2	¬num-le(ord(aut(cyc(n))), num:3())	n = 5; n = 7
+36	2	1	num-divides(n, num:3())	n = 1; n = 3
+33	2	1	num-divides(num-mul(num:2(), n), num:6())	n = 1; n = 3
+29	2	1	¬num-le(n, num:5())	n = 6; n = 7
+29	2	1	num-divides(n, num:5())	n = 1; n = 5
+20	2	1	num-divides(num:6(), num-mul(num:2(), n))	n = 3; n = 6
+14	3	1	num-coprime(n, num:6())	n = 1; n = 5; n = 7
+10	2	1	¬num-coprime(num-add(num-mul(num:2(), n), num:1()), num:5())	n = 2; n = 7
+8	3	1	indecomposable(dih(num-mul(num:2(), n)))	n = 2; n = 4; n = 6
+8	3	1	¬complemented(center(dih(num-mul(num:2(), n))))	n = 2; n = 4; n = 6
+8	3	1	¬num-coprime(n, num:2())	n = 2; n = 4; n = 6
+8	3	1	¬num-coprime(n, ord(center(dih(num-mul(num:2(), n)))))	n = 2; n = 4; n = 6
+7	3	1	num-divides(num:2(), n)	n = 2; n = 4; n = 6
+7	3	1	num-divides(ord(center(dih(num-mul(num:2(), n)))), n)	n = 2; n = 4; n = 6
+7	2	1	num-divides(num:5(), num-add(num-mul(num:2(), n), num:1()))	n = 2; n = 7
+6	3	2	num-divides(ord(aut(cyc(n))), n)	n = 2; n = 4; n = 6
+6	3	2	simple(aut(cyc(n)))	n = 3; n = 4; n = 6
+5	3	1	nilpotent(dih(num-mul(num:2(), n)))	n = 1; n = 2; n = 4
+5	3	2	¬simple(aut(cyc(n)))	n = 2; n = 5; n = 7
+5	3	2	iso(aut(cyc(n)), center(dih(num-mul(num:2(), n))))	n = 3; n = 4; n = 6
+4	3	1	p-group(dih(num-mul(num:2(), n)))	n = 1; n = 2; n = 4
+4	3	2	¬iso(aut(cyc(n)), center(dih(num-mul(num:2(), n))))	n = 2; n = 5; n = 7
+4	3	1	num-le(n, num:3())	n = 1; n = 2; n = 3
+3	3	1	num-le(num-mul(num:2(), n), num:6())	n = 1; n = 2; n = 3
+3	3	2	num-eq(num:2(), ord(aut(cyc(n))))	n = 3; n = 4; n = 6
+3	3	2	¬num-eq(num:2(), ord(aut(cyc(n))))	n = 2; n = 5; n = 7
+2	3	0	num-le(num:6(), n)	n = 6; n = 7; n = ∞
+2	3	1	¬num-coprime(num-add(num-mul(num:2(), n), num:1()), num:6())	n = 1; n = 4; n = 7
+2	3	1	num-divides(num:3(), num-add(num-mul(num:2(), n), num:1()))	n = 1; n = 4; n = 7
+2	3	1	¬num-coprime(num-add(num-mul(num:2(), n), num:1()), num:3())	n = 1; n = 4; n = 7
+2	3	1	num-eq(num-phi(n), num:2())	n = 3; n = 4; n = 6
+2	3	1	num-eq(num-phi(n), ord(center(dih(num-mul(num:2(), n)))))	n = 3; n = 4; n = 6
+2	3	2	num-eq(ord(aut(cyc(n))), ord(center(dih(num-mul(num:2(), n)))))	n = 3; n = 4; n = 6
+1	3	1	¬num-divides(n, num:6())	n = 4; n = 5; n = 7
+1	3	2	¬num-divides(ord(aut(cyc(n))), n)	n = 3; n = 5; n = 7
+1	3	1	¬num-divides(num-phi(n), n)	n = 3; n = 5; n = 7

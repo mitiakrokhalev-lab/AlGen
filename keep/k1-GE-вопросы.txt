@@ -1,0 +1,48 @@
+596	0	51714	¬torsion-free(image-of(F, commutator(G)))	
+595	0	53251	simple(image-of(F, commutator(G)))	
+594	0	31460	¬le(image-of(F, commutator(G)), ker(F))	
+593	0	26397	¬le(image-of(F, commutator(G)), im(F))	
+592	0	48234	¬polycyclic(image-of(F, commutator(G)))	
+589	0	50341	¬finite(image-of(F, commutator(G)))	
+588	0	50503	¬central(image-of(F, commutator(G)))	
+587	0	50423	¬abelian(image-of(F, commutator(G)))	
+586	0	47531	¬fin-gen(image-of(F, commutator(G)))	
+586	0	47524	¬hopfian(image-of(F, commutator(G)))	
+584	0	44919	¬periodic(image-of(F, commutator(G)))	
+584	0	32202	¬residually-finite(image-of(F, commutator(G)))	
+583	0	33724	¬linear(image-of(F, commutator(G)))	
+582	0	28379	¬normal(image-of(F, commutator(G)))	
+582	0	47647	¬nilpotent(image-of(F, commutator(G)))	
+582	0	47711	¬le(image-of(F, commutator(G)), frattini(G))	
+563	0	33935	¬solvable(image-of(F, commutator(G)))	
+294	2	50364	iso(image-of(F, commutator(G)), prod(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+294	2	28987	iso(image-of(F, commutator(G)), wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+294	2	50419	embeds(G, image-of(F, commutator(G)))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+293	2	50419	iso(G, image-of(F, commutator(G)))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+292	2	25141	iso(freeprod(G, G), image-of(F, commutator(G)))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+291	2	50315	eq-sub(center(G), image-of(F, commutator(G)))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+278	2	14152	whole(image-of(F, commutator(G)))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+244	2	0	eq-sub(im(F), ker(F))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+129	6	5288	iso(im(F), wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1; G = W(A₅): W ≅ W ≀ W = W′, F = id: W(A₅): W ≅ W ≀ W = W′ → W(A₅): W ≅ W ≀ W = W′
+128	4	8	iso(freeprod(G, G), ker(F))	G = 1, F = 1: 1 → 1; G = ∗_ℕ C₂, F = 1: ∗_ℕ C₂ → ∗_ℕ C₂; G = 1, F = id: 1 → 1
+125	6	4681	iso(ker(F), wreath(G, G))	G = 1, F = 1: 1 → 1; G = W(A₅): W ≅ W ≀ W = W′, F = 1: W(A₅): W ≅ W ≀ W = W′ → W(A₅): W ≅ W ≀ W = W′; G = 1, F = id: 1 → 1
+122	7	9	iso(freeprod(G, G), im(F))	G = 1, F = 1: 1 → 1; G = F_∞, F = F_∞ ↪ F_∞ (подгруппа прообраз стабилизатора); G = 1, F = id: 1 → 1
+118	3	1	iso(im(F), ker(F))	G = 1, F = 1: 1 → 1; G = ⊕C₂, F = ⊕C₂ ↠ ⊕C₂ (фактор по чётные); G = 1, F = id: 1 → 1
+114	2	51193	iso(aut(G), wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+114	2	22590	iso(frattini(G), freeprod(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1
+44	4	12453	iso(commutator(G), wreath(G, G))	G = 1, F = 1: 1 → 1; G = W(A₅): W ≅ W ≀ W = W′, F = 1: W(A₅): W ≅ W ≀ W = W′ → W(A₅): W ≅ W ≀ W = W′; G = 1, F = id: 1 → 1
+41	4	16039	torsion-free(aut(G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1; G = C2, F = 1: C2 → C2
+39	6	50893	iso(aut(G), frattini(G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1; G = C4, F = 1: C4 → C4
+30	4	25200	iso(frattini(G), wreath(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), F = 1: W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) → W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W)
+28	7	8419	iso(commutator(G), freeprod(G, G))	G = 1, F = 1: 1 → 1; G = F_∞, F = F_∞ ↪ F_∞ (подгруппа прообраз стабилизатора); G = 1, F = id: 1 → 1
+26	10	9969	iso(G, wreath(G, G))	G = 1, F = 1: 1 → 1; G = W(A₅): W ≅ W ≀ W = W′, F = 1: W(A₅): W ≅ W ≀ W = W′ → W(A₅): W ≅ W ≀ W = W′; G = 1, F = id: 1 → 1
+26	10	17659	iso(inn(G), wreath(G, G))	G = 1, F = 1: 1 → 1; G = W(A₅): W ≅ W ≀ W = W′, F = 1: W(A₅): W ≅ W ≀ W = W′ → W(A₅): W ≅ W ≀ W = W′; G = 1, F = id: 1 → 1
+24	9	8854	iso(freeprod(G, G), inn(G))	G = 1, F = 1: 1 → 1; G = F_∞, F = F_∞ ↪ F_∞ (подгруппа прообраз стабилизатора); G = ∗_ℕ C₂, F = 1: ∗_ℕ C₂ → ∗_ℕ C₂
+24	9	25140	embeds(freeprod(G, G), G)	G = 1, F = 1: 1 → 1; G = F_∞, F = F_∞ ↪ F_∞ (подгруппа прообраз стабилизатора); G = ∗_ℕ C₂, F = 1: ∗_ℕ C₂ → ∗_ℕ C₂
+23	4	10250	iso(aut(G), center(G))	G = 1, F = 1: 1 → 1; G = ℤ₃^× ≅ C₂ × ℤ₃, F = id: ℤ₃^× ≅ C₂ × ℤ₃ → ℤ₃^× ≅ C₂ × ℤ₃; G = 1, F = id: 1 → 1
+23	4	10955	iso(ab(G), aut(G))	G = 1, F = 1: 1 → 1; G = ℤ₃^× ≅ C₂ × ℤ₃, F = id: ℤ₃^× ≅ C₂ × ℤ₃ → ℤ₃^× ≅ C₂ × ℤ₃; G = 1, F = id: 1 → 1
+21	9	17	iso(G, freeprod(G, G))	G = 1, F = 1: 1 → 1; G = F_∞, F = F_∞ ↪ F_∞ (подгруппа прообраз стабилизатора); G = ∗_ℕ C₂, F = 1: ∗_ℕ C₂ → ∗_ℕ C₂
+13	8	47147	divisible(aut(G))	G = 1, F = 1: 1 → 1; G = SO(3), F = id: SO(3) → SO(3); G = 1, F = id: 1 → 1
+10	9	31253	iso(aut(G), commutator(G))	G = 1, F = 1: 1 → 1; G = SO(3), F = id: SO(3) → SO(3); G = Sym(ℕ), F = id: Sym(ℕ) → Sym(ℕ)
+1	4	0	free(aut(G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1; G = C2, F = 1: C2 → C2
+1	4	2	solvable(freeprod(G, G))	G = 1, F = 1: 1 → 1; G = 1, F = id: 1 → 1; G = C2, F = 1: C2 → C2

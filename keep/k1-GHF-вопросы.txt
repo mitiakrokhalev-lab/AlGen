@@ -1,0 +1,25 @@
+348	6	140	iso(im(F), wreath(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), F = id: W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) → W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W); G = W(ℤ): W ≅ W ≀ W без кручения, H = W(ℤ): W ≅ W ≀ W без кручения, F = id: W(ℤ): W ≅ W ≀ W без кручения → W(ℤ): W ≅ W ≀ W без кручения
+348	6	140	iso(im(F), wreath(H, G))	G = 1, H = 1, F = 1: 1 → 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), F = id: W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) → W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W); G = W(ℤ): W ≅ W ≀ W без кручения, H = W(ℤ): W ≅ W ≀ W без кручения, F = id: W(ℤ): W ≅ W ≀ W без кручения → W(ℤ): W ≅ W ≀ W без кручения
+312	7	82	iso(freeprod(G, H), im(F))	G = 1, H = 1, F = 1: 1 → 1; G = F_∞, H = F_∞, F = id: F_∞ → F_∞; G = 1, H = 1, F = id: 1 → 1
+126	2	1658	iso(prod(G, G), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+126	2	1693	iso(prod(H, H), wreath(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+126	2	3746	iso(freeprod(G, G), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+126	2	3759	iso(freeprod(H, H), wreath(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1
+109	9	1345	iso(ker(F), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), H = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), F = 1: W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) → W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W); G = W(ℤ): W ≅ W ≀ W без кручения, H = W(ℤ): W ≅ W ≀ W без кручения, F = 1: W(ℤ): W ≅ W ≀ W без кручения → W(ℤ): W ≅ W ≀ W без кручения
+99	3	61907	iso(aut(H), wreath(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = 1, H = C2, F = 1: 1 → C2
+95	4	26742	iso(freeprod(H, H), wreath(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = 1, H = F_∞, F = 1: 1 → F_∞
+95	4	26930	iso(freeprod(H, H), wreath(H, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = 1, H = F_∞, F = 1: 1 → F_∞
+91	6	3879	iso(prod(G, H), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = W(C₂): W ≅ W ≀ W, F = 1: 1 → W(C₂): W ≅ W ≀ W; G = 1, H = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), F = 1: 1 → W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W)
+91	6	21386	iso(freeprod(G, H), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = W(C₂): W ≅ W ≀ W, F = 1: 1 → W(C₂): W ≅ W ≀ W; G = 1, H = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), F = 1: 1 → W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W)
+90	0	130540	¬characteristic(inn(G))	
+90	0	130108	¬complemented(inn(G))	
+88	0	130760	¬characteristic(inn(H))	
+88	0	130327	¬complemented(inn(H))	
+83	3	62101	iso(aut(G), wreath(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = C2, H = 1, F = 1: C2 → 1
+73	6	3817	iso(prod(G, H), wreath(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = W(ℤ): W ≅ W ≀ W без кручения, H = 1, F = 1: W(ℤ): W ≅ W ≀ W без кручения → 1; G = 1, H = 1, F = id: 1 → 1
+73	6	36299	iso(freeprod(G, H), wreath(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = W(ℤ): W ≅ W ≀ W без кручения, H = 1, F = 1: W(ℤ): W ≅ W ≀ W без кручения → 1; G = 1, H = 1, F = id: 1 → 1
+72	4	26731	iso(freeprod(G, G), wreath(G, H))	G = 1, H = 1, F = 1: 1 → 1; G = F_∞, H = 1, F = 1: F_∞ → 1; G = 1, H = 1, F = id: 1 → 1
+72	4	26581	iso(freeprod(G, G), wreath(H, G))	G = 1, H = 1, F = 1: 1 → 1; G = F_∞, H = 1, F = 1: F_∞ → 1; G = 1, H = 1, F = id: 1 → 1
+37	6	81889	iso(aut(H), freeprod(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = C2, H = D∞, F = 1: C2 → D∞
+33	6	82169	iso(aut(G), freeprod(H, H))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = C2, H = 1, F = 1: C2 → 1
+31	10	51935	iso(aut(H), prod(G, G))	G = 1, H = 1, F = 1: 1 → 1; G = 1, H = 1, F = id: 1 → 1; G = ∏C₂, H = ⊕_i R_{P_i}, R_P = ⟨1/p : p ∈ P⟩, P_i — непересекающиеся бесконечные множества простых, F = 1: ∏C₂ → ⊕_i R_{P_i}, R_P = ⟨1/p : p ∈ P⟩, P_i — непересекающиеся бесконечные множества простых

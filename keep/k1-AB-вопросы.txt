@@ -1,0 +1,30 @@
+1109	0	128140	¬characteristic(inn(B))	
+1109	0	127710	¬complemented(inn(B))	
+1109	0	128140	¬characteristic(inn(A))	
+1109	0	127710	¬complemented(inn(A))	
+779	1	1544	iso(prod(A, A), wreath(B, B))	A = 1, B = 1
+779	1	1544	iso(prod(B, B), wreath(A, A))	A = 1, B = 1
+777	1	3534	iso(freeprod(A, A), wreath(B, B))	A = 1, B = 1
+777	1	3534	iso(freeprod(B, B), wreath(A, A))	A = 1, B = 1
+531	2	60569	iso(aut(B), wreath(A, A))	A = 1, B = 1; A = 1, B = C2
+531	2	60569	iso(aut(A), wreath(B, B))	A = 1, B = 1; A = C2, B = 1
+427	3	25863	iso(freeprod(B, B), wreath(A, B))	A = 1, B = 1; A = 1, B = F_∞; A = 1, B = ∗_ℕ C₂
+427	3	26081	iso(freeprod(B, B), wreath(B, A))	A = 1, B = 1; A = 1, B = F_∞; A = 1, B = ∗_ℕ C₂
+427	3	26081	iso(freeprod(A, A), wreath(A, B))	A = 1, B = 1; A = F_∞, B = 1; A = ∗_ℕ C₂, B = 1
+427	3	25863	iso(freeprod(A, A), wreath(B, A))	A = 1, B = 1; A = F_∞, B = 1; A = ∗_ℕ C₂, B = 1
+404	5	20632	iso(freeprod(A, B), wreath(B, B))	A = 1, B = 1; A = 1, B = W(C₂): W ≅ W ≀ W; A = 1, B = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W)
+404	5	35631	iso(freeprod(A, B), wreath(A, A))	A = 1, B = 1; A = W(A₅): W ≅ W ≀ W = W′, B = 1; A = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), B = 1
+391	5	3628	iso(prod(A, B), wreath(B, B))	A = 1, B = 1; A = 1, B = W(C₂): W ≅ W ≀ W; A = 1, B = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W)
+391	5	3628	iso(prod(A, B), wreath(A, A))	A = 1, B = 1; A = W(A₅): W ≅ W ≀ W = W′, B = 1; A = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W), B = 1
+304	3	80325	iso(aut(B), freeprod(A, A))	A = 1, B = 1; A = C2, B = D∞; A = 1, B = C2
+304	3	80325	iso(aut(A), freeprod(B, B))	A = 1, B = 1; A = C2, B = 1; A = D∞, B = C2
+258	6	50687	iso(aut(A), prod(B, B))	A = 1, B = 1; A = C8, B = C2; A = C12, B = C2
+258	6	50687	iso(aut(B), prod(A, A))	A = 1, B = 1; A = ∏C₂, B = ⊕_i R_{P_i}, R_P = ⟨1/p : p ∈ P⟩, P_i — непересекающиеся бесконечные множества простых; A = C2, B = C12
+172	6	22526	iso(freeprod(A, A), freeprod(B, B))	A = 1, B = 1; A = F_∞, B = F_∞; A = ∗_ℕ C₂, B = ∗_ℕ C₂
+148	8	99960	iso(freeprod(A, A), freeprod(A, B))	A = 1, B = 1; A = F_∞, B = 1; A = ∗_ℕ C₂, B = 1
+148	8	74888	iso(freeprod(A, B), freeprod(B, B))	A = 1, B = 1; A = F_∞, B = F_∞; A = ∗_ℕ C₂, B = ∗_ℕ C₂
+133	6	1126	iso(A, freeprod(B, B))	A = 1, B = 1; A = F_∞, B = F_∞; A = ∗_ℕ C₂, B = ∗_ℕ C₂
+133	6	1126	iso(B, freeprod(A, A))	A = 1, B = 1; A = C2, B = D∞; A = F_∞, B = F_∞
+124	8	1324	iso(A, wreath(B, B))	A = 1, B = 1; A = W(ℤ): W ≅ W ≀ W без кручения, B = W(ℤ): W ≅ W ≀ W без кручения; A = W(A₅): W ≅ W ≀ W = W′, B = W(A₅): W ≅ W ≀ W = W′
+124	8	1324	iso(B, wreath(A, A))	A = 1, B = 1; A = ℤ, B = ℤ ≀ ℤ; A = ℚ⁺, B = ℚ ≀ ℚ
+112	8	7950	iso(wreath(A, A), wreath(B, B))	A = 1, B = 1; A = ℤ, B = ℤ; A = W(ℤ): W ≅ W ≀ W без кручения, B = W(ℤ): W ≅ W ≀ W без кручения

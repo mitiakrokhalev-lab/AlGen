@@ -1,0 +1,256 @@
+1861	0	20541	nilpotent(hnn-hull(G))	
+1861	0	22059	periodic(hnn-hull(G))	
+1861	0	22669	polycyclic(hnn-hull(G))	
+1861	0	22999	cyclic(higman-hull(G))	
+1861	0	22359	iso(aut(center(G)), hnn-hull(G))	
+1861	0	4154	num-eq(index(G, center(G)), num:1056())	
+1861	0	0	num-eq(index(G, center(G)), num:5())	
+1861	0	455	num-eq(num:1056(), ord(G))	
+1860	0	19371	abelian(hnn-hull(G))	
+1860	0	21749	finite(hnn-hull(G))	
+1860	0	21554	iso(ab(G), profinite(G))	
+1860	0	18919	iso(inn(G), profinite(G))	
+1860	0	22388	iso(commutator(commutator(commutator(G))), profinite(G))	
+1859	0	19899	p-group(hnn-hull(G))	
+1859	0	19371	iso(center(G), hnn-hull(G))	
+1859	0	19371	iso(ab(G), hnn-hull(G))	
+1859	0	22279	iso(frattini(G), hnn-hull(G))	
+1859	0	22179	iso(commutator(commutator(G)), profinite(G))	
+1859	0	19263	iso(center(aut(G)), hnn-hull(G))	
+1859	0	21749	iso(alt(num:5()), hnn-hull(G))	
+1858	0	18950	cyclic(hnn-hull(G))	
+1858	0	20841	iso(center(G), profinite(G))	
+1858	0	22044	iso(commutator(G), hnn-hull(G))	
+1858	0	18914	iso(aut(G), profinite(G))	
+1858	0	21798	iso(commutator(commutator(G)), hnn-hull(G))	
+1858	0	21766	iso(commutator(commutator(commutator(G))), hnn-hull(G))	
+1858	0	20720	iso(hnn-hull(G), meet(G, commutator(G), frattini(G)))	
+1858	0	21128	iso(frattini(commutator(G)), hnn-hull(G))	
+1857	0	19110	torsion-free(hnn-hull(G))	
+1857	0	22951	torsion-free(higman-hull(G))	
+1857	0	22860	iso(higman-hull(G), meet(G, center(G), commutator(G)))	
+1857	0	19182	iso(hnn-hull(G), meet(G, center(G), frattini(G)))	
+1857	0	22860	iso(ab(commutator(G)), higman-hull(G))	
+1857	0	19182	iso(center(frattini(G)), hnn-hull(G))	
+1857	0	22860	iso(center(commutator(G)), higman-hull(G))	
+1856	0	18816	free(hnn-hull(G))	
+1856	0	22865	free(higman-hull(G))	
+1856	0	22875	free-abelian(higman-hull(G))	
+1856	0	22935	iso(comm(G, commutator(G), whole-sub(G)), free-cover(G))	
+1855	0	18811	iso(hnn-hull(G), meet(G, center(G), commutator(G)))	
+1855	0	10880	iso(alt(num:5()), meet(G, commutator(G), frattini(G)))	
+1855	0	13192	iso(alt(num:5()), centralizer(G, commutator(G)))	
+1855	0	14782	iso(alt(num:5()), aut(center(G)))	
+1855	0	18213	iso(alt(num:5()), aut(commutator(G)))	
+1855	0	18811	iso(ab(commutator(G)), hnn-hull(G))	
+1855	0	9644	iso(alt(num:5()), frattini(commutator(G)))	
+1855	0	20878	iso(alt(num:5()), aut(ab(G)))	
+1855	0	18811	iso(center(commutator(G)), hnn-hull(G))	
+1855	0	18816	iso(free-cover(G), hnn-hull(G))	
+1855	0	22865	iso(free-cover(G), higman-hull(G))	
+1854	0	18826	free-abelian(hnn-hull(G))	
+1854	0	19470	iso(commutator(G), profinite(G))	
+1854	0	18852	iso(commutator(commutator(commutator(G))), free-cover(G))	
+1853	0	22860	trivial(higman-hull(G))	
+1853	0	0	iso(alt(num:5()), center(frattini(G)))	
+1853	0	0	iso(alt(num:5()), center(aut(G)))	
+1853	0	0	iso(alt(num:5()), free-cover(G))	
+1852	0	0	abelian(alt(num:5()))	
+1852	0	0	cyclic(alt(num:5()))	
+1852	0	0	¬simple(alt(num:5()))	
+1852	0	0	solvable(alt(num:5()))	
+1852	0	0	nilpotent(alt(num:5()))	
+1852	0	0	¬perfect(alt(num:5()))	
+1852	0	0	¬centerless(alt(num:5()))	
+1852	0	0	¬indecomposable(alt(num:5()))	
+1852	0	0	p-group(alt(num:5()))	
+1852	0	0	iso(alt(num:5()), meet(G, center(G), commutator(G)))	
+1852	0	0	iso(alt(num:5()), meet(G, center(G), frattini(G)))	
+1852	0	19177	iso(centralizer(G, frattini(G)), free-cover(G))	
+1852	0	0	iso(ab(commutator(G)), alt(num:5()))	
+1852	0	0	iso(alt(num:5()), center(commutator(G)))	
+1851	0	0	free(alt(num:5()))	
+1851	0	16088	iso(join(G, center(G), commutator(G)), profinite(G))	
+1851	0	18923	iso(centralizer(G, commutator(G)), free-cover(G))	
+1851	0	14975	iso(center(commutator(G)), free-cover(G))	
+1849	0	12986	iso(ab(commutator(G)), free-cover(G))	
+1847	0	18811	trivial(hnn-hull(G))	
+1847	0	22987	¬characteristic(centralizer(G, commutator(G)))	
+1846	0	17734	iso(commutator(commutator(G)), free-cover(G))	
+1845	0	11927	iso(profinite-map(G))	
+1845	0	0	iso(ab(G), alt(num:5()))	
+1845	0	11927	iso(prod(G, G), profinite(G))	
+1845	0	11927	iso(freeprod(G, G), profinite(G))	
+1844	0	11927	iso(G, profinite(G))	
+1844	0	22859	¬fin-gen(higman-hull(G))	
+1844	0	22859	¬embeds(G, higman-hull(G))	
+1843	0	18810	¬fin-gen(hnn-hull(G))	
+1843	0	18810	¬embeds(G, hnn-hull(G))	
+1838	0	12449	iso(alt(num:5()), frattini(G))	
+1834	0	0	iso(alt(num:5()), center(G))	
+1833	0	5520	iso(ab(G), free-cover(G))	
+1831	0	6827	iso(aut(ab(G)), free-cover(G))	
+1826	0	18124	¬residually-finite(center(aut(G)))	
+1825	0	18999	¬le(meet(G, center(G), commutator(G)), meet(G, center(G), frattini(G)))	
+1818	0	18736	¬le(meet(G, center(G), commutator(G)), meet(G, commutator(G), frattini(G)))	
+1817	0	6517	iso(center(G), free-cover(G))	
+1814	0	8408	iso(aut(center(G)), free-cover(G))	
+1808	0	21933	¬complemented(comm(G, commutator(G), whole-sub(G)))	
+1805	0	21928	¬indecomposable(comm(G, commutator(G), whole-sub(G)))	
+1803	0	21137	¬normal(centralizer(G, frattini(G)))	
+1798	0	20900	¬normal(centralizer(G, commutator(G)))	
+1791	0	18762	¬hopfian(comm(G, commutator(G), whole-sub(G)))	
+1790	0	19798	¬nilpotent(centralizer(G, commutator(G)))	
+1781	0	8253	iso(commutator(G), free-cover(G))	
+1779	0	4415	iso(alt(num:5()), aut(G))	
+1770	0	4346	iso(profinite(G), wreath(G, G))	
+1769	0	15236	¬le(meet(G, center(G), commutator(G)), frattini(G))	
+1765	0	5634	iso(free-cover(G), inn(G))	
+1738	0	2366	iso(free-cover(G), join(G, center(G), commutator(G)))	
+1699	0	4220	iso(aut(commutator(G)), free-cover(G))	
+1699	0	14367	¬solvable(centralizer(G, commutator(G)))	
+1692	0	0	iso(alt(num:5()), prod(G, G))	
+1692	0	0	iso(alt(num:5()), wreath(G, G))	
+1626	0	8	iso(G, free-cover(G))	
+1626	0	8	iso(free-cover(G), freeprod(G, G))	
+1309	0	2	iso(aut(G), free-cover(G))	
+994	0	1	iso(free-cover(G), prod(G, G))	
+977	0	0	iso(alt(num:5()), freeprod(G, G))	
+937	1	13271	iso(aut(center(G)), prod(G, G))	G = 1
+937	1	17464	iso(aut(ab(G)), prod(G, G))	G = 1
+936	1	22433	iso(commutator(aut(G)), wreath(G, G))	G = 1
+935	1	21260	iso(centralizer(G, commutator(G)), inn(G))	G = 1
+935	1	21710	iso(centralizer(G, commutator(G)), comm(G, commutator(G), whole-sub(G)))	G = 1
+934	1	12420	iso(centralizer(G, commutator(G)), wreath(G, G))	G = 1
+934	1	13068	iso(centralizer(G, frattini(G)), wreath(G, G))	G = 1
+934	1	19678	iso(aut(commutator(G)), centralizer(G, commutator(G)))	G = 1
+933	1	21886	iso(comm(G, commutator(G), whole-sub(G)), prod(G, G))	G = 1
+933	1	14970	iso(aut(commutator(G)), prod(G, G))	G = 1
+933	1	13142	iso(comm(G, commutator(G), whole-sub(G)), wreath(G, G))	G = 1
+933	1	12715	iso(aut(center(G)), wreath(G, G))	G = 1
+933	1	16159	iso(aut(commutator(G)), wreath(G, G))	G = 1
+932	1	22333	iso(aut(G), wreath(G, G))	G = 1
+932	1	7978	iso(meet(G, commutator(G), frattini(G)), wreath(G, G))	G = 1
+932	1	15281	iso(aut(ab(G)), wreath(G, G))	G = 1
+931	1	21294	iso(ab(G), comm(G, commutator(G), whole-sub(G)))	G = 1
+931	1	7430	iso(frattini(commutator(G)), wreath(G, G))	G = 1
+930	1	18897	iso(center(G), comm(G, commutator(G), whole-sub(G)))	G = 1
+930	1	10912	iso(comm(G, commutator(G), whole-sub(G)), freeprod(G, G))	G = 1
+930	1	7871	iso(freeprod(G, G), meet(G, commutator(G), frattini(G)))	G = 1
+930	1	10603	iso(centralizer(G, commutator(G)), freeprod(G, G))	G = 1
+930	1	16577	iso(aut(commutator(G)), freeprod(G, G))	G = 1
+929	1	12401	iso(aut(center(G)), freeprod(G, G))	G = 1
+928	1	19670	eq-sub(centralizer(G, commutator(G)), comm(G, commutator(G), whole-sub(G)))	G = 1
+928	1	7643	iso(frattini(commutator(G)), freeprod(G, G))	G = 1
+926	1	16490	iso(aut(ab(G)), freeprod(G, G))	G = 1
+924	1	9804	iso(frattini(G), freeprod(G, G))	G = 1
+922	1	17060	eq-sub(center(G), comm(G, commutator(G), whole-sub(G)))	G = 1
+919	1	11926	embeds(G, profinite(G))	G = 1
+873	1	21434	¬linear(center(aut(G)))	G = ℚ/ℤ
+871	1	1	num-eq(num:5(), ord(G))	G = C5
+862	1	13955	iso(alt(num:5()), comm(G, commutator(G), whole-sub(G)))	G = A5
+860	1	13538	iso(alt(num:5()), centralizer(G, frattini(G)))	G = A5
+853	3	20990	¬le(meet(G, commutator(G), frattini(G)), centralizer(G, commutator(G)))	G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂); G = группа Маклейна M(ℚ, 𝔽₂)
+802	4	21146	¬le(comm(G, commutator(G), whole-sub(G)), centralizer(G, frattini(G)))	G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂); G = группа Маклейна M(ℚ, 𝔽₂)
+725	1	0	iso(G, alt(num:5()))	G = A5
+721	6	14333	¬linear(comm(G, commutator(G), whole-sub(G)))	G = A_∞ (финитарная знакопеременная); G = T (группа Томпсона); G = универсальная группа Холла U
+710	7	18762	¬fin-gen(comm(G, commutator(G), whole-sub(G)))	G = A_∞ (финитарная знакопеременная); G = SO(3); G = универсальная группа Холла U
+681	2	309	iso(alt(num:5()), join(G, center(G), commutator(G)))	G = A5; G = 120:34
+651	6	16653	¬nilpotent(frattini(G))	G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂); G = группа Маклейна M(ℚ, 𝔽₂)
+650	2	18648	iso(aut(ab(G)), comm(G, commutator(G), whole-sub(G)))	G = 1; G = C2
+649	2	13310	iso(aut(G), meet(G, commutator(G), frattini(G)))	G = 1; G = C2
+649	2	11651	iso(aut(G), frattini(commutator(G)))	G = 1; G = C2
+648	9	13095	¬residually-finite(comm(G, commutator(G), whole-sub(G)))	G = A_∞ (финитарная знакопеременная); G = SO(3); G = T (группа Томпсона)
+647	2	6889	torsion-free(aut(G))	G = 1; G = C2
+636	6	21435	¬hopfian(center(aut(G)))	G = ℚ²; G = ℚ³; G = ℚ⁺
+628	5	13722	¬nilpotent(meet(G, commutator(G), frattini(G)))	G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂); G = группа Маклейна M(ℚ, 𝔽₂)
+611	2	12321	iso(join(G, center(G), commutator(G)), wreath(G, G))	G = 1; G = W(A₅): W ≅ W ≀ W = W′
+610	1	2611	iso(center(aut(G)), prod(G, G))	G = 1
+610	2	5928	iso(commutator(commutator(G)), wreath(G, G))	G = 1; G = W(A₅): W ≅ W ≀ W = W′
+609	2	5919	iso(commutator(commutator(commutator(G))), wreath(G, G))	G = 1; G = W(A₅): W ≅ W ≀ W = W′
+605	2	5779	iso(commutator(G), wreath(G, G))	G = 1; G = W(A₅): W ≅ W ≀ W = W′
+598	2	11268	iso(frattini(G), wreath(G, G))	G = 1; G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W)
+579	9	4154	num-eq(index(G, center(G)), num:120())	G = (C5 : C4) x S3; G = C2 x C2 x ((C5 : C4) x S3); G = C2 x ((C5 : C4) x S3)
+577	5	13153	¬solvable(meet(G, commutator(G), frattini(G)))	G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂); G = группа Маклейна M(ℚ, 𝔽₂)
+567	6	13152	¬solvable(frattini(G))	G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂); G = группа Маклейна M(ℚ, 𝔽₂)
+547	3	21885	iso(aut(G), frattini(G))	G = 1; G = C2; G = C4
+535	5	20993	¬le(meet(G, commutator(G), frattini(G)), centralizer(G, frattini(G)))	G = UT₅(ℚ); G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂)
+530	2	10588	iso(meet(G, commutator(G), frattini(G)), prod(G, G))	G = 1; G = ⊕_ℕ M(ℚ, 𝔽₂)
+529	2	10124	iso(frattini(commutator(G)), prod(G, G))	G = 1; G = ⊕_ℕ M(ℚ, 𝔽₂)
+527	5	8091	iso(inn(G), wreath(G, G))	G = 1; G = W(A₅): W ≅ W ≀ W = W′; G = W(ℤ): W ≅ W ≀ W без кручения
+525	2	1033	iso(aut(G), meet(G, center(G), commutator(G)))	G = 1; G = C2
+525	2	13764	iso(aut(center(G)), join(G, center(G), commutator(G)))	G = 1; G = ℤ₃^× ≅ C₂ × ℤ₃
+525	2	18473	iso(aut(ab(G)), join(G, center(G), commutator(G)))	G = 1; G = ℤ₃^× ≅ C₂ × ℤ₃
+524	2	749	iso(ab(commutator(G)), aut(G))	G = 1; G = C2
+523	2	13250	iso(G, aut(center(G)))	G = 1; G = ℤ₃^× ≅ C₂ × ℤ₃
+523	2	17444	iso(G, aut(ab(G)))	G = 1; G = ℤ₃^× ≅ C₂ × ℤ₃
+516	9	22977	iso(alt(num:5()), commutator(aut(G)))	G = GL(2,4); G = C6 x A5; G = 240:91
+506	4	9897	embeds(G, frattini(commutator(G)))	G = 1; G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂)
+505	4	9524	iso(G, frattini(commutator(G)))	G = 1; G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂)
+505	4	10066	embeds(G, meet(G, commutator(G), frattini(G)))	G = 1; G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂)
+504	4	10065	iso(G, meet(G, commutator(G), frattini(G)))	G = 1; G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂)
+502	4	15126	embeds(G, aut(center(G)))	G = 1; G = ℤ₂ (целые 2-адические); G = ℤ₃ (целые 3-адические)
+502	4	19925	embeds(G, aut(ab(G)))	G = 1; G = ℤ₂ (целые 2-адические); G = ℤ₃ (целые 3-адические)
+500	5	4681	iso(G, wreath(G, G))	G = 1; G = W(A₅): W ≅ W ≀ W = W′; G = W(ℤ): W ≅ W ≀ W без кручения
+500	6	13239	embeds(wreath(G, G), G)	G = 1; G = W(A₅): W ≅ W ≀ W = W′; G = W(ℤ): W ≅ W ≀ W без кручения
+497	5	456	¬num-le(num:5(), ord(G))	G = 1; G = C2; G = C3
+493	2	9306	iso(freeprod(G, G), join(G, center(G), commutator(G)))	G = 1; G = F_∞
+491	3	18451	iso(aut(commutator(G)), join(G, center(G), commutator(G)))	G = 1; G = SO(3); G = Sym(ℕ)
+490	2	4248	iso(commutator(commutator(G)), freeprod(G, G))	G = 1; G = F_∞
+489	2	4276	iso(commutator(commutator(commutator(G))), freeprod(G, G))	G = 1; G = F_∞
+475	4	7884	le(whole-sub(G), meet(G, commutator(G), frattini(G)))	G = 1; G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂)
+473	2	3831	iso(commutator(G), freeprod(G, G))	G = 1; G = F_∞
+472	10	455	num-eq(num:120(), ord(G))	G = (C5 : C4) x S3; G = C20 x S3; G = 120:45
+469	3	10916	embeds(freeprod(G, G), G)	G = 1; G = F_∞; G = ∗_ℕ C₂
+467	4	6799	whole(meet(G, commutator(G), frattini(G)))	G = 1; G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂)
+467	3	10901	iso(centralizer(G, frattini(G)), freeprod(G, G))	G = 1; G = F_∞; G = ∗_ℕ C₂
+464	3	3973	iso(freeprod(G, G), inn(G))	G = 1; G = F_∞; G = ∗_ℕ C₂
+436	9	4154	num-eq(index(G, center(G)), num:60())	G = S3 x D10; G = GL(2,4); G = C2 x C2 x A5
+433	4	1390	iso(ab(G), commutator(commutator(commutator(G))))	G = 1; G = C2 . S4 = SL(2,3) . C2; G = GL(2,3)
+430	3	4269	iso(aut(G), meet(G, center(G), frattini(G)))	G = 1; G = C2; G = C4
+430	3	4624	iso(aut(G), center(frattini(G)))	G = 1; G = C2; G = C4
+411	3	21629	iso(aut(G), comm(G, commutator(G), whole-sub(G)))	G = 1; G = SO(3); G = C2
+409	3	13227	iso(aut(ab(G)), commutator(G))	G = 1; G = C2; G = C4 x A4
+407	2	4312	iso(aut(G), center(G))	G = 1; G = ℤ₃^× ≅ C₂ × ℤ₃
+407	2	4650	iso(ab(G), aut(G))	G = 1; G = ℤ₃^× ≅ C₂ × ℤ₃
+388	10	22971	¬le(frattini(G), centralizer(G, commutator(G)))	G = ((C4 x C2) : C2) : C4; G = (C4 x C4) : C4; G = (C4 x C4) : S3
+374	9	4968	eq-sub(center(aut(G)), inn(G))	G = 1; G = C2 x C2 x C2 x C2 x C2 x C2; G = ⊕C₂
+373	8	15456	iso(centralizer(G, commutator(G)), commutator(commutator(commutator(G))))	G = 1; G = C2 . S4 = SL(2,3) . C2; G = GL(2,3)
+366	7	14789	iso(aut(center(G)), comm(G, commutator(G), whole-sub(G)))	G = 1; G = C2; G = D8
+364	8	11221	¬linear(meet(G, commutator(G), frattini(G)))	G = H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ): [(v, w), (v′, w′)] = (vᵢw′ᵢ − v′ᵢwᵢ mod ℤ)ᵢ; G = H(ℤ^(ℕ), ⊕ℚ/ℤ): [eᵢ, eⱼ] = (1/j!)δᵢ при i < j; G = группа Маклейна M(ℚ, ℚ)
+364	6	21612	iso(centralizer(G, frattini(G)), meet(G, commutator(G), frattini(G)))	G = 1; G = H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ): [(v, w), (v′, w′)] = (vᵢw′ᵢ − v′ᵢwᵢ mod ℤ)ᵢ; G = H∞(ℚ): ⟨xᵢ, yᵢ, z | [xᵢ, yᵢ] = z⟩ над ℚ (Гейзенберг счётного ранга над ℚ)
+364	6	17140	iso(centralizer(G, frattini(G)), frattini(commutator(G)))	G = 1; G = H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ): [(v, w), (v′, w′)] = (vᵢw′ᵢ − v′ᵢwᵢ mod ℤ)ᵢ; G = H∞(ℚ): ⟨xᵢ, yᵢ, z | [xᵢ, yᵢ] = z⟩ над ℚ (Гейзенберг счётного ранга над ℚ)
+362	3	8	iso(G, freeprod(G, G))	G = 1; G = F_∞; G = ∗_ℕ C₂
+361	4	20192	divisible(aut(G))	G = 1; G = SO(3); G = C2
+356	6	21439	eq-sub(centralizer(G, frattini(G)), meet(G, commutator(G), frattini(G)))	G = 1; G = H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ): [(v, w), (v′, w′)] = (vᵢw′ᵢ − v′ᵢwᵢ mod ℤ)ᵢ; G = H∞(ℚ): ⟨xᵢ, yᵢ, z | [xᵢ, yᵢ] = z⟩ над ℚ (Гейзенберг счётного ранга над ℚ)
+352	4	13921	iso(aut(G), commutator(G))	G = 1; G = SO(3); G = C2
+352	4	11717	iso(aut(G), commutator(commutator(G)))	G = 1; G = SO(3); G = C2
+352	4	11598	iso(aut(G), commutator(commutator(commutator(G))))	G = 1; G = SO(3); G = C2
+340	5	3773	trivial(centralizer(G, frattini(G)))	G = 1; G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂)
+332	7	16223	iso(centralizer(G, commutator(G)), commutator(commutator(G)))	G = 1; G = ((C3 x C3) : C3) : C2; G = C2 x C2 x S4
+327	7	19996	iso(aut(commutator(G)), centralizer(G, frattini(G)))	G = 1; G = S3 x S4; G = (C3 x C3) : QD16
+305	10	22400	¬le(frattini(G), join(G, center(G), commutator(G)))	G = H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ): [(v, w), (v′, w′)] = (vᵢw′ᵢ − v′ᵢwᵢ mod ℤ)ᵢ; G = H∞(ℚ): ⟨xᵢ, yᵢ, z | [xᵢ, yᵢ] = z⟩ над ℚ (Гейзенберг счётного ранга над ℚ); G = (C8 x C2) : C4
+289	5	22805	iso(aut(ab(G)), centralizer(G, frattini(G)))	G = 1; G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂)
+284	5	9137	iso(commutator(G), prod(G, G))	G = 1; G = ⊕_ℕ A₅; G = ⊕_ℕ PSL₂(ℝ)
+283	5	7412	iso(commutator(commutator(G)), prod(G, G))	G = 1; G = ⊕_ℕ A₅; G = ⊕_ℕ PSL₂(ℝ)
+282	5	7255	iso(commutator(commutator(commutator(G))), prod(G, G))	G = 1; G = ⊕_ℕ A₅; G = ⊕_ℕ PSL₂(ℝ)
+278	5	22162	iso(frattini(G), prod(G, G))	G = 1; G = ⊕_ℕ ℚ/ℤ; G = ⊕_ℕ M(ℚ, 𝔽₂)
+272	6	21335	iso(aut(center(G)), centralizer(G, frattini(G)))	G = 1; G = группа Маклейна M(ℚ, ℚ); G = ⊕_ℕ M(ℚ, 𝔽₂)
+254	9	20194	¬residually-finite(commutator(aut(G)))	G = ⊕C₂; G = SO(3); G = PGL₂(ℚ)
+208	10	20085	iso(centralizer(G, frattini(G)), meet(G, center(G), commutator(G)))	G = 1; G = H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ): [(v, w), (v′, w′)] = (vᵢw′ᵢ − v′ᵢwᵢ mod ℤ)ᵢ; G = H∞(ℚ): ⟨xᵢ, yᵢ, z | [xᵢ, yᵢ] = z⟩ над ℚ (Гейзенберг счётного ранга над ℚ)
+203	10	19926	le(centralizer(G, frattini(G)), meet(G, center(G), commutator(G)))	G = 1; G = H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ): [(v, w), (v′, w′)] = (vᵢw′ᵢ − v′ᵢwᵢ mod ℤ)ᵢ; G = H∞(ℚ): ⟨xᵢ, yᵢ, z | [xᵢ, yᵢ] = z⟩ над ℚ (Гейзенберг счётного ранга над ℚ)
+201	10	19926	eq-sub(centralizer(G, frattini(G)), meet(G, center(G), commutator(G)))	G = 1; G = H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ): [(v, w), (v′, w′)] = (vᵢw′ᵢ − v′ᵢwᵢ mod ℤ)ᵢ; G = H∞(ℚ): ⟨xᵢ, yᵢ, z | [xᵢ, yᵢ] = z⟩ над ℚ (Гейзенберг счётного ранга над ℚ)
+196	2	2611	iso(G, center(aut(G)))	G = 1; G = ℤ₃^× ≅ C₂ × ℤ₃
+177	4	2613	embeds(G, center(aut(G)))	G = 1; G = ℤ₂ (целые 2-адические); G = ℤ₃ (целые 3-адические)
+143	2	1	solvable(freeprod(G, G))	G = 1; G = C2
+129	4	2525	iso(center(frattini(G)), prod(G, G))	G = 1; G = ⊕_ℕ ℚ/ℤ; G = ⊕_ℕ ℚ
+120	9	142	embeds(G, alt(num:5()))	G = 1; G = C2; G = C3
+109	2	0	free(aut(G))	G = 1; G = C2
+94	7	1	free(G)	G = 1; G = F₄; G = F₅
+92	1	0	trivial(G)	G = 1
+85	8	45	order-p2(G)	G = C25; G = C4; G = C5 x C5
+1	0	15692	¬residually-finite(ulm(G))	
+1	0	16019	¬linear(ulm(G))	
+1	0	22076	¬polycyclic(ulm(G))	
+1	0	16227	iso(free-cover(G), torsion(G))	
+1	0	13993	iso(alt(num:5()), ulm(G))	

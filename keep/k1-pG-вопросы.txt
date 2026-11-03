@@ -1,0 +1,35 @@
+149	0	56	¬num-le(num:1(), ord(G))	
+96	0	430	¬num-le(p, num-mul(num:2(), p))	
+96	0	430	¬num-divides(p, num-mul(num:2(), p))	
+96	0	430	¬num-le(p, num-pow(p, num:3()))	
+96	0	430	¬num-divides(p, num-pow(p, num:3()))	
+96	0	0	¬num-le(num:2(), num-mul(num:2(), p))	
+96	0	430	¬num-divides(num:2(), num-mul(num:2(), p))	
+96	0	430	num-le(num-mul(num:2(), p), p)	
+96	0	430	num-divides(num-mul(num:2(), p), p)	
+96	0	430	num-eq(num-mul(num:2(), p), p)	
+96	0	430	num-coprime(num-mul(num:2(), p), num:2())	
+96	0	430	num-divides(num-mul(num:2(), p), num:3())	
+96	0	0	num-eq(num-mul(num:2(), p), num:3())	
+96	0	430	num-eq(num-mul(num:2(), p), num-pow(p, num:3()))	
+96	0	430	num-le(num-mul(num:2(), p), num:1())	
+96	0	430	num-divides(num-mul(num:2(), p), num:1())	
+96	0	0	num-eq(num-mul(num:2(), p), num:1())	
+96	0	430	¬num-coprime(num-mul(num:2(), p), num:1())	
+96	0	0	num-eq(num-pow(p, num:3()), num:2())	
+96	0	0	num-eq(num-pow(p, num:3()), num:3())	
+96	0	430	¬num-coprime(num-pow(p, num:3()), num:1())	
+96	0	0	¬num-le(num:1(), p)	
+96	0	430	¬num-divides(num:1(), p)	
+96	0	430	¬num-coprime(num:1(), p)	
+96	0	0	¬num-le(num:1(), num-mul(num:2(), p))	
+96	0	430	¬num-divides(num:1(), num-mul(num:2(), p))	
+96	0	0	¬num-le(num:1(), num-pow(p, num:3()))	
+96	0	430	¬num-divides(num:1(), num-pow(p, num:3()))	
+39	6	418	num-eq(num-pow(p, num:3()), ord(G))	p = 1, G = 1; p = 2, G = C8; p = 2, G = C4 x C2
+17	9	402	num-eq(ord(G), p)	p = 1, G = 1; p = 2, G = C2; p = 3, G = C3
+14	6	92	iso(G, dih(p))	p = 1, G = C2; p = 2, G = C2 x C2; p = 4, G = D8
+4	8	56	¬num-le(num:2(), ord(G))	p = 1, G = 1; p = 2, G = 1; p = 3, G = 1
+4	8	0	num-eq(num:1(), ord(G))	p = 1, G = 1; p = 2, G = 1; p = 3, G = 1
+2	8	24	num-eq(num:3(), ord(G))	p = 1, G = C3; p = 2, G = C3; p = 3, G = C3
+1	8	24	num-eq(num:2(), ord(G))	p = 1, G = C2; p = 2, G = C2; p = 3, G = C2

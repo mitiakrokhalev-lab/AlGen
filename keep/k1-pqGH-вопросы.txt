@@ -1,0 +1,5 @@
+48	0	160256	¬num-le(ord(H), ord(G))	
+30	0	30360	¬num-le(p, num-mul(p, q))	
+30	0	56925	¬num-divides(p, num-mul(p, q))	
+30	0	30360	¬num-le(q, num-mul(p, q))	
+30	0	56925	¬num-divides(q, num-mul(p, q))	

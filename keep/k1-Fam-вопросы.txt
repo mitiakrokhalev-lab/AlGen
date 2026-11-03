@@ -1,0 +1,120 @@
+205	0	6	maximal(commutator(prod-fam(F)))	
+205	0	6	¬complemented(commutator(prod-fam(F)))	
+204	0	6	¬complemented(center(prod-fam(F)))	
+203	0	6	¬indecomposable(commutator(prod-fam(F)))	
+203	0	6	¬le(commutator(prod-fam(F)), sum-fam(F))	
+202	0	6	maximal(sum-fam(F))	
+202	0	0	simple(sum-fam(F))	
+200	0	6	¬fin-gen(commutator(prod-fam(F)))	
+199	0	6	¬hopfian(commutator(prod-fam(F)))	
+196	0	1	¬residually-finite(commutator(prod-fam(F)))	
+196	0	6	¬linear(commutator(prod-fam(F)))	
+192	0	5	simple(center(prod-fam(F)))	
+187	0	0	simple(prod-fam(F))	
+126	1	5	¬periodic(commutator(prod-fam(F)))	F = (UT₃(ℤ))_{n ∈ ℕ}
+108	1	0	¬indecomposable(F)	F = (ℚ/ℤ)_{n ∈ ℕ}
+97	1	8	indecomposable(prod-fam(F))	F = (1)_{n ∈ ℕ}
+96	1	0	indecomposable(sum-fam(F))	F = (1)_{n ∈ ℕ}
+93	2	4	¬finite-index(center(prod-fam(F)))	F = (UT₃(ℤ))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+92	1	6	perfect(prod-fam(F))	F = (1)_{n ∈ ℕ}
+92	1	0	free(sum-fam(F))	F = (1)_{n ∈ ℕ}
+92	1	6	le(sum-fam(F), commutator(prod-fam(F)))	F = (1)_{n ∈ ℕ}
+92	1	6	le(center(prod-fam(F)), commutator(prod-fam(F)))	F = (1)_{n ∈ ℕ}
+92	1	6	iso(commutator(prod-fam(F)), prod-fam(F))	F = (1)_{n ∈ ℕ}
+92	1	6	iso(commutator(prod-fam(F)), sum-fam(F))	F = (1)_{n ∈ ℕ}
+91	2	4	¬finite(commutator(prod-fam(F)))	F = (UT₃(ℤ))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+89	1	6	eq-sub(commutator(prod-fam(F)), sum-fam(F))	F = (1)_{n ∈ ℕ}
+89	1	9	¬complemented(sum-fam(F))	F = (C_p)_{p простое}
+88	1	6	¬linear(center(prod-fam(F)))	F = (ℚ/ℤ)_{n ∈ ℕ}
+87	1	3	iso(center(prod-fam(F)), commutator(prod-fam(F)))	F = (1)_{n ∈ ℕ}
+84	1	6	¬perfect(commutator(prod-fam(F)))	F = (S₃, ℤ)
+83	1	6	¬centerless(commutator(prod-fam(F)))	F = (S₃, ℤ)
+82	1	6	centerless(prod-fam(F))	F = (1)_{n ∈ ℕ}
+81	1	2	eq-sub(center(prod-fam(F)), commutator(prod-fam(F)))	F = (1)_{n ∈ ℕ}
+74	1	0	free(prod-fam(F))	F = (1)_{n ∈ ℕ}
+74	1	0	trivial(sum-fam(F))	F = (1)_{n ∈ ℕ}
+59	2	8	¬characteristic(sum-fam(F))	F = (C₂)_{n ∈ ℕ}; F = (ℤ)_{n ∈ ℕ}
+59	2	6	¬free(commutator(prod-fam(F)))	F = (S₃, ℤ); F = (A₅, ℤ)
+57	2	5	simple(commutator(prod-fam(F)))	F = (S₃, ℤ); F = (A₅, ℤ)
+56	2	5	¬torsion-free(commutator(prod-fam(F)))	F = (S₃, ℤ); F = (A₅, ℤ)
+55	2	5	¬p-group(commutator(prod-fam(F)))	F = (UT₃(ℤ))_{n ∈ ℕ}; F = (A₅, ℤ)
+53	2	1	¬residually-finite(center(prod-fam(F)))	F = (ℚ/ℤ)_{n ∈ ℕ}; F = (ℚ, ℚ)
+53	2	9	¬iso(prod-fam(F), sum-fam(F))	F = (ℤ)_{n ∈ ℕ}; F = (C_p)_{p простое}
+46	3	8	¬whole(sum-fam(F))	F = (C₂)_{n ∈ ℕ}; F = (ℤ)_{n ∈ ℕ}; F = (C_p)_{p простое}
+46	2	0	cyclic(sum-fam(F))	F = (C₂, C₃); F = (1)_{n ∈ ℕ}
+45	3	8	¬finite-index(sum-fam(F))	F = (C₂)_{n ∈ ℕ}; F = (ℤ)_{n ∈ ℕ}; F = (C_p)_{p простое}
+41	3	7	¬hopfian(prod-fam(F))	F = (C₂)_{n ∈ ℕ}; F = (ℤ)_{n ∈ ℕ}; F = (ℚ/ℤ)_{n ∈ ℕ}
+37	3	8	¬le(center(prod-fam(F)), sum-fam(F))	F = (C₂)_{n ∈ ℕ}; F = (ℤ)_{n ∈ ℕ}; F = (C_p)_{p простое}
+36	3	6	finite-index(commutator(prod-fam(F)))	F = (C₂, C₃); F = (C₂, C₂); F = (1)_{n ∈ ℕ}
+35	3	7	¬hopfian(center(prod-fam(F)))	F = (C₂)_{n ∈ ℕ}; F = (ℤ)_{n ∈ ℕ}; F = (ℚ/ℤ)_{n ∈ ℕ}
+34	3	6	finite(center(prod-fam(F)))	F = (C₂, C₃); F = (C₂, C₂); F = (1)_{n ∈ ℕ}
+33	3	0	finite(sum-fam(F))	F = (C₂, C₃); F = (C₂, C₂); F = (1)_{n ∈ ℕ}
+33	3	0	¬fin-gen(F)	F = (ℚ/ℤ)_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}; F = (ℚ, ℚ)
+32	4	3	¬cyclic(commutator(prod-fam(F)))	F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+30	3	0	¬residually-finite(F)	F = (ℚ/ℤ)_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}; F = (ℚ, ℚ)
+30	4	3	¬polycyclic(commutator(prod-fam(F)))	F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+29	4	3	¬abelian(commutator(prod-fam(F)))	F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+27	4	3	¬solvable(prod-fam(F))	F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+27	4	3	¬nilpotent(commutator(prod-fam(F)))	F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+26	3	0	free(F)	F = (ℤ)_{n ∈ ℕ}; F = (ℤ, ℤ); F = (1)_{n ∈ ℕ}
+26	3	7	p-group(center(prod-fam(F)))	F = (C₂)_{n ∈ ℕ}; F = (C₂, C₂); F = (1)_{n ∈ ℕ}
+26	4	0	¬solvable(F)	F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+23	3	0	finite(prod-fam(F))	F = (C₂, C₃); F = (C₂, C₂); F = (1)_{n ∈ ℕ}
+23	4	0	p-group(sum-fam(F))	F = (C₂)_{n ∈ ℕ}; F = (C₃)_{n ∈ ℕ}; F = (C₂, C₂)
+23	3	6	divisible(center(prod-fam(F)))	F = (ℚ/ℤ)_{n ∈ ℕ}; F = (ℚ, ℚ); F = (1)_{n ∈ ℕ}
+23	3	0	¬residually-finite(sum-fam(F))	F = (ℚ/ℤ)_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}; F = (ℚ, ℚ)
+22	3	1	p-group(prod-fam(F))	F = (C₂)_{n ∈ ℕ}; F = (C₂, C₂); F = (1)_{n ∈ ℕ}
+22	4	0	perfect(F)	F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+22	4	0	perfect(sum-fam(F))	F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+22	4	0	centerless(F)	F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+22	4	0	centerless(sum-fam(F))	F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+21	4	8	periodic(center(prod-fam(F)))	F = (C₂)_{n ∈ ℕ}; F = (C₂, C₃); F = (C₂, C₂)
+20	5	3	¬free-abelian(commutator(prod-fam(F)))	F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+19	4	6	periodic(prod-fam(F))	F = (C₂)_{n ∈ ℕ}; F = (C₂, C₃); F = (C₂, C₂)
+19	3	0	free-abelian(sum-fam(F))	F = (ℤ)_{n ∈ ℕ}; F = (ℤ, ℤ); F = (1)_{n ∈ ℕ}
+19	4	0	¬solvable(sum-fam(F))	F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+19	2	0	free-abelian(prod-fam(F))	F = (ℤ, ℤ); F = (1)_{n ∈ ℕ}
+16	6	0	¬nilpotent(F)	F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}
+16	6	2	¬nilpotent(prod-fam(F))	F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}
+16	2	0	cyclic(prod-fam(F))	F = (C₂, C₃); F = (1)_{n ∈ ℕ}
+15	6	2	¬central(commutator(prod-fam(F)))	F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}
+13	6	0	¬nilpotent(sum-fam(F))	F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}
+13	3	8	indecomposable(center(prod-fam(F)))	F = (S₃, ℤ); F = (A₅, ℤ); F = (1)_{n ∈ ℕ}
+12	7	1	¬linear(prod-fam(F))	F = (ℚ/ℤ)_{n ∈ ℕ}; F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}
+11	8	0	¬abelian(F)	F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}
+10	5	3	iso(center(prod-fam(F)), sum-fam(F))	F = (C₂, C₃); F = (ℤ, ℤ); F = (ℚ, ℚ)
+10	7	1	¬divisible(commutator(prod-fam(F)))	F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}
+9	6	6	¬fin-gen(prod-fam(F))	F = (C₂)_{n ∈ ℕ}; F = (C₃)_{n ∈ ℕ}; F = (ℤ)_{n ∈ ℕ}
+9	7	0	¬linear(sum-fam(F))	F = (ℚ/ℤ)_{n ∈ ℕ}; F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}
+9	8	0	¬central(sum-fam(F))	F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}
+8	5	2	eq-sub(center(prod-fam(F)), sum-fam(F))	F = (C₂, C₃); F = (ℤ, ℤ); F = (ℚ, ℚ)
+8	5	0	torsion-free(sum-fam(F))	F = (ℤ)_{n ∈ ℕ}; F = (UT₃(ℤ))_{n ∈ ℕ}; F = (ℤ, ℤ)
+8	8	0	¬abelian(sum-fam(F))	F = (S₃)_{n ∈ ℤ}; F = (A₅)_{n ∈ ℕ}; F = (SL(2, 5))_{n ∈ ℕ}
+7	1	0	trivial(F)	F = (1)_{n ∈ ℕ}
+7	6	5	¬torsion-free(center(prod-fam(F)))	F = (C₂)_{n ∈ ℕ}; F = (C₃)_{n ∈ ℕ}; F = (ℚ/ℤ)_{n ∈ ℕ}
+7	3	6	free(center(prod-fam(F)))	F = (S₃, ℤ); F = (A₅, ℤ); F = (1)_{n ∈ ℕ}
+7	4	6	free-abelian(center(prod-fam(F)))	F = (ℤ, ℤ); F = (S₃, ℤ); F = (A₅, ℤ)
+6	5	0	torsion-free(F)	F = (ℤ)_{n ∈ ℕ}; F = (UT₃(ℤ))_{n ∈ ℕ}; F = (ℤ, ℤ)
+5	6	6	¬fin-gen(center(prod-fam(F)))	F = (C₂)_{n ∈ ℕ}; F = (C₃)_{n ∈ ℕ}; F = (ℤ)_{n ∈ ℕ}
+5	6	6	fin-gen(prod-fam(F))	F = (C₂, C₃); F = (ℤ, ℤ); F = (S₃, ℤ)
+5	4	6	cyclic(center(prod-fam(F)))	F = (C₂, C₃); F = (S₃, ℤ); F = (A₅, ℤ)
+4	7	8	¬indecomposable(center(prod-fam(F)))	F = (C₂)_{n ∈ ℕ}; F = (ℤ)_{n ∈ ℕ}; F = (C_p)_{p простое}
+4	4	0	divisible(prod-fam(F))	F = (ℚ/ℤ)_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}; F = (ℚ, ℚ)
+4	4	0	divisible(sum-fam(F))	F = (ℚ/ℤ)_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}; F = (ℚ, ℚ)
+4	5	0	polycyclic(sum-fam(F))	F = (C₂, C₃); F = (ℤ, ℤ); F = (S₃, ℤ)
+4	6	0	fin-gen(sum-fam(F))	F = (C₂, C₃); F = (ℤ, ℤ); F = (S₃, ℤ)
+4	6	6	fin-gen(center(prod-fam(F)))	F = (C₂, C₃); F = (ℤ, ℤ); F = (S₃, ℤ)
+3	4	0	divisible(F)	F = (ℚ/ℤ)_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}; F = (ℚ, ℚ)
+3	6	0	finite-fam(F)	F = (C₂, C₃); F = (ℤ, ℤ); F = (S₃, ℤ)
+2	8	0	cyclic(F)	F = (C₂)_{n ∈ ℕ}; F = (C₃)_{n ∈ ℕ}; F = (ℤ)_{n ∈ ℕ}
+2	7	0	¬periodic(F)	F = (ℤ)_{n ∈ ℕ}; F = (UT₃(ℤ))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+2	6	8	¬periodic(center(prod-fam(F)))	F = (ℤ)_{n ∈ ℕ}; F = (C_p)_{p простое}; F = (ℤ, ℤ)
+2	7	8	whole(sum-fam(F))	F = (C₂, C₃); F = (ℤ, ℤ); F = (S₃, ℤ)
+2	7	8	finite-index(sum-fam(F))	F = (C₂, C₃); F = (ℤ, ℤ); F = (S₃, ℤ)
+1	7	0	¬periodic(sum-fam(F))	F = (ℤ)_{n ∈ ℕ}; F = (UT₃(ℤ))_{n ∈ ℕ}; F = (PSL₂(ℝ))_{n ∈ ℕ}
+1	7	0	simple(F)	F = (C₂)_{n ∈ ℕ}; F = (C₃)_{n ∈ ℕ}; F = (A₅)_{n ∈ ℕ}
+1	8	7	hopfian(prod-fam(F))	F = (C_p)_{p простое}; F = (C₂, C₃); F = (ℤ, ℤ)
+1	8	8	characteristic(sum-fam(F))	F = (C_p)_{p простое}; F = (C₂, C₃); F = (ℤ, ℤ)
+1	8	7	hopfian(center(prod-fam(F)))	F = (C_p)_{p простое}; F = (C₂, C₃); F = (ℤ, ℤ)
+1	7	8	le(center(prod-fam(F)), sum-fam(F))	F = (C₂, C₃); F = (ℤ, ℤ); F = (S₃, ℤ)
+1	7	9	iso(prod-fam(F), sum-fam(F))	F = (C₂, C₃); F = (ℤ, ℤ); F = (S₃, ℤ)

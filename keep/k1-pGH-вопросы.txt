@@ -1,0 +1,7 @@
+35	0	22770	abelian(alt(p))	
+35	0	22770	cyclic(alt(p))	
+35	0	22770	free(alt(p))	
+35	0	22770	nilpotent(alt(p))	
+35	0	22770	¬centerless(alt(p))	
+35	0	22770	¬indecomposable(alt(p))	
+35	0	22770	p-group(alt(p))	

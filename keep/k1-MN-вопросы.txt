@@ -1,0 +1,83 @@
+176	0	8	¬num-le(m, num-mul(m, n))	
+176	0	15	¬num-divides(m, num-mul(m, n))	
+176	0	8	¬num-le(n, num-mul(m, n))	
+176	0	15	¬num-divides(n, num-mul(m, n))	
+176	0	15	¬num-le(num-gcd(m, n), m)	
+176	0	15	¬num-divides(num-gcd(m, n), m)	
+176	0	15	¬num-le(num-gcd(m, n), n)	
+176	0	15	¬num-divides(num-gcd(m, n), n)	
+176	0	15	¬num-le(num-gcd(m, n), num-mul(m, n))	
+176	0	15	¬num-divides(num-gcd(m, n), num-mul(m, n))	
+176	0	15	¬num-coprime(num-gcd(m, n), num:1())	
+176	0	15	¬num-le(num-gcd(m, n), num:100())	
+176	0	15	num-eq(num-gcd(m, n), num:100())	
+176	0	15	¬num-coprime(num-mul(m, n), num:1())	
+176	0	15	¬num-le(num-mul(m, n), num:100())	
+176	0	0	num-eq(num-mul(m, n), num:100())	
+176	0	15	¬num-le(num:1(), num-gcd(m, n))	
+176	0	15	¬num-divides(num:1(), num-gcd(m, n))	
+176	0	0	¬num-le(num:1(), num-mul(m, n))	
+176	0	15	¬num-divides(num:1(), num-mul(m, n))	
+176	0	15	num-le(num:100(), num-gcd(m, n))	
+176	0	15	num-divides(num:100(), num-gcd(m, n))	
+176	0	15	num-divides(num:100(), num-mul(m, n))	
+175	0	28	iso(cyc(m), prod(cyc(m), cyc(n)))	
+175	0	28	iso(cyc(n), prod(cyc(m), cyc(n)))	
+173	0	24	indecomposable(prod(cyc(m), cyc(n)))	
+173	0	19	free(bs(m, n))	
+172	0	47	perfect(bs(m, n))	
+168	0	20	simple(prod(cyc(m), cyc(n)))	
+168	0	12	cyclic(bs(m, n))	
+168	0	41	divisible(bs(m, n))	
+166	0	21	simple(bs(m, n))	
+162	0	4	free(prod(cyc(m), cyc(n)))	
+152	0	8	¬num-coprime(n, num:1())	
+152	0	8	¬num-le(n, num:100())	
+152	0	0	num-eq(n, num:100())	
+152	0	0	¬num-le(num:1(), n)	
+152	0	8	¬num-divides(num:1(), n)	
+152	0	8	num-divides(num:100(), n)	
+152	0	8	¬num-coprime(m, num:1())	
+152	0	8	¬num-le(m, num:100())	
+152	0	0	num-eq(m, num:100())	
+152	0	0	¬num-le(num:1(), m)	
+152	0	8	¬num-divides(num:1(), m)	
+152	0	8	num-divides(num:100(), m)	
+150	0	16	free(cyc(n))	
+150	0	16	free(cyc(m))	
+80	1	15	num-eq(num-gcd(m, n), num-mul(m, n))	m = 1, n = 1
+80	1	15	num-le(num-mul(m, n), num-gcd(m, n))	m = 1, n = 1
+80	1	15	num-divides(num-mul(m, n), num-gcd(m, n))	m = 1, n = 1
+80	1	15	num-le(num-mul(m, n), num:1())	m = 1, n = 1
+80	1	15	num-divides(num-mul(m, n), num:1())	m = 1, n = 1
+80	1	0	num-eq(num-mul(m, n), num:1())	m = 1, n = 1
+79	8	0	num-le(num:100(), m)	m = ∞, n = 1; m = ∞, n = 2; m = ∞, n = 3
+79	8	0	num-le(num:100(), n)	m = 1, n = ∞; m = 2, n = ∞; m = 3, n = ∞
+76	1	12	polycyclic(bs(m, n))	m = 1, n = 1
+75	1	12	nilpotent(bs(m, n))	m = 1, n = 1
+74	1	12	abelian(bs(m, n))	m = 1, n = 1
+42	6	28	iso(cyc(m), cyc(n))	m = 2, n = 2; m = 3, n = 3; m = 4, n = 4
+40	7	15	num-coprime(m, num-mul(m, n))	m = 1, n = 1; m = 1, n = 2; m = 1, n = 3
+40	7	8	num-eq(n, num-mul(m, n))	m = 1, n = 1; m = 1, n = 2; m = 1, n = 3
+40	7	15	num-le(num-mul(m, n), n)	m = 1, n = 1; m = 1, n = 2; m = 1, n = 3
+40	7	15	num-divides(num-mul(m, n), n)	m = 1, n = 1; m = 1, n = 2; m = 1, n = 3
+40	7	8	num-eq(m, num-mul(m, n))	m = 1, n = 1; m = 2, n = 1; m = 3, n = 1
+40	7	15	num-coprime(n, num-mul(m, n))	m = 1, n = 1; m = 2, n = 1; m = 3, n = 1
+40	7	15	num-le(num-mul(m, n), m)	m = 1, n = 1; m = 2, n = 1; m = 3, n = 1
+40	7	15	num-divides(num-mul(m, n), m)	m = 1, n = 1; m = 2, n = 1; m = 3, n = 1
+32	3	19	linear(bs(m, n))	m = 1, n = 1; m = 1, n = 2; m = 2, n = 1
+31	5	15	¬num-divides(num-gcd(m, n), num:100())	m = 3, n = 3; m = 3, n = 6; m = 6, n = 3
+30	7	24	p-group(prod(cyc(m), cyc(n)))	m = 2, n = 2; m = 2, n = 4; m = 3, n = 3
+26	8	8	num-le(m, num:1())	m = 1, n = 1; m = 1, n = 2; m = 1, n = 3
+26	8	8	num-divides(m, num:1())	m = 1, n = 1; m = 1, n = 2; m = 1, n = 3
+26	8	0	num-eq(m, num:1())	m = 1, n = 1; m = 1, n = 2; m = 1, n = 3
+26	8	8	num-le(n, num:1())	m = 1, n = 1; m = 2, n = 1; m = 3, n = 1
+26	8	8	num-divides(n, num:1())	m = 1, n = 1; m = 2, n = 1; m = 3, n = 1
+26	8	0	num-eq(n, num:1())	m = 1, n = 1; m = 2, n = 1; m = 3, n = 1
+16	7	1	num-eq(m, n)	m = 1, n = 1; m = 2, n = 2; m = 3, n = 3
+14	10	15	¬num-coprime(num-gcd(m, n), num:100())	m = 2, n = 2; m = 2, n = 4; m = 2, n = 6
+6	9	15	num-coprime(num-mul(m, n), num:100())	m = 1, n = 1; m = 1, n = 3; m = 1, n = 7
+2	8	16	¬indecomposable(cyc(m))	m = 6, n = 1; m = 6, n = 2; m = 6, n = 3
+2	8	16	¬p-group(cyc(m))	m = 6, n = 1; m = 6, n = 2; m = 6, n = 3
+2	8	16	¬indecomposable(cyc(n))	m = 1, n = 6; m = 2, n = 6; m = 3, n = 6
+2	8	16	¬p-group(cyc(n))	m = 1, n = 6; m = 2, n = 6; m = 3, n = 6
