@@ -1,0 +1,372 @@
+{
+ "база": "GN",
+ "строк": 9987,
+ "различных строк": 9530,
+ "литералов": 3774,
+ "k=0 (верно во всех строках)": 422,
+ "k=1 неопровергнутых": 869683,
+ "k=2 минимальных неопровергнутых": 418251284,
+ "пар посылок": 3152583,
+ "пустых пар (посылки несовместны в библиотеке)": 427149,
+ "посылки противоречат теории": 0,
+ "выводится распространением": 16058133,
+ "остаток после распространения": 402193151,
+ "выборка SAT: пар": 6218,
+ "кандидатов": 800786,
+ "выводится": 8954,
+ "вызовов SAT": 184596,
+ "оценка: выводится SAT во всём остатке": 4497128,
+ "оценка: неизвестно (вопросы до склейки)": 397696023,
+ "время": {
+  "подготовка, с": 453,
+  "стена, с": 2724,
+  "перебор, нить·с": 2007,
+  "распространение, нить·с": 2481,
+  "SAT по выборке, нить·с": 6198,
+  "SAT на весь остаток (оценка), нить·ч": 864.7
+ },
+ "примеры": [
+  {
+   "посылки": [
+    "¬('r', 'iso', App(op='center', args=(Var(name='G'),)), App(op='prod', args=(Var(name='N'), App(op='quotient', args=(Var(name='G'), Var(name='N'))))))",
+    "('r', 'iso', App(op='aut', args=(Var(name='N'),)), App(op='center', args=(Var(name='N'),)))"
+   ],
+   "остаток": [
+    "¬('p', 'abelian', Var(name='G'))",
+    "¬('p', 'cyclic', Var(name='G'))",
+    "¬('p', 'exponent-3', Var(name='G'))",
+    "¬('p', 'whole', App(op='center', args=(Var(name='G'),)))",
+    "¬('p', 'trivial', App(op='commutator', args=(Var(name='G'),)))",
+    "¬('p', 'abelian', App(op='aut', args=(Var(name='G'),)))",
+    "¬('p', 'central', App(op='inn', args=(Var(name='G'),)))",
+    "('p', 'finite-index', App(op='inn', args=(Var(name='G'),)))",
+    "¬('p', 'trivial', App(op='inn', args=(Var(name='G'),)))",
+    "¬('p', 'cyclic', App(op='inn', args=(Var(name='G'),)))"
+   ],
+   "выводится SAT": [
+    "¬('p', 'free-abelian', App(op='prod', args=(Var(name='G'), Var(name='N'))))",
+    "¬('p', 'free-abelian', App(op='whole-sub', args=(Var(name='G'),)))",
+    "¬('p', 'free-abelian', Var(name='G'))",
+    "¬('p', 'free-abelian', App(op='prod', args=(Var(name='G'), Var(name='G'))))",
+    "¬('p', 'free-abelian', App(op='prod', args=(Var(name='N'), App(op='quotient', args=(Var(name='G'), Var(name='N'))))))"
+   ]
+  },
+  {
+   "посылки": [
+    "¬('r', 'iso', App(op='center', args=(Var(name='G'),)), App(op='prod', args=(Var(name='N'), App(op='quotient', args=(Var(name='G'), Var(name='N'))))))",
+    "('r', 'embeds', Var(name='N'), App(op='torsion', args=(Var(name='N'),)))"
+   ],
+   "остаток": [
+    "¬('p', 'free-abelian', App(op='normalizer', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'le', App(op='torsion', args=(Var(name='G'),)), App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))))",
+    "¬('r', 'iso', Var(name='G'), App(op='center', args=(Var(name='N'),)))",
+    "¬('r', 'iso', Var(name='G'), App(op='ab', args=(Var(name='N'),)))",
+    "¬('r', 'iso', App(op='center', args=(Var(name='N'),)), App(op='whole-sub', args=(Var(name='G'),)))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='G'),)), App(op='freeprod', args=(Var(name='N'), Var(name='N'))))",
+    "¬('r', 'iso', App(op='ab', args=(Var(name='N'),)), App(op='whole-sub', args=(Var(name='G'),)))",
+    "¬('r', 'embeds', Var(name='G'), App(op='center', args=(Var(name='N'),)))",
+    "¬('r', 'embeds', Var(name='G'), App(op='ab', args=(Var(name='N'),)))"
+   ],
+   "выводится SAT": [
+    "¬('p', 'free-abelian', App(op='whole-sub', args=(Var(name='G'),)))",
+    "¬('p', 'free-abelian', Var(name='G'))",
+    "¬('p', 'free-abelian', App(op='prod', args=(Var(name='G'), Var(name='G'))))",
+    "¬('p', 'free-abelian', App(op='prod', args=(Var(name='N'), App(op='quotient', args=(Var(name='G'), Var(name='N'))))))",
+    "¬('p', 'free-abelian', App(op='prod', args=(Var(name='G'), Var(name='N'))))"
+   ]
+  },
+  {
+   "посылки": [
+    "('p', 'linear', App(op='freeprod', args=(Var(name='G'), Var(name='G'))))",
+    "('r', 'conj-sub', Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))"
+   ],
+   "остаток": [
+    "('p', 'linear', App(op='aut', args=(Var(name='N'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('p', 'linear', App(op='freeprod', args=(Var(name='G'), Var(name='G'))))",
+    "('r', 'le', App(op='torsion', args=(Var(name='N'),)), App(op='commutator', args=(Var(name='N'),)))"
+   ],
+   "остаток": [
+    "('p', 'complemented', App(op='centralizer', args=(Var(name='G'), Var(name='N'))))",
+    "('p', 'finite', App(op='torsion', args=(Var(name='N'),)))",
+    "('p', 'fin-gen', App(op='torsion', args=(Var(name='N'),)))",
+    "('p', 'residually-finite', App(op='torsion', args=(Var(name='N'),)))",
+    "('p', 'indecomposable', App(op='torsion', args=(Var(name='N'),)))",
+    "('p', 'hopfian', App(op='torsion', args=(Var(name='N'),)))",
+    "('r', 'le', App(op='torsion', args=(Var(name='G'),)), App(op='centralizer', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'iso', Var(name='G'), App(op='commutator', args=(Var(name='N'),)))",
+    "¬('r', 'iso', Var(name='G'), App(op='torsion', args=(Var(name='N'),)))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='N'),)), App(op='normalizer', args=(Var(name='G'), Var(name='N'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('p', 'periodic', App(op='center', args=(Var(name='N'),)))",
+    "¬('p', 'central', App(op='commutator', args=(Var(name='N'),)))"
+   ],
+   "остаток": [
+    "('p', 'finite', App(op='frattini', args=(Var(name='G'),)))",
+    "('p', 'periodic', App(op='frattini', args=(Var(name='G'),)))",
+    "('r', 'le', App(op='centralizer', args=(Var(name='G'), Var(name='N'))), App(op='torsion', args=(Var(name='G'),)))",
+    "('r', 'iso', App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))), App(op='inn', args=(Var(name='N'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('p', 'periodic', App(op='center', args=(Var(name='N'),)))",
+    "('p', 'nilpotent', App(op='torsion', args=(Var(name='G'),)))"
+   ],
+   "остаток": [
+    "¬('p', 'simple', App(op='inn', args=(Var(name='N'),)))",
+    "¬('p', 'perfect', App(op='normalizer', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'eq-sub', App(op='commutator', args=(Var(name='G'),)), App(op='normalizer', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'iso', Var(name='G'), App(op='commutator', args=(Var(name='N'),)))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='G'),)), App(op='normalizer', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='G'),)), App(op='prod', args=(Var(name='N'), App(op='quotient', args=(Var(name='G'), Var(name='N'))))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='N'),)), App(op='normalizer', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='N'),)), App(op='whole-sub', args=(Var(name='G'),)))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='N'),)), App(op='prod', args=(Var(name='N'), App(op='quotient', args=(Var(name='G'), Var(name='N'))))))",
+    "¬('r', 'iso', App(op='ab', args=(Var(name='G'),)), App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('p', 'periodic', App(op='center', args=(Var(name='N'),)))",
+    "¬('p', 'nilpotent', App(op='whole-sub', args=(Var(name='G'),)))"
+   ],
+   "остаток": [
+    "('p', 'periodic', App(op='frattini', args=(Var(name='G'),)))",
+    "¬('r', 'iso', App(op='center', args=(Var(name='G'),)), App(op='normalizer', args=(Var(name='G'), Var(name='N'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('p', 'periodic', App(op='center', args=(Var(name='N'),)))",
+    "('r', 'eq-sub', App(op='commutator', args=(Var(name='G'),)), App(op='frattini', args=(Var(name='G'),)))"
+   ],
+   "остаток": [
+    "('p', 'periodic', Var(name='N'))",
+    "('p', 'periodic', App(op='ab', args=(Var(name='N'),)))",
+    "('p', 'periodic', App(op='aut', args=(Var(name='N'),)))",
+    "('p', 'finite-index', App(op='inn', args=(Var(name='N'),)))",
+    "('p', 'periodic', App(op='prod', args=(Var(name='N'), Var(name='N'))))",
+    "('p', 'periodic', App(op='wreath', args=(Var(name='N'), Var(name='N'))))",
+    "('p', 'periodic', App(op='normal-closure', args=(Var(name='G'), Var(name='N'))))",
+    "¬('p', 'simple', App(op='torsion', args=(Var(name='G'),)))",
+    "('p', 'whole', App(op='torsion', args=(Var(name='N'),)))",
+    "('p', 'finite-index', App(op='torsion', args=(Var(name='N'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('r', 'le', Var(name='N'), App(op='centralizer', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'le', App(op='centralizer', args=(Var(name='G'), Var(name='N'))), App(op='commutator', args=(Var(name='G'),)))"
+   ],
+   "остаток": [
+    "¬('p', 'simple', App(op='centralizer', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'iso', App(op='centralizer', args=(Var(name='G'), Var(name='N'))), App(op='commutator', args=(Var(name='G'),)))",
+    "¬('r', 'iso', App(op='ab', args=(Var(name='G'),)), App(op='inn', args=(Var(name='N'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('r', 'le', Var(name='N'), App(op='centralizer', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'iso', App(op='frattini', args=(Var(name='G'),)), App(op='prod', args=(Var(name='N'), Var(name='N'))))"
+   ],
+   "остаток": [
+    "¬('p', 'free', Var(name='G'))",
+    "¬('p', 'simple', Var(name='G'))",
+    "('p', 'amenable', Var(name='G'))",
+    "('p', 'linear', Var(name='N'))",
+    "¬('p', 'simple', App(op='inn', args=(Var(name='G'),)))",
+    "('p', 'linear', App(op='prod', args=(Var(name='N'), Var(name='N'))))",
+    "¬('p', 'free', App(op='freeprod', args=(Var(name='G'), Var(name='G'))))",
+    "¬('p', 'free', App(op='freeprod', args=(Var(name='G'), Var(name='N'))))",
+    "('p', 'linear', App(op='freeprod', args=(Var(name='N'), Var(name='N'))))",
+    "('p', 'linear', App(op='wreath', args=(Var(name='N'), Var(name='N'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('r', 'le', Var(name='N'), App(op='centralizer', args=(Var(name='G'), Var(name='N'))))",
+    "('r', 'iso', App(op='core', args=(Var(name='G'), Var(name='N'))), App(op='torsion', args=(Var(name='G'),)))"
+   ],
+   "остаток": [
+    "¬('p', 'perfect', Var(name='G'))",
+    "('p', 'central', Var(name='N'))",
+    "¬('p', 'sylow', Var(name='N'))",
+    "¬('p', 'maximal', App(op='commutator', args=(Var(name='G'),)))",
+    "¬('p', 'whole', App(op='commutator', args=(Var(name='G'),)))",
+    "¬('p', 'simple', App(op='commutator', args=(Var(name='G'),)))",
+    "('p', 'torsion-free', App(op='commutator', args=(Var(name='G'),)))",
+    "¬('p', 'trivial', App(op='ab', args=(Var(name='G'),)))",
+    "¬('p', 'simple', App(op='ab', args=(Var(name='G'),)))",
+    "¬('p', 'perfect', App(op='ab', args=(Var(name='G'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'indecomposable', App(op='inn', args=(Var(name='N'),)))",
+    "('p', 'nilpotent', App(op='quotient', args=(Var(name='G'), Var(name='N'))))"
+   ],
+   "остаток": [
+    "¬('p', 'exponent-3', Var(name='G'))",
+    "¬('p', 'simple', App(op='inn', args=(Var(name='G'),)))",
+    "¬('p', 'p-group', App(op='prod', args=(Var(name='G'), Var(name='N'))))",
+    "('p', 'fin-gen', App(op='frattini', args=(Var(name='G'),)))",
+    "('p', 'hopfian', App(op='frattini', args=(Var(name='G'),)))",
+    "('p', 'polycyclic', App(op='frattini', args=(Var(name='G'),)))",
+    "¬('p', 'central', App(op='core', args=(Var(name='G'), Var(name='N'))))",
+    "¬('p', 'abelian', App(op='core', args=(Var(name='G'), Var(name='N'))))",
+    "¬('p', 'cyclic', App(op='core', args=(Var(name='G'), Var(name='N'))))",
+    "¬('p', 'simple', App(op='core', args=(Var(name='G'), Var(name='N'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'indecomposable', App(op='inn', args=(Var(name='N'),)))",
+    "¬('r', 'le', App(op='commutator', args=(Var(name='G'),)), App(op='torsion', args=(Var(name='G'),)))"
+   ],
+   "остаток": [
+    "¬('p', 'indecomposable', Var(name='G'))",
+    "¬('p', 'finite', Var(name='N'))",
+    "¬('p', 'two-primes', Var(name='N'))",
+    "¬('p', 'odd-order', Var(name='N'))",
+    "¬('p', 'exponent-3', Var(name='N'))",
+    "¬('p', 'clt', Var(name='N'))",
+    "¬('p', 'dedekind', Var(name='N'))",
+    "¬('p', 'simple', App(op='center', args=(Var(name='G'),)))",
+    "('p', 'torsion-free', App(op='center', args=(Var(name='G'),)))",
+    "¬('p', 'finite-index', App(op='center', args=(Var(name='N'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'indecomposable', App(op='inn', args=(Var(name='N'),)))",
+    "¬('r', 'le', App(op='torsion', args=(Var(name='G'),)), App(op='center', args=(Var(name='G'),)))"
+   ],
+   "остаток": [
+    "¬('p', 'torsion-free', Var(name='N'))",
+    "¬('p', 'divisible', Var(name='N'))",
+    "¬('p', 'left-orderable', Var(name='N'))",
+    "¬('p', 'divisible', App(op='commutator', args=(Var(name='G'),)))",
+    "¬('p', 'free', App(op='commutator', args=(Var(name='N'),)))",
+    "¬('p', 'torsion-free', App(op='commutator', args=(Var(name='N'),)))",
+    "¬('p', 'divisible', App(op='commutator', args=(Var(name='N'),)))",
+    "¬('p', 'free-abelian', App(op='commutator', args=(Var(name='N'),)))",
+    "¬('p', 'torsion-free', App(op='inn', args=(Var(name='N'),)))",
+    "¬('p', 'divisible', App(op='inn', args=(Var(name='N'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'indecomposable', App(op='inn', args=(Var(name='N'),)))",
+    "¬('r', 'iso', App(op='normal-closure', args=(Var(name='G'), Var(name='N'))), App(op='quotient', args=(Var(name='G'), Var(name='N'))))"
+   ],
+   "остаток": [
+    "¬('p', 'exponent-3', Var(name='G'))",
+    "¬('p', 'simple', App(op='inn', args=(Var(name='G'),)))",
+    "¬('p', 'p-group', App(op='prod', args=(Var(name='G'), Var(name='N'))))",
+    "('p', 'fin-gen', App(op='frattini', args=(Var(name='G'),)))",
+    "('p', 'hopfian', App(op='frattini', args=(Var(name='G'),)))",
+    "('p', 'polycyclic', App(op='frattini', args=(Var(name='G'),)))",
+    "¬('r', 'iso', App(op='ab', args=(Var(name='G'),)), App(op='torsion', args=(Var(name='N'),)))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='N'),)), App(op='quotient', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'iso', App(op='normalizer', args=(Var(name='G'), Var(name='N'))), App(op='prod', args=(Var(name='N'), Var(name='N'))))",
+    "¬('r', 'iso', App(op='prod', args=(Var(name='N'), Var(name='N'))), App(op='prod', args=(Var(name='N'), App(op='quotient', args=(Var(name='G'), Var(name='N'))))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('r', 'eq-sub', App(op='centralizer', args=(Var(name='G'), Var(name='N'))), App(op='normalizer', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'iso', App(op='freeprod', args=(Var(name='N'), Var(name='N'))), App(op='torsion', args=(Var(name='G'),)))"
+   ],
+   "остаток": [
+    "¬('p', 'simple', Var(name='G'))",
+    "('p', 'fin-gen', App(op='aut', args=(Var(name='G'),)))",
+    "('p', 'fin-gen', App(op='aut', args=(Var(name='N'),)))",
+    "¬('p', 'simple', App(op='normalizer', args=(Var(name='G'), Var(name='N'))))",
+    "¬('p', 'simple', App(op='whole-sub', args=(Var(name='G'),)))",
+    "¬('p', 'complemented', App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))))",
+    "¬('p', 'perfect', App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))))",
+    "¬('p', 'centerless', App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))))",
+    "¬('p', 'indecomposable', App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))))",
+    "¬('p', 'simple', App(op='prod', args=(Var(name='N'), App(op='quotient', args=(Var(name='G'), Var(name='N'))))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('p', 'indecomposable', App(op='torsion', args=(Var(name='N'),)))",
+    "¬('r', 'iso', App(op='freeprod', args=(Var(name='G'), Var(name='N'))), App(op='normalizer', args=(Var(name='G'), Var(name='N'))))"
+   ],
+   "остаток": [
+    "¬('p', 'simple', Var(name='G'))",
+    "¬('p', 'simple', App(op='whole-sub', args=(Var(name='G'),)))",
+    "¬('p', 'simple', App(op='prod', args=(Var(name='N'), App(op='quotient', args=(Var(name='G'), Var(name='N'))))))",
+    "¬('r', 'le', Var(name='N'), App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))))",
+    "¬('r', 'eq-sub', Var(name='N'), App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))))",
+    "¬('r', 'conj-sub', Var(name='N'), App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))))",
+    "¬('r', 'le', App(op='normal-closure', args=(Var(name='G'), Var(name='N'))), App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))))",
+    "¬('r', 'eq-sub', App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))), App(op='normal-closure', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'eq-sub', App(op='comm', args=(Var(name='G'), Var(name='N'), App(op='whole-sub', args=(Var(name='G'),)))), App(op='core', args=(Var(name='G'), Var(name='N'))))",
+    "¬('r', 'iso', Var(name='G'), App(op='prod', args=(Var(name='G'), Var(name='G'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('p', 'indecomposable', App(op='torsion', args=(Var(name='N'),)))",
+    "¬('r', 'iso', App(op='torsion', args=(Var(name='N'),)), App(op='whole-sub', args=(Var(name='G'),)))"
+   ],
+   "остаток": [
+    "¬('r', 'embeds', Var(name='G'), App(op='torsion', args=(Var(name='N'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('p', 'residually-finite', App(op='commutator', args=(Var(name='N'),)))",
+    "('p', 'linear', App(op='ab', args=(Var(name='N'),)))"
+   ],
+   "остаток": [
+    "('p', 'linear', Var(name='N'))",
+    "('p', 'linear', App(op='commutator', args=(Var(name='N'),)))",
+    "('p', 'linear', App(op='inn', args=(Var(name='N'),)))",
+    "('p', 'linear', App(op='prod', args=(Var(name='N'), Var(name='N'))))",
+    "('p', 'linear', App(op='freeprod', args=(Var(name='N'), Var(name='N'))))",
+    "('p', 'linear', App(op='normal-closure', args=(Var(name='G'), Var(name='N'))))",
+    "('p', 'linear', App(op='torsion', args=(Var(name='N'),)))",
+    "('p', 'linear', App(op='frattini', args=(Var(name='N'),)))",
+    "('p', 'linear', App(op='core', args=(Var(name='G'), Var(name='N'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('p', 'residually-finite', App(op='commutator', args=(Var(name='N'),)))",
+    "('p', 'periodic', App(op='prod', args=(Var(name='N'), App(op='quotient', args=(Var(name='G'), Var(name='N'))))))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='N'),)), App(op='torsion', args=(Var(name='G'),)))"
+   ],
+   "выводится SAT": []
+  }
+ ]
+}

@@ -1,0 +1,393 @@
+{
+ "база": "AB",
+ "строк": 178525,
+ "различных строк": 136935,
+ "литералов": 2462,
+ "k=0 (верно во всех строках)": 99,
+ "k=1 неопровергнутых": 244236,
+ "k=2 минимальных неопровергнутых": 199922896,
+ "пар посылок": 2033064,
+ "пустых пар (посылки несовместны в библиотеке)": 122002,
+ "посылки противоречат теории": 0,
+ "выводится распространением": 49256393,
+ "остаток после распространения": 150666503,
+ "выборка SAT: пар": 4033,
+ "кандидатов": 301590,
+ "выводится": 43784,
+ "вызовов SAT": 136092,
+ "оценка: выводится SAT во всём остатке": 21873345,
+ "оценка: неизвестно (вопросы до склейки)": 128793158,
+ "время": {
+  "подготовка, с": 207,
+  "стена, с": 2406,
+  "перебор, нить·с": 5234,
+  "распространение, нить·с": 1854,
+  "SAT по выборке, нить·с": 2454,
+  "SAT на весь остаток (оценка), нить·ч": 340.5
+ },
+ "примеры": [
+  {
+   "посылки": [
+    "¬('p', 'fin-gen', App(op='aut', args=(Var(name='B'),)))",
+    "¬('p', 'linear', App(op='torsion', args=(Var(name='A'),)))"
+   ],
+   "остаток": [
+    "('p', 'amenable', Var(name='A'))",
+    "('p', 'periodic', App(op='commutator', args=(Var(name='A'),)))",
+    "('p', 'periodic', App(op='aut', args=(Var(name='A'),)))",
+    "('p', 'periodic', App(op='inn', args=(Var(name='A'),)))",
+    "¬('p', 'p-group', App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "('p', 'hopfian', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'hopfian', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "('p', 'indecomposable', App(op='wreath', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'indecomposable', App(op='wreath', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'hopfian', App(op='wreath', args=(Var(name='A'), Var(name='B'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'fin-gen', App(op='aut', args=(Var(name='B'),)))",
+    "¬('r', 'iso', Var(name='B'), App(op='wreath', args=(Var(name='B'), Var(name='A'))))"
+   ],
+   "остаток": [
+    "¬('p', 'simple', App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'indecomposable', App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'abelian', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'simple', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'solvable', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'nilpotent', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'periodic', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'divisible', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "('p', 'centerless', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "('p', 'indecomposable', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))"
+   ],
+   "выводится SAT": [
+    "¬('r', 'iso', App(op='center', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)), App(op='wreath', args=(Var(name='B'), Var(name='A'))))"
+   ]
+  },
+  {
+   "посылки": [
+    "¬('p', 'fin-gen', App(op='aut', args=(Var(name='B'),)))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='A'),)), App(op='prod', args=(Var(name='B'), Var(name='B'))))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', Var(name='A'), App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='A'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='inn', args=(Var(name='A'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='inn', args=(Var(name='A'),)), App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'embeds', App(op='wreath', args=(Var(name='B'), Var(name='B'))), Var(name='A'))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'fin-gen', App(op='aut', args=(Var(name='B'),)))",
+    "¬('r', 'iso', App(op='wreath', args=(Var(name='A'), Var(name='A'))), App(op='wreath', args=(Var(name='B'), Var(name='A'))))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', Var(name='A'), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', Var(name='A'), App(op='prod', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', Var(name='A'), App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', Var(name='B'), App(op='inn', args=(Var(name='A'),)))",
+    "¬('r', 'iso', Var(name='B'), App(op='prod', args=(Var(name='A'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='center', args=(Var(name='A'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='commutator', args=(Var(name='A'),)))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='A'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='ab', args=(Var(name='A'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='inn', args=(Var(name='A'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'fin-gen', App(op='aut', args=(Var(name='B'),)))",
+    "('r', 'embeds', Var(name='A'), App(op='frattini', args=(Var(name='A'),)))"
+   ],
+   "остаток": [
+    "('p', 'linear', App(op='center', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))",
+    "¬('r', 'iso', Var(name='A'), App(op='aut', args=(Var(name='B'),)))",
+    "¬('r', 'iso', Var(name='A'), App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='center', args=(Var(name='A'),)))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='commutator', args=(Var(name='A'),)))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='A'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='ab', args=(Var(name='A'),)), App(op='aut', args=(Var(name='B'),)))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='inn', args=(Var(name='A'),)))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='prod', args=(Var(name='A'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='torsion', args=(Var(name='A'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'maximal', App(op='commutator', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))",
+    "¬('r', 'iso', App(op='ab', args=(Var(name='B'),)), App(op='freeprod', args=(Var(name='A'), Var(name='B'))))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', App(op='aut', args=(Var(name='A'),)), App(op='wreath', args=(Var(name='B'), Var(name='B'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'maximal', App(op='commutator', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))",
+    "¬('r', 'embeds', App(op='prod', args=(Var(name='B'), Var(name='B'))), Var(name='A'))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='A'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='frattini', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='B'), Var(name='B'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('p', 'central', App(op='torsion', args=(Var(name='A'),)))",
+    "¬('p', 'trivial', App(op='torsion', args=(Var(name='B'),)))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', Var(name='A'), App(op='freeprod', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', Var(name='A'), App(op='wreath', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', Var(name='A'), App(op='wreath', args=(Var(name='B'), Var(name='A'))))",
+    "¬('r', 'iso', Var(name='A'), App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', Var(name='B'), App(op='commutator', args=(Var(name='A'),)))",
+    "¬('r', 'iso', Var(name='B'), App(op='inn', args=(Var(name='A'),)))",
+    "¬('r', 'iso', Var(name='B'), App(op='wreath', args=(Var(name='A'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='A'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='A'),)), App(op='prod', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='A'),)), App(op='freeprod', args=(Var(name='B'), Var(name='B'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "('p', 'central', App(op='torsion', args=(Var(name='A'),)))",
+    "¬('r', 'iso', App(op='ab', args=(Var(name='A'),)), App(op='inn', args=(Var(name='A'),)))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', App(op='center', args=(Var(name='A'),)), App(op='inn', args=(Var(name='A'),)))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='A'),)), App(op='prod', args=(Var(name='A'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='A'),)), App(op='wreath', args=(Var(name='A'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='B'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='A'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='B'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='A'),)), App(op='torsion', args=(Var(name='A'),)))",
+    "¬('r', 'iso', App(op='inn', args=(Var(name='A'),)), App(op='prod', args=(Var(name='A'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='center', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)), App(op='inn', args=(Var(name='A'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'trivial', App(op='center', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))",
+    "('r', 'iso', App(op='center', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='A'), Var(name='B'))))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='prod', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='freeprod', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='B'),)), App(op='torsion', args=(Var(name='B'),)))",
+    "¬('r', 'iso', App(op='wreath', args=(Var(name='B'), Var(name='A'))), App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'num-eq', App(op='rank', args=(Var(name='A'),)), App(op='rank', args=(Var(name='B'),)))"
+   ],
+   "выводится SAT": [
+    "¬('r', 'iso', Var(name='B'), App(op='ab', args=(Var(name='A'),)))",
+    "¬('p', 'free', App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', Var(name='B'), App(op='aut', args=(Var(name='A'),)))",
+    "¬('r', 'iso', App(op='freeprod', args=(Var(name='B'), Var(name='B'))), App(op='prod', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', Var(name='B'), App(op='inn', args=(Var(name='A'),)))",
+    "¬('r', 'iso', Var(name='B'), App(op='inn', args=(Var(name='B'),)))",
+    "¬('p', 'perfect', App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', Var(name='B'), App(op='prod', args=(Var(name='A'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='prod', args=(Var(name='B'), Var(name='B'))), App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='prod', args=(Var(name='B'), Var(name='B'))), App(op='torsion', args=(Var(name='A'),)))"
+   ]
+  },
+  {
+   "посылки": [
+    "¬('p', 'trivial', App(op='center', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))",
+    "¬('r', 'iso', App(op='ab', args=(Var(name='A'),)), App(op='ab', args=(Var(name='B'),)))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', App(op='freeprod', args=(Var(name='A'), Var(name='A'))), App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='freeprod', args=(Var(name='A'), Var(name='B'))), App(op='freeprod', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='wreath', args=(Var(name='A'), Var(name='A'))), App(op='wreath', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='wreath', args=(Var(name='A'), Var(name='A'))), App(op='wreath', args=(Var(name='B'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='wreath', args=(Var(name='A'), Var(name='B'))), App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='wreath', args=(Var(name='B'), Var(name='A'))), App(op='wreath', args=(Var(name='B'), Var(name='B'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'trivial', App(op='center', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))",
+    "¬('r', 'iso', App(op='prod', args=(Var(name='A'), Var(name='B'))), App(op='torsion', args=(Var(name='B'),)))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', App(op='inn', args=(Var(name='B'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='freeprod', args=(Var(name='A'), Var(name='B'))), App(op='inn', args=(Var(name='B'),)))",
+    "¬('r', 'iso', App(op='inn', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='inn', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='B'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='torsion', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='torsion', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='B'), Var(name='A'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'trivial', App(op='center', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))",
+    "('r', 'iso', App(op='torsion', args=(Var(name='B'),)), App(op='wreath', args=(Var(name='A'), Var(name='A'))))"
+   ],
+   "остаток": [
+    "('p', 'trivial', Var(name='A'))",
+    "('p', 'abelian', Var(name='A'))",
+    "('p', 'cyclic', Var(name='A'))",
+    "('p', 'finite', Var(name='A'))",
+    "('p', 'fin-gen', Var(name='A'))",
+    "('p', 'free', Var(name='A'))",
+    "¬('p', 'simple', Var(name='A'))",
+    "('p', 'solvable', Var(name='A'))",
+    "('p', 'nilpotent', Var(name='A'))",
+    "('p', 'perfect', Var(name='A'))"
+   ],
+   "выводится SAT": [
+    "¬('r', 'iso', App(op='freeprod', args=(Var(name='B'), Var(name='B'))), App(op='prod', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', Var(name='B'), App(op='ab', args=(Var(name='A'),)))",
+    "¬('p', 'free', App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('p', 'trivial', App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='prod', args=(Var(name='B'), Var(name='B'))), App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('p', 'free-abelian', App(op='aut', args=(Var(name='B'),)))",
+    "¬('r', 'iso', Var(name='B'), App(op='center', args=(Var(name='A'),)))",
+    "¬('p', 'abelian', App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('p', 'divisible', App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('p', 'free-abelian', App(op='wreath', args=(Var(name='B'), Var(name='B'))))"
+   ]
+  },
+  {
+   "посылки": [
+    "¬('p', 'residually-finite', Var(name='B'))",
+    "¬('p', 'solvable', App(op='wreath', args=(Var(name='B'), Var(name='B'))))"
+   ],
+   "остаток": [
+    "('p', 'complemented', App(op='commutator', args=(Var(name='B'),)))",
+    "('p', 'centerless', App(op='aut', args=(Var(name='B'),)))",
+    "¬('p', 'residually-finite', App(op='aut', args=(Var(name='B'),)))",
+    "('p', 'indecomposable', App(op='aut', args=(Var(name='B'),)))",
+    "¬('p', 'characteristic', App(op='inn', args=(Var(name='B'),)))",
+    "('p', 'maximal', App(op='inn', args=(Var(name='B'),)))",
+    "('p', 'finite-index', App(op='inn', args=(Var(name='B'),)))",
+    "¬('p', 'complemented', App(op='inn', args=(Var(name='B'),)))",
+    "¬('p', 'simple', App(op='frattini', args=(Var(name='B'),)))",
+    "('p', 'complemented', App(op='commutator', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'residually-finite', Var(name='B'))",
+    "('p', 'complemented', App(op='center', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))"
+   ],
+   "остаток": [
+    "¬('p', 'exponent-3', Var(name='B'))",
+    "('p', 'complemented', App(op='commutator', args=(Var(name='B'),)))",
+    "('p', 'complemented', App(op='frattini', args=(Var(name='B'),)))",
+    "¬('p', 'simple', App(op='frattini', args=(Var(name='B'),)))",
+    "('p', 'complemented', App(op='commutator', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))",
+    "¬('r', 'eq-sub', App(op='center', args=(Var(name='B'),)), App(op='commutator', args=(Var(name='B'),)))",
+    "¬('r', 'iso', App(op='center', args=(Var(name='B'),)), App(op='commutator', args=(Var(name='B'),)))",
+    "¬('r', 'iso', App(op='center', args=(Var(name='B'),)), App(op='inn', args=(Var(name='B'),)))",
+    "¬('r', 'iso', App(op='center', args=(Var(name='B'),)), App(op='commutator', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))",
+    "¬('r', 'iso', App(op='center', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)), App(op='commutator', args=(Var(name='B'),)))"
+   ],
+   "выводится SAT": [
+    "¬('r', 'eq-sub', App(op='center', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)), App(op='commutator', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))"
+   ]
+  },
+  {
+   "посылки": [
+    "¬('p', 'centerless', App(op='commutator', args=(Var(name='A'),)))",
+    "('p', 'polycyclic', App(op='prod', args=(Var(name='B'), Var(name='B'))))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', Var(name='B'), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='A'),)), App(op='commutator', args=(Var(name='B'),)))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='B'),)), App(op='prod', args=(Var(name='A'), Var(name='A'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='B'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='commutator', args=(Var(name='B'),)), App(op='commutator', args=(App(op='prod', args=(Var(name='A'), Var(name='B'))),)))",
+    "¬('r', 'iso', App(op='inn', args=(Var(name='B'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='prod', args=(Var(name='A'), Var(name='B'))), App(op='torsion', args=(Var(name='B'),)))",
+    "¬('r', 'embeds', App(op='prod', args=(Var(name='A'), Var(name='B'))), Var(name='B'))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'centerless', App(op='commutator', args=(Var(name='A'),)))",
+    "('r', 'iso', App(op='aut', args=(Var(name='A'),)), App(op='freeprod', args=(Var(name='B'), Var(name='B'))))"
+   ],
+   "остаток": [
+    "¬('p', 'nilpotent', Var(name='A'))",
+    "¬('p', 'perfect', Var(name='A'))",
+    "¬('p', 'torsion-free', Var(name='A'))",
+    "¬('p', 'periodic', Var(name='A'))",
+    "¬('p', 'divisible', Var(name='A'))",
+    "('p', 'centerless', Var(name='A'))",
+    "¬('p', 'p-group', Var(name='A'))",
+    "¬('p', 'exponent-3', Var(name='A'))",
+    "¬('p', 'dedekind', Var(name='A'))",
+    "¬('p', 'class-2', Var(name='A'))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'centerless', App(op='commutator', args=(Var(name='A'),)))",
+    "¬('r', 'iso', App(op='prod', args=(Var(name='A'), Var(name='A'))), App(op='wreath', args=(Var(name='B'), Var(name='A'))))"
+   ],
+   "остаток": [
+    "¬('r', 'iso', Var(name='A'), App(op='freeprod', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', Var(name='A'), App(op='wreath', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='aut', args=(Var(name='A'),)), App(op='freeprod', args=(Var(name='B'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='inn', args=(Var(name='A'),)), App(op='wreath', args=(Var(name='B'), Var(name='B'))))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'solvable', App(op='aut', args=(Var(name='A'),)))",
+    "('p', 'centerless', App(op='aut', args=(Var(name='A'),)))"
+   ],
+   "остаток": [
+    "¬('p', 'free-abelian', Var(name='A'))",
+    "('p', 'centerless', App(op='inn', args=(Var(name='A'),)))",
+    "¬('p', 'free-abelian', App(op='prod', args=(Var(name='A'), Var(name='A'))))",
+    "¬('p', 'free-abelian', App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'free-abelian', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'free-abelian', App(op='wreath', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'free-abelian', App(op='wreath', args=(Var(name='B'), Var(name='A'))))",
+    "¬('p', 'maximal', App(op='frattini', args=(Var(name='A'),)))",
+    "('r', 'embeds', Var(name='A'), App(op='aut', args=(Var(name='A'),)))"
+   ],
+   "выводится SAT": []
+  },
+  {
+   "посылки": [
+    "¬('p', 'solvable', App(op='aut', args=(Var(name='A'),)))",
+    "¬('p', 'linear', App(op='wreath', args=(Var(name='A'), Var(name='B'))))"
+   ],
+   "остаток": [
+    "¬('p', 'polycyclic', App(op='prod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'abelian', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'solvable', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'nilpotent', App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'abelian', App(op='wreath', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'nilpotent', App(op='wreath', args=(Var(name='A'), Var(name='B'))))",
+    "¬('p', 'abelian', App(op='wreath', args=(Var(name='B'), Var(name='A'))))",
+    "¬('p', 'nilpotent', App(op='wreath', args=(Var(name='B'), Var(name='A'))))",
+    "¬('r', 'iso', Var(name='B'), App(op='freeprod', args=(Var(name='A'), Var(name='B'))))",
+    "¬('r', 'iso', App(op='center', args=(Var(name='A'),)), App(op='prod', args=(Var(name='A'), Var(name='B'))))"
+   ],
+   "выводится SAT": []
+  }
+ ]
+}

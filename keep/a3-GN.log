@@ -1,0 +1,61 @@
+GN: частей 3 из 97; берём готовые части
+{"alive": 10054313, "pairs": 85711, "empty": 11141, "contra": 0, "der_prop": 431440, "rest": 9622873, "t_enum": 65, "t_prop": 237, "sat_pairs": 166, "sat_cand": 24641, "sat_der": 220, "sat_calls": 4913, "t_sat": 165}
+{"alive": 23973617, "pairs": 186366, "empty": 28141, "contra": 0, "der_prop": 942898, "rest": 23030719, "t_enum": 130, "t_prop": 534, "sat_pairs": 367, "sat_cand": 50176, "sat_der": 447, "sat_calls": 10951, "t_sat": 364}
+{"alive": 38921201, "pairs": 283277, "empty": 43329, "contra": 0, "der_prop": 1392882, "rest": 37528319, "t_enum": 185, "t_prop": 843, "sat_pairs": 578, "sat_cand": 80451, "sat_der": 733, "sat_calls": 17866, "t_sat": 601}
+{"alive": 52881180, "pairs": 379187, "empty": 57083, "contra": 0, "der_prop": 2044530, "rest": 50836650, "t_enum": 247, "t_prop": 1163, "sat_pairs": 801, "sat_cand": 114526, "sat_der": 963, "sat_calls": 24721, "t_sat": 841}
+{"alive": 64008317, "pairs": 473262, "empty": 70042, "contra": 0, "der_prop": 2485457, "rest": 61522860, "t_enum": 314, "t_prop": 1396, "sat_pairs": 995, "sat_cand": 134671, "sat_der": 1229, "sat_calls": 29224, "t_sat": 988}
+{"alive": 76519825, "pairs": 564432, "empty": 85420, "contra": 0, "der_prop": 2996836, "rest": 73522989, "t_enum": 379, "t_prop": 1657, "sat_pairs": 1198, "sat_cand": 157427, "sat_der": 1367, "sat_calls": 34400, "t_sat": 1167}
+{"alive": 88637771, "pairs": 658948, "empty": 100700, "contra": 0, "der_prop": 3595935, "rest": 85041836, "t_enum": 440, "t_prop": 1994, "sat_pairs": 1387, "sat_cand": 189365, "sat_der": 1755, "sat_calls": 41728, "t_sat": 1414}
+{"alive": 104525957, "pairs": 767212, "empty": 115349, "contra": 0, "der_prop": 4268217, "rest": 100257740, "t_enum": 501, "t_prop": 2320, "sat_pairs": 1618, "sat_cand": 220763, "sat_der": 2093, "sat_calls": 48712, "t_sat": 1651}
+{"alive": 118220917, "pairs": 872683, "empty": 128318, "contra": 0, "der_prop": 4789849, "rest": 113431068, "t_enum": 559, "t_prop": 2568, "sat_pairs": 1826, "sat_cand": 246714, "sat_der": 2233, "sat_calls": 53923, "t_sat": 1824}
+{"alive": 132020666, "pairs": 964708, "empty": 143645, "contra": 0, "der_prop": 5193843, "rest": 126826823, "t_enum": 613, "t_prop": 2821, "sat_pairs": 2009, "sat_cand": 275167, "sat_der": 2664, "sat_calls": 59729, "t_sat": 2011}
+{"alive": 145696882, "pairs": 1066357, "empty": 156987, "contra": 0, "der_prop": 5914914, "rest": 139781968, "t_enum": 676, "t_prop": 3143, "sat_pairs": 2233, "sat_cand": 303662, "sat_der": 3189, "sat_calls": 66802, "t_sat": 2245}
+{"alive": 160106868, "pairs": 1165932, "empty": 169847, "contra": 0, "der_prop": 6417350, "rest": 153689518, "t_enum": 738, "t_prop": 3427, "sat_pairs": 2433, "sat_cand": 330431, "sat_der": 3459, "sat_calls": 73016, "t_sat": 2453}
+{"alive": 174538570, "pairs": 1270629, "empty": 182598, "contra": 0, "der_prop": 6946038, "rest": 167592532, "t_enum": 811, "t_prop": 3647, "sat_pairs": 2608, "sat_cand": 348823, "sat_der": 3736, "sat_calls": 77528, "t_sat": 2604}
+{"alive": 187831935, "pairs": 1373386, "empty": 193841, "contra": 0, "der_prop": 7442643, "rest": 180389292, "t_enum": 885, "t_prop": 3909, "sat_pairs": 2800, "sat_cand": 370267, "sat_der": 4100, "sat_calls": 83267, "t_sat": 2794}
+{"alive": 198813081, "pairs": 1464112, "empty": 206729, "contra": 0, "der_prop": 7891756, "rest": 190921325, "t_enum": 950, "t_prop": 4208, "sat_pairs": 2975, "sat_cand": 400419, "sat_der": 4395, "sat_calls": 89358, "t_sat": 3004}
+{"alive": 210385768, "pairs": 1561519, "empty": 219839, "contra": 0, "der_prop": 8541483, "rest": 201844285, "t_enum": 1020, "t_prop": 4518, "sat_pairs": 3189, "sat_cand": 429019, "sat_der": 4793, "sat_calls": 95584, "t_sat": 3216}
+{"alive": 221970654, "pairs": 1658208, "empty": 230802, "contra": 0, "der_prop": 8969759, "rest": 213000895, "t_enum": 1093, "t_prop": 4757, "sat_pairs": 3370, "sat_cand": 449011, "sat_der": 4944, "sat_calls": 100488, "t_sat": 3380}
+{"alive": 237312914, "pairs": 1766652, "empty": 245780, "contra": 0, "der_prop": 9435944, "rest": 227876970, "t_enum": 1158, "t_prop": 5055, "sat_pairs": 3584, "sat_cand": 477988, "sat_der": 5190, "sat_calls": 106757, "t_sat": 3595}
+{"alive": 249990849, "pairs": 1863618, "empty": 258668, "contra": 0, "der_prop": 9891630, "rest": 240099219, "t_enum": 1216, "t_prop": 5315, "sat_pairs": 3781, "sat_cand": 502465, "sat_der": 5547, "sat_calls": 112404, "t_sat": 3786}
+{"alive": 262234022, "pairs": 1956810, "empty": 271768, "contra": 0, "der_prop": 10324472, "rest": 251909550, "t_enum": 1276, "t_prop": 5569, "sat_pairs": 3968, "sat_cand": 522483, "sat_der": 5894, "sat_calls": 117933, "t_sat": 3973}
+{"alive": 273932803, "pairs": 2053874, "empty": 281993, "contra": 0, "der_prop": 10692649, "rest": 263240154, "t_enum": 1346, "t_prop": 5783, "sat_pairs": 4128, "sat_cand": 536619, "sat_der": 6085, "sat_calls": 122130, "t_sat": 4120}
+{"alive": 284899968, "pairs": 2141080, "empty": 293589, "contra": 0, "der_prop": 10947890, "rest": 273952078, "t_enum": 1406, "t_prop": 6036, "sat_pairs": 4300, "sat_cand": 560274, "sat_der": 6190, "sat_calls": 127583, "t_sat": 4317}
+{"alive": 298236186, "pairs": 2249421, "empty": 307652, "contra": 0, "der_prop": 11516590, "rest": 286719596, "t_enum": 1469, "t_prop": 6331, "sat_pairs": 4516, "sat_cand": 588322, "sat_der": 6776, "sat_calls": 134102, "t_sat": 4533}
+{"alive": 312250757, "pairs": 2352602, "empty": 320512, "contra": 0, "der_prop": 11918408, "rest": 300332349, "t_enum": 1529, "t_prop": 6650, "sat_pairs": 4721, "sat_cand": 616655, "sat_der": 6899, "sat_calls": 140904, "t_sat": 4779}
+{"alive": 326766793, "pairs": 2463093, "empty": 334460, "contra": 0, "der_prop": 12574204, "rest": 314192589, "t_enum": 1586, "t_prop": 6957, "sat_pairs": 4927, "sat_cand": 643686, "sat_der": 7231, "sat_calls": 146852, "t_sat": 4980}
+{"alive": 340579342, "pairs": 2570597, "empty": 348684, "contra": 0, "der_prop": 13069079, "rest": 327510263, "t_enum": 1654, "t_prop": 7259, "sat_pairs": 5153, "sat_cand": 670701, "sat_der": 7642, "sat_calls": 153842, "t_sat": 5212}
+{"alive": 353289177, "pairs": 2667895, "empty": 361937, "contra": 0, "der_prop": 13596269, "rest": 339692908, "t_enum": 1717, "t_prop": 7517, "sat_pairs": 5341, "sat_cand": 691287, "sat_der": 7911, "sat_calls": 158880, "t_sat": 5381}
+{"alive": 366302148, "pairs": 2761669, "empty": 374677, "contra": 0, "der_prop": 13961137, "rest": 352341011, "t_enum": 1775, "t_prop": 7723, "sat_pairs": 5507, "sat_cand": 708978, "sat_der": 7980, "sat_calls": 162937, "t_sat": 5524}
+{"alive": 379688095, "pairs": 2858130, "empty": 385272, "contra": 0, "der_prop": 14494816, "rest": 365193279, "t_enum": 1834, "t_prop": 7988, "sat_pairs": 5699, "sat_cand": 734210, "sat_der": 8395, "sat_calls": 168855, "t_sat": 5723}
+{"alive": 391812591, "pairs": 2960545, "empty": 398607, "contra": 0, "der_prop": 15038151, "rest": 376774440, "t_enum": 1899, "t_prop": 8238, "sat_pairs": 5874, "sat_cand": 755331, "sat_der": 8564, "sat_calls": 173919, "t_sat": 5898}
+{"alive": 404228057, "pairs": 3058149, "empty": 412677, "contra": 0, "der_prop": 15396700, "rest": 388831357, "t_enum": 1955, "t_prop": 8445, "sat_pairs": 6038, "sat_cand": 774699, "sat_der": 8633, "sat_calls": 178718, "t_sat": 6040}
+{"alive": 418251284, "pairs": 3152583, "empty": 427149, "contra": 0, "der_prop": 16058133, "rest": 402193151, "t_enum": 2007, "t_prop": 8679, "sat_pairs": 6218, "sat_cand": 800786, "sat_der": 8954, "sat_calls": 184596, "t_sat": 6198}
+{
+ "база": "GN",
+ "строк": 9987,
+ "различных строк": 9530,
+ "литералов": 3774,
+ "k=0 (верно во всех строках)": 422,
+ "k=1 неопровергнутых": 869683,
+ "k=2 минимальных неопровергнутых": 418251284,
+ "пар посылок": 3152583,
+ "пустых пар (посылки несовместны в библиотеке)": 427149,
+ "посылки противоречат теории": 0,
+ "выводится распространением": 16058133,
+ "остаток после распространения": 402193151,
+ "выборка SAT: пар": 6218,
+ "кандидатов": 800786,
+ "выводится": 8954,
+ "вызовов SAT": 184596,
+ "оценка: выводится SAT во всём остатке": 4497128,
+ "оценка: неизвестно (вопросы до склейки)": 397696023,
+ "время": {
+  "подготовка, с": 453,
+  "стена, с": 2724,
+  "перебор, нить·с": 2007,
+  "распространение, нить·с": 2481,
+  "SAT по выборке, нить·с": 6198,
+  "SAT на весь остаток (оценка), нить·ч": 864.7
+ }
+}
