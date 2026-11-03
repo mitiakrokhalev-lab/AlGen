@@ -835,6 +835,10 @@ def add_pairs(form, pairs):
     form._synth = None
 
 
+# Конструкции-свидетели («существует группа, в которую …»): терм — выбор, свойства его не определены.
+WITNESS = {"hnn-hull", "higman-hull", "free-cover", "free-cover-map"}
+
+
 def enumerate_form(form, max_prem, goals=None, m=None):
     """Все минимальные условия не длиннее max_prem посылок, которые библиотека
     не опровергает (по матрице m, по умолчанию — только понятными значениями).
@@ -879,6 +883,15 @@ def enumerate_form(form, max_prem, goals=None, m=None):
         keep = {j // 2 for j in getattr(form, "fixed", [])}
         deferred = {i for i in np.flatnonzero(frac < DEFER).tolist() if i not in keep}
     form.deferred = sorted(atom_name(form.atoms[i]) for i in deferred)
+    # Не перебираются ни посылкой, ни целью: атомы о замкнутых термах (abelian(A(5)) —
+    # факт библиотеки, а не теорема о переменных базы) и о свидетелях (hnn-hull(G),
+    # higman-hull(G), free-cover(G) — выбор, а не функция: nilpotent(hnn-hull(G)) не определён).
+    def _has(t, ops):
+        return isinstance(t, App) and (t.op in ops or any(_has(x, ops) for x in t.args))
+    for i, a in enumerate(getattr(form, "atoms", None) or []):
+        ts = [x for x in a[2:] if not isinstance(x, (str, int, bool))]
+        if ts and (all(ground(x) for x in ts) or any(_has(x, WITNESS) for x in ts)):
+            deferred.add(i)
     if deferred:
         goal_cols = [g for g in goal_cols if g // 2 not in deferred]
     pairs = getattr(form, "pair_atoms", None) or {}

@@ -150,17 +150,23 @@ def size_universe(vocab, base, smax):
     for _round in range(2 * smax):
         prev = list(allt)
         new = set()
+        # аргумент терма из ⩽ smax конструкций сам из ⩽ smax − 1 (кроме c(Y) в Y/c(Y))
+        small = [t for t in prev if len(nodes[t]) < smax]
+        canon = [t for t in prev if isinstance(t, App) and t.op in CANON_SUB and len(nodes[t]) <= smax]
         for op in CONS:
             c = vocab.cons.get(op)
             if not c:
                 continue
-            for args in product(prev, repeat=len(c["in"])):
+            pools = [small] * len(c["in"])
+            if op == "quotient":
+                pools = [small, small + [t for t in canon if t not in small]]
+            for args in product(*pools):
+                if not fresh.intersection(args):
+                    continue  # такой набор аргументов уже пробовали в прошлом раунде
                 if op in SYMMETRIC and str(args[0]) > str(args[1]):
                     continue
                 if op in SYMMETRIC_SUB and not str(args[1]) < str(args[2]):
                     continue
-                if not fresh.intersection(args):
-                    continue  # такой набор аргументов уже пробовали в прошлом раунде
                 if op == "quotient" and isinstance(args[1], App) and args[1].op in CANON_SUB:
                     n = len(nodes[args[0]] | set().union(*(app_nodes(a) for a in args[1].args))) + 1
                 else:
@@ -594,10 +600,10 @@ def build_all(lib, vocab, job, jobs, outdir, threads, cache=None):
 
 def load(lib, vocab, base, tdir):
     """Каркас базы со строками из всех частей таблицы."""
-    f = skeleton(lib, vocab, base)
     parts = sorted(Path(tdir).glob(f"{base}.*-*.pickle"))
-    if not parts:
+    if not parts:  # до каркаса: каркас G — минуты, а таблицы может и не быть
         raise FileNotFoundError(f"нет таблицы {base} в {tdir}")
+    f = skeleton(lib, vocab, base)
     n = int(parts[0].stem.split("-")[-1])
     if len(parts) != n:
         raise FileNotFoundError(f"{base}: частей {len(parts)} из {n}")
