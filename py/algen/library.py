@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_chars, load_compl, load_endo, load_elts, load_homs, load_hk, load_perm, load_products
+from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_chars, load_compl, load_endo, load_elts, load_homs, load_hk, load_perm, load_products, load_sdp
 from math import gcd
 
 from .logic import DATA, App, Graph, Theory, Var, Vocab
@@ -33,6 +33,47 @@ NUMS = (1, 2, 3, 4, 5, 6, 7, INF)
 BS = {(1, 1): "ZxZ", (1, 2): "BS12", (2, 1): "BS12", (2, 3): "BS23", (3, 2): "BS23"}
 
 INFINITE = DATA / "infinite" / "grp.json"
+PRES = DATA / "infinite" / "grp-pres.json"
+
+
+def _word(w, gens):
+    """Слово «a^2 b a^-1» → [(номер образующей, показатель)], свободно сокращённое."""
+    out = []
+    for tok in w.split():
+        g, _, e = tok.partition("^")
+        x = (gens.index(g), int(e) if e else 1)
+        if out and out[-1][0] == x[0]:
+            e = out.pop()[1] + x[1]
+            if e:
+                out.append((x[0], e))
+        else:
+            out.append(x)
+    return out
+
+
+def _proper_power(w):
+    """Слово — собственная степень sᵏ, k ⩾ 2, в свободной группе: циклически
+    сократить и проверить, что получившееся слово (по буквам) периодично."""
+    w = list(w)
+    while len(w) > 1 and w[0][0] == w[-1][0]:
+        e = w[0][1] + w.pop()[1]
+        w[0] = (w[0][0], e)
+        if not e:
+            w.pop(0)
+    if len(w) == 1:
+        return abs(w[0][1]) >= 2
+    letters = [(g, 1 if e > 0 else -1) for g, e in w for _ in range(abs(e))]
+    n = len(letters)
+    return any(n % d == 0 and letters == letters[:d] * (n // d) for d in range(1, n // 2 + 1))
+
+
+def pres_props(gens, rels):
+    """Свойства копредставления ⟨gens | rels⟩ (сорт Grp.pres)."""
+    ws = [_word(r, list(gens)) for r in rels]
+    d = len(gens) - len(rels)
+    return {"even-relators": all(sum(abs(e) for _, e in w) % 2 == 0 for w in ws),
+            "nonempty-gens": len(gens) > 0, "def-positive": d >= 1, "def-2": d >= 2,
+            "one-relator": len(rels) == 1, "relator-power": len(rels) == 1 and _proper_power(ws[0])}
 # Конечные множители произведений сверх малых и простых: A₄, S₄, SL(2, 3) (коммутант Q₈
 # неабелев нильпотентен), SL(2, 5) (совершенная с центром).
 EXTRA_FINITE = ("12:3", "24:12", "24:3", "120:5",
@@ -134,6 +175,7 @@ class Library:
         self.prod = load_products()
         # Свободные произведения и сплетения: поля записи «свободное произведение»
         # и «сплетение»: [A, B]. Сплетение A ≀ B не симметрично.
+        self._pres_acts()
         self.fprod, self.wreath = {}, {}
         for k, o in self.obj.items():
             ab = o.get("свободное произведение")
@@ -169,6 +211,42 @@ class Library:
             for k in ("injective-sys", "surjective-sys", "constant-sys"):
                 if f.get(k) is not None:
                     f["свойства"][k] = f[k]
+
+    def _pres_acts(self):
+        """Копредставления ⟨X | R⟩ с группой из библиотеки и действия Act(Q, N):
+        self.pres — [запись], self.acts[(Q, N)] — ключи N ⋊ Q (None — неизвестно),
+        первое — тривиальное действие (N ⋊ Q = N × Q)."""
+        raw = json.loads(PRES.read_text(encoding="utf-8")) if PRES.exists() else {}
+        self.pres = []
+        for p in raw.get("копредставления", []):
+            if p["группа"] not in self.obj:
+                raise KeyError(f"копредставление {p}: нет группы {p['группа']}")
+            self.pres.append({**p, "свойства": pres_props(p["образующие"], p["соотношения"])})
+        sdp = load_sdp()
+        extra = {}
+        for a in raw.get("действия", []):
+            for k in (a["N"], a["Q"], a["N ⋊ Q"]):
+                if k not in self.obj:
+                    raise KeyError(f"действие {a}: нет группы {k}")
+            extra.setdefault((a["Q"], a["N"]), []).append(a["N ⋊ Q"])
+        self._sdp, self._sdp_extra = sdp, extra
+
+    def acts(self, q, n):
+        """Ключи N ⋊ Q по известным действиям Q на N; первое — тривиальное."""
+        r = self._sdp.get((n, q))
+        if r is not None:  # нетривиальные — только с N ⋊ Q из библиотеки
+            return [r[0] if r[0] in self.obj else None] + [x for x in r[1:] if x in self.obj]
+        if self.obj[n]["свойства"].get("trivial"):
+            triv = q
+        elif self.obj[q]["свойства"].get("trivial"):
+            triv = n
+        else:
+            triv = self.prod.get((n, q))
+        out = [triv]
+        for x in self._sdp_extra.get((q, n), []):
+            if x not in out:
+                out.append(x)
+        return out
 
     def _check_negations(self):
         """Поля «≇» и «↪̸» бесконечных групп обходят вывод, поэтому у каждой записи
@@ -981,6 +1059,18 @@ class Search:
             for k in self.lib.diag:
                 env[t] = ("diag", k)
                 yield from self._assign(i + 1, env)
+        elif info.sort == "Grp.pres":
+            for j in range(len(self.lib.pres)):
+                env[t] = ("pres", j)
+                yield from self._assign(i + 1, env)
+        elif info.sort == "Grp.act":
+            q = self._obj(self._image(info.links.get("dom"), env))
+            n = self._obj(self._image(info.links.get("cod"), env))
+            if q is None or n is None:
+                return
+            for j in range(len(self.lib.acts(q, n))):
+                env[t] = ("qact", q, n, j)
+                yield from self._assign(i + 1, env)
         elif info.sort == "Grp.fam":
             for k in self.lib.fam:
                 env[t] = ("fam", k)
@@ -1170,6 +1260,16 @@ class Search:
                 sid = o.get("коммутант" if t.op == "ab" else "центр")
                 s = next((x for x in o["подгруппы"] or [] if x["id"] == sid), None)
                 k = s.get("фактор") if s else None
+            return ("obj", k) if k else None
+        if t.op == "pres-grp" and args[0] and args[0][0] == "pres":
+            return ("obj", lib.pres[args[0][1]]["группа"])
+        if t.op == "choose-act" and self._obj(args[0]) and self._obj(args[1]):
+            return ("qact", self._obj(args[0]), self._obj(args[1]), 0)  # тривиальное
+        if t.op == "semidirect" and args[2] and args[2][0] == "qact":
+            _, q, n, j = args[2]
+            if (self._obj(args[0]), self._obj(args[1])) != (n, q):
+                return None
+            k = lib.acts(q, n)[j]
             return ("obj", k) if k else None
         if t.op == "coset-act" and args[1] and args[1][0] == "sub":
             return ("act", args[1][1], (args[1][2],))
@@ -1361,7 +1461,12 @@ class Search:
                         out[("p", p, t)] = v
                 nums[t] = n
                 continue
-            if im[0] == "pt":
+            if im[0] in ("pt", "qact"):
+                continue
+            if im[0] == "pres":
+                for p, v in self.lib.pres[im[1]]["свойства"].items():
+                    if p in self.g.v.props:
+                        out[("p", p, t)] = v
                 continue
             if im[0] == "elt":
                 c = self.lib.obj[im[1]]["элементы"][im[2]]
@@ -1675,6 +1780,15 @@ class Search:
             return o.get("имя", im[1])
         if im[0] == "fam":
             return self.lib.fam[im[1]].get("имя", im[1])
+        if im[0] == "pres":
+            p = self.lib.pres[im[1]]
+            return f"⟨{', '.join(p['образующие'])} | {', '.join(p['соотношения'])}⟩"
+        if im[0] == "qact":
+            _, q, n, j = im
+            k = self.lib.acts(q, n)[j]
+            nq, nn = self._name(("obj", q)), self._name(("obj", n))
+            return f"действие {nq} на {nn}" + (" (тривиальное)" if j == 0 else "") + \
+                (f", {nn} ⋊ {nq} ≅ {self._name(('obj', k))}" if k else "")
         if im[0] == "diag":
             return self.lib.diag[im[1]].get("имя", im[1])
         if im[0] == "act":

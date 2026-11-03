@@ -43,6 +43,8 @@ HOMS_SCRIPT = Path(__file__).with_name("gap") / "homs.g"
 HOMS = ROOT / "data" / "finite" / "grp-homs.jsonl"
 HK_SCRIPT = Path(__file__).with_name("gap") / "hk.g"
 HK = ROOT / "data" / "finite" / "grp-hk.jsonl"
+SDP_SCRIPT = Path(__file__).with_name("gap") / "sdp.g"
+SDP = ROOT / "data" / "finite" / "grp-sdp.jsonl"
 PERM_SCRIPT = Path(__file__).with_name("gap") / "perm.g"
 PERM = ROOT / "data" / "finite" / "grp-perm.jsonl"
 PRESENT_SCRIPT = Path(__file__).with_name("gap") / "present.g"
@@ -103,6 +105,20 @@ def build_products(upto):
     prog = f'HI:={upto};; OUT:="{PRODUCTS}";; Read("{PRODUCTS_SCRIPT}");\n'
     subprocess.run(["gap", "-q", "-o", "4g"], input=prog, text=True, check=True,
                    stdout=subprocess.DEVNULL)
+
+
+def build_sdp(upto=16):
+    prog = f'HI:={upto};; OUT:="{SDP}";; Read("{SDP_SCRIPT}");\n'
+    subprocess.run(["gap", "-q", "-o", "4g"], input=prog, text=True, check=True,
+                   stdout=subprocess.DEVNULL)
+
+
+def load_sdp(path=SDP):
+    """(key N, key Q) → ключи N ⋊_φ Q по классам действий φ : Q → Aut(N)."""
+    if not Path(path).exists():
+        return {}
+    with open(path) as f:
+        return {(r["N"], r["Q"]): r["semi"] for r in map(json.loads, f)}
 
 
 def load_products(path=PRODUCTS):
@@ -466,6 +482,8 @@ if __name__ == "__main__":
                     help="эндоморфизмы всех групп таблицы в data/finite/grp-homs.jsonl")
     ap.add_argument("--пересечения", dest="hk", action="store_true",
                     help="H ∩ K, ⟨H, K⟩, [H, K] для пар представителей классов в data/finite/grp-hk.jsonl")
+    ap.add_argument("--полупрямые", dest="sdp", action="store_true",
+                    help="N ⋊ Q для пар групп порядка ⩽ 16 (|N|·|Q| ⩽ 100) в data/finite/grp-sdp.jsonl")
     ap.add_argument("--перестановочность", dest="perm", action="store_true",
                     help="перестановочность представителей классов подгрупп в data/finite/grp-perm.jsonl")
     ap.add_argument("--авт", dest="aut", action="store_true",
@@ -504,6 +522,10 @@ if __name__ == "__main__":
     if a.hk:
         build_table(HK_SCRIPT, HK, a.jobs, stall=a.stall)
         print(HK, sum(1 for _ in HK.open()))
+        raise SystemExit
+    if a.sdp:
+        build_sdp()
+        print(SDP, sum(1 for _ in SDP.open()))
         raise SystemExit
     if a.perm:
         build_table(PERM_SCRIPT, PERM, a.jobs, stall=a.stall)
