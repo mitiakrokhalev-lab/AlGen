@@ -625,10 +625,38 @@ def load(lib, vocab, base, tdir):
         f.envs += d["envs"]
         f.skipped += d["skipped"]
         for k in "mse":
-            mats[k].append(np.unpackbits(d[k], axis=1, count=width).astype(bool))
-    f.m, f.s, f.e = (np.concatenate(mats[k]) for k in "mse")
+            mats[k].append(d[k])  # упакованные биты: в 8 раз меньше, распаковка — ниже, на место
+        del d
+    rows = sum(x.shape[0] for x in mats["m"])
+    for k in "mse":  # без промежуточных копий: у G при s ⩽ 2 одна матрица — больше 1 ГБ
+        out = np.empty((rows, width), dtype=bool)
+        r = 0
+        for x in mats[k]:
+            out[r:r + x.shape[0]] = np.unpackbits(x, axis=1, count=width).view(bool)
+            r += x.shape[0]
+        mats[k] = None
+        setattr(f, k, out)
     f.names = list(range(len(f.envs)))
     return f
+
+
+def save_reps(f, base, tdir):
+    with open(Path(tdir) / f"{base}.rep.pickle", "wb") as fh:
+        pickle.dump({"отпечаток": _fp(base), "атомов": len(f.atoms), "rep": f.rep, "rep_flat": f.rep_flat}, fh)
+
+
+def load_reps(f, base, tdir):
+    """Готовые классы равносильных (команда «равносильные»): у G их счёт — около 2 ч."""
+    p = Path(tdir) / f"{base}.rep.pickle"
+    if not p.exists():
+        return False
+    with open(p, "rb") as fh:
+        d = pickle.load(fh)
+    if d["отпечаток"] != _fp(base) or d["атомов"] != len(f.atoms):
+        print(f"{p}: классы от другой таблицы, считаю заново", file=sys.stderr)
+        return False
+    f.rep, f.rep_flat = d["rep"], d["rep_flat"]
+    return True
 
 
 def equiv_reps(f):
@@ -855,7 +883,8 @@ def run_schemes(a):
             _STATE["forms"][base] = load(lib, vocab, base, a.dir)
         _STATE.setdefault("base_of", {})[id(_STATE["forms"][base])] = base
         if not getattr(a, "no_equiv", False) and getattr(_STATE["forms"][base], "rep", None) is None:
-            equiv_reps(_STATE["forms"][base])
+            if not load_reps(_STATE["forms"][base], base, a.dir):
+                equiv_reps(_STATE["forms"][base])
         print(f"{base}: таблица {_STATE['forms'][base].e.shape}, {round(time.time() - t)} с",
               file=sys.stderr, flush=True)
         done = _run_pool(jobs, a, deadline, t0, done, total)
@@ -1016,6 +1045,10 @@ def main():
     s.add_argument("--каталог", dest="dir", required=True)
     s.add_argument("--выход", dest="out", required=True)
     s.add_argument("--без", dest="skip", default="")
+    s = sub.add_parser("равносильные", help="классы равносильных литералов базы — один раз, в файл <база>.rep.pickle")
+    s.add_argument("base")
+    s.add_argument("--каталог", dest="dir", required=True)
+    s.add_argument("--без", dest="skip", default="")
     s = sub.add_parser("полнота")
     s.add_argument("base")
     s.add_argument("--каталог", dest="dir", required=True)
@@ -1065,6 +1098,12 @@ def main():
             print("    больше всего неизвестных: " + "; ".join(f"{g} {n}" for g, n in miss[:8]))
     elif a.cmd == "k1":
         k1_base(a)
+    elif a.cmd == "равносильные":
+        t = time.time()
+        f = load(built_library(vocab), vocab, a.base, a.dir)
+        equiv_reps(f)
+        save_reps(f, a.base, a.dir)
+        print(f"{a.base}: классы равносильных за {round(time.time() - t)} с", file=sys.stderr)
     elif a.cmd == "строить-все":
         j, n = map(int, a.job.split("/"))
         build_all(built_library(vocab), vocab, j, n, a.dir, a.jobs, a.cache)
