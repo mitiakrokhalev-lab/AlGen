@@ -120,13 +120,21 @@ ARCHIVE_ONLY = {"ABH", "ABC", "n", "pG", "pqG", "pGH", "pqGH", "MN"}
 SIZE = int(os.environ.get("ALGEN_SIZE", "0") or 0)
 
 
+# Поправка 3 (класс по архиву): фактор по своей каноничной подгруппе — G/Z(G), G/G′,
+# Aut G/Inn G — одна конструкция, а не две.
+CANON_SUB = {"center", "commutator", "inn", "torsion", "frattini", "ulm"}
+
+
 def app_nodes(t):
     """Конструкции терма (узлы-применения, без числовых констант)."""
     out = set()
     if isinstance(t, App):
         if t.args or not str(t.op).startswith("num:"):
             out.add(t)
-        for a in t.args:
+        args = t.args
+        if t.op == "quotient" and len(args) == 2 and isinstance(args[1], App) and args[1].op in CANON_SUB:
+            args = (args[0],) + tuple(args[1].args)
+        for a in args:
             out |= app_nodes(a)
     return out
 
@@ -136,8 +144,12 @@ def size_universe(vocab, base, smax):
     g, _, _ = scheme(vocab, {"раздел": "grp", "условие": BASES[base]})
     vars_ = [t for t in g.terms if isinstance(t, Var)]
     allt, sz = list(vars_), {t: 0 for t in vars_}
-    for sv in range(1, smax + 1):
+    # раунды до неподвижной точки: G/Z(G) — размер 1, но строится из Z(G) (поправка 3)
+    nodes = {t: frozenset() for t in vars_}
+    fresh = set(vars_)
+    for _round in range(2 * smax):
         prev = list(allt)
+        new = set()
         for op in CONS:
             c = vocab.cons.get(op)
             if not c:
@@ -147,15 +159,27 @@ def size_universe(vocab, base, smax):
                     continue
                 if op in SYMMETRIC_SUB and not str(args[1]) < str(args[2]):
                     continue
-                if len(set().union(*(app_nodes(a) for a in args))) + 1 != sv:
+                if not fresh.intersection(args):
+                    continue  # такой набор аргументов уже пробовали в прошлом раунде
+                if op == "quotient" and isinstance(args[1], App) and args[1].op in CANON_SUB:
+                    n = len(nodes[args[0]] | set().union(*(app_nodes(a) for a in args[1].args))) + 1
+                else:
+                    n = len(frozenset().union(*(nodes[a] for a in args))) + 1
+                if n > smax:
                     continue
                 try:
                     t = g.make(op, list(args))
                 except Exception:
                     t = None
                 if t is not None and t not in sz:
-                    sz[t] = sv
+                    nodes[t] = frozenset(app_nodes(t))
+                    sz[t] = len(nodes[t])
+                    new.add(t)
                     allt.append(t)
+        if not new:
+            break
+        fresh = new
+    allt.sort(key=lambda t: sz[t])
     out = [t for t in allt if isinstance(t, App)]
     for t in list(out):
         for x in closure(g, [t] + vars_):
@@ -271,7 +295,14 @@ def maximal(g, elems):
 
 
 # Симметрии баз: перестановка переменных, переводящая запись базы в себя.
-SWAP = {"AB": ("A", "B"), "GHK": ("H", "K")}
+# Поправка 2: P(A) и P(B) для симметричных переменных — одна посылка (парные атомы)
+SWAP = {"AB": ("A", "B"), "GHK": ("H", "K"), "MN": ("m", "n"), "Gxy": ("x", "y"),
+        "GFE": ("F", "E"), "pqG": ("p", "q"), "pqGH": ("p", "q")}
+
+# Поправка 1: класс в объявлении базы («∀ G конечная», «∀ G абелева») — посылка класса
+# на главную переменную не считается. ALGEN_CLASS=finite: перебор по строкам, где
+# первая групповая переменная базы конечна, с этой посылкой как посылкой записи.
+CLASS = os.environ.get("ALGEN_CLASS", "")
 
 
 def _swap(s, pair):
@@ -681,6 +712,12 @@ def view(base_form, terms):
         if need:
             v.req[i] = need
     v.fixed = [2 * v.index[a] + (0 if val else 1) for a, val in b.fixed_lits if a in v.index]
+    if CLASS:
+        X = next((t for t in v.own if isinstance(t, Var) and g.terms[t].sort == "Grp.obj"), None)
+        a = ("p", CLASS, X)
+        if X is not None and a in v.index:
+            v.fixed_lits = list(v.fixed_lits) + [(a, True)]
+            v.fixed = v.fixed + [2 * v.index[a]]
     cols = np.array([2 * b.index[a] + d for a in v.atoms for d in (0, 1)], dtype=np.int64)
     v.m, v.s, v.e = b.m[:, cols], b.s[:, cols], b.e[:, cols]
     v._base, v._base_cols = b, cols
@@ -739,7 +776,7 @@ def _one(job):
     finally:
         if limit:
             signal.alarm(0)
-    rec = {"id": sid, "условие": BASES[base], "термы": terms, "посылок": k, "без": sorted(E.SKIP),
+    rec = {"id": sid, "условие": BASES[base] + (f"; класс {CLASS}" if CLASS else ""), "термы": terms, "посылок": k, "без": sorted(E.SKIP),
            "отпечаток": fp, "секунд": round(time.time() - t0, 1), "статус": status, **summary}
     p = Path(outdir) / sid
     p.with_suffix(".txt").write_text(err.getvalue() + "\n" + out.getvalue(), encoding="utf-8")

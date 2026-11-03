@@ -866,6 +866,10 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 if m.shape[0] and m[:, j].all():
                     const.add(j)
     form.const = sorted(const)
+    # атом посылки записи (класс базы, ALGEN_CLASS) целью не бывает: его значение задано
+    fixed_atoms = {j // 2 for j in getattr(form, "fixed", [])}
+    if fixed_atoms:
+        goal_cols = [g for g in goal_cols if g // 2 not in fixed_atoms]
     if const:
         goal_cols = [g for g in goal_cols if g not in const and g ^ 1 not in const]
     # Отложенные атомы: известны меньше чем в DEFER доле строк (кроме посылок записи).

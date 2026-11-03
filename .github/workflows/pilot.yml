@@ -6,6 +6,8 @@ name: pilot
 #   1) build — 20 машин строят части таблицы G;
 #   2) enum  — 20 машин перебирают схемы;
 #   3) summary — сводка в ветку «results-<ветка>».
+# Поправки по архиву (A6): G/Z(G) — одна конструкция (в коде), класс базы — матрица cls
+# (none — без класса, finite / abelian — «∀ G конечная / абелева», ALGEN_CLASS).
 # Запуск: пуш в ветку «pilot-…».
 
 on:
@@ -55,7 +57,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        part: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        cls: [none, finite, abelian]
+        part: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     runs-on: ubuntu-latest
     timeout-minutes: 340
     steps:
@@ -73,11 +76,12 @@ jobs:
         continue-on-error: true
         run: |
           cd py
-          timeout 320m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей $THREADS --память $MEM --посылок $K --до 300 --предел 3600 $ARGS
+          if [ "${{ matrix.cls }}" != none ]; then export ALGEN_CLASS=${{ matrix.cls }}; fi
+          timeout 320m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../out/${{ matrix.cls }} --часть ${{ matrix.part }}/10 --нитей $THREADS --память $MEM --посылок $K --до 300 --предел 3600 $ARGS
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: part-${{ matrix.part }}
+          name: part-${{ matrix.cls }}-${{ matrix.part }}
           path: out
           retention-days: 30
           compression-level: 1
@@ -99,10 +103,13 @@ jobs:
           pattern: part-*
           path: parts
       - run: |
-          mkdir -p all
-          find parts -name '*.json' -exec cp {} all/ \; || true
-          find parts -name '*.txt' -exec cp {} all/ \; || true
-          cd py && python3 -m algen.batch сводка ../all || echo "сводка упала" > ../all/сводка.md
+          for c in none finite abelian; do
+            mkdir -p all/$c
+            find parts -path "*/$c/*" -name '*.json' -exec cp {} all/$c/ \; || true
+            find parts -path "*/$c/*" -name '*.txt' -exec cp {} all/$c/ \; || true
+            (cd py && python3 -m algen.batch сводка ../all/$c) || echo "сводка упала" > all/$c/сводка.md
+          done
+          cat all/*/сводка.md > all/сводка.md || true
       - name: результаты в ветку «results-…»
         run: |
           tar czf results.tar.gz all
