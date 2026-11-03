@@ -1381,8 +1381,15 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
                       f, ensure_ascii=False, indent=1)
     seen, hints, vals = {}, defaultdict(set), defaultdict(set)
     reduced = {}
+    # Сжатие (ALGEN_COMPRESS, py/algen/compress.py): свёрнутый вопрос следует из
+    # теории и оставленных вопросов. Он не выкидывается, а показывается свёрнутым
+    # со ссылками «следует из №…» и возвращается, если источник опровергнут.
+    folded = {}
     for r in report:
         if r["вердикт"] != "неизвестно":
+            continue
+        if r.get("свёрнута"):
+            folded[r["№"]] = r
             continue
         t = r["класс"]
         seen.setdefault(t, r["примеров"])
@@ -1435,6 +1442,11 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
             print(f"{k} — запретов {len(ts)}: {qs.get(k, {}).get('вопрос', '')}")
     print(f"решающих значений {len(fresh)} на {sum(len(ts) for _, ts in fresh)} запретов, без кандидата {len(bare_fresh)} "
           f"в {len(cl)} кластерах, в реестре {sum(len(x) for x in known.values())}", file=sys.stderr)
+    if folded:
+        print(f"== свёрнуто вопросов {len(folded)}: следуют из теории и оставленных вопросов ==")
+        for k, r in sorted(folded.items()) if full else ():
+            print(f"№{k} {' & '.join(r['класс'])} ⇐ " + ", ".join(f"№{d}" for d in r["следует из"]))
+        print(f"свёрнуто вопросов {len(folded)} (список: --полностью)", file=sys.stderr)
     summary = {
         "запретов": len(classes), "вердикты": dict(tally), "остаток": len(seen),
         "значения": [{"имя": v, "запретов": len(ts), "пример": " & ".join(ts[0])} for v, ts in fresh],
@@ -1443,6 +1455,8 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
         "реестр": {k: len(ts) for k, ts in known.items()},
         "отложено": getattr(form, "deferred", []),
     }
+    if any("сжатие" in r for r in report):  # без флага сводка прежняя бит в бит
+        summary["свёрнуто"] = {k: r["следует из"] for k, r in folded.items()}
     qs = {}
     for r in classes.values():
         q = r.get("вопрос")
