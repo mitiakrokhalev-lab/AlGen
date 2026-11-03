@@ -134,3 +134,182 @@ class TestCompress(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# --- экземпляры φ(t) по φ(G) ---------------------------------------------
+
+import numpy as np
+
+from algen.logic import App, Var
+
+
+class Info:
+    def __init__(self, sort):
+        self.sort = sort
+
+
+class G2:
+    def __init__(self, terms, req=None):
+        self.terms = terms
+        self._req = req or {}
+
+    def requires(self, t):
+        return self._req.get(t, [])
+
+
+class T2:
+    def __init__(self, g, clauses=()):
+        self.g, self.var, self.clauses = g, {}, []
+        for cl in clauses:
+            self.clauses.append([self.lit(a, v) for a, v in cl])
+
+    def lit(self, a, value=True):
+        n = self.var.setdefault(a, len(self.var) + 1)
+        return n if value else -n
+
+    def solver(self):
+        return Solver(name="g4", bootstrap_with=self.clauses)
+
+
+GV = Var("G")
+ZG = App("center", (GV,))
+QG = App("quot", (GV,))
+
+
+class InstForm:
+    """База ∀ G; термы G, Z(G), quot(G) (последний требует normal-ish(G))."""
+
+    def __init__(self, table, clauses=(), fixed=(), sort_z="Grp.obj"):
+        g = G2({GV: Info("Grp.obj"), ZG: Info(sort_z), QG: Info("Grp.obj")}, {QG: [("ok", GV)]})
+        self.sc = type("SC", (), {})()
+        self.sc.T = T2(g, clauses)
+        self.atoms = [("p", p, t) for t in (GV, ZG, QG) for p in ("a", "b", "c")] + [("p", "ok", GV)]
+        self.index = {a: i for i, a in enumerate(self.atoms)}
+        self.fixed_lits = list(fixed)
+        self.fixed = [2 * self.index[a] + (0 if v else 1) for a, v in fixed]
+        m = np.zeros((len(table), 2 * len(self.atoms)), dtype=bool)
+        for i, rowv in enumerate(table):
+            for a, v in rowv.items():
+                m[i, 2 * self.index[a] + (0 if v else 1)] = True
+        self.m = m
+
+    def lit(self, j):
+        return self.atoms[j // 2], j % 2 == 0
+
+    def lits(self, j):
+        return [self.lit(j)]
+
+
+def irow(form, prem, goal, kind="неизвестно"):
+    cols = [2 * form.index[a] for a in prem] + [2 * form.index[goal] + 1]
+    return {"_cols": cols, "класс": tuple(map(str, prem + [goal])), "примеров": 1, "вердикт": kind}
+
+
+class TestInstances(unittest.TestCase):
+    def test_instance_folds_when_admissible_and_unrefuted(self):
+        f = InstForm([])
+        r = irow(f, [("p", "a", ZG)], ("p", "b", ZG))
+        C.compress(f, [r])
+        self.assertTrue(r["свёрнута"])
+        self.assertEqual(r["экземпляр"], {"терм": "center(G)", "вместо": "G"})
+        self.assertEqual(C.verify(f, [r]), [])
+
+    def test_refuted_source_keeps_row(self):
+        # группа библиотеки с a(G), ¬b(G): R0 = «a ⇒ b» опровергнут, φ(Z(G)) остаётся
+        f = InstForm([{("p", "a", GV): True, ("p", "b", GV): False}])
+        r = irow(f, [("p", "a", ZG)], ("p", "b", ZG))
+        C.compress(f, [r])
+        self.assertFalse(r["свёрнута"])
+
+    def test_requires_must_be_derivable(self):
+        f = InstForm([])
+        r = irow(f, [("p", "a", QG)], ("p", "b", QG))
+        C.compress(f, [r])
+        self.assertFalse(r["свёрнута"])  # ok(G) не выводится
+        f2 = InstForm([], clauses=[[(("p", "ok", GV), True)]])
+        r2 = irow(f2, [("p", "a", QG)], ("p", "b", QG))
+        C.compress(f2, [r2])
+        self.assertTrue(r2["свёрнута"])
+
+    def test_base_hypothesis_must_hold_for_term(self):
+        # база «∀ G с c(G)»: Z(G) подходит, только если теория даёт c(Z(G))
+        hyp = [(("p", "c", GV), True)]
+        f = InstForm([], fixed=hyp)
+        r = irow(f, [("p", "a", ZG)], ("p", "b", ZG))
+        C.compress(f, [r])
+        self.assertFalse(r["свёрнута"])
+        f2 = InstForm([], clauses=[[(("p", "c", GV), False), (("p", "c", ZG), True)]], fixed=hyp)
+        r2 = irow(f2, [("p", "a", ZG)], ("p", "b", ZG))
+        C.compress(f2, [r2])
+        self.assertTrue(r2["свёрнута"])
+
+    def test_sort_mismatch_and_mixed_rows_kept(self):
+        f = InstForm([], sort_z="Grp.sub")
+        r = irow(f, [("p", "a", ZG)], ("p", "b", ZG))
+        C.compress(f, [r])
+        self.assertFalse(r["свёрнута"])
+        f2 = InstForm([])
+        r2 = irow(f2, [("p", "a", GV)], ("p", "b", ZG))  # о G и Z(G) — не экземпляр
+        C.compress(f2, [r2])
+        self.assertFalse(r2.get("экземпляр"))
+
+    def test_facts_not_folded_by_instance(self):
+        f = InstForm([])
+        r = irow(f, [("p", "a", ZG)], ("p", "b", ZG), "выводится")
+        C.compress(f, [r])
+        self.assertFalse(r.get("экземпляр"))
+
+
+class GenForm(InstForm):
+    """Многопеременная база: таблица базы G передаётся в form.generic."""
+
+    def __init__(self, gtable, clauses=(), cls=""):
+        super().__init__([], clauses)
+        props = ["a", "b", "c", "fin"]
+        gcol = {p: i for i, p in enumerate(props)}
+        gm = np.zeros((len(gtable), 2 * len(props)), dtype=bool)
+        for i, rv in enumerate(gtable):
+            for p, v in rv.items():
+                gm[i, 2 * gcol[p] + (0 if v else 1)] = True
+        self.generic = (gm, gcol)
+        self.atoms.append(("p", "fin", ZG))
+        self.index = {a: i for i, a in enumerate(self.atoms)}
+
+
+class TestInstancesGeneric(unittest.TestCase):
+    def setUp(self):
+        import os
+        self._cls = os.environ.pop("ALGEN_CLASS", None)
+
+    def tearDown(self):
+        import os
+        if self._cls is not None:
+            os.environ["ALGEN_CLASS"] = self._cls
+        else:
+            os.environ.pop("ALGEN_CLASS", None)
+
+    def test_generic_unrefuted_folds(self):
+        f = GenForm([{"a": True, "b": True}])
+        r = irow(f, [("p", "a", ZG)], ("p", "b", ZG))
+        C.compress(f, [r])
+        self.assertTrue(r["свёрнута"])
+
+    def test_generic_refuted_kept(self):
+        f = GenForm([{"a": True, "b": False}])
+        r = irow(f, [("p", "a", ZG)], ("p", "b", ZG))
+        C.compress(f, [r])
+        self.assertFalse(r["свёрнута"])
+
+    def test_class_needs_term_in_class_and_class_rows(self):
+        import os
+        os.environ["ALGEN_CLASS"] = "fin"
+        # контрпример к R0 — бесконечная группа: в классе «fin» R0 не опровергнут
+        tbl = [{"a": True, "b": False, "fin": False}]
+        f = GenForm(tbl)
+        r = irow(f, [("p", "a", ZG)], ("p", "b", ZG))
+        C.compress(f, [r])
+        self.assertFalse(r["свёрнута"])  # fin(Z(G)) не выводится — Z(G) может быть вне класса
+        f2 = GenForm(tbl, clauses=[[(("p", "fin", ZG), True)]])
+        r2 = irow(f2, [("p", "a", ZG)], ("p", "b", ZG))
+        C.compress(f2, [r2])
+        self.assertTrue(r2["свёрнута"])

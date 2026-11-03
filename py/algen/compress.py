@@ -25,7 +25,16 @@
    вызывается полный SAT; «не вывелось» без ответа решателя ≠ «не следует».
 5. Прочие вердикты (опровергается, противоречие, трудный контрпример,
    короткий довод, ОШИБКА…) не сворачиваются и в фон не входят.
-6. reopen: если вопрос опровергнут, все строки, которые держались на нём
+6. Экземпляры (instances): строка только об одном построенном терме t
+   (например, Z(G)) у базы с одной переменной G — экземпляр R0 = R[t ↦ G].
+   Она сворачивается со ссылкой «экземпляр: <запрет R0>», только если
+   (а) сорт t равен сорту G; (б) каждая гипотеза базы (fixed_lits) и каждое
+   условие существования t (graph.requires) выводятся теорией для t;
+   (в) R0 не опровергнут ни одной строкой библиотеки (матрица m, со всеми
+   помеченными значениями); (г) все атомы R0 есть в форме. R0 проверяется
+   заново при каждом прогоне; опровергнут R0 — строка не сворачивается.
+   Экземпляры не входят в фон базиса (осторожно: меньше сжатия, без дыр).
+7. reopen: если вопрос опровергнут, все строки, которые держались на нём
    (транзитивно), разворачиваются. Повторный compress с refuted пересобирает
    базис без опровергнутых.
 """
@@ -99,7 +108,147 @@ def _nvars(T):
     return max((abs(c) for cl in T.clauses for c in cl), default=0) + 1
 
 
-def compress(form, report, refuted=(), key=interest_key):
+def _subst(x, t, G):
+    if x == t:
+        return G
+    return x
+
+
+def _row_terms(form, r):
+    out = set()
+    for j in r["_cols"]:
+        for a, _ in form.lits(j):
+            out |= {x for x in a[2:] if not isinstance(x, (str, int))}
+    return out
+
+
+def _admissible(form, t, G, cache):
+    """Терм t можно подставить вместо переменной базы G: сорт, гипотезы базы
+    и условия существования t выводятся теорией (свой решатель, form.sc.s
+    не трогаем)."""
+    if t in cache:
+        return cache[t]
+    from algen.logic import decide
+    T, g = form.sc.T, form.sc.T.g
+    ok = t in g.terms and g.terms[t].sort == g.terms[G].sort
+    if ok:
+        fixed = list(getattr(form, "fixed_lits", []))
+        need = [(tuple(_subst(x, G, t) for x in a), v) for a, v in fixed if G in a[2:]]
+        need += [(("p", p, u), True) for p, u in g.requires(t)]
+        s = T.solver()
+        try:
+            ok = all(decide(T, fixed, goal, s).kind == "выводится" for goal in need)
+        finally:
+            s.delete()
+    cache[t] = ok
+    return ok
+
+
+def instances(form, report):
+    """Сворачивает строки-экземпляры φ(t) по φ(G) (правило 6). Возвращает
+    число свёрнутых."""
+    from algen.logic import Var
+    import numpy as np
+
+    g = getattr(form.sc.T, "g", None)
+    if g is None:
+        return 0
+    if getattr(form, "generic", None) is not None:
+        return _instances_generic(form, report, g)
+    vars_ = [x for x in g.terms if isinstance(x, Var)]
+    m = getattr(form, "m", None)
+    if len(vars_) != 1 or m is None or not hasattr(form, "index"):
+        return 0
+    G = vars_[0]
+    base = m[:, form.fixed].all(axis=1) if getattr(form, "fixed", None) else np.ones(m.shape[0], dtype=bool)
+    cache, n = {}, 0
+    for r in report:
+        if "_cols" not in r or r.get("свёрнута") or r["вердикт"] != "неизвестно":
+            continue
+        ts = _row_terms(form, r)
+        if len(ts) != 1:
+            continue
+        (t,) = ts
+        if t == G or not _admissible(form, t, G, cache):
+            continue
+        cols, names = [], []
+        try:
+            for j in r["_cols"]:
+                if form.atoms[j // 2][0] == "pair":
+                    raise KeyError
+                a, v = form.lit(j)
+                a0 = tuple(_subst(x, t, G) for x in a)
+                cols.append(2 * form.index[a0] + (0 if v else 1))
+                names.append(("" if v else "¬") + str(a0[1]) + "(" + ", ".join(map(str, a0[2:])) + ")")
+        except KeyError:
+            continue
+        if (base & m[:, cols].all(axis=1)).any():
+            continue  # R0 опровергнут библиотекой: φ(t) от него не следует
+        r["свёрнута"] = True
+        r["следует из"] = ["экземпляр: " + " & ".join(sorted(names))]
+        r["экземпляр"] = {"терм": str(t), "вместо": str(G)}
+        n += 1
+    return n
+
+
+def _instances_generic(form, report, g):
+    """Экземпляры по таблице базы G (form.generic = (матрица, {свойство: атом})),
+    у любой базы: строка только о свойствах одного построенного терма t.
+    R0 — то же о произвольной группе G базы G с классом ALGEN_CLASS. Гипотезы:
+    t — группа (сорт Grp.obj или Grp.sub), условия существования t и класс
+    для t выводятся теорией; R0 не опровергнут строками базы G этого класса."""
+    import os
+    from algen.logic import Var, decide
+
+    gm, gcol = form.generic
+    cls = os.environ.get("ALGEN_CLASS", "")
+    if cls and cls not in gcol:
+        return 0
+    rows_ok = gm[:, 2 * gcol[cls]] if cls else None
+    T = form.sc.T
+    fixed = list(getattr(form, "fixed_lits", []))
+    cache, n = {}, 0
+    for r in report:
+        if "_cols" not in r or r.get("свёрнута") or r["вердикт"] != "неизвестно":
+            continue
+        lits = [l for j in r["_cols"] for l in form.lits(j)]
+        ts = {a[2] if len(a) > 2 else None for a, _ in lits}
+        if len(ts) != 1 or any(a[0] != "p" or a[1] not in gcol for a, _ in lits):
+            continue
+        if any(form.atoms[j // 2][0] == "pair" for j in r["_cols"]):
+            continue
+        (t,) = ts
+        if isinstance(t, Var) or t not in g.terms:
+            continue
+        if t not in cache:
+            ok = g.terms[t].sort in ("Grp.obj", "Grp.sub")
+            if ok:
+                need = [(("p", p, u), True) for p, u in g.requires(t)]
+                if cls:
+                    need.append((("p", cls, t), True))
+                sv = T.solver()
+                try:
+                    ok = all(decide(T, fixed, goal, sv).kind == "выводится" for goal in need)
+                finally:
+                    sv.delete()
+            cache[t] = ok
+        if not cache[t]:
+            continue
+        cols = [2 * gcol[a[1]] + (0 if v else 1) for a, v in lits]
+        hit = gm[:, cols].all(axis=1)
+        if rows_ok is not None:
+            hit &= rows_ok
+        if hit.any():
+            continue
+        names = sorted(("" if v else "¬") + f"{a[1]}(G)" for a, v in lits)
+        r["свёрнута"] = True
+        r["следует из"] = ["экземпляр: " + " & ".join(names)]
+        r["экземпляр"] = {"терм": str(t), "вместо": "G" + (f", класс {cls}" if cls else "")}
+        n += 1
+    return n
+
+
+def compress(form, report, refuted=(), key=interest_key, use_instances=True):
     """Жадный базис. refuted — номера опровергнутых вопросов: они не входят в
     фон, их строка остаётся несвёрнутой с полем "опровергнут"."""
     from pysat.solvers import Solver
@@ -115,7 +264,9 @@ def compress(form, report, refuted=(), key=interest_key):
         r["сжатие"] = VERSION
         if r["№"] in refuted:
             r["опровергнут"] = True
-    rows = sorted([r for r in report if "_cols" in r], key=key)
+    if use_instances:
+        instances(form, report)
+    rows = sorted([r for r in report if "_cols" in r and not r.get("экземпляр")], key=key)
 
     # вопросы: теория + оставленные вопросы под селекторами
     sq = T.solver()
@@ -198,11 +349,19 @@ def verify(form, report, sample=None, rng=None):
     T = form.sc.T
     fixed = _fixed(form)
     by = {r["№"]: r for r in report if not r.get("свёрнута")}
-    folded = [r for r in report if r.get("свёрнута")]
+    folded = [r for r in report if r.get("свёрнута") and not r.get("экземпляр")]
     if sample is not None and len(folded) > sample:
         import random
         folded = (rng or random.Random(0)).sample(folded, sample)
     bad = []
+    inst = [r for r in report if r.get("экземпляр")]
+    if inst:  # экземпляры: пересчитать заново на копиях и сравнить
+        import copy
+        cp = [copy.copy(r) for r in inst]
+        for r in cp:
+            r["свёрнута"] = False
+        instances(form, cp)
+        bad += [(r["№"], "экземпляр не подтверждается") for r in cp if not r.get("экземпляр") or not r["свёрнута"]]
     for r in folded:
         deps = [by.get(d) for d in r["следует из"]]
         if any(d is None for d in deps):
