@@ -20,7 +20,7 @@ env:
   ALGEN_FAST: "1"
   BASE: "G"
   K: "3"
-  ARGS: "--без bounded-exponent"
+  ARGS: ""  # полный класс: все свойства словаря (прежде пропускали bounded-exponent, причина не записана)
   THREADS: "2"
   MEM: "4"
   ALGEN_SKEL: ${{ github.workspace }}/skel

@@ -117,7 +117,8 @@ def _relation_atoms(g, terms):
                 if str(a) < str(b):
                     out.append(("r", "eq-sub", a, b))
                     # сопряжённость и перестановочность — если одна из подгрупп переменная схемы
-                    if isinstance(a, Var) or isinstance(b, Var):
+                    # (в полном классе, ALGEN_SIZE, — у всех пар: отбор пар делает PAIR_FILTER)
+                    if FULL_PROPS or isinstance(a, Var) or isinstance(b, Var):
                         out += [("r", r, a, b) for r in ("conj-sub", "permutes") if r in g.v.rels]
     for i, a in enumerate(objs):
         for b in objs[i + 1:]:
