@@ -114,8 +114,60 @@ DEPTH2 = {
 ARCHIVE_ONLY = {"ABH", "ABC", "n", "pG", "pqG", "pGH", "pqGH", "MN"}
 
 
+# Мера полноты по размеру (решение 2–3.11): ALGEN_SIZE=s — вселенная базы есть все
+# термы из ⩽ s конструкций (а не глубина ⩽ 2 по выбору), схемы — наборы термов
+# с ⩽ s конструкциями вместе. Без переменной окружения — прежняя вселенная.
+SIZE = int(os.environ.get("ALGEN_SIZE", "0") or 0)
+
+
+def app_nodes(t):
+    """Конструкции терма (узлы-применения, без числовых констант)."""
+    out = set()
+    if isinstance(t, App):
+        if t.args or not str(t.op).startswith("num:"):
+            out.add(t)
+        for a in t.args:
+            out |= app_nodes(a)
+    return out
+
+
+def size_universe(vocab, base, smax):
+    """Все термы базы из ⩽ smax конструкций CONS (по возрастанию размера), с замыканием."""
+    g, _, _ = scheme(vocab, {"раздел": "grp", "условие": BASES[base]})
+    vars_ = [t for t in g.terms if isinstance(t, Var)]
+    allt, sz = list(vars_), {t: 0 for t in vars_}
+    for sv in range(1, smax + 1):
+        prev = list(allt)
+        for op in CONS:
+            c = vocab.cons.get(op)
+            if not c:
+                continue
+            for args in product(prev, repeat=len(c["in"])):
+                if op in SYMMETRIC and str(args[0]) > str(args[1]):
+                    continue
+                if op in SYMMETRIC_SUB and not str(args[1]) < str(args[2]):
+                    continue
+                if len(set().union(*(app_nodes(a) for a in args))) + 1 != sv:
+                    continue
+                try:
+                    t = g.make(op, list(args))
+                except Exception:
+                    t = None
+                if t is not None and t not in sz:
+                    sz[t] = sv
+                    allt.append(t)
+    out = [t for t in allt if isinstance(t, App)]
+    for t in list(out):
+        for x in closure(g, [t] + vars_):
+            if isinstance(x, App) and x not in out:
+                out.append(x)
+    return [str(t) for t in out]
+
+
 def universe(vocab, base):
     """Термы вселенной базы (строки) в порядке построения."""
+    if SIZE:
+        return size_universe(vocab, base, SIZE)
     g, _, _ = scheme(vocab, {"раздел": "grp", "условие": BASES[base]})
     vars_ = list(g.terms)
     out = []
@@ -244,10 +296,16 @@ def schemes(vocab, base, k=2, t=None):
     vars_ = [t for t in g.terms if isinstance(t, Var)]
     seen, out = set(), []
     swap = SWAP.get(base)
-    for r in range(0, t + 1):
+    for r in range(0, (SIZE if SIZE else t) + 1):
         for pick in combinations(ts, r):
+            if SIZE:
+                if len(set().union(*(app_nodes(x) for x in pick))) > SIZE if pick else False:
+                    continue
+                # набор, где один терм — подтерм другого, даёт ту же схему, что больший терм
+                if any(x in subterms(y) for x in pick for y in pick if x != y):
+                    continue
             cl = closure(g, list(pick) + vars_)
-            if len(maximal(g, cl)) > t:
+            if not SIZE and len(maximal(g, cl)) > t:
                 continue
             terms_ = sorted((t for t in cl if isinstance(t, App)), key=lambda x: (num.get(x, 10 ** 6), str(x)))
             key = tuple(terms_)
@@ -290,7 +348,8 @@ def skeleton(lib, vocab, base, part=None, with_rows=False):
 
 
 def _fp(base):
-    return f"{_fingerprint()}:{base}:{','.join(sorted(E.SKIP))}"
+    mode = (f":s{SIZE}" if SIZE else "") + (":быстро" if E.FAST_DERIVE else "")
+    return f"{_fingerprint()}:{base}:{','.join(sorted(E.SKIP))}{mode}"
 
 
 def theory_fp(base, form=None):

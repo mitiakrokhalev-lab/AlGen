@@ -1,0 +1,116 @@
+name: pilot
+
+# Пилот меры по размеру (решение 2–3.11): база G, вселенная — все термы из ⩽ 2
+# конструкций (ALGEN_SIZE=2), строки — записанные значения и распространение
+# (ALGEN_FAST=1), схемы — наборы термов с ⩽ 2 конструкциями вместе, k = 3.
+#   1) build — 20 машин строят части таблицы G;
+#   2) enum  — 20 машин перебирают схемы;
+#   3) summary — сводка в ветку «results-<ветка>».
+# Запуск: пуш в ветку «pilot-…».
+
+on:
+  push:
+    branches: ["pilot-*"]
+
+env:
+  ALGEN_SIZE: "2"
+  ALGEN_FAST: "1"
+  BASE: "G"
+  K: "3"
+  ARGS: "--без bounded-exponent"
+  THREADS: "2"
+  MEM: "6"
+
+jobs:
+  build:
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        job: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: часть таблицы
+        run: |
+          cd py
+          timeout 290m python3 -m algen.table строить $BASE --часть ${{ matrix.job }}/20 --каталог ../tab $ARGS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tab-${{ matrix.job }}
+          path: tab
+          retention-days: 7
+          compression-level: 1
+
+  enum:
+    needs: build
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: tab-*
+          path: tab
+          merge-multiple: true
+      - name: перебор
+        continue-on-error: true
+        run: |
+          cd py
+          timeout 320m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../out --часть ${{ matrix.part }}/20 --нитей $THREADS --память $MEM --посылок $K --до 300 --предел 3600 $ARGS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: part-${{ matrix.part }}
+          path: out
+          retention-days: 30
+          compression-level: 1
+
+  summary:
+    needs: enum
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: part-*
+          path: parts
+      - run: |
+          mkdir -p all
+          find parts -name '*.json' -exec cp {} all/ \; || true
+          find parts -name '*.txt' -exec cp {} all/ \; || true
+          cd py && python3 -m algen.batch сводка ../all || echo "сводка упала" > ../all/сводка.md
+      - name: результаты в ветку «results-…»
+        run: |
+          tar czf results.tar.gz all
+          cp all/сводка.md сводка.md || echo "нет сводки" > сводка.md
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e results.tar.gz -e сводка.md
+          git add results.tar.gz сводка.md
+          git commit -qm "Пилот размера ⩽ 2: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"

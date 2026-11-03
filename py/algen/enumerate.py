@@ -37,6 +37,7 @@ import sys
 from collections import Counter, defaultdict
 from itertools import combinations, permutations
 
+import os
 import numpy as np
 
 from types import SimpleNamespace
@@ -52,6 +53,11 @@ ELT_PROPS = ("identity-elt", "involution", "central-elt", "real-elt", "commutato
 GSET_PROPS = ("transitive", "faithful", "free-act", "regular", "primitive", "singleton-set", "finite-set")
 RELATIONS = True  # атомы-отношения между термами схемы (⩽, =, ≅)
 DIVERSE = 4  # моделей «наоборот» в _derive
+# ALGEN_FAST=1: значения строки — записанные и единичное распространение, без
+# поиска ядра решателем. На G даёт 91 % значений полного вывода в 15 раз
+# быстрее; недостающие 9 % — меньше опровержений (больше вопросов), но не
+# ошибки: каждое значение выведено. Для больших вселенных (размер ⩽ 2).
+FAST_DERIVE = bool(os.environ.get("ALGEN_FAST"))
 REFRESH = 200  # выводов строк до пересоздания решателя
 REDUCE = True  # сводить «неизвестно» к вопросу «посылки ⇒ переменная вырождена?»
 # Посылки только из свойств (без отношений ⩽, ≅, ↪ между термами), начиная с этой
@@ -566,6 +572,17 @@ class SchemeForm(Form):
                         val[a] = v
                         del lits[a]
                 assume = assume + extra
+        if FAST_DERIVE:
+            ok, implied = s.propagate(assumptions=assume)
+            if not ok:
+                return [facts.get(a) for a in self.atoms]
+            implied = set(implied or ())
+            for a, l in lits.items():
+                if l in implied:
+                    val[a] = True
+                elif -l in implied:
+                    val[a] = False
+            return [facts[a] if a in facts else val.get(a) for a in self.atoms]
         if not s.solve(assumptions=assume):
             return [facts.get(a) for a in self.atoms]
         model = s.get_model()
