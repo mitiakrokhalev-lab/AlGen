@@ -1253,6 +1253,11 @@ def run(max_prem, lib=None, vocab=None, form=None):
     for r in report:
         r.pop("_держится", None)
     questions(form, report)
+    # Сжатие выдачи (тред «Сжать выдачу», py/algen/compress.py): только добавляет
+    # поля строкам, без флага выдача прежняя бит в бит.
+    if os.environ.get("ALGEN_COMPRESS"):
+        from algen import compress
+        compress.compress(form, report)
     for r in report:
         r.pop("_cols", None)
     return form, alive, empty, report
