@@ -81,15 +81,6 @@ jobs:
           path: tab/*.pickle
           retention-days: 7
           compression-level: 1
-      - uses: actions/upload-artifact@v4
-        with:
-          name: cache-${{ matrix.job }}
-          path: |
-            tab/*.hcache
-            tab/*.dcache
-          retention-days: 7
-          compression-level: 1
-          if-no-files-found: ignore
 
   prep:
     needs: build
