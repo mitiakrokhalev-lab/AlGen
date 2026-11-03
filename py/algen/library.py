@@ -39,6 +39,13 @@ EXTRA_FINITE = ("12:3", "24:12", "24:3", "120:5",
                 # для произведений: ступени 3 (D₁₆, SD₁₆, Q₁₆), группы Гейзенберга порядка 27,
                 # неабелевы порядка pq (D₁₀, C₇ ⋊ C₃) — Q₈ × Heis₃ (Z = G′ = C₆) и подобные
                 "16:7", "16:8", "16:9", "27:3", "27:4", "10:1", "21:1")
+# A(n), S(n), D(n) (порядка 2n) при малых n — ключи SmallGroups; C(n) = n:1
+SMALL_FAMILY = {
+    "alt": {1: "1:1", 2: "1:1", 3: "3:1", 4: "12:3", 5: "60:5", 6: "360:118"},
+    "sym-n": {1: "1:1", 2: "2:1", 3: "6:1", 4: "24:12", 5: "120:34", 6: "720:763"},
+    "cyc": {1: "1:1", 2: "2:1", 3: "3:1", 4: "4:1", 5: "5:1", 6: "6:2", 7: "7:1"},
+    "dih": {1: "2:1", 2: "4:2", 3: "6:1", 4: "8:3", 5: "10:1", 6: "12:4", 7: "14:1"},
+}
 ALL, ONE = "<всё>", "<1>"  # подгруппы множителя в метках подгрупп произведения
 SUB_PROPS = ("normal", "characteristic", "maximal", "whole", "central", "finite-index",
              # арифметика индекса (конечный индекс): 2, простой, наименьший простой делитель |G|;
@@ -1061,19 +1068,16 @@ class Search:
         args = [self._image(a, env) for a in t.args]
         if t.op.startswith("num:"):
             return ("num", int(t.op[4:]))
-        if t.op in ("alt", "sym-n", "cyc") and args[0] and args[0][0] == "num":
-            if not hasattr(self, "_by_name"):
-                self._by_name = {o.get("имя"): k for k, o in lib.obj.items() if o.get("конечная")}
+        if t.op in ("alt", "sym-n", "cyc", "dih") and args[0] and args[0][0] == "num":
+            # ключи SmallGroups: имена групп в таблице не однозначны (S₃ записана
+            # как «S3», а не «D6»; S₅ — как «120:34»; тривиальная — как «1»)
             n = args[0][1]
-            k = self._by_name.get({"alt": "A", "sym-n": "S", "cyc": "C"}[t.op] + str(n)) if n != INF else None
-            return ("obj", k) if k else None
-        if t.op == "dih" and args[0] and args[0][0] == "num":
-            if not hasattr(self, "_by_name"):
-                self._by_name = {o.get("имя"): k for k, o in lib.obj.items() if o.get("конечная")}
-            n = args[0][1]
-            k = None if n == INF else (self._by_name.get("C2") if n == 1 else
-                                        self._by_name.get("C2 x C2") if n == 2 else self._by_name.get(f"D{2 * n}"))
-            return ("obj", k) if k else None
+            k = None if n == INF else SMALL_FAMILY[t.op].get(n)
+            if k is None and n != INF and t.op == "cyc":
+                if not hasattr(self, "_by_name"):
+                    self._by_name = {o.get("имя"): k for k, o in lib.obj.items() if o.get("конечная")}
+                k = self._by_name.get(f"C{n}")
+            return ("obj", k) if k and k in lib.obj else None
         if t.op in ("num-add", "num-sub", "num-pow", "num-gcd") and all(a and a[0] == "num" for a in args):
             a, b = args[0][1], args[1][1]
             if INF in (a, b):
@@ -1143,6 +1147,13 @@ class Search:
                 return ("obj", ks[1])
             p = {"prod": lib.prod, "freeprod": lib.fprod, "wreath": lib.wreath}[t.op].get((ks[0], ks[1]))
             return ("obj", p) if p else None
+        if t.op == "profinite" and self._obj(args[0]):
+            # X̂ = X у конечной X; X̂ = 1, если у X нет собственных подгрупп конечного индекса
+            k = self._obj(args[0])
+            o = lib.obj[k]
+            if o.get("конечная"):
+                return ("obj", k)
+            return ("obj", "1:1") if o["свойства"].get("no-finite-quotients") else None
         if t.op in ("aut", "ab", "inn") and self._obj(args[0]):
             o = lib.obj[self._obj(args[0])]
             k = o.get({"aut": "aut", "ab": "абелианизация", "inn": "inn"}[t.op])
