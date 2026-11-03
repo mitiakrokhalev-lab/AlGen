@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 from multiprocessing import Pool
 
-from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_chars, load_compl, load_endo, load_elts, load_homs, load_perm, load_products
+from .finite import FINITE_DERIVED, arith_props, arith_sub_props, load as load_finite, load_aut, load_chars, load_compl, load_endo, load_elts, load_homs, load_hk, load_perm, load_products
 from math import gcd
 
 from .logic import DATA, App, Graph, Theory, Var, Vocab
@@ -39,12 +39,15 @@ EXTRA_FINITE = ("12:3", "24:12", "24:3", "120:5",
                 # для произведений: ступени 3 (D₁₆, SD₁₆, Q₁₆), группы Гейзенберга порядка 27,
                 # неабелевы порядка pq (D₁₀, C₇ ⋊ C₃) — Q₈ × Heis₃ (Z = G′ = C₆) и подобные
                 "16:7", "16:8", "16:9", "27:3", "27:4", "10:1", "21:1")
-# A(n), S(n), D(n) (порядка 2n) при малых n — ключи SmallGroups; C(n) = n:1
+# A(n), S(n), C(n), D(n) (порядка 2n) — ключи SmallGroups (номера: IdGroup(CyclicGroup(n)),
+# IdGroup(DihedralGroup(2n)) в GAP). C(∞) и D(∞) не заводятся: в словаре эти группы конечны
+_CYC_ID = [1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 2, 2, 1, 2, 1, 2, 1, 2, 1, 4, 1, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 6, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 4, 1, 2, 2, 1, 1, 4, 1, 2, 1, 4, 1, 2, 1, 2, 1, 2, 1, 6, 1, 2, 1, 2, 1, 6, 1, 2, 1, 2, 1, 4, 1, 2, 2, 2, 1, 2, 1, 2, 1, 2]
+_DIH_ID = [1, 2, 1, 3, 1, 4, 1, 7, 1, 4, 1, 6, 1, 3, 3, 18, 1, 4, 1, 6, 5, 3, 1, 7, 1, 4, 1, 5, 1, 12, 1, 52, 3, 4, 3, 6, 1, 3, 5, 7, 1, 14, 1, 5, 3, 3, 1, 6, 1, 4]
 SMALL_FAMILY = {
     "alt": {1: "1:1", 2: "1:1", 3: "3:1", 4: "12:3", 5: "60:5", 6: "360:118"},
     "sym-n": {1: "1:1", 2: "2:1", 3: "6:1", 4: "24:12", 5: "120:34", 6: "720:763"},
-    "cyc": {1: "1:1", 2: "2:1", 3: "3:1", 4: "4:1", 5: "5:1", 6: "6:2", 7: "7:1"},
-    "dih": {1: "2:1", 2: "4:2", 3: "6:1", 4: "8:3", 5: "10:1", 6: "12:4", 7: "14:1"},
+    "cyc": {n: f"{n}:{i}" for n, i in enumerate(_CYC_ID, 1)},
+    "dih": {n: f"{2 * n}:{i}" for n, i in enumerate(_DIH_ID, 1)},
 }
 ALL, ONE = "<всё>", "<1>"  # подгруппы множителя в метках подгрупп произведения
 SUB_PROPS = ("normal", "characteristic", "maximal", "whole", "central", "finite-index",
@@ -60,7 +63,8 @@ class Library:
         self.obj = {}
         patch = DATA / "finite" / "grp-subs-patch.json"
         patch = json.loads(patch.read_text(encoding="utf-8"))["группы"] if patch.exists() else {}
-        compl, endo, elts, homs, perm = load_compl(), load_endo(), load_elts(), load_homs(), load_perm()
+        compl, endo, elts, homs, perm, hk = (load_compl(), load_endo(), load_elts(), load_homs(), load_perm(),
+                                              load_hk())
         for k, r in load_finite(extra=True).items():
             for data, field, prop in ((compl, "complemented", "complemented"),
                                       (endo, "fully_invariant", "fully-invariant"),
@@ -91,6 +95,10 @@ class Library:
             if e and e.get("classes") and r["subs"] is not None and \
                     [[x["group"], x["class_size"]] for x in r["subs"]] == e["check"]:
                 self.obj[k]["элементы"] = e["classes"]
+            q = hk.get(k)
+            if q and q.get("hk") is not None and r["subs"] is not None and \
+                    [[x["group"], x["class_size"]] for x in r["subs"]] == q["check"]:
+                self.obj[k]["hk"] = (len(r["subs"]), q["hk"])
             q = perm.get(k)
             if q and q.get("nonperm") is not None and r["subs"] is not None and \
                     [[x["group"], x["class_size"]] for x in r["subs"]] == q["check"]:
@@ -1072,7 +1080,7 @@ class Search:
             # ключи SmallGroups: имена групп в таблице не однозначны (S₃ записана
             # как «S3», а не «D6»; S₅ — как «120:34»; тривиальная — как «1»)
             n = args[0][1]
-            k = None if n == INF else SMALL_FAMILY[t.op].get(n)
+            k = SMALL_FAMILY[t.op].get(n)
             if k is None and n != INF and t.op == "cyc":
                 if not hasattr(self, "_by_name"):
                     self._by_name = {o.get("имя"): k for k, o in lib.obj.items() if o.get("конечная")}
@@ -1205,21 +1213,25 @@ class Search:
                 return ("sub", d, idx) if idx is not None else None
             idx = {"zero": self._one(c), "id": self._all(c), "proj": self._all(c), "incl": j}[kind]
             return ("sub", c, idx) if idx is not None else None
-        if t.op in ("meet", "join") and len(args) == 3 and all(a and a[0] == "sub" for a in args[1:]):
+        if t.op == "whole-sub" and self._obj(args[0]):
+            idx = self._all(self._obj(args[0]))
+            return ("sub", self._obj(args[0]), idx) if idx is not None else None
+        if t.op in ("meet", "join", "comm") and len(args) == 3 and all(a and a[0] == "sub" for a in args[1:]):
             n, m = args[1], args[2]
             if n[1] != m[1]:
                 return None
             key = n[1]
             one, whole = self._one(key), self._all(key)
-            meet = t.op == "meet"
-            if n[2] == m[2]:
-                return n
-            for a, b in ((n, m), (m, n)):
-                if a[2] == one:
-                    return a if meet else b
-                if a[2] == whole:
-                    return b if meet else a
-            return None
+            if t.op != "comm":
+                meet = t.op == "meet"
+                if n[2] == m[2] and n[3:] == m[3:] and "?" not in n[3:]:
+                    return n
+                for a, b in ((n, m), (m, n)):
+                    if a[2] == one:
+                        return a if meet else b
+                    if a[2] == whole:
+                        return b if meet else a
+            return self._hk(t, key, n, m)
         if t.op in ("centralizer", "normalizer", "normal-closure") and len(args) == 2 and args[1] and args[1][0] == "sub":
             key, j = args[1][1], args[1][2]
             x = lib.obj[key]["подгруппы"][j]
@@ -1242,6 +1254,27 @@ class Search:
                 return ("sub", key, idx) if idx is not None else None
             return None
         return None
+
+    def _exact_sub(self, t, im):
+        """Образ im подгруппы-терма t — сама подгруппа-представитель своего класса
+        (а не какая-то сопряжённая): переменная, нормальная подгруппа или точный
+        результат таблицы H ∩ K, ⟨H, K⟩, [H, K]."""
+        if im is None or im[0] != "sub" or len(im) > 3:
+            return False
+        if self.lib.obj[im[1]]["подгруппы"][im[2]]["свойства"].get("normal"):
+            return True
+        return isinstance(t, Var) or isinstance(t, App) and t.op in ("meet", "join", "comm")
+
+    def _hk(self, t, key, n, m):
+        """H ∩ K, ⟨H, K⟩, [H, K] по таблице GAP (grp-hk.jsonl): только для точных H и K."""
+        tab = self.lib.obj[key].get("hk")
+        if tab is None or not (self._exact_sub(t.args[1], n) and self._exact_sub(t.args[2], m)):
+            return None
+        size, flat = tab
+        i, j = sorted((n[2], m[2]))
+        off = i * size - i * (i - 1) // 2 + (j - i)
+        c = flat[3 * off + ("meet", "join", "comm").index(t.op)]
+        return ("sub", key, c) if c >= 0 else ("sub", key, -c - 1, "?")
 
     def _im_order(self, im):
         """Порядок группы образа: число, INF или None."""
