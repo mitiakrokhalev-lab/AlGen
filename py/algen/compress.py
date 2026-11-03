@@ -130,7 +130,10 @@ def _admissible(form, t, G, cache):
         return cache[t]
     from algen.logic import decide
     T, g = form.sc.T, form.sc.T.g
-    ok = t in g.terms and g.terms[t].sort == g.terms[G].sort
+    # подгруппа — тоже группа: свойства подгрупп, которых нет у G (normal и т. п.),
+    # отсеются ниже — у R0 не найдётся атома
+    sorts = {g.terms[G].sort} | ({"Grp.sub"} if g.terms[G].sort == "Grp.obj" else set())
+    ok = t in g.terms and g.terms[t].sort in sorts
     if ok:
         fixed = list(getattr(form, "fixed_lits", []))
         need = [(tuple(_subst(x, G, t) for x in a), v) for a, v in fixed if G in a[2:]]
@@ -278,15 +281,16 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
     sf = Solver(name="g4")
     nf = nv
     sel_q, sel_f = {}, {}
+    copies = []
     try:
         for r in rows:
             kind = r["вердикт"]
             if kind not in ("неизвестно", "выводится") or r["№"] in refuted:
                 continue
-            if r["№"] in seen:  # та же строка класса уже есть: держится на ней
-                r["свёрнута"], r["следует из"] = True, [seen[r["№"]]]
+            if r["№"] in seen:  # копия класса (контрапозиция): статус — как у представителя
+                copies.append(r)
                 continue
-            seen[r["№"]] = r["№"]
+            seen[r["№"]] = r
             try:
                 F = forbid_lits(form, r)
             except _Unencodable:
@@ -318,6 +322,9 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
     finally:
         sq.delete()
         sf.delete()
+    for r in copies:
+        rep = seen[r["№"]]
+        r["свёрнута"], r["следует из"] = rep["свёрнута"], list(rep["следует из"])
     return report
 
 
@@ -328,14 +335,17 @@ def reopen(report, refuted):
     for r in report:
         for d in r.get("следует из", []):
             by.setdefault(d, []).append(r)
-    out, stack = set(), list(refuted)
+    out, done, stack = set(), set(), list(refuted)
     while stack:
         x = stack.pop()
         for r in by.get(x, []):
+            if id(r) in done:
+                continue
+            done.add(id(r))
+            r["свёрнута"] = False
+            r["вернулась"] = sorted(set(r.get("вернулась", [])) | {x})
             if r["№"] not in out:
                 out.add(r["№"])
-                r["свёрнута"] = False
-                r["вернулась"] = sorted(set(r.get("вернулась", [])) | {x})
                 stack.append(r["№"])
     return out
 
@@ -348,7 +358,10 @@ def verify(form, report, sample=None, rng=None):
 
     T = form.sc.T
     fixed = _fixed(form)
-    by = {r["№"]: r for r in report if not r.get("свёрнута")}
+    by = {}
+    for r in report:
+        if not r.get("свёрнута"):
+            by.setdefault(r["№"], r)
     folded = [r for r in report if r.get("свёрнута") and not r.get("экземпляр")]
     if sample is not None and len(folded) > sample:
         import random

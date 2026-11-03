@@ -244,7 +244,7 @@ class TestInstances(unittest.TestCase):
         self.assertTrue(r2["свёрнута"])
 
     def test_sort_mismatch_and_mixed_rows_kept(self):
-        f = InstForm([], sort_z="Grp.sub")
+        f = InstForm([], sort_z="Grp.elt")
         r = irow(f, [("p", "a", ZG)], ("p", "b", ZG))
         C.compress(f, [r])
         self.assertFalse(r["свёрнута"])
@@ -313,3 +313,19 @@ class TestInstancesGeneric(unittest.TestCase):
         r2 = irow(f2, [("p", "a", ZG)], ("p", "b", ZG))
         C.compress(f2, [r2])
         self.assertTrue(r2["свёрнута"])
+
+
+class TestCopies(unittest.TestCase):
+    def test_class_copies_follow_representative(self):
+        """Контрапозиции — копии класса: свёрнута копия ровно тогда, когда
+        свёрнут представитель, и источники у неё те же (не сам представитель)."""
+        f = FakeForm(ATOMS, [["-a", "b"]])
+        q1 = row(f, ["b"], "c", n=5)
+        q2 = row(f, ["a"], "c", n=1)
+        q2c = dict(q2, _cols=list(reversed(q2["_cols"])))  # та же строка класса
+        rep = C.compress(f, [q1, q2, q2c])
+        self.assertTrue(q2c["свёрнута"])
+        self.assertEqual(q2c["следует из"], [q1["№"]])
+        self.assertEqual(C.verify(f, rep), [])
+        C.reopen(rep, [q1["№"]])
+        self.assertFalse(q2["свёрнута"] or q2c["свёрнута"])
