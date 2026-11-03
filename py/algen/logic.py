@@ -44,29 +44,6 @@ PAIR_UNI = None      # строки термов вселенной
 _STR = {}
 
 
-def _s(t):
-    s = _STR.get(t)
-    if s is None:
-        s = _STR[t] = str(t)
-    return s
-
-
-_NEIGH = {}
-
-
-def _neighbours():
-    """Соседи терма вселенной по фильтру пар: {строка: множество строк}."""
-    if _NEIGH.get("obj") is not PAIR_FILTER:
-        nb = {}
-        for p in PAIR_FILTER:
-            a, b = tuple(p) if len(p) == 2 else (next(iter(p)),) * 2
-            nb.setdefault(a, set()).add(b)
-            nb.setdefault(b, set()).add(a)
-        _NEIGH.clear()
-        _NEIGH.update(obj=PAIR_FILTER, nb=nb)
-    return _NEIGH["nb"]
-
-
 def _pair_ok(t, env):
     s = _STR.get(t)
     if s is None:
@@ -430,9 +407,7 @@ class Theory:
                 if k in r and not link_roles(r[k]) <= names:
                     return
         terms = list(self.g.terms.items())
-        by_sort, by_link, pf_cache = {}, {}, {}
-
-        neigh = _neighbours() if PAIR_FILTER is not None else None
+        by_sort, by_link = {}, {}
 
         def cands(r, env):
             lst = by_sort.get(r["sort"])
@@ -454,23 +429,13 @@ class Theory:
                     lst = idx.get(want, [])
                     lkey = ("l", r["sort"], k, want)
                     break
-            # Фильтр пар: только соседи уже выбранного терма вселенной (подпоследовательность
-            # в том же порядке — go всё равно проверяет _pair_ok, подстановки те же). Без этого
-            # заземление перебирает и отбрасывает почти все пары: 99 % времени каркаса G.
-            if neigh is not None and env:
-                su = next((x for x in map(_s, env.values()) if x in PAIR_UNI), None)
-                if su is not None:
-                    key = (lkey, su)
-                    f = pf_cache.get(key)
-                    if f is None:
-                        nb = neigh.get(su, ())
-                        f = pf_cache[key] = [(t, i) for t, i in lst
-                                             if _s(t) not in PAIR_UNI or _s(t) == su or _s(t) in nb]
-                    lst = f
             if r["name"] in shallow:
                 # аргумент образца: новый терм глубины ⩽ limit строится только
                 # из термов глубины < limit
                 return [(t, i) for t, i in lst if i.depth < limit]
+            if lkey[0] == "l":
+                ok = allowed.get(r["name"])  # короткий список по связи: фильтр без кэша
+                return lst if ok is None else [(t, i) for t, i in lst if t in ok]
             return restrict(r["name"], lst)
 
         def fits(r, t, info, env):
