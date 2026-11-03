@@ -44,6 +44,29 @@ PAIR_UNI = None      # строки термов вселенной
 _STR = {}
 
 
+def _s(t):
+    s = _STR.get(t)
+    if s is None:
+        s = _STR[t] = str(t)
+    return s
+
+
+_NEIGH = {}
+
+
+def _neighbours():
+    """Соседи терма вселенной по фильтру пар: {строка: множество строк}."""
+    if _NEIGH.get("obj") is not PAIR_FILTER:
+        nb = {}
+        for p in PAIR_FILTER:
+            a, b = tuple(p) if len(p) == 2 else (next(iter(p)),) * 2
+            nb.setdefault(a, set()).add(b)
+            nb.setdefault(b, set()).add(a)
+        _NEIGH.clear()
+        _NEIGH.update(obj=PAIR_FILTER, nb=nb)
+    return _NEIGH["nb"]
+
+
 def _pair_ok(t, env):
     s = _STR.get(t)
     if s is None:
@@ -407,12 +430,15 @@ class Theory:
                 if k in r and not link_roles(r[k]) <= names:
                     return
         terms = list(self.g.terms.items())
-        by_sort, by_link = {}, {}
+        by_sort, by_link, pf_cache = {}, {}, {}
+
+        neigh = _neighbours() if PAIR_FILTER is not None else None
 
         def cands(r, env):
             lst = by_sort.get(r["sort"])
             if lst is None:
                 lst = by_sort[r["sort"]] = [(t, i) for t, i in terms if self.v.fits(i.sort, r["sort"])]
+            lkey = ("s", r["sort"])
             # связь на уже выбранную роль: только термы с этой связью (индекс)
             for k in LINKS:
                 if k in r:
@@ -426,12 +452,26 @@ class Theory:
                         for t, i in lst:
                             idx.setdefault(i.links.get(k), []).append((t, i))
                     lst = idx.get(want, [])
+                    lkey = ("l", r["sort"], k, want)
                     break
+            # Фильтр пар: только соседи уже выбранного терма вселенной (подпоследовательность
+            # в том же порядке — go всё равно проверяет _pair_ok, подстановки те же). Без этого
+            # заземление перебирает и отбрасывает почти все пары: 99 % времени каркаса G.
+            if neigh is not None and env:
+                su = next((x for x in map(_s, env.values()) if x in PAIR_UNI), None)
+                if su is not None:
+                    key = (lkey, su)
+                    f = pf_cache.get(key)
+                    if f is None:
+                        nb = neigh.get(su, ())
+                        f = pf_cache[key] = [(t, i) for t, i in lst
+                                             if _s(t) not in PAIR_UNI or _s(t) == su or _s(t) in nb]
+                    lst = f
             if r["name"] in shallow:
                 # аргумент образца: новый терм глубины ⩽ limit строится только
                 # из термов глубины < limit
                 return [(t, i) for t, i in lst if i.depth < limit]
-            return lst
+            return restrict(r["name"], lst)
 
         def fits(r, t, info, env):
             if not self.v.fits(info.sort, r["sort"]):
@@ -448,15 +488,115 @@ class Theory:
                 yield dict(env)
                 return
             r = order[i]
-            if r["name"] in env:
-                if fits(r, env[r["name"]], self.g.terms[env[r["name"]]], env):
-                    yield from go(i + 1, env, order)
+            name = r["name"]
+            if name in env:
+                t = env[name]
+                info = self.g.terms[t]
+                added = derive(name, info, env)
+                if added is not None:
+                    # роль, выведенная из связи другой роли, проверяется на пары здесь —
+                    # как проверялась бы при обычном переборе
+                    if fits(r, t, info, env) and (name not in derived or PAIR_FILTER is None or _pair_ok(t, env)):
+                        yield from go(i + 1, env, order)
+                    for v in added:
+                        del env[v]
+                        derived.discard(v)
                 return
             for t, info in cands(r, env):
+                added = derive(name, info, env)
+                if added is None:
+                    continue
                 if fits(r, t, info, env) and (PAIR_FILTER is None or _pair_ok(t, env)):
-                    env[r["name"]] = t
+                    env[name] = t
                     yield from go(i + 1, env, order)
-                    del env[r["name"]]
+                    del env[name]
+                for v in added:
+                    del env[v]
+                    derived.discard(v)
+
+        # Роль со связями только на роли сцены (F : Mor(X, Y), N : Sub(X)) задаёт эти
+        # роли своими связями: перебираем её первой, а X, Y берём из связей. Иначе
+        # перебор шёл по всем парам групп X, Y и почти все отбрасывал (правила
+        # «образ наследует P» — по 170 с на G и по 3 клаузы). Подстановки — те же.
+        plain = lambda x: isinstance(x, str) and " " not in x and x in names
+
+        def unifiable(x):
+            # связь — роль сцены или образец из ролей (H : Sub(A ∗ B)): по терму
+            # связи роли образца восстанавливаются однозначно
+            if isinstance(x, dict):
+                return "op" in x and "bind" not in x and bool(x.get("args")) and all(map(unifiable, x["args"]))
+            return plain(x)
+
+        det = {}
+        for r in roles:
+            ks = [k for k in LINKS if k in r]
+            if ks and all(unifiable(r[k]) for k in ks):
+                det[r["name"]] = [(k, r[k]) for k in ks]
+        derived = set()
+
+        def unify(x, t, env, added):
+            """Связать роли образца x с термом t (False — не сходится)."""
+            if t is None or t not in self.g.terms:
+                return False
+            if isinstance(x, dict):
+                if not isinstance(t, App) or t.op != x["op"] or len(t.args) != len(x["args"]):
+                    return False
+                return all(unify(a, u, env, added) for a, u in zip(x["args"], t.args))
+            if x in env:
+                return env[x] == t
+            env[x] = t
+            derived.add(x)
+            added.append(x)
+            return True
+
+        def derive(name, info, env):
+            added = []
+            for k, v in det.get(name, ()):
+                if not unify(v, info.links.get(k), env, added):
+                    for x in added:
+                        del env[x]
+                        derived.discard(x)
+                    return None
+            return added
+
+        # Роль — аргумент образца правила (rank(X)): без терма-образца подстановка всё
+        # равно отбрасывается, поэтому роль берётся только из аргументов уже
+        # построенных термов с этой конструкцией (на этом месте). Подстановки те же.
+        allowed = {}
+        if pats:
+            ops = self._by_op()
+
+            def scan(x):
+                if not isinstance(x, dict) or "op" not in x or "bind" in x:
+                    return
+                args = x.get("args", [])
+                for i, a in enumerate(args):
+                    if plain(a):
+                        got = {t.args[i] for t in ops.get(x["op"], ()) if len(t.args) == len(args)}
+                        allowed[a] = allowed[a] & got if a in allowed else got
+                    else:
+                        scan(a)
+
+            for x in pats:
+                scan(x)
+        allow_cache = {}
+
+        def restrict(name, lst):
+            ok = allowed.get(name)
+            if ok is None:
+                return lst
+            hit = allow_cache.get((id(lst), name))
+            if hit is None or hit[0] is not lst:
+                hit = allow_cache[id(lst), name] = (lst, [(t, i) for t, i in lst if t in ok])
+            return hit[1]
+
+        if det:
+            roles = [r for r in roles if r["name"] in det] + [r for r in roles if r["name"] not in det]
+        if allowed:
+            free = [r for r in roles if r["name"] not in det and not any(k in r for k in LINKS)]
+            rest = [r for r in roles if r not in free]
+            free.sort(key=lambda r: len(allowed.get(r["name"], self.g.terms)))
+            roles = [r for r in rest if r["name"] in det] + free + [r for r in rest if r["name"] not in det]
 
         # образец с наибольшим числом ролей среди аргументов
         best = None
@@ -467,7 +607,32 @@ class Theory:
             if best is None or len(set(args)) > len(set(best["args"])):
                 best = pat
         if best is None or len(set(best["args"])) < 2:
-            yield from go(0, {}, roles)
+            # вложенный образец (Z(X ∗ Y)): подстановка без терма X ∗ Y всё равно
+            # отбросится, поэтому роли берём из уже построенных термов X ∗ Y.
+            # Роли образца проверяются на пары как выведенные — подстановки те же,
+            # что у полного перебора.
+            nest = None
+            if pats:
+                def subs(x):
+                    if isinstance(x, dict) and "op" in x:
+                        yield x
+                        for a in x.get("args", []):
+                            yield from subs(a)
+                for top in pats:
+                    for x in subs(top):
+                        if unifiable(x):
+                            n = len(self._pat_roles(x))
+                            if n >= 2 and (nest is None or n > nest[0]):
+                                nest = (n, x)
+            if nest is None:
+                yield from go(0, {}, roles)
+                return
+            for t in self._by_op().get(nest[1]["op"], ()):
+                env, added = {}, []
+                if unify(nest[1], t, env, added):
+                    yield from go(0, env, roles)
+                for x in added:
+                    derived.discard(x)
             return
         for t in self._by_op().get(best["op"], ()):
             env = {}

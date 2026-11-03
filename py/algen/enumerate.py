@@ -58,6 +58,9 @@ DIVERSE = 4  # моделей «наоборот» в _derive
 # быстрее; недостающие 9 % — меньше опровержений (больше вопросов), но не
 # ошибки: каждое значение выведено. Для больших вселенных (размер ⩽ 2).
 FAST_DERIVE = bool(os.environ.get("ALGEN_FAST"))
+# Отсечение наборов посылок, не являющихся свободными (enumerate_form): выдача та же,
+# меньше только счётчик «не опровергнуто библиотекой». ALGEN_PRUNE=0 — без отсечения.
+PRUNE_FREE = os.environ.get("ALGEN_PRUNE", "1") != "0"
 REFRESH = 200  # выводов строк до пересоздания решателя
 REDUCE = True  # сводить «неизвестно» к вопросу «посылки ⇒ переменная вырождена?»
 # Посылки только из свойств (без отношений ⩽, ≅, ↪ между термами), начиная с этой
@@ -1062,12 +1065,21 @@ def enumerate_form(form, max_prem, goals=None, m=None):
         for j in range(start, n_lit):
             if j // 2 in used or j in const or j ^ 1 in const or j // 2 in deferred or j in drop:
                 continue
+            # Свободные множества: литерал j верен во всех строках посылок — набор с
+            # ним и все его продолжения имеют те же строки, что и без j, поэтому все
+            # их неопровергнутые условия неминимальны (без j тоже не опровергнуты).
+            # Такие наборы вверх замкнуты, так что у оставшихся все подмножества
+            # тоже остались. Не для j, нужного как условие существования терма.
+            if prune and prem and j not in reqcols and not (R & ~P[j]).any():
+                continue
             if pairs and ((j // 2 in pairs and j % 2) or clash.get(j // 2, set()) & used):
                 continue
             if PROPS_ONLY_FROM and len(prem) + 1 >= PROPS_ONLY_FROM and form.atoms[j // 2][0] == "r":
                 continue
             go(prem + [j], P[j] & R, j + 1, depth, pm | (int(lmask[j]) if need else 0), P, rows_map)
 
+    reqcols = set().union(*form.req.values()) if form.req else set()
+    prune = PRUNE_FREE and not form.fixed  # alive_direct смотрит все строки, а не строки записи
     start = np.flatnonzero(m[:, form.fixed].all(axis=1)) if form.fixed else np.arange(nr)
     P0 = pack(start)
     for depth in range(1, max_prem + 1):

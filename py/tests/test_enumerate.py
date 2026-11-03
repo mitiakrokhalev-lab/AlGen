@@ -23,7 +23,43 @@ class FakeForm:
         self.e = self.m = m
 
 
+class RandomForm:
+    """Случайная таблица: n атомов, значения верно / ложно / неизвестно, условия
+    существования req и покрытие need — как у формы схемы."""
+
+    def __init__(self, rng, n, rows, req=False, need=False):
+        v = rng.integers(0, 3, size=(rows, n))  # 0 — верно, 1 — ложно, 2 — неизвестно
+        m = np.zeros((rows, 2 * n), dtype=bool)
+        for i in range(n):
+            m[:, 2 * i] = v[:, i] == 0
+            m[:, 2 * i + 1] = v[:, i] == 1
+        self.e = self.m = m
+        self.fixed = []
+        self.req = {}
+        if req:
+            for i in rng.choice(n, size=2, replace=False):
+                self.req[int(i)] = {2 * int(rng.integers(0, n))}
+        if need:
+            self.need = [list(range(0, n // 2)), list(range(n // 2, n))]
+
+
 class EnumerateTest(unittest.TestCase):
+    def test_free_set_pruning_keeps_output(self):
+        """Отсечение несвободных наборов посылок не меняет найденных условий."""
+        import algen.enumerate as E
+        rng = np.random.default_rng(7)
+        for case in range(60):
+            n, rows = int(rng.integers(4, 9)), int(rng.integers(3, 60))
+            # мало строк и смещённые значения — много наборов с одинаковыми строками
+            kw = dict(req=case % 3 == 1, need=case % 4 == 2)
+            res = []
+            for prune in (False, True):
+                E.PRUNE_FREE = prune
+                form = RandomForm(np.random.default_rng(case), n, rows, **kw)
+                res.append(enumerate_form(form, 3)[0])
+            E.PRUNE_FREE = True
+            self.assertEqual(res[0], res[1], f"случай {case}")
+
     def test_refuted_and_minimal(self):
         # a ⇒ c на всех строках, b ⇒ c опровергается последней строкой.
         form = FakeForm([(True, True, True), (True, False, True), (False, True, False)])
