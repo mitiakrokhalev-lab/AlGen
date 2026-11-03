@@ -13,7 +13,7 @@ on:
 env:
   TABLES_RUN: "41453989443"
   TABLES_SHA: "28e55e517cf002d2945f36c9cfd6fa7448b42f0d"
-  SKIP: "bounded-exponent"
+  SKIP: ""
   SAT_FRAC: "0.002"
 
 jobs:

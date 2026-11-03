@@ -13,7 +13,7 @@ on:
     branches: ["build-*"]
 
 env:
-  ARGS: "--без bounded-exponent"
+  ARGS: ""
   PREV_BUILD: ""     # номер прошлого запуска build: его готовые части таблиц не считаются заново
 
 jobs:

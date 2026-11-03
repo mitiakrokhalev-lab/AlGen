@@ -153,15 +153,38 @@ SIZE_EXTRA = ["ord", "index", "eltord", "rank", "prod-card", "core", "comm", "nc
               # 3.11, сверка словаря с вселенной: все конструкции словаря на сортах раздела grp,
               # кроме свидетелей и choose-* (Set, Top, Ring — других разделов, у баз таких переменных нет)
               "pres-grp", "semidirect", "equalizer", "coequalizer", "pullback", "pushout", "base-pt",
-              "profinite-map", "torsion-set", "union", "as-sub", "as-elt"]
+              "profinite-map", "torsion-set", "union", "as-sub", "as-elt", "prod-sub", "cayley", "lim", "colim"]
 # Не берутся, потому что всякое утверждение с ними равносильно утверждению класса без них
 # (критерий A: «каждое утверждение класса или равносильное ему»): whole-sub(X) как группа — это X,
 # trivial-sub(X) и terminal() — это 1; отношения с ними — свойства whole / trivial, которые
 # заведены у каждого терма. С ними вселенная G — 918 термов вместо 620, почти все вырожденные.
 EQUIVALENT_DROPPED = ["whole-sub", "trivial-sub", "terminal"]
 
+# Реестр: каждая конструкция словаря grp — либо во вселенной (CONS, SIZE_EXTRA), либо здесь,
+# с причиной. Тест tests/test_class.py падает, если в словаре появится конструкция вне обоих
+# списков: так новая конструкция не выпадет из перебора молча. Сужать класс может только Дима.
+EXCLUDED_OPS = {
+    **{op: "равносильно утверждению без неё (свойства whole / trivial), решение 3.11" for op in EQUIVALENT_DROPPED},
+    "hnn-hull": "свидетель («существует»), не функция: не конструкция утверждения",
+    "higman-hull": "свидетель («существует»), не функция",
+    "free-cover": "свидетель («существует»), не функция",
+    "free-cover-map": "свидетель («существует»), не функция",
+    "choose-act": "служебная: выбор («существует»)",
+    "choose-diag": "служебная: выбор («существует»)",
+    "choose-elt": "служебная: выбор («существует»)",
+    "choose-fam": "служебная: выбор («существует»)",
+    "choose-mor": "служебная: выбор («существует»)",
+    "choose-sub": "служебная: выбор («существует»)",
+    "choose-subfam": "служебная: выбор («существует»)",
+    "meet-fam": "аргумент сорта Grp.subfam строит только choose-subfam: термов нет",
+    "join-fam": "аргумент сорта Grp.subfam строит только choose-subfam: термов нет",
+    "free": "аргумент — множество (Set.obj): переменных этого сорта нет ни у одной базы",
+    "pi1": "аргумент — точечное пространство (Top.pt): других разделов у баз нет",
+    "units": "аргумент — кольцо (Ring.obj): других разделов у баз нет",
+}
 
-WITNESS_OPS = {"hnn-hull", "higman-hull", "free-cover", "free-cover-map", "cayley"}
+
+WITNESS_OPS = {"hnn-hull", "higman-hull", "free-cover", "free-cover-map"}
 
 
 def _has_op(t, ops):

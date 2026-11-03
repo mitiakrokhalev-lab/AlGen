@@ -1,0 +1,26 @@
+name: tests
+
+# Тесты на каждый пуш в рабочие ветки, включая полноту класса перебора
+# (tests/test_class.py: конструкции, свойства, отношения словаря, флаги «--без»).
+
+on:
+  push:
+    branches: ["claude/**", "main"]
+  pull_request:
+
+jobs:
+  tests:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: unittest
+        run: |
+          cd py
+          python3 -m unittest discover -s tests -v

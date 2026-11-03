@@ -14,7 +14,7 @@ on:
         default: "data/schemes/grp.txt"
       args:
         description: "доп. флаги algen.batch"
-        default: "--без bounded-exponent"
+        default: ""
 
 jobs:
   part:
@@ -34,7 +34,7 @@ jobs:
         run: |
           cd py
           python3 -m algen.batch прогон "../${{ inputs.schemes || 'data/schemes/grp.txt' }}" --каталог ../out --нитей 4 --память 3.5 \
-            --часть ${{ matrix.part }}/20 ${{ inputs.args || '--без bounded-exponent' }}
+            --часть ${{ matrix.part }}/20 ${{ inputs.args || '' }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:

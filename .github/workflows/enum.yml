@@ -17,7 +17,7 @@ env:
   ALGEN_FAST: "1"
   BASE: "G"
   K: "3"
-  ARGS: "--без bounded-exponent"
+  ARGS: ""
   THREADS: "2"
   MEM: "4"
 
