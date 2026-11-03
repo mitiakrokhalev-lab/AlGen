@@ -96,3 +96,42 @@ class EnumerateTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BitsTest(unittest.TestCase):
+    """Строки по битовым столбцам совпадают с прежней выборкой столбцов матрицы."""
+
+    def test_rows_match_matrix(self):
+        from algen.enumerate import Form
+        rng = np.random.default_rng(3)
+        for case in range(40):
+            n, rows = int(rng.integers(3, 9)), int(rng.integers(1, 300))
+            f = Form.__new__(Form)
+            v = rng.integers(0, 3, size=(rows, n))
+            m = np.zeros((rows, 2 * n), dtype=bool)
+            for i in range(n):
+                m[:, 2 * i], m[:, 2 * i + 1] = v[:, i] == 0, v[:, i] == 1
+            f.m = f.s = m
+            f.fixed = [0] if case % 3 == 0 else []
+            synth = rng.random(rows) < 0.3
+            f.synthetic = lambda r, synth=synth: bool(synth[r])
+            for _ in range(20):
+                k = int(rng.integers(1, 4))
+                prem = sorted(rng.choice(2 * n, size=k, replace=False).tolist())
+                g = int(rng.integers(0, 2 * n))
+                neg = g ^ 1
+                want = np.flatnonzero(m[:, prem + f.fixed + [neg]].all(axis=1))
+                self.assertEqual(f.refuters(prem, g).tolist(), want.tolist())
+                ur = np.flatnonzero(m[:, prem + f.fixed].all(axis=1) & ~m[:, g] & ~m[:, g ^ 1])
+                self.assertEqual(f.unknown_rows(prem, g).tolist(), ur.tolist())
+                cols = prem + f.fixed
+                tr, fa = m[:, cols], m[:, [c ^ 1 for c in cols]]
+                unk = ~tr & ~fa
+                rr = np.flatnonzero(~fa.any(axis=1) & (unk.sum(axis=1) == 1))
+                for limit in (None, 3):
+                    r2 = rr
+                    if limit is not None and len(r2) > limit:
+                        r2 = np.concatenate([r2[~synth[r2]], r2[synth[r2]]])[:limit]
+                    which = np.asarray(cols)[unk[r2].argmax(axis=1)] if len(r2) else []
+                    self.assertEqual(f.one_unknown(prem, limit=limit),
+                                     list(zip(r2.tolist(), [int(c) for c in which])))

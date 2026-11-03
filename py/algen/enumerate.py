@@ -286,11 +286,38 @@ class Form:
                     m[r, 2 * i + (0 if v else 1)] = True
         return m
 
+    # Столбцы матриц битами (uint64 по строкам): строки, где верны литералы, — AND
+    # слов, а не выборка столбцов из матрицы 30 тыс. × сотни на каждое условие.
+    def _bits(self, mat):
+        cache = self.__dict__.setdefault("_bitcache", {})
+        hit = cache.get(id(mat))
+        if hit is None or hit[0] is not mat:
+            n = mat.shape[0]
+            w = max(1, (n + 63) // 64)
+            pk = np.packbits(mat, axis=0, bitorder="little")
+            pad = np.zeros((w * 8 - pk.shape[0], mat.shape[1]), dtype=np.uint8)
+            P = np.ascontiguousarray(np.vstack([pk, pad]).T).view(np.uint64)
+            valid = np.packbits(np.arange(w * 64) < n, bitorder="little").view(np.uint64)
+            hit = cache[id(mat)] = (mat, P, valid)
+        return hit
+
+    def _and(self, mat, cols):
+        """Битовое множество строк mat, где верны все столбцы cols."""
+        _, P, valid = self._bits(mat)
+        R = valid.copy()
+        for c in cols:
+            R &= P[c]
+        return R
+
+    def _rows(self, mat, R):
+        return np.flatnonzero(np.unpackbits(R.view(np.uint8), bitorder="little")[:mat.shape[0]])
+
     def unknown_goal(self, prem, g):
         """Строка, где посылки верны, а значение цели не записано и не
         выводится: заполнив его, можно закрыть условие. Записанные группы
         предпочтительнее построенных произведений."""
-        rows = np.flatnonzero(self.m[:, list(prem) + self.fixed].all(axis=1) & ~self.m[:, g] & ~self.m[:, g ^ 1])
+        _, P, _ = self._bits(self.m)
+        rows = self._rows(self.m, self._and(self.m, list(prem) + self.fixed) & ~P[g] & ~P[g ^ 1])
         if not len(rows):
             return None
         real = rows[~self.synth_mask()[rows]]
@@ -304,7 +331,8 @@ class Form:
 
     def unknown_rows(self, prem, g):
         """Все строки, где посылки верны, а значение цели не записано и не выводится."""
-        return np.flatnonzero(self.m[:, list(prem) + self.fixed].all(axis=1) & ~self.m[:, g] & ~self.m[:, g ^ 1])
+        _, P, _ = self._bits(self.m)
+        return self._rows(self.m, self._and(self.m, list(prem) + self.fixed) & ~P[g] & ~P[g ^ 1])
 
     def _image(self, r, t):
         """Образ терма t в строке r: ("obj", ключ) или ("sub", ключ, номер)."""
@@ -321,13 +349,22 @@ class Form:
         неизвестен ровно один: заполнив его, можно закрыть запрет.
         Возвращает [(строка, столбец неизвестного литерала)]."""
         cols = list(cols) + self.fixed
-        tr, fa = self.m[:, cols], self.m[:, [c ^ 1 for c in cols]]
-        unk = ~tr & ~fa
-        rows = np.flatnonzero(~fa.any(axis=1) & (unk.sum(axis=1) == 1))
+        _, P, valid = self._bits(self.m)
+        ok, one, two, unks = valid.copy(), np.zeros_like(valid), np.zeros_like(valid), []
+        for c in cols:
+            ok &= ~P[c ^ 1]  # ни один литерал не ложен
+            u = ~P[c] & ~P[c ^ 1]
+            two |= one & u
+            one |= u
+            unks.append(u)
+        rows = self._rows(self.m, ok & one & ~two)  # неизвестен ровно один
         if limit is not None and len(rows) > limit:
             real = rows[~self.synth_mask()[rows]]
             rows = np.concatenate([real, rows[self.synth_mask()[rows]]])[:limit]
-        which = np.asarray(cols)[unk[rows].argmax(axis=1)] if len(rows) else []
+        which = np.zeros(len(rows), dtype=np.int64)
+        if len(rows):
+            for c, u in reversed(list(zip(cols, unks))):  # первый неизвестный — как argmax
+                which[np.isin(rows, self._rows(self.m, u))] = c
         return list(zip(rows.tolist(), [int(c) for c in which]))
 
     def value_name(self, r, atom):
@@ -377,7 +414,7 @@ class Form:
         """Строки матрицы (по умолчанию m), где посылки верны, а цель ложна."""
         m = self.m if m is None else m
         neg = g + 1 if g % 2 == 0 else g - 1
-        return np.flatnonzero(m[:, list(prem) + self.fixed + [neg]].all(axis=1))
+        return self._rows(m, self._and(m, list(prem) + self.fixed + [neg]))
 
     def lit(self, j):
         """Номер столбца → (атом, значение)."""
@@ -1136,8 +1173,8 @@ def generic_filter(form, mins):
     условие держится на устройстве t («Inn(G) циклична ⇒ тривиальна»). Иначе
     это повтор базы G (там оно и выдаётся) или общая теорема."""
     gen = getattr(form, "generic", None)
-    if gen is None:
-        return mins
+    if gen is None or os.environ.get("ALGEN_COMPRESS"):
+        return mins  # при сжатии экземпляры сворачивает compress.instances со ссылкой
     gm, gcol = gen  # матрица базы G и {свойство: номер атома}
     out, dropped = {}, 0
     for (prem, g), sup in mins.items():
@@ -1276,15 +1313,16 @@ def questions(form, report, limit=None):
     if not limit:
         return
     m = form.m
-    base = m[:, form.fixed].all(axis=1) if form.fixed else np.ones(m.shape[0], dtype=bool)
+    _, P, _ = form._bits(m)  # столбцы битами: AND слов вместо выборки столбцов
+    base = form._and(m, form.fixed)
     cache = {}
 
     def rows(S):
         if S not in cache:
             R = base.copy()
             for j in S:
-                R &= m[:, j]
-            cache[S] = np.flatnonzero(R)
+                R &= P[j]
+            cache[S] = form._rows(m, R)
         return cache[S]
 
     for r in report:
@@ -1301,8 +1339,8 @@ def questions(form, report, limit=None):
                 # linear(G ∗ G)»), чем о редкости групп с S
                 maybe = base.copy()
                 for j in S:
-                    maybe &= ~m[:, j ^ 1]
-                r["вопрос"] = {"S": " & ".join(names), "групп": n, "неизвестно": int(maybe.sum()) - n,
+                    maybe &= ~P[j ^ 1]
+                r["вопрос"] = {"S": " & ".join(names), "групп": n, "неизвестно": int(np.bitwise_count(maybe).sum()) - n,
                                "группы": [form.where(int(x)) for x in rows(S)[:3]],
                                "все группы": sorted(form.where(int(x)) for x in rows(S))}
                 break
