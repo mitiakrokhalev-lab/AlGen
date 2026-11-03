@@ -79,6 +79,9 @@ BASES = {
     "GNA": "∀ G : Grp; ∀ N : Sub(G); ∀ A : GSet(G)",
     "GNF": "∀ G : Grp; ∀ N : Sub(G); ∀ F : Mor(G, G)",
     "lmn": "∀ l, m, n : Num",
+    # 3.11, по сверке с архивом: копредставления (Z3-ix) и действия (ФА-24, полупрямое произведение)
+    "P": "∀ P : Pres",
+    "NQA": "∀ N : Grp; ∀ Q : Grp; ∀ A : Act(Q, N)",
 }
 NEW_N = ["GxA", "GxF", "GAB", "GAF", "GAa", "GHx", "GHA", "GHE", "GHn", "GHK2", "GFE", "Gnx", "GnA", "GnF",
          "GNx", "GNy", "GNA", "GNF", "lmn"]
@@ -87,8 +90,8 @@ NEW_N = ["GxA", "GxF", "GAB", "GAF", "GAa", "GHx", "GHA", "GHE", "GHn", "GHK2", 
 CONS = ["center", "commutator", "ab", "aut", "inn", "quotient", "prod", "freeprod", "wreath",
         "meet", "join", "normalizer", "centralizer", "normal-closure", "ker", "im", "torsion", "frattini", "prod-fam", "sum-fam",
         "stab", "act-ker", "gen", "centralizer-elt"]
-SYMMETRIC = {"prod", "freeprod"}            # A × B ≅ B × A: берём один порядок
-SYMMETRIC_SUB = {"meet", "join"}            # meet(G, H, K) = meet(G, K, H)
+SYMMETRIC = {"prod", "freeprod", "equalizer", "coequalizer", "pullback", "pushout"}  # A × B ≅ B × A, eq(F, E) = eq(E, F): берём один порядок
+SYMMETRIC_SUB = {"meet", "join", "union"}            # meet(G, H, K) = meet(G, K, H)
 
 # Термы глубины 2, известные по задачам (подтермы добавляются сами).
 DEPTH2 = {
@@ -146,7 +149,16 @@ def app_nodes(t):
 SIZE_EXTRA = ["ord", "index", "eltord", "rank", "prod-card", "core", "comm", "nc", "profinite", "sym",
               "ulm", "image-of", "preimage", "compose", "apply-mor", "conj-mor", "id-mor", "proj", "incl",
               "coset-act", "regular-act", "num-mul", "num-add", "num-sub", "num-pow", "num-gcd", "num-phi",
-              "num-fact", "num-sylow", "cyc", "sym-n", "alt", "dih", "bs"]
+              "num-fact", "num-sylow", "cyc", "sym-n", "alt", "dih", "bs",
+              # 3.11, сверка словаря с вселенной: все конструкции словаря на сортах раздела grp,
+              # кроме свидетелей и choose-* (Set, Top, Ring — других разделов, у баз таких переменных нет)
+              "pres-grp", "semidirect", "equalizer", "coequalizer", "pullback", "pushout", "base-pt",
+              "profinite-map", "torsion-set", "union", "as-sub", "as-elt"]
+# Не берутся, потому что всякое утверждение с ними равносильно утверждению класса без них
+# (критерий A: «каждое утверждение класса или равносильное ему»): whole-sub(X) как группа — это X,
+# trivial-sub(X) и terminal() — это 1; отношения с ними — свойства whole / trivial, которые
+# заведены у каждого терма. С ними вселенная G — 918 термов вместо 620, почти все вырожденные.
+EQUIVALENT_DROPPED = ["whole-sub", "trivial-sub", "terminal"]
 
 
 WITNESS_OPS = {"hnn-hull", "higman-hull", "free-cover", "free-cover-map", "cayley"}
@@ -156,7 +168,7 @@ def _has_op(t, ops):
     return isinstance(t, App) and (t.op in ops or any(_has_op(a, ops) for a in t.args))
 
 
-DEGENERATE_EQ = {"num-sub", "num-gcd", "num-pow", "bs"}
+DEGENERATE_EQ = {"num-sub", "num-gcd", "num-pow", "bs", "equalizer", "coequalizer"}
 
 
 def size_universe(vocab, base, smax):
@@ -181,8 +193,8 @@ def size_universe(vocab, base, smax):
             if op == "quotient":
                 pools = [small, small + [t for t in canon if t not in small]]
             for args in product(*pools):
-                if not fresh.intersection(args):
-                    continue  # такой набор аргументов уже пробовали в прошлом раунде
+                if args and not fresh.intersection(args):
+                    continue  # такой набор аргументов уже пробовали в прошлом раунде (константы — t not in sz)
                 if op in DEGENERATE_EQ and args[0] == args[1]:
                     continue  # x − x, НОД(x, x), x^x, BS(x, x): вырожденные или неестественные
                 if op in SYMMETRIC and str(args[0]) > str(args[1]):
