@@ -101,6 +101,37 @@ class EnumerateTest(unittest.TestCase):
         self.assertNotIn(((), 1), alive)
         self.assertIn(((0,), 4), alive)
 
+    def test_theory_const_unknown_in_rows(self):
+        # c выводится из теории, но во второй строке его значение не выписано (ALGEN_FAST):
+        # c — литерал-теорема, посылкой не перебирается, условие «c ⇒ ¬b» не выдаётся
+        # (без c его опровергает третья строка — а c в ней на деле верно). Литерал,
+        # ложный хоть в одной строке, решателю не отдаётся (строки — модели).
+        from types import SimpleNamespace
+        asked = []
+        old = E.decide
+
+        def fake(T, fixed, lit, s):
+            asked.append(lit)
+            return SimpleNamespace(kind="выводится" if lit == ("c", True) else "неизвестно")
+        res = {}
+        try:
+            E.decide = fake
+            for flag in (False, True):
+                E.THEORY_CONST = flag
+                form = FakeForm([(True, True, True), (False, True, None), (True, False, True)])
+                form.sc = SimpleNamespace(T=None, s=None)
+                form.lit = lambda j: ("abc"[j // 2], j % 2 == 0)
+                alive, _ = enumerate_form(form, 2)
+                res[flag] = (form.const, alive)
+        finally:
+            E.decide, E.THEORY_CONST = old, True
+        self.assertEqual(res[False][0], [])
+        self.assertEqual(res[True][0], [4])
+        self.assertNotIn(("c", False), asked)
+        self.assertNotIn(("a", True), asked)  # a ложно во второй строке
+        self.assertTrue(all(4 not in prem for prem, _ in res[True][1]))
+        self.assertTrue(any(4 in prem for prem, _ in res[False][1]))
+
     def test_cover_prefers_shared_fact(self):
         # Условия 0 и 1 держатся на x или y, условие 2 — только на y:
         # хватает одного факта y.

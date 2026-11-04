@@ -1128,7 +1128,8 @@ def _one(job):
         signal.signal(signal.SIGALRM, _alarm)
         signal.alarm(int(limit))
     prof = None
-    if os.environ.get("ALGEN_PROFILE"):
+    want_prof = os.environ.get("ALGEN_PROFILE", "")
+    if want_prof == "1" or sid in want_prof.split(","):
         # профиль схемы: время по функциям — в <схема>.prof.txt рядом с выдачей
         import cProfile
         prof = cProfile.Profile()
