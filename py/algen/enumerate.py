@@ -1280,7 +1280,27 @@ def generic_filter(form, mins):
     if gen is None or os.environ.get("ALGEN_COMPRESS"):
         return mins  # при сжатии экземпляры сворачивает compress.instances со ссылкой
     gm, gcol = gen  # матрица базы G и {свойство: номер атома}
+    # Класс прогона (ALGEN_CLASS, «∀ G конечная» и т. п.): общая версия R0
+    # спрашивается в базе G только для групп класса. Условие о t снимается,
+    # только если теория выводит, что t в классе; иначе R(t) держится на R0
+    # для групп вне класса, которое нигде не спрашивается (дыра 4.11).
+    cls = os.environ.get("ALGEN_CLASS", "")
+    in_class = {}
+
+    def class_ok(t):
+        if not cls:
+            return True
+        if t not in in_class:
+            T = form.sc.T
+            s = T.solver()
+            try:
+                in_class[t] = decide(T, list(getattr(form, "fixed_lits", [])), (("p", cls, t), True), s).kind == "выводится"
+            finally:
+                s.delete()
+        return in_class[t]
+
     out, dropped = {}, 0
+    form.generic_kept_class = 0
     for (prem, g), sup in mins.items():
         lits = [l for j in prem for l in form.lits(j)] + [form.lit(g)]
         ts = {a[2] for a, _ in lits}
@@ -1294,6 +1314,9 @@ def generic_filter(form, mins):
         neg = 2 * gcol[a[1]] + (1 if v else 0)
         if gm[:, cols + [neg]].all(axis=1).any():
             out[prem, g] = sup  # общая версия опровергается — условие о терме
+        elif not class_ok(t):
+            out[prem, g] = sup  # t не доказуемо в классе: R0 вне класса не спрашивается
+            form.generic_kept_class += 1
         else:
             dropped += 1
     form.n_generic = dropped
