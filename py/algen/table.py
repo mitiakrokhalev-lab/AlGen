@@ -1042,9 +1042,12 @@ def view(base_form, terms):
     if CLASS:
         X = next((t for t in v.own if isinstance(t, Var) and g.terms[t].sort == "Grp.obj"), None)
         a = ("p", CLASS, X)
-        if X is not None and a in v.index:
-            v.fixed_lits = list(v.fixed_lits) + [(a, True)]
-            v.fixed = v.fixed + [2 * v.index[a]]
+        if X is None or a not in v.index:
+            # класс не применить (нет групповой переменной или атома класса): молча
+            # перебирать без класса, а писать «класс …» нельзя (проверщик 4.11, №14)
+            raise ValueError(f"класс {CLASS} не применим к базе: {'нет переменной Grp.obj' if X is None else 'нет атома ' + str(a)}")
+        v.fixed_lits = list(v.fixed_lits) + [(a, True)]
+        v.fixed = v.fixed + [2 * v.index[a]]
     cols = np.array([2 * b.index[a] + d for a in v.atoms for d in (0, 1)], dtype=np.int64)
     v.m, v.s, v.e = b.m[:, cols], b.s[:, cols], b.e[:, cols]
     v._base, v._base_cols = b, cols

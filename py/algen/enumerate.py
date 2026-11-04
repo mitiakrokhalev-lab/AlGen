@@ -1419,10 +1419,9 @@ def run(max_prem, lib=None, vocab=None, form=None):
             degen_all += [(("p", "trivial", t), True), (("p", "whole", t), True)]
     degen_all = [d for d in degen_all if form.sc.T.lit(d[0]) is not None] if REDUCE else []
     if getattr(form, "pairs", None):
-        try:
-            add_pairs(form, form.pairs)
-        except Exception as e:  # парные атомы — добавка: при сбое перебор идёт без них
-            print(f"парные атомы не добавлены: {e!r}", file=sys.stderr)
+        # парные атомы — поправка 2 класса: при сбое схема падает со статусом «ошибка»,
+        # а не перебирается молча без поправки (проверщик 4.11, №13)
+        add_pairs(form, form.pairs)
     # Контрпример с помеченным значением («трудно», «короткий довод») закрывает
     # условие: нетривиален сам контрпример, он записан в библиотеке и идёт в
     # архив один раз, а не с каждым условием, которое опровергает (решение Димы
