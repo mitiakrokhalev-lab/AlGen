@@ -61,6 +61,8 @@ FAST_DERIVE = bool(os.environ.get("ALGEN_FAST"))
 # Отсечение наборов посылок, не являющихся свободными (enumerate_form): выдача та же,
 # меньше только счётчик «не опровергнуто библиотекой». ALGEN_PRUNE=0 — без отсечения.
 PRUNE_FREE = os.environ.get("ALGEN_PRUNE", "1") != "0"
+# Лист перебора векторами по целям (enumerate_form.leaf_vec); ALGEN_VEC=0 — прежний цикл.
+VEC = os.environ.get("ALGEN_VEC", "1") != "0"
 REFRESH = 200  # выводов строк до пересоздания решателя
 REDUCE = True  # сводить «неизвестно» к вопросу «посылки ⇒ переменная вырождена?»
 # Посылки только из свойств (без отношений ⩽, ≅, ↪ между термами), начиная с этой
@@ -1071,6 +1073,76 @@ def enumerate_form(form, max_prem, goals=None, m=None):
         mask[:n] = True
         return np.packbits(mask, bitorder="little").view(np.uint64)
 
+    # Лист перебора векторами по всем целям сразу (VEC): те же проверки, что в цикле
+    # по целям ниже, и та же минимальность — «lower» хранит для набора q маску целей,
+    # прошедших проверки листа, alive_direct — маску по всем строкам. Порядок целей
+    # (по возрастанию) и счётчик — те же.
+    n_atoms = n_lit // 2
+    goal_static = np.zeros(n_lit, dtype=bool)
+    goal_static[list(goal_cols)] = True
+    req_goals = {g: form.req[g // 2] for g in range(n_lit) if form.req.get(g // 2)}
+    lower_vec, direct_vec = {}, {}
+
+    def req_ok(have):
+        ok = np.ones(n_lit, dtype=bool)
+        for g, rq in req_goals.items():
+            if not rq <= have:
+                ok[g] = False
+        return ok
+
+    def direct_mask(q):
+        """alive_direct(q, g) для всех g сразу."""
+        hit = direct_vec.get(q)
+        if hit is not None:
+            return hit
+        have = set(q) | set(form.fixed)
+        if not all(form.req.get(j // 2, set()) <= have for j in q):
+            d = np.zeros(n_lit, dtype=bool)
+        else:
+            nonlocal Pall
+            if Pall is None:
+                Pall = pack(every)
+            R = Pall[q[0]].copy()
+            for j in q[1:]:
+                R &= Pall[j]
+            if not R.any():
+                d = np.zeros(n_lit, dtype=bool)
+            else:
+                d = ~(Pall & R).any(axis=1)[neg_idx] & req_ok(have)
+        direct_vec[q] = d
+        return d
+
+    def leaf_vec(prem, atoms, have, gc, negs, buf, depth):
+        nonlocal count
+        m = (goal_static if gc is goal_cols else np.isin(np.arange(n_lit), gc)) & ~negs
+        for a in atoms:
+            m[2 * a] = m[2 * a + 1] = False
+        if req_goals:
+            m &= req_ok(have)
+        if pairs:
+            for g in np.flatnonzero(m):
+                if clash.get(int(g) // 2, set()) & atoms:
+                    m[g] = False
+        n = int(m.sum())
+        if not n:
+            if depth < max_prem:
+                lower_vec[tuple(prem)] = m
+            return
+        count += n
+        tp = tuple(prem)
+        if depth < max_prem:
+            lower_vec[tp] = m
+        sub = np.zeros(n_lit, dtype=bool)
+        for q in proper_subsets(prem):
+            if need:
+                sub |= direct_mask(q)
+            else:
+                x = lower_vec.get(q)
+                if x is not None:
+                    sub |= x
+        for g in np.flatnonzero(m & ~sub).tolist():
+            alive[(tp, g)] = int(np.bitwise_count(buf[g]).sum())
+
     def go(prem, R, start, depth, pm, P, rows_map):
         nonlocal count
         if need:
@@ -1098,6 +1170,9 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             np.bitwise_and(P, R, out=buf)
             hits = buf.any(axis=1)  # литерал верен хотя бы в одной строке посылок
             negs = hits[neg_idx]
+            if vec:
+                leaf_vec(prem, atoms, have, gc, negs, buf, depth)
+                return
             for g in gc:
                 if g // 2 in atoms or not form.req.get(g // 2, set()) <= have:
                     continue
@@ -1144,6 +1219,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             go(prem + [j], P[j] & R, j + 1, depth, pm | (int(lmask[j]) if need else 0), P, rows_map)
 
     reqcols = set().union(*form.req.values()) if form.req else set()
+    vec = VEC and goals is None
     prune = PRUNE_FREE and not form.fixed  # alive_direct смотрит все строки, а не строки записи
     start = np.flatnonzero(m[:, form.fixed].all(axis=1)) if form.fixed else np.arange(nr)
     P0 = pack(start)

@@ -98,6 +98,24 @@ if __name__ == "__main__":
     unittest.main()
 
 
+class VecTest(unittest.TestCase):
+    def test_vector_leaf_keeps_output_and_order(self):
+        """Лист векторами по целям: те же условия, тот же порядок, тот же счётчик."""
+        import algen.enumerate as E
+        for case in range(80):
+            rng = np.random.default_rng(100 + case)
+            n, rows = int(rng.integers(4, 9)), int(rng.integers(3, 60))
+            kw = dict(req=case % 3 == 1, need=case % 4 == 2)
+            res = []
+            for vec in (False, True):
+                E.VEC = vec
+                form = RandomForm(np.random.default_rng(100 + case), n, rows, **kw)
+                alive, empty = enumerate_form(form, 3)
+                res.append((list(alive.items()), empty, form.n_alive))
+            E.VEC = True
+            self.assertEqual(res[0], res[1], f"случай {case}")
+
+
 class BitsTest(unittest.TestCase):
     """Строки по битовым столбцам совпадают с прежней выборкой столбцов матрицы."""
 
