@@ -355,3 +355,42 @@ class TestRegress(unittest.TestCase):
         rows[0]["вердикт"] = "выводится" if rows[0]["вердикт"] != "выводится" else "неизвестно"
         self.assertTrue(C.regress(before, rows))
         self.assertTrue(C.regress([C.digest(r) for r in before], rows))
+
+
+class TestGenericFilterClass(unittest.TestCase):
+    """enumerate.generic_filter при ALGEN_CLASS: условие о терме снимается,
+    только если теория выводит, что терм в классе (дыра 4.11)."""
+
+    def setUp(self):
+        import os
+        self.env = {k: os.environ.pop(k, None) for k in ("ALGEN_CLASS", "ALGEN_COMPRESS")}
+
+    def tearDown(self):
+        import os
+        for k, v in self.env.items():
+            os.environ.pop(k, None)
+            if v is not None:
+                os.environ[k] = v
+
+    def run_filter(self, clauses, cls):
+        import os
+        from algen import enumerate as E
+        if cls:
+            os.environ["ALGEN_CLASS"] = cls
+        f = GenForm([{"a": True, "b": True}], clauses=clauses)  # R0 «a ⇒ b» не опровергнут
+        ia, ib = f.index[("p", "a", ZG)], f.index[("p", "b", ZG)]
+        mins = {((2 * ia,), 2 * ib): 1}
+        return E.generic_filter(f, mins), f
+
+    def test_without_class_unchanged(self):
+        out, f = self.run_filter([], "")
+        self.assertEqual(out, {})  # снято, как и раньше
+
+    def test_class_term_not_in_class_kept(self):
+        out, f = self.run_filter([], "fin")
+        self.assertEqual(len(out), 1)
+        self.assertEqual(f.generic_kept_class, 1)
+
+    def test_class_term_in_class_dropped(self):
+        out, f = self.run_filter([[(("p", "fin", ZG), True)]], "fin")
+        self.assertEqual(out, {})
