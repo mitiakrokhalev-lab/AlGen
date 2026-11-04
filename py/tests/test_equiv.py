@@ -42,8 +42,12 @@ def make(rnd):
     if rnd.random() < 0.3:  # равносильность только при посылке записи f: f ∧ r ⇒ x, f ∧ x ⇒ r
         r, x, f_ = rnd.sample(range(1, nv + 1), 3)
         cls += [[-f_, -r, x], [-f_, -x, r]]
+    for _ in range(rnd.choice((0, 0, 1, 2))):  # ложная во всех моделях, распространение не видит
+        y, a, b = rnd.sample(range(1, nv + 1), 3)
+        cls += [[-y, a, b], [-y, a, -b], [-y, -a, b], [-y, -a, -b]]
     natoms = rnd.randint(4, 14)
-    var = [rnd.choice([None, False] + list(range(1, nv + 3))) if rnd.random() < 0.9 else rnd.randint(1, nv)
+    clean = rnd.random() < 0.5  # только переменные клауз: путь дробления доли моделями
+    var = [rnd.randint(1, nv) if clean or rnd.random() >= 0.9 else rnd.choice([None, False] + list(range(1, nv + 3)))
            for _ in range(natoms)]  # nv+1, nv+2 — свободные переменные (вне клауз)
     atoms = [("p", f"q{i}", None) for i in range(natoms)]
     T = FakeT({a: x for a, x in zip(atoms, var)}, cls)
@@ -73,7 +77,7 @@ class EquivTest(unittest.TestCase):
     def test_same_classes_as_pairwise_logic_decide(self):
         rnd = random.Random(3)
         merged = 0
-        for _ in range(600):
+        for _ in range(1500):
             form = make(rnd)
             old_n, old_u = table.EQUIV_MODELS, table.UNIT_EQUIV
             table.EQUIV_MODELS, table.UNIT_EQUIV = 0, False

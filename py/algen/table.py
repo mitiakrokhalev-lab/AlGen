@@ -821,6 +821,7 @@ def equiv_reps(f, decide=None):
     fixed = [f.lit(j) for j in f.fixed]
     nclause = max((abs(l) for c in T.clauses for l in c), default=0)
     fl_list = list(dict.fromkeys(l for a, v in fixed if type(l := T.lit(a, v)) is int))
+    own_decide = decide is None
     if decide is None:
         def decide(T_, prem, goal, s_):
             free = any(type(l) is int and abs(l) > nclause for l in (T_.lit(*x) for x in prem + [goal]))
@@ -882,6 +883,67 @@ def equiv_reps(f, decide=None):
         ij = implied(lj)
         return ij is not None and lr in ij
 
+    # Дробление доли моделями решателя (как разбиение по моделям выше, но модель
+    # ищется для пары, которая ещё не разошлась): r = первый литерал доли; для
+    # каждого следующего j — модель, где r и j различны. Нашлась — доля делится
+    # по ней целиком (равносильные в любой модели равны), порядок внутри частей
+    # прежний. Нет модели ни для r ∧ ¬j, ни для ¬r ∧ j (при совместных r и j) —
+    # оба вопроса decide ответили бы «выводится». Итог — те же классы, что у
+    # перебора пар, но вызовов решателя порядка числа классов, а не пар.
+    refine_ok = shortcut and own_decide
+    bank = fast.bank(T, s) if refine_ok else None
+
+    def model_bits(lits):
+        """Номер модели банка, где верны lits (решатель — если в банке нет), или None."""
+        ok, _ = bank.sat(lits)
+        if not ok:
+            return None
+        w = bank.witness(lits)
+        return (w & -w).bit_length() - 1
+
+    def value(l, k):
+        v = abs(l)
+        bit = (bank.pos.get(v, 0) >> k) & 1
+        return bool(bit) == (l > 0)
+
+    def refine(part):
+        out, stack = [], [part]
+        while stack:
+            p = stack.pop()
+            lr = T.lit(*f.lit(p[0]))
+            if len(p) == 1 or not bank.sat(fl_list + [lr])[0]:
+                out.append([p[0]])  # одиночка или r противоречит посылкам записи
+                if len(p) > 1:
+                    stack.append(p[1:])
+                continue
+            same, split, bad = [p[0]], None, set()
+            for j in p[1:]:
+                lj = T.lit(*f.lit(j))
+                if not bank.sat(fl_list + [lj])[0]:
+                    out.append([j])  # j противоречит посылкам: ни с кем не равносилен
+                    bad.add(j)
+                    continue
+                if by_unit(p[0], j):
+                    same.append(j)
+                    continue
+                k = model_bits(fl_list + [lr, -lj])
+                if k is None:
+                    k = model_bits(fl_list + [-lr, lj])
+                if k is None:
+                    same.append(j)
+                    continue
+                split = k
+                break
+            if split is None:
+                out.append(same)
+                continue
+            halves = ([], [])
+            for j in p:
+                if j not in bad:
+                    halves[value(T.lit(*f.lit(j)), split)].append(j)
+            stack += [h for h in halves if h]
+        return out
+
     rep = list(range(n))
     for js in buckets.values():
         if len(js) < 2:
@@ -894,6 +956,11 @@ def equiv_reps(f, decide=None):
             unit.clear()
             want.clear()
             want.update(l for j in part if type(l := T.lit(*f.lit(j))) is int)
+            if refine_ok and all(type(l := T.lit(*f.lit(j))) is int and abs(l) <= nclause for j in part):
+                for c in refine(part):
+                    for j in c[1:]:
+                        rep[j] = c[0]
+                continue
             classes = []  # внутри доли: несколько классов с одинаковыми столбцами
             for j in part:
                 for c in classes:
