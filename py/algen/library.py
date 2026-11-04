@@ -920,23 +920,66 @@ def _is_prime(n):
     return True
 
 
+def _rho(n):
+    """Делитель составного n (Поллард — Брент)."""
+    import math
+    import random
+    if n % 2 == 0:
+        return 2
+    rnd = random.Random(n)
+    while True:
+        y, c, m = rnd.randrange(1, n), rnd.randrange(1, n), 128
+        g, r, q = 1, 1, 1
+        while g == 1:
+            x = y
+            for _ in range(r):
+                y = (y * y + c) % n
+            k = 0
+            while k < r and g == 1:
+                ys = y
+                for _ in range(min(m, r - k)):
+                    y = (y * y + c) % n
+                    q = q * abs(x - y) % n
+                g = math.gcd(q, n)
+                k += m
+            r *= 2
+        if g == n:
+            g = 1
+            while g == 1:
+                ys = (ys * ys + c) % n
+                g = math.gcd(abs(x - ys), n)
+        if g != n:
+            return g
+
+
 @functools.lru_cache(maxsize=None)
 def _phi(n):
-    """φ(n) разложением на простые (прежде — перебор всех i ⩽ n: у порядков вроде
-    |GL₃(F₇)| это 3/4 времени постройки таблицы G). Делители — до 10⁶; остаток
-    без малых делителей — простой, если < 10¹² или по Миллеру — Рабину (< 3.3·10²⁴).
-    Иначе None — значение неизвестно (прежде перебор до √n зависал на n вроде 1056⁶⁰)."""
-    r, m, p = n, n, 2
-    while p * p <= m and p <= 10 ** 6:
+    """φ(n) разложением на простые: малые делители перебором, остаток — Миллер —
+    Рабин (детерминированный при n < 3.3·10²⁴) и Поллард — Брент. Для n ⩾ 3·10²⁴ —
+    None (значение неизвестно): прежде перебор до √n зависал на огромных n из
+    num-pow. Для прежних n ответ тот же (сверено с перебором при n < 5000 и на
+    случайных n < 10¹²)."""
+    if n >= 3 * 10 ** 24:
+        return None
+    primes, m = set(), n
+    for p in range(2, 1000):
         if m % p == 0:
+            primes.add(p)
             while m % p == 0:
                 m //= p
-            r -= r // p
-        p += 1
-    if m > 1:
-        if p * p <= m and not (m < 10 ** 12 or (m < 33 * 10 ** 23 and _is_prime(m))):
-            return None
-        r -= r // m
+    todo = [m] if m > 1 else []
+    while todo:
+        x = todo.pop()
+        if x == 1:
+            continue
+        if _is_prime(x):
+            primes.add(x)
+            continue
+        d = _rho(x)
+        todo += [d, x // d]
+    r = n
+    for p in primes:
+        r -= r // p
     return r
 
 
