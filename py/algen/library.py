@@ -895,6 +895,9 @@ CORE = ["2:1", "6:1", "60:5", "Z", "Q", "QmodZ", "Pruf2", "F2", "Foo", "UT3Z", "
         "SumC2", "Tarski", "SL2Rcov"]
 
 
+FACT_MAX = 2000  # n! считается при n ⩽ FACT_MAX, иначе значение неизвестно (ослабление, в реестре)
+
+
 def _is_prime(n):
     """Миллер — Рабин, детерминированный для n < 3.3·10²⁴ (основания — первые 13 простых)."""
     if n < 2:
@@ -1213,7 +1216,7 @@ class Search:
         if t.op == "num-sylow" and args[0] and args[0][0] == "num" and args[0][1] != INF:
             p, key = args[0][1], self._obj(args[1])
             o = key and lib.obj[key]
-            if not o or not o.get("конечная") or not o.get("подгруппы") or p < 2 or any(p % d == 0 for d in range(2, p)):
+            if not o or not o.get("конечная") or not o.get("подгруппы") or p >= 3 * 10 ** 24 or not _is_prime(p):
                 return None
             n = int(key.split(":")[0])
             pp = 1
@@ -1231,6 +1234,10 @@ class Search:
             n = args[0][1]
             if n == INF:
                 return ("num", INF)
+            if n > FACT_MAX:
+                # |G|! для |G| ~ 10¹⁰ не вычислить (строка таблицы G висела часами:
+                # num-fact(ord(G)) во вселенной G) — значение неизвестно
+                return None
             from math import factorial
             return ("num", factorial(n))
         if t.op in ("ord", "index", "num-mul", "prod-card", "bs"):
