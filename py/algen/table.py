@@ -138,6 +138,9 @@ def app_nodes(t):
         # как в мере по архиву: X / c(X, …) — подгруппа, построенная от самой X, не считается
         if t.op == "quotient" and len(args) == 2 and isinstance(args[1], App) and args[0] in args[1].args:
             args = (args[0],) + tuple(args[1].args)
+        elif (t.op == "quotient" and len(args) == 2 and isinstance(args[0], App) and isinstance(args[1], App)
+              and args[0].args and tuple(args[0].args) == tuple(args[1].args)):
+            args = tuple(args[0].args)  # поправка 3: Aut G / Inn G — одна конструкция
         for a in args:
             out |= app_nodes(a)
     return out
@@ -191,7 +194,9 @@ def _has_op(t, ops):
     return isinstance(t, App) and (t.op in ops or any(_has_op(a, ops) for a in t.args))
 
 
-DEGENERATE_EQ = {"num-sub", "num-gcd", "num-pow", "bs", "equalizer", "coequalizer"}
+# x − x = 0, НОД(x, x) = x, уравнитель F с F — весь домен: вырождены. x^x и BS(n, n)
+# не вырождены (BS(n, n) — отдельная группа), в реестре их нет — в класс (проверщик 4.11).
+DEGENERATE_EQ = {"num-sub", "num-gcd", "equalizer", "coequalizer"}
 
 
 def size_universe(vocab, base, smax):
@@ -219,13 +224,17 @@ def size_universe(vocab, base, smax):
                 if args and not fresh.intersection(args):
                     continue  # такой набор аргументов уже пробовали в прошлом раунде (константы — t not in sz)
                 if op in DEGENERATE_EQ and args[0] == args[1]:
-                    continue  # x − x, НОД(x, x), x^x, BS(x, x): вырожденные или неестественные
+                    continue  # x − x, НОД(x, x), уравнитель F с F: вырожденные
                 if op in SYMMETRIC and str(args[0]) > str(args[1]):
                     continue
                 if op in SYMMETRIC_SUB and not str(args[1]) < str(args[2]):
                     continue
                 if op == "quotient" and isinstance(args[1], App) and args[0] in args[1].args:
                     n = len(nodes[args[0]] | set().union(*(app_nodes(a) for a in args[1].args))) + 1
+                elif (op == "quotient" and isinstance(args[0], App) and isinstance(args[1], App)
+                      and args[0].args and tuple(args[0].args) == tuple(args[1].args)):
+                    # поправка 3: Aut G / Inn G — одна конструкция (как X / c(X))
+                    n = len(set().union(*(app_nodes(a) for a in args[0].args))) + 1
                 else:
                     n = len(frozenset().union(*(nodes[a] for a in args))) + 1
                 if n > smax:

@@ -895,18 +895,47 @@ CORE = ["2:1", "6:1", "60:5", "Z", "Q", "QmodZ", "Pruf2", "F2", "Foo", "UT3Z", "
         "SumC2", "Tarski", "SL2Rcov"]
 
 
+def _is_prime(n):
+    """Миллер — Рабин, детерминированный для n < 3.3·10²⁴ (основания — первые 13 простых)."""
+    if n < 2:
+        return False
+    small = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41)
+    for p in small:
+        if n % p == 0:
+            return n == p
+    d, r = n - 1, 0
+    while d % 2 == 0:
+        d //= 2
+        r += 1
+    for a in small:
+        x = pow(a, d, n)
+        if x in (1, n - 1):
+            continue
+        for _ in range(r - 1):
+            x = x * x % n
+            if x == n - 1:
+                break
+        else:
+            return False
+    return True
+
+
 @functools.lru_cache(maxsize=None)
 def _phi(n):
     """φ(n) разложением на простые (прежде — перебор всех i ⩽ n: у порядков вроде
-    |GL₃(F₇)| это 3/4 времени постройки таблицы G)."""
+    |GL₃(F₇)| это 3/4 времени постройки таблицы G). Делители — до 10⁶; остаток
+    без малых делителей — простой, если < 10¹² или по Миллеру — Рабину (< 3.3·10²⁴).
+    Иначе None — значение неизвестно (прежде перебор до √n зависал на n вроде 1056⁶⁰)."""
     r, m, p = n, n, 2
-    while p * p <= m:
+    while p * p <= m and p <= 10 ** 6:
         if m % p == 0:
             while m % p == 0:
                 m //= p
             r -= r // p
         p += 1
     if m > 1:
+        if p * p <= m and not (m < 10 ** 12 or (m < 33 * 10 ** 23 and _is_prime(m))):
+            return None
         r -= r // m
     return r
 
@@ -1136,8 +1165,8 @@ class Search:
                  "num-gcd": gcd(a, b)}[t.op]
             return ("num", v) if v is not None and v >= 1 else None
         if t.op == "num-phi" and args[0] and args[0][0] == "num" and args[0][1] != INF:
-            n = args[0][1]
-            return ("num", _phi(n))
+            v = _phi(args[0][1])
+            return ("num", v) if v is not None else None
         if t.op == "num-sylow" and args[0] and args[0][0] == "num" and args[0][1] != INF:
             p, key = args[0][1], self._obj(args[1])
             o = key and lib.obj[key]
@@ -1163,6 +1192,27 @@ class Search:
             return ("num", factorial(n))
         if t.op in ("ord", "index", "num-mul", "prod-card", "bs"):
             return self._num_image(t, args, env)
+        if t.op == "eltord" and len(args) == 2 and args[1] and args[1][0] == "elt":
+            # порядок элемента — из записи класса (0 — бесконечный)
+            o = lib.obj[args[1][1]]["элементы"][args[1][2]]["ord"]
+            return ("num", INF if o == 0 else o)
+        if t.op == "compose" and len(args) == 2 and all(a and a[0] == "mor" for a in args):
+            f, e = args  # compose(F, E) = E ∘ F: dom F → cod E
+            if f[1] == "id":
+                return e
+            if e[1] == "id":
+                return f
+            if "zero" in (f[1], e[1]):
+                return ("mor", "zero", f[2], e[3], None)
+            return None
+        if t.op == "apply-mor" and len(args) == 2 and args[0] and args[0][0] == "mor" and args[1] and args[1][0] == "elt":
+            if args[0][1] == "id":
+                return args[1]
+            if args[0][1] == "zero":
+                cls = lib.obj[args[0][3]].get("элементы") or []
+                one = next((i for i, c in enumerate(cls) if c["ord"] == 1), None)
+                return ("elt", args[0][3], one) if one is not None else None
+            return None
         if t.op in ("colim", "lim") and args[0] and args[0][0] == "diag":
             k = lib.diag[args[0][1]].get("прямой предел" if t.op == "colim" else "обратный предел")
             return ("obj", k) if k else None
