@@ -20,9 +20,9 @@ jobs:
       fail-fast: false
       matrix:
         base: [G, GE, GN]
-        code: [new]  # старый код: отпечатки из запуска 41726000943 (canon-1)
+        code: [new, old]
     runs-on: ubuntu-latest
-    timeout-minutes: 340
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
         with:
