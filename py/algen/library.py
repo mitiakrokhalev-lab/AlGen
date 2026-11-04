@@ -15,6 +15,7 @@ SAT-решатель ищет противоречие с базой прави�
     python3 -m algen.library --конечные 200        # сверка движка на конечных
 """
 
+import functools
 import argparse
 import json
 import random
@@ -869,6 +870,22 @@ CORE = ["2:1", "6:1", "60:5", "Z", "Q", "QmodZ", "Pruf2", "F2", "Foo", "UT3Z", "
         "SumC2", "Tarski", "SL2Rcov"]
 
 
+@functools.lru_cache(maxsize=None)
+def _phi(n):
+    """φ(n) разложением на простые (прежде — перебор всех i ⩽ n: у порядков вроде
+    |GL₃(F₇)| это 3/4 времени постройки таблицы G)."""
+    r, m, p = n, n, 2
+    while p * p <= m:
+        if m % p == 0:
+            while m % p == 0:
+                m //= p
+            r -= r // p
+        p += 1
+    if m > 1:
+        r -= r // m
+    return r
+
+
 class Search:
     """Контрпример к «посылки ⇒ цель» на графе условия.
 
@@ -1095,7 +1112,7 @@ class Search:
             return ("num", v) if v is not None and v >= 1 else None
         if t.op == "num-phi" and args[0] and args[0][0] == "num" and args[0][1] != INF:
             n = args[0][1]
-            return ("num", sum(1 for i in range(1, n + 1) if gcd(i, n) == 1))
+            return ("num", _phi(n))
         if t.op == "num-sylow" and args[0] and args[0][0] == "num" and args[0][1] != INF:
             p, key = args[0][1], self._obj(args[1])
             o = key and lib.obj[key]
