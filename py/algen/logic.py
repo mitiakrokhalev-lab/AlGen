@@ -81,6 +81,66 @@ def _pair_ok(t, env):
             return False
     return True
 
+class ClauseStore:
+    """Клаузы теории в плоском массиве int32 с границами (int64) вместо списка
+    списков: у баз с тремя переменными десятки миллионов клауз, а список из трёх
+    больших int в Python — ≈ 160 байт (каркасы GE и GN падали по памяти на 16 ГБ).
+    Те же клаузы в том же порядке: перебор отдаёт списки, как прежде."""
+    __slots__ = ("data", "offs")
+
+    def __init__(self, clauses=()):
+        from array import array
+        self.data, self.offs = array("i"), array("q", [0])
+        for c in clauses:
+            self.append(c)
+
+    def append(self, lits):
+        self.data.extend(lits)
+        self.offs.append(len(self.data))
+
+    def __len__(self):
+        return len(self.offs) - 1
+
+    def __iter__(self):
+        d, o = self.data, self.offs
+        for i in range(len(o) - 1):
+            yield d[o[i]:o[i + 1]].tolist()
+
+    def __getitem__(self, i):
+        if isinstance(i, slice):
+            return [self[j] for j in range(*i.indices(len(self)))]
+        if i < 0:
+            i += len(self)
+        if not 0 <= i < len(self):
+            raise IndexError(i)
+        return self.data[self.offs[i]:self.offs[i + 1]].tolist()
+
+
+class OriginStore:
+    """id правила для каждой клаузы: номер в списке имён (массив) вместо ссылки."""
+    __slots__ = ("names", "index", "ids")
+
+    def __init__(self):
+        from array import array
+        self.names, self.index, self.ids = [], {}, array("I")
+
+    def append(self, name):
+        k = self.index.get(name)
+        if k is None:
+            k = self.index[name] = len(self.names)
+            self.names.append(name)
+        self.ids.append(k)
+
+    def __len__(self):
+        return len(self.ids)
+
+    def __getitem__(self, i):
+        return self.names[self.ids[i]]
+
+    def __iter__(self):
+        return (self.names[k] for k in self.ids)
+
+
 class Vocab:
     """Словарь раздела: сорта, свойства, конструкции, вырождения, правила.
 
@@ -380,8 +440,8 @@ class Theory:
         self.var = {}
         self._lc = {}  # кэш lit: атом → номер переменной (0 — тождественно верный)
         self.atoms = []
-        self.clauses = []
-        self.origin = []  # id правила для каждой клаузы
+        self.clauses = ClauseStore()
+        self.origin = OriginStore()  # id правила для каждой клаузы
         for a in extra:  # атомы перебора (отношения), которым нужны аксиомы равенства
             self.lit(a)
         self._build()
