@@ -28,6 +28,42 @@ from math import gcd
 
 from .logic import DATA, App, Graph, Theory, Var, Vocab
 
+
+def backbone(s, assume, lits):
+    """Для каждого литерала из lits: True, если он следует из assume, False, если
+    следует его отрицание, иначе None. Ответ тот же, что у двух вызовов на литерал
+    (solve(assume + [-l]), затем solve(assume + [l])), но вызов делается только
+    для значения, которого ещё не было ни в одной найденной модели: литерал,
+    принимавший в моделях оба значения, не следует ни так, ни так."""
+    if not s.solve(assumptions=assume):
+        return [True] * len(lits)  # как у двух вызовов: из противоречия следует всё
+    seen = [0] * len(lits)  # биты: 1 — был верен в модели, 2 — был ложен
+
+    def see(m):
+        n = len(m)
+        for i, l in enumerate(lits):
+            if type(l) is int:
+                v = abs(l)
+                seen[i] |= 3 if v > n else 1 if (m[v - 1] > 0) == (l > 0) else 2
+
+    see(s.get_model())
+    out = [None] * len(lits)
+    for i, l in enumerate(lits):
+        if type(l) is not int:  # не номер переменной: как раньше, двумя вызовами
+            if not s.solve(assumptions=assume + [-l]):
+                out[i] = True
+            elif not s.solve(assumptions=assume + [l]):
+                out[i] = False
+            continue
+        if seen[i] == 3:
+            continue
+        v = seen[i] == 1
+        if not s.solve(assumptions=assume + [-l if v else l]):
+            out[i] = v
+        else:
+            see(s.get_model())
+    return out
+
 # Числа (сорт Num) в перебора: малые и ∞; BS(m, n) — группы библиотеки
 INF = "∞"
 NUMS = (1, 2, 3, 4, 5, 6, 7, INF)
@@ -486,12 +522,9 @@ class Library:
             if not s.solve(assumptions=assume):
                 raise ValueError(f"{key}: значения множителей противоречат базе")
             props = {}
-            for p in GROUP_PROPS:
-                l = T.lit(("p", p, P))
-                if not s.solve(assumptions=assume + [-l]):
-                    props[p] = True
-                elif not s.solve(assumptions=assume + [l]):
-                    props[p] = False
+            for p, v in zip(GROUP_PROPS, backbone(s, assume, [T.lit(("p", p, P)) for p in GROUP_PROPS])):
+                if v is not None:
+                    props[p] = v
             # конечное × конечное: порядок известен, арифметика порядка — из него
             if oa["конечная"] and ob["конечная"]:
                 n = int(a.split(":")[0]) * int(b.split(":")[0])
@@ -756,16 +789,8 @@ class Scene:
         """Значения атомов, которые следуют из записей: {атом: значение}."""
         assume = [l for a, (v, _) in facts.items()
                   if (l := self.T.lit(a, v)) not in (None, False)]
-        out = {}
-        for a in atoms:
-            if a in facts:
-                continue
-            l = self.T.lit(a)
-            if not self.s.solve(assumptions=assume + [-l]):
-                out[a] = True
-            elif not self.s.solve(assumptions=assume + [l]):
-                out[a] = False
-        return out
+        todo = [a for a in atoms if a not in facts]
+        return {a: v for a, v in zip(todo, backbone(self.s, assume, [self.T.lit(a) for a in todo])) if v is not None}
 
     def values(self, lib, key, sub, need=None, drop=()):
         """Значения атомов пары (G, N): записанные и выведенные из них.

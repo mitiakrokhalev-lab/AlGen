@@ -783,17 +783,28 @@ def load_reps(f, base, tdir):
     return True
 
 
-def equiv_reps(f):
+EQUIV_MODELS = 64  # моделей теории для разбиения корзин equiv_reps (0 — без разбиения)
+
+
+def equiv_reps(f, decide=None):
     """Классы равносильных литералов базы: rep[j] — представитель класса столбца j.
 
     Кандидаты — литералы с одинаковыми столбцами строк (литерал и отрицание);
     равносильность проверяется теорией базы в обе стороны (при посылках записи).
     Представитель — литерал с наименьшим числом построенных термов, затем короче.
     Набор с литералом и набор с его представителем — один факт: перебирать
-    достаточно представителей."""
+    достаточно представителей.
+
+    Ускорение без смены ответа: корзина дробится по значениям литерала в
+    EQUIV_MODELS моделях теории с посылками записи — у равносильных литералов они
+    совпадают в каждой модели, так что класс целиком остаётся в одной доле, а
+    порядок внутри доли тот же. Вопросы решаются банком моделей (fast.decide —
+    те же вердикты, что у logic.decide); литералы со свободными переменными
+    (вне клауз) — прежним logic.decide, у банка они не учитываются."""
     from collections import defaultdict
-    from .logic import decide
+    from . import fast, logic
     n = f.m.shape[1]
+    T, s = f.sc.T, f.sc.s
     name = lambda j: ("¬" if j % 2 else "") + E.atom_name(f.atoms[j // 2])
 
     def napps(j):
@@ -807,22 +818,63 @@ def equiv_reps(f):
     for j in range(n):
         buckets[(f.m[:, j].tobytes(), f.m[:, j ^ 1].tobytes())].append(j)
     fixed = [f.lit(j) for j in f.fixed]
+    nclause = max((abs(l) for c in T.clauses for l in c), default=0)
+    if decide is None:
+        def decide(T_, prem, goal, s_):
+            free = any(type(l) is int and abs(l) > nclause for l in (T_.lit(*x) for x in prem + [goal]))
+            return (logic.decide if free else fast.decide)(T_, prem, goal, s_)
+    # модели теории с посылками записи: случайные фазы решателя
+    models = []
+    if EQUIV_MODELS and any(len(js) > 2 for js in buckets.values()):
+        import random
+        fl = [l for a, v in fixed if type(l := T.lit(a, v)) is int]
+        rng = random.Random(1)
+        for _ in range(EQUIV_MODELS):  # фазы меняют только путь решателя, не ответы
+            s.set_phases([v if rng.random() < 0.5 else -v for v in range(1, nclause + 1)])
+            if not s.solve(assumptions=fl):
+                break
+            models.append(np.array(s.get_model()[:nclause], dtype=np.int32) > 0)
+    M = np.array(models) if models else None  # модели × переменные: верна ли переменная
+    ones = np.ones(len(models), dtype=bool).tobytes()
+    zeros = np.zeros(len(models), dtype=bool).tobytes()
+    fl_set = {l for a, v in fixed if type(l := T.lit(a, v)) is int}
+
+    def sig(j):
+        """Значения литерала столбца j в моделях; одинаковы у равносильных."""
+        if M is None:
+            return 0
+        l = T.lit(*f.lit(j))
+        if l is None:
+            return ones  # верен всегда — как литерал, который следует из посылок записи
+        if l is False:
+            return ("F", j)  # противоречие: ни с чем не равносилен
+        if abs(l) > nclause:  # свободная переменная (вне клауз)
+            if l in fl_set or -l in fl_set:  # её задают посылки записи: постоянна
+                return ones if l in fl_set else zeros
+            return ("free", l)  # иначе равносильна только себе
+        col = M[:, abs(l) - 1]
+        return (col if l > 0 else ~col).tobytes()
+
     rep = list(range(n))
     for js in buckets.values():
         if len(js) < 2:
             continue
         js = sorted(js, key=lambda j: (napps(j), len(name(j)), j))
-        classes = []  # внутри корзины: несколько классов с одинаковыми столбцами
+        parts = defaultdict(list)
         for j in js:
-            for c in classes:
-                r = c[0]
-                if decide(f.sc.T, fixed + [f.lit(r)], f.lit(j), f.sc.s).kind == "выводится" and \
-                        decide(f.sc.T, fixed + [f.lit(j)], f.lit(r), f.sc.s).kind == "выводится":
-                    c.append(j)
-                    rep[j] = r
-                    break
-            else:
-                classes.append([j])
+            parts[sig(j) if len(js) > 2 else 0].append(j)
+        for part in parts.values():
+            classes = []  # внутри доли: несколько классов с одинаковыми столбцами
+            for j in part:
+                for c in classes:
+                    r = c[0]
+                    if decide(T, fixed + [f.lit(r)], f.lit(j), s).kind == "выводится" and \
+                            decide(T, fixed + [f.lit(j)], f.lit(r), s).kind == "выводится":
+                        c.append(j)
+                        rep[j] = r
+                        break
+                else:
+                    classes.append([j])
     f.rep = rep
     f.rep_flat = {j for j in range(n) if napps(j) == 0}
     return rep
