@@ -292,10 +292,10 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
             kind = r["вердикт"]
             if kind not in ("неизвестно", "выводится") or r["№"] in refuted:
                 continue
-            if r["№"] in seen:  # копия класса (контрапозиция): статус — как у представителя
+            if (r["№"], kind) in seen:  # копия класса (контрапозиция): статус — как у представителя
                 copies.append(r)
                 continue
-            seen[r["№"]] = r
+            seen[r["№"], kind] = r
             try:
                 F = forbid_lits(form, r)
             except _Unencodable:
@@ -328,7 +328,7 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
         sq.delete()
         sf.delete()
     for r in copies:
-        rep = seen[r["№"]]
+        rep = seen[r["№"], r["вердикт"]]
         r["свёрнута"], r["следует из"] = rep["свёрнута"], list(rep["следует из"])
     return report
 
@@ -366,7 +366,7 @@ def verify(form, report, sample=None, rng=None):
     by = {}
     for r in report:
         if not r.get("свёрнута"):
-            by.setdefault(r["№"], r)
+            by.setdefault((r["№"], r["вердикт"]), r)
     folded = [r for r in report if r.get("свёрнута") and not r.get("экземпляр")]
     rk = {}  # порядок — по представителю класса (у копий «примеров» бывает другим)
     for r in report:
@@ -386,7 +386,7 @@ def verify(form, report, sample=None, rng=None):
         instances(form, cp)
         bad += [(r["№"], "экземпляр не подтверждается") for r in cp if not r.get("экземпляр") or not r["свёрнута"]]
     for r in folded:
-        deps = [by.get(d) for d in r["следует из"]]
+        deps = [by.get((d, r["вердикт"])) for d in r["следует из"]]
         if any(d is None for d in deps):
             bad.append((r["№"], "источник свёрнут или потерян"))
             continue
