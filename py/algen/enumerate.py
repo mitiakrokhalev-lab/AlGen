@@ -73,6 +73,9 @@ CLOSE_MARKED = True  # помеченные контрпримеры закры�
 # условия с ними — почти сплошь «неизвестно» (шум), а стоят решателя каждое.
 # Они возвращаются в перебор, когда библиотека заполнится.
 DEFER = 0.0
+# Условия без посылок (k = 0) — часть класса k ⩽ 3: вопрос «всегда ли X?» не следует
+# из вопросов «P ⇒ X» (проверщик 4.11: ЯЗ-43, ЯЗ-39). False — прежнее поведение.
+ZERO_PREMISES = True
 CORE_PROPS = {"trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable", "nilpotent",
               "perfect", "torsion-free", "periodic", "divisible", "centerless", "residually-finite",
               "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent", "free-abelian", "p-group"}
@@ -188,7 +191,17 @@ def atom_vars(a, graph):
     говорит и об объемлющей группе, свойство N как группы — только об N.
     Отношение — о всех своих аргументах."""
     if a[0] == "r":
-        return set().union(*(term_vars(x) for x in a[2:]))
+        out = set().union(*(term_vars(x) for x in a[2:] if not isinstance(x, (str, int, bool))))
+        # отношения решётки подгрупп (⩽, =, сопряжённость, перестановочность) говорят и об
+        # объемлющей группе: «H ≅ K ⇒ H, K сопряжены» — о G, H, K (проверщик: ЯЗ-37, ЯЗ-39)
+        rel = graph.v.rels.get(a[1]) if hasattr(graph, "v") else None
+        if rel and "Grp.sub" in (rel.get("in") or []):
+            for x in a[2:]:
+                info = graph.terms.get(x) if not isinstance(x, (str, int, bool)) else None
+                amb = info.links.get("ambient") if info is not None else None
+                if amb is not None:
+                    out |= term_vars(amb)
+        return out
     out = term_vars(a[2])
     if a[1] in SUB_PROPS:
         amb = graph.terms[a[2]].links.get("ambient")
@@ -1268,6 +1281,21 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     P0 = pack(start)
     for depth in range(1, max_prem + 1):
         go([], ones(len(start)), 0, depth, 0, P0, start)
+    if ZERO_PREMISES:
+        # Условия без посылок: цель, не опровергнутая ни одной строкой (записи), — вопрос
+        # «всегда ли X?» (выводимые без посылок — form.const — исключены из целей и
+        # выписываются фактами). Базис должен его содержать: из «P ⇒ X» он не следует.
+        # Условия «P ⇒ X» с такой X неминимальны и снимаются; ((), X) выдаётся, если X
+        # касается всех верхних термов схемы (иначе — в меньшей схеме).
+        fixed_set = set(form.fixed)
+        zero = {g for g in goal_cols
+                if form.req.get(g // 2, set()) <= fixed_set and not m[start, g ^ 1].any()}
+        if zero:
+            for key in [k for k in alive if k[1] in zero]:
+                del alive[key]
+            for g in sorted(zero):
+                if not need or int(amask[g // 2]) == full:
+                    alive[((), g)] = len(start)
     form.n_alive = count
     return alive, empty
 

@@ -7,6 +7,7 @@ import unittest
 
 import numpy as np
 
+from algen import enumerate as E
 from algen.enumerate import clusters, cover, enumerate_form, minimal
 
 
@@ -74,11 +75,31 @@ class EnumerateTest(unittest.TestCase):
         self.assertNotIn(((0, 2), 4), mins)
 
     def test_unknown_value_does_not_refute(self):
-        # Значение цели не записано: строка не опровергает.
+        # Значение цели не записано: строка не опровергает. Без условий без посылок
+        # (прежнее поведение) живы «a ⇒ c», «a ⇒ ¬c»; с ними — «⇒ c», «⇒ ¬c», а условия
+        # с посылкой a неминимальны.
+        E.ZERO_PREMISES = False
+        try:
+            form = FakeForm([(True, None, None)])
+            alive, _ = enumerate_form(form, 1, goals=[4, 5])
+            self.assertIn(((0,), 4), alive)
+            self.assertIn(((0,), 5), alive)
+        finally:
+            E.ZERO_PREMISES = True
         form = FakeForm([(True, None, None)])
         alive, _ = enumerate_form(form, 1, goals=[4, 5])
-        self.assertIn(((0,), 4), alive)
-        self.assertIn(((0,), 5), alive)
+        self.assertIn(((), 4), alive)
+        self.assertIn(((), 5), alive)
+        self.assertNotIn(((0,), 4), alive)
+
+    def test_zero_premises(self):
+        # c верно во всех строках: вопрос «всегда ли c?» — условие без посылок, а
+        # «a ⇒ c», «b ⇒ c» неминимальны. ¬a опровергается первой строкой.
+        form = FakeForm([(True, True, True), (False, True, True), (True, False, True)])
+        alive, _ = enumerate_form(form, 2, goals=[1, 4])
+        self.assertIn(((), 4), alive)
+        self.assertNotIn(((), 1), alive)
+        self.assertFalse(any(g == 4 and prem for prem, g in alive), alive)
 
     def test_cover_prefers_shared_fact(self):
         # Условия 0 и 1 держатся на x или y, условие 2 — только на y:
