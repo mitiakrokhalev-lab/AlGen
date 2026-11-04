@@ -196,6 +196,7 @@ class Library:
         for o in self.obj.values():
             self._center_commutator(o)
         self._quantified_props()
+        self._finite_subgroup_props()
         for f in self.fam.values():
             self._fam_props(f)
         # Направленные системы: члены, свойства отображений, прямой и обратный пределы.
@@ -366,6 +367,86 @@ class Library:
                     o["свойства"][q["id"]] = False
                 elif complete and not unknown:
                     o["свойства"][q["id"]] = True
+
+    def finite_subgroup_values(self, o):
+        """Свойства конечной группы по полному списку классов подгрупп и коммутанту:
+        metabelian (G′ абелев), class-2 (G′ центральна), dedekind (все подгруппы
+        нормальны), exponent-2/3 и prime-orders (по порядкам циклических подгрупп),
+        clt (подгруппы всех порядков, делящих |G|). None — не вычислить."""
+        out = {}
+        subs = o.get("подгруппы") or []
+
+        def order(k):
+            h = k.split(":")[0] if isinstance(k, str) else ""
+            return int(h) if h.isdigit() and self.obj.get(k, {}).get("конечная") else None
+        cid = o.get("коммутант")
+        cs = next((x for x in subs if x["id"] == cid), None) if cid is not None else None
+        if cs is not None:
+            ab = self.obj.get(cs["≅"], {}).get("свойства", {}).get("abelian")
+            if ab is not None:
+                out["metabelian"] = ab
+            if cs["свойства"].get("central") is not None:
+                out["class-2"] = cs["свойства"]["central"]
+        if not o["конечная"]:
+            return out
+        # классы сопряжённых элементов (если посчитаны): порядки всех элементов — точно
+        els = o.get("элементы")
+        if els:
+            eo = [c.get("ord") for c in els]
+            if None not in eo and 0 not in eo:
+                out["exponent-2"] = all(m in (1, 2) for m in eo)
+                out["exponent-3"] = all(m in (1, 3) for m in eo)
+                out["prime-orders"] = all(m == 1 or _is_prime(m) for m in eo)
+        if o.get("подгруппы неполные") or not subs:
+            # неполный список: только опровержения по записанным подгруппам
+            for x in subs:
+                m, c = order(x["≅"]), self.obj.get(x["≅"], {}).get("свойства", {}).get("cyclic")
+                if x["свойства"].get("normal") is False:
+                    out["dedekind"] = False
+                if c and m is not None:
+                    if m not in (1, 2):
+                        out.setdefault("exponent-2", False)
+                    if m not in (1, 3):
+                        out.setdefault("exponent-3", False)
+                    if m != 1 and not _is_prime(m):
+                        out.setdefault("prime-orders", False)
+            return out
+        n = order(o["key"])
+        ords = [order(x["≅"]) for x in subs]
+        cyc = [self.obj.get(x["≅"], {}).get("свойства", {}).get("cyclic") for x in subs]
+        if n is None or None in ords or None in cyc:
+            return out
+        corder = [m for m, c in zip(ords, cyc) if c]
+        normal = [x["свойства"].get("normal") for x in subs]
+        if None not in normal:
+            out["dedekind"] = all(normal)
+        for p, v in (("exponent-2", all(m in (1, 2) for m in corder)),
+                     ("exponent-3", all(m in (1, 3) for m in corder)),
+                     ("prime-orders", all(m == 1 or _is_prime(m) for m in corder))):
+            if out.setdefault(p, v) != v:
+                raise ValueError(f"{o['key']}: {p} по элементам и по подгруппам расходятся")
+        have = set(ords)
+        out["clt"] = all(d in have for d in range(1, n + 1) if n % d == 0) if n <= 10 ** 6 else None
+        return {k: v for k, v in out.items() if v is not None}
+
+    def _finite_subgroup_props(self):
+        """Заполнить неизвестные значения finite_subgroup_values и таблицы GAP
+        (finite.load_props); записанные не трогаются, расхождение — ошибка данных."""
+        from .finite import load_props
+        gap = load_props()
+        for o in self.obj.values():
+            if o.get("синтез"):
+                continue
+            vals = dict(gap.get(o["key"], {}))
+            for p, v in self.finite_subgroup_values(o).items():
+                if vals.setdefault(p, v) != v:
+                    raise ValueError(f"{o['key']}: {p} по GAP {vals[p]}, по подгруппам {v}")
+            for p, v in vals.items():
+                have = o["свойства"].get(p)
+                if have is None:
+                    o["свойства"][p] = v
+                elif have != v:
+                    raise ValueError(f"{o['key']}: {p} записано {have}, по подгруппам {v}")
 
     def _fam_props(self, f):
         """Свойство семейства — у всех членов: да, если у всех да; нет, если у

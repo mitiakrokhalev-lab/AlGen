@@ -34,6 +34,8 @@ EXTRA = ROOT / "data" / "finite" / "grp-extra.jsonl"
 AUT_SCRIPT = Path(__file__).with_name("gap") / "aut.g"
 AUT = ROOT / "data" / "finite" / "grp-aut.jsonl"
 COMPL_SCRIPT = Path(__file__).with_name("gap") / "compl.g"
+PROPS_SCRIPT = Path(__file__).with_name("gap") / "props.g"
+PROPS = ROOT / "data" / "finite" / "grp-props.jsonl"
 COMPL = ROOT / "data" / "finite" / "grp-compl.jsonl"
 ENDO_SCRIPT = Path(__file__).with_name("gap") / "endo.g"
 ENDO = ROOT / "data" / "finite" / "grp-endo.jsonl"
@@ -255,6 +257,24 @@ def load_present(path=PRESENT):
         return {r["id"]: r for r in map(json.loads, f)}
 
 
+def load_props(path=PROPS):
+    """key → свойства из gap/props.g: metabelian, class-2, dedekind, exponent-2/3,
+    prime-orders (по порядкам элементов). Пусто, если таблица не посчитана."""
+    if not Path(path).exists():
+        return {}
+    out = {}
+    with open(path) as f:
+        for r in map(json.loads, f):
+            if r.get("skipped"):
+                continue
+            ords = r["orders"]
+            isp = lambda m: m > 1 and all(m % d for d in range(2, int(m ** 0.5) + 1))
+            out[r["key"]] = {"metabelian": r["metabelian"], "class-2": r["class-2"], "dedekind": r["dedekind"],
+                             "exponent-2": r["exponent"] <= 2, "exponent-3": r["exponent"] in (1, 3),
+                             "prime-orders": all(m == 1 or isp(m) for m in ords)}
+    return out
+
+
 def load_compl(path=COMPL):
     """key → [дополняема ли подгруппа класса i] (если таблица посчитана)."""
     if not Path(path).exists():
@@ -462,6 +482,8 @@ if __name__ == "__main__":
                     help="вполне инвариантные подгруппы всех групп таблицы в data/finite/grp-endo.jsonl")
     ap.add_argument("--элементы", dest="elts", action="store_true",
                     help="классы сопряжённых элементов всех групп таблицы в data/finite/grp-elts.jsonl")
+    ap.add_argument("--свойства", dest="gprops", action="store_true",
+                    help="метабелевость, ступень 2, экспонента, порядки элементов, дедекиндовость → data/finite/grp-props.jsonl")
     ap.add_argument("--гомоморфизмы", dest="homs", action="store_true",
                     help="эндоморфизмы всех групп таблицы в data/finite/grp-homs.jsonl")
     ap.add_argument("--пересечения", dest="hk", action="store_true",
@@ -487,6 +509,11 @@ if __name__ == "__main__":
     if a.compl:
         build_table(COMPL_SCRIPT, COMPL, a.jobs)
         print(COMPL, sum(1 for _ in COMPL.open()))
+        raise SystemExit
+    if a.gprops:
+        import time
+        build_table(PROPS_SCRIPT, PROPS, a.jobs, stall=a.stall, deadline=time.time() + a.minutes * 60)
+        print(PROPS, sum(1 for _ in PROPS.open()))
         raise SystemExit
     if a.homs:
         import time
