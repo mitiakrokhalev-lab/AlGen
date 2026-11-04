@@ -476,6 +476,8 @@ def scheme_pairs(vocab, base):
 SKEL_DIR = os.environ.get("ALGEN_SKEL", "")
 # Таблица базы в памяти упакована по столбцам (PackedCols); False — плотные bool.
 PACKED = True
+# При одной нити схемы идут в самом процессе, без fork (см. _run_pool).
+IN_PROCESS = True
 
 
 def skeleton(lib, vocab, base, part=None, with_rows=False):
@@ -1267,6 +1269,35 @@ def _run_pool(jobs, a, deadline, t0, done, total):
         os._exit(0)
 
     # Дочерний процесс берёт пачку схем (форк на каждую схему дорог при тысячах схем).
+    if a.jobs == 1 and IN_PROCESS:
+        # Одна нить — схемы в этом же процессе, без fork: копия при записи у Python
+        # (счётчики ссылок) дублирует страницы каркаса и таблицы в дочернем процессе,
+        # и машина 16 ГБ гибла целиком (пилот 9). Предел памяти — на процесс:
+        # схема, которой не хватило, пишется «ошибка: память», остальные идут дальше.
+        import gc
+        import resource
+        if limit:
+            vm = 0
+            with open("/proc/self/status") as fh:
+                for line in fh:
+                    if line.startswith("VmSize:"):
+                        vm = int(line.split()[1]) * 1024
+            resource.setrlimit(resource.RLIMIT_AS, (vm + limit, vm + limit))
+        for i, job in enumerate(jobs):
+            if deadline and time.time() > deadline:
+                print(f"срок вышел: не начато схем {len(jobs) - i}", file=sys.stderr, flush=True)
+                break
+            try:
+                _one(job)
+            except MemoryError:
+                p = Path(job[4]) / job[1]
+                p.with_suffix(".json").write_text(json.dumps(
+                    {"id": job[1], "условие": BASES[job[0]], "термы": job[2], "отпечаток": job[5],
+                     "статус": "ошибка: память"}, ensure_ascii=False), encoding="utf-8")
+            gc.collect()
+            done += 1
+            print(f"[{done}/{total}] {round(time.time() - t0)} с", file=sys.stderr, flush=True)
+        return done
     size = max(1, min(20, len(jobs) // (a.jobs * 4) or 1))
     queue = [jobs[i:i + size] for i in range(0, len(jobs), size)]
     running = {}
