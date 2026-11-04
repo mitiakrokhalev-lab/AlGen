@@ -513,15 +513,26 @@ def theory_fp(base, form=None):
     import inspect
     h = hashlib.sha256()
     if form is not None:
+        hit = form.__dict__.get("_theory_fp")
+        if hit is not None and hit[0] is form.sc.T:
+            return hit[1]
         T = form.sc.T
-        h.update(repr([str(a) for a in T.atoms]).encode())
-        for c in sorted(tuple(sorted(c)) for c in T.clauses):  # порядок заземления не важен
-            h.update(repr(c).encode())
-        h.update(repr([str(a) for a in form.atoms]).encode())
+        for a in T.atoms:
+            h.update(str(a).encode() + b"\0")
+        # порядок заземления не важен: хеши клауз (hash кортежа целых не зависит от
+        # процесса) сортируются массивом — без списка кортежей на десятки миллионов
+        hc = np.fromiter((hash(tuple(sorted(c))) for c in T.clauses), dtype=np.int64, count=len(T.clauses))
+        hc.sort()
+        h.update(hc.tobytes())
+        del hc
+        for a in form.atoms:
+            h.update(str(a).encode() + b"\0")
         h.update(inspect.getsource(E.SchemeForm._derive).encode())
         h.update(f"{E.DIVERSE}:{E.REFRESH}".encode())
         h.update(f"{base}:{','.join(sorted(E.SKIP))}".encode())
-        return "т" + h.hexdigest()[:15]
+        fp = "т" + h.hexdigest()[:15]
+        form.__dict__["_theory_fp"] = (T, fp)
+        return fp
     root = Path(__file__).resolve().parents[2]
     files = [root / "data" / "grp.json", root / "data" / "new" / "grp.json", root / "data" / "vocab" / "grp.json",
              *(Path(__file__).parent / f for f in ("logic.py", "enumerate.py", "library.py", "table.py", "etalon.py"))]

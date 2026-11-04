@@ -506,12 +506,26 @@ def _atom_name_cached(a):
     return n
 
 
+_LITH = {}
+_M128 = (1 << 128) - 1
+
+
+def _lit_hash(a, v):
+    k = (a, v)
+    h = _LITH.get(k)
+    if h is None:
+        import hashlib
+        name = f"{'' if v else '¬'}{_atom_name_cached(a)}"
+        h = _LITH[k] = int.from_bytes(hashlib.blake2b(name.encode(), digest_size=16).digest(), "little")
+    return h
+
+
 def name_key(facts):
     """Ключ записанных значений строки по именам атомов — не зависит от нумерации
-    переменных теории, поэтому годится между прогонами с разными правилами (A4)."""
-    import hashlib
-    items = sorted(f"{'' if v else '¬'}{_atom_name_cached(a)}" for a, v in facts.items())
-    return hashlib.sha1("\n".join(items).encode()).hexdigest()[:20]
+    переменных теории, поэтому годится между прогонами с разными правилами (A4).
+    Сумма 128-битных хешей литералов: без сортировки строк на каждой строке таблицы
+    (у G — сотни тысяч значений в строке)."""
+    return f"{(sum(_lit_hash(a, v) for a, v in facts.items()) & _M128):032x}:{len(facts)}"
 
 
 class SchemeForm(Form):

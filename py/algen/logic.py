@@ -250,14 +250,19 @@ class App:
         return h
 
     def __getstate__(self):  # хэш строк зависит от процесса: кэш не сохраняем
-        return {k: v for k, v in self.__dict__.items() if k != "_h"}
+        return {k: v for k, v in self.__dict__.items() if k not in ("_h", "_s")}
 
     def __setstate__(self, st):
         for k, v in st.items():
             object.__setattr__(self, k, v)
 
     def __str__(self):
-        return f"{self.op}({', '.join(map(str, self.args))})"
+        # имя терма запоминается: таблица сортирует пары термов по имени на каждой строке
+        s = self.__dict__.get("_s")
+        if s is None:
+            s = f"{self.op}({', '.join(map(str, self.args))})"
+            object.__setattr__(self, "_s", s)
+        return s
 
 
 @dataclass
