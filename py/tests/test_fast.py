@@ -54,5 +54,26 @@ class FastBankTest(unittest.TestCase):
         self.assertEqual(bad, 0)
 
 
+class PackedColsTest(unittest.TestCase):
+    def test_packed_matches_dense(self):
+        """Таблица базы, упакованная по столбцам, отдаёт те же столбцы, строки и срезы."""
+        import numpy as np
+        from algen.table import PackedCols
+        rng = np.random.default_rng(0)
+        for _ in range(40):
+            r, c = int(rng.integers(1, 300)), int(rng.integers(1, 200))
+            d = rng.random((r, c)) < 0.3
+            P = PackedCols(d)
+            idx = rng.integers(0, c, size=int(rng.integers(1, 20)))
+            self.assertTrue(np.array_equal(P[:, list(idx)], d[:, idx]))
+            self.assertTrue(np.array_equal(P.cols(idx), d[:, idx]))
+            j = int(rng.integers(0, c))
+            self.assertTrue(np.array_equal(P[:, j], d[:, j]))
+            self.assertTrue(np.array_equal(P[:, 1::2], d[:, 1::2]))
+            self.assertTrue(np.array_equal(np.asarray(P), d))
+            rows = rng.integers(0, r, size=5)
+            self.assertTrue(np.array_equal(P[rows, list(idx)], d[rows][:, idx]))
+
+
 if __name__ == "__main__":
     unittest.main()

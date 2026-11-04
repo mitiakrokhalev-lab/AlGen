@@ -474,6 +474,8 @@ def scheme_pairs(vocab, base):
 # ALGEN_SKEL=каталог: каркас базы (теория и атомы) строится один раз и берётся из
 # <каталог>/<база>.skel.pickle — у G при мере размера его постройка — десятки минут.
 SKEL_DIR = os.environ.get("ALGEN_SKEL", "")
+# Таблица базы в памяти упакована по столбцам (PackedCols); False — плотные bool.
+PACKED = True
 
 
 def skeleton(lib, vocab, base, part=None, with_rows=False):
@@ -731,6 +733,36 @@ def build_all(lib, vocab, job, jobs, outdir, threads, cache=None):
         p.join()
 
 
+class PackedCols:
+    """Матрица строк × литералов базы, упакованная по столбцам: строка массива —
+    биты одного столбца (в 8 раз меньше bool). Схема берёт свои столбцы
+    распаковкой (`m[:, cols]`); у G при s ⩽ 2 плотные m, s, e — 3 × 2,75 ГБ, и
+    машина GitHub (16 ГБ) падала на первой схеме перебора (пилот 8)."""
+
+    def __init__(self, dense):
+        self.shape = dense.shape
+        self.dtype = np.dtype(bool)
+        self.bits = np.ascontiguousarray(np.packbits(dense, axis=0).T)  # (столбцы, строки/8)
+
+    def cols(self, idx):
+        """Плотные столбцы idx (номер, список, массив или срез) — bool (строки × столбцы)."""
+        if isinstance(idx, (int, np.integer)):
+            return np.unpackbits(self.bits[int(idx)], count=self.shape[0]).view(bool)
+        sel = self.bits[idx] if isinstance(idx, slice) else self.bits[np.asarray(idx, dtype=np.int64)]
+        return np.unpackbits(sel, axis=1, count=self.shape[0]).view(bool).T
+
+    def __getitem__(self, key):
+        if isinstance(key, tuple) and len(key) == 2:
+            rows, idx = key
+            out = self.cols(idx)
+            return out if isinstance(rows, slice) and rows == slice(None) else out[rows]
+        return np.asarray(self)[key]
+
+    def __array__(self, dtype=None, copy=None):
+        out = self.cols(slice(None))
+        return out.astype(dtype) if dtype is not None else out
+
+
 def load(lib, vocab, base, tdir):
     """Каркас базы со строками из всех частей таблицы."""
     parts = sorted(Path(tdir).glob(f"{base}.*-*.pickle"))
@@ -761,14 +793,15 @@ def load(lib, vocab, base, tdir):
             mats[k].append(d[k])  # упакованные биты: в 8 раз меньше, распаковка — ниже, на место
         del d
     rows = sum(x.shape[0] for x in mats["m"])
-    for k in "mse":  # без промежуточных копий: у G при s ⩽ 2 одна матрица — больше 1 ГБ
+    for k in "mse":  # по одной матрице: плотная — только на время упаковки по столбцам
         out = np.empty((rows, width), dtype=bool)
         r = 0
         for x in mats[k]:
             out[r:r + x.shape[0]] = np.unpackbits(x, axis=1, count=width).view(bool)
             r += x.shape[0]
         mats[k] = None
-        setattr(f, k, out)
+        setattr(f, k, PackedCols(out) if PACKED else out)
+        del out
     f.names = list(range(len(f.envs)))
     return f
 
@@ -1048,7 +1081,7 @@ def view(base_form, terms):
         v.fixed_lits = list(v.fixed_lits) + [(a, True)]
         v.fixed = v.fixed + [2 * v.index[a]]
     cols = np.array([2 * b.index[a] + d for a in v.atoms for d in (0, 1)], dtype=np.int64)
-    v.m, v.s, v.e = b.m[:, cols], b.s[:, cols], b.e[:, cols]
+    v.m, v.s, v.e = (x.cols(cols) if isinstance(x, PackedCols) else x[:, cols] for x in (b.m, b.s, b.e))
     v._base, v._base_cols = b, cols
     v.drop = drop_equiv(v, cols)
     top = need_tops(g, elems)
@@ -1297,6 +1330,8 @@ def k1_base(a):
     lib = built_library(vocab)
     fast.install()
     E.DEFER = 0.0  # класс: все атомы (прежде 0.15 — редко известные не перебирались, дыра k = 1)
+    global PACKED
+    PACKED = False  # перебор по всей базе сразу: нужны плотные строки
     t = time.time()
     f = load(lib, vocab, a.base, a.dir)
     gen = f if a.base == "G" else load(lib, vocab, "G", a.dir)
