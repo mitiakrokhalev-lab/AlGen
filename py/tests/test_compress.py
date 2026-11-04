@@ -322,9 +322,14 @@ class TestCopies(unittest.TestCase):
         f = FakeForm(ATOMS, [["-a", "b"]])
         q1 = row(f, ["b"], "c", n=5)
         q2 = row(f, ["a"], "c", n=1)
-        q2c = dict(q2, _cols=list(reversed(q2["_cols"])))  # та же строка класса
+        q2c = dict(q2, _cols=list(reversed(q2["_cols"])), примеров=99)  # та же строка класса, другая поддержка
         rep = C.compress(f, [q1, q2, q2c])
-        self.assertTrue(q2c["свёрнута"])
+        # класс q2 интереснее (99 примеров у копии): он раньше q1 и остаётся
+        self.assertFalse(q2["свёрнута"] or q2c["свёрнута"])
+        self.assertEqual(C.verify(f, rep), [])
+        q2c["примеров"] = 0
+        rep = C.compress(f, [q1, q2, q2c])
+        self.assertTrue(q2["свёрнута"] and q2c["свёрнута"])
         self.assertEqual(q2c["следует из"], [q1["№"]])
         self.assertEqual(C.verify(f, rep), [])
         C.reopen(rep, [q1["№"]])

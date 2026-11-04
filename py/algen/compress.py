@@ -269,7 +269,12 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
             r["опровергнут"] = True
     if use_instances:
         instances(form, report)
-    rows = sorted([r for r in report if "_cols" in r and not r.get("экземпляр")], key=key)
+    rows = [r for r in report if "_cols" in r and not r.get("экземпляр")]
+    ck = {}  # ключ класса — наименьший по его копиям: порядок не зависит от копии
+    for r in rows:
+        k = key(r)
+        ck[r["№"]] = min(ck.get(r["№"], k), k)
+    rows.sort(key=lambda r: (ck[r["№"]], key(r)))
 
     # вопросы: теория + оставленные вопросы под селекторами
     sq = T.solver()
@@ -363,6 +368,11 @@ def verify(form, report, sample=None, rng=None):
         if not r.get("свёрнута"):
             by.setdefault(r["№"], r)
     folded = [r for r in report if r.get("свёрнута") and not r.get("экземпляр")]
+    rk = {}  # порядок — по представителю класса (у копий «примеров» бывает другим)
+    for r in report:
+        if "_cols" in r:
+            k = interest_key(r)
+            rk[r["№"]] = min(rk.get(r["№"], k), k)
     if sample is not None and len(folded) > sample:
         import random
         folded = (rng or random.Random(0)).sample(folded, sample)
@@ -380,7 +390,7 @@ def verify(form, report, sample=None, rng=None):
         if any(d is None for d in deps):
             bad.append((r["№"], "источник свёрнут или потерян"))
             continue
-        if any(d["№"] != r["№"] and interest_key(d) >= interest_key(r) for d in deps):
+        if any(rk[d["№"]] >= rk[r["№"]] for d in deps):
             bad.append((r["№"], "источник стоит не раньше"))
             continue
         if any(d["вердикт"] != r["вердикт"] for d in deps):
