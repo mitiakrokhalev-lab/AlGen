@@ -36,4 +36,4 @@ jobs:
       - name: отпечаток выдачи
         run: |
           cd py
-          timeout 340m python3 -m algen.ident 3 "∀ G : Grp" "center(G); commutator(G)" 2>&1 | tail -25
+          timeout 340m env ALGEN_SIZE=2 ALGEN_COMPRESS=1 python3 -m algen.ident 3 "∀ G : Grp" "ab(G); torsion(G)" 2>&1 | tail -40
