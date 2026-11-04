@@ -684,10 +684,15 @@ class SchemeForm(Form):
                 # ни на что не влияют: свободная переменная в посылках решателя ничего
                 # не выводит, а значение строки берётся только у атомов формы. Прежде
                 # T.lit заводил их (у G — сотни тысяч на строку: память и время строки).
-                cols = self.__dict__.get("_col_set")
-                if cols is None or len(cols) != len(self.atoms):
-                    cols = self._col_set = set(self.atoms)
-                facts = {a: v for a, v in facts.items() if a in cols or T._known(a)}
+                keep = self.__dict__.get("_keep_set")
+                if keep is None or keep[0] != (len(self.atoms), len(T.var)):
+                    # атомы формы и теории (симметричные отношения — в обоих порядках,
+                    # как их нормализует T.lit); один поиск в множестве на значение
+                    ks = set(self.atoms) | set(T.var)
+                    ks |= {(a[0], a[1], a[3], a[2]) for a in T.var if a[0] == "r" and a[1] in SYMMETRIC}
+                    keep = self._keep_set = ((len(self.atoms), len(T.var)), ks)
+                ks = keep[1]
+                facts = {a: v for a, v in facts.items() if a in ks}
             assume = [l for a, v in facts.items() if (l := T.lit(a, v)) not in (None, False)]
             if not self.sc.s.solve(assumptions=assume):
                 self.skipped.append(self.where_env(env))  # записи противоречат базе
