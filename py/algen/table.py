@@ -907,13 +907,11 @@ def equiv_reps(f, decide=None):
         ok, _ = bank.sat(lits)
         if not ok:
             return None
-        w = bank.witness(lits)
-        return (w & -w).bit_length() - 1
+        return bank.first_witness(lits)
 
     def value(l, k):
         v = abs(l)
-        bit = (bank.pos.get(v, 0) >> k) & 1
-        return bool(bit) == (l > 0)
+        return bank.value(v, k) == (l > 0)
 
     def refine(part):
         out, stack = [], [part]

@@ -24,43 +24,79 @@ STATS = {"вопросов": 0, "из банка": 0, "решатель": 0, "к
 
 
 class Bank:
+    """Модели — столбцами битов: строка матрицы на переменную, бит на модель
+    (numpy uint64; прежде — словарь Python-чисел, и добавление модели обходило
+    все переменные циклом Python: у базы n 0,47 с на модель). Модели и ответы те же."""
+
     def __init__(self, theory, solver):
+        import numpy as np
+        self.np = np
         self.T = theory
         self.s = solver
-        self.pos = {}  # переменная → битовое множество моделей, где она верна
-        self.neg = {}
         self.n = 0
-        self.full = 0
         self.unsat = {}  # frozenset литералов → ядро
         self.nclause = max((abs(l) for c in theory.clauses for l in c), default=0)
+        self.P = np.zeros((self.nclause + 1, 1), dtype=np.uint64)  # переменная верна в модели
+        self.N = np.zeros((self.nclause + 1, 1), dtype=np.uint64)  # переменная ложна
         rng = random.Random(1)
         self.phases = [[v if rng.random() < 0.5 else -v for v in range(1, self.nclause + 1)] for _ in range(4)]
         self.calls = 0
 
     def _add(self, model):
-        bit = 1 << self.n
+        np = self.np
+        word, bit = divmod(self.n, 64)
+        if word >= self.P.shape[1]:
+            grow = self.P.shape[1]
+            self.P = np.hstack([self.P, np.zeros_like(self.P[:, :grow])])
+            self.N = np.hstack([self.N, np.zeros_like(self.N[:, :grow])])
+        m = np.asarray(model, dtype=np.int64)
+        top = int(np.abs(m).max()) if len(m) else 0
+        if top >= self.P.shape[0]:  # переменные вне клауз тоже храним (их значение нужно value)
+            extra = top + 1 - self.P.shape[0]
+            self.P = np.vstack([self.P, np.zeros((extra, self.P.shape[1]), dtype=np.uint64)])
+            self.N = np.vstack([self.N, np.zeros((extra, self.N.shape[1]), dtype=np.uint64)])
+        b = np.uint64(1 << bit)
+        self.P[m[m > 0], word] |= b
+        self.N[-m[m < 0], word] |= b
         self.n += 1
-        self.full |= bit
-        for l in model:
-            v = abs(l)
-            if l > 0:
-                self.pos[v] = self.pos.get(v, 0) | bit
-            else:
-                self.neg[v] = self.neg.get(v, 0) | bit
         STATS["моделей"] += 1
 
-    def witness(self, lits):
-        """Битовое множество моделей банка, где верны все lits (переменные
-        вне клауз свободны и не ограничивают)."""
-        w = self.full
+    def _witness_words(self, lits):
+        np = self.np
+        nw = (self.n + 63) // 64
+        if not nw:
+            return None
+        w = np.full(nw, np.uint64(0xFFFFFFFFFFFFFFFF))
+        r = self.n % 64
+        if r:
+            w[-1] = np.uint64((1 << r) - 1)
         for l in lits:
             v = abs(l)
             if v > self.nclause:
                 continue
-            w &= self.pos.get(v, 0) if l > 0 else self.neg.get(v, 0)
-            if not w:
-                return 0
+            w &= (self.P if l > 0 else self.N)[v, :nw]
+            if not w.any():
+                return None
         return w
+
+    def witness(self, lits):
+        """Есть ли в банке модель, где верны все lits (переменные вне клауз свободны)."""
+        return self._witness_words(lits) is not None
+
+    def first_witness(self, lits):
+        """Номер первой модели банка, где верны все lits, или None."""
+        w = self._witness_words(lits)
+        if w is None:
+            return None
+        i = int(self.np.flatnonzero(w)[0])
+        x = int(w[i])
+        return 64 * i + (x & -x).bit_length() - 1
+
+    def value(self, v, k):
+        """Значение переменной v в модели k (нет в модели — False, как прежде)."""
+        if v >= self.P.shape[0]:
+            return False
+        return bool((int(self.P[v, k // 64]) >> (k % 64)) & 1)
 
     def sat(self, lits):
         """(выполнимо?, ядро при «нет»)."""

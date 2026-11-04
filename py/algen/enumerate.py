@@ -246,13 +246,25 @@ def dep_close(vs, graph):
     return out
 
 
+_AV = {}  # id графа → (граф, нужные переменные, кэш переменных атома с зависимостями)
+
+
 def about_all_vars(lits, graph):
     """Условие (литералы посылок, цели и записи) говорит обо всех переменных базы,
     кроме скрытых, — с учётом зависимостей сортов. Иначе это утверждение меньшей
     базы (свойство N как группы — база G) и выдаётся там."""
-    allvars = {t for t in graph.terms if isinstance(t, Var)} - hidden_vars(graph)
-    got = dep_close(set().union(*(atom_vars(a, graph) for a, _ in lits)), graph)
-    return allvars <= got
+    hit = _AV.get(id(graph))
+    if hit is None or hit[0] is not graph:
+        need = frozenset({t for t in graph.terms if isinstance(t, Var)} - hidden_vars(graph))
+        hit = _AV[id(graph)] = (graph, need, {})
+    _, need, memo = hit
+    got = set()
+    for a, _ in lits:
+        vs = memo.get(a)
+        if vs is None:
+            vs = memo[a] = frozenset(dep_close(atom_vars(a, graph), graph))
+        got |= vs
+    return need <= got
 
 
 def canon(t, perm):
