@@ -78,6 +78,8 @@ DEFER = 0.0
 ZERO_PREMISES = True
 # При сжатии подсказки считаются только оставленным строкам (свёрнутым не нужны).
 LATE_HINTS = True
+# Строки таблицы: значения только атомов теории и столбцов формы (прочие ни на что не влияют).
+ROW_FACT_FILTER = True
 CORE_PROPS = {"trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable", "nilpotent",
               "perfect", "torsion-free", "periodic", "divisible", "centerless", "residually-finite",
               "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent", "free-abelian", "p-group"}
@@ -677,6 +679,15 @@ class SchemeForm(Form):
             if max_subs and any(im[0] == "sub" and im[2] >= max_subs for im in env.values()):
                 continue
             facts, hard = self.search.facts(env)
+            if ROW_FACT_FILTER:
+                # Значения атомов, которых нет ни в клаузах теории, ни в столбцах формы,
+                # ни на что не влияют: свободная переменная в посылках решателя ничего
+                # не выводит, а значение строки берётся только у атомов формы. Прежде
+                # T.lit заводил их (у G — сотни тысяч на строку: память и время строки).
+                cols = self.__dict__.get("_col_set")
+                if cols is None or len(cols) != len(self.atoms):
+                    cols = self._col_set = set(self.atoms)
+                facts = {a: v for a, v in facts.items() if a in cols or T._known(a)}
             assume = [l for a, v in facts.items() if (l := T.lit(a, v)) not in (None, False)]
             if not self.sc.s.solve(assumptions=assume):
                 self.skipped.append(self.where_env(env))  # записи противоречат базе
