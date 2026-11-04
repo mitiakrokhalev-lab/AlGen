@@ -1006,7 +1006,8 @@ def need_tops(g, elems):
     константах замкнут и не перебирается, отношения «группа — число» нет, так
     что условий, касающихся G и всех констант сразу, не бывает — выдача схем
     G была пустой)."""
-    return [t for t in maximal(g, elems) if isinstance(t, Var) or app_nodes(t)]
+    hid = E.hidden_vars(g)
+    return [t for t in maximal(g, set(elems) - hid) if isinstance(t, Var) or app_nodes(t)]
 
 
 def view(base_form, terms):
@@ -1284,7 +1285,7 @@ def k1_base(a):
     vocab = Vocab.section("grp")
     lib = built_library(vocab)
     fast.install()
-    E.DEFER = 0.15
+    E.DEFER = 0.0  # класс: все атомы (прежде 0.15 — редко известные не перебирались, дыра k = 1)
     t = time.time()
     f = load(lib, vocab, a.base, a.dir)
     gen = f if a.base == "G" else load(lib, vocab, "G", a.dir)

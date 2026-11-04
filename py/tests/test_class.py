@@ -96,6 +96,32 @@ class ClassTest(unittest.TestCase):
         self.assertEqual(lines[0], "G 0 ['G']", out)
         self.assertTrue(lines[1].startswith("n 0 "), out)
 
+    def test_dependent_vars_kept(self):
+        """Условия о морфизме, элементе, G-множестве говорят и об их группах: «F
+        инъективен и сюръективен ⇒ F изоморфизм» (GE), «involution(x) …» (Gx),
+        «транзитивно и свободно ⇒ регулярно» (GX, без скрытой точки x_A) не
+        снимаются как «о части переменных»; верхний терм GX — A, а не x_A.
+        Свойство N как группы и элемент подгруппы — утверждения меньшей базы."""
+        out = run_size(
+            "from algen import table as T, enumerate as E\n"
+            "from algen.etalon import scheme\n"
+            "from algen.logic import Vocab, Var\n"
+            "v = Vocab.section('grp')\n"
+            "def g_of(b):\n"
+            "    g, _, _ = scheme(v, {'раздел': 'grp', 'условие': T.BASES[b]})\n"
+            "    return g, {str(t): t for t in g.terms}\n"
+            "res = []\n"
+            "g, n = g_of('GE'); res.append(E.about_all_vars([(('p', 'injective', n['F']), True), (('p', 'iso', n['F']), True)], g))\n"
+            "g, n = g_of('GHF'); res.append(E.about_all_vars([(('p', 'injective', n['F']), True)], g))\n"
+            "g, n = g_of('Gx'); res.append(E.about_all_vars([(('p', 'involution', n['x']), True)], g))\n"
+            "g, n = g_of('GX'); res.append(E.about_all_vars([(('p', 'transitive', n['A']), True), (('p', 'regular', n['A']), True)], g))\n"
+            "res.append(sorted(str(t) for t in T.need_tops(g, {t for t in g.terms if isinstance(t, Var)})))\n"
+            "g, n = g_of('GN'); res.append(E.about_all_vars([(('p', 'abelian', n['N']), True)], g))\n"
+            "res.append(E.about_all_vars([(('p', 'normal', n['N']), True)], g))\n"
+            "g, n = g_of('GNy'); res.append(E.about_all_vars([(('p', 'involution', n['x']), True)], g))\n"
+            "print(res)\n")
+        self.assertEqual(out.strip(), "[True, True, True, True, ['A'], False, True, False]", out)
+
     def test_relations_all_pairs(self):
         """Отношения словаря заводятся у всех подходящих пар термов, а не только с переменной."""
         out = run_size(
@@ -131,7 +157,10 @@ class ClassTest(unittest.TestCase):
         bad = []
         for f in sorted((ROOT / ".github" / "workflows").glob("*.yml")):
             for i, line in enumerate(f.read_text().splitlines(), 1):
-                if re.search(r"--без\s+[a-z]", line) or re.search(r"SKIP:\s*\"[a-z]", line):
+                if (re.search(r"--без\s+[a-z]", line) or re.search(r"SKIP:\s*\"[a-z]", line)
+                        # отсрочка редко известных атомов и таблица прошлых правил без проверки
+                        or re.search(r"DEFER:\s*\"0*\.?0*[1-9]", line) or re.search(r"--отложить\s+0*\.?0*[1-9]", line)
+                        or re.search(r"ALGEN_STALE:\s*\"1", line)):
                     bad.append(f"{f.name}:{i}: {line.strip()}")
         self.assertEqual(bad, [], "пропуск свойств — сужение класса, его решает Дима")
 

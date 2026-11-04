@@ -197,6 +197,49 @@ def atom_vars(a, graph):
     return out
 
 
+# Сорта переменных, которые сами по себе ни о чём не говорят: морфизм — о своих
+# группах, элемент и G-множество — об объемлющей группе, точка — о G-множестве.
+# Условие о F: G → H касается и G, H (в меньшей базе его не записать).
+DEPENDENT_SORTS = ("Grp.mor", "Grp.elt", "Grp.gset", "Grp.pt", "Grp.act")
+
+
+def hidden_vars(graph):
+    """Скрытые переменные записи: точка x_A G-множества A (etalon.scheme заводит её
+    для правил о стабилизаторах). Условие не обязано её касаться."""
+    out = set()
+    for t, info in graph.terms.items():
+        if isinstance(t, Var) and info.sort == "Grp.pt":
+            amb = info.links.get("ambient")
+            if amb is not None and str(t) == f"x_{amb}":
+                out.add(t)
+    return out
+
+
+def dep_close(vs, graph):
+    """Переменные vs и те, от которых зависят их сорта (DEPENDENT_SORTS)."""
+    out, todo = set(vs), list(vs)
+    while todo:
+        v = todo.pop()
+        info = graph.terms.get(v)
+        if info is None or info.sort not in DEPENDENT_SORTS:
+            continue
+        for x in info.links.values():
+            for u in term_vars(x):
+                if u not in out:
+                    out.add(u)
+                    todo.append(u)
+    return out
+
+
+def about_all_vars(lits, graph):
+    """Условие (литералы посылок, цели и записи) говорит обо всех переменных базы,
+    кроме скрытых, — с учётом зависимостей сортов. Иначе это утверждение меньшей
+    базы (свойство N как группы — база G) и выдаётся там."""
+    allvars = {t for t in graph.terms if isinstance(t, Var)} - hidden_vars(graph)
+    got = dep_close(set().union(*(atom_vars(a, graph) for a, _ in lits)), graph)
+    return allvars <= got
+
+
 def canon(t, perm):
     if isinstance(t, Var):
         return perm.get(t, t).name
@@ -1367,7 +1410,7 @@ def run(max_prem, lib=None, vocab=None, form=None):
         prem_l = [l for j in prem for l in form.lits(j)]
         goal = form.lit(g)
         # Условие только о части переменных — факт меньшей схемы.
-        if set().union(*(atom_vars(a, graph) for a, _ in prem_l + [goal] + fixed)) != allvars:
+        if not about_all_vars(prem_l + [goal] + fixed, graph):
             continue
         # Вырожденное: посылки заставляют группу быть тривиальной или
         # подгруппу — тривиальной или всей. Это тоже факт меньшей схемы.
