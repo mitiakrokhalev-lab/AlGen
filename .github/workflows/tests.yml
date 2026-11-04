@@ -8,6 +8,12 @@ on:
     branches: ["claude/**", "main"]
   pull_request:
 
+# один прогон тестов на ветку: новый пуш снимает прежний (иначе очередь тестов
+# занимает машины, нужные пилотам)
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   tests:
     permissions:
