@@ -83,6 +83,12 @@ ROW_FACT_FILTER = True
 # Предел кэшей строк базы (записанные значения, выводы для разбора помеченных): строки G
 # огромны, кэш общий для всех схем части — без предела память росла до гибели машины.
 ROW_CACHE = 32
+# Литералы-теоремы схемы ищутся и среди столбцов, где значение известно не во всех строках
+# (ALGEN_FAST: строка — модель теории, но не все следствия выписаны). Литерал, выводимый
+# из теории и посылок записи, верен в каждой строке, поэтому посылкой он лишний, а
+# «опровержение» без него — настоящее (помощник 4.11: 261 вопрос пилота 9 держался на
+# посылке-теореме с неизвестным значением). False — только столбцы, верные во всех строках.
+THEORY_CONST = True
 CORE_PROPS = {"trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable", "nilpotent",
               "perfect", "torsion-free", "periodic", "divisible", "centerless", "residually-finite",
               "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent", "free-abelian", "p-group"}
@@ -1085,7 +1091,14 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     const = set()
     if hasattr(form, "sc") and hasattr(form.sc, "T"):
         fixed_l = [form.lit(j) for j in form.fixed]
-        for j in np.flatnonzero(m.all(axis=0)):
+        if THEORY_CONST and m.shape[0]:
+            # кандидаты: ни в одной строке записи литерал не ложен (строки — модели)
+            rf = m[:, list(form.fixed)].all(axis=1) if form.fixed else np.ones(m.shape[0], dtype=bool)
+            neg = m[rf].any(axis=0)
+            cand = [j for j in range(n_lit) if not neg[j ^ 1]]
+        else:
+            cand = np.flatnonzero(m.all(axis=0)).tolist()
+        for j in cand:
             if int(j) in form.fixed:
                 continue
             if decide(form.sc.T, fixed_l, form.lit(int(j)), form.sc.s).kind == "выводится":

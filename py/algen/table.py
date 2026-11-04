@@ -1126,6 +1126,13 @@ def _one(job):
     if limit:
         signal.signal(signal.SIGALRM, _alarm)
         signal.alarm(int(limit))
+    prof = None
+    want_prof = os.environ.get("ALGEN_PROFILE", "")
+    if want_prof == "1" or sid in want_prof.split(","):
+        # профиль схемы: время по функциям — в <схема>.prof.txt рядом с выдачей
+        import cProfile
+        prof = cProfile.Profile()
+        prof.enable()
     try:
         form = view(_STATE["forms"][base], terms)
         form, alive, empty, report = E.run(k, _STATE["lib"], _STATE["vocab"], form)
@@ -1139,6 +1146,14 @@ def _one(job):
     finally:
         if limit:
             signal.alarm(0)
+        if prof is not None:
+            prof.disable()
+            import pstats
+            buf = io.StringIO()
+            st = pstats.Stats(prof, stream=buf)
+            st.sort_stats("cumulative").print_stats(45)
+            st.sort_stats("tottime").print_stats(25)
+            (Path(outdir) / f"{sid}.prof.txt").write_text(buf.getvalue(), encoding="utf-8")
     rec = {"id": sid, "условие": BASES[base] + (f"; класс {CLASS}" if CLASS else ""), "термы": terms, "посылок": k, "без": sorted(E.SKIP),
            "отпечаток": fp, "секунд": round(time.time() - t0, 1), "статус": status,
            # строки библиотеки, чьи записи противоречат правилам (неверно правило или данные)
@@ -1183,6 +1198,9 @@ def run_schemes(a):
                             if isinstance(t, App))
         if getattr(a, "sample", 1) > 1:  # каждая N-я схема базы: круг библиотеки по всем базам сразу
             todo = todo[::a.sample]
+        if getattr(a, "only", ""):  # только перечисленные схемы (профиль, досчёт)
+            want = set(a.only.split(","))
+            todo = [x for x in todo if x[0] in want]
         if a.part:
             i, n = map(int, a.part.split("/"))
             todo = todo[i - 1::n]
@@ -1449,6 +1467,7 @@ def main():
     s.add_argument("--до", dest="until", type=float, default=0, help="минут: после этого новые схемы не начинать")
     s.add_argument("--предел", dest="limit", type=float, default=0, help="секунд на одну схему")
     s.add_argument("--выборка", dest="sample", type=int, default=1, help="брать каждую N-ю схему базы")
+    s.add_argument("--схемы", dest="only", default="", help="только эти схемы (id через запятую)")
     s.add_argument("--термов", dest="t", type=int, default=None, help="верхних термов в схеме (по умолчанию k + 1)")
     a = ap.parse_args()
     E.SKIP.update(x.strip() for x in getattr(a, "skip", "").split(",") if x.strip())
