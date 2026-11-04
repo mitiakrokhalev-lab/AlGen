@@ -472,13 +472,23 @@ class Theory:
             if PAIR_FILTER is not None and env:
                 su = next((x for x in map(_s, env.values()) if x in PAIR_UNI), None)
                 if su is not None:
-                    key = (r["sort"], r["name"], su)
-                    f = pf_cache.get(key)
-                    if f is None:
-                        nb = _neighbours().get(su, ())
-                        f = pf_cache[key] = [(t, i) for t, i in lst
-                                             if _s(t) not in PAIR_UNI or _s(t) == su or _s(t) in nb]
-                    lst = f
+                    # индекс списка (один на сорт и роль): место терма по имени и места
+                    # термов вне вселенной; соседи su берутся по индексу, без кэша на su
+                    key = (r["sort"], r["name"])
+                    ix = pf_cache.get(key)
+                    if ix is None or ix[0] is not lst:
+                        pos = {_s(t): k for k, (t, _) in enumerate(lst)}
+                        ix = pf_cache[key] = (lst, pos, [k for k, (t, _) in enumerate(lst) if _s(t) not in PAIR_UNI])
+                    _, pos, outside = ix
+                    nb = _neighbours().get(su, ())
+                    if len(nb) > len(lst):  # список короче соседей — фильтр прямо по нему
+                        lst = [(t, i) for t, i in lst if _s(t) not in PAIR_UNI or _s(t) == su or _s(t) in nb]
+                    else:
+                        ks = {pos[x] for x in nb if x in pos}
+                        if su in pos:
+                            ks.add(pos[su])
+                        ks.update(outside)
+                        lst = [lst[k] for k in sorted(ks)]
             return lst
 
         def fits(r, t, info, env):

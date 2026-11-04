@@ -19,8 +19,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base: [G, GE, GN]
-        code: [new, old]
+        base: [GE, GN]
+        code: [new]  # старый код — в запуске canon-3 (41749856320)
     runs-on: ubuntu-latest
     timeout-minutes: 350
     steps:
