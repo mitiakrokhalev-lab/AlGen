@@ -101,6 +101,14 @@ class ClauseStore:
     def __len__(self):
         return len(self.offs) - 1
 
+    def max_var(self):
+        """Наибольший номер переменной в клаузах (0, если клауз нет)."""
+        if not len(self.data):
+            return 0
+        import numpy as np
+        a = np.frombuffer(self.data, dtype=np.int32)
+        return int(max(a.max(), -a.min()))
+
     def __iter__(self):
         d, o = self.data, self.offs
         for i in range(len(o) - 1):
@@ -139,6 +147,13 @@ class OriginStore:
 
     def __iter__(self):
         return (self.names[k] for k in self.ids)
+
+
+def clause_max_var(clauses):
+    """Наибольший номер переменной в клаузах: быстро для ClauseStore, иначе перебором."""
+    if isinstance(clauses, ClauseStore):
+        return clauses.max_var()
+    return max((abs(l) for c in clauses for l in c), default=0)
 
 
 class Vocab:

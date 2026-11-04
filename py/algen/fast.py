@@ -35,7 +35,7 @@ class Bank:
         self.s = solver
         self.n = 0
         self.unsat = {}  # frozenset литералов → ядро
-        self.nclause = max((abs(l) for c in theory.clauses for l in c), default=0)
+        self.nclause = logic.clause_max_var(theory.clauses)
         self.P = np.zeros((self.nclause + 1, 1), dtype=np.uint64)  # переменная верна в модели
         self.N = np.zeros((self.nclause + 1, 1), dtype=np.uint64)  # переменная ложна
         rng = random.Random(1)

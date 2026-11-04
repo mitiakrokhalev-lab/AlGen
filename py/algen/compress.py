@@ -109,7 +109,8 @@ def _solve(s, assumptions):
 
 
 def _nvars(T):
-    return max((abs(c) for cl in T.clauses for c in cl), default=0) + 1
+    from algen.logic import clause_max_var
+    return clause_max_var(T.clauses) + 1
 
 
 def _subst(x, t, G):

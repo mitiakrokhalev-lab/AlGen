@@ -828,7 +828,8 @@ def equiv_reps(f, decide=None):
     for j in range(n):
         buckets[(f.m[:, j].tobytes(), f.m[:, j ^ 1].tobytes())].append(j)
     fixed = [f.lit(j) for j in f.fixed]
-    nclause = max((abs(l) for c in T.clauses for l in c), default=0)
+    from .logic import clause_max_var
+    nclause = clause_max_var(T.clauses)
     fl_list = list(dict.fromkeys(l for a, v in fixed if type(l := T.lit(a, v)) is int))
     own_decide = decide is None
     if decide is None:
