@@ -784,6 +784,7 @@ def load_reps(f, base, tdir):
 
 
 EQUIV_MODELS = 64  # моделей теории для разбиения корзин equiv_reps (0 — без разбиения)
+UNIT_EQUIV = True  # равносильность сначала единичным распространением (False — только decide)
 
 
 def equiv_reps(f, decide=None):
@@ -819,6 +820,7 @@ def equiv_reps(f, decide=None):
         buckets[(f.m[:, j].tobytes(), f.m[:, j ^ 1].tobytes())].append(j)
     fixed = [f.lit(j) for j in f.fixed]
     nclause = max((abs(l) for c in T.clauses for l in c), default=0)
+    fl_list = list(dict.fromkeys(l for a, v in fixed if type(l := T.lit(a, v)) is int))
     if decide is None:
         def decide(T_, prem, goal, s_):
             free = any(type(l) is int and abs(l) > nclause for l in (T_.lit(*x) for x in prem + [goal]))
@@ -855,6 +857,31 @@ def equiv_reps(f, decide=None):
         col = M[:, abs(l) - 1]
         return (col if l > 0 else ~col).tobytes()
 
+    # Равносильность единичным распространением: если посылки записи с r
+    # совместны и распространение из них даёт j, а из посылок с j — r, то оба
+    # вопроса decide ответили бы «выводится». Иначе — прежние два вопроса.
+    shortcut = UNIT_EQUIV and all(type(T.lit(a, v)) is int or T.lit(a, v) is None for a, v in fixed) \
+        and all(abs(l) <= nclause for l in fl_list)
+    unit, want = {}, set()  # want — литералы текущей доли: следствия храним только среди них (память)
+
+    def implied(l):
+        if l not in unit:
+            ok, imp = s.propagate(assumptions=fl_list + [l])
+            unit[l] = want.intersection(imp or ()) if ok and fast.bank(T, s).sat(fl_list + [l])[0] else None
+        return unit[l]
+
+    def by_unit(r, j):
+        if not shortcut:
+            return False
+        lr, lj = T.lit(*f.lit(r)), T.lit(*f.lit(j))
+        if type(lr) is not int or type(lj) is not int or abs(lr) > nclause or abs(lj) > nclause:
+            return False
+        ir = implied(lr)
+        if ir is None or lj not in ir:
+            return False
+        ij = implied(lj)
+        return ij is not None and lr in ij
+
     rep = list(range(n))
     for js in buckets.values():
         if len(js) < 2:
@@ -864,11 +891,14 @@ def equiv_reps(f, decide=None):
         for j in js:
             parts[sig(j) if len(js) > 2 else 0].append(j)
         for part in parts.values():
+            unit.clear()
+            want.clear()
+            want.update(l for j in part if type(l := T.lit(*f.lit(j))) is int)
             classes = []  # внутри доли: несколько классов с одинаковыми столбцами
             for j in part:
                 for c in classes:
                     r = c[0]
-                    if decide(T, fixed + [f.lit(r)], f.lit(j), s).kind == "выводится" and \
+                    if by_unit(r, j) or decide(T, fixed + [f.lit(r)], f.lit(j), s).kind == "выводится" and \
                             decide(T, fixed + [f.lit(j)], f.lit(r), s).kind == "выводится":
                         c.append(j)
                         rep[j] = r
