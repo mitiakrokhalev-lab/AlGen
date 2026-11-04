@@ -90,16 +90,16 @@ class EnumerateTest(unittest.TestCase):
         alive, _ = enumerate_form(form, 1, goals=[4, 5])
         self.assertIn(((), 4), alive)
         self.assertIn(((), 5), alive)
-        self.assertNotIn(((0,), 4), alive)
+        self.assertIn(((0,), 4), alive)  # не снимается: может оказаться доказуемым фактом
 
     def test_zero_premises(self):
-        # c верно во всех строках: вопрос «всегда ли c?» — условие без посылок, а
-        # «a ⇒ c», «b ⇒ c» неминимальны. ¬a опровергается первой строкой.
+        # c верно во всех строках: вопрос «всегда ли c?» — условие без посылок; «a ⇒ c»
+        # остаётся (доказуемое — факт). ¬a опровергается первой строкой.
         form = FakeForm([(True, True, True), (False, True, True), (True, False, True)])
         alive, _ = enumerate_form(form, 2, goals=[1, 4])
         self.assertIn(((), 4), alive)
         self.assertNotIn(((), 1), alive)
-        self.assertFalse(any(g == 4 and prem for prem, g in alive), alive)
+        self.assertIn(((0,), 4), alive)
 
     def test_cover_prefers_shared_fact(self):
         # Условия 0 и 1 держатся на x или y, условие 2 — только на y:
