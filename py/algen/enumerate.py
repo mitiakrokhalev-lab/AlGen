@@ -80,6 +80,9 @@ ZERO_PREMISES = True
 LATE_HINTS = True
 # Строки таблицы: значения только атомов теории и столбцов формы (прочие ни на что не влияют).
 ROW_FACT_FILTER = True
+# Предел кэшей строк базы (записанные значения, выводы для разбора помеченных): строки G
+# огромны, кэш общий для всех схем части — без предела память росла до гибели машины.
+ROW_CACHE = 32
 CORE_PROPS = {"trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable", "nilpotent",
               "perfect", "torsion-free", "periodic", "divisible", "centerless", "residually-finite",
               "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent", "free-abelian", "p-group"}
@@ -702,20 +705,7 @@ class SchemeForm(Form):
             if max_subs and any(im[0] == "sub" and im[2] >= max_subs for im in env.values()):
                 continue
             facts, hard = self.search.facts(env)
-            if ROW_FACT_FILTER:
-                # Значения атомов, которых нет ни в клаузах теории, ни в столбцах формы,
-                # ни на что не влияют: свободная переменная в посылках решателя ничего
-                # не выводит, а значение строки берётся только у атомов формы. Прежде
-                # T.lit заводил их (у G — сотни тысяч на строку: память и время строки).
-                keep = self.__dict__.get("_keep_set")
-                if keep is None or keep[0] != (len(self.atoms), len(T.var)):
-                    # атомы формы и теории (симметричные отношения — в обоих порядках,
-                    # как их нормализует T.lit); один поиск в множестве на значение
-                    ks = set(self.atoms) | set(T.var)
-                    ks |= {(a[0], a[1], a[3], a[2]) for a in T.var if a[0] == "r" and a[1] in SYMMETRIC}
-                    keep = self._keep_set = ((len(self.atoms), len(T.var)), ks)
-                ks = keep[1]
-                facts = {a: v for a, v in facts.items() if a in ks}
+            facts = self._relevant(facts)
             assume = [l for a, v in facts.items() if (l := T.lit(a, v)) not in (None, False)]
             if not self.sc.s.solve(assumptions=assume):
                 self.skipped.append(self.where_env(env))  # записи противоречат базе
@@ -751,9 +741,34 @@ class SchemeForm(Form):
         return np.array(sorted(l for a, v in f.items() if type(l := T.lit(a, v)) is int),
                         dtype=np.int32).tobytes()
 
+    def _relevant(self, facts):
+        """Значения только атомов формы и теории. Значения атомов, которых нет ни в
+        клаузах теории, ни в столбцах формы, ни на что не влияют: свободная
+        переменная в посылках решателя ничего не выводит, а значение строки берётся
+        только у атомов формы. Прежде T.lit заводил их (у G — сотни тысяч на строку:
+        память и время строки)."""
+        if not ROW_FACT_FILTER:
+            return facts
+        T = self.sc.T
+        keep = self.__dict__.get("_keep_set")
+        if keep is None or keep[0] != (len(self.atoms), len(T.var)):
+            # атомы формы и теории (симметричные отношения — в обоих порядках,
+            # как их нормализует T.lit); один поиск в множестве на значение
+            ks = set(self.atoms) | set(T.var)
+            ks |= {(a[0], a[1], a[3], a[2]) for a in T.var if a[0] == "r" and a[1] in SYMMETRIC}
+            keep = self._keep_set = ((len(self.atoms), len(T.var)), ks)
+        ks = keep[1]
+        return {a: v for a, v in facts.items() if a in ks}
+
     def row_facts(self, r):
         if r not in self._facts:
-            self._facts[r] = self.search.facts(self.envs[r])
+            # кэш ограничен: у G записанных значений строки — сотни тысяч, а кэш
+            # общий для всех схем части (база); без предела машина перебора пилота 9
+            # умирала по памяти на 4-й схеме
+            if len(self._facts) >= ROW_CACHE:
+                self._facts.clear()
+            facts, hard = self.search.facts(self.envs[r])
+            self._facts[r] = (self._relevant(facts), hard)
         return self._facts[r]
 
     def _derive(self, facts, hint=None):
@@ -922,7 +937,11 @@ class SchemeForm(Form):
             key = self._key(f)
             row = self._derived.get(key)
             if row is None:
+                if base is None and len(self._derived) >= ROW_CACHE:
+                    self._derived.clear()  # кэш базы (общий для схем): с пределом, см. row_facts
                 row = self._derived[key] = self._derive(f)
+            if base is None and len(self._kept) >= 4 * ROW_CACHE:
+                self._kept.clear()
             self._kept[k] = self._matrix([row])[0]
         return self._kept[k]
 
