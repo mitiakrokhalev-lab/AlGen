@@ -348,23 +348,37 @@ class Form:
         """Строки, где ни один литерал запрета (столбцы cols) не ложен, а
         неизвестен ровно один: заполнив его, можно закрыть запрет.
         Возвращает [(строка, столбец неизвестного литерала)]."""
+        # ответ зависит только от набора столбцов (неизвестен ровно один литерал),
+        # а контрапозиции одного запрета спрашивают тот же набор
+        mm = self.__dict__.get("_one_memo")
+        if mm is None or mm[0] is not self.m:
+            mm = self._one_memo = (self.m, {})
+        memo = mm[1]
+        key = (tuple(sorted(cols)), limit)
+        hit = memo.get(key)
+        if hit is None:
+            hit = memo[key] = self._one_unknown(cols, limit)
+        return list(hit)
+
+    def _one_unknown(self, cols, limit=None):
         cols = list(cols) + self.fixed
         _, P, valid = self._bits(self.m)
-        ok, one, two, unks = valid.copy(), np.zeros_like(valid), np.zeros_like(valid), []
+        ok, one, two = valid.copy(), np.zeros_like(valid), np.zeros_like(valid)
         for c in cols:
             ok &= ~P[c ^ 1]  # ни один литерал не ложен
             u = ~P[c] & ~P[c ^ 1]
             two |= one & u
             one |= u
-            unks.append(u)
         rows = self._rows(self.m, ok & one & ~two)  # неизвестен ровно один
         if limit is not None and len(rows) > limit:
             real = rows[~self.synth_mask()[rows]]
             rows = np.concatenate([real, rows[self.synth_mask()[rows]]])[:limit]
-        which = np.zeros(len(rows), dtype=np.int64)
-        if len(rows):
-            for c, u in reversed(list(zip(cols, unks))):  # первый неизвестный — как argmax
-                which[np.isin(rows, self._rows(self.m, u))] = c
+        if len(rows):  # строк немного (limit): неизвестный литерал — по подматрице
+            sub = self.m[rows]
+            unk = ~sub[:, cols] & ~sub[:, [c ^ 1 for c in cols]]
+            which = np.asarray(cols)[unk.argmax(axis=1)]
+        else:
+            which = []
         return list(zip(rows.tolist(), [int(c) for c in which]))
 
     def value_name(self, r, atom):
@@ -492,12 +506,26 @@ def _atom_name_cached(a):
     return n
 
 
+_LITH = {}
+_M128 = (1 << 128) - 1
+
+
+def _lit_hash(a, v):
+    k = (a, v)
+    h = _LITH.get(k)
+    if h is None:
+        import hashlib
+        name = f"{'' if v else '¬'}{_atom_name_cached(a)}"
+        h = _LITH[k] = int.from_bytes(hashlib.blake2b(name.encode(), digest_size=16).digest(), "little")
+    return h
+
+
 def name_key(facts):
     """Ключ записанных значений строки по именам атомов — не зависит от нумерации
-    переменных теории, поэтому годится между прогонами с разными правилами (A4)."""
-    import hashlib
-    items = sorted(f"{'' if v else '¬'}{_atom_name_cached(a)}" for a, v in facts.items())
-    return hashlib.sha1("\n".join(items).encode()).hexdigest()[:20]
+    переменных теории, поэтому годится между прогонами с разными правилами (A4).
+    Сумма 128-битных хешей литералов: без сортировки строк на каждой строке таблицы
+    (у G — сотни тысяч значений в строке)."""
+    return f"{(sum(_lit_hash(a, v) for a, v in facts.items()) & _M128):032x}:{len(facts)}"
 
 
 class SchemeForm(Form):
@@ -1235,7 +1263,7 @@ def run(max_prem, lib=None, vocab=None, form=None):
     if getattr(form, "pair_atoms", None):
         mins = pair_minimal(form, mins)
     mins = generic_filter(form, mins)
-    report = []
+    report, degen_memo = [], {}
     for (prem, g), support in mins.items():
         prem_l = [l for j in prem for l in form.lits(j)]
         goal = form.lit(g)
@@ -1246,7 +1274,14 @@ def run(max_prem, lib=None, vocab=None, form=None):
         # подгруппу — тривиальной или всей. Это тоже факт меньшей схемы.
         # Смотрим на весь запрет, чтобы контрапозиции решались одинаково.
         whole = fixed + prem_l + [(goal[0], not goal[1])]
-        if any(decide(form.sc.T, whole, d, form.sc.s).kind == "выводится" for d in degen):
+        # один ответ на весь запрет (у контрапозиций тот же набор литералов): банк
+        # моделей на повторный вопрос отвечает без решателя, так что это экономит
+        # только сам повтор
+        wkey = frozenset(whole)
+        dg = degen_memo.get(wkey)
+        if dg is None:
+            dg = degen_memo[wkey] = any(decide(form.sc.T, whole, d, form.sc.s).kind == "выводится" for d in degen)
+        if dg:
             continue
         v = decide(form.sc.T, fixed + prem_l, goal, form.sc.s)
         r = {"_cols": list(prem) + [g ^ 1],
@@ -1325,10 +1360,16 @@ def questions(form, report, limit=None):
             cache[S] = form._rows(m, R)
         return cache[S]
 
+    done = {}  # у контрапозиций запрета тот же набор F — тот же вопрос
     for r in report:
         if r["вердикт"] != "неизвестно" or "_cols" not in r:
             continue
         F = tuple(sorted(r["_cols"]))
+        if F in done:
+            if done[F] is not None:
+                r["вопрос"] = {k: list(v) if isinstance(v, list) else v for k, v in done[F].items()}
+            continue
+        done[F] = None
         for size in range(1, len(F)):
             cand = [(len(rows(S)), S) for S in combinations(F, size) if len(rows(S)) <= limit]
             if cand:
@@ -1343,6 +1384,7 @@ def questions(form, report, limit=None):
                 r["вопрос"] = {"S": " & ".join(names), "групп": n, "неизвестно": int(np.bitwise_count(maybe).sum()) - n,
                                "группы": [form.where(int(x)) for x in rows(S)[:3]],
                                "все группы": sorted(form.where(int(x)) for x in rows(S))}
+                done[F] = {k: list(v) if isinstance(v, list) else v for k, v in r["вопрос"].items()}
                 break
 
 
