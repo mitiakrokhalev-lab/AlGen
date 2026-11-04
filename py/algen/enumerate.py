@@ -175,8 +175,17 @@ def atom_name(a):
     return f"{a[1]}({', '.join(map(str, a[2:]))})"
 
 
+_LIT_NAMES = {}
+
+
 def lit_name(a, v):
-    return ("" if v else "¬") + atom_name(a)
+    """Имя литерала; одна строка на литерал (у схемы G при k = 3 в отчёте до миллиона
+    строк с этими именами — без общего экземпляра каждая занимала память заново)."""
+    k = (a, v)
+    n = _LIT_NAMES.get(k)
+    if n is None:
+        n = _LIT_NAMES[k] = ("" if v else "¬") + atom_name(a)
+    return n
 
 
 # --- подсхемы и симметрии ---------------------------------------------------------
@@ -308,10 +317,24 @@ def symmetries(graph, atoms, fixed):
     return out
 
 
+_CANON = {}
+
+
+def _canon_lit(a, v, i, perm):
+    k = (a, v, i)
+    n = _CANON.get(k)
+    if n is None:
+        n = _CANON[k] = ("" if v else "¬") + canon_atom(a, perm)
+    return n
+
+
 def klass(lits, perms):
     """Канонический запрет: множество литералов с точностью до симметрий."""
-    return min(tuple(sorted(("" if v else "¬") + canon_atom(a, perm) for a, v in lits))
-               for perm in perms)
+    if _CANON.get(("id",)) is not perms:  # кэш имён — для одного набора симметрий
+        _CANON.clear()
+        _CANON[("id",)] = perms
+    return min(tuple(sorted(_canon_lit(a, v, i, perm) for a, v in lits))
+               for i, perm in enumerate(perms))
 
 
 class Form:
