@@ -24,9 +24,23 @@ env:
   THREADS: "2"
   MEM: "4"
   ALGEN_SKEL: ${{ github.workspace }}/skel
+  # Номер прошлого запуска pilot: каркас, таблица и классы равносильных берутся из его
+  # артефактов (хранятся 7 дней), сразу перебор. Годится, если с тех пор не менялись
+  # library.py, logic.py, finite.py и данные (иначе таблица не загрузится: отпечаток).
+  PREV_RUN: ""
 
 jobs:
+  cfg:
+    runs-on: ubuntu-latest
+    outputs:
+      prev: ${{ steps.c.outputs.prev }}
+    steps:
+      - id: c
+        run: echo "prev=$PREV_RUN" >> "$GITHUB_OUTPUT"
+
   skel:
+    needs: cfg
+    if: needs.cfg.outputs.prev == ''
     permissions:
       contents: read
     runs-on: ubuntu-latest
@@ -116,9 +130,11 @@ jobs:
           compression-level: 1
 
   enum:
-    needs: prep
+    needs: [cfg, prep]
+    if: always() && (needs.prep.result == 'success' || needs.cfg.outputs.prev != '')
     permissions:
       contents: read
+      actions: read
     strategy:
       fail-fast: false
       matrix:
@@ -136,10 +152,14 @@ jobs:
         with:
           name: skel
           path: .
+          run-id: ${{ needs.cfg.outputs.prev || github.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/download-artifact@v4
         with:
           name: tabs
           path: tab
+          run-id: ${{ needs.cfg.outputs.prev || github.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: перебор
         continue-on-error: true
         run: |

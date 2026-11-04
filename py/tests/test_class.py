@@ -72,6 +72,30 @@ class ClassTest(unittest.TestCase):
             "print(len(miss), miss[:5])\n")
         self.assertTrue(out.strip().startswith("0 "), out)
 
+    def test_constants_not_need_tops(self):
+        """Константы архива (60, 1056, …) есть в каждой схеме, но условие не обязано
+        их касаться: иначе схемы G ничего не выдают (дыра 4.11, проверщик)."""
+        out = run_size(
+            "from algen import table as T\n"
+            "from algen.etalon import scheme, term\n"
+            "from algen.logic import Vocab, Var\n"
+            "v = Vocab.section('grp')\n"
+            "for base in ('G', 'n'):\n"
+            "    g, _, _ = scheme(v, {'раздел': 'grp', 'условие': T.BASES[base]})\n"
+            "    names = {str(x): x for x in g.terms}\n"
+            "    bad = 0\n"
+            "    ss = T.schemes(v, base, 3)\n"
+            "    for sid, ts in ss:\n"
+            "        el = {x for x in g.terms if isinstance(x, Var)} | {term(g, x, names, 'grp') for x in ts}\n"
+            "        tops = T.need_tops(g, el)\n"
+            "        bad += any(not isinstance(t, Var) and not T.app_nodes(t) for t in tops)\n"
+            "    base0 = min(ss, key=lambda s: len([x for x in s[1] if T.app_nodes(term(g, x, names, 'grp'))]))\n"
+            "    el = {x for x in g.terms if isinstance(x, Var)} | {term(g, x, names, 'grp') for x in base0[1]}\n"
+            "    print(base, bad, sorted(str(t) for t in T.need_tops(g, el)))\n")
+        lines = out.strip().splitlines()
+        self.assertEqual(lines[0], "G 0 ['G']", out)
+        self.assertTrue(lines[1].startswith("n 0 "), out)
+
     def test_relations_all_pairs(self):
         """Отношения словаря заводятся у всех подходящих пар термов, а не только с переменной."""
         out = run_size(

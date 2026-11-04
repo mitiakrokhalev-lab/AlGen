@@ -999,6 +999,16 @@ def drop_equiv(f, cols=None):
     return out
 
 
+def need_tops(g, elems):
+    """Верхние термы схемы, которых должно коснуться каждое условие. Числовые
+    константы архива (60, 1056, …) входят в каждую схему базы — это общий фон,
+    а не терм схемы: требовать касания каждой константы нельзя (атом о двух
+    константах замкнут и не перебирается, отношения «группа — число» нет, так
+    что условий, касающихся G и всех констант сразу, не бывает — выдача схем
+    G была пустой)."""
+    return [t for t in maximal(g, elems) if isinstance(t, Var) or app_nodes(t)]
+
+
 def view(base_form, terms):
     """Схема-вид: столбцы таблицы для переменных базы и термов terms."""
     b = base_form
@@ -1029,7 +1039,7 @@ def view(base_form, terms):
     v.m, v.s, v.e = b.m[:, cols], b.s[:, cols], b.e[:, cols]
     v._base, v._base_cols = b, cols
     v.drop = drop_equiv(v, cols)
-    top = maximal(g, elems)
+    top = need_tops(g, elems)
     v.need = [{i for i, a in enumerate(v.atoms) if t in a[2:]} for t in top]
     sw = SWAP.get(_STATE.get("base_of", {}).get(id(b)))
     if sw:  # парные атомы «P(A) и P(B)» для симметричных переменных базы
@@ -1084,7 +1094,9 @@ def _one(job):
         if limit:
             signal.alarm(0)
     rec = {"id": sid, "условие": BASES[base] + (f"; класс {CLASS}" if CLASS else ""), "термы": terms, "посылок": k, "без": sorted(E.SKIP),
-           "отпечаток": fp, "секунд": round(time.time() - t0, 1), "статус": status, **summary}
+           "отпечаток": fp, "секунд": round(time.time() - t0, 1), "статус": status,
+           # строки библиотеки, чьи записи противоречат правилам (неверно правило или данные)
+           "строк противоречат базе": len(getattr(_STATE["forms"][base], "skipped", []) or []), **summary}
     p = Path(outdir) / sid
     p.with_suffix(".txt").write_text(err.getvalue() + "\n" + out.getvalue(), encoding="utf-8")
     p.with_suffix(".json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -1148,6 +1160,11 @@ def run_schemes(a):
         if jobs:
             by_base[base] = jobs
     total = sum(len(j) for j in by_base.values())
+    # план части: сводка сверяет, у каких схем нет результата (не начаты до срока,
+    # убиты внешним timeout) — иначе они пропадают молча
+    part = (a.part or "1/1").replace("/", "-")
+    (outdir / f"_план-{part}.json").write_text(json.dumps(
+        {"схемы": [j[1] for js in by_base.values() for j in js]}, ensure_ascii=False), encoding="utf-8")
     print(f"схем к перебору {total}, нитей {a.jobs}: " + ", ".join(f"{b} {len(j)}" for b, j in by_base.items()),
           file=sys.stderr, flush=True)
     t0 = time.time()

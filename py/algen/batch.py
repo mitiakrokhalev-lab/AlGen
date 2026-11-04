@@ -137,11 +137,15 @@ def aggregate(a):
     """Общая сводка: решающие значения по всем схемам (повторы складываются),
     вопросы реестра, кластеры без кандидата, таблица схем."""
     recs = []
+    planned = set()
     for p in sorted(Path(a.dir).glob("*.json")):
         try:
             r = json.loads(p.read_text(encoding="utf-8"))
         except Exception as e:
             print(f"{p.name}: не читается ({e})", file=sys.stderr)
+            continue
+        if p.name.startswith("_план-"):
+            planned |= set(r.get("схемы", []))
             continue
         if isinstance(r, dict) and "id" in r:
             recs.append(r)
@@ -188,6 +192,14 @@ def aggregate(a):
             f"остаток: {sum(r.get('остаток') or 0 for r in ok)}, "
             f"секунд на схему: среднее {round(sum(float(r.get('секунд') or 0) for r in recs) / max(1, len(recs)))}, "
             f"наибольшее {max((float(r.get('секунд') or 0) for r in recs), default=0)}.\n")
+    missing = sorted(planned - {r["id"] for r in recs})
+    if planned:
+        head += (f"\nПо плану частей схем {len(planned)}; **без результата {len(missing)}** "
+                 f"(не начаты до срока или убиты внешним timeout)"
+                 + (": " + ", ".join(missing[:30]) + (" …" if len(missing) > 30 else "") if missing else "") + ".\n")
+    bad = max((r.get("строк противоречат базе") or 0 for r in recs), default=0)
+    if bad:
+        head += f"\n**Строк библиотеки, противоречащих правилам: {bad}** (неверно правило или данные; список — в .txt схем).\n"
     md = [f"# Сводка пакетного прогона\n\n{head}",
           f"## Вопросы «какие группы бывают с S» ({len(qs)} вопросов на {sum(x['запретов'] for x in qs.values())} "
           f"запретов; без вопроса {noq})\n",
