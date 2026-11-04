@@ -1560,8 +1560,15 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
                       f, ensure_ascii=False, indent=1)
     seen, hints, vals = {}, defaultdict(set), defaultdict(set)
     reduced = {}
+    # Сжатие (ALGEN_COMPRESS, py/algen/compress.py): свёрнутый вопрос следует из
+    # теории и оставленных вопросов. Он не выкидывается, а показывается свёрнутым
+    # со ссылками «следует из №…» и возвращается, если источник опровергнут.
+    folded = {}
     for r in report:
         if r["вердикт"] != "неизвестно":
+            continue
+        if r.get("свёрнута"):
+            folded[r["№"]] = r
             continue
         t = r["класс"]
         seen.setdefault(t, r["примеров"])
@@ -1614,6 +1621,11 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
             print(f"{k} — запретов {len(ts)}: {qs.get(k, {}).get('вопрос', '')}")
     print(f"решающих значений {len(fresh)} на {sum(len(ts) for _, ts in fresh)} запретов, без кандидата {len(bare_fresh)} "
           f"в {len(cl)} кластерах, в реестре {sum(len(x) for x in known.values())}", file=sys.stderr)
+    if folded:
+        print(f"== свёрнуто вопросов {len(folded)}: следуют из теории и оставленных вопросов ==")
+        for k, r in sorted(folded.items()) if full else ():
+            print(f"№{k} {' & '.join(r['класс'])} ⇐ " + ", ".join(f"№{d}" for d in r["следует из"]))
+        print(f"свёрнуто вопросов {len(folded)} (список: --полностью)", file=sys.stderr)
     summary = {
         "запретов": len(classes), "вердикты": dict(tally), "остаток": len(seen),
         "значения": [{"имя": v, "запретов": len(ts), "пример": " & ".join(ts[0])} for v, ts in fresh],
@@ -1622,6 +1634,32 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
         "реестр": {k: len(ts) for k, ts in known.items()},
         "отложено": getattr(form, "deferred", []),
     }
+    if any("сжатие" in r for r in report):  # без флага сводка прежняя бит в бит
+        summary["свёрнуто"] = {k: r["следует из"] for k, r in folded.items()}
+        from algen import compress
+        summary["оставленные вопросы"] = compress.kept_questions(report)  # для сжатия между схемами
+        # Полный список для архива: базис фактов (свёрнутые факты следуют из него без
+        # теории) и условия, опровергнутые только помеченным значением библиотеки.
+        kept_f, seen_f = [], set()
+        for r in report:
+            if r["вердикт"] == "выводится" and not r.get("свёрнута") and r.get("№") not in seen_f:
+                seen_f.add(r.get("№"))
+                kept_f.append({"№": r.get("№"), "посылки": r["посылки"], "цель": r["цель"], "ядро": r.get("ядро", [])})
+        summary["оставленные факты"] = kept_f
+        summary["свёрнуто фактов"] = sum(1 for r in report if r["вердикт"] == "выводится" and r.get("свёрнута"))
+        summary["опровергнуто помеченным"] = [
+            {"запрет": r["запрет"], "вердикт": r["вердикт"], "решающий факт": r.get("решающий факт")}
+            for r in classes.values() if r["вердикт"] in ("трудный контрпример", "короткий довод")]
+    # Факты без посылок: литералы-теоремы схемы (выводятся без посылок), касающиеся
+    # каждого верхнего терма (так каждый попадает ровно в одну схему); замкнутые
+    # числовые (2 ⩽ 3) — арифметика, не выписываются.
+    need = getattr(form, "need", None) or []
+    def _ground(t):
+        return isinstance(t, App) and all(_ground(a) for a in t.args)
+    summary["факты без посылок"] = sorted(
+        lit_name(*form.lit(j)) for j in getattr(form, "const", [])
+        if form.atoms[j // 2][0] != "pair" and all(j // 2 in n for n in need)
+        and not all(_ground(x) for x in form.atoms[j // 2][2:] if not isinstance(x, (str, int, bool))))
     qs = {}
     for r in classes.values():
         q = r.get("вопрос")

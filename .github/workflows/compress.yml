@@ -1,0 +1,30 @@
+name: compress
+
+# Замер сжатия выдачи (py/algen/compress.py) на схеме G, Z(G), G′:
+# время, сколько свёрнуто, verify на выборке и regress до/после.
+# Запуск: пуш в ветку сжатия с «[compress-run]» в сообщении коммита.
+
+on:
+  push:
+    branches: ["claude/project-thread-x5hadw"]
+
+jobs:
+  compress:
+    if: contains(github.event.head_commit.message, '[compress-run]')
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      ALGEN_FAST: "1"
+      ALGEN_COMPRESS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: сжатие G, Z(G), G′
+        run: |
+          cd py
+          timeout 340m python3 -m algen.compress_run 3 "∀ G : Grp" "center(G); commutator(G)"
