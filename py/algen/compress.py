@@ -43,6 +43,10 @@ import hashlib
 VERSION = 1
 # Бюджет конфликтов на один вызов решателя; None — без ограничения.
 CONF_BUDGET = 100_000
+# Ссылки «следует из» длиннее TRIM_FROM укорачиваются до TRIM_PASSES
+# повторными вызовами решателя (короче ссылка — меньше строк возвращается
+# при опровержении одного источника).
+TRIM_FROM, TRIM_PASSES = 4, 3
 
 
 def row_id(r):
@@ -306,7 +310,19 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
             ans = _solve(s, fixed + F + list(sels))
             if ans is False:
                 core = set(s.get_core() or [])
-                deps = sorted(sels[x] for x in sels if x in core)
+                cs = [x for x in sels if x in core]
+                # Укорачивание: решаем заново только с селекторами ядра — новое
+                # ядро бывает меньше. Любое ядро — верный набор источников; если
+                # решатель не ответил, остаётся прежнее (тоже верное).
+                for _ in range(TRIM_PASSES if len(cs) > TRIM_FROM else 0):
+                    if _solve(s, fixed + F + cs) is not False:
+                        break
+                    core = set(s.get_core() or [])
+                    cs2 = [x for x in cs if x in core]
+                    if len(cs2) >= len(cs):
+                        break
+                    cs = cs2
+                deps = sorted(sels[x] for x in cs)
                 if kind == "неизвестно" and not deps:
                     # следует из одной теории — значит, вердикт «неизвестно»
                     # неверен; не сворачиваем, а помечаем
