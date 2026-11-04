@@ -76,6 +76,8 @@ DEFER = 0.0
 # Условия без посылок (k = 0) — часть класса k ⩽ 3: вопрос «всегда ли X?» не следует
 # из вопросов «P ⇒ X» (проверщик 4.11: ЯЗ-43, ЯЗ-39). False — прежнее поведение.
 ZERO_PREMISES = True
+# При сжатии подсказки считаются только оставленным строкам (свёрнутым не нужны).
+LATE_HINTS = True
 CORE_PROPS = {"trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable", "nilpotent",
               "perfect", "torsion-free", "periodic", "divisible", "centerless", "residually-finite",
               "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent", "free-abelian", "p-group"}
@@ -1432,6 +1434,7 @@ def run(max_prem, lib=None, vocab=None, form=None):
         mins = pair_minimal(form, mins)
     mins = generic_filter(form, mins)
     report, degen_memo = [], {}
+    late_hints = bool(os.environ.get("ALGEN_COMPRESS")) and LATE_HINTS
     for (prem, g), support in mins.items():
         prem_l = [l for j in prem for l in form.lits(j)]
         goal = form.lit(g)
@@ -1458,7 +1461,9 @@ def run(max_prem, lib=None, vocab=None, form=None):
              "класс": klass(prem_l + [(goal[0], not goal[1])], perms),
              "примеров": support, "вердикт": v.kind,
              "ядро": [lit_name(*x) for x in v.core or []]}
-        if v.kind == "неизвестно":
+        if v.kind == "неизвестно" and late_hints:
+            r["_hint"] = (prem, g, prem_l, goal)
+        elif v.kind == "неизвестно":
             hint = form.unknown_goal(prem, g)
             if hint is not None:
                 r["заполнить"] = {"где": form.where(hint), "атом": atom_name(goal[0])}
@@ -1492,12 +1497,35 @@ def run(max_prem, lib=None, vocab=None, form=None):
             r["контрпример"] = {"где": form.where(r["_держится"][1][fact]), mark: sorted(fact)}
     for r in report:
         r.pop("_держится", None)
-    questions(form, report)
+    if not late_hints:
+        questions(form, report)
     # Сжатие выдачи (тред «Сжать выдачу», py/algen/compress.py): только добавляет
     # поля строкам, без флага выдача прежняя бит в бит.
     if os.environ.get("ALGEN_COMPRESS"):
         from algen import compress
         compress.compress(form, report)
+    if late_hints:
+        # Подсказки (решающие значения, сведение к вырожденности, вопрос «какие группы
+        # с S») — только оставленным после сжатия: свёрнутым они не нужны (вопрос
+        # разбирается по базису), а это ≈ треть времени схемы. Вердикты и сжатие от
+        # подсказок не зависят.
+        for r in report:
+            h = r.pop("_hint", None)
+            if h is None or r.get("свёрнута"):
+                continue
+            prem, g, prem_l, goal = h
+            hint = form.unknown_goal(prem, g)
+            if hint is not None:
+                r["заполнить"] = {"где": form.where(hint), "атом": atom_name(goal[0])}
+            for d in degen_all:
+                if decide(form.sc.T, fixed + prem_l + [(d[0], not d[1])], (goal[0], not goal[1]),
+                          form.sc.s).kind == "выводится":
+                    r["сводится"] = sorted(lit_name(*x) for x in prem_l) + [lit_name(*d)]
+                    break
+            r["значения"] = sorted({form.value_name(x, form.lit(c)[0]) if form.lit(c)[0][0] != "pair" else
+                                    form.value_name(x, form.lits(c)[0][0])
+                                    for x, c in form.one_unknown(list(prem) + [g ^ 1], limit=60)})
+        questions(form, [r for r in report if not r.get("свёрнута")])
     for r in report:
         r.pop("_cols", None)
     return form, alive, empty, report
