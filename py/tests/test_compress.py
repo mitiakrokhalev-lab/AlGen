@@ -394,3 +394,23 @@ class TestGenericFilterClass(unittest.TestCase):
     def test_class_term_in_class_dropped(self):
         out, f = self.run_filter([[(("p", "fin", ZG), True)]], "fin")
         self.assertEqual(out, {})
+
+
+class TestAcross(unittest.TestCase):
+    def test_fold_across_schemes(self):
+        from algen import compress_base as B
+        f = FakeForm(ATOMS, [["-a", "b"]])
+        T = f.sc.T
+        name2lit = {a: (a, True) for a in ATOMS} | {"¬" + a: (a, False) for a in ATOMS}
+        qs = [{"id": "S1:x", "№": "x", "запрет": ["b", "¬c"], "примеров": 5},
+              {"id": "S2:y", "№": "y", "запрет": ["a", "¬c"], "примеров": 1},
+              {"id": "S3:x", "№": "x", "запрет": ["b", "¬c"], "примеров": 5},
+              {"id": "S3:z", "№": "z", "запрет": ["d", "¬e"], "примеров": 1},
+              {"id": "S4:w", "№": "w", "запрет": ["q", "¬e"], "примеров": 0}]
+        kept, folded, why, enc, fx = B.fold_across(T, name2lit, [], qs)
+        self.assertEqual(sorted(kept), ["S1:x", "S3:z", "S4:w"])
+        self.assertEqual(folded["S2:y"], ["S1:x"])
+        self.assertEqual(folded["S3:x"], ["S1:x"])
+        self.assertEqual(why["S4:w"], "нет литерала в каркасе")
+        self.assertEqual(B.verify_across(T, enc, fx, kept, folded), [])
+        self.assertTrue(B.verify_across(T, enc, fx, kept, dict(folded, **{"S2:y": ["S3:z"]})))

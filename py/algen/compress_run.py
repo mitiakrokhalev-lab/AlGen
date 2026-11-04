@@ -53,4 +53,10 @@ print("нарушений regress:", len(cap["reg"]), cap["reg"][:10])
 print("ОШИБКА сжатия:", sum("ОШИБКА сжатия" in r for r in report))
 deps = Counter(len(r["следует из"]) for r in cl.values() if r.get("свёрнута") and not r.get("экземпляр"))
 print("размер «следует из»:", sorted(deps.items())[:15], "…, max", max(deps) if deps else 0)
+if len(sys.argv) > 4:  # для сжатия между схемами (compress_base)
+    import json
+    from pathlib import Path
+    Path(sys.argv[4]).write_text(json.dumps({"id": sys.argv[5] if len(sys.argv) > 5 else Path(sys.argv[4]).stem,
+                                             "оставленные вопросы": C.kept_questions(report)}, ensure_ascii=False),
+                                 encoding="utf-8")
 sys.exit(1 if cap["bad"] or cap["reg"] else 0)

@@ -1636,6 +1636,8 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
     }
     if any("сжатие" in r for r in report):  # без флага сводка прежняя бит в бит
         summary["свёрнуто"] = {k: r["следует из"] for k, r in folded.items()}
+        from algen import compress
+        summary["оставленные вопросы"] = compress.kept_questions(report)  # для сжатия между схемами
     qs = {}
     for r in classes.values():
         q = r.get("вопрос")

@@ -462,3 +462,15 @@ def regress(before, after):
             if not r.get("следует из") or any(d not in kept for d in r["следует из"]):
                 bad.append((i, "цепочка не кончается на оставленных"))
     return bad
+
+
+def kept_questions(report):
+    """Оставленные (несвёрнутые) вопросы схемы — по одному на класс — для
+    сжатия между схемами базы (compress_base): запрет именами литералов."""
+    out, seen = [], set()
+    for r in report:
+        if r.get("вердикт") != "неизвестно" or r.get("свёрнута") or "№" not in r or r["№"] in seen:
+            continue
+        seen.add(r["№"])
+        out.append({"№": r["№"], "запрет": list(r["запрет"]), "примеров": r.get("примеров", 0)})
+    return out
