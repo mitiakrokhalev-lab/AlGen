@@ -410,6 +410,14 @@ def verify(form, report, sample=None, rng=None):
 ADDED = {"№", "свёрнута", "следует из", "сжатие", "экземпляр", "опровергнут", "вернулась", "ОШИБКА сжатия"}
 
 
+def digest(r):
+    """Отпечаток прежних полей строки (без служебных и добавленных сжатием):
+    для regress на больших выдачах вместо копии строк."""
+    import json
+    body = {k: v for k, v in r.items() if not k.startswith("_") and k not in ADDED}
+    return hashlib.sha1(json.dumps(body, sort_keys=True, ensure_ascii=False, default=str).encode()).hexdigest()
+
+
 def regress(before, after):
     """Сверка выдачи до/после сжатия: ни одна строка не потеряна, ни одно
     прежнее поле (в том числе вердикт) не изменилось, у каждой свёрнутой
@@ -420,6 +428,10 @@ def regress(before, after):
     if len(before) != len(after):
         bad.append(("строк", len(before), len(after)))
     for i, (b, a) in enumerate(zip(before, after)):
+        if isinstance(b, str):  # отпечаток digest(r)
+            if digest(a) != b:
+                bad.append((i, "поля изменены"))
+            continue
         for k, v in b.items():
             if k.startswith("_") or k in ADDED:
                 continue

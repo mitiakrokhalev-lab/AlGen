@@ -350,6 +350,8 @@ class TestRegress(unittest.TestCase):
             before = copy.deepcopy(rows)
             C.compress(f, rows)
             self.assertEqual(C.regress(before, rows), [])
+            self.assertEqual(C.regress([C.digest(r) for r in before], rows), [])
         self.assertTrue(C.regress(before, rows[:-1]) or len(rows) == 0)
         rows[0]["вердикт"] = "выводится" if rows[0]["вердикт"] != "выводится" else "неизвестно"
         self.assertTrue(C.regress(before, rows))
+        self.assertTrue(C.regress([C.digest(r) for r in before], rows))
