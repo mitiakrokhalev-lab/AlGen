@@ -76,3 +76,29 @@ class SymKeyTest(unittest.TestCase):
             self.assertTrue(o.get("неканонический"))
             str(o)  # всё печатается
         self.assertNotEqual(lib.sym_key(factorial(2000)), lib.sym_key(factorial(2000) + 1))
+
+
+class RankTest(unittest.TestCase):
+    """d(G): поле «ранг», 1 и циклические, не к. п.; A × B — max при взаимно простых
+    порядках, сумма при тривиальном множителе, иначе неизвестно."""
+
+    def test_key_rank(self):
+        from types import SimpleNamespace
+        from algen.library import INF, Search
+        obj = {
+            "1:1": {"конечная": True, "свойства": {"trivial": True}},
+            "4:2": {"конечная": True, "свойства": {"trivial": False, "cyclic": False}, "ранг": 2},
+            "3:1": {"конечная": True, "свойства": {"trivial": False, "cyclic": True}},
+            "6:1": {"конечная": True, "свойства": {"trivial": False, "cyclic": False}, "ранг": 2},
+            "Q": {"конечная": False, "свойства": {"finite": False, "fin-gen": False}},
+            "P1": {"конечная": True, "свойства": {}}, "P2": {"конечная": True, "свойства": {}},
+            "P3": {"конечная": True, "свойства": {}},
+        }
+        prod = {("4:2", "3:1"): "P1", ("4:2", "6:1"): "P2", ("1:1", "6:1"): "P3"}
+        sc = Search.__new__(Search)
+        sc.lib = SimpleNamespace(obj=obj, prod=prod)
+        r = sc._key_rank
+        self.assertEqual([r("1:1"), r("3:1"), r("4:2"), r("Q")], [0, 1, 2, INF])
+        self.assertEqual(r("P1"), 2)      # V₄ × C₃: порядки 4 и 3 взаимно просты
+        self.assertIsNone(r("P2"))        # V₄ × C₆: не взаимно просты — не знаем
+        self.assertEqual(r("P3"), 2)      # 1 × C₆
