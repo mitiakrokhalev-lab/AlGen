@@ -58,3 +58,21 @@ class SearchTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SymKeyTest(unittest.TestCase):
+    def test_sym_key_huge_and_nested(self):
+        """Sym(Sym(X)) при большом |X|: card = n! — ключ без десятичной записи,
+        порядок не пишется (пилот 15 падал: «Exceeds the limit (4300 digits)»)."""
+        from math import factorial
+        from algen.library import Library
+        lib = Library.__new__(Library)
+        lib.obj = {}
+        for n in (7, 150, 151, 2000, factorial(2000)):
+            k = lib.sym_key(n)
+            self.assertIn(k, lib.obj)
+            o = lib.obj[k]
+            self.assertEqual(o["порядок"], factorial(n) if n <= 150 else None)
+            self.assertTrue(o.get("неканонический"))
+            str(o)  # всё печатается
+        self.assertNotEqual(lib.sym_key(factorial(2000)), lib.sym_key(factorial(2000) + 1))
