@@ -93,6 +93,7 @@ THEORY_CONST = True
 # литералом-теоремой из form.const: он посылкой не перебирается, и без этого
 # все условия об атомах G/H, G/G′, G/Φ(G) терялись (проверщик 5.11).
 REQ_CONST = True
+PACK_T = True  # pack по транспонированной m: те же слова, без транспонирования на каждый вызов
 CORE_PROPS = {"trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable", "nilpotent",
               "perfect", "torsion-free", "periodic", "divisible", "centerless", "residually-finite",
               "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent", "free-abelian", "p-group"}
@@ -1207,12 +1208,22 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     neg_idx = np.arange(n_lit) ^ 1
     bufs = {}
 
+    mT = None  # m по столбцам (n_lit, строк) — для pack без транспонирования
+
     def pack(rows):
         """Столбцы по строкам rows (номера строк m) — матрица (n_lit, слов)."""
+        nonlocal mT
         w = max(1, (len(rows) + 63) // 64)
-        pk = np.packbits(m[rows], axis=0, bitorder="little")
-        pad = np.zeros((w * 8 - pk.shape[0], n_lit), dtype=np.uint8)
-        return np.ascontiguousarray(np.vstack([pk, pad]).T).view(np.uint64)
+        if not PACK_T:
+            pk = np.packbits(m[rows], axis=0, bitorder="little")
+            pad = np.zeros((w * 8 - pk.shape[0], n_lit), dtype=np.uint8)
+            return np.ascontiguousarray(np.vstack([pk, pad]).T).view(np.uint64)
+        if mT is None:
+            mT = np.ascontiguousarray(m.T)
+        out = np.zeros((n_lit, w * 8), dtype=np.uint8)
+        pk = np.packbits(mT[:, rows], axis=1, bitorder="little")
+        out[:, :pk.shape[1]] = pk
+        return out.view(np.uint64)
 
     def ones(n):
         mask = np.zeros(max(1, (n + 63) // 64) * 64, dtype=bool)

@@ -1118,6 +1118,17 @@ def _alarm(signum, frame):
     raise SchemeTimeout()
 
 
+def _rss_gb():
+    """Текущая память процесса (VmRSS), ГБ."""
+    try:
+        for line in open("/proc/self/status"):
+            if line.startswith("VmRSS"):
+                return round(int(line.split()[1]) / 1e6, 2)
+    except OSError:
+        pass
+    return None
+
+
 # Предпроверка локальной теорией схемы (fast.Local): вердикты те же, ядра — свои.
 LOCAL_PRECHECK = os.environ.get("ALGEN_LOCAL", "1") == "1"
 
@@ -1126,6 +1137,7 @@ def _one(job):
     base, sid, terms, k, outdir, fp = job
     out, err = io.StringIO(), io.StringIO()
     t0 = time.time()
+    rss0 = _rss_gb()  # память процесса в начале схемы
     limit = _STATE.get("limit") or 0
     if limit:
         signal.signal(signal.SIGALRM, _alarm)
@@ -1170,6 +1182,7 @@ def _one(job):
     rec = {"id": sid, "условие": BASES[base] + (f"; класс {CLASS}" if CLASS else ""), "термы": terms, "посылок": k, "без": sorted(E.SKIP),
            "отпечаток": fp, "секунд": round(time.time() - t0, 1), "статус": status,
            # пик памяти процесса с его начала (схемы идут в одном процессе — пик не убывает)
+           "память ГБ": [rss0, _rss_gb()],  # VmRSS в начале и в конце схемы
            "пик памяти ГБ": round(__import__("resource").getrusage(__import__("resource").RUSAGE_SELF).ru_maxrss / 1e6, 2),
            # строки библиотеки, чьи записи противоречат правилам (неверно правило или данные)
            "строк противоречат базе": len(getattr(_STATE["forms"][base], "skipped", []) or []), **summary}

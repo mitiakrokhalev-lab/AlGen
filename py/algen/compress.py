@@ -53,6 +53,7 @@ CONF_BUDGET = 100_000
 # решатель теории не уложился в CONF_BUDGET: их предпроверка сворачивает);
 # «следует из» — ядро другого решателя, тоже верное.
 PRECHECK = True
+REUSE_SOLVER = True  # сжатие в основном решателе формы (см. compress)
 TRIM_FROM, TRIM_PASSES = 4, 0  # прогон 41761019204: max 176 → 163, +10 с — выключено
 
 
@@ -157,8 +158,17 @@ def _solve(s, assumptions):
     return s.solve_limited(assumptions=assumptions)
 
 
+_NV = {}  # id(теории) → (теория, число клауз, ответ): проход по 53 млн литералам G — 13,6 с на схему
+
+
 def _nvars(T):
-    return max((abs(c) for cl in T.clauses for c in cl), default=0) + 1
+    c = _NV.get(id(T))
+    if c is not None and c[0] is T and c[1] == len(T.clauses):
+        return c[2]
+    v = max((abs(c) for cl in T.clauses for c in cl), default=0) + 1
+    _NV.clear()
+    _NV[id(T)] = (T, len(T.clauses), v)
+    return v
 
 
 def _subst(x, t, G):
@@ -330,11 +340,20 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
     rows.sort(key=lambda r: (ck[r["№"]], key(r)))
 
     # вопросы: теория + оставленные вопросы под селекторами
-    sq = T.solver()
+    # REUSE_SOLVER: гипотезы — в основной решатель формы под свежими селекторами,
+    # после сжатия селекторы гасятся (единичные клаузы ¬sel). Второй решатель на
+    # всю теорию у G — ещё ≈ 0,9 ГБ при 16 ГБ машины (пилот 12: 29 падений по памяти).
+    own = getattr(getattr(form, "sc", None), "s", None)
+    reuse = REUSE_SOLVER and own is not None and getattr(own, "solver", 1) is not None
+    sq = own if reuse else T.solver()
     # селекторы — номера выше всех переменных теории, гипотез и запретов
-    # (T.lit заводит переменные лениво, поэтому смотрим и на сами запреты)
+    # (T.lit заводит переменные лениво, поэтому смотрим и на сами запреты), а в
+    # основном решателе — и выше всех его переменных (селекторы прежних схем)
     nv = max([_nvars(T)] + [abs(l) + 1 for l in fixed]
-             + [abs(l) + 1 for r in rows for l in (_safe_forbid(form, r) or [])])
+             + [abs(l) + 1 for r in rows for l in (_safe_forbid(form, r) or [])]
+             + ([sq.nof_vars() + 1] if reuse else []))
+    nv_start = nv
+    bmodel = None  # модель теории с фоном (см. проверку совместности фона)
     # факты: только оставленные факты
     sf = Solver(name="g4")
     from . import fast as _fast
@@ -395,7 +414,15 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                 # строках) вместе противоречивы, а из противоречия следует всё: после
                 # них сворачивался любой вопрос (5.11, пилоты 9–10). Вопрос, с которым
                 # фон несовместен, остаётся вопросом, но фоном не служит.
-                ok = _solve(sq, fixed + list(sel_q) + [nv])
+                # свидетель совместности без решателя: последняя модель теории с
+                # посылками записи и фоном, где запрет нового вопроса ложен (в ней
+                # верен и весь фон: каждый принятый по ней вопрос в ней ложен)
+                if bmodel is not None and any(bmodel.get(abs(l)) is not None and bmodel[abs(l)] != (l > 0) for l in F):
+                    ok = True
+                else:
+                    ok = _solve(sq, fixed + list(sel_q) + [nv])
+                    if ok:
+                        bmodel = {abs(x): x > 0 for x in (sq.get_model() or [])}
                 if ok:
                     sel_q[nv] = r["№"]
                     if sb is not None:
@@ -412,7 +439,11 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                 sf.add_clause([-nf] + [-l for l in F])
                 sel_f[nf] = r["№"]
     finally:
-        sq.delete()
+        if reuse:
+            for x in range(nv_start + 1, nv + 1):
+                sq.add_clause([-x])
+        else:
+            sq.delete()
         sf.delete()
         if sb is not None:
             sb.delete()

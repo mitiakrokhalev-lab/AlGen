@@ -44,6 +44,54 @@ ATOMS = ["a", "b", "c", "d", "e"]
 
 
 class TestCompress(unittest.TestCase):
+    def test_reuse_solver_same_decisions_and_inert_after(self):
+        """Сжатие в основном решателе формы: те же решения, что со своим решателем;
+        два сжатия подряд в одном решателе — второе как с чистого листа; после —
+        решатель отвечает о теории как прежде (селекторы погашены)."""
+        import random
+        for case in range(80):
+            rnd = random.Random(500 + case)
+            cl = [[rnd.choice(["", "-"]) + rnd.choice(ATOMS) for _ in range(rnd.randint(1, 3))]
+                  for _ in range(rnd.randint(0, 4))]
+
+            def rows_for(f, seed):
+                rnd2, out = random.Random(seed), []
+                for i in range(rnd2.randint(3, 12)):
+                    prem = rnd2.sample(ATOMS, rnd2.randint(0, 2))
+                    goal = rnd2.choice([a for a in ATOMS if a not in prem])
+                    r = row(f, prem, goal, n=rnd2.randint(0, 9))
+                    sv = f.sc.T.solver()
+                    F = C.forbid_lits(f, r)
+                    sat = sv.solve(assumptions=F) and sv.solve(assumptions=F[:-1] + [-F[-1]])
+                    sv.delete()
+                    r["вердикт"] = rnd2.choice(["неизвестно"] * 3 + ["выводится"]) if sat else "выводится"
+                    out.append(r)
+                return out
+
+            def dec(rep):
+                return sorted((r["№"], bool(r["свёрнута"]), "вне фона" in r) for r in rep)
+            res = {}
+            for reuse in (False, True):
+                C.REUSE_SOLVER = reuse
+                f = FakeForm(ATOMS, cl)
+                f.sc.s = f.sc.T.solver()
+                try:
+                    a = dec(C.compress(f, rows_for(f, 1000 + case)))
+                    b = dec(C.compress(f, rows_for(f, 2000 + case)))
+                    probe = [f.sc.s.solve(assumptions=[f.sc.T.lit(x) * sg]) for x in ATOMS for sg in (1, -1)]
+                except Exception as e:
+                    a = b = probe = type(e).__name__
+                finally:
+                    f.sc.s.delete()
+                res[reuse] = (a, b)
+                if reuse and not isinstance(probe, str):
+                    sv = f.sc.T.solver()
+                    want = [sv.solve(assumptions=[f.sc.T.lit(x) * sg]) for x in ATOMS for sg in (1, -1)]
+                    sv.delete()
+                    self.assertEqual(probe, want, case)
+            C.REUSE_SOLVER = True
+            self.assertEqual(res[False], res[True], case)
+
     def test_opposite_questions_do_not_fold_everything(self):
         """«Всегда ли ¬c?» и «всегда ли c?» (c не известно нигде) вместе
         противоречивы: второй остаётся вопросом, но фоном не служит, а вопрос
