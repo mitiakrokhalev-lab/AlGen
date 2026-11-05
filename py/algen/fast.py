@@ -147,6 +147,13 @@ class Bank:
     def sat(self, lits):
         """(выполнимо?, ядро при «нет»)."""
         STATS["вопросов"] += 1
+        free = {l for l in lits if abs(l) > self.nclause}
+        if free:
+            # переменная вне клауз свободна, но x ∧ ¬x невыполнимо и для неё
+            # (прежде такие пары отбрасывались — ответ «выполнимо»)
+            both = next((l for l in free if -l in free), None)
+            if both is not None:
+                return False, [both, -both]
         lits = [l for l in lits if abs(l) <= self.nclause]
         if self.witness(lits):
             STATS["из банка"] += 1

@@ -28,6 +28,11 @@ env:
   # артефактов (хранятся 7 дней), сразу перебор. Годится, если с тех пор не менялись
   # library.py, logic.py, finite.py и данные (иначе таблица не загрузится: отпечаток).
   PREV_RUN: ""
+  # Динамический архив: каждая схема пишет кэш вердиктов (<схема>.vc.json.gz);
+  # STATE_RUN — номер прошлого запуска pilot, чьи кэши берутся (решатель — только
+  # о новых условиях). Пусто — без прежнего кэша.
+  ALGEN_STATE_SAVE: "1"
+  STATE_RUN: ""
 
 jobs:
   cfg:
@@ -160,11 +165,20 @@ jobs:
           path: tab
           run-id: ${{ needs.cfg.outputs.prev || github.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: прежнее состояние схем
+        if: env.STATE_RUN != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh run download $STATE_RUN -R $GITHUB_REPOSITORY -n part-${{ matrix.cls }}-${{ matrix.part }} -D state0
+          ls state0/${{ matrix.cls }} | grep -c vc.json.gz || true
       - name: перебор
         continue-on-error: true
         run: |
           cd py
           if [ "${{ matrix.cls }}" != none ]; then export ALGEN_CLASS=${{ matrix.cls }}; fi
+          if [ -d ../state0/${{ matrix.cls }} ]; then export ALGEN_STATE=$PWD/../state0/${{ matrix.cls }}; fi
           timeout 320m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../out/${{ matrix.cls }} --часть ${{ matrix.part }}/20 --выборка 10 --нитей $THREADS --память $MEM --посылок $K --до 300 --предел 3600 $ARGS
       - uses: actions/upload-artifact@v4
         if: always()

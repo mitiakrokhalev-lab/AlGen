@@ -18,6 +18,7 @@ SAT-решатель ищет противоречие с базой прави�
 import functools
 import argparse
 import json
+import math
 import random
 import sys
 from pathlib import Path
@@ -146,6 +147,7 @@ class Library:
                 self.obj[k]["эндоморфизмы"] = h["endos"]
         self._aut_out()
         self._chars()
+        self._props2()
         with open(infinite, encoding="utf-8") as f:
             raw = json.load(f)
             for r in raw["группы"]:
@@ -503,6 +505,32 @@ class Library:
             o["inn центральна"] = r["inn_central"]
             o["|Aut|"], o["|Out|"] = r["aut_order"], r["out_order"]
 
+    PROPS2 = ("two-generated", "clt", "dedekind", "prime-orders", "proper-subs-abelian",
+              "proper-subs-nilpotent", "proper-subs-cyclic", "metabelian", "class-2", "exponent-4",
+              "exponent-6")
+
+    def _props2(self):
+        """Свойства конечных групп, посчитанные GAP (gap/props2.g →
+        data/finite/grp-props2.jsonl): ранг d(G) в поле «ранг» и свойства PROPS2.
+        Значение, расходящееся с уже записанным, — ошибка (ни одно не затирается)."""
+        from .finite import load_props2
+        for k, r in load_props2().items():
+            o = self.obj.get(k)
+            if o is None or not o.get("конечная"):
+                continue
+            pr = o.setdefault("свойства", {})
+            for p in self.PROPS2:
+                v = r.get(p)
+                if v is None:
+                    continue
+                if pr.get(p) is not None and pr[p] != v:
+                    raise ValueError(f"grp-props2.jsonl: {k} {p} = {v}, а в библиотеке {pr[p]}")
+                pr[p] = v
+            if r.get("rank_exact"):
+                if o.get("ранг") is not None and o["ранг"] != r["rank"]:
+                    raise ValueError(f"grp-props2.jsonl: {k} ранг {r['rank']}, а в библиотеке {o['ранг']}")
+                o["ранг"] = r["rank"]
+
     def _chars(self):
         """Конечные группы без таблицы подгрупп (порядок > 100): подгруппы 1, Z, G′,
         Φ, G с факторами и Aut/Out — data/finite/grp-chars.jsonl (считает GAP,
@@ -631,7 +659,7 @@ class Library:
                 # для синтетической записи это не доказано (та же Sₙ может быть в
                 # библиотеке под другим ключом) — решают свойства и порядок
                 self.obj[key] = {"key": key, "имя": key.replace("Sym(", "S(", 1), "конечная": True, "синтез": True,
-                                 "без произведений": True, "неканонический": True,
+                                 "без произведений": True, "неканонический": True, "ранг": 2,  # Sₙ, n ⩾ 3: (1 2), (1 … n)
                                  # n! записывается при n ⩽ 150: порядок печатают (num-термы)
                                  "порядок": factorial(card) if card <= 150 else None,
                                  "свойства": {**yes, **no}, "почему": {}, "подгруппы": None}
@@ -927,6 +955,24 @@ class Library:
                 o[field] = field
         s.delete()
         return len(made)
+
+    def rank_products(self):
+        """Двупорождённость построенных A × B по рангу (Search._key_rank): d ⩽ 2.
+        Расхождение с выведенным значением — ошибка."""
+        sc = Search.__new__(Search)
+        sc.lib = self
+        for k in set(self.prod.values()):
+            o = self.obj.get(k)
+            if o is None:
+                continue
+            r = sc._key_rank(k)
+            if r is None or r == INF:
+                continue
+            pr = o["свойства"]
+            v = r <= 2
+            if pr.get("two-generated") is not None and pr["two-generated"] != v:
+                raise ValueError(f"{k}: ранг {r}, а two-generated = {pr['two-generated']}")
+            pr["two-generated"] = v
 
     def saturate(self, workers=None, rounds=3):
         """Дописать в записи бесконечных групп значения, которые следуют по
@@ -1760,6 +1806,9 @@ class Search:
         if t.op == "ord":
             n = self._im_order(args[0])
             return ("num", n) if n is not None else None
+        if t.op == "rank":
+            n = self._key_rank(self._obj(args[0]))
+            return ("num", n) if n is not None else None
         if t.op == "index" and args[1] and args[1][0] == "sub":
             key, j = args[1][1], args[1][2]
             x = lib.obj[key]["подгруппы"][j]
@@ -1997,6 +2046,38 @@ class Search:
                     # Inn ⊴ Aut максимальна ⇔ Out не имеет собственных нетривиальных подгрупп ⇔ |Out| простое
                     out[("p", "maximal", t)] = arith_sub_props(n, n // i)["prime-index"]
         return out, hard
+
+    def _key_rank(self, k, depth=0):
+        """d(G) группы записи k: поле «ранг» (GAP), 0 у 1, 1 у циклической ≠ 1, INF у
+        не конечно порождённой; у построенного A × B — max(d A, d B) при взаимно
+        простых конечных порядках и d A + d B, если один множитель тривиален;
+        иначе None."""
+        if k is None or depth > 4:
+            return None
+        o = self.lib.obj.get(k)
+        if o is None:
+            return None
+        if o.get("ранг") is not None:
+            return o["ранг"]
+        pr = o["свойства"]
+        if pr.get("trivial"):
+            return 0
+        if pr.get("cyclic"):
+            return 1
+        if pr.get("fin-gen") is False:
+            return INF
+        rev = self.__dict__.setdefault("_prod_of", {v: kk for kk, v in self.lib.prod.items()})
+        if k in rev:
+            a, b = rev[k]
+            ra, rb = self._key_rank(a, depth + 1), self._key_rank(b, depth + 1)
+            na, nb = self._key_order(a), self._key_order(b)
+            if None in (ra, rb) or INF in (ra, rb):
+                return None
+            if 0 in (ra, rb):
+                return ra + rb
+            if isinstance(na, int) and isinstance(nb, int) and math.gcd(na, nb) == 1:
+                return max(ra, rb)
+        return None
 
     def _key_order(self, k):
         """Порядок группы записи: n у «n:i», произведение у построенных A × B,
@@ -2297,6 +2378,7 @@ def built_library(vocab=None):
     lib = Library()
     lib.saturate()
     lib.synthesize_products(vocab)
+    lib.rank_products()
     try:
         CACHE.mkdir(exist_ok=True)
         for old in CACHE.glob("библиотека-*.pickle"):
