@@ -641,21 +641,31 @@ class Library:
             # это «изоморфны» в фактах строки: образа нет
             return None
         key = "Sym(ℕ)"
+        base = "SymN" if "SymN" in self.obj else None  # запись Sym(ℕ) из data/infinite/grp.json
+        yes = dict.fromkeys(("centerless", "perfect", "indecomposable", "no-finite-quotients",
+                             "contains-free"), True)
+        no = dict.fromkeys((
+            "finite", "countable", "fin-gen", "two-generated", "fin-pres", "trivial", "abelian",
+            "cyclic", "nilpotent", "class-2", "dedekind", "solvable", "metabelian", "polycyclic",
+            "simple", "free", "free-abelian", "torsion-free", "periodic", "bounded-exponent",
+            "locally-finite", "residually-finite", "virtually-nilpotent", "virtually-solvable",
+            "amenable", "locally-solvable", "locally-nilpotent", "locally-cyclic", "linear-c",
+            "divisible", "residually-nilpotent", "exponent-2", "exponent-3", "exponent-4",
+            "exponent-6", "prime-orders", "clt", "p-group", "prime-order", "order-p2", "order-pq",
+            "two-primes", "odd-order", "proper-subs-abelian", "proper-subs-nilpotent",
+            "proper-subs-cyclic", "proper-subs-finite"), False)
+        vals = {**yes, **no}
+        if base is not None:
+            # дописать недостающее в запись библиотеки; расхождение — ошибка данных
+            props = self.obj[base]["свойства"]
+            for q, v in vals.items():
+                if props.get(q, v) != v:
+                    raise ValueError(f"sym_key: SymN.{q} = {props[q]}, а по теореме {v}")
+                props.setdefault(q, v)
+            return base
         if key not in self.obj:
-            yes = dict.fromkeys(("centerless", "perfect", "indecomposable", "no-finite-quotients",
-                                 "contains-free"), True)
-            no = dict.fromkeys((
-                "finite", "countable", "fin-gen", "two-generated", "fin-pres", "trivial", "abelian",
-                "cyclic", "nilpotent", "class-2", "dedekind", "solvable", "metabelian", "polycyclic",
-                "simple", "free", "free-abelian", "torsion-free", "periodic", "bounded-exponent",
-                "locally-finite", "residually-finite", "virtually-nilpotent", "virtually-solvable",
-                "amenable", "locally-solvable", "locally-nilpotent", "locally-cyclic", "linear-c",
-                "divisible", "residually-nilpotent", "exponent-2", "exponent-3", "exponent-4",
-                "exponent-6", "prime-orders", "clt", "p-group", "prime-order", "order-p2", "order-pq",
-                "two-primes", "odd-order", "proper-subs-abelian", "proper-subs-nilpotent",
-                "proper-subs-cyclic", "proper-subs-finite"), False)
             self.obj[key] = {"key": key, "имя": key, "конечная": False, "синтез": True,
-                             "без произведений": True, "свойства": {**yes, **no}, "почему": {},
+                             "без произведений": True, "свойства": vals, "почему": {},
                              "подгруппы": None}
         return key
 
@@ -1464,6 +1474,8 @@ class Search:
                 if not hasattr(self, "_by_name"):
                     self._by_name = {o.get("имя"): k for k, o in lib.obj.items() if o.get("конечная")}
                 k = self._by_name.get(f"C{n}")
+            if k is None and t.op == "sym-n" and isinstance(n, int) and n != INF:
+                k = lib.sym_key(n)  # Sₙ при n ⩾ 7 (S_∞ не записывается: Sym(ℕ) или FSym — не определено)
             return ("obj", k) if k and k in lib.obj else None
         if t.op in ("num-add", "num-sub", "num-pow", "num-gcd") and all(a and a[0] == "num" for a in args):
             a, b = args[0][1], args[1][1]
