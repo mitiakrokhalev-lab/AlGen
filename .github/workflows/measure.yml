@@ -35,10 +35,7 @@ jobs:
           gh run download $TABLES_RUN -R $GITHUB_REPOSITORY -n tabs -D tab
           gh run download $TABLES_RUN -R $GITHUB_REPOSITORY -n skel -D .
           ls -la tab | head; du -sh tab skel кэш
-      - name: сжатие строк под схему
-        run: |
-          mkdir -p res
-          cd py && timeout 90m python3 -m algen.measure строки $BASE --каталог ../tab --выборка 40 2>&1 | tee ../res/строки.txt
+      - run: mkdir -p res
       - name: профиль перебора 5 схем
         continue-on-error: true
         run: |
