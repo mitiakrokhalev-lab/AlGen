@@ -8,7 +8,7 @@ on:
     branches: ["measure-*"]
 
 env:
-  TABLES_RUN: "41640102876"
+  TABLES_RUN: "42049108650"
   ALGEN_SIZE: "2"
   ALGEN_FAST: "1"
   BASE: "G"
