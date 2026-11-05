@@ -184,6 +184,31 @@ class Bank:
 LOCAL = {}  # id(теории) → Local текущей схемы (table._one ставит и снимает)
 
 
+_FLAT = {}  # id(теории) → (теория, литералы клауз подряд, границы): один раз на теорию
+
+
+def _flat(theory):
+    """Клаузы теории плоскими массивами numpy (литералы int32, границы int64): из ClauseStore — без копии
+    по Python, из списка списков — один проход."""
+    import numpy as np
+    cs = theory.clauses
+    c = _FLAT.get(id(theory))
+    if c is not None and c[0] is theory and len(c[2]) == len(cs) + 1:
+        return c[1], c[2]
+    if hasattr(cs, "data") and hasattr(cs, "offs"):
+        # копия: вид без копии не дал бы массиву ClauseStore расти (BufferError)
+        data = np.frombuffer(cs.data, dtype=np.int32).copy()
+        offs = np.frombuffer(cs.offs, dtype=np.int64).copy()
+    else:
+        from itertools import chain
+        lens = np.fromiter((len(x) for x in cs), dtype=np.int64, count=len(cs))
+        offs = np.concatenate([[0], np.cumsum(lens)])
+        data = np.fromiter(chain.from_iterable(cs), dtype=np.int32, count=int(offs[-1]))
+    _FLAT.clear()  # одна теория за раз (память)
+    _FLAT[id(theory)] = (theory, data, offs)
+    return data, offs
+
+
 class Local:
     """Локальная теория схемы: клаузы теории, все переменные которых — атомы о
     термах схемы (и их подтермах), в своём решателе со сжатой нумерацией.
@@ -213,8 +238,8 @@ class Local:
                         add(a)
         for t in terms:
             add(t)
-        cs = theory.clauses
-        top = logic.clause_max_var(cs)
+        data, offs = _flat(theory)
+        top = int(np.abs(data).max()) if len(data) else 0
         allowed = np.zeros(top + 2, dtype=bool)
         for a in theory.atoms:
             if all(x in clos for x in a[2:] if is_term(x)):
@@ -225,20 +250,18 @@ class Local:
         idx = np.flatnonzero(allowed)
         g2l[idx] = np.arange(1, len(idx) + 1)
         self.g2l, self.l2g = g2l, np.concatenate([[0], idx])
-        if isinstance(cs, logic.ClauseStore) and len(cs.offs) > 1:
-            data = np.frombuffer(cs.data, dtype=np.int32).astype(np.int64)
-            offs = np.frombuffer(cs.offs, dtype=np.int64)
+        cl = []
+        if len(offs) > 1:
             ok = allowed[np.abs(data)].astype(np.int8)
             nonempty = offs[1:] > offs[:-1]
             good = np.zeros(len(offs) - 1, dtype=bool)
             starts = offs[:-1][nonempty]
             if len(starts):
                 good[nonempty] = np.minimum.reduceat(ok, starts) == 1
-            mapped = np.sign(data) * g2l[np.abs(data)]
-            cl = [mapped[offs[i]:offs[i + 1]].tolist() for i in np.flatnonzero(good)]
-        else:
-            cl = [[(1 if l > 0 else -1) * int(g2l[abs(l)]) for l in c] for c in cs
-                  if all(abs(l) <= top and allowed[abs(l)] for l in c)]
+            cl = []
+            for i in np.flatnonzero(good):
+                c = data[offs[i]:offs[i + 1]].astype(np.int64)
+                cl.append((np.sign(c) * g2l[np.abs(c)]).tolist())
         self.n_atoms, self.n_clauses = len(idx), len(cl)
         self.clauses = cl
         self.s = Solver(name="g4", bootstrap_with=cl)
