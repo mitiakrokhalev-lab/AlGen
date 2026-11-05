@@ -44,6 +44,40 @@ ATOMS = ["a", "b", "c", "d", "e"]
 
 
 class TestCompress(unittest.TestCase):
+    def test_precheck_keeps_fold_decisions(self):
+        """Предпроверка без теории: те же свёрнутые и оставленные, verify чист."""
+        import random
+        for case in range(150):
+            rnd = random.Random(case)
+            cl = [[rnd.choice(["", "-"]) + rnd.choice(ATOMS) for _ in range(rnd.randint(1, 3))]
+                  for _ in range(rnd.randint(0, 5))]
+            res = []
+            for pre in (False, True):
+                C.PRECHECK = pre
+                f = FakeForm(ATOMS, cl)
+                rnd2 = random.Random(1000 + case)
+                rows = []
+                for i in range(rnd2.randint(3, 14)):
+                    prem = rnd2.sample(ATOMS, rnd2.randint(0, 2))
+                    goal = rnd2.choice([a for a in ATOMS if a not in prem])
+                    r = row(f, prem, goal, n=rnd2.randint(0, 9))
+                    # как в переборе: «неизвестно» — только если запрет совместен с теорией
+                    sv = f.sc.T.solver()
+                    F = C.forbid_lits(f, r)  # посылки ∧ ¬цель; «неизвестно» — совместны и она, и посылки ∧ цель
+                    sat = sv.solve(assumptions=F) and sv.solve(assumptions=F[:-1] + [-F[-1]])
+                    sv.delete()
+                    r["вердикт"] = rnd2.choice(["неизвестно"] * 3 + ["выводится"]) if sat else "выводится"
+                    rows.append(r)
+                try:
+                    rep = C.compress(f, rows)
+                except Exception as e:  # теория без моделей и т. п. — одинаково в обоих режимах
+                    res.append(("ошибка", type(e).__name__))
+                    continue
+                res.append(sorted((r["№"], bool(r["свёрнута"]), "вне фона" in r) for r in rep))
+                self.assertEqual(C.verify(f, rep), [], (case, pre))
+            C.PRECHECK = True
+            self.assertEqual(res[0], res[1], case)
+
     def test_opposite_questions_do_not_fold_everything(self):
         """«Всегда ли ¬c?» и «всегда ли c?» (c не известно нигде) вместе
         противоречивы: второй остаётся вопросом, но фоном не служит, а вопрос
@@ -52,7 +86,9 @@ class TestCompress(unittest.TestCase):
         q1 = row(f, [], "c", n=9)  # запрет {¬c}
         q2 = dict(row(f, [], "c", n=8), _cols=[4], класс=("c",), цель="¬c")  # запрет {c}
         q3 = row(f, ["d"], "e", n=1)
-        rep = C.compress(f, [q1, q2, q3])
+        q2c = dict(q2)  # копия класса (контрапозиция): статус и «вне фона» — как у представителя
+        rep = C.compress(f, [q1, q2, q3, q2c])
+        self.assertEqual(q2c.get("вне фона"), [q1["№"]])
         self.assertFalse(q1["свёрнута"])
         self.assertFalse(q2["свёрнута"])
         self.assertEqual(q2["вне фона"], [q1["№"]])

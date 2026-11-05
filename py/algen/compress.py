@@ -46,6 +46,13 @@ CONF_BUDGET = 100_000
 # Ссылки «следует из» длиннее TRIM_FROM укорачиваются до TRIM_PASSES
 # повторными вызовами решателя (короче ссылка — меньше строк возвращается
 # при опровержении одного источника).
+# Предпроверка без теории: фон вопросов — ещё и в маленьком решателе без клауз
+# теории. Запрет, противоречащий одному фону, противоречит и фону с теорией —
+# свёртка без вызова решателя на всю теорию (у G — 1,24 млн атомов, ≈ 20 мс на
+# вызов). Какие вопросы свёрнуты, а какие оставлены — то же (кроме строк, где
+# решатель теории не уложился в CONF_BUDGET: их предпроверка сворачивает);
+# «следует из» — ядро другого решателя, тоже верное.
+PRECHECK = True
 TRIM_FROM, TRIM_PASSES = 4, 0  # прогон 41761019204: max 176 → 163, +10 с — выключено
 
 
@@ -289,6 +296,7 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
              + [abs(l) + 1 for r in rows for l in (_safe_forbid(form, r) or [])])
     # факты: только оставленные факты
     sf = Solver(name="g4")
+    sb = Solver(name="g4")  # фон вопросов без теории (PRECHECK)
     nf = nv
     sel_q, sel_f = {}, {}
     copies = []
@@ -308,7 +316,11 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
             if F is None:
                 continue
             s, sels = (sq, sel_q) if kind == "неизвестно" else (sf, sel_f)
-            ans = _solve(s, fixed + F + list(sels))
+            ans = None
+            if PRECHECK and kind == "неизвестно" and sels and _solve(sb, fixed + F + list(sels)) is False:
+                s, ans = sb, False
+            if ans is None:
+                ans = _solve(s, fixed + F + list(sels))
             if ans is False:
                 core = set(s.get_core() or [])
                 cs = [x for x in sels if x in core]
@@ -344,6 +356,7 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                 ok = _solve(sq, fixed + list(sel_q) + [nv])
                 if ok:
                     sel_q[nv] = r["№"]
+                    sb.add_clause([-nv] + [-l for l in F])
                 else:
                     sq.add_clause([-nv])
                     if ok is False:
@@ -358,9 +371,12 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
     finally:
         sq.delete()
         sf.delete()
+        sb.delete()
     for r in copies:
         rep = seen[r["№"], r["вердикт"]]
         r["свёрнута"], r["следует из"] = rep["свёрнута"], list(rep["следует из"])
+        if "вне фона" in rep:
+            r["вне фона"] = rep["вне фона"]
     return report
 
 
