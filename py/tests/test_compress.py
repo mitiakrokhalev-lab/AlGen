@@ -44,6 +44,24 @@ ATOMS = ["a", "b", "c", "d", "e"]
 
 
 class TestCompress(unittest.TestCase):
+    def test_opposite_questions_do_not_fold_everything(self):
+        """«Всегда ли ¬c?» и «всегда ли c?» (c не известно нигде) вместе
+        противоречивы: второй остаётся вопросом, но фоном не служит, а вопрос
+        «d ⇒ e?», с ними не связанный, не сворачивается (до 5.11 сворачивался)."""
+        f = FakeForm(ATOMS, [["-a", "b"]])
+        q1 = row(f, [], "c", n=9)  # запрет {¬c}
+        q2 = dict(row(f, [], "c", n=8), _cols=[4], класс=("c",), цель="¬c")  # запрет {c}
+        q3 = row(f, ["d"], "e", n=1)
+        rep = C.compress(f, [q1, q2, q3])
+        self.assertFalse(q1["свёрнута"])
+        self.assertFalse(q2["свёрнута"])
+        self.assertEqual(q2["вне фона"], [q1["№"]])
+        self.assertFalse(q3["свёрнута"], q3.get("следует из"))
+        self.assertEqual(C.verify(f, rep), [])
+        # фон, собранный руками из противоположных вопросов, verify ловит
+        q2.pop("вне фона")
+        self.assertIn(("фон", "оставленные вопросы вместе противоречивы"), C.verify(f, rep))
+
     def test_question_folds_through_theory_and_kept_question(self):
         f = FakeForm(ATOMS, [["-a", "b"]])  # теория: a ⇒ b
         q1, q2 = row(f, ["b"], "c", n=5), row(f, ["a"], "c", n=1)
