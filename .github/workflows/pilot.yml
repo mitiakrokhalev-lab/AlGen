@@ -22,9 +22,6 @@ env:
   BASE: "G"
   K: "3"
   ARGS: ""  # полный класс: все свойства словаря (прежде пропускали bounded-exponent, причина не записана)
-  # pilot-11: 9 схем пилота 9 — 4 самые долгие (профиль) и 5 с посылками-теоремами (THEORY_CONST)
-  ONLY: "G-3-9-705-707-708-709,G-9-100-705-707-708-709,G-9-290-705-707-708-709,G-2-160-705-707-708-709,G-10-24-443-690-705-707-708-709,G-10-270-705-707-708-709,G-8-17-705-707-708-709,G-3-19-705-707-708-709,G-14-17-705-707-708-709"
-  ALGEN_PROFILE: "G-3-9-705-707-708-709,G-9-100-705-707-708-709,G-9-290-705-707-708-709,G-2-160-705-707-708-709"
   THREADS: "1"  # одна схема на машину: отчёт схемы G при k = 3 — до миллиона строк, две схемы сразу не влезают в 16 ГБ
   MEM: "4"
   ALGEN_SKEL: ${{ github.workspace }}/skel
@@ -143,7 +140,7 @@ jobs:
       fail-fast: false
       matrix:
         cls: [none]
-        part: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        part: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     runs-on: ubuntu-latest
     timeout-minutes: 340
     steps:
@@ -169,7 +166,7 @@ jobs:
         run: |
           cd py
           if [ "${{ matrix.cls }}" != none ]; then export ALGEN_CLASS=${{ matrix.cls }}; fi
-          timeout 320m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../out/${{ matrix.cls }} --часть ${{ matrix.part }}/9 --выборка 10 --схемы "$ONLY" --нитей $THREADS --память $MEM --посылок $K --до 300 --предел 10800 $ARGS
+          timeout 320m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../out/${{ matrix.cls }} --часть ${{ matrix.part }}/20 --выборка 10 --нитей $THREADS --память $MEM --посылок $K --до 300 --предел 3600 $ARGS
       - uses: actions/upload-artifact@v4
         if: always()
         with:

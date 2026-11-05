@@ -1156,6 +1156,8 @@ def _one(job):
             (Path(outdir) / f"{sid}.prof.txt").write_text(buf.getvalue(), encoding="utf-8")
     rec = {"id": sid, "условие": BASES[base] + (f"; класс {CLASS}" if CLASS else ""), "термы": terms, "посылок": k, "без": sorted(E.SKIP),
            "отпечаток": fp, "секунд": round(time.time() - t0, 1), "статус": status,
+           # пик памяти процесса с его начала (схемы идут в одном процессе — пик не убывает)
+           "пик памяти ГБ": round(__import__("resource").getrusage(__import__("resource").RUSAGE_SELF).ru_maxrss / 1e6, 2),
            # строки библиотеки, чьи записи противоречат правилам (неверно правило или данные)
            "строк противоречат базе": len(getattr(_STATE["forms"][base], "skipped", []) or []), **summary}
     p = Path(outdir) / sid
