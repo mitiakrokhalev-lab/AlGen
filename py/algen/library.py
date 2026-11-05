@@ -608,7 +608,9 @@ class Library:
             if card <= 6:
                 k = SMALL_FAMILY["sym-n"].get(card)
                 return k if k in self.obj else None
-            key = f"Sym({card})"
+            # Sym(Sym(X)) даёт card = n!: десятичная запись больших чисел запрещена
+            # (sys.int_info, 4300 цифр) — ключ тогда в шестнадцатеричной
+            key = f"Sym({card})" if card < 10 ** 60 else f"Sym(0x{card:x})"
             if key not in self.obj:
                 yes = dict.fromkeys((
                     "finite", "periodic", "bounded-exponent", "locally-finite", "residually-finite",
@@ -628,9 +630,10 @@ class Library:
                 # «неканонический»: разные ключи конечных групп таблицы — «не изоморфны»;
                 # для синтетической записи это не доказано (та же Sₙ может быть в
                 # библиотеке под другим ключом) — решают свойства и порядок
-                self.obj[key] = {"key": key, "имя": f"S{card}", "конечная": True, "синтез": True,
+                self.obj[key] = {"key": key, "имя": key.replace("Sym(", "S(", 1), "конечная": True, "синтез": True,
                                  "без произведений": True, "неканонический": True,
-                                 "порядок": factorial(card) if card <= FACT_MAX else None,
+                                 # n! записывается при n ⩽ 150: порядок печатают (num-термы)
+                                 "порядок": factorial(card) if card <= 150 else None,
                                  "свойства": {**yes, **no}, "почему": {}, "подгруппы": None}
             return key
         if card != "ctbl":
