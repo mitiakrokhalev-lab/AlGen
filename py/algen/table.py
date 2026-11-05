@@ -1143,33 +1143,82 @@ STATE_IN = os.environ.get("ALGEN_STATE", "")
 STATE_SAVE = os.environ.get("ALGEN_STATE_SAVE", "") == "1"
 
 
-def theory_print(vocab, base, k):
-    """(отпечаток теории, отпечатки правил): словарь раздела, logic.py, база, k."""
+def theory_print(form, base):
+    """Отпечаток теории схемы для кэша вердиктов: смысловой хэш каркаса (атомы и
+    клаузы, theory_fp) и код решателя (fast.py: вердикты даёт fast.decide)."""
     import hashlib
-    def h(x):
-        return hashlib.sha256(json.dumps(x, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()[:16]
-    rules = sorted(h(r) for r in vocab.rules)
-    rest = h([sorted(vocab.props.items()), sorted(vocab.rels.items()), sorted(vocab.cons.items()), vocab.degen,
-              sorted(getattr(vocab, "quantified", {}) or {}), base, k,
-              (Path(__file__).parent / "logic.py").read_text(encoding="utf-8")])
-    return h([rest, rules]), rest, rules
+    hit = form.__dict__.get("_vc_print")
+    if hit is not None and hit[0] is form.sc.T:
+        return hit[1]
+    h = hashlib.sha256((theory_fp(base, form) + ":").encode())
+    h.update((Path(__file__).parent / "fast.py").read_bytes())
+    fp = "в" + h.hexdigest()[:15]
+    form.__dict__["_vc_print"] = (form.sc.T, fp)
+    return fp
 
 
-def _load_state(sid, tp):
-    """Кэш вердиктов схемы из STATE_IN под теорию tp = (отпечаток, rest, rules) или None."""
+def theory_clauses(form):
+    """(хэш списка атомов, отсортированные хэши клауз) каркаса — для проверки
+    «теория только выросла»: те же атомы, прежние клаузы ⊆ новых."""
+    import hashlib
+    T = form.sc.T
+    h = hashlib.sha256()
+    for a in T.atoms:
+        h.update(str(a).encode() + b"\0")
+    hc = np.fromiter((hash(tuple(sorted(c))) for c in T.clauses), dtype=np.int64, count=len(T.clauses))
+    hc.sort()
+    return h.hexdigest()[:16], hc
+
+
+_GROWN = {}  # прежний отпечаток → теория только выросла?
+
+
+def _grown(old_fp, form):
+    """Теория form — рост теории old_fp (по файлам теория-<fp>.json/.npy в STATE_IN)."""
+    if old_fp in _GROWN:
+        return _GROWN[old_fp]
+    ok = False
+    try:
+        meta = Path(STATE_IN) / f"теория-{old_fp}.json"
+        arr = Path(STATE_IN) / f"теория-{old_fp}.npy"
+        if meta.exists() and arr.exists():
+            o = json.loads(meta.read_text(encoding="utf-8"))
+            atoms, hc = theory_clauses(form)
+            old = np.load(arr)
+            ok = o.get("атомы") == atoms and bool(np.isin(old, hc).all())
+            del hc, old
+    except Exception:
+        ok = False
+    _GROWN[old_fp] = ok
+    return ok
+
+
+def _load_state(sid, form, base):
+    """Кэш вердиктов схемы из STATE_IN: {ключ: (вид, ядро[, «рост»])} или None.
+    Та же теория — весь кэш. Теория только выросла (те же атомы, прежние клаузы
+    ⊆ новых) — «противоречие» и «нет» (невыполнимо) остаются верны; «выводится» и
+    «опровергается» — с пометкой «рост»: cdecide сперва проверяет совместность
+    посылок (при росте она могла пропасть — тогда вердикт «противоречие»)."""
     import gzip
     p = Path(STATE_IN) / f"{sid}.vc.json.gz"
     if not STATE_IN or not p.exists():
         return None
-    d = json.loads(gzip.decompress(p.read_bytes()))
-    if d.get("теория") == tp[0]:
+    try:
+        d = json.loads(gzip.decompress(p.read_bytes()))
+    except Exception:  # обрезанный файл и т. п. — без кэша
+        return None
+    tp = theory_print(form, base)
+    if d.get("теория") == tp:
         return d["вердикты"]
-    old = Path(STATE_IN) / f"теория-{d.get('теория')}.json"
-    if old.exists():
-        o = json.loads(old.read_text(encoding="utf-8"))
-        if o.get("rest") == tp[1] and set(o.get("rules", [])) <= set(tp[2]):
-            return {k: v for k, v in d["вердикты"].items() if v[0] != "неизвестно"}
-    return None
+    if not _grown(d.get("теория"), form):
+        return None
+    out = {}
+    for k, v in d["вердикты"].items():
+        if v[0] in ("противоречие", "нет"):
+            out[k] = v[:2]
+        elif v[0] in ("выводится", "опровергается"):
+            out[k] = [v[0], v[1], "рост"]
+    return out
 
 
 def _one(job):
@@ -1196,9 +1245,9 @@ def _one(job):
             from . import fast
             local_T = form.sc.T
             local = fast.LOCAL[id(local_T)] = fast.Local(local_T, set(form.own))
-        tp = _STATE.get("theory_print")
+        tp = theory_print(_STATE["forms"][base], base) if (STATE_IN or STATE_SAVE) else None
         if tp is not None:
-            E.VCACHE, E.VCACHE_OUT, E.VCACHE_HITS[:] = _load_state(sid, tp), {}, [0, 0]
+            E.VCACHE, E.VCACHE_OUT, E.VCACHE_HITS[:] = _load_state(sid, _STATE["forms"][base], base), {}, [0, 0]
         form, alive, empty, report = E.run(k, _STATE["lib"], _STATE["vocab"], form)
         summary = E.render(form, alive, empty, report, out=out, err=err, registry=_STATE["registry"])
         status = "ok"
@@ -1207,8 +1256,11 @@ def _one(job):
                                         "промахов": E.VCACHE_HITS[1]}
             if STATE_SAVE:
                 import gzip
-                (Path(outdir) / f"{sid}.vc.json.gz").write_bytes(gzip.compress(json.dumps(
-                    {"теория": tp[0], "вердикты": E.VCACHE_OUT}, ensure_ascii=False).encode(), 6))
+                dst = Path(outdir) / f"{sid}.vc.json.gz"
+                tmp = dst.with_suffix(".tmp")
+                tmp.write_bytes(gzip.compress(json.dumps(
+                    {"теория": tp, "вердикты": E.VCACHE_OUT}, ensure_ascii=False).encode(), 6))
+                os.replace(tmp, dst)  # SIGALRM посреди записи не оставит обрезанный файл
     except SchemeTimeout:
         summary, status = {}, f"таймаут {limit} с"
     except Exception:
@@ -1311,10 +1363,6 @@ def run_schemes(a):
           file=sys.stderr, flush=True)
     t0 = time.time()
     _STATE["limit"] = a.limit
-    if STATE_IN or STATE_SAVE:
-        _STATE["theory_print"] = tp = theory_print(vocab, getattr(a, "base", "G"), max(ks) if ks else 0)
-        if STATE_SAVE:
-            (outdir / f"теория-{tp[0]}.json").write_text(json.dumps({"rest": tp[1], "rules": tp[2]}), encoding="utf-8")
     deadline = t0 + a.until * 60 if a.until else None
     _STATE["deadline"] = deadline  # видят и дочерние процессы (fork)
     done = 0
@@ -1333,6 +1381,14 @@ def run_schemes(a):
                 equiv_reps(_STATE["forms"][base])
         print(f"{base}: таблица {_STATE['forms'][base].e.shape}, {round(time.time() - t)} с",
               file=sys.stderr, flush=True)
+        if STATE_IN or STATE_SAVE:
+            # отпечаток теории — до fork: дочерние процессы не хешируют каркас заново
+            tp = theory_print(_STATE["forms"][base], base)
+            if STATE_SAVE and not (outdir / f"теория-{tp}.npy").exists():
+                atoms, hc = theory_clauses(_STATE["forms"][base])
+                np.save(outdir / f"теория-{tp}.npy", hc)
+                (outdir / f"теория-{tp}.json").write_text(json.dumps({"атомы": atoms}), encoding="utf-8")
+                del hc
         done = _run_pool(jobs, a, deadline, t0, done, total)
         if base != "G":
             del _STATE["forms"][base]

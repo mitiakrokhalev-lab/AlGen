@@ -115,16 +115,72 @@ def cdecide(T, prem, goal, s):
     k = _vkey(prem, goal)
     hit = VCACHE.get(k) if VCACHE else None
     if hit is not None:
-        VCACHE_HITS[0] += 1
-        kind, core = hit
+        kind, core = hit[0], hit[1]
         by = {lit_name(a, v): (a, v) for a, v in prem}
-        if all(c in by for c in core):
-            VCACHE_OUT[k] = hit
+        ok = all(c in by for c in core)
+        if ok and len(hit) > 2:
+            # из выросшей теории: вывод верен, если посылки ещё совместны (иначе
+            # теперь «противоречие» — спрашиваем решатель)
+            ok = _joint_sat(T, prem, [], s) is True
+        if ok:
+            VCACHE_HITS[0] += 1
+            VCACHE_OUT[k] = [kind, core]
             return Verdict(kind, [by[c] for c in core])
     VCACHE_HITS[1] += 1
     v = decide(T, prem, goal, s)
     VCACHE_OUT[k] = (v.kind, [lit_name(*x) for x in v.core or []])
     return v
+
+
+# Совместная проверка вместо цикла (ответы те же): если посылки вместе с
+# отрицаниями ВСЕХ целей ds выполнимы, ни одна цель не выводится — модель
+# годится каждой паре «посылки, ¬d». Иначе — прежний цикл по d. JOINT = False —
+# только цикл.
+JOINT = os.environ.get("ALGEN_JOINT", "1") == "1"
+
+
+def _joint_sat(T, prem, extra, s):
+    """Выполнимы ли посылки prem вместе с литералами extra ((атом, значение));
+    None — не решить совместной проверкой (литерал-константа)."""
+    lits = []
+    for a, v in list(prem) + list(extra):
+        l = T.lit(a, v)
+        if l is None:
+            continue
+        if l is False:
+            return None
+        lits.append(l)
+    key = "совместно: " + " ∧ ".join(sorted(lit_name(a, v) for a, v in list(prem) + list(extra)))
+    hit = VCACHE.get(key) if VCACHE else None
+    if hit is not None:
+        if VCACHE_OUT is not None:
+            VCACHE_OUT[key] = hit
+        return hit[0] == "да"
+    from . import fast
+    ok = bool(fast.bank(T, s).sat(lits)[0])
+    if VCACHE_OUT is not None:
+        VCACHE_OUT[key] = ("да" if ok else "нет", [])
+    return ok
+
+
+def none_derivable(T, prem, ds, s):
+    """Точно ли ни одно d из ds не выводится из prem (тогда цикл не нужен)."""
+    if not JOINT or len(ds) < 2:
+        return False
+    for d in ds:
+        if T.lit(*d) is None:  # цель-константа выводится из совместных посылок
+            return False
+    return _joint_sat(T, prem, [(a, not v) for a, v in ds], s) is True
+
+
+def none_reduce(T, prem, goal, ds, s):
+    """Точно ли ни при одном d из ds не выводится «prem ∧ ¬d ⊢ ¬goal»: выполнимо
+    prem ∧ goal ∧ ¬d₁ ∧ … ∧ ¬dₙ."""
+    if not JOINT or len(ds) < 2:
+        return False
+    if T.lit(*goal) is False:
+        return False
+    return _joint_sat(T, prem, [goal] + [(a, not v) for a, v in ds], s) is True
 
 PACK_T = True  # pack по транспонированной m: те же слова, без транспонирования на каждый вызов
 CORE_PROPS = {"trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable", "nilpotent",
@@ -1594,7 +1650,9 @@ def run(max_prem, lib=None, vocab=None, form=None):
         wkey = frozenset(whole)
         dg = degen_memo.get(wkey)
         if dg is None:
-            dg = degen_memo[wkey] = any(cdecide(form.sc.T, whole, d, form.sc.s).kind == "выводится" for d in degen)
+            dg = degen_memo[wkey] = (not none_derivable(form.sc.T, whole, degen, form.sc.s)
+                                     and any(cdecide(form.sc.T, whole, d, form.sc.s).kind == "выводится"
+                                             for d in degen))
         if dg:
             continue
         v = cdecide(form.sc.T, fixed + prem_l, goal, form.sc.s)
@@ -1614,7 +1672,7 @@ def run(max_prem, lib=None, vocab=None, form=None):
             # Сведение к вырожденности: если посылки вместе с «v нетривиальна» уже
             # дают отрицание цели, вопрос условия — «посылки ⇒ v тривиальна?»
             # (десятки «третьих» вида ¬abelian(G ∗ G), ¬cyclic(G ∗ G)… — один вопрос).
-            for d in degen_all:
+            for d in ([] if none_reduce(form.sc.T, fixed + prem_l, goal, degen_all, form.sc.s) else degen_all):
                 if cdecide(form.sc.T, fixed + prem_l + [(d[0], not d[1])], (goal[0], not goal[1]),
                           form.sc.s).kind == "выводится":
                     r["сводится"] = sorted(lit_name(*x) for x in prem_l) + [lit_name(*d)]
@@ -1662,7 +1720,7 @@ def run(max_prem, lib=None, vocab=None, form=None):
             hint = form.unknown_goal(prem, g)
             if hint is not None:
                 r["заполнить"] = {"где": form.where(hint), "атом": atom_name(goal[0])}
-            for d in degen_all:
+            for d in ([] if none_reduce(form.sc.T, fixed + prem_l, goal, degen_all, form.sc.s) else degen_all):
                 if cdecide(form.sc.T, fixed + prem_l + [(d[0], not d[1])], (goal[0], not goal[1]),
                           form.sc.s).kind == "выводится":
                     r["сводится"] = sorted(lit_name(*x) for x in prem_l) + [lit_name(*d)]

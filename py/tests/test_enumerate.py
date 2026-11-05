@@ -274,3 +274,57 @@ class VCacheTest(unittest.TestCase):
         self.assertEqual(len(calls), 3)  # второй прогон — без решателя
         self.assertEqual([v.kind for v in first], [v.kind for v in second])
         self.assertEqual([sorted(map(str, v.core)) for v in first], [sorted(map(str, v.core)) for v in second])
+
+
+class JointTest(unittest.TestCase):
+    def test_joint_matches_loop(self):
+        """none_derivable / none_reduce: «да» только когда цикл decide не нашёл бы
+        «выводится» ни для одного d (случайные теории, литералы-константы)."""
+        import random
+        from pysat.solvers import Solver
+        from algen import fast
+        from algen.logic import decide as slow
+
+        class Th:
+            def __init__(self, cl, nv, const):
+                self.clauses, self.nv, self.const = cl, nv, const
+                self.atoms = None
+
+            def lit(self, a, v):
+                c = self.const.get(a[1])
+                if c is not None:
+                    return None if c == v else False
+                n = int(a[1][1:])
+                return n if v else -n
+
+            def solver(self):
+                return Solver(name="g4", bootstrap_with=self.clauses)
+        bad = checked = 0
+        for case in range(150):
+            rnd = random.Random(case)
+            nv = rnd.randint(4, 12)
+            cl = [[rnd.choice([1, -1]) * rnd.randint(1, nv) for _ in range(rnd.randint(1, 3))]
+                  for _ in range(rnd.randint(2, 25))]
+            const = {nv + 1: True, nv + 2: False} if case % 3 == 0 else {}
+            th = Th(cl, nv, const)
+            s = th.solver()
+            fast._BANKS.pop(id(th), None)
+            atoms = [("p", f"q{i}", "G") for i in list(range(1, nv + 1)) + list(const)]
+            th.const = {f"q{i}": v for i, v in const.items()}
+            for _ in range(15):
+                prem = [(a, rnd.random() < 0.5) for a in rnd.sample(atoms, rnd.randint(0, 3))]
+                ds = [(a, rnd.random() < 0.5) for a in rnd.sample(atoms, rnd.randint(2, 4))]
+                goal = (rnd.choice(atoms), rnd.random() < 0.5)
+                loop_d = any(slow(th, prem, d, s).kind == "выводится" for d in ds)
+                if E.none_derivable(th, prem, ds, s):
+                    checked += 1
+                    bad += loop_d
+                loop_r = any(slow(th, prem + [(a, not v)], (goal[0], not goal[1]), s).kind == "выводится"
+                             for a, v in ds)
+                if E.none_reduce(th, prem, goal, ds, s):
+                    checked += 1
+                    bad += loop_r
+            fast._BANKS.pop(id(th), None)
+            s.delete()
+        self.assertEqual(bad, 0)
+        self.assertGreater(checked, 100)
