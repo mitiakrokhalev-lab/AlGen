@@ -10,7 +10,7 @@ on:
 
 jobs:
   gap:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # на ubuntu-latest (26.04) apt-зеркало часами отдавало пакеты GAP
     timeout-minutes: 350
     permissions:
       contents: write
@@ -23,8 +23,8 @@ jobs:
       - name: GAP
         run: |
           sudo apt-get update -q
-          sudo apt-get install -y -q gap
-          sudo apt-get install -y -q gap-smallgrp || true
+          sudo apt-get install -y -q --no-install-recommends gap
+          sudo apt-get install -y -q --no-install-recommends gap-smallgrp || true
           echo 'Print(NrSmallGroups(64), " ", IdGroupsAvailable(20160), "\n");' | gap -q
       - name: расчёт
         run: |
