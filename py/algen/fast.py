@@ -155,6 +155,13 @@ class Bank:
         if key in self.unsat:
             STATS["кэш"] += 1
             return False, self.unsat[key]
+        loc = LOCAL.get(id(self.T))
+        if loc is not None:
+            core = loc.unsat_core(lits)
+            if core is not None:
+                STATS["локально"] = STATS.get("локально", 0) + 1
+                self.unsat[key] = core
+                return False, core
         STATS["решатель"] += 1
         # разнообразие моделей: случайная фаза у решателя
         if self.calls % 8 == 0:  # фаза меняется раз в 8 вызовов: список дорог
@@ -172,6 +179,96 @@ class Bank:
         core = self.s.get_core() or []
         self.unsat[key] = core
         return False, core
+
+
+LOCAL = {}  # id(теории) → Local текущей схемы (table._one ставит и снимает)
+
+
+class Local:
+    """Локальная теория схемы: клаузы теории, все переменные которых — атомы о
+    термах схемы (и их подтермах), в своём решателе со сжатой нумерацией.
+    Подмножество клауз: «невыполнимо» локально ⇒ «невыполнимо» в теории, а
+    литералы вне локальной теории можно просто не передавать (меньше посылок —
+    слабее запрос). «Выполнимо» локально не говорит ничего — тогда спрашивается
+    решатель теории. У каркаса G 1,24 млн атомов и 13,9 млн клауз; распространение
+    по ним — ≈ 9 мс даже на [x, ¬x], а у схемы ≈ 300 атомов и ≈ 2 000 клауз
+    (pilot-11: G-3-9 — 97,5 % фактов невыполнимы локально, 0,6 мс против 28,7)."""
+
+    def __init__(self, theory, terms):
+        import numpy as np
+        from pysat.solvers import Solver
+        from .logic import App, Var
+
+        def is_term(x):
+            return isinstance(x, (App, Var))
+        clos = set()
+
+        def add(t):
+            if t in clos:
+                return
+            clos.add(t)
+            if isinstance(t, App):
+                for a in t.args:
+                    if is_term(a):
+                        add(a)
+        for t in terms:
+            add(t)
+        cs = theory.clauses
+        top = logic.clause_max_var(cs)
+        allowed = np.zeros(top + 2, dtype=bool)
+        for a in theory.atoms:
+            if all(x in clos for x in a[2:] if is_term(x)):
+                v = theory.var.get(a)
+                if v and v <= top:
+                    allowed[v] = True
+        g2l = np.zeros(top + 2, dtype=np.int64)
+        idx = np.flatnonzero(allowed)
+        g2l[idx] = np.arange(1, len(idx) + 1)
+        self.g2l, self.l2g = g2l, np.concatenate([[0], idx])
+        if isinstance(cs, logic.ClauseStore) and len(cs.offs) > 1:
+            data = np.frombuffer(cs.data, dtype=np.int32).astype(np.int64)
+            offs = np.frombuffer(cs.offs, dtype=np.int64)
+            ok = allowed[np.abs(data)].astype(np.int8)
+            nonempty = offs[1:] > offs[:-1]
+            good = np.zeros(len(offs) - 1, dtype=bool)
+            starts = offs[:-1][nonempty]
+            if len(starts):
+                good[nonempty] = np.minimum.reduceat(ok, starts) == 1
+            mapped = np.sign(data) * g2l[np.abs(data)]
+            cl = [mapped[offs[i]:offs[i + 1]].tolist() for i in np.flatnonzero(good)]
+        else:
+            cl = [[(1 if l > 0 else -1) * int(g2l[abs(l)]) for l in c] for c in cs
+                  if all(abs(l) <= top and allowed[abs(l)] for l in c)]
+        self.n_atoms, self.n_clauses = len(idx), len(cl)
+        self.clauses = cl
+        self.s = Solver(name="g4", bootstrap_with=cl)
+        self.top = top
+
+    def local_var(self, v):
+        """Локальный номер глобальной переменной v или 0."""
+        return int(self.g2l[v]) if 0 < v <= self.top else 0
+
+    def map(self, lits):
+        """Глобальные литералы → локальные; литералы вне локальной теории отбрасываются."""
+        out = []
+        for l in lits:
+            v = abs(l)
+            if v <= self.top:
+                x = int(self.g2l[v])
+                if x:
+                    out.append(x if l > 0 else -x)
+        return out
+
+    def unsat_core(self, lits):
+        """Ядро (глобальные литералы из lits), если lits ∧ локальная теория невыполнимы; иначе None."""
+        loc = self.map(lits)
+        if self.s.solve(assumptions=loc) is not False:
+            return None
+        core = self.s.get_core() or []
+        return [int(self.l2g[abs(x)]) * (1 if x > 0 else -1) for x in core]
+
+    def delete(self):
+        self.s.delete()
 
 
 def bank(theory, solver):

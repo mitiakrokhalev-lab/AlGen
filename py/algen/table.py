@@ -1119,6 +1119,10 @@ def _alarm(signum, frame):
     raise SchemeTimeout()
 
 
+# Предпроверка локальной теорией схемы (fast.Local): вердикты те же, ядра — свои.
+LOCAL_PRECHECK = os.environ.get("ALGEN_LOCAL", "1") == "1"
+
+
 def _one(job):
     base, sid, terms, k, outdir, fp = job
     out, err = io.StringIO(), io.StringIO()
@@ -1128,6 +1132,7 @@ def _one(job):
         signal.signal(signal.SIGALRM, _alarm)
         signal.alarm(int(limit))
     prof = None
+    local, local_T = None, None
     want_prof = os.environ.get("ALGEN_PROFILE", "")
     if want_prof == "1" or sid in want_prof.split(","):
         # профиль схемы: время по функциям — в <схема>.prof.txt рядом с выдачей
@@ -1136,6 +1141,10 @@ def _one(job):
         prof.enable()
     try:
         form = view(_STATE["forms"][base], terms)
+        if LOCAL_PRECHECK:  # локальная теория схемы: «невыполнимо» без решателя каркаса
+            from . import fast
+            local_T = form.sc.T
+            local = fast.LOCAL[id(local_T)] = fast.Local(local_T, set(form.own))
         form, alive, empty, report = E.run(k, _STATE["lib"], _STATE["vocab"], form)
         summary = E.render(form, alive, empty, report, out=out, err=err, registry=_STATE["registry"])
         status = "ok"
@@ -1147,6 +1156,10 @@ def _one(job):
     finally:
         if limit:
             signal.alarm(0)
+        if local is not None:
+            from . import fast
+            fast.LOCAL.pop(id(local_T), None)
+            local.delete()
         if prof is not None:
             prof.disable()
             import pstats
