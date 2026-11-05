@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install numpy python-sat pyyaml py-spy
+      - run: pip install numpy python-sat pyyaml
       - name: таблицы и каркас пилота
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -40,9 +40,9 @@ jobs:
         continue-on-error: true
         run: |
           cd py
-          timeout 150m py-spy record --subprocesses -r 20 -f speedscope -o ../res/prof.json -- \
-            python3 -m algen.table перебор $BASE --каталог ../tab --выход ../res/out --выборка 190 --нитей 1 --посылок $K --предел 3600 2>&1 | tail -30 | tee ../res/перебор.txt
-          python3 -m algen.measure профиль ../res/prof.json | tee ../res/профиль.txt
+          export ALGEN_PROFILE=1
+          timeout 110m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../res/out --нитей 1 --посылок $K --предел 3000 --память 9 \
+            --схемы G-14-20-200-705-707-708-709,G-13-318-550-705-707-708-709,G-12-370-705-707-708-709,G-14-180-705-707-708-709 2>&1 | tail -30 | tee ../res/перебор.txt
       - name: результаты в ветку «results-…»
         if: always()
         run: |
