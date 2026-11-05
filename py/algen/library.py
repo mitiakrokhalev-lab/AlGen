@@ -573,7 +573,8 @@ class Library:
         хопфовы и кохопфовы, гиперболичны, со свойством (T), с композиционным
         рядом, почти нильпотентны, полиномиального роста, аменабельны, без
         свободных подгрупп, не упорядочиваемы (есть кручение), все подгруппы конечны.
-        Sym(Ω), Ω бесконечно: |Sym(Ω)| = 2^|Ω| — несчётна, не конечно порождена;
+        Sym(ℕ) (только счётные X: при несчётных мощность Ω не записана, а один ключ
+        значил бы изоморфизм). Sym(Ω), Ω бесконечно: |Sym(Ω)| = 2^|Ω| — несчётна, не конечно порождена;
         Z = 1; не проста (финитарные перестановки — собственная нормальная);
         совершенна (Ore 1951: каждый элемент — коммутатор); нормальные подгруппы
         (Baer–Schreier–Ulam) — цепь, Alt(Ω) в каждой нетривиальной — неразложима;
@@ -610,14 +611,19 @@ class Library:
                     "two-primes", "odd-order", "residually-nilpotent", "locally-cyclic",
                     "locally-nilpotent", "locally-solvable", "proper-subs-abelian",
                     "proper-subs-nilpotent", "proper-subs-cyclic"), False)
+                # «неканонический»: разные ключи конечных групп таблицы — «не изоморфны»;
+                # для синтетической записи это не доказано (та же Sₙ может быть в
+                # библиотеке под другим ключом) — решают свойства и порядок
                 self.obj[key] = {"key": key, "имя": f"S{card}", "конечная": True, "синтез": True,
-                                 "без произведений": True,
+                                 "без произведений": True, "неканонический": True,
                                  "порядок": factorial(card) if card <= FACT_MAX else None,
                                  "свойства": {**yes, **no}, "почему": {}, "подгруппы": None}
             return key
-        if card not in ("ctbl", "unctbl"):
+        if card != "ctbl":
+            # несчётные Ω разной мощности дают неизоморфные Sym(Ω), а один ключ —
+            # это «изоморфны» в фактах строки: образа нет
             return None
-        key = "Sym(ℕ)" if card == "ctbl" else "Sym(Ω), Ω несчётно"
+        key = "Sym(ℕ)"
         if key not in self.obj:
             yes = dict.fromkeys(("centerless", "perfect", "indecomposable", "no-finite-quotients",
                                  "contains-free"), True)
@@ -634,6 +640,71 @@ class Library:
             self.obj[key] = {"key": key, "имя": key, "конечная": False, "синтез": True,
                              "без произведений": True, "свойства": {**yes, **no}, "почему": {},
                              "подгруппы": None}
+        return key
+
+    def amalgam_sym_key(self, d):
+        """Запись Sym(X) ∗_X Sym(X) = pushout(cayley X, cayley X) (вложения Кэли).
+        Ключ — свой у каждой X (один ключ значил бы изоморфизм). |X| ⩽ 2 и X без
+        записи Sym — не здесь (см. _image). Значения — теоремы (5.11):
+        Собственная амальгама A ∗_C B (C ≠ A, B): Z ⊆ Z(A) ∩ Z(B) ∩ C — у Sym(X)
+        центр тривиален (|X| ⩾ 3): без центра; бесконечна (элемент ab, a ∈ A∖C,
+        b ∈ B∖C, бесконечного порядка — не периодична, не локально конечна, не
+        ограниченной экспоненты); содержит A, B: есть кручение (транспозиции) — не
+        без кручения, не свободна, не упорядочиваема, в K[G] есть делители нуля;
+        S₃ ⩽ A — не локально циклична, не дедекиндова, не абелева.
+        |X| = 3: S₃ ∗_{C₃} S₃ — оба индекса 2, C₃ нормальна, фактор C₂ ∗ C₂ = D∞;
+        C₃ × ℤ — абелева индекса 2: почти абелева, полициклическая, разрешима,
+        аменабельна, конечно определена, финитно аппроксимируема, линейна (и над ℂ),
+        хопфова, гиперболична (почти ℤ), без F₂; бесконечная аменабельная — без (T);
+        не нильпотентна (фактор D∞), не совершенна, не проста.
+        |X| = n ⩾ 4 (конечная): амальгама двух конечных групп с индексами (n−1)! ⩾ 6 —
+        почти свободна (Karrass–Pietrowski–Solitar): конечно порождена и определена,
+        финитно аппроксимируема, хопфова, линейна (и над ℂ), гиперболична, словарная
+        проблема разрешима; индексы ⩾ 3 и ⩾ 2 — содержит F₂: не аменабельна, не
+        разрешима (и не локально), не почти нильпотентна/разрешима, не полиномиального
+        роста; действует на дереве Басса–Серра без неподвижной точки — без (T);
+        Gᵃᵇ ↠ C₂ (знак) — не совершенна; нетривиальная финитно аппроксимируемая — не
+        проста, не делима, с конечными факторами.
+        X бесконечная счётная: Sym(ℕ) ∗_X Sym(ℕ) — содержит Sym(ℕ): несчётна, не
+        конечно порождена; не финитно аппроксимируема, не аппроксимируема
+        нильпотентными, не локально конечна, не ограниченной экспоненты, не почти
+        разрешима (всё это наследуют подгруппы, а у Sym(ℕ) этого нет); содержит F₂ —
+        не аменабельна."""
+        o = self.obj.get(d)
+        key = f"Sym∗Sym над {d}"
+        if key in self.obj:
+            return key
+        fin_ord = None
+        if o is not None and o.get("конечная"):
+            head = d.split(":")[0]
+            fin_ord = int(head) if head.isdigit() else o.get("порядок")
+        common_no = ("finite", "trivial", "abelian", "cyclic", "nilpotent", "class-2", "dedekind",
+                     "torsion-free", "free", "free-abelian", "simple", "left-orderable", "bi-orderable",
+                     "kaplansky", "periodic", "bounded-exponent", "locally-finite", "exponent-2",
+                     "exponent-3", "exponent-4", "exponent-6", "prime-orders", "clt", "p-group",
+                     "prime-order", "order-p2", "order-pq", "two-primes", "odd-order", "locally-cyclic")
+        if fin_ord == 3:
+            yes = ("centerless", "virtually-nilpotent", "virtually-solvable", "polynomial-growth",
+                   "polycyclic", "solvable", "amenable", "fin-gen", "fin-pres", "rec-pres", "word-problem",
+                   "countable", "residually-finite", "linear", "linear-c", "hopfian", "hyperbolic")
+            no = common_no + ("contains-free", "property-t", "perfect", "divisible", "no-finite-quotients")
+        elif fin_ord is not None and fin_ord >= 4:
+            yes = ("centerless", "fin-gen", "fin-pres", "rec-pres", "word-problem", "countable",
+                   "residually-finite", "hopfian", "linear", "linear-c", "hyperbolic", "contains-free")
+            no = common_no + ("amenable", "solvable", "locally-solvable", "virtually-nilpotent",
+                              "virtually-solvable", "polynomial-growth", "polycyclic", "metabelian",
+                              "locally-nilpotent", "property-t", "perfect", "divisible", "no-finite-quotients")
+        elif o is not None and o["свойства"].get("finite") is False and o["свойства"].get("countable"):
+            yes = ("centerless", "contains-free")
+            no = common_no + ("countable", "fin-gen", "two-generated", "fin-pres", "residually-finite",
+                              "residually-nilpotent", "virtually-solvable", "virtually-nilpotent", "amenable",
+                              "solvable", "polycyclic", "metabelian", "locally-solvable", "locally-nilpotent",
+                              "polynomial-growth")
+        else:
+            return None
+        self.obj[key] = {"key": key, "имя": key, "конечная": False, "синтез": True, "без произведений": True,
+                         "неканонический": True, "свойства": {**dict.fromkeys(yes, True), **dict.fromkeys(no, False)},
+                         "почему": {}, "подгруппы": None}
         return key
 
     def infinite(self):
@@ -1487,6 +1558,42 @@ class Search:
                 s = next((x for x in o["подгруппы"] or [] if x["id"] == sid), None)
                 k = s.get("фактор") if s else None
             return ("obj", k) if k else None
+        if t.op == "profinite-map" and self._obj(args[0]):
+            # X → X̂: у конечной X̂ = X и это тождество; без конечных факторов X̂ = 1
+            k0 = self._obj(args[0])
+            o = lib.obj[k0]
+            if o.get("конечная") or o["свойства"].get("finite"):
+                return ("mor", "id", k0, k0, None)
+            if o["свойства"].get("no-finite-quotients") and "1:1" in lib.obj:
+                return ("mor", "zero", k0, "1:1", None)
+            return None
+        if (t.op in ("pullback", "pushout") and len(args) == 2 and all(a and a[0] == "mor" for a in args)
+                and args[0] == args[1]):
+            _, kind, d, c, j = args[0]
+            if t.op == "pullback":
+                # ядерная пара {(x, y): f x = f y}: у инъективного f — диагональ ≅ dom f;
+                # у нулевого — dom f × dom f
+                if kind in ("id", "cayley", "incl") or (kind == "end" and lib.obj[d]["эндоморфизмы"][j]["inj"]):
+                    return ("obj", d)
+                if kind == "zero":
+                    p = d if lib.obj[d]["свойства"].get("trivial") else lib.prod.get((d, d))
+                    return ("obj", p) if p else None
+                return None
+            # pushout(f, f) = cod f ∗_{im f} cod f
+            if kind == "id":
+                return ("obj", d)
+            if kind == "zero":
+                if lib.obj[c]["свойства"].get("trivial"):
+                    return ("obj", c)
+                p = lib.fprod.get((c, c))  # амальгама по 1 — свободное произведение
+                return ("obj", p) if p else None
+            if kind == "cayley":
+                n = self._key_order(d)
+                if isinstance(n, int) and n <= 2:
+                    return ("obj", c)  # cayley — изоморфизм: амальгама ≅ Sym(X) ≅ X
+                k = lib.amalgam_sym_key(d)
+                return ("obj", k) if k else None
+            return None
         if t.op in ("sym", "cayley") and self._obj(args[0]):
             # Sym(X) — по мощности X (Library.sym_key); cayley: X → Sym(X), левые сдвиги
             k0 = self._obj(args[0])
