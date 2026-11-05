@@ -141,7 +141,7 @@ jobs:
       fail-fast: false
       matrix:
         cls: [none]
-        part: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        part: [1]  # аудит таблицы: одна задача
     runs-on: ubuntu-latest
     timeout-minutes: 340
     steps:
@@ -167,7 +167,7 @@ jobs:
         run: |
           cd py
           if [ "${{ matrix.cls }}" != none ]; then export ALGEN_CLASS=${{ matrix.cls }}; fi
-          timeout 320m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../out/${{ matrix.cls }} --часть ${{ matrix.part }}/20 --выборка 10 --нитей $THREADS --память $MEM --посылок $K --до 300 --предел 3600 $ARGS
+          timeout 320m python3 -m algen.audit_table $BASE --каталог ../tab --выход ../out/${{ matrix.cls }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
