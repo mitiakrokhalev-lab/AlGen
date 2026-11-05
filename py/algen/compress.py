@@ -345,6 +345,7 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
              + [abs(l) + 1 for r in rows for l in (_safe_forbid(form, r) or [])]
              + ([sq.nof_vars() + 1] if reuse else []))
     nv_start = nv
+    bmodel = None  # модель теории с фоном (см. проверку совместности фона)
     # факты: только оставленные факты
     sf = Solver(name="g4")
     from . import fast as _fast
@@ -405,7 +406,15 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                 # строках) вместе противоречивы, а из противоречия следует всё: после
                 # них сворачивался любой вопрос (5.11, пилоты 9–10). Вопрос, с которым
                 # фон несовместен, остаётся вопросом, но фоном не служит.
-                ok = _solve(sq, fixed + list(sel_q) + [nv])
+                # свидетель совместности без решателя: последняя модель теории с
+                # посылками записи и фоном, где запрет нового вопроса ложен (в ней
+                # верен и весь фон: каждый принятый по ней вопрос в ней ложен)
+                if bmodel is not None and any(bmodel.get(abs(l)) is not None and bmodel[abs(l)] != (l > 0) for l in F):
+                    ok = True
+                else:
+                    ok = _solve(sq, fixed + list(sel_q) + [nv])
+                    if ok:
+                        bmodel = {abs(x): x > 0 for x in (sq.get_model() or [])}
                 if ok:
                     sel_q[nv] = r["№"]
                     if sb is not None:

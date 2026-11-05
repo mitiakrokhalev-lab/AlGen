@@ -52,6 +52,19 @@ def fold_across(T, name2lit, fixed, questions, budget=None):
     nv = max([C._nvars(T)] + [abs(l) + 1 for F in enc.values() if F for l in F] + [abs(l) + 1 for l in fx])
     s = T.solver()
     sels, kept, folded, why, first = {}, [], {}, {}, {}
+    back = None
+    if C.PRECHECK and hasattr(T, "atoms"):  # фон + локальная теория (термы всех вопросов) — «невыполнимо» без каркаса
+        from . import fast
+        from .logic import App, Var
+        inv = {}
+        need = {abs(l) for F in enc.values() if F for l in F}
+        for a in T.atoms:
+            v = T.var.get(a)
+            if v in need:
+                inv[v] = a
+        terms = {x for a in inv.values() for x in a[2:] if isinstance(x, (App, Var))}
+        back = C._Back(fast.Local(T, terms))
+    model = None  # последняя модель теории с фоном: свидетель совместности без решателя
     try:
         for q in qs:
             F = enc[q["id"]]
@@ -64,9 +77,10 @@ def fold_across(T, name2lit, fixed, questions, budget=None):
                 kept.append(q["id"])
                 why[q["id"]] = "нет литерала в каркасе" if F is None else "запрет ложен"
                 continue
-            ans = C._solve(s, fx + F + list(sels))
+            pre = back.unsat(fx, F, list(sels)) if back is not None else None
+            ans = False if pre is not None else C._solve(s, fx + F + list(sels))
             if ans is False:
-                core = set(s.get_core() or [])
+                core = set(pre) if pre is not None else set(s.get_core() or [])
                 deps = sorted(sels[x] for x in sels if x in core)
                 if deps:
                     folded[q["id"]] = deps
@@ -76,9 +90,17 @@ def fold_across(T, name2lit, fixed, questions, budget=None):
             s.add_clause([-nv] + [-l for l in F])
             kept.append(q["id"])
             # в фон — только если фон с вопросом совместен (иначе из фона следует всё; 5.11)
-            ok = C._solve(s, fx + list(sels) + [nv])
+            if model is not None and any(model.get(abs(l)) is not None and model[abs(l)] != (l > 0) for l in F):
+                ok = True  # модель теории с фоном, где запрет ложен — свидетель совместности
+            else:
+                ok = C._solve(s, fx + list(sels) + [nv])
+                if ok:
+                    m = s.get_model() or []
+                    model = {abs(x): x > 0 for x in m}
             if ok:
                 sels[nv] = q["id"]
+                if back is not None:
+                    back.add(nv, F)
             else:
                 s.add_clause([-nv])
                 if q["id"] not in why:
@@ -89,6 +111,9 @@ def fold_across(T, name2lit, fixed, questions, budget=None):
                         why[q["id"]] = "вне фона: решатель не ответил"
     finally:
         s.delete()
+        if back is not None:
+            back.loc.delete()
+            back.delete()
     return kept, folded, why, enc, fx
 
 
