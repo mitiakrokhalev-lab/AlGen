@@ -453,7 +453,7 @@ class Library:
         кого-то нет; иначе неизвестно. finite-fam — конечно ли семейство."""
         ms = [self.obj[k] for k in f["члены"] if k in self.obj]
         props = {"finite-fam": not f["бесконечное"]}
-        for p in GROUP_PROPS:
+        for p in LIB_GROUP_PROPS:
             vs = [m["свойства"].get(p) for m in ms]
             props[p] = False if False in vs else True if vs and None not in vs else None
         f["свойства"] = {k: v for k, v in props.items() if v is not None}
@@ -557,6 +557,85 @@ class Library:
             if f in o and o[f] is None:
                 del o[f]
 
+    def sym_key(self, card):
+        """Ключ записи Sym(X) по мощности X: card — порядок конечной X (int) или
+        "ctbl" / "unctbl" для бесконечной счётной / несчётной. Sₙ при n ⩽ 6 — группы
+        SmallGroups; при n ⩾ 7 и для бесконечных X — синтетические записи (создаются
+        по требованию). Значения — только теоремы (5.11):
+        Sₙ, n ⩾ 7: конечна, |Sₙ| = n!; Z = 1 (n ⩾ 3); Sₙ′ = Aₙ простая (n ⩾ 5) —
+        не разрешима, не нильпотентна, не проста, не совершенна (Sₙ/Aₙ = C₂),
+        неразложима (нормальные подгруппы — 1, Aₙ, Sₙ), 2-порождена ((12), (12…n));
+        экспонента НОК(1..n) — не 2, 3, 4, 6; |Sₙ| делится на 2, 3, 5, 7 — не pᵃqᵇ;
+        CLT-группы разрешимы — не CLT; конечная аппроксимируема нильпотентными ⇔
+        нильпотентна — нет; Sₙ₋₁ — собственная неабелева, не нильпотентная, не
+        циклическая. Конечные группы: периодичны, ограниченной экспоненты, локально
+        конечны, финитно аппроксимируемы, линейны (и над ℂ), конечно определены,
+        хопфовы и кохопфовы, гиперболичны, со свойством (T), с композиционным
+        рядом, почти нильпотентны, полиномиального роста, аменабельны, без
+        свободных подгрупп, не упорядочиваемы (есть кручение), все подгруппы конечны.
+        Sym(Ω), Ω бесконечно: |Sym(Ω)| = 2^|Ω| — несчётна, не конечно порождена;
+        Z = 1; не проста (финитарные перестановки — собственная нормальная);
+        совершенна (Ore 1951: каждый элемент — коммутатор); нормальные подгруппы
+        (Baer–Schreier–Ulam) — цепь, Alt(Ω) в каждой нетривиальной — неразложима;
+        подгруппа конечного индекса содержит нормальную конечного индекса, а
+        собственные нормальные — ограниченного носителя, бесконечного индекса: нет
+        собственных подгрупп конечного индекса — без конечных факторов, не финитно
+        аппроксимируема, почти нильпотентна (разрешима) ⇔ нильпотентна (разрешима) —
+        нет; содержит каждую группу мощности ⩽ |Ω| (Кэли): F₂ и все Sₙ — не
+        аменабельна, не локально разрешима, не линейна над ℂ (Жордан); сдвиг на
+        ℤ ⊂ Ω — элемент бесконечного порядка: не периодична, не ограниченной
+        экспоненты, не локально конечна, не p-группа и т. п.; транспозиция — не
+        квадрат (у квадрата число циклов длины 2 чётно или бесконечно) — не делима;
+        совершенная нетривиальная — не аппроксимируема нильпотентными; стабилизатор
+        точки — собственная бесконечная (≅ Sym(Ω)) неабелева подгруппа."""
+        from math import factorial
+        if isinstance(card, int):
+            if card <= 6:
+                k = SMALL_FAMILY["sym-n"].get(card)
+                return k if k in self.obj else None
+            key = f"Sym({card})"
+            if key not in self.obj:
+                yes = dict.fromkeys((
+                    "finite", "periodic", "bounded-exponent", "locally-finite", "residually-finite",
+                    "linear", "linear-c", "fin-gen", "fin-pres", "rec-pres", "word-problem", "countable",
+                    "hopfian", "co-hopfian", "hyperbolic", "property-t", "comp-series",
+                    "virtually-nilpotent", "virtually-solvable", "polynomial-growth", "amenable",
+                    "proper-subs-finite", "centerless", "indecomposable", "two-generated"), True)
+                no = dict.fromkeys((
+                    "trivial", "abelian", "cyclic", "nilpotent", "class-2", "dedekind", "solvable",
+                    "metabelian", "polycyclic", "simple", "perfect", "free", "free-abelian",
+                    "torsion-free", "divisible", "no-finite-quotients", "contains-free", "left-orderable",
+                    "bi-orderable", "exponent-2", "exponent-3", "exponent-4", "exponent-6",
+                    "prime-orders", "clt", "p-group", "prime-order", "order-p2", "order-pq",
+                    "two-primes", "odd-order", "residually-nilpotent", "locally-cyclic",
+                    "locally-nilpotent", "locally-solvable", "proper-subs-abelian",
+                    "proper-subs-nilpotent", "proper-subs-cyclic"), False)
+                self.obj[key] = {"key": key, "имя": f"S{card}", "конечная": True, "синтез": True,
+                                 "без произведений": True,
+                                 "порядок": factorial(card) if card <= FACT_MAX else None,
+                                 "свойства": {**yes, **no}, "почему": {}, "подгруппы": None}
+            return key
+        if card not in ("ctbl", "unctbl"):
+            return None
+        key = "Sym(ℕ)" if card == "ctbl" else "Sym(Ω), Ω несчётно"
+        if key not in self.obj:
+            yes = dict.fromkeys(("centerless", "perfect", "indecomposable", "no-finite-quotients",
+                                 "contains-free"), True)
+            no = dict.fromkeys((
+                "finite", "countable", "fin-gen", "two-generated", "fin-pres", "trivial", "abelian",
+                "cyclic", "nilpotent", "class-2", "dedekind", "solvable", "metabelian", "polycyclic",
+                "simple", "free", "free-abelian", "torsion-free", "periodic", "bounded-exponent",
+                "locally-finite", "residually-finite", "virtually-nilpotent", "virtually-solvable",
+                "amenable", "locally-solvable", "locally-nilpotent", "locally-cyclic", "linear-c",
+                "divisible", "residually-nilpotent", "exponent-2", "exponent-3", "exponent-4",
+                "exponent-6", "prime-orders", "clt", "p-group", "prime-order", "order-p2", "order-pq",
+                "two-primes", "odd-order", "proper-subs-abelian", "proper-subs-nilpotent",
+                "proper-subs-cyclic", "proper-subs-finite"), False)
+            self.obj[key] = {"key": key, "имя": key, "конечная": False, "синтез": True,
+                             "без произведений": True, "свойства": {**yes, **no}, "почему": {},
+                             "подгруппы": None}
+        return key
+
     def infinite(self):
         return [k for k, o in self.obj.items() if not o["конечная"]]
 
@@ -603,7 +682,8 @@ class Library:
             if not s.solve(assumptions=assume):
                 raise ValueError(f"{key}: значения множителей противоречат базе")
             props = {}
-            for p, v in zip(GROUP_PROPS, backbone(s, assume, [T.lit(("p", p, P)) for p in GROUP_PROPS])):
+            pl = [(p, l) for p in LIB_GROUP_PROPS if type(l := T.lit(("p", p, P))) is int]
+            for (p, _), v in zip(pl, backbone(s, assume, [l for _, l in pl])):
                 if v is not None:
                     props[p] = v
             # конечное × конечное: порядок известен, арифметика порядка — из него
@@ -833,7 +913,7 @@ class Scene:
             if prop in props:
                 out[("p", prop, t)] = (props[prop], where)
 
-        for p in GROUP_PROPS:
+        for p in LIB_GROUP_PROPS:
             put(p, self.G, o["свойства"], key)
         if sub is None:
             return out
@@ -841,11 +921,11 @@ class Scene:
         n = lib.obj[s["≅"]]
         for p in SUB_PROPS:
             put(p, self.N, s["свойства"], f"{key}/{s['id']}")
-        for p in GROUP_PROPS:
+        for p in LIB_GROUP_PROPS:
             put(p, self.N, n["свойства"], f"{key}/{s['id']} ≅ {s['≅']}")
         if s.get("фактор"):
             q = lib.obj[s["фактор"]]
-            for p in GROUP_PROPS:
+            for p in LIB_GROUP_PROPS:
                 put(p, self.Q, q["свойства"], f"{key}/{s['id']}: фактор ≅ {s['фактор']}")
         for name, t in (("центр", self.Z), ("коммутант", self.C)):
             if o.get(name) is not None:
@@ -945,7 +1025,7 @@ class Scene:
         return f"{atom[1]}({rec})"
 
     def atoms(self):
-        return ([("p", p, t) for t in (self.G, self.N, self.Q) for p in GROUP_PROPS]
+        return ([("p", p, t) for t in (self.G, self.N, self.Q) for p in LIB_GROUP_PROPS]
                 + [("p", p, self.N) for p in SUB_PROPS])
 
 
@@ -964,6 +1044,19 @@ GROUP_PROPS = ("trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "sim
                "exponent-2", "exponent-3", "clt", "prime-orders", "linear-c",
                # 30.10: дедекиндовы, метабелевы, ступени ⩽ 2, аменабельные, левоупорядочиваемые
                "dedekind", "metabelian", "class-2", "amenable", "left-orderable")
+# Свойства групп, которые библиотека выводит по правилам базы у построенных
+# произведений, семейств и при насыщении бесконечных групп. До 5.11 — только
+# GROUP_PROPS (37 из 66): countable, fin-pres, contains-free, no-finite-quotients,
+# residually-nilpotent, locally-finite, … у 27 984 построенных A × B не выводились
+# никогда, даже когда следуют из множителей (аудит таблицы G: известно 35 %).
+# GROUP_PROPS не трогаем: по нему — атомы старых форм перебора (класс).
+LIB_GROUP_PROPS = GROUP_PROPS + (
+    "countable", "two-generated", "fin-pres", "rec-pres", "word-problem", "virtually-nilpotent",
+    "virtually-solvable", "polynomial-growth", "contains-free", "whitehead", "kaplansky", "comp-series",
+    "hyperbolic", "no-finite-quotients", "rec-pres-ctbl", "exponent-4", "exponent-6", "co-hopfian",
+    "bi-orderable", "property-t", "residually-nilpotent", "locally-finite", "locally-cyclic",
+    "locally-nilpotent", "locally-solvable", "proper-subs-abelian", "proper-subs-nilpotent",
+    "proper-subs-cyclic", "proper-subs-finite")
 
 _LIB = _SCENE = None
 
@@ -1394,6 +1487,17 @@ class Search:
                 s = next((x for x in o["подгруппы"] or [] if x["id"] == sid), None)
                 k = s.get("фактор") if s else None
             return ("obj", k) if k else None
+        if t.op in ("sym", "cayley") and self._obj(args[0]):
+            # Sym(X) — по мощности X (Library.sym_key); cayley: X → Sym(X), левые сдвиги
+            k0 = self._obj(args[0])
+            n = self._key_order(k0)
+            if n == "inf":
+                c = lib.obj[k0]["свойства"].get("countable")
+                n = None if c is None else "ctbl" if c else "unctbl"
+            ks = lib.sym_key(n) if n is not None else None
+            if ks is None:
+                return None
+            return ("obj", ks) if t.op == "sym" else ("mor", "cayley", k0, ks, None)
         if t.op == "coset-act" and args[1] and args[1][0] == "sub":
             return ("act", args[1][1], (args[1][2],))
         if t.op == "regular-act" and self._obj(args[0]):
@@ -1431,6 +1535,8 @@ class Search:
             if kind == "end":
                 e = lib.obj[d]["эндоморфизмы"][j]
                 return ("sub", d, e["ker"]) if t.op == "ker" else ("sub", c, e["im"])
+            if kind == "cayley":
+                return ("sub", d, self._one(d)) if t.op == "ker" and self._one(d) is not None else None
             if t.op == "ker":
                 idx = {"zero": self._all(d), "id": self._one(d), "proj": j, "incl": self._one(d)}[kind]
                 return ("sub", d, idx) if idx is not None else None
@@ -1505,8 +1611,11 @@ class Search:
         if k is None:
             return None
         o = self.lib.obj[k]
+        if o.get("порядок") is not None:  # синтетические Sₙ
+            return o["порядок"]
         if o.get("конечная"):
-            return int(k.split(":")[0])
+            head = k.split(":")[0]
+            return int(head) if head.isdigit() else None
         fin = o["свойства"].get("finite")
         return INF if fin is False else None
 
@@ -1552,6 +1661,12 @@ class Search:
             return {"zero-mor": True, "injective": td, "surjective": tc,
                     "iso": (td and tc) if td is not None and tc is not None else None,
                     "idempotent": True if d == c else None, "inner-aut": td if d == c else None}
+        if kind == "cayley":
+            # инъективен (сдвиги различны); сюръективен ⇔ |X| = |Sym(X)| ⇔ |X| ⩽ 2
+            # (n ⩽ n! ⇔ n ⩽ 2; для бесконечной |Sym(X)| = 2^|X| > |X|); нулевой ⇔ X = 1
+            n = self._key_order(d)
+            surj = (n <= 2) if isinstance(n, int) else (False if n == "inf" else None)
+            return {"injective": True, "surjective": surj, "iso": surj, "zero-mor": td}
         if kind == "end":
             e = self.lib.obj[d]["эндоморфизмы"][j]
             return {"injective": e["inj"], "surjective": e["surj"], "iso": e["inj"] and e["surj"],
@@ -1755,6 +1870,8 @@ class Search:
             return None
         if o["свойства"].get("finite") is False:
             return "inf"
+        if o.get("порядок") is not None:  # синтетические Sₙ (sym_key)
+            return o["порядок"]
         head = k.split(":")
         if o.get("конечная") and len(head) == 2 and head[0].isdigit() and head[1].isdigit():
             return int(head[0])
@@ -1938,7 +2055,7 @@ def _saturate(job):
     key, sub = job
     S, lib = _SCENE, _LIB
     o = lib.obj[key]
-    ga = [("p", p, S.G) for p in GROUP_PROPS if p not in o["свойства"]]
+    ga = [("p", p, S.G) for p in LIB_GROUP_PROPS if p not in o["свойства"]]
     s = o["подгруппы"][sub] if sub is not None else None
     na = [("p", p, S.N) for p in SUB_PROPS if s is not None and p not in s["свойства"]]
     if not ga and not na:
