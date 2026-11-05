@@ -1527,8 +1527,19 @@ def run(max_prem, lib=None, vocab=None, form=None):
     # условие: нетривиален сам контрпример, он записан в библиотеке и идёт в
     # архив один раз, а не с каждым условием, которое опровергает (решение Димы
     # 1.11.2026). CLOSE_MARKED = False — прежнее поведение с корзинами.
+    form.mem = []  # (этап, VmRSS ГБ, сколько записей) — где схема набирает память
+
+    def _mem(stage, n):
+        try:
+            rss = next(int(x.split()[1]) / 1e6 for x in open("/proc/self/status") if x.startswith("VmRSS"))
+        except (OSError, StopIteration):
+            rss = None
+        form.mem.append((stage, None if rss is None else round(rss, 2), n))
+    _mem("начало", 0)
     alive, empty = enumerate_form(form, max_prem, m=form.m if CLOSE_MARKED else None)
+    _mem("перебор", len(alive))
     mins = minimal(alive)
+    _mem("минимальные", len(mins))
     if getattr(form, "pair_atoms", None):
         mins = pair_minimal(form, mins)
     mins = generic_filter(form, mins)
@@ -1600,9 +1611,11 @@ def run(max_prem, lib=None, vocab=None, form=None):
         questions(form, report)
     # Сжатие выдачи (тред «Сжать выдачу», py/algen/compress.py): только добавляет
     # поля строкам, без флага выдача прежняя бит в бит.
+    _mem("вердикты", len(report))
     if os.environ.get("ALGEN_COMPRESS"):
         from algen import compress
         compress.compress(form, report)
+        _mem("сжатие", len(report))
     if late_hints:
         # Подсказки (решающие значения, сведение к вырожденности, вопрос «какие группы
         # с S») — только оставленным после сжатия: свёрнутым они не нужны (вопрос

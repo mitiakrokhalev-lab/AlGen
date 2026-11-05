@@ -1144,6 +1144,7 @@ def _one(job):
         signal.signal(signal.SIGALRM, _alarm)
         signal.alarm(int(limit))
     prof = None
+    form = None
     local, local_T = None, None
     want_prof = os.environ.get("ALGEN_PROFILE", "")
     if want_prof == "1" or sid in want_prof.split(","):
@@ -1183,6 +1184,7 @@ def _one(job):
     rec = {"id": sid, "условие": BASES[base] + (f"; класс {CLASS}" if CLASS else ""), "термы": terms, "посылок": k, "без": sorted(E.SKIP),
            "отпечаток": fp, "секунд": round(time.time() - t0, 1), "статус": status,
            "память ГБ": [rss0, _rss_gb()],  # VmRSS в начале и в конце схемы
+           "память по этапам": getattr(form, "mem", None) if form is not None else None,
            # строки библиотеки, чьи записи противоречат правилам (неверно правило или данные)
            "строк противоречат базе": len(getattr(_STATE["forms"][base], "skipped", []) or []), **summary}
     p = Path(outdir) / sid

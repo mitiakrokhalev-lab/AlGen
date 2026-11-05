@@ -166,6 +166,20 @@ class Library:
                             raise KeyError(f"{r['id']}: элемент {e.get('имя')}: нет подгруппы ⟨x⟩ или C(x)")
                         els.append(e)
                     self.obj[r["id"]]["элементы"] = els
+        # Счётность бесконечных групп — наложением с обоснованием (5.11)
+        cnt = infinite.parent / "countable.json"
+        if cnt.exists():
+            with open(cnt, encoding="utf-8") as f:
+                over = json.load(f)
+            for field, val in (("счётны", True), ("несчётны", False)):
+                for gid, why in over[field].items():
+                    if gid not in self.obj:
+                        raise KeyError(f"countable.json: нет группы {gid}")
+                    o = self.obj[gid]
+                    if o["свойства"].get("countable", val) != val:
+                        raise ValueError(f"countable.json: {gid} — записано {o['свойства']['countable']}, а здесь {val}")
+                    o["свойства"]["countable"] = val
+                    o.setdefault("почему", {})["countable"] = why
         self.fam = {f["id"]: f for f in raw.get("семейства", [])}
         self._sums()
         self.prod = load_products()
@@ -2242,6 +2256,7 @@ def _fingerprint():
     import hashlib
     root = Path(__file__).resolve().parents[2]
     files = sorted([*(root / "data" / "finite").glob("*.json*"), root / "data" / "infinite" / "grp.json",
+                    root / "data" / "infinite" / "countable.json",
                     root / "data" / "new" / "grp.json", root / "data" / "vocab" / "grp.json",
                     *(Path(__file__).parent / f for f in ("library.py", "logic.py", "finite.py"))])
     h = hashlib.sha256()
