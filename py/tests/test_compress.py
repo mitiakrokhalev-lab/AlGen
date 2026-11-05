@@ -44,6 +44,24 @@ ATOMS = ["a", "b", "c", "d", "e"]
 
 
 class TestCompress(unittest.TestCase):
+    def test_opposite_questions_do_not_fold_everything(self):
+        """«Всегда ли ¬c?» и «всегда ли c?» (c не известно нигде) вместе
+        противоречивы: второй остаётся вопросом, но фоном не служит, а вопрос
+        «d ⇒ e?», с ними не связанный, не сворачивается (до 5.11 сворачивался)."""
+        f = FakeForm(ATOMS, [["-a", "b"]])
+        q1 = row(f, [], "c", n=9)  # запрет {¬c}
+        q2 = dict(row(f, [], "c", n=8), _cols=[4], класс=("c",), цель="¬c")  # запрет {c}
+        q3 = row(f, ["d"], "e", n=1)
+        rep = C.compress(f, [q1, q2, q3])
+        self.assertFalse(q1["свёрнута"])
+        self.assertFalse(q2["свёрнута"])
+        self.assertEqual(q2["вне фона"], [q1["№"]])
+        self.assertFalse(q3["свёрнута"], q3.get("следует из"))
+        self.assertEqual(C.verify(f, rep), [])
+        # фон, собранный руками из противоположных вопросов, verify ловит
+        q2.pop("вне фона")
+        self.assertIn(("фон", "оставленные вопросы вместе противоречивы"), C.verify(f, rep))
+
     def test_question_folds_through_theory_and_kept_question(self):
         f = FakeForm(ATOMS, [["-a", "b"]])  # теория: a ⇒ b
         q1, q2 = row(f, ["b"], "c", n=5), row(f, ["a"], "c", n=1)
@@ -416,6 +434,16 @@ class TestAcross(unittest.TestCase):
         self.assertTrue(B.verify_across(T, enc, fx, kept, dict(folded, **{"S2:y": ["S3:z"]})))
         # Один решатель на несколько образцов: источник первого (S1:x) не должен
         # протечь во второй — с ним ложное «S2:y из S3:z» прошло бы.
+        # противоположные вопросы разных схем: второй — вне фона, третий не сворачивается
+        qs2 = [{"id": "S1:p", "№": "p", "запрет": ["¬c"], "примеров": 9},
+               {"id": "S2:n", "№": "n", "запрет": ["c"], "примеров": 8},
+               {"id": "S3:u", "№": "u", "запрет": ["d", "¬e"], "примеров": 1}]
+        k2, f2, w2, e2, x2 = B.fold_across(T, name2lit, [], qs2)
+        self.assertEqual(sorted(k2), ["S1:p", "S2:n", "S3:u"])
+        self.assertTrue(w2["S2:n"].startswith("вне фона"))
+        self.assertEqual(f2, {})
+        self.assertEqual(B.verify_across(T, e2, x2, k2, f2, outside={"S2:n"}), [])
+        self.assertIn(("фон", "оставленные вопросы вместе противоречивы"), B.verify_across(T, e2, x2, k2, f2))
         leak = {"S3:x": ["S1:x"], "S2:y": ["S3:z"]}
         for chunk in (1, 100):
             bad = B.verify_across(T, enc, fx, kept, leak, chunk=chunk)

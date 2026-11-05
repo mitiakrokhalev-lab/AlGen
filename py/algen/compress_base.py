@@ -74,14 +74,25 @@ def fold_across(T, name2lit, fixed, questions, budget=None):
                 why[q["id"]] = "ОШИБКА: следует из одной теории"
             nv += 1
             s.add_clause([-nv] + [-l for l in F])
-            sels[nv] = q["id"]
             kept.append(q["id"])
+            # в фон — только если фон с вопросом совместен (иначе из фона следует всё; 5.11)
+            ok = C._solve(s, fx + list(sels) + [nv])
+            if ok:
+                sels[nv] = q["id"]
+            else:
+                s.add_clause([-nv])
+                if q["id"] not in why:
+                    if ok is False:
+                        core = set(s.get_core() or [])
+                        why[q["id"]] = "вне фона: противоречит " + ", ".join(sorted(sels[x] for x in sels if x in core))
+                    else:
+                        why[q["id"]] = "вне фона: решатель не ответил"
     finally:
         s.delete()
     return kept, folded, why, enc, fx
 
 
-def verify_across(T, enc, fx, kept, folded, sample=1000, rng=None, chunk=100, log=None):
+def verify_across(T, enc, fx, kept, folded, sample=1000, rng=None, chunk=100, log=None, outside=None):
     """Решатель на выборке: каждый свёрнутый следует из теории и своих
     источников; источники оставлены. Решатель свой на каждые chunk образцов
     (загрузка теории каркаса — секунды), внутри — селекторы: условие образца
@@ -92,6 +103,19 @@ def verify_across(T, enc, fx, kept, folded, sample=1000, rng=None, chunk=100, lo
         items = (rng or random.Random(0)).sample(items, sample)
     nv0 = max([C._nvars(T)] + [abs(l) + 1 for F in enc.values() if F for l in F] + [abs(l) + 1 for l in fx])
     bad, s, nv, t0 = [], None, nv0, time.time()
+    back = [q for q in kept if q not in (outside or ()) and enc.get(q)]
+    if back:  # фон совместен: иначе из него следует всё
+        s0 = T.solver()
+        try:
+            for q in back:
+                s0.add_clause([-l for l in enc[q]])
+            if s0.solve(assumptions=fx) is False:
+                bad.append(("фон", "оставленные вопросы вместе противоречивы"))
+        finally:
+            s0.delete()
+    for qid, deps in items:
+        if any(d in (outside or ()) for d in deps):
+            bad.append((qid, "источник вне фона"))
     try:
         for i, (qid, deps) in enumerate(items):
             if any(d not in ks for d in deps):
@@ -163,13 +187,17 @@ def main():
     print(f"сжатие между схемами {time.time() - t:.0f} с: оставлено {len(kept)}, свёрнуто {len(folded)} "
           f"(тот же класс {sum(1 for x in folded if why.get(x) == 'тот же класс')})", flush=True)
     from collections import Counter
-    print("особые:", Counter(w for x, w in why.items() if w != "тот же класс"))
+    print("особые:", Counter(w.split(":")[0] for x, w in why.items() if w != "тот же класс"))
+    real = [x for x in kept if not why.get(x, "").startswith("ОШИБКА")]
+    print(f"вопросов (без выводимых из одной теории): {len(real)}, из них вне фона: "
+          f"{sum(1 for x in real if why.get(x, '').startswith('вне фона'))}", flush=True)
     out = {"база": a.base, "класс": a.cls, "оставлено": kept, "свёрнуто": folded,
            "особые": {x: w for x, w in why.items() if w != "тот же класс"}}
     if a.out:  # до verify: долгая проверка не должна терять сжатие
         Path(a.out).write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     t = time.time()
-    bad = verify_across(T, enc, fx, kept, folded, log=lambda m: print(m, flush=True))
+    outside = {x for x, w in why.items() if w.startswith("вне фона")}
+    bad = verify_across(T, enc, fx, kept, folded, log=lambda m: print(m, flush=True), outside=outside)
     print(f"нарушений verify: {len(bad)} за {time.time() - t:.0f} с", bad[:10], flush=True)
     if a.out:
         out["verify"] = {"нарушений": len(bad), "первые": bad[:50]}

@@ -40,7 +40,7 @@
 """
 import hashlib
 
-VERSION = 1
+VERSION = 2  # 2: вопрос входит в фон, только если фон с ним совместен (5.11)
 # Бюджет конфликтов на один вызов решателя; None — без ограничения.
 CONF_BUDGET = 100_000
 # Ссылки «следует из» длиннее TRIM_FROM укорачиваются до TRIM_PASSES
@@ -336,7 +336,21 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
             if kind == "неизвестно":
                 nv += 1
                 sq.add_clause([-nv] + [-l for l in F])
-                sel_q[nv] = r["№"]
+                # Фон — гипотезы «ответ да» на оставленные вопросы. Противоположные
+                # вопросы («всегда ли P?», «всегда ли ¬P?» при P, неизвестном во всех
+                # строках) вместе противоречивы, а из противоречия следует всё: после
+                # них сворачивался любой вопрос (5.11, пилоты 9–10). Вопрос, с которым
+                # фон несовместен, остаётся вопросом, но фоном не служит.
+                ok = _solve(sq, fixed + list(sel_q) + [nv])
+                if ok:
+                    sel_q[nv] = r["№"]
+                else:
+                    sq.add_clause([-nv])
+                    if ok is False:
+                        core = set(sq.get_core() or [])
+                        r["вне фона"] = sorted(sel_q[x] for x in sel_q if x in core)
+                    else:
+                        r["вне фона"] = "решатель не ответил"
             else:
                 nf += 1
                 sf.add_clause([-nf] + [-l for l in F])
@@ -394,6 +408,19 @@ def verify(form, report, sample=None, rng=None):
         import random
         folded = (rng or random.Random(0)).sample(folded, sample)
     bad = []
+    back = [r for r in by.values() if r["вердикт"] == "неизвестно" and "вне фона" not in r and "_cols" in r
+            and not r.get("экземпляр") and not r.get("ОШИБКА сжатия") and not r.get("опровергнут")]
+    if back:  # фон совместен: иначе из него следует всё
+        s = T.solver()
+        try:
+            for d in back:
+                F = _safe_forbid(form, d)
+                if F:
+                    s.add_clause([-l for l in F])
+            if s.solve(assumptions=fixed) is False:
+                bad.append(("фон", "оставленные вопросы вместе противоречивы"))
+        finally:
+            s.delete()
     inst = [r for r in report if r.get("экземпляр")]
     if inst:  # экземпляры: пересчитать заново на копиях и сравнить
         import copy
@@ -412,6 +439,9 @@ def verify(form, report, sample=None, rng=None):
             continue
         if any(d["вердикт"] != r["вердикт"] for d in deps):
             bad.append((r["№"], "источник другого вида"))
+            continue
+        if any("вне фона" in d for d in deps):
+            bad.append((r["№"], "источник вне фона"))
             continue
         s = T.solver() if r["вердикт"] == "неизвестно" else Solver(name="g4")
         try:
