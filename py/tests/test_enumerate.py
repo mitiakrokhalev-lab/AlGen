@@ -101,6 +101,29 @@ class EnumerateTest(unittest.TestCase):
         self.assertNotIn(((), 1), alive)
         self.assertIn(((0,), 4), alive)
 
+    def test_theorem_satisfies_existence_requirement(self):
+        # n = normal(H) (столбцы 0/1) — теорема, a — свойство G/H (требует столбец 0),
+        # b — свойство G. n — литерал-теорема и посылкой не бывает; без REQ_CONST все
+        # условия об a терялись (проверщик 5.11). С ним «b ⇒ a» и др. на месте.
+        from types import SimpleNamespace
+        rows = [(True, True, True), (None, True, True), (True, False, False)]
+        old = E.decide
+        E.decide = lambda T, fx, lit, s: SimpleNamespace(kind="выводится" if lit == ("n", True) else "неизвестно")
+        res = {}
+        try:
+            for flag in (False, True):
+                E.REQ_CONST = flag
+                f = FakeForm(rows)
+                f.req = {1: {0}}
+                f.sc = SimpleNamespace(T=None, s=None)
+                f.lit = lambda j: ("nab"[j // 2], j % 2 == 0)
+                alive, _ = enumerate_form(f, 2)
+                res[flag] = sorted((p, g) for p, g in alive if g // 2 == 1 or any(j // 2 == 1 for j in p))
+        finally:
+            E.decide, E.REQ_CONST = old, True
+        self.assertEqual(res[False], [])
+        self.assertEqual(res[True], [((2,), 4), ((3,), 5), ((4,), 2), ((5,), 3)])
+
     def test_cover_prefers_shared_fact(self):
         # Условия 0 и 1 держатся на x или y, условие 2 — только на y:
         # хватает одного факта y.

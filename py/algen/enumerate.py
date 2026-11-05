@@ -89,6 +89,10 @@ ROW_CACHE = 32
 # «опровержение» без него — настоящее (помощник 4.11: 261 вопрос пилота 9 держался на
 # посылке-теореме с неизвестным значением). False — только столбцы, верные во всех строках.
 THEORY_CONST = True
+# Условие существования (req: атом о G/H имеет смысл при normal(H)) выполнено и
+# литералом-теоремой из form.const: он посылкой не перебирается, и без этого
+# все условия об атомах G/H, G/G′, G/Φ(G) терялись (проверщик 5.11).
+REQ_CONST = True
 CORE_PROPS = {"trivial", "abelian", "cyclic", "finite", "fin-gen", "free", "simple", "solvable", "nilpotent",
               "perfect", "torsion-free", "periodic", "divisible", "centerless", "residually-finite",
               "indecomposable", "hopfian", "linear", "polycyclic", "bounded-exponent", "free-abelian", "p-group"}
@@ -1115,6 +1119,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 if m.shape[0] and m[:, j].all():
                     const.add(j)
     form.const = sorted(const)
+    have0 = set(form.fixed) | (const if REQ_CONST else set())  # для req: посылки записи и теоремы
     # атом посылки записи (класс базы, ALGEN_CLASS) целью не бывает: его значение задано
     fixed_atoms = {j // 2 for j in getattr(form, "fixed", [])}
     if fixed_atoms:
@@ -1176,7 +1181,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
 
     def alive_direct(q, g):
         """Подусловие (q, g) не опровергнуто (для минимальности при покрытии)."""
-        have = set(q) | set(form.fixed)
+        have = set(q) | have0
         if not all(form.req.get(j // 2, set()) <= have for j in list(q) + [g]):
             return False
         key = (q, g)
@@ -1236,7 +1241,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
         hit = direct_vec.get(q)
         if hit is not None:
             return hit
-        have = set(q) | set(form.fixed)
+        have = set(q) | have0
         if not all(form.req.get(j // 2, set()) <= have for j in q):
             d = np.zeros(n_lit, dtype=bool)
         else:
@@ -1292,7 +1297,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 return  # не хватит литералов, чтобы коснуться всех элементов
         if len(prem) == depth:
             atoms = {j // 2 for j in prem}
-            have = set(prem) | set(form.fixed)
+            have = set(prem) | have0
             if not all(form.req.get(i, set()) <= have for i in atoms):
                 return
             if not R.any():
@@ -1373,7 +1378,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
         # ((), X) выдаётся, если X касается всех верхних термов схемы (иначе — в меньшей
         # схеме). Условия «P ⇒ X» не снимаются: доказуемое «P ⇒ X» — факт, а не следствие
         # вопроса «X?»; невыводимое сжатие свернёт в «X?» (следует из него).
-        fixed_set = set(form.fixed)
+        fixed_set = have0
         zero = {g for g in goal_cols
                 if form.req.get(g // 2, set()) <= fixed_set and not m[start, g ^ 1].any()}
         if zero:
