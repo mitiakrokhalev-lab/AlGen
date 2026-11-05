@@ -414,3 +414,9 @@ class TestAcross(unittest.TestCase):
         self.assertEqual(why["S4:w"], "нет литерала в каркасе")
         self.assertEqual(B.verify_across(T, enc, fx, kept, folded), [])
         self.assertTrue(B.verify_across(T, enc, fx, kept, dict(folded, **{"S2:y": ["S3:z"]})))
+        # Один решатель на несколько образцов: источник первого (S1:x) не должен
+        # протечь во второй — с ним ложное «S2:y из S3:z» прошло бы.
+        leak = {"S3:x": ["S1:x"], "S2:y": ["S3:z"]}
+        for chunk in (1, 100):
+            bad = B.verify_across(T, enc, fx, kept, leak, chunk=chunk)
+            self.assertEqual(bad, [("S2:y", "не следует из источников")], chunk)

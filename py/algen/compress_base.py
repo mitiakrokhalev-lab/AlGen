@@ -81,29 +81,40 @@ def fold_across(T, name2lit, fixed, questions, budget=None):
     return kept, folded, why, enc, fx
 
 
-def verify_across(T, enc, fx, kept, folded, sample=1000, rng=None):
-    """Новый решатель на выборке: каждый свёрнутый следует из теории и своих
-    источников; источники оставлены."""
+def verify_across(T, enc, fx, kept, folded, sample=1000, rng=None, chunk=100, log=None):
+    """Решатель на выборке: каждый свёрнутый следует из теории и своих
+    источников; источники оставлены. Решатель свой на каждые chunk образцов
+    (загрузка теории каркаса — секунды), внутри — селекторы: условие образца
+    включено только при его селекторе, после образца селектор гасится."""
     ks = set(kept)
     items = list(folded.items())
     if len(items) > sample:
         items = (rng or random.Random(0)).sample(items, sample)
-    bad = []
-    for qid, deps in items:
-        if any(d not in ks for d in deps):
-            bad.append((qid, "источник не оставлен"))
-            continue
-        if enc.get(qid) is None or any(enc.get(d) is None for d in deps):
-            bad.append((qid, "нет кодировки"))
-            continue
-        s = T.solver()
-        try:
+    nv0 = max([C._nvars(T)] + [abs(l) + 1 for F in enc.values() if F for l in F] + [abs(l) + 1 for l in fx])
+    bad, s, nv, t0 = [], None, nv0, time.time()
+    try:
+        for i, (qid, deps) in enumerate(items):
+            if any(d not in ks for d in deps):
+                bad.append((qid, "источник не оставлен"))
+                continue
+            if enc.get(qid) is None or any(enc.get(d) is None for d in deps):
+                bad.append((qid, "нет кодировки"))
+                continue
+            if i % chunk == 0:
+                if s is not None:
+                    s.delete()
+                s, nv = T.solver(), nv0
+                if log:
+                    log(f"verify {i}/{len(items)}, {time.time() - t0:.0f} с, нарушений {len(bad)}")
+            nv += 1
             for d in deps:
-                s.add_clause([-l for l in enc[d]])
-            if s.solve(assumptions=fx + enc[qid]):
+                s.add_clause([-nv] + [-l for l in enc[d]])
+            if s.solve(assumptions=[nv] + fx + enc[qid]):
                 if not (len(deps) == 1 and sorted(enc[deps[0]]) == sorted(enc[qid])):
                     bad.append((qid, "не следует из источников"))
-        finally:
+            s.add_clause([-nv])
+    finally:
+        if s is not None:
             s.delete()
     return bad
 
@@ -153,12 +164,16 @@ def main():
           f"(тот же класс {sum(1 for x in folded if why.get(x) == 'тот же класс')})", flush=True)
     from collections import Counter
     print("особые:", Counter(w for x, w in why.items() if w != "тот же класс"))
-    bad = verify_across(T, enc, fx, kept, folded)
-    print("нарушений verify:", len(bad), bad[:10])
+    out = {"база": a.base, "класс": a.cls, "оставлено": kept, "свёрнуто": folded,
+           "особые": {x: w for x, w in why.items() if w != "тот же класс"}}
+    if a.out:  # до verify: долгая проверка не должна терять сжатие
+        Path(a.out).write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
+    t = time.time()
+    bad = verify_across(T, enc, fx, kept, folded, log=lambda m: print(m, flush=True))
+    print(f"нарушений verify: {len(bad)} за {time.time() - t:.0f} с", bad[:10], flush=True)
     if a.out:
-        Path(a.out).write_text(json.dumps({"база": a.base, "класс": a.cls, "оставлено": kept, "свёрнуто": folded,
-                                           "особые": {x: w for x, w in why.items() if w != "тот же класс"}},
-                                          ensure_ascii=False), encoding="utf-8")
+        out["verify"] = {"нарушений": len(bad), "первые": bad[:50]}
+        Path(a.out).write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     sys.exit(1 if bad else 0)
 
 

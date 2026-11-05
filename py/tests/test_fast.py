@@ -54,6 +54,59 @@ class FastBankTest(unittest.TestCase):
         self.assertEqual(bad, 0)
 
 
+    def test_ring_keeps_last_models(self):
+        """Кольцо из cap моделей: свидетель есть ⇔ он есть среди последних cap
+        добавленных; first_witness — место модели, где верны все литералы;
+        value — значение в модели на этом месте. Строки, заведённые до и после
+        вытеснения, одинаковы."""
+        bad = 0
+        for case in range(40):
+            rnd = random.Random(1000 + case)
+            nv = rnd.randint(5, 70)
+            cl = [[rnd.choice([1, -1]) * rnd.randint(1, nv) for _ in range(rnd.randint(1, 3))] for _ in range(rnd.randint(5, 80))]
+            s = Solver(name="g4", bootstrap_with=cl)
+            cap = rnd.choice([1, 3, 8, 64, 65, 130])
+            b = fast.Bank(T(cl), s, cap=cap)
+            slots = {}
+            for q in range(400):
+                lits = [rnd.choice([1, -1]) * rnd.randint(1, nv + 3) for _ in range(rnd.randint(1, 4))]
+                if rnd.random() < 0.3:
+                    s.set_phases([rnd.choice([1, -1]) * v for v in range(1, nv + 1)])
+                    if s.solve(assumptions=[l for l in lits if abs(l) <= b.nclause]):
+                        m = s.get_model()
+                        slots[b.n % cap] = set(m)
+                        b._add(m)
+                live = [l for l in lits if abs(l) <= b.nclause]
+                want = [k for k in sorted(slots) if all(l in slots[k] for l in live)]
+                if bool(want) != b.witness(lits): bad += 1
+                k = b.first_witness(lits)
+                if (k is None) != (not want) or (k is not None and k != want[0]): bad += 1
+                if slots:
+                    k = rnd.choice(sorted(slots)); v = rnd.randint(1, nv + 3)
+                    if (v in slots[k]) != b.value(v, k): bad += 1
+            s.delete()
+        self.assertEqual(bad, 0)
+
+
+    def test_bank_outlives_its_solver(self):
+        """Банк создан с временным решателем, решатель удалён (как в class_ok):
+        следующий вопрос с живым решателем отвечается верно, а не «невыполнимо»
+        от удалённого; без живого решателя — ошибка, а не ложный ответ."""
+        cl = [[1, 2], [-1, 3], [-2, 3]]
+        th = T(cl)
+        fast._BANKS.pop(id(th), None)
+        s1 = Solver(name="g4", bootstrap_with=cl)
+        b = fast.bank(th, s1)
+        s1.delete()
+        s2 = Solver(name="g4", bootstrap_with=cl)
+        self.assertEqual(fast.bank(th, s2).sat([3, -1])[0], True)  # банк пуст: отвечает решатель
+        self.assertEqual(fast.bank(th, s2).sat([-3])[0], False)
+        s2.delete()
+        with self.assertRaises(RuntimeError):
+            b.sat([1, 2, -3, 3])  # нет свидетеля, решатель удалён
+        fast._BANKS.pop(id(th), None)
+
+
 class PackedColsTest(unittest.TestCase):
     def test_packed_matches_dense(self):
         """Таблица базы, упакованная по столбцам, отдаёт те же столбцы, строки и срезы."""
