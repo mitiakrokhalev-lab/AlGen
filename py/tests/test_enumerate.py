@@ -228,3 +228,20 @@ class BitsTest(unittest.TestCase):
                     which = np.asarray(cols)[unk[r2].argmax(axis=1)] if len(r2) else []
                     self.assertEqual(f.one_unknown(prem, limit=limit),
                                      list(zip(r2.tolist(), [int(c) for c in which])))
+
+
+class PackTest(unittest.TestCase):
+    def test_pack_transposed_keeps_output(self):
+        """pack по транспонированной матрице: те же условия, порядок, счётчик."""
+        for case in range(60):
+            rng = np.random.default_rng(300 + case)
+            n, rows = int(rng.integers(4, 9)), int(rng.integers(3, 150))
+            kw = dict(req=case % 3 == 1, need=case % 4 == 2)
+            res = []
+            for flag in (False, True):
+                E.PACK_T = flag
+                form = RandomForm(np.random.default_rng(300 + case), n, rows, **kw)
+                alive, empty = enumerate_form(form, 3)
+                res.append((list(alive.items()), empty, form.n_alive))
+            E.PACK_T = True
+            self.assertEqual(res[0], res[1], f"случай {case}")

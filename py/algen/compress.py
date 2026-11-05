@@ -158,9 +158,18 @@ def _solve(s, assumptions):
     return s.solve_limited(assumptions=assumptions)
 
 
+_NV = {}  # id(теории) → (теория, число клауз, ответ): проход по 53 млн литералам G — 13,6 с на схему
+
+
 def _nvars(T):
     from algen.logic import clause_max_var
-    return clause_max_var(T.clauses) + 1
+    c = _NV.get(id(T))
+    if c is not None and c[0] is T and c[1] == len(T.clauses):
+        return c[2]
+    v = clause_max_var(T.clauses) + 1
+    _NV.clear()
+    _NV[id(T)] = (T, len(T.clauses), v)
+    return v
 
 
 def _subst(x, t, G):
