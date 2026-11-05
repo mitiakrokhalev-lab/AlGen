@@ -245,3 +245,32 @@ class PackTest(unittest.TestCase):
                 res.append((list(alive.items()), empty, form.n_alive))
             E.PACK_T = True
             self.assertEqual(res[0], res[1], f"случай {case}")
+
+
+class VCacheTest(unittest.TestCase):
+    def test_cache_gives_same_verdicts_without_solver(self):
+        """Второй прогон с кэшем вердиктов: те же вердикты и ядра, решатель не нужен;
+        ключ не зависит от порядка посылок."""
+        from types import SimpleNamespace
+        calls = []
+        old = E.decide
+
+        def fake(T, prem, goal, s):
+            calls.append((tuple(prem), goal))
+            core = [prem[0]] if prem else []
+            return SimpleNamespace(kind="выводится" if goal[1] else "неизвестно", core=core)
+        a, b, c = ("p", "x", "G"), ("p", "y", "G"), ("p", "z", "G")
+        qs = [([(a, True), (b, False)], (c, True)), ([(b, False)], (c, False)), ([], (a, True))]
+        try:
+            E.decide = fake
+            E.VCACHE, E.VCACHE_OUT = None, {}
+            first = [E.cdecide(None, p, g, None) for p, g in qs]
+            n1 = len(calls)
+            E.VCACHE, E.VCACHE_OUT = dict(E.VCACHE_OUT), {}
+            second = [E.cdecide(None, list(reversed(p)), g, None) for p, g in qs]
+        finally:
+            E.decide, E.VCACHE, E.VCACHE_OUT = old, None, None
+        self.assertEqual(n1, 3)
+        self.assertEqual(len(calls), 3)  # второй прогон — без решателя
+        self.assertEqual([v.kind for v in first], [v.kind for v in second])
+        self.assertEqual([sorted(map(str, v.core)) for v in first], [sorted(map(str, v.core)) for v in second])

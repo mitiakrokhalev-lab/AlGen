@@ -1134,6 +1134,44 @@ def _rss_gb():
 LOCAL_PRECHECK = os.environ.get("ALGEN_LOCAL", "1") == "1"
 
 
+# Состояние схем (динамический архив): кэш вердиктов прошлого прогона.
+# ALGEN_STATE=<каталог прошлой выдачи> — брать оттуда <схема>.vc.json.gz;
+# ALGEN_STATE_SAVE=1 — писать своё состояние рядом с выдачей. Вердикт зависит
+# только от теории: при той же теории годится весь кэш; если теория только
+# выросла (правила прежней ⊆ новой, остальное то же) — всё, кроме «неизвестно».
+STATE_IN = os.environ.get("ALGEN_STATE", "")
+STATE_SAVE = os.environ.get("ALGEN_STATE_SAVE", "") == "1"
+
+
+def theory_print(vocab, base, k):
+    """(отпечаток теории, отпечатки правил): словарь раздела, logic.py, база, k."""
+    import hashlib
+    def h(x):
+        return hashlib.sha256(json.dumps(x, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()[:16]
+    rules = sorted(h(r) for r in vocab.rules)
+    rest = h([sorted(vocab.props.items()), sorted(vocab.rels.items()), sorted(vocab.cons.items()), vocab.degen,
+              sorted(getattr(vocab, "quantified", {}) or {}), base, k,
+              (Path(__file__).parent / "logic.py").read_text(encoding="utf-8")])
+    return h([rest, rules]), rest, rules
+
+
+def _load_state(sid, tp):
+    """Кэш вердиктов схемы из STATE_IN под теорию tp = (отпечаток, rest, rules) или None."""
+    import gzip
+    p = Path(STATE_IN) / f"{sid}.vc.json.gz"
+    if not STATE_IN or not p.exists():
+        return None
+    d = json.loads(gzip.decompress(p.read_bytes()))
+    if d.get("теория") == tp[0]:
+        return d["вердикты"]
+    old = Path(STATE_IN) / f"теория-{d.get('теория')}.json"
+    if old.exists():
+        o = json.loads(old.read_text(encoding="utf-8"))
+        if o.get("rest") == tp[1] and set(o.get("rules", [])) <= set(tp[2]):
+            return {k: v for k, v in d["вердикты"].items() if v[0] != "неизвестно"}
+    return None
+
+
 def _one(job):
     base, sid, terms, k, outdir, fp = job
     out, err = io.StringIO(), io.StringIO()
@@ -1158,15 +1196,26 @@ def _one(job):
             from . import fast
             local_T = form.sc.T
             local = fast.LOCAL[id(local_T)] = fast.Local(local_T, set(form.own))
+        tp = _STATE.get("theory_print")
+        if tp is not None:
+            E.VCACHE, E.VCACHE_OUT, E.VCACHE_HITS[:] = _load_state(sid, tp), {}, [0, 0]
         form, alive, empty, report = E.run(k, _STATE["lib"], _STATE["vocab"], form)
         summary = E.render(form, alive, empty, report, out=out, err=err, registry=_STATE["registry"])
         status = "ok"
+        if tp is not None:
+            summary["кэш вердиктов"] = {"было": len(E.VCACHE or {}), "попаданий": E.VCACHE_HITS[0],
+                                        "промахов": E.VCACHE_HITS[1]}
+            if STATE_SAVE:
+                import gzip
+                (Path(outdir) / f"{sid}.vc.json.gz").write_bytes(gzip.compress(json.dumps(
+                    {"теория": tp[0], "вердикты": E.VCACHE_OUT}, ensure_ascii=False).encode(), 6))
     except SchemeTimeout:
         summary, status = {}, f"таймаут {limit} с"
     except Exception:
         summary, status = {}, "ошибка"
         err.write(traceback.format_exc())
     finally:
+        E.VCACHE = E.VCACHE_OUT = None
         if limit:
             signal.alarm(0)
         if local is not None:
@@ -1262,6 +1311,10 @@ def run_schemes(a):
           file=sys.stderr, flush=True)
     t0 = time.time()
     _STATE["limit"] = a.limit
+    if STATE_IN or STATE_SAVE:
+        _STATE["theory_print"] = tp = theory_print(vocab, getattr(a, "base", "G"), max(ks) if ks else 0)
+        if STATE_SAVE:
+            (outdir / f"теория-{tp[0]}.json").write_text(json.dumps({"rest": tp[1], "rules": tp[2]}), encoding="utf-8")
     deadline = t0 + a.until * 60 if a.until else None
     _STATE["deadline"] = deadline  # видят и дочерние процессы (fork)
     done = 0
