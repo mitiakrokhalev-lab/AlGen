@@ -27,9 +27,10 @@ def key(q):
     return (len(q["запрет"]), -q["примеров"] if isinstance(q.get("примеров"), int) else 0, q["id"])
 
 
-def fold_across(T, name2lit, fixed, questions, budget=None):
+def fold_across(T, name2lit, fixed, questions, budget=None, no_back=None):
     """questions: [{"id": "схема:№", "№", "запрет": [имена], "примеров"}].
-    Возвращает (оставленные id, {id: [id источников]}, {id: причина})."""
+    Возвращает (оставленные id, {id: [id источников]}, {id: причина}).
+    no_back(q) — вопрос остаётся, но в фон не входит (сворачивать им другие нельзя)."""
     from pysat.solvers import Solver  # noqa: F401 — решатель теории T.solver()
 
     def lits(q):
@@ -89,6 +90,10 @@ def fold_across(T, name2lit, fixed, questions, budget=None):
             nv += 1
             s.add_clause([-nv] + [-l for l in F])
             kept.append(q["id"])
+            if no_back is not None and no_back(q):
+                s.add_clause([-nv])
+                why.setdefault(q["id"], "вне фона: по выбору (no_back)")
+                continue
             # в фон — только если фон с вопросом совместен (иначе из фона следует всё; 5.11)
             if model is not None and any(model.get(abs(l)) is not None and model[abs(l)] != (l > 0) for l in F):
                 ok = True  # модель теории с фоном, где запрет ложен — свидетель совместности
@@ -184,6 +189,8 @@ def main():
     ap.add_argument("dir")
     ap.add_argument("--класс", dest="cls", default="")
     ap.add_argument("--выход", dest="out", default="")
+    ap.add_argument("--фон-без-всегда", dest="no_always", type=int, default=0,
+                    help="вопросы без посылок (запрет — один литерал) с ≥ N примеров — не в фон")
     a = ap.parse_args()
     from algen import enumerate as E
     from algen.library import built_library
@@ -208,7 +215,10 @@ def main():
         X = next(t for t in f.own if isinstance(t, Var) and f.g.terms[t].sort == "Grp.obj")
         fixed.append((("p", a.cls, X), True))
     t = time.time()
-    kept, folded, why, enc, fx = fold_across(T, name2lit, fixed, qs)
+    nb = None
+    if a.no_always:
+        nb = lambda q: len(q["запрет"]) == 1 and isinstance(q.get("примеров"), int) and q["примеров"] >= a.no_always
+    kept, folded, why, enc, fx = fold_across(T, name2lit, fixed, qs, no_back=nb)
     print(f"сжатие между схемами {time.time() - t:.0f} с: оставлено {len(kept)}, свёрнуто {len(folded)} "
           f"(тот же класс {sum(1 for x in folded if why.get(x) == 'тот же класс')})", flush=True)
     from collections import Counter
