@@ -70,7 +70,11 @@ def fold_across(T, name2lit, fixed, questions, budget=None, no_back=None):
         for q in qs:
             F = enc[q["id"]]
             if q["№"] in first:
-                folded[q["id"]] = [first[q["№"]]]
+                # тот же вопрос (тот же класс — тот же запрет): у свёрнутого первого —
+                # его источники; у оставленного — он сам (дубликат, не свёртка; verify
+                # такие пропускает — проверщик 5.11: первый мог быть свёрнут или вне фона)
+                f0 = first[q["№"]]
+                folded[q["id"]] = list(folded[f0]) if f0 in folded else [f0]
                 why[q["id"]] = "тот же класс"
                 continue
             first[q["№"]] = q["id"]
@@ -144,7 +148,9 @@ def verify_across(T, enc, fx, kept, folded, sample=1000, rng=None, chunk=100, lo
         finally:
             s0.delete()
     for qid, deps in items:
-        if any(d in (outside or ()) for d in deps):
+        dup = len(deps) == 1 and enc.get(qid) is not None and enc.get(deps[0]) is not None \
+            and sorted(enc[deps[0]]) == sorted(enc[qid])
+        if not dup and any(d in (outside or ()) for d in deps):
             bad.append((qid, "источник вне фона"))
     try:
         for i, (qid, deps) in enumerate(items):
@@ -154,12 +160,15 @@ def verify_across(T, enc, fx, kept, folded, sample=1000, rng=None, chunk=100, lo
             if enc.get(qid) is None or any(enc.get(d) is None for d in deps):
                 bad.append((qid, "нет кодировки"))
                 continue
-            if i % chunk == 0:
+            if s is None or nv - nv0 >= chunk:  # свой решатель на каждые chunk проверенных
                 if s is not None:
                     s.delete()
                 s, nv = T.solver(), nv0
                 if log:
                     log(f"verify {i}/{len(items)}, {time.time() - t0:.0f} с, нарушений {len(bad)}")
+            if len(deps) == 1 and enc.get(qid) is not None and enc.get(deps[0]) is not None \
+                    and sorted(enc[deps[0]]) == sorted(enc[qid]):
+                continue  # дубликат оставленного вопроса (тот же класс)
             nv += 1
             for d in deps:
                 s.add_clause([-nv] + [-l for l in enc[d]])
