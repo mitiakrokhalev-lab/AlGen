@@ -18,6 +18,7 @@ on:
 env:
   ALGEN_SIZE: "2"
   ALGEN_FAST: "1"
+  ALGEN_COMPRESS: "1"  # сжатие внутри схемы: базис вопросов и фактов в сводке схемы
   BASE: "G"
   K: "3"
   ARGS: ""  # полный класс: все свойства словаря (прежде пропускали bounded-exponent, причина не записана)
@@ -122,12 +123,23 @@ jobs:
           cd py
           du -sh ../tab
           timeout 320m python3 -m algen.table равносильные $BASE --каталог ../tab $ARGS
+      - name: аудит таблицы
+        continue-on-error: true
+        run: |
+          cd py
+          timeout 60m python3 -m algen.audit_table $BASE --каталог ../tab --выход ../out/none
       - uses: actions/upload-artifact@v4
         with:
           name: tabs
           path: tab
           retention-days: 7
           compression-level: 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: part-none-audit
+          path: out
+          retention-days: 30
 
   enum:
     needs: [cfg, prep]
