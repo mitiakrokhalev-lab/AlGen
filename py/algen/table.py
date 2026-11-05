@@ -1179,7 +1179,7 @@ def _grown(old_fp, form):
         return _GROWN[old_fp]
     ok = False
     try:
-        meta = Path(STATE_IN) / f"теория-{old_fp}.json"
+        meta = Path(STATE_IN) / f"теория-{old_fp}.meta"
         arr = Path(STATE_IN) / f"теория-{old_fp}.npy"
         if meta.exists() and arr.exists():
             o = json.loads(meta.read_text(encoding="utf-8"))
@@ -1387,7 +1387,7 @@ def run_schemes(a):
             if STATE_SAVE and not (outdir / f"теория-{tp}.npy").exists():
                 atoms, hc = theory_clauses(_STATE["forms"][base])
                 np.save(outdir / f"теория-{tp}.npy", hc)
-                (outdir / f"теория-{tp}.json").write_text(json.dumps({"атомы": atoms}), encoding="utf-8")
+                (outdir / f"теория-{tp}.meta").write_text(json.dumps({"атомы": atoms}), encoding="utf-8")
                 del hc
         done = _run_pool(jobs, a, deadline, t0, done, total)
         if base != "G":
