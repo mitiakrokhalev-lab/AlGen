@@ -53,6 +53,7 @@ CONF_BUDGET = 100_000
 # решатель теории не уложился в CONF_BUDGET: их предпроверка сворачивает);
 # «следует из» — ядро другого решателя, тоже верное.
 PRECHECK = True
+REUSE_SOLVER = True  # сжатие в основном решателе формы (см. compress)
 TRIM_FROM, TRIM_PASSES = 4, 0  # прогон 41761019204: max 176 → 163, +10 с — выключено
 
 
@@ -331,11 +332,19 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
     rows.sort(key=lambda r: (ck[r["№"]], key(r)))
 
     # вопросы: теория + оставленные вопросы под селекторами
-    sq = T.solver()
+    # REUSE_SOLVER: гипотезы — в основной решатель формы под свежими селекторами,
+    # после сжатия селекторы гасятся (единичные клаузы ¬sel). Второй решатель на
+    # всю теорию у G — ещё ≈ 0,9 ГБ при 16 ГБ машины (пилот 12: 29 падений по памяти).
+    own = getattr(getattr(form, "sc", None), "s", None)
+    reuse = REUSE_SOLVER and own is not None and getattr(own, "solver", 1) is not None
+    sq = own if reuse else T.solver()
     # селекторы — номера выше всех переменных теории, гипотез и запретов
-    # (T.lit заводит переменные лениво, поэтому смотрим и на сами запреты)
+    # (T.lit заводит переменные лениво, поэтому смотрим и на сами запреты), а в
+    # основном решателе — и выше всех его переменных (селекторы прежних схем)
     nv = max([_nvars(T)] + [abs(l) + 1 for l in fixed]
-             + [abs(l) + 1 for r in rows for l in (_safe_forbid(form, r) or [])])
+             + [abs(l) + 1 for r in rows for l in (_safe_forbid(form, r) or [])]
+             + ([sq.nof_vars() + 1] if reuse else []))
+    nv_start = nv
     # факты: только оставленные факты
     sf = Solver(name="g4")
     from . import fast as _fast
@@ -413,7 +422,11 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                 sf.add_clause([-nf] + [-l for l in F])
                 sel_f[nf] = r["№"]
     finally:
-        sq.delete()
+        if reuse:
+            for x in range(nv_start + 1, nv + 1):
+                sq.add_clause([-x])
+        else:
+            sq.delete()
         sf.delete()
         if sb is not None:
             sb.delete()
