@@ -107,6 +107,47 @@ class FastBankTest(unittest.TestCase):
         fast._BANKS.pop(id(th), None)
 
 
+class LocalTest(unittest.TestCase):
+    def test_local_unsat_is_sound_and_matches_subtheory(self):
+        """Локальная теория — ровно клаузы над атомами термов схемы (с подтермами);
+        «невыполнимо» локально ⇒ ядро невыполнимо и в полной теории; литералы вне
+        локальной теории отбрасываются (запрос слабее)."""
+        from algen.logic import App, Var
+        try:
+            from algen.logic import ClauseStore
+        except ImportError:  # ветки пилотов: клаузы — списки
+            ClauseStore = list
+        G = Var("G")
+        A, B = App("f", (G,)), App("g", (G,))
+        C2 = App("h", (A,))  # подтерм A входит в замыкание C2
+        terms = [G, A, B, C2]
+        for case in range(80):
+            rnd = random.Random(case)
+            atoms = [("p", f"q{i}", rnd.choice(terms)) for i in range(rnd.randint(4, 14))]
+            th = T([])
+            th.atoms, th.var = atoms, {a: i + 1 for i, a in enumerate(atoms)}
+            nv = len(atoms)
+            cl = [[rnd.choice([1, -1]) * rnd.randint(1, nv) for _ in range(rnd.randint(1, 3))]
+                  for _ in range(rnd.randint(3, 40))]
+            th.clauses = ClauseStore(cl) if case % 2 else cl
+            scheme = rnd.choice([[G, A], [G, C2], [G, B], [G]])
+            loc = fast.Local(th, scheme)
+            clos = set(scheme) | ({A} if C2 in scheme else set())
+            inside = {i + 1 for i, a in enumerate(atoms) if a[2] in clos}
+            want = [c for c in cl if all(abs(l) in inside for l in c)]
+            self.assertEqual(sorted(map(sorted, ([int(loc.l2g[abs(x)]) * (1 if x > 0 else -1) for x in c] for c in loc.clauses))),
+                             sorted(map(sorted, want)), case)
+            full = Solver(name="g4", bootstrap_with=cl)
+            for _ in range(40):
+                lits = [rnd.choice([1, -1]) * rnd.randint(1, nv) for _ in range(rnd.randint(1, 4))]
+                core = loc.unsat_core(lits)
+                if core is not None:
+                    self.assertTrue(set(core) <= set(lits))
+                    self.assertFalse(full.solve(assumptions=core), (case, lits, core))
+            full.delete()
+            loc.delete()
+
+
 class PackedColsTest(unittest.TestCase):
     def test_packed_matches_dense(self):
         """Таблица базы, упакованная по столбцам, отдаёт те же столбцы, строки и срезы."""

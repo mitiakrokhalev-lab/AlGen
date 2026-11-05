@@ -46,6 +46,13 @@ CONF_BUDGET = 100_000
 # Ссылки «следует из» длиннее TRIM_FROM укорачиваются до TRIM_PASSES
 # повторными вызовами решателя (короче ссылка — меньше строк возвращается
 # при опровержении одного источника).
+# Предпроверка без теории: фон вопросов — ещё и в маленьком решателе без клауз
+# теории. Запрет, противоречащий одному фону, противоречит и фону с теорией —
+# свёртка без вызова решателя на всю теорию (у G — 1,24 млн атомов, ≈ 20 мс на
+# вызов). Какие вопросы свёрнуты, а какие оставлены — то же (кроме строк, где
+# решатель теории не уложился в CONF_BUDGET: их предпроверка сворачивает);
+# «следует из» — ядро другого решателя, тоже верное.
+PRECHECK = True
 TRIM_FROM, TRIM_PASSES = 4, 0  # прогон 41761019204: max 176 → 163, +10 с — выключено
 
 
@@ -98,6 +105,48 @@ def _fixed(form):
         if type(l) is int:
             out.append(l)
     return out
+
+
+class _Back:
+    """Фон вопросов для предпроверки (PRECHECK) в маленьком решателе: клаузы
+    локальной теории схемы (fast.Local, если есть) и гипотезы оставленных
+    вопросов под селекторами, в сжатой нумерации. Переменная вне локальной
+    теории — свободная (о ней нет клауз): теория только слабее, так что
+    «невыполнимо» здесь ⇒ «невыполнимо» с теорией и тем же фоном."""
+
+    def __init__(self, loc):
+        from pysat.solvers import Solver
+        self.loc = loc
+        self.s = Solver(name="g4", bootstrap_with=loc.clauses if loc is not None else [])
+        self.ids = {}
+        self.next = (loc.n_atoms if loc is not None else 0) + 1
+        self.g2s, self.s2g = {}, {}
+
+    def lit(self, l):
+        v = abs(l)
+        x = self.loc.local_var(v) if self.loc is not None else 0
+        if not x:
+            x = self.ids.get(v)
+            if x is None:
+                x = self.ids[v] = self.next
+                self.next += 1
+        return x if l > 0 else -x
+
+    def add(self, gsel, F):
+        x = self.next
+        self.next += 1
+        self.g2s[gsel], self.s2g[x] = x, gsel
+        self.s.add_clause([-x] + [-self.lit(l) for l in F])
+
+    def unsat(self, fixed, F, gsels):
+        """Глобальные селекторы ядра, если запрет F (с посылками записи) противоречит фону; иначе None."""
+        a = [self.lit(l) for l in fixed + F] + [self.g2s[g] for g in gsels if g in self.g2s]
+        if _solve(self.s, a) is not False:
+            return None
+        return [self.s2g[x] for x in (self.s.get_core() or []) if x in self.s2g]
+
+    def delete(self):
+        self.s.delete()
 
 
 def _solve(s, assumptions):
@@ -288,6 +337,8 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
              + [abs(l) + 1 for r in rows for l in (_safe_forbid(form, r) or [])])
     # факты: только оставленные факты
     sf = Solver(name="g4")
+    from . import fast as _fast
+    sb = _Back(_fast.LOCAL.get(id(T))) if PRECHECK else None  # фон вопросов + локальная теория
     nf = nv
     sel_q, sel_f = {}, {}
     copies = []
@@ -307,10 +358,14 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
             if F is None:
                 continue
             s, sels = (sq, sel_q) if kind == "неизвестно" else (sf, sel_f)
-            ans = _solve(s, fixed + F + list(sels))
+            pre = sb.unsat(fixed, F, list(sels)) if sb is not None and kind == "неизвестно" else None
+            ans = False if pre is not None else _solve(s, fixed + F + list(sels))
             if ans is False:
-                core = set(s.get_core() or [])
-                cs = [x for x in sels if x in core]
+                if pre is not None:
+                    cs = [x for x in sels if x in set(pre)]
+                else:
+                    core = set(s.get_core() or [])
+                    cs = [x for x in sels if x in core]
                 # Укорачивание: решаем заново только с селекторами ядра — новое
                 # ядро бывает меньше. Любое ядро — верный набор источников; если
                 # решатель не ответил, остаётся прежнее (тоже верное).
@@ -343,6 +398,8 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                 ok = _solve(sq, fixed + list(sel_q) + [nv])
                 if ok:
                     sel_q[nv] = r["№"]
+                    if sb is not None:
+                        sb.add(nv, F)
                 else:
                     sq.add_clause([-nv])
                     if ok is False:
@@ -357,9 +414,13 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
     finally:
         sq.delete()
         sf.delete()
+        if sb is not None:
+            sb.delete()
     for r in copies:
         rep = seen[r["№"], r["вердикт"]]
         r["свёрнута"], r["следует из"] = rep["свёрнута"], list(rep["следует из"])
+        if "вне фона" in rep:
+            r["вне фона"] = rep["вне фона"]
     return report
 
 
