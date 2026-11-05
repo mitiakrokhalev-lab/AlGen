@@ -36,6 +36,8 @@ AUT = ROOT / "data" / "finite" / "grp-aut.jsonl"
 COMPL_SCRIPT = Path(__file__).with_name("gap") / "compl.g"
 PROPS_SCRIPT = Path(__file__).with_name("gap") / "props.g"
 PROPS = ROOT / "data" / "finite" / "grp-props.jsonl"
+PROPS2_SCRIPT = Path(__file__).with_name("gap") / "props2.g"
+PROPS2 = ROOT / "data" / "finite" / "grp-props2.jsonl"
 COMPL = ROOT / "data" / "finite" / "grp-compl.jsonl"
 ENDO_SCRIPT = Path(__file__).with_name("gap") / "endo.g"
 ENDO = ROOT / "data" / "finite" / "grp-endo.jsonl"
@@ -168,7 +170,7 @@ def build_aut(jobs):
                 out.write(json.dumps(recs[k], ensure_ascii=False, separators=(",", ":")) + "\n")
 
 
-def build_table(script, target, jobs, stall=None, deadline=None):
+def build_table(script, target, jobs, stall=None, deadline=None, keys=None):
     """Данные по всем группам таблицы скриптом GAP (KEYS, OUT) → target (jsonl).
 
     stall — сколько секунд ждать строку об очередной группе: группа, на которой GAP
@@ -176,7 +178,7 @@ def build_table(script, target, jobs, stall=None, deadline=None):
     считается заново. deadline — время (time.time()), после которого записывается
     то, что есть (недосчитанные группы просто отсутствуют)."""
     import time
-    keys = sorted(load(extra=True), key=lambda k: tuple(map(int, k.split(":"))))
+    keys = sorted(keys if keys is not None else load(extra=True), key=lambda k: tuple(map(int, k.split(":"))))
     chunks = [keys[i::jobs * 4] for i in range(jobs * 4)]
     with tempfile.TemporaryDirectory() as tmp:
         def one(i):
@@ -332,6 +334,22 @@ def load_chars(path=None):
         return {r["key"]: r for r in map(json.loads, f)}
 
 
+def library_finite_keys():
+    """Ключи n:i всех конечных групп библиотеки (таблица, Aut/Out, характеристические)."""
+    import re
+    from .library import built_library
+    return [k for k, o in built_library().obj.items()
+            if o.get("конечная") and re.fullmatch(r"\d+:\d+", k) and int(k.split(":")[0]) not in (512, 1024, 1536)]
+
+
+def load_props2(path=PROPS2):
+    """key → запись props2.g (если посчитана)."""
+    if not Path(path).exists():
+        return {}
+    with open(path) as f:
+        return {r["key"]: r for r in map(json.loads, f) if not r.get("skipped")}
+
+
 def load_aut(path=AUT):
     """key → запись об Aut, Inn, Out (если таблица посчитана)."""
     if not Path(path).exists():
@@ -484,6 +502,9 @@ if __name__ == "__main__":
                     help="классы сопряжённых элементов всех групп таблицы в data/finite/grp-elts.jsonl")
     ap.add_argument("--свойства", dest="gprops", action="store_true",
                     help="метабелевость, ступень 2, экспонента, порядки элементов, дедекиндовость → data/finite/grp-props.jsonl")
+    ap.add_argument("--свойства2", dest="gprops2", action="store_true",
+                    help="ранг, клт, дедекиндовость, свойства собственных подгрупп всех конечных групп "
+                         "библиотеки с ключом n:i (gap/props2.g) → data/finite/grp-props2.jsonl")
     ap.add_argument("--гомоморфизмы", dest="homs", action="store_true",
                     help="эндоморфизмы всех групп таблицы в data/finite/grp-homs.jsonl")
     ap.add_argument("--пересечения", dest="hk", action="store_true",
@@ -519,6 +540,12 @@ if __name__ == "__main__":
         import time
         build_table(HOMS_SCRIPT, HOMS, a.jobs, stall=a.stall, deadline=time.time() + a.minutes * 60)
         print(HOMS, sum(1 for _ in HOMS.open()))
+        raise SystemExit
+    if a.gprops2:
+        import time
+        build_table(PROPS2_SCRIPT, PROPS2, a.jobs, stall=a.stall, deadline=time.time() + a.minutes * 60,
+                    keys=library_finite_keys())
+        print(PROPS2, sum(1 for _ in PROPS2.open()))
         raise SystemExit
     if a.elts:
         build_table(ELTS_SCRIPT, ELTS, a.jobs)
