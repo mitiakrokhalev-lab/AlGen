@@ -1216,16 +1216,21 @@ def _load_state(sid, form, base):
     except Exception:  # обрезанный файл и т. п. — без кэша
         return None
     tp = theory_print(form, base)
+    v0 = d["вердикты"]
+    if isinstance(v0, dict):  # прежний формат (пилот 16): ключи и ядра — строки
+        rows = {E._h(k): (v[0], tuple(E._h(c) for c in v[1])) for k, v in v0.items()}
+    else:
+        rows = {k: (kind, tuple(core)) for k, kind, core in v0}
     if d.get("теория") == tp:
-        return d["вердикты"]
+        return rows
     if not _grown(d.get("теория"), form):
         return None
     out = {}
-    for k, v in d["вердикты"].items():
+    for k, v in rows.items():
         if v[0] in ("противоречие", "нет"):
-            out[k] = v[:2]
+            out[k] = v
         elif v[0] in ("выводится", "опровергается"):
-            out[k] = [v[0], v[1], "рост"]
+            out[k] = (v[0], v[1], "рост")
     return out
 
 
@@ -1267,7 +1272,8 @@ def _one(job):
                 dst = Path(outdir) / f"{sid}.vc.json.gz"
                 tmp = dst.with_suffix(".tmp")
                 tmp.write_bytes(gzip.compress(json.dumps(
-                    {"теория": tp, "вердикты": E.VCACHE_OUT}, ensure_ascii=False).encode(), 6))
+                    {"теория": tp, "вердикты": [[k, v[0], list(v[1])] for k, v in E.VCACHE_OUT.items()]},
+                    ensure_ascii=False).encode(), 6))
                 os.replace(tmp, dst)  # SIGALRM посреди записи не оставит обрезанный файл
     except SchemeTimeout:
         summary, status = {}, f"таймаут {limit} с"

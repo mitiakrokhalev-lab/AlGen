@@ -104,8 +104,15 @@ VCACHE_OUT = None
 VCACHE_HITS = [0, 0]  # попадания, промахи
 
 
+def _h(text):
+    """128-битный хэш строки (ключи кэша — числа: строки занимали память схемы;
+    при 128 битах совпадение ключей на 10⁶ ключей схемы — около 10⁻²⁷)."""
+    import hashlib
+    return int.from_bytes(hashlib.blake2b(text.encode(), digest_size=16).digest(), "little", signed=True)
+
+
 def _vkey(prem, goal):
-    return " ∧ ".join(sorted(lit_name(a, v) for a, v in prem)) + " ⊢ " + lit_name(*goal)
+    return _h(" ∧ ".join(sorted(lit_name(a, v) for a, v in prem)) + " ⊢ " + lit_name(*goal))
 
 
 def cdecide(T, prem, goal, s):
@@ -116,7 +123,7 @@ def cdecide(T, prem, goal, s):
     hit = VCACHE.get(k) if VCACHE else None
     if hit is not None:
         kind, core = hit[0], hit[1]
-        by = {lit_name(a, v): (a, v) for a, v in prem}
+        by = {_h(lit_name(a, v)): (a, v) for a, v in prem}
         ok = all(c in by for c in core)
         if ok and len(hit) > 2:
             # из выросшей теории: вывод верен, если посылки ещё совместны (иначе
@@ -124,11 +131,11 @@ def cdecide(T, prem, goal, s):
             ok = _joint_sat(T, prem, [], s) is True
         if ok:
             VCACHE_HITS[0] += 1
-            VCACHE_OUT[k] = [kind, core]
+            VCACHE_OUT[k] = (kind, core)
             return Verdict(kind, [by[c] for c in core])
     VCACHE_HITS[1] += 1
     v = decide(T, prem, goal, s)
-    VCACHE_OUT[k] = (v.kind, [lit_name(*x) for x in v.core or []])
+    VCACHE_OUT[k] = (v.kind, tuple(_h(lit_name(*x)) for x in v.core or []))
     return v
 
 
@@ -150,7 +157,7 @@ def _joint_sat(T, prem, extra, s):
         if l is False:
             return None
         lits.append(l)
-    key = "совместно: " + " ∧ ".join(sorted(lit_name(a, v) for a, v in list(prem) + list(extra)))
+    key = _h("совместно: " + " ∧ ".join(sorted(lit_name(a, v) for a, v in list(prem) + list(extra))))
     hit = VCACHE.get(key) if VCACHE else None
     if hit is not None:
         if VCACHE_OUT is not None:
@@ -159,7 +166,7 @@ def _joint_sat(T, prem, extra, s):
     from . import fast
     ok = bool(fast.bank(T, s).sat(lits)[0])
     if VCACHE_OUT is not None:
-        VCACHE_OUT[key] = ("да" if ok else "нет", [])
+        VCACHE_OUT[key] = ("да" if ok else "нет", ())
     return ok
 
 

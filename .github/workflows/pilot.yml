@@ -32,6 +32,7 @@ env:
   # STATE_RUN — номер прошлого запуска pilot, чьи кэши берутся (решатель — только
   # о новых условиях). Пусто — без прежнего кэша.
   ALGEN_STATE_SAVE: "1"
+  ALGEN_COMPRESS: "1"  # сжатие внутри схемы: базис вопросов и фактов в сводке схемы (было только в ветке pilot-15)
   STATE_RUN: ""
 
 jobs:
@@ -127,12 +128,23 @@ jobs:
           cd py
           du -sh ../tab
           timeout 320m python3 -m algen.table равносильные $BASE --каталог ../tab $ARGS
+      - name: аудит таблицы
+        continue-on-error: true
+        run: |
+          cd py
+          timeout 60m python3 -m algen.audit_table $BASE --каталог ../tab --выход ../out/none
       - uses: actions/upload-artifact@v4
         with:
           name: tabs
           path: tab
           retention-days: 7
           compression-level: 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: part-none-audit
+          path: out
+          retention-days: 30
 
   enum:
     needs: [cfg, prep]
