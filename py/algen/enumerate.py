@@ -106,6 +106,10 @@ VCACHE = None
 VCACHE_OUT = None
 VCACHE_HITS = [0, 0]  # попадания, промахи
 
+# Контрольный прежний путь для замеров. При пустом degen ответ всегда False;
+# строить и хранить frozenset каждого запрета для этого ответа не нужно.
+LEGACY_EMPTY_DEGEN_CACHE = os.environ.get("ALGEN_DEGEN_EMPTY_CACHE", "0") == "1"
+
 
 def _h(text):
     """128-битный хэш строки (ключи кэша — числа: строки занимали память схемы;
@@ -1654,7 +1658,8 @@ def run(max_prem, lib=None, vocab=None, form=None):
 
     def _mem(stage, n):
         try:
-            rss = next(int(x.split()[1]) / 1e6 for x in open("/proc/self/status") if x.startswith("VmRSS"))
+            with open("/proc/self/status") as status:
+                rss = next(int(x.split()[1]) / 1e6 for x in status if x.startswith("VmRSS"))
         except (OSError, StopIteration):
             rss = None
         form.mem.append((stage, None if rss is None else round(rss, 2), n))
@@ -1677,18 +1682,17 @@ def run(max_prem, lib=None, vocab=None, form=None):
         # Вырожденное: посылки заставляют группу быть тривиальной или
         # подгруппу — тривиальной или всей. Это тоже факт меньшей схемы.
         # Смотрим на весь запрет, чтобы контрапозиции решались одинаково.
-        whole = fixed + prem_l + [(goal[0], not goal[1])]
-        # один ответ на весь запрет (у контрапозиций тот же набор литералов): банк
-        # моделей на повторный вопрос отвечает без решателя, так что это экономит
-        # только сам повтор
-        wkey = frozenset(whole)
-        dg = degen_memo.get(wkey)
-        if dg is None:
-            dg = degen_memo[wkey] = (not none_derivable(form.sc.T, whole, degen, form.sc.s)
-                                     and any(cdecide(form.sc.T, whole, d, form.sc.s).kind == "выводится"
-                                             for d in degen))
-        if dg:
-            continue
+        if degen or LEGACY_EMPTY_DEGEN_CACHE:
+            whole = fixed + prem_l + [(goal[0], not goal[1])]
+            # Один ответ на весь запрет (у контрапозиций тот же набор литералов).
+            wkey = frozenset(whole)
+            dg = degen_memo.get(wkey)
+            if dg is None:
+                dg = degen_memo[wkey] = (not none_derivable(form.sc.T, whole, degen, form.sc.s)
+                                         and any(cdecide(form.sc.T, whole, d, form.sc.s).kind == "выводится"
+                                                 for d in degen))
+            if dg:
+                continue
         v = cdecide(form.sc.T, fixed + prem_l, goal, form.sc.s)
         r = {"_cols": list(prem) + [g ^ 1],
              "посылки": [lit_name(*x) for x in prem_l], "цель": lit_name(*goal),

@@ -476,6 +476,7 @@ def scheme_pairs(vocab, base):
 SKEL_DIR = os.environ.get("ALGEN_SKEL", "")
 # Таблица базы в памяти упакована по столбцам (PackedCols); False — плотные bool.
 PACKED = True
+STREAM_TABLE = os.environ.get("ALGEN_STREAM_TABLE", "1") == "1"
 # При одной нити схемы идут в самом процессе, без fork (см. _run_pool).
 IN_PROCESS = True
 
@@ -754,6 +755,51 @@ class PackedCols:
         self.dtype = np.dtype(bool)
         self.bits = np.ascontiguousarray(np.packbits(dense, axis=0).T)  # (столбцы, строки/8)
 
+    @classmethod
+    def from_packed_rows(cls, parts, width, block_bytes=64 * 1024**2):
+        """Преобразовать части таблицы без плотной матрицы всех строк.
+
+        Полные блоки кратны восьми строкам. Блок может пересекать границы
+        частей: их длины не обязаны быть кратны восьми. Хвост дополняется
+        нулями только один раз, в конце всей таблицы.
+        """
+        if width < 0 or block_bytes <= 0:
+            raise ValueError("неверные размер таблицы/бюджет блока")
+        parts = tuple(parts)
+        packed_width = (width + 7) // 8
+        if any(p.ndim != 2 or p.dtype != np.uint8 or p.shape[1] != packed_width for p in parts):
+            raise ValueError("неверный формат упакованной части")
+        out = object.__new__(cls)
+        out.shape = (sum(p.shape[0] for p in parts), width)
+        out.dtype = np.dtype(bool)
+        out.bits = np.empty((width, (out.shape[0] + 7) // 8), dtype=np.uint8)
+        if not width or not out.shape[0]:
+            out.bits.fill(0)
+            return out
+        block_rows = max(8, block_bytes // width // 8 * 8)
+        chunks, count, offset = [], 0, 0
+
+        def emit():
+            nonlocal offset
+            rows = np.concatenate(chunks, axis=0) if len(chunks) > 1 else chunks[0]
+            dense = np.unpackbits(rows, axis=1, count=width)
+            packed = np.packbits(dense, axis=0)
+            out.bits[:, offset:offset + packed.shape[0]] = packed.T
+            offset += packed.shape[0]
+
+        for part in parts:
+            pos = 0
+            while pos < part.shape[0]:
+                take = min(block_rows - count, part.shape[0] - pos)
+                chunks.append(part[pos:pos + take])
+                pos, count = pos + take, count + take
+                if count == block_rows:
+                    emit()
+                    chunks, count = [], 0
+        if chunks:
+            emit()
+        return out
+
     def cols(self, idx):
         """Плотные столбцы idx (номер, список, массив или срез) — bool (строки × столбцы)."""
         if isinstance(idx, (int, np.integer)):
@@ -803,7 +849,11 @@ def load(lib, vocab, base, tdir):
             mats[k].append(d[k])  # упакованные биты: в 8 раз меньше, распаковка — ниже, на место
         del d
     rows = sum(x.shape[0] for x in mats["m"])
-    for k in "mse":  # по одной матрице: плотная — только на время упаковки по столбцам
+    for k in "mse":  # по одной матрице; прежний плотный путь оставлен для сравнения
+        if PACKED and STREAM_TABLE:
+            setattr(f, k, PackedCols.from_packed_rows(mats[k], width))
+            mats[k] = None
+            continue
         out = np.empty((rows, width), dtype=bool)
         r = 0
         for x in mats[k]:

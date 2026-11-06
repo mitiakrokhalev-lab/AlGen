@@ -14,7 +14,8 @@ class MetricsTest(unittest.TestCase):
                 (root / name).write_text(json.dumps(d))
             put('_план-1-1.json', {"схемы": ["a", "b", "c", "d", "e"]})
             put('a.json', {"id": "a", "статус": "ok", "секунд": 2, "память ГБ": [1, 2],
-                           "вердикты": {"неизвестно": 10}, "оставленные вопросы": [{}, {}]})
+                           "вердикты": {"неизвестно": 9}, "оставленные вопросы": [{"№": "k1"}, {"№": "k2"}],
+                           "свёрнуто": {str(i): ["k1"] for i in range(8)}})
             put('b.json', {"id": "b", "статус": "ошибка", "секунд": 90})
             (root / 'b.txt').write_text('Traceback\nMemoryError\n')
             put('c.json', {"id": "c", "статус": "ошибка: память"})
@@ -26,6 +27,8 @@ class MetricsTest(unittest.TestCase):
             self.assertEqual(r['time_unreported'], ['c'])
             self.assertEqual(r['time_seconds_ok_only']['sum'], 2)
             self.assertEqual(r['within_scheme_ratio'], 5)
+            self.assertEqual(r['unknown_ids_before_compression'], 10)
+            self.assertEqual(r['summary_counter_ratio'], 4.5)  # первый вердикт класса — другой счётчик
             self.assertIsNone(r['peak_rss_gib'])
             self.assertIsNone(r['cpu_seconds'])
             self.assertIsNone(r['global_verified_basis'])
