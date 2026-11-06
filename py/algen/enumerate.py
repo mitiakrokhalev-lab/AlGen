@@ -1360,7 +1360,12 @@ def enumerate_form(form, max_prem, goals=None, m=None):
 
     def leaf_vec(prem, atoms, have, gc, negs, buf, depth):
         nonlocal count
-        m = (goal_static if gc is goal_cols else np.isin(np.arange(n_lit), gc)) & ~negs
+        if gc is goal_cols:
+            m = goal_static & ~negs
+        else:  # то же, что np.isin(np.arange(n_lit), gc), без сортировки
+            m = np.zeros(n_lit, dtype=bool)
+            m[np.asarray(gc, dtype=np.intp)] = True
+            m &= ~negs
         for a in atoms:
             m[2 * a] = m[2 * a + 1] = False
         if req_goals:
