@@ -1258,13 +1258,21 @@ def _one(job):
             from . import fast
             local_T = form.sc.T
             local = fast.LOCAL[id(local_T)] = fast.Local(local_T, set(form.own))
-        tp = theory_print(_STATE["forms"][base], base) if (STATE_IN or STATE_SAVE) else None
-        if tp is not None:
+        export_live = os.environ.get("ALGEN_DYNAMIC_EXPORT") == "1"
+        live = _STATE.get("live")
+        tp = theory_print(_STATE["forms"][base], base) if (STATE_IN or STATE_SAVE or export_live or live) else None
+        live_info = None
+        if live:
+            from .live_bridge import append_rows
+            live_info = append_rows(form, live, base, CLASS, tp)
+        if STATE_IN or STATE_SAVE:
             E.VCACHE, E.VCACHE_OUT, E.VCACHE_HITS[:] = _load_state(sid, _STATE["forms"][base], base), {}, [0, 0]
         form, alive, empty, report = E.run(k, _STATE["lib"], _STATE["vocab"], form)
         summary = E.render(form, alive, empty, report, out=out, err=err, registry=_STATE["registry"])
+        if live_info:
+            summary["dynamic"] = live_info
         status = "ok"
-        if tp is not None:
+        if STATE_IN or STATE_SAVE:
             summary["кэш вердиктов"] = {"было": len(E.VCACHE or {}), "попаданий": E.VCACHE_HITS[0],
                                         "промахов": E.VCACHE_HITS[1]}
             if STATE_SAVE:
@@ -1275,6 +1283,15 @@ def _one(job):
                     {"теория": tp, "вердикты": [[k, v[0], list(v[1])] for k, v in E.VCACHE_OUT.items()]},
                     ensure_ascii=False).encode(), 6))
                 os.replace(tmp, dst)  # SIGALRM посреди записи не оставит обрезанный файл
+        if export_live:
+            from .live import write_report
+            write_report(Path(outdir) / f"{sid}.archive.jsonl.gz",
+                         {"base": base, "class": CLASS, "scheme": sid, "theory": tp,
+                          "library": fp, "declaration": BASES[base],
+                          "dynamic": live_info,
+                          "variables": [str(t) for t in form.search.vars],
+                          "fixed": [E.lit_name(a, val) for a, val in form.fixed_lits]}, report,
+                         summary.get("факты без посылок", ()))
     except SchemeTimeout:
         summary, status = {}, f"таймаут {limit} с"
     except Exception:
@@ -1318,6 +1335,8 @@ def run_schemes(a):
     from . import fast
     fast.install()  # вывод через банк моделей теории (ответы те же, что у logic.decide)
     _STATE.update(lib=lib, vocab=vocab, registry=E.load_registry(), forms={})
+    from .live_bridge import settings as live_settings
+    _STATE["live"] = live_settings()
     outdir = Path(a.out)
     outdir.mkdir(parents=True, exist_ok=True)
     # «--посылок 3/2» (при ALGEN_SIZE): k = 3 у схем из ⩽ 1 конструкции, k = 2 у остальных.
@@ -1332,6 +1351,10 @@ def run_schemes(a):
     by_base = {}
     for base in a.bases.split(","):
         fp = _fp(base) + f":{a.k}" + (f":d{a.defer}" if a.defer else "")
+        if _STATE["live"]:
+            if (_STATE["live"]["header"]["base"] != base or _STATE["live"]["header"]["class"] != CLASS):
+                raise ValueError("один динамический контекст применяется только к своей базе и классу")
+            fp += _STATE["live"]["fingerprint"]
         todo = schemes(vocab, base, ks[-1], getattr(a, "t", None))
         g0, _, _ = scheme(vocab, {"раздел": "grp", "условие": BASES[base]})
         n0 = {str(t): t for t in g0.terms}
@@ -1354,7 +1377,11 @@ def run_schemes(a):
             if j.exists() and not a.force:
                 try:
                     old = json.loads(j.read_text(encoding="utf-8"))
-                    if old.get("отпечаток") == fp and old.get("статус") == "ok":
+                    have_export = True
+                    if os.environ.get("ALGEN_DYNAMIC_EXPORT") == "1":
+                        from .live import export_matches
+                        have_export = export_matches(outdir / f"{sid}.archive.jsonl.gz", sid, fp)
+                    if old.get("отпечаток") == fp and old.get("статус") == "ok" and have_export:
                         continue
                 except Exception:
                     pass
@@ -1395,7 +1422,7 @@ def run_schemes(a):
                 equiv_reps(_STATE["forms"][base])
         print(f"{base}: таблица {_STATE['forms'][base].e.shape}, {round(time.time() - t)} с",
               file=sys.stderr, flush=True)
-        if STATE_IN or STATE_SAVE:
+        if STATE_IN or STATE_SAVE or _STATE["live"] or os.environ.get("ALGEN_DYNAMIC_EXPORT") == "1":
             # отпечаток теории — до fork: дочерние процессы не хешируют каркас заново
             tp = theory_print(_STATE["forms"][base], base)
             if STATE_SAVE and not (outdir / f"теория-{tp}.npy").exists():
