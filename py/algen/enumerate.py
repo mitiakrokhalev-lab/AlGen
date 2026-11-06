@@ -44,10 +44,13 @@ from types import SimpleNamespace
 
 from .library import GROUP_PROPS, MARKS, SUB_PROPS, Library, Scene, Search, built_library, jobs
 from .logic import SYMMETRIC, App, Theory, Var, Verdict, Vocab, decide
+from .conditions import PackedConditions, empty_like
 
 # Свойства, которые не входят в атомы формы (флаг --без): схемы с большим
 # числом термов растут комбинаторно с каждым свойством.
 SKIP = set()
+# Те же минимальные условия в числовых массивах. 0 — прежний словарь для сверки.
+PACKED_CONDITIONS = os.environ.get("ALGEN_PACKED_CONDITIONS", "1") != "0"
 MOR_PROPS = ("injective", "surjective", "iso", "zero-mor", "idempotent", "inner-aut")
 ELT_PROPS = ("identity-elt", "involution", "central-elt", "real-elt", "commutator-elt", "generator")
 GSET_PROPS = ("transitive", "faithful", "free-act", "regular", "primitive", "singleton-set", "finite-set")
@@ -1256,7 +1259,15 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             clash.setdefault(c, set()).add(i)
     for i, cs in pairs.items():  # «P(A) и P(B)» с «¬P(A) и ¬P(B)» — тоже
         clash[i] |= {k for k, ds in pairs.items() if ds == cs}
-    alive, empty, lower = {}, [], set()
+    # Произвольный список целей может быть неупорядочен; прежний путь остаётся
+    # и для него, и для кодов, которым нужно больше 64 бит. Класс не сужается.
+    alive = {}
+    if PACKED_CONDITIONS and goals is None and max_prem >= 0:
+        try:
+            alive = PackedConditions(n_lit, max_prem, m.shape[0])
+        except OverflowError:
+            pass
+    empty, lower = [], set()
     count = 0
     # Покрытие (схемы из таблицы базы): условие должно касаться каждого
     # «верхнего» элемента схемы, иначе оно — факт меньшей схемы и выдаётся там.
@@ -1503,7 +1514,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
 
 def minimal(alive):
     """Оставить условия, у которых без любой посылки цель опровергается."""
-    out = {}
+    out = empty_like(alive)
     for (prem, g), support in alive.items():
         if all((tuple(x for x in prem if x != p), g) not in alive for p in prem if len(prem) > 1):
             out[prem, g] = support
@@ -1515,7 +1526,7 @@ def pair_minimal(form, mins):
     если без одной половины пары цель всё ещё не опровергается, условие не
     минимально («A тривиальна и A, B абелевы ⇒ …» — хватает «B абелева»)."""
     m, pairs = form.m, form.pair_atoms
-    out = {}
+    out = empty_like(mins)
     for (prem, g), sup in mins.items():
         if not any(j // 2 in pairs for j in prem):
             out[prem, g] = sup
@@ -1571,7 +1582,7 @@ def generic_filter(form, mins):
                 s.delete()
         return in_class[t]
 
-    out, dropped = {}, 0
+    out, dropped = empty_like(mins), 0
     form.generic_kept_class = 0
     for (prem, g), sup in mins.items():
         lits = [l for j in prem for l in form.lits(j)] + [form.lit(g)]
