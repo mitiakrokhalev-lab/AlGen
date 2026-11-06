@@ -42,7 +42,7 @@ jobs:
           cd py
           export ALGEN_PROFILE=1
           timeout 110m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../res/out --нитей 1 --посылок $K --предел 3000 --память 9 \
-            --схемы G-14-20-200-705-707-708-709,G-13-318-550-705-707-708-709,G-12-370-705-707-708-709,G-14-180-705-707-708-709 2>&1 | tail -30 | tee ../res/перебор.txt
+            --схемы G-14-20-200-705-707-708-709,G-12-370-705-707-708-709 2>&1 | tail -30 | tee ../res/перебор.txt
       - name: результаты в ветку «results-…»
         if: always()
         run: |
@@ -51,6 +51,6 @@ jobs:
           git config user.email "algen-bot@users.noreply.github.com"
           git checkout --orphan "results-${GITHUB_REF_NAME}"
           git rm -rq --cached . && git clean -fdq -e res
-          git add res/*.txt res/prof.json.gz res/out 2>/dev/null || true
+          git add -f res/*.txt; git add -f res/out || true
           git commit -qm "Замеры по таблицам запуска ${TABLES_RUN}: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
           git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"
