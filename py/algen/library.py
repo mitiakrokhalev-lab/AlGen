@@ -1648,11 +1648,12 @@ class Search:
                 k = s.get("фактор") if s else None
             return ("obj", k) if k else None
         if t.op == "profinite-map" and self._obj(args[0]):
-            # X → X̂: у конечной X̂ = X и это тождество; без конечных факторов X̂ = 1
+            # X → X̂: у конечной X̂ ≅ X и это изоморфизм (не тождество: X̂ — другой
+            # объект, соглашение 6.11 — не идемпотентно); без конечных факторов X̂ = 1
             k0 = self._obj(args[0])
             o = lib.obj[k0]
             if o.get("конечная") or o["свойства"].get("finite"):
-                return ("mor", "id", k0, k0, None)
+                return ("mor", "isoprof", k0, k0, None)
             if o["свойства"].get("no-finite-quotients") and "1:1" in lib.obj:
                 return ("mor", "zero", k0, "1:1", None)
             return None
@@ -1662,14 +1663,14 @@ class Search:
             if t.op == "pullback":
                 # ядерная пара {(x, y): f x = f y}: у инъективного f — диагональ ≅ dom f;
                 # у нулевого — dom f × dom f
-                if kind in ("id", "cayley", "incl") or (kind == "end" and lib.obj[d]["эндоморфизмы"][j]["inj"]):
+                if kind in ("id", "isoprof", "cayley", "incl") or (kind == "end" and lib.obj[d]["эндоморфизмы"][j]["inj"]):
                     return ("obj", d)
                 if kind == "zero":
                     p = d if lib.obj[d]["свойства"].get("trivial") else lib.prod.get((d, d))
                     return ("obj", p) if p else None
                 return None
             # pushout(f, f) = cod f ∗_{im f} cod f
-            if kind == "id":
+            if kind in ("id", "isoprof"):
                 return ("obj", d)
             if kind == "zero":
                 if lib.obj[c]["свойства"].get("trivial"):
@@ -1734,9 +1735,11 @@ class Search:
             if kind == "cayley":
                 return ("sub", d, self._one(d)) if t.op == "ker" and self._one(d) is not None else None
             if t.op == "ker":
-                idx = {"zero": self._all(d), "id": self._one(d), "proj": j, "incl": self._one(d)}[kind]
+                idx = {"zero": self._all(d), "id": self._one(d), "isoprof": self._one(d), "proj": j,
+                       "incl": self._one(d)}[kind]
                 return ("sub", d, idx) if idx is not None else None
-            idx = {"zero": self._one(c), "id": self._all(c), "proj": self._all(c), "incl": j}[kind]
+            idx = {"zero": self._one(c), "id": self._all(c), "isoprof": self._all(c), "proj": self._all(c),
+                   "incl": j}[kind]
             return ("sub", c, idx) if idx is not None else None
         if t.op == "whole-sub" and self._obj(args[0]):
             idx = self._all(self._obj(args[0]))
@@ -1856,6 +1859,9 @@ class Search:
         if kind == "id":
             return {"injective": True, "surjective": True, "iso": True, "zero-mor": td,
                     "idempotent": True, "inner-aut": True}
+        if kind == "isoprof":  # X → X̂ конечной X: изоморфизм на другой объект
+            return {"injective": True, "surjective": True, "iso": True, "zero-mor": td,
+                    "idempotent": False, "inner-aut": False}
         if kind == "zero":
             return {"zero-mor": True, "injective": td, "surjective": tc,
                     "iso": (td and tc) if td is not None and tc is not None else None,
@@ -2240,7 +2246,8 @@ class Search:
                 subs = self.lib.obj[d]["подгруппы"]
                 nm = lambda i: self._name(("obj", subs[i]["≅"]))
                 return f"эндоморфизм {nd}: ядро ≅ {nm(e['ker'])}, образ ≅ {nm(e['im'])}"
-            return {"id": f"id: {nd} → {nc}", "zero": f"1: {nd} → {nc}"}[kind]
+            return {"id": f"id: {nd} → {nc}", "zero": f"1: {nd} → {nc}",
+                    "isoprof": f"{nd} ≅ {nc}^ (проконечное пополнение)", "cayley": f"Кэли {nd} → {nc}"}[kind]
         if im[0] == "obj":
             o = self.lib.obj[im[1]]
             return o.get("имя", im[1])

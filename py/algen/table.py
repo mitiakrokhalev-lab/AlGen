@@ -640,6 +640,14 @@ def build(lib, vocab, base, part, outdir, skel=None):
         f.fill_rows(part)
     else:
         f = skeleton(lib, vocab, base, part=part, with_rows=True)
+    if f.skipped:
+        print(f"{base} {part[0]}/{part[1]}: строк противоречат базе {len(f.skipped)}, например: "
+              + "; ".join(map(str, f.skipped[:3])), file=sys.stderr)
+    if f.skipped and len(f.skipped) > len(f.envs):
+        # больше половины строк противоречит правилам — ошибка правила или данных:
+        # таблица без них бессмысленна (пилот 16: строк 0, выдача пуста)
+        raise SystemExit(f"{base} {part[0]}/{part[1]}: противоречат базе {len(f.skipped)} строк из "
+                         f"{len(f.skipped) + len(f.envs)} — правило или данные неверны")
     path = Path(outdir) / f"{base}.{part[0]}-{part[1]}.pickle"
     path.parent.mkdir(parents=True, exist_ok=True)
     data = {"отпечаток": _fp(base), "атомов": len(f.atoms), "envs": f.envs, "skipped": f.skipped,
