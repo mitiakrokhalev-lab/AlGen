@@ -1,0 +1,148 @@
+name: bounded stress pilot
+
+on:
+  push:
+    branches: ["stress-codex-*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: stress-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    outputs:
+      cases: ${{ steps.plan.outputs.cases }}
+      source: ${{ steps.plan.outputs.source }}
+      seconds: ${{ steps.plan.outputs.seconds }}
+      rss: ${{ steps.plan.outputs.rss }}
+      fingerprint: ${{ steps.plan.outputs.fingerprint }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: plan
+        run: |
+          python3 -B - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          p = json.loads(Path('.github/stress-plan.json').read_text())
+          ids = [c['id'] for c in p['cases']]
+          assert p['version'] == 1 and p['base'] == 'G' and p['class'] == ''
+          assert p['size'] == 2 and p['k'] == 3 and p['max_parallel'] == 4
+          assert 1 <= len(ids) <= 12 and len(ids) == len(set(ids))
+          assert all(re.fullmatch(r'G(?:-\d+)+', sid) for sid in ids)
+          assert 0 < p['seconds_per_process'] <= 1200 and 0 < p['rss_gib'] <= 12
+          assert type(p['source_run']) is int
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              for k, v in {'cases': json.dumps(ids), 'source': p['source_run'],
+                           'seconds': p['seconds_per_process'], 'rss': p['rss_gib'],
+                           'fingerprint': p['native_fingerprint']}.items():
+                  f.write(f'{k}={v}\n')
+          print(f'План: {len(ids)} схем; максимум 4 параллельно; {p["seconds_per_process"]} с на процесс')
+          PY
+
+  profile:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        case: ${{ fromJSON(needs.plan.outputs.cases) }}
+    env:
+      CASE_ID: ${{ matrix.case }}
+      ALGEN_SIZE: "2"
+      ALGEN_FAST: "1"
+      EXPECTED_FP: ${{ needs.plan.outputs.fingerprint }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          name: skel
+          path: native
+          run-id: ${{ needs.plan.outputs.source }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: tabs
+          path: native-tabs
+          run-id: ${{ needs.plan.outputs.source }}
+          github-token: ${{ github.token }}
+      - name: Проверка совместимости native-кэша
+        working-directory: py
+        run: |
+          python3 -B - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          from algen import table, library
+          assert table._fp('G') == os.environ['EXPECTED_FP'], 'таблицы требуют нового плана/сборки'
+          assert (Path('../native/кэш') / ('библиотека-' + library._fingerprint() + '.pickle')).is_file()
+          plan = json.loads(Path('../.github/stress-plan.json').read_text())
+          assert any(p.endswith('G.skel.pickle') for p in plan['input_files_sha256'])
+          assert any(p.endswith('G.rep.pickle') for p in plan['input_files_sha256'])
+          for relative, expected in plan['input_files_sha256'].items():
+              path = Path('..') / relative
+              with path.open('rb') as f:
+                  assert hashlib.file_digest(f, 'sha256').hexdigest() == expected, relative
+          print('Native fingerprint:', table._fp('G'))
+          print('CPU:', os.cpu_count())
+          print(next(s for s in Path('/proc/meminfo').read_text().splitlines() if s.startswith('MemTotal:')))
+          PY
+      - name: Ограниченный полный прогон одной схемы
+        working-directory: py
+        run: |
+          python3 -B -m tools.profile_memory --tables ../native-tabs --skel ../native/skel \
+            --library-cache ../native/кэш --scheme "$CASE_ID" --out "../profiles/$CASE_ID" \
+            --seconds ${{ needs.plan.outputs.seconds }} --rss-gib ${{ needs.plan.outputs.rss }} --save-report
+          python3 -B -c 'import json,os; from pathlib import Path; d=json.loads((Path("../profiles")/os.environ["CASE_ID"]/"measurement.json").read_text()); assert d["complete"], d'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stress-${{ matrix.case }}
+          path: profiles/
+          retention-days: 30
+          compression-level: 1
+
+  summary:
+    needs: [plan, profile]
+    if: always() && needs.plan.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: stress-*
+          path: pilot-results
+          merge-multiple: true
+      - name: Учёт всех схем и проверка полных отчётов
+        working-directory: py
+        run: |
+          python3 -B -m tools.stress_summary ../.github/stress-plan.json ../pilot-results \
+            --out ../pilot-summary.json --markdown ../pilot-summary.md --require-complete
+      - name: Сводка запуска
+        if: always()
+        run: |
+          if [ -f pilot-summary.md ]; then cat pilot-summary.md >> "$GITHUB_STEP_SUMMARY"; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stress-summary
+          path: |
+            pilot-summary.json
+            pilot-summary.md
+          retention-days: 30

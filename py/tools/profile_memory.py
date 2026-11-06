@@ -5,7 +5,9 @@
 """
 
 import argparse
+from contextlib import nullcontext
 from functools import wraps
+import gzip
 import hashlib
 import json
 import os
@@ -37,6 +39,11 @@ def child(a):
     def size(x):
         return dict(entries=len(x), container_bytes=sys.getsizeof(x),
                     packed_bytes=getattr(x, "nbytes", None)) if x is not None else None
+    def search_state(form):
+        from algen.deferred import DeferredSolver
+        handle = form.search.s
+        delayed = isinstance(handle, DeferredSolver)
+        return dict(deferred=delayed, materialized=handle.materialized if delayed else True)
     for name in ("built_library", "skeleton", "load"):
         fn = getattr(table, name)
         def setup(*args, _fn=fn, _name=name, **kwargs):
@@ -76,6 +83,14 @@ def child(a):
         record("solver:end", number=number)
         return result
     logic.Theory.solver = make_solver
+    if a.load_only:
+        lib = table.built_library(table.Vocab.section("grp"))
+        form = table.load(lib, table.Vocab.section("grp"), "G", a.tables)
+        record("native-load:verified", shape=list(form.m.shape),
+               bit_sha256={k: hashlib.sha256(getattr(form, k).bits).hexdigest() for k in "mse"},
+               search_solver=search_state(form), solver_factories=solver_count,
+               table_fingerprint=table._fp("G"))
+        return
     for name in ("enumerate_form", "minimal", "pair_minimal", "generic_filter"):
         original = getattr(E, name)
         def wrapper(*args, _fn=original, _name=name, **kwargs):
@@ -109,14 +124,19 @@ def child(a):
         form, alive, empty, report = result
         h = hashlib.sha256()
         encoder = json.JSONEncoder(ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-        for row in report:
-            h.update(encoder.encode(row).encode() + b"\n")
+        with (gzip.open(out / "report.jsonl.gz", "wb") if a.save_report else nullcontext(None)) as archive:
+            for row in report:
+                line = encoder.encode(row).encode() + b"\n"
+                h.update(line)
+                if archive is not None:
+                    archive.write(line)
         record("run:end", report_rows=len(report), report_sha256=h.hexdigest(),
-               alive=size(alive), empty=size(empty), legacy_stages=form.mem)
+               alive=size(alive), empty=size(empty), legacy_stages=form.mem,
+               search_solver=search_state(form), solver_factories=solver_count)
         return result
     E.run = run
     record("start", python=sys.version, table_fingerprint=table._fp("G"),
-           bank_models=fast.BANK_MODELS, legacy_empty_cache=a.legacy_empty_cache)
+           bank_models=fast.BANK_MODELS, legacy_empty_cache=a.legacy_empty_cache, eager_search=a.eager_search)
     sys.argv = ["table", "перебор", "G", "--каталог", a.tables, "--выход", str(out / "results"),
                 "--схемы", a.scheme, "--нитей", "1", "--посылок", "3", "--предел", str(a.seconds)]
     table.main()
@@ -134,7 +154,11 @@ def main():
     p.add_argument("--rss-gib", type=float, default=6.4)
     p.add_argument("--legacy-empty-cache", action="store_true")
     p.add_argument("--legacy-table-load", action="store_true")
-    p.add_argument("--table-only", action="store_true", help="изолировать storage, без теории/SAT/перебора")
+    mode = p.add_mutually_exclusive_group()
+    mode.add_argument("--table-only", action="store_true", help="изолировать storage, без теории/SAT/перебора")
+    mode.add_argument("--load-only", action="store_true", help="native загрузка с каркасом, без перебора")
+    p.add_argument("--eager-search", action="store_true", help="прежнее немедленное создание solver Search")
+    p.add_argument("--save-report", action="store_true", help="сохранить весь report в gzip по одной строке")
     p.add_argument("--child", action="store_true", help=argparse.SUPPRESS)
     a = p.parse_args()
     if a.child:
@@ -153,6 +177,8 @@ def main():
         env["ALGEN_DEGEN_EMPTY_CACHE"] = "1"
     if a.legacy_table_load:
         env["ALGEN_STREAM_TABLE"] = "0"
+    if a.eager_search:
+        env["ALGEN_EAGER_SEARCH"] = "1"
     cmd = [sys.executable, "-B", "-m", "tools.profile_memory", "--child", "--tables", a.tables,
            "--skel", a.skel, "--library-cache", a.library_cache, "--scheme", a.scheme, "--out", a.out,
            "--seconds", str(a.seconds), "--rss-gib", str(a.rss_gib)]
@@ -162,8 +188,14 @@ def main():
         cmd.append("--legacy-table-load")
     if a.table_only:
         cmd.append("--table-only")
+    if a.load_only:
+        cmd.append("--load-only")
+    if a.eager_search:
+        cmd.append("--eager-search")
+    if a.save_report:
+        cmd.append("--save-report")
     code = {name: hashlib.sha256((Path(__file__).resolve().parents[1] / name).read_bytes()).hexdigest()
-            for name in ("algen/enumerate.py", "algen/table.py", "tools/profile_memory.py")}
+            for name in ("algen/enumerate.py", "algen/table.py", "algen/deferred.py", "tools/profile_memory.py")}
     start = time.monotonic()
     reason = "exited"
     sampled = 0
@@ -207,8 +239,10 @@ def main():
             result["scheme_status"] = summary.get("статус")
         except (OSError, ValueError) as e:
             result["summary_error"] = str(e)
-    result["complete"] = reason == "exited" and proc.returncode == 0 and (a.table_only or result["scheme_status"] == "ok")
-    result["scope"] = "table storage only" if a.table_only else "full native scheme"
+    result["complete"] = reason == "exited" and proc.returncode == 0 and (a.table_only or a.load_only or result["scheme_status"] == "ok")
+    result["scope"] = "table storage only" if a.table_only else ("native load only" if a.load_only else "full native scheme")
+    result["eager_search"] = a.eager_search
+    result["saved_report"] = a.save_report
     result["code_sha256"] = code
     (out / "measurement.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(result, ensure_ascii=False))
