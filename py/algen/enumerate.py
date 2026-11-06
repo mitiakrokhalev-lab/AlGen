@@ -871,6 +871,8 @@ class SchemeForm(Form):
         return {a: v for a, v in facts.items() if a in ks}
 
     def row_facts(self, r):
+        if r in getattr(self, "_live_rows", {}):
+            return self._live_rows[r]["atom_facts"], {}
         if r not in self._facts:
             # кэш ограничен: у G записанных значений строки — сотни тысяч, а кэш
             # общий для всех схем части (база); без предела машина перебора пилота 9
@@ -1018,12 +1020,19 @@ class SchemeForm(Form):
         return [facts[a] if a in facts else val.get(a) for a in self.atoms]
 
     def synthetic(self, r):
+        if r in getattr(self, "_live_rows", {}):
+            return False
         return any(im[0] == "obj" and self.lib.obj[im[1]].get("синтез") for im in self.envs[r].values())
 
     def _image(self, r, t):
+        if r in getattr(self, "_live_rows", {}):
+            return None
         return self.search._image(t, self.envs[r])
 
     def where(self, r):
+        if r in getattr(self, "_live_rows", {}):
+            packet = self._live_rows[r]
+            return packet["source"].get("where") or (packet["key"] + ": " + str(packet["assignment"]))
         return self.where_env(self.envs[r])
 
     def where_env(self, env):
@@ -1034,6 +1043,8 @@ class SchemeForm(Form):
         return sorted(((a, name) for a, (m, name) in hard.items() if m == mark), key=lambda x: str(x[0]))
 
     def row_keeping(self, r, keep, mark):
+        if r in getattr(self, "_live_rows", {}):
+            return self.m[r]
         k = (r, keep, mark)
         base = getattr(self, "_base", None)
         if base is not None and k not in self._kept:
