@@ -492,10 +492,10 @@ def skeleton(lib, vocab, base, part=None, with_rows=False):
         with open(path, "rb") as fh:
             d = pickle.load(fh)
         if d["отпечаток"] == _fp(base):
-            from .library import Search
+            from .deferred import make_search
             f = d["каркас"]
             f.lib, f.sc.s = lib, f.sc.T.solver()
-            f.search = Search(f.g, f.sc.T, lib)
+            f.search = make_search(f.g, f.sc.T, lib)
             return f
         print(f"{path}: каркас от другого кода или данных, строю заново", file=sys.stderr)
     f = E.SchemeForm(lib, vocab, BASES[base], universe(vocab, base),

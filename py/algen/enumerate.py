@@ -763,7 +763,8 @@ class SchemeForm(Form):
         self.g, self.lib, self._kept = g, lib, {}
         T = Theory(g, grow=1, extra=relation_atoms(g, own) if RELATIONS else (), grow_ops=grow_ops)
         self.sc = SimpleNamespace(T=T, s=T.solver())
-        self.search = Search(g, T, lib)
+        from .deferred import make_search
+        self.search = make_search(g, T, lib, constructor=Search)
         self.atoms = []
         for t in own:
             sort = g.terms[t].sort

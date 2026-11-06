@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "name": "stress-codex-01",
+  "date": "2026-11-07",
+  "scope": "8 selected native G schemes; not the whole class",
+  "base": "G",
+  "class": "",
+  "size": 2,
+  "k": 3,
+  "source_run": 42173383257,
+  "native_fingerprint": "73a2a35d2480ac9c:G::s2:быстро",
+  "max_parallel": 4,
+  "seconds_per_process": 1200,
+  "rss_gib": 12,
+  "cases": [
+    {
+      "id": "G-1-183-470-705-707-708-709",
+      "reason": "Прежний успех: центр, нормализатор и фактор",
+      "terms": [
+        "center(G)",
+        "normalizer(G, center(G))",
+        "quotient(G, normalizer(G, center(G)))",
+        "num:5()",
+        "num:120()",
+        "num:1056()",
+        "num:60()"
+      ],
+      "baseline": {
+        "run": 42209559171,
+        "status": "ok",
+        "scheme_seconds": 101.2,
+        "k": 3,
+        "verdict_cache": {
+          "было": 187,
+          "попаданий": 187,
+          "промахов": 0
+        }
+      }
+    },
+    {
+      "id": "G-14-20-705-707-708-709",
+      "reason": "Прежний успех: Sym и Кэли",
+      "terms": [
+        "sym(G)",
+        "cayley(G)",
+        "num:5()",
+        "num:120()",
+        "num:1056()",
+        "num:60()"
+      ],
+      "baseline": {
+        "run": 42209559171,
+        "status": "ok",
+        "scheme_seconds": 166.9,
+        "k": 3,
+        "verdict_cache": {
+          "было": 28126,
+          "попаданий": 17662,
+          "промахов": 0
+        }
+      }
+    },
+    {
+      "id": "G-4-17-705-707-708-709",
+      "reason": "Прежний успех: Aut и регулярное действие",
+      "terms": [
+        "aut(G)",
+        "regular-act(G)",
+        "num:5()",
+        "num:120()",
+        "num:1056()",
+        "num:60()"
+      ],
+      "baseline": {
+        "run": 42209559171,
+        "status": "ok",
+        "scheme_seconds": 269.0,
+        "k": 3,
+        "verdict_cache": {
+          "было": 37386,
+          "попаданий": 23229,
+          "промахов": 0
+        }
+      }
+    },
+    {
+      "id": "G-15-320-705-707-708-709",
+      "reason": "Прежний OOM, затем успешный локальный контроль Ulm/Ulm",
+      "terms": [
+        "ulm(G)",
+        "ulm(ulm(G))",
+        "num:5()",
+        "num:120()",
+        "num:1056()",
+        "num:60()"
+      ],
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 143.3,
+        "k": 3,
+        "verdict_cache": null
+      },
+      "known_report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699"
+    },
+    {
+      "id": "G-10-13-705-707-708-709",
+      "reason": "Прежний OOM: Frattini и профинитное пополнение",
+      "terms": [
+        "frattini(G)",
+        "profinite(G)",
+        "num:5()",
+        "num:120()",
+        "num:1056()",
+        "num:60()"
+      ],
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 277.2,
+        "k": 3,
+        "verdict_cache": null
+      }
+    },
+    {
+      "id": "G-4-220-705-707-708-709",
+      "reason": "Прежний OOM: Aut и Frattini, 13 млн живых условий",
+      "terms": [
+        "aut(G)",
+        "frattini(aut(G))",
+        "num:5()",
+        "num:120()",
+        "num:1056()",
+        "num:60()"
+      ],
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 762.1,
+        "k": 3,
+        "verdict_cache": null
+      }
+    },
+    {
+      "id": "G-4-5-26-445-700-705-707-708-709",
+      "reason": "Прежний OOM: Aut/Inn и вложенные факторы",
+      "terms": [
+        "aut(G)",
+        "inn(G)",
+        "quotient(aut(G), inn(G))",
+        "center(quotient(aut(G), inn(G)))",
+        "quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G))))",
+        "num:5()",
+        "num:120()",
+        "num:1056()",
+        "num:60()"
+      ],
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 464.5,
+        "k": 3,
+        "verdict_cache": null
+      }
+    },
+    {
+      "id": "G-14-20-390-705-707-708-709",
+      "reason": "Прежний OOM: Sym, Кэли и pushout",
+      "terms": [
+        "sym(G)",
+        "cayley(G)",
+        "pushout(cayley(G), cayley(G))",
+        "num:5()",
+        "num:120()",
+        "num:1056()",
+        "num:60()"
+      ],
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 712.6,
+        "k": 3,
+        "verdict_cache": null
+      }
+    }
+  ],
+  "input_files_sha256": {
+    "native/skel/G.skel.pickle": "554b49cef6017012d35bc4b4a364bbdeb79c8c3fc622d02d4578ae50c11330c7",
+    "native/кэш/библиотека-73a2a35d2480ac9c.pickle": "1fcf69b2fe3dfe3d6a6bcf95692cb37835d3d8031b435a98a42786fbf39d65fb",
+    "native-tabs/G.1-20.pickle": "1a932ae131a175da3df0e716c572f938384d401f18c741b82d938282941e5aaf",
+    "native-tabs/G.10-20.pickle": "a79a89319d6523c3f8818de33215419edffdc1cf1da6622c5a4e51619180dca5",
+    "native-tabs/G.11-20.pickle": "b1ffcb65854099cf3ee4ec05f1e4641238258d5c0e72f892e9709ceb565a57e0",
+    "native-tabs/G.12-20.pickle": "e7f838046237b1749d473babff0be212478c4e09205d1964485ef8ff9f751f8a",
+    "native-tabs/G.13-20.pickle": "b9a91e27a044dac4562e4ccdf4d10133a8d1f459a39f054cb51edc41235eb83e",
+    "native-tabs/G.14-20.pickle": "c39db8259912842a20fdbdb28cff2c98b0a0013205007c0a0b0ea8129c48a922",
+    "native-tabs/G.15-20.pickle": "91cb209bab73c7d2ed29d1cdcb0b29c832eaef8eb8d272ca219240c3baadd1c2",
+    "native-tabs/G.16-20.pickle": "878b612107c0ab6b7a719e5a76aeae69858c47b6a2ba31b2e3a106a549725840",
+    "native-tabs/G.17-20.pickle": "06c385b70187a575e5d2670aa2e04f1619c323a82969fdd6e1eb94aecc8a39de",
+    "native-tabs/G.18-20.pickle": "80562dd3f09dd363683c0d7b4305e55d887c11a05c00be19f9ab0aba56225c05",
+    "native-tabs/G.19-20.pickle": "47c5826f5e3d41e08cc655d02d31ed3320f19f0cc3cfd83adc02fe6b8b748e8e",
+    "native-tabs/G.2-20.pickle": "811f8ffcf57fbc342807adb7239ebc6c09d0fb3b4b563936a2e3fabe3efd6c3a",
+    "native-tabs/G.20-20.pickle": "1a3bf8e7b58517d13b863b75488400a7d5a267a353ea38ece2124687b887909a",
+    "native-tabs/G.3-20.pickle": "41fa0c6f93d40f346b3fdab31d1d6ee1882ca89d181e18c7bb76252c5f14bd97",
+    "native-tabs/G.4-20.pickle": "37542b12ddf0a2337966da15d4552a408909cfd12e20a522ff26ebf604f877c2",
+    "native-tabs/G.5-20.pickle": "fce0707c7a0b0db2d31239a16737a7b4bae2f571567810cafb45737c875e16d8",
+    "native-tabs/G.6-20.pickle": "7ef05bb32f924b8597e98aa1fbb0eb685794a45e89bbd43ef321c652f6f73003",
+    "native-tabs/G.7-20.pickle": "da93a2f7ece8e138cffd8e01eaa767574beebfcef431fdf8b468104a21320e4b",
+    "native-tabs/G.8-20.pickle": "ad7d4d9c573db017bcba7553a03397401ead3c48c9d0f40058ef16e6669f7447",
+    "native-tabs/G.9-20.pickle": "de7d10651fec0802860fe9de9030bfb949203da1dec176a83199555b2cf5b645",
+    "native-tabs/G.rep.pickle": "a1da261c9d2d2edb4013c5d8122e252f74718704cb603f88097dd84187c65d03"
+  },
+  "timing_note": "Baseline 16б: scheme time excludes startup, old ok reused verdict cache. New process includes startup without loading prior verdict cache; timing is not a matched speed comparison."
+}
