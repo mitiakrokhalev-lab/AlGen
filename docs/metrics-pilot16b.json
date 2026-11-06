@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "planned": 105,
   "reported": 103,
   "statuses": {
@@ -41,7 +41,13 @@
     "опровергается": 145
   },
   "kept_within_schemes": 7872,
-  "within_scheme_ratio": 158.4278455284553,
+  "unknown_ids_before_compression": 1247289,
+  "kept_ids_within_schemes": 7872,
+  "folded_ids_within_schemes": 1239417,
+  "compression_accounting_incomplete": [],
+  "compression_id_overlaps": [],
+  "summary_counter_ratio": 158.4278455284553,
+  "within_scheme_ratio": 158.44626524390245,
   "compression_reports": 45,
   "zero_unknown_without_compression_report": 10,
   "rss_observations_historical_units": {
@@ -58,7 +64,9 @@
   "notes": [
     "Сумма секунд схем не CPU-time и не wall workflow; отсутствующие времена не равны нулю.",
     "RSS: Linux KiB / 1e6, две точки на схему; peak неизвестен.",
-    "Вердикты — классы симметрии в успешных схемах; общая полнота при ошибках не достигнута."
+    "Вердикты — первый вердикт класса, сжатие — все неизвестные строки по №; это разные правила учёта.",
+    "within_scheme_ratio использует объединение kept/folded №, summary_counter_ratio — лишь отношение старых счётчиков.",
+    "Общая полнота при ошибках не достигнута."
   ],
   "source": "https://github.com/mitiakrokhalev-lab/AlGen/actions/runs/42209559171"
 }
