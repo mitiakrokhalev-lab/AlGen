@@ -1,0 +1,5772 @@
+{
+ "id": "G-14-20-200-705-707-708-709",
+ "условие": "∀ G : Grp",
+ "термы": [
+  "sym(G)",
+  "cayley(G)",
+  "ker(cayley(G))",
+  "num:5()",
+  "num:120()",
+  "num:1056()",
+  "num:60()"
+ ],
+ "посылок": 3,
+ "без": [],
+ "отпечаток": "d4710b6288895f4c:G::s2:быстро:3",
+ "секунд": 271.7,
+ "статус": "ok",
+ "память ГБ": [
+  4.59,
+  5.04
+ ],
+ "память по этапам": [
+  [
+   "начало",
+   4.59,
+   0
+  ],
+  [
+   "перебор",
+   4.82,
+   21681
+  ],
+  [
+   "минимальные",
+   4.82,
+   21681
+  ],
+  [
+   "вердикты",
+   5.04,
+   21681
+  ]
+ ],
+ "строк противоречат базе": 0,
+ "запретов": 6077,
+ "вердикты": {
+  "выводится": 471,
+  "неизвестно": 5606
+ },
+ "остаток": 5606,
+ "значения": [
+  {
+   "имя": "two-generated(S3)",
+   "запретов": 470,
+   "пример": "centerless(sym(G)) & clt(sym(G)) & min-prime-index(ker(cayley(G))) & two-generated(sym(G))"
+  },
+  {
+   "имя": "embeds(G, sym(G)) у (C3 x C3) : C3",
+   "запретов": 220,
+   "пример": "embeds(G, sym(G)) & exponent-3(G) & ¬abelian(sym(G)) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "two-generated(S4)",
+   "запретов": 200,
+   "пример": "clt(sym(G)) & two-generated(sym(G)) & ¬bi-orderable(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "prime-index(ker(cayley(G))) у G = C_p (p > 10⁷⁵)",
+   "запретов": 130,
+   "пример": "abelian(G) & simple(G) & ¬prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "min-prime-index(ker(cayley(G))) у G = C_p (p > 10⁷⁵)",
+   "запретов": 130,
+   "пример": "abelian(G) & simple(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "embeds(G, sym(G)) у PSL(3,2)",
+   "запретов": 94,
+   "пример": "amenable(sym(G)) & embeds(G, sym(G)) & simple(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "prime-orders(sym(G)) у G = 20160:G′(80640:Aut(80:52))",
+   "запретов": 71,
+   "пример": "prime-orders(sym(G)) & simple(G) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G))"
+  },
+  {
+   "имя": "exponent-6(sym(G)) у G = 20160:G′(80640:Aut(80:52))",
+   "запретов": 71,
+   "пример": "exponent-6(sym(G)) & simple(G) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G))"
+  },
+  {
+   "имя": "two-generated(C3 x C3)",
+   "запретов": 66,
+   "пример": "exponent-3(G) & two-generated(G) & ¬abelian(sym(G)) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "two-generated(C2 x C2)",
+   "запретов": 57,
+   "пример": "exponent-2(G) & two-generated(G) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "embeds(sym(G), G) у PSL(3,2)",
+   "запретов": 54,
+   "пример": "embeds(sym(G), G) & simple(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "proper-subs-nilpotent(sym(G)) у G = 512:2048:Aut(64:83)/Z",
+   "запретов": 52,
+   "пример": "exponent-4(G) & proper-subs-nilpotent(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "proper-subs-cyclic(sym(G)) у G = 512:2048:Aut(64:83)/Z",
+   "запретов": 52,
+   "пример": "exponent-4(G) & proper-subs-cyclic(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "proper-subs-abelian(sym(G)) у G = 512:2048:Aut(64:83)/Z",
+   "запретов": 52,
+   "пример": "exponent-4(G) & proper-subs-abelian(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "metabelian(sym(G)) у G = 512:2048:Aut(64:83)/Z",
+   "запретов": 52,
+   "пример": "exponent-4(G) & metabelian(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "two-primes(sym(G)) у G = Aut(C_p) ≅ C_{p−1} (p > 10⁷⁵)",
+   "запретов": 48,
+   "пример": "two-primes(sym(G)) & ¬abelian(sym(G)) & ¬min-prime-index(ker(cayley(G))) & ¬order-p2(G)"
+  },
+  {
+   "имя": "solvable(sym(G)) у G = Aut(C_p) ≅ C_{p−1} (p > 10⁷⁵)",
+   "запретов": 48,
+   "пример": "solvable(sym(G)) & ¬abelian(sym(G)) & ¬min-prime-index(ker(cayley(G))) & ¬order-p2(G)"
+  },
+  {
+   "имя": "polycyclic(sym(G)) у G = Aut(C_p) ≅ C_{p−1} (p > 10⁷⁵)",
+   "запретов": 48,
+   "пример": "polycyclic(sym(G)) & ¬abelian(sym(G)) & ¬min-prime-index(ker(cayley(G))) & ¬order-p2(G)"
+  },
+  {
+   "имя": "locally-solvable(sym(G)) у G = Aut(C_p) ≅ C_{p−1} (p > 10⁷⁵)",
+   "запретов": 48,
+   "пример": "locally-solvable(sym(G)) & ¬abelian(sym(G)) & ¬min-prime-index(ker(cayley(G))) & ¬order-p2(G)"
+  },
+  {
+   "имя": "clt(sym(G)) у G = Aut(C_p) ≅ C_{p−1} (p > 10⁷⁵)",
+   "запретов": 48,
+   "пример": "clt(sym(G)) & ¬abelian(sym(G)) & ¬min-prime-index(ker(cayley(G))) & ¬order-p2(G)"
+  },
+  {
+   "имя": "iso(cayley(G)) у G = 20160:G′(80640:Aut(80:52))",
+   "запретов": 45,
+   "пример": "iso(cayley(G)) & simple(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "iso(G, sym(G)) у 20160:G′(80640:Aut(80:52))",
+   "запретов": 45,
+   "пример": "iso(G, sym(G)) & simple(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "residually-nilpotent(sym(G)) у G = order 129024",
+   "запретов": 42,
+   "пример": "residually-nilpotent(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "p-group(sym(G)) у G = order 129024",
+   "запретов": 42,
+   "пример": "p-group(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "nilpotent(sym(G)) у G = order 129024",
+   "запретов": 42,
+   "пример": "nilpotent(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "locally-nilpotent(sym(G)) у G = order 129024",
+   "запретов": 42,
+   "пример": "locally-nilpotent(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "exponent-4(sym(G)) у G = order 129024",
+   "запретов": 42,
+   "пример": "exponent-4(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "dedekind(sym(G)) у G = order 129024",
+   "запретов": 42,
+   "пример": "dedekind(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "class-2(sym(G)) у G = order 129024",
+   "запретов": 42,
+   "пример": "class-2(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "locally-cyclic(sym(G)) у G = C_p (p > 10⁷⁵) × Aut(C_{p−1}) ≅ (ℤ/(p−1))ˣ (p > 10⁷⁵)",
+   "запретов": 36,
+   "пример": "locally-cyclic(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "exponent-2(sym(G)) у G = C_p (p > 10⁷⁵) × Aut(C_{p−1}) ≅ (ℤ/(p−1))ˣ (p > 10⁷⁵)",
+   "запретов": 36,
+   "пример": "exponent-2(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "cyclic(sym(G)) у G = C_p (p > 10⁷⁵) × Aut(C_{p−1}) ≅ (ℤ/(p−1))ˣ (p > 10⁷⁵)",
+   "запретов": 36,
+   "пример": "cyclic(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "abelian(sym(G)) у G = C_p (p > 10⁷⁵) × Aut(C_{p−1}) ≅ (ℤ/(p−1))ˣ (p > 10⁷⁵)",
+   "запретов": 36,
+   "пример": "abelian(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "prime-orders(sym(G)) у G = ∏C₂",
+   "запретов": 30,
+   "пример": "exponent-2(G) & prime-orders(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "exponent-6(sym(G)) у G = ∏C₂",
+   "запретов": 30,
+   "пример": "exponent-2(G) & exponent-6(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "proper-subs-nilpotent(sym(G)) у G = SO(3)",
+   "запретов": 25,
+   "пример": "proper-subs-nilpotent(sym(G)) & simple(G) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G))"
+  },
+  {
+   "имя": "proper-subs-cyclic(sym(G)) у G = SO(3)",
+   "запретов": 25,
+   "пример": "proper-subs-cyclic(sym(G)) & simple(G) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G))"
+  },
+  {
+   "имя": "proper-subs-abelian(sym(G)) у G = SO(3)",
+   "запретов": 25,
+   "пример": "proper-subs-abelian(sym(G)) & simple(G) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G))"
+  },
+  {
+   "имя": "metabelian(sym(G)) у G = ℂ*",
+   "запретов": 24,
+   "пример": "metabelian(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G))"
+  },
+  {
+   "имя": "proper-subs-nilpotent(sym(G)) у G = ∏C₂",
+   "запретов": 18,
+   "пример": "exponent-2(G) & proper-subs-nilpotent(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "proper-subs-cyclic(sym(G)) у G = ∏C₂",
+   "запретов": 18,
+   "пример": "exponent-2(G) & proper-subs-cyclic(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "proper-subs-abelian(sym(G)) у G = ∏C₂",
+   "запретов": 18,
+   "пример": "exponent-2(G) & proper-subs-abelian(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "locally-solvable(sym(G)) у G = SO(3)",
+   "запретов": 17,
+   "пример": "locally-solvable(sym(G)) & simple(G) & ¬exponent-3(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "metabelian(sym(G)) у G = ⊕C₂ × ∏C₂",
+   "запретов": 12,
+   "пример": "exponent-2(G) & metabelian(sym(G)) & ¬bi-orderable(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "index-2(ker(cayley(G))) у G = C_p (p > 10⁷⁵)",
+   "запретов": 11,
+   "пример": "index-2(ker(cayley(G))) & odd-order(G)"
+  },
+  {
+   "имя": "residually-nilpotent(sym(G)) у G = SO(3)",
+   "запретов": 9,
+   "пример": "residually-nilpotent(sym(G)) & simple(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "p-group(sym(G)) у G = SO(3)",
+   "запретов": 9,
+   "пример": "p-group(sym(G)) & simple(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "locally-nilpotent(sym(G)) у G = SO(3)",
+   "запретов": 9,
+   "пример": "locally-nilpotent(sym(G)) & simple(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "iso(G, sym(G)) у S6",
+   "запретов": 9,
+   "пример": "iso(G, sym(G)) & ¬divisible(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "comp-series(Sym(ℕ))",
+   "запретов": 8,
+   "пример": "comp-series(sym(G)) & p-group(G) & simple(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "solvable(sym(G)) у G = ⊕_ℕ PSL₂(ℝ) × UT₃(ℚ)/⟨e₁₃⟩",
+   "запретов": 6,
+   "пример": "solvable(sym(G)) & ¬exponent-3(sym(G)) & ¬min-prime-index(ker(cayley(G))) & ¬order-p2(G)"
+  },
+  {
+   "имя": "nilpotent(sym(G)) у G = ⊕_ℕ PSL₂(ℝ) × UT₃(ℚ)/⟨e₁₃⟩",
+   "запретов": 6,
+   "пример": "nilpotent(sym(G)) & ¬exponent-3(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "iso(cayley(G)) у G = order 129024",
+   "запретов": 6,
+   "пример": "iso(cayley(G)) & ¬centerless(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "iso(G, sym(G)) у order 129024",
+   "запретов": 6,
+   "пример": "iso(G, sym(G)) & ¬centerless(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "inner-aut(cayley(G)) у G = Q16 : C4",
+   "запретов": 6,
+   "пример": "inner-aut(cayley(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "inner-aut(cayley(G)) у G = C2",
+   "запретов": 6,
+   "пример": "index-2(ker(cayley(G))) & inner-aut(cayley(G))"
+  },
+  {
+   "имя": "idempotent(cayley(G)) у G = Q16 : C4",
+   "запретов": 6,
+   "пример": "idempotent(cayley(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "idempotent(cayley(G)) у G = C2",
+   "запретов": 6,
+   "пример": "idempotent(cayley(G)) & index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "exponent-4(sym(G)) у G = ⊕_ℕ SL(2, 5) × Sym(ℕ) ∗ Sym(ℕ)",
+   "запретов": 6,
+   "пример": "exponent-4(sym(G)) & ¬exponent-3(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "embeds(sym(G), G) у order 129024",
+   "запретов": 6,
+   "пример": "embeds(sym(G), G) & ¬centerless(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "dedekind(sym(G)) у G = ⊕_ℕ PSL₂(ℝ) × UT₃(ℚ)/⟨e₁₃⟩",
+   "запретов": 6,
+   "пример": "dedekind(sym(G)) & ¬exponent-3(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "class-2(sym(G)) у G = ⊕_ℕ PSL₂(ℝ) × UT₃(ℚ)/⟨e₁₃⟩",
+   "запретов": 6,
+   "пример": "class-2(sym(G)) & ¬exponent-3(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "exponent-6(order 9999360)",
+   "запретов": 5,
+   "пример": "exponent-6(G) & simple(G) & ¬exponent-3(G) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "prime-orders(sym(G)) у G = order 129024",
+   "запретов": 4,
+   "пример": "prime-orders(sym(G)) & ¬centerless(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "exponent-6(sym(G)) у G = order 129024",
+   "запретов": 4,
+   "пример": "exponent-6(sym(G)) & ¬centerless(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "embeds(G, sym(G)) у C99",
+   "запретов": 4,
+   "пример": "embeds(G, sym(G)) & odd-order(G) & ¬exponent-3(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "simple(sym(G)) у G = order 1440",
+   "запретов": 3,
+   "пример": "simple(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "prime-order(sym(G)) у G = C_p (p > 10⁷⁵) × Aut(C_{p−1}) ≅ (ℤ/(p−1))ˣ (p > 10⁷⁵)",
+   "запретов": 3,
+   "пример": "prime-order(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "indecomposable(sym(G)) у G = order 1440",
+   "запретов": 3,
+   "пример": "¬indecomposable(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "hopfian(sym(G)) у G = order 1440",
+   "запретов": 3,
+   "пример": "¬hopfian(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "comp-series(sym(G)) у G = order 1440",
+   "запретов": 3,
+   "пример": "¬comp-series(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "centerless(sym(G)) у G = order 1440",
+   "запретов": 3,
+   "пример": "¬centerless(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  {
+   "имя": "two-primes(sym(G)) у G = 2916:Aut(486:130)",
+   "запретов": 2,
+   "пример": "exponent-6(G) & two-primes(sym(G)) & ¬exponent-2(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "solvable(sym(G)) у G = 2916:Aut(486:130)",
+   "запретов": 2,
+   "пример": "exponent-6(G) & solvable(sym(G)) & ¬exponent-2(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "proper-subs-nilpotent(sym(G)) у G = ⊕_ℕ SL(2, 5) × Sym(ℕ) ∗ Sym(ℕ)",
+   "запретов": 2,
+   "пример": "proper-subs-nilpotent(sym(G)) & ¬centerless(G) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G))"
+  },
+  {
+   "имя": "proper-subs-nilpotent(sym(G)) у G = order 1440",
+   "запретов": 2,
+   "пример": "proper-subs-nilpotent(sym(G)) & ¬exponent-4(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "proper-subs-cyclic(sym(G)) у G = ⊕_ℕ SL(2, 5) × Sym(ℕ) ∗ Sym(ℕ)",
+   "запретов": 2,
+   "пример": "proper-subs-cyclic(sym(G)) & ¬centerless(G) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G))"
+  },
+  {
+   "имя": "proper-subs-cyclic(sym(G)) у G = order 1440",
+   "запретов": 2,
+   "пример": "proper-subs-cyclic(sym(G)) & ¬exponent-4(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "proper-subs-abelian(sym(G)) у G = ⊕_ℕ SL(2, 5) × Sym(ℕ) ∗ Sym(ℕ)",
+   "запретов": 2,
+   "пример": "proper-subs-abelian(sym(G)) & ¬centerless(G) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G))"
+  },
+  {
+   "имя": "proper-subs-abelian(sym(G)) у G = order 1440",
+   "запретов": 2,
+   "пример": "proper-subs-abelian(sym(G)) & ¬exponent-4(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "prime-orders(sym(G)) у G = ⊕_ℕ PSL₂(ℝ) × UT₃(ℚ)/⟨e₁₃⟩",
+   "запретов": 2,
+   "пример": "prime-orders(sym(G)) & ¬centerless(G) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G))"
+  },
+  {
+   "имя": "polycyclic(sym(G)) у G = 2916:Aut(486:130)",
+   "запретов": 2,
+   "пример": "exponent-6(G) & polycyclic(sym(G)) & ¬exponent-2(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "order-pq(sym(G)) у G = order 1440",
+   "запретов": 2,
+   "пример": "order-pq(sym(G)) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "metabelian(sym(G)) у G = order 1440",
+   "запретов": 2,
+   "пример": "metabelian(sym(G)) & ¬exponent-4(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "locally-solvable(sym(G)) у G = 2916:Aut(486:130)",
+   "запретов": 2,
+   "пример": "exponent-6(G) & locally-solvable(sym(G)) & ¬exponent-2(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "embeds(G, sym(G)) у C97",
+   "запретов": 2,
+   "пример": "min-prime-index(ker(cayley(G))) & ¬embeds(G, sym(G))"
+  },
+  {
+   "имя": "clt(sym(G)) у G = 2916:Aut(486:130)",
+   "запретов": 2,
+   "пример": "clt(sym(G)) & exponent-6(G) & ¬exponent-2(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  {
+   "имя": "proper-subs-nilpotent(sym(G)) у G = ⊕_ℕ PSL₂(ℝ) × UT₃(ℚ)/⟨e₁₃⟩",
+   "запретов": 1,
+   "пример": "proper-subs-nilpotent(sym(G)) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G)) & ¬perfect(G)"
+  },
+  {
+   "имя": "proper-subs-cyclic(sym(G)) у G = ⊕_ℕ ℚ/ℤ × Aff⁺(ℝ) = ℝ ⋊ ℝ*₊",
+   "запретов": 1,
+   "пример": "proper-subs-cyclic(sym(G)) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G)) & ¬perfect(G)"
+  },
+  {
+   "имя": "proper-subs-abelian(sym(G)) у G = ⊕_ℕ PSL₂(ℝ) × UT₃(ℚ)/⟨e₁₃⟩",
+   "запретов": 1,
+   "пример": "proper-subs-abelian(sym(G)) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G)) & ¬perfect(G)"
+  },
+  {
+   "имя": "locally-solvable(SO(3))",
+   "запретов": 1,
+   "пример": "locally-solvable(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  {
+   "имя": "locally-nilpotent(SO(3))",
+   "запретов": 1,
+   "пример": "locally-nilpotent(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  {
+   "имя": "exponent-6(sym(G)) у G = ⊕_ℕ SL(2, 5) × Sym(ℕ) ∗ Sym(ℕ)",
+   "запретов": 1,
+   "пример": "exponent-6(sym(G)) & ¬centerless(G) & ¬index-2(ker(cayley(G))) & ¬order-pq(sym(G))"
+  }
+ ],
+ "без кандидата": [
+  {
+   "пара": [
+    "index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "contains-free(sym(G))",
+    "divisible(sym(G))",
+    "exponent-3(G)",
+    "exponent-3(sym(G))",
+    "no-finite-quotients(sym(G))",
+    "odd-order(sym(G))",
+    "order-pq(sym(G))",
+    "perfect(sym(G))",
+    "¬amenable(sym(G))",
+    "¬bounded-exponent(sym(G))",
+    "¬class-2(sym(G))",
+    "¬clt(sym(G))",
+    "¬co-hopfian(sym(G))",
+    "¬comp-series(sym(G))",
+    "¬countable(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(G, sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬fin-gen(sym(G))",
+    "¬fin-pres(sym(G))",
+    "¬finite(sym(G))",
+    "¬hopfian(sym(G))",
+    "¬hyperbolic(sym(G))",
+    "¬indecomposable(sym(G))",
+    "¬linear(sym(G))",
+    "¬linear-c(sym(G))",
+    "¬locally-finite(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬locally-solvable(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬periodic(sym(G))",
+    "¬polycyclic(sym(G))",
+    "¬polynomial-growth(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-finite(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))",
+    "¬property-t(sym(G))",
+    "¬rec-pres(sym(G))",
+    "¬rec-pres-ctbl(sym(G))",
+    "¬residually-finite(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))",
+    "¬solvable(sym(G))",
+    "¬two-generated(sym(G))",
+    "¬two-primes(sym(G))",
+    "¬virtually-nilpotent(sym(G))",
+    "¬virtually-solvable(sym(G))",
+    "¬word-problem(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "contains-free(sym(G))",
+    "divisible(sym(G))",
+    "exponent-3(sym(G))",
+    "no-finite-quotients(sym(G))",
+    "odd-order(sym(G))",
+    "perfect(sym(G))",
+    "¬amenable(sym(G))",
+    "¬bounded-exponent(sym(G))",
+    "¬co-hopfian(sym(G))",
+    "¬comp-series(sym(G))",
+    "¬countable(sym(G))",
+    "¬fin-gen(sym(G))",
+    "¬fin-pres(sym(G))",
+    "¬finite(sym(G))",
+    "¬hopfian(sym(G))",
+    "¬hyperbolic(sym(G))",
+    "¬indecomposable(sym(G))",
+    "¬linear(sym(G))",
+    "¬linear-c(sym(G))",
+    "¬locally-finite(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬periodic(sym(G))",
+    "¬polynomial-growth(sym(G))",
+    "¬proper-subs-finite(sym(G))",
+    "¬property-t(sym(G))",
+    "¬rec-pres(sym(G))",
+    "¬rec-pres-ctbl(sym(G))",
+    "¬residually-finite(sym(G))",
+    "¬virtually-nilpotent(sym(G))",
+    "¬virtually-solvable(sym(G))",
+    "¬word-problem(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "contains-free(sym(G))",
+    "divisible(sym(G))",
+    "exponent-3(sym(G))",
+    "no-finite-quotients(sym(G))",
+    "odd-order(sym(G))",
+    "perfect(sym(G))",
+    "¬amenable(sym(G))",
+    "¬bounded-exponent(sym(G))",
+    "¬co-hopfian(sym(G))",
+    "¬comp-series(sym(G))",
+    "¬countable(sym(G))",
+    "¬fin-gen(sym(G))",
+    "¬fin-pres(sym(G))",
+    "¬finite(sym(G))",
+    "¬hopfian(sym(G))",
+    "¬hyperbolic(sym(G))",
+    "¬indecomposable(sym(G))",
+    "¬linear(sym(G))",
+    "¬linear-c(sym(G))",
+    "¬locally-finite(sym(G))",
+    "¬periodic(sym(G))",
+    "¬polynomial-growth(sym(G))",
+    "¬proper-subs-finite(sym(G))",
+    "¬property-t(sym(G))",
+    "¬rec-pres(sym(G))",
+    "¬rec-pres-ctbl(sym(G))",
+    "¬residually-finite(sym(G))",
+    "¬virtually-nilpotent(sym(G))",
+    "¬virtually-solvable(sym(G))",
+    "¬word-problem(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "cyclic(G)",
+    "prime-orders(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬clt(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬exponent-3(G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬locally-solvable(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(G)",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬polycyclic(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬solvable(sym(G))",
+    "¬two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "cyclic(G)",
+    "prime-orders(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬clt(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬exponent-3(G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬locally-solvable(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(G)",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬polycyclic(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬solvable(sym(G))",
+    "¬two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-cyclic(G)",
+    "prime-orders(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬clt(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬exponent-3(G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬locally-solvable(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(G)",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬polycyclic(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬solvable(sym(G))",
+    "¬two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-cyclic(G)",
+    "prime-orders(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬clt(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬exponent-3(G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬locally-solvable(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(G)",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬polycyclic(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬solvable(sym(G))",
+    "¬two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "p-group(G)",
+    "simple(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "amenable(sym(G))",
+    "bounded-exponent(sym(G))",
+    "co-hopfian(sym(G))",
+    "countable(sym(G))",
+    "fin-gen(sym(G))",
+    "fin-pres(sym(G))",
+    "finite(sym(G))",
+    "hyperbolic(sym(G))",
+    "linear(sym(G))",
+    "linear-c(sym(G))",
+    "locally-finite(sym(G))",
+    "periodic(sym(G))",
+    "polynomial-growth(sym(G))",
+    "proper-subs-finite(sym(G))",
+    "property-t(sym(G))",
+    "rec-pres(sym(G))",
+    "rec-pres-ctbl(sym(G))",
+    "residually-finite(sym(G))",
+    "two-generated(sym(G))",
+    "virtually-nilpotent(sym(G))",
+    "virtually-solvable(sym(G))",
+    "word-problem(sym(G))",
+    "¬contains-free(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "p-group(G)",
+    "simple(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "amenable(sym(G))",
+    "bounded-exponent(sym(G))",
+    "co-hopfian(sym(G))",
+    "countable(sym(G))",
+    "fin-gen(sym(G))",
+    "fin-pres(sym(G))",
+    "finite(sym(G))",
+    "hyperbolic(sym(G))",
+    "linear(sym(G))",
+    "linear-c(sym(G))",
+    "locally-finite(sym(G))",
+    "periodic(sym(G))",
+    "polynomial-growth(sym(G))",
+    "proper-subs-finite(sym(G))",
+    "property-t(sym(G))",
+    "rec-pres(sym(G))",
+    "rec-pres-ctbl(sym(G))",
+    "residually-finite(sym(G))",
+    "two-generated(sym(G))",
+    "virtually-nilpotent(sym(G))",
+    "virtually-solvable(sym(G))",
+    "word-problem(sym(G))",
+    "¬contains-free(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "proper-subs-abelian(G)",
+    "simple(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "amenable(sym(G))",
+    "bounded-exponent(sym(G))",
+    "co-hopfian(sym(G))",
+    "countable(sym(G))",
+    "fin-gen(sym(G))",
+    "fin-pres(sym(G))",
+    "finite(sym(G))",
+    "hyperbolic(sym(G))",
+    "linear(sym(G))",
+    "linear-c(sym(G))",
+    "locally-finite(sym(G))",
+    "periodic(sym(G))",
+    "polynomial-growth(sym(G))",
+    "proper-subs-finite(sym(G))",
+    "property-t(sym(G))",
+    "rec-pres(sym(G))",
+    "rec-pres-ctbl(sym(G))",
+    "residually-finite(sym(G))",
+    "two-generated(sym(G))",
+    "virtually-nilpotent(sym(G))",
+    "virtually-solvable(sym(G))",
+    "word-problem(sym(G))",
+    "¬contains-free(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "proper-subs-abelian(G)",
+    "simple(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "amenable(sym(G))",
+    "bounded-exponent(sym(G))",
+    "co-hopfian(sym(G))",
+    "countable(sym(G))",
+    "fin-gen(sym(G))",
+    "fin-pres(sym(G))",
+    "finite(sym(G))",
+    "hyperbolic(sym(G))",
+    "linear(sym(G))",
+    "linear-c(sym(G))",
+    "locally-finite(sym(G))",
+    "periodic(sym(G))",
+    "polynomial-growth(sym(G))",
+    "proper-subs-finite(sym(G))",
+    "property-t(sym(G))",
+    "rec-pres(sym(G))",
+    "rec-pres-ctbl(sym(G))",
+    "residually-finite(sym(G))",
+    "two-generated(sym(G))",
+    "virtually-nilpotent(sym(G))",
+    "virtually-solvable(sym(G))",
+    "word-problem(sym(G))",
+    "¬contains-free(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "proper-subs-cyclic(G)",
+    "simple(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "amenable(sym(G))",
+    "bounded-exponent(sym(G))",
+    "co-hopfian(sym(G))",
+    "countable(sym(G))",
+    "fin-gen(sym(G))",
+    "fin-pres(sym(G))",
+    "finite(sym(G))",
+    "hyperbolic(sym(G))",
+    "linear(sym(G))",
+    "linear-c(sym(G))",
+    "locally-finite(sym(G))",
+    "periodic(sym(G))",
+    "polynomial-growth(sym(G))",
+    "proper-subs-finite(sym(G))",
+    "property-t(sym(G))",
+    "rec-pres(sym(G))",
+    "rec-pres-ctbl(sym(G))",
+    "residually-finite(sym(G))",
+    "two-generated(sym(G))",
+    "virtually-nilpotent(sym(G))",
+    "virtually-solvable(sym(G))",
+    "word-problem(sym(G))",
+    "¬contains-free(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "proper-subs-cyclic(G)",
+    "simple(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "amenable(sym(G))",
+    "bounded-exponent(sym(G))",
+    "co-hopfian(sym(G))",
+    "countable(sym(G))",
+    "fin-gen(sym(G))",
+    "fin-pres(sym(G))",
+    "finite(sym(G))",
+    "hyperbolic(sym(G))",
+    "linear(sym(G))",
+    "linear-c(sym(G))",
+    "locally-finite(sym(G))",
+    "periodic(sym(G))",
+    "polynomial-growth(sym(G))",
+    "proper-subs-finite(sym(G))",
+    "property-t(sym(G))",
+    "rec-pres(sym(G))",
+    "rec-pres-ctbl(sym(G))",
+    "residually-finite(sym(G))",
+    "two-generated(sym(G))",
+    "virtually-nilpotent(sym(G))",
+    "virtually-solvable(sym(G))",
+    "word-problem(sym(G))",
+    "¬contains-free(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "proper-subs-nilpotent(G)",
+    "simple(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "amenable(sym(G))",
+    "bounded-exponent(sym(G))",
+    "co-hopfian(sym(G))",
+    "countable(sym(G))",
+    "fin-gen(sym(G))",
+    "fin-pres(sym(G))",
+    "finite(sym(G))",
+    "hyperbolic(sym(G))",
+    "linear(sym(G))",
+    "linear-c(sym(G))",
+    "locally-finite(sym(G))",
+    "periodic(sym(G))",
+    "polynomial-growth(sym(G))",
+    "proper-subs-finite(sym(G))",
+    "property-t(sym(G))",
+    "rec-pres(sym(G))",
+    "rec-pres-ctbl(sym(G))",
+    "residually-finite(sym(G))",
+    "two-generated(sym(G))",
+    "virtually-nilpotent(sym(G))",
+    "virtually-solvable(sym(G))",
+    "word-problem(sym(G))",
+    "¬contains-free(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "proper-subs-nilpotent(G)",
+    "simple(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "amenable(sym(G))",
+    "bounded-exponent(sym(G))",
+    "co-hopfian(sym(G))",
+    "countable(sym(G))",
+    "fin-gen(sym(G))",
+    "fin-pres(sym(G))",
+    "finite(sym(G))",
+    "hyperbolic(sym(G))",
+    "linear(sym(G))",
+    "linear-c(sym(G))",
+    "locally-finite(sym(G))",
+    "periodic(sym(G))",
+    "polynomial-growth(sym(G))",
+    "proper-subs-finite(sym(G))",
+    "property-t(sym(G))",
+    "rec-pres(sym(G))",
+    "rec-pres-ctbl(sym(G))",
+    "residually-finite(sym(G))",
+    "two-generated(sym(G))",
+    "virtually-nilpotent(sym(G))",
+    "virtually-solvable(sym(G))",
+    "word-problem(sym(G))",
+    "¬contains-free(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-6(G)",
+    "min-prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(G)",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-6(G)",
+    "prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(G)",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "min-prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-solvable(sym(G))",
+    "min-prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-solvable(sym(G))",
+    "prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "polycyclic(sym(G))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "solvable(sym(G))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "two-primes(sym(G))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "polycyclic(sym(G))",
+    "prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "solvable(sym(G))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "two-primes(sym(G))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "odd-order(G)",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "min-prime-index(ker(cayley(G)))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "prime-index(ker(cayley(G)))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-4(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))",
+    "¬clt(sym(G))",
+    "¬exponent-6(sym(G))",
+    "¬locally-solvable(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬order-pq(sym(G))",
+    "¬polycyclic(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))",
+    "¬solvable(sym(G))",
+    "¬two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-4(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))",
+    "¬clt(sym(G))",
+    "¬exponent-6(sym(G))",
+    "¬locally-solvable(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬order-pq(sym(G))",
+    "¬polycyclic(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))",
+    "¬solvable(sym(G))",
+    "¬two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-solvable(sym(G))",
+    "min-prime-index(ker(cayley(G)))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-solvable(sym(G))",
+    "prime-index(ker(cayley(G)))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "polycyclic(sym(G))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "solvable(sym(G))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "two-primes(sym(G))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "polycyclic(sym(G))",
+    "prime-index(ker(cayley(G)))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "solvable(sym(G))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "two-primes(sym(G))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "centerless(sym(G))",
+    "¬abelian(sym(G))",
+    "¬class-2(sym(G))",
+    "¬cyclic(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-2(G)",
+    "¬exponent-2(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-cyclic(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬prime-order(sym(G))",
+    "¬residually-nilpotent(sym(G))",
+    "¬simple(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "¬index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "abelian(sym(G))",
+    "class-2(sym(G))",
+    "cyclic(sym(G))",
+    "dedekind(sym(G))",
+    "embeds(sym(G), G)",
+    "exponent-2(G)",
+    "exponent-2(sym(G))",
+    "exponent-4(G)",
+    "exponent-4(sym(G))",
+    "iso(G, sym(G))",
+    "iso(cayley(G))",
+    "locally-cyclic(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))",
+    "¬odd-order(G)"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "¬index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "abelian(sym(G))",
+    "class-2(sym(G))",
+    "cyclic(sym(G))",
+    "dedekind(sym(G))",
+    "embeds(sym(G), G)",
+    "exponent-2(G)",
+    "exponent-2(sym(G))",
+    "exponent-4(G)",
+    "exponent-4(sym(G))",
+    "iso(G, sym(G))",
+    "iso(cayley(G))",
+    "locally-cyclic(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))",
+    "¬odd-order(G)"
+   ]
+  },
+  {
+   "пара": [
+    "simple(G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬odd-order(G)"
+   ],
+   "третьи": [
+    "abelian(G)",
+    "class-2(G)",
+    "clt(G)",
+    "clt(sym(G))",
+    "cyclic(G)",
+    "dedekind(G)",
+    "locally-cyclic(G)",
+    "metabelian(G)",
+    "nilpotent(G)",
+    "polycyclic(G)",
+    "polycyclic(sym(G))",
+    "solvable(G)",
+    "solvable(sym(G))",
+    "two-primes(G)",
+    "two-primes(sym(G))",
+    "¬centerless(G)",
+    "¬perfect(G)"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "locally-solvable(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "locally-solvable(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-solvable(sym(G))",
+    "odd-order(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬centerless(G)",
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-solvable(sym(G))",
+    "odd-order(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬centerless(G)",
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "solvable(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "solvable(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "odd-order(G)",
+    "solvable(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬centerless(G)",
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "odd-order(G)",
+    "solvable(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬centerless(G)",
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬no-finite-quotients(sym(G))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-4(sym(G))",
+    "exponent-6(sym(G))",
+    "iso(cayley(G))",
+    "locally-nilpotent(sym(G))",
+    "metabelian(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬no-finite-quotients(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-4(sym(G))",
+    "exponent-6(sym(G))",
+    "iso(cayley(G))",
+    "locally-nilpotent(sym(G))",
+    "metabelian(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "exponent-3(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "exponent-3(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "odd-order(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬centerless(G)",
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "odd-order(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬centerless(G)",
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "polycyclic(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "polycyclic(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "two-primes(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "two-primes(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "odd-order(G)",
+    "polycyclic(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬centerless(G)",
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "odd-order(G)",
+    "polycyclic(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬centerless(G)",
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "odd-order(G)",
+    "two-primes(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬centerless(G)",
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "odd-order(G)",
+    "two-primes(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬centerless(G)",
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬embeds(sym(G), G)",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬iso(G, sym(G))",
+    "¬iso(cayley(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-order(G)",
+    "¬index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "embeds(sym(G), G)",
+    "exponent-2(G)",
+    "exponent-4(G)",
+    "exponent-4(sym(G))",
+    "iso(G, sym(G))",
+    "iso(cayley(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))",
+    "¬odd-order(G)"
+   ]
+  },
+  {
+   "пара": [
+    "cyclic(G)",
+    "exponent-3(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "cyclic(G)",
+    "exponent-3(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "locally-cyclic(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-3(G)",
+    "locally-cyclic(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-order(G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "clt(sym(G))",
+    "exponent-6(G)",
+    "exponent-6(sym(G))",
+    "locally-solvable(sym(G))",
+    "metabelian(sym(G))",
+    "polycyclic(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))",
+    "solvable(sym(G))",
+    "two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "simple(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "clt(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-2(G)",
+    "exponent-3(G)",
+    "exponent-4(G)",
+    "exponent-4(sym(G))",
+    "metabelian(sym(G))",
+    "nilpotent(sym(G))",
+    "polycyclic(sym(G))",
+    "solvable(sym(G))",
+    "two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "simple(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "clt(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-2(G)",
+    "exponent-3(G)",
+    "exponent-4(G)",
+    "exponent-4(sym(G))",
+    "metabelian(sym(G))",
+    "nilpotent(sym(G))",
+    "polycyclic(sym(G))",
+    "solvable(sym(G))",
+    "two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-6(G)",
+    "min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬clt(sym(G))",
+    "¬exponent-6(sym(G))",
+    "¬locally-solvable(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬polycyclic(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))",
+    "¬solvable(sym(G))",
+    "¬two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-6(G)",
+    "prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬clt(sym(G))",
+    "¬exponent-6(sym(G))",
+    "¬locally-solvable(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬polycyclic(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))",
+    "¬solvable(sym(G))",
+    "¬two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬divisible(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "iso(cayley(G))",
+    "locally-nilpotent(sym(G))",
+    "metabelian(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬divisible(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "iso(cayley(G))",
+    "locally-nilpotent(sym(G))",
+    "metabelian(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬perfect(sym(G))"
+   ],
+   "третьи": [
+    "exponent-4(sym(G))",
+    "exponent-6(sym(G))",
+    "iso(cayley(G))",
+    "locally-nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬perfect(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "exponent-4(sym(G))",
+    "exponent-6(sym(G))",
+    "iso(cayley(G))",
+    "locally-nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬order-p2(G)"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "¬order-p2(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "polycyclic(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬order-p2(G)"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "polycyclic(sym(G))",
+    "¬order-p2(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "two-primes(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬order-p2(G)"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "two-primes(sym(G))",
+    "¬order-p2(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬exponent-3(sym(G))",
+    "¬exponent-4(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬odd-order(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "solvable(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬order-p2(G)"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "solvable(sym(G))",
+    "¬order-p2(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬divisible(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬index-2(ker(cayley(G)))",
+    "¬no-finite-quotients(sym(G))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-4(sym(G))",
+    "iso(cayley(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "clt(sym(G))",
+    "prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-solvable(sym(G))",
+    "min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-solvable(sym(G))",
+    "prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "metabelian(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "min-prime-index(ker(cayley(G)))",
+    "prime-index(ker(cayley(G)))",
+    "simple(G)",
+    "¬divisible(G)",
+    "¬divisible(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬no-finite-quotients(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "odd-order(G)"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-4(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "polycyclic(sym(G))"
+   ],
+   "третьи": [
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "solvable(sym(G))"
+   ],
+   "третьи": [
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "two-primes(sym(G))"
+   ],
+   "третьи": [
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "¬prime-order(sym(G))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-4(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "¬simple(sym(G))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-4(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "odd-order(G)",
+    "prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-4(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "polycyclic(sym(G))",
+    "prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "solvable(sym(G))"
+   ],
+   "третьи": [
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "two-primes(sym(G))"
+   ],
+   "третьи": [
+    "¬exponent-6(G)",
+    "¬exponent-6(sym(G))",
+    "¬metabelian(sym(G))",
+    "¬prime-orders(sym(G))",
+    "¬proper-subs-abelian(sym(G))",
+    "¬proper-subs-cyclic(sym(G))",
+    "¬proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "¬prime-order(sym(G))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-4(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "¬simple(sym(G))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-4(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "centerless(sym(G))",
+    "min-prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "centerless(sym(G))",
+    "prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-2(G)",
+    "¬exponent-3(sym(G))",
+    "¬index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-2(G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬no-finite-quotients(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-2(G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬odd-order(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-4(G)",
+    "¬exponent-3(sym(G))",
+    "¬index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-4(G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬no-finite-quotients(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-4(G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬odd-order(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-solvable(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬order-p2(G)"
+   ],
+   "третьи": [
+    "¬divisible(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "locally-solvable(sym(G))",
+    "¬order-p2(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬divisible(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬no-finite-quotients(sym(G))",
+    "¬p-group(sym(G))",
+    "¬perfect(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "metabelian(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "metabelian(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "¬class-2(sym(G))",
+    "¬dedekind(sym(G))",
+    "¬locally-nilpotent(sym(G))",
+    "¬nilpotent(sym(G))",
+    "¬p-group(sym(G))",
+    "¬residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "odd-order(G)",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))",
+    "¬prime-order(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))",
+    "¬simple(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "odd-order(G)",
+    "prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))",
+    "¬prime-order(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "¬order-pq(sym(G))",
+    "¬simple(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "metabelian(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-order(G)",
+    "¬exponent-3(G)",
+    "¬index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "clt(sym(G))",
+    "exponent-6(G)",
+    "locally-solvable(sym(G))",
+    "polycyclic(sym(G))",
+    "solvable(sym(G))",
+    "two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "proper-subs-abelian(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "min-prime-index(ker(cayley(G)))",
+    "prime-index(ker(cayley(G)))",
+    "¬divisible(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "proper-subs-cyclic(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "min-prime-index(ker(cayley(G)))",
+    "prime-index(ker(cayley(G)))",
+    "¬divisible(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "proper-subs-nilpotent(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "min-prime-index(ker(cayley(G)))",
+    "prime-index(ker(cayley(G)))",
+    "¬divisible(sym(G))",
+    "¬no-finite-quotients(G)",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "simple(G)",
+    "¬index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "dedekind(sym(G))",
+    "exponent-2(G)",
+    "exponent-4(G)",
+    "exponent-4(sym(G))",
+    "nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬divisible(sym(G))",
+    "¬index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "class-2(sym(G))",
+    "iso(cayley(G))",
+    "locally-nilpotent(sym(G))",
+    "nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-2(G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬perfect(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-4(G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬perfect(sym(G))"
+   ],
+   "третьи": [
+    "exponent-6(sym(G))",
+    "prime-orders(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-6(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "min-prime-index(ker(cayley(G)))",
+    "prime-index(ker(cayley(G)))",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(G)",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-orders(G)",
+    "¬exponent-2(G)",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "clt(sym(G))",
+    "locally-solvable(sym(G))",
+    "polycyclic(sym(G))",
+    "solvable(sym(G))",
+    "two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-orders(G)",
+    "¬exponent-2(G)",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "clt(sym(G))",
+    "locally-solvable(sym(G))",
+    "polycyclic(sym(G))",
+    "solvable(sym(G))",
+    "two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬index-2(ker(cayley(G)))",
+    "¬perfect(sym(G))"
+   ],
+   "третьи": [
+    "exponent-4(sym(G))",
+    "iso(cayley(G))",
+    "locally-nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "centerless(sym(G))",
+    "min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "exponent-4(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "centerless(sym(G))",
+    "prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "exponent-4(sym(G))",
+    "locally-nilpotent(sym(G))",
+    "p-group(sym(G))",
+    "residually-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-2(G)",
+    "¬divisible(sym(G))",
+    "¬index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "metabelian(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-4(G)",
+    "¬divisible(sym(G))",
+    "¬index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "metabelian(sym(G))",
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-orders(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "min-prime-index(ker(cayley(G)))",
+    "prime-index(ker(cayley(G)))",
+    "¬no-finite-quotients(sym(G))",
+    "¬perfect(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "simple(G)",
+    "¬exponent-3(G)",
+    "¬index-2(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "clt(sym(G))",
+    "polycyclic(sym(G))",
+    "solvable(sym(G))",
+    "two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "simple(G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬order-pq(sym(G))"
+   ],
+   "третьи": [
+    "clt(sym(G))",
+    "polycyclic(sym(G))",
+    "solvable(sym(G))",
+    "two-primes(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-6(G)",
+    "min-prime-index(ker(cayley(G)))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "¬embeds(sym(G), G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "exponent-6(G)",
+    "prime-index(ker(cayley(G)))",
+    "¬exponent-3(G)"
+   ],
+   "третьи": [
+    "¬embeds(sym(G), G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬iso(G, sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "¬embeds(sym(G), G)"
+   ],
+   "третьи": [
+    "exponent-2(G)",
+    "exponent-4(G)",
+    "¬odd-order(G)"
+   ]
+  },
+  {
+   "пара": [
+    "min-prime-index(ker(cayley(G)))",
+    "¬iso(G, sym(G))"
+   ],
+   "третьи": [
+    "exponent-2(G)",
+    "exponent-4(G)",
+    "¬odd-order(G)"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "¬embeds(sym(G), G)"
+   ],
+   "третьи": [
+    "exponent-2(G)",
+    "exponent-4(G)",
+    "¬odd-order(G)"
+   ]
+  },
+  {
+   "пара": [
+    "prime-index(ker(cayley(G)))",
+    "¬iso(G, sym(G))"
+   ],
+   "третьи": [
+    "exponent-2(G)",
+    "exponent-4(G)",
+    "¬odd-order(G)"
+   ]
+  },
+  {
+   "пара": [
+    "¬locally-nilpotent(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬locally-nilpotent(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬p-group(sym(G))"
+   ],
+   "третьи": [
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬residually-nilpotent(sym(G))"
+   ],
+   "третьи": [
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬p-group(sym(G))",
+    "¬prime-index(ker(cayley(G)))"
+   ],
+   "третьи": [
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "¬prime-index(ker(cayley(G)))",
+    "¬residually-nilpotent(sym(G))"
+   ],
+   "третьи": [
+    "proper-subs-abelian(sym(G))",
+    "proper-subs-cyclic(sym(G))",
+    "proper-subs-nilpotent(sym(G))"
+   ]
+  },
+  {
+   "пара": [
+    "prime-orders(G)",
+    "¬index-2(ker(cayley(G)))",
+    "¬odd-order(G)"
+   ],
+   "третьи": [
+    "cyclic(G)",
+    "locally-cyclic(G)"
+   ]
+  }
+ ],
+ "вырождено": [
+  {
+   "вопрос": [
+    "abelian(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 9
+  },
+  {
+   "вопрос": [
+    "abelian(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 8
+  },
+  {
+   "вопрос": [
+    "abelian(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 8
+  },
+  {
+   "вопрос": [
+    "class-2(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "class-2(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "class-2(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "clt(sym(G))",
+    "exponent-3(G)",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "clt(sym(G))",
+    "exponent-3(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "clt(sym(G))",
+    "odd-order(G)",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "clt(sym(G))",
+    "odd-order(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "clt(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬order-p2(G)",
+    "trivial(G)"
+   ],
+   "запретов": 3
+  },
+  {
+   "вопрос": [
+    "clt(sym(G))",
+    "¬order-p2(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 3
+  },
+  {
+   "вопрос": [
+    "cyclic(G)",
+    "exponent-2(G)",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "cyclic(G)",
+    "exponent-2(G)",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "cyclic(G)",
+    "exponent-2(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "cyclic(G)",
+    "exponent-3(G)",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 21
+  },
+  {
+   "вопрос": [
+    "cyclic(G)",
+    "exponent-3(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 21
+  },
+  {
+   "вопрос": [
+    "cyclic(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 9
+  },
+  {
+   "вопрос": [
+    "cyclic(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 8
+  },
+  {
+   "вопрос": [
+    "cyclic(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 8
+  },
+  {
+   "вопрос": [
+    "dedekind(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 2
+  },
+  {
+   "вопрос": [
+    "dedekind(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 2
+  },
+  {
+   "вопрос": [
+    "dedekind(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 2
+  },
+  {
+   "вопрос": [
+    "exponent-2(G)",
+    "exponent-6(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "exponent-2(G)",
+    "indecomposable(G)",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "exponent-2(G)",
+    "indecomposable(G)",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "exponent-2(G)",
+    "indecomposable(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "exponent-2(G)",
+    "locally-cyclic(G)",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "exponent-2(G)",
+    "locally-cyclic(G)",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "exponent-2(G)",
+    "locally-cyclic(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "exponent-2(G)",
+    "metabelian(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "exponent-2(G)",
+    "prime-orders(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "exponent-2(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 9
+  },
+  {
+   "вопрос": [
+    "exponent-2(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 8
+  },
+  {
+   "вопрос": [
+    "exponent-2(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 8
+  },
+  {
+   "вопрос": [
+    "exponent-3(G)",
+    "locally-cyclic(G)",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 21
+  },
+  {
+   "вопрос": [
+    "exponent-3(G)",
+    "locally-cyclic(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 21
+  },
+  {
+   "вопрос": [
+    "exponent-3(G)",
+    "locally-solvable(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 16
+  },
+  {
+   "вопрос": [
+    "exponent-3(G)",
+    "locally-solvable(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 16
+  },
+  {
+   "вопрос": [
+    "exponent-3(G)",
+    "polycyclic(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "exponent-3(G)",
+    "polycyclic(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "exponent-3(G)",
+    "solvable(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 17
+  },
+  {
+   "вопрос": [
+    "exponent-3(G)",
+    "solvable(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 17
+  },
+  {
+   "вопрос": [
+    "exponent-3(G)",
+    "two-primes(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "exponent-3(G)",
+    "two-primes(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "exponent-4(G)",
+    "exponent-6(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "exponent-4(G)",
+    "metabelian(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "exponent-4(G)",
+    "prime-orders(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "exponent-4(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "exponent-4(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "exponent-4(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "exponent-6(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬order-pq(sym(G))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "exponent-6(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "exponent-6(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "locally-cyclic(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 9
+  },
+  {
+   "вопрос": [
+    "locally-cyclic(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 8
+  },
+  {
+   "вопрос": [
+    "locally-cyclic(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 8
+  },
+  {
+   "вопрос": [
+    "locally-solvable(sym(G))",
+    "odd-order(G)",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 16
+  },
+  {
+   "вопрос": [
+    "locally-solvable(sym(G))",
+    "odd-order(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 16
+  },
+  {
+   "вопрос": [
+    "metabelian(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬order-pq(sym(G))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "metabelian(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "metabelian(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "nilpotent(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "nilpotent(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "nilpotent(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "odd-order(G)",
+    "polycyclic(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "odd-order(G)",
+    "polycyclic(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "odd-order(G)",
+    "solvable(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 17
+  },
+  {
+   "вопрос": [
+    "odd-order(G)",
+    "solvable(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 17
+  },
+  {
+   "вопрос": [
+    "odd-order(G)",
+    "two-primes(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "odd-order(G)",
+    "two-primes(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 19
+  },
+  {
+   "вопрос": [
+    "polycyclic(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬order-p2(G)",
+    "trivial(G)"
+   ],
+   "запретов": 3
+  },
+  {
+   "вопрос": [
+    "polycyclic(sym(G))",
+    "¬order-p2(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 3
+  },
+  {
+   "вопрос": [
+    "prime-orders(sym(G))",
+    "¬index-2(ker(cayley(G)))",
+    "¬order-pq(sym(G))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "prime-orders(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "prime-orders(sym(G))",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "solvable(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬order-p2(G)",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "solvable(sym(G))",
+    "¬order-p2(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 1
+  },
+  {
+   "вопрос": [
+    "two-primes(sym(G))",
+    "¬min-prime-index(ker(cayley(G)))",
+    "¬order-p2(G)",
+    "trivial(G)"
+   ],
+   "запретов": 3
+  },
+  {
+   "вопрос": [
+    "two-primes(sym(G))",
+    "¬order-p2(G)",
+    "¬prime-index(ker(cayley(G)))",
+    "trivial(G)"
+   ],
+   "запретов": 3
+  }
+ ],
+ "реестр": {
+  "В-7": 16
+ },
+ "отложено": [],
+ "факты без посылок": [
+  "abelian(ker(cayley(G)))",
+  "amenable(ker(cayley(G)))",
+  "bi-orderable(ker(cayley(G)))",
+  "bounded-exponent(ker(cayley(G)))",
+  "centerless(ker(cayley(G)))",
+  "central(ker(cayley(G)))",
+  "characteristic(ker(cayley(G)))",
+  "class-2(ker(cayley(G)))",
+  "clt(ker(cayley(G)))",
+  "co-hopfian(ker(cayley(G)))",
+  "comp-series(ker(cayley(G)))",
+  "complemented(ker(cayley(G)))",
+  "countable(ker(cayley(G)))",
+  "cyclic(ker(cayley(G)))",
+  "dedekind(ker(cayley(G)))",
+  "divisible(ker(cayley(G)))",
+  "embeds(ker(cayley(G)), G)",
+  "embeds(ker(cayley(G)), sym(G))",
+  "exponent-2(ker(cayley(G)))",
+  "exponent-3(ker(cayley(G)))",
+  "exponent-4(ker(cayley(G)))",
+  "exponent-6(ker(cayley(G)))",
+  "fin-gen(ker(cayley(G)))",
+  "fin-pres(ker(cayley(G)))",
+  "finite(ker(cayley(G)))",
+  "free(ker(cayley(G)))",
+  "free-abelian(ker(cayley(G)))",
+  "fully-invariant(ker(cayley(G)))",
+  "hopfian(ker(cayley(G)))",
+  "hyperbolic(ker(cayley(G)))",
+  "indecomposable(ker(cayley(G)))",
+  "kaplansky(ker(cayley(G)))",
+  "left-orderable(ker(cayley(G)))",
+  "linear(ker(cayley(G)))",
+  "linear-c(ker(cayley(G)))",
+  "locally-cyclic(ker(cayley(G)))",
+  "locally-finite(ker(cayley(G)))",
+  "locally-nilpotent(ker(cayley(G)))",
+  "locally-solvable(ker(cayley(G)))",
+  "metabelian(ker(cayley(G)))",
+  "nilpotent(ker(cayley(G)))",
+  "no-finite-quotients(ker(cayley(G)))",
+  "normal(ker(cayley(G)))",
+  "odd-order(ker(cayley(G)))",
+  "p-group(ker(cayley(G)))",
+  "perfect(ker(cayley(G)))",
+  "periodic(ker(cayley(G)))",
+  "polycyclic(ker(cayley(G)))",
+  "polynomial-growth(ker(cayley(G)))",
+  "prime-orders(ker(cayley(G)))",
+  "proper-subs-abelian(ker(cayley(G)))",
+  "proper-subs-cyclic(ker(cayley(G)))",
+  "proper-subs-finite(ker(cayley(G)))",
+  "proper-subs-nilpotent(ker(cayley(G)))",
+  "property-t(ker(cayley(G)))",
+  "quasinormal(ker(cayley(G)))",
+  "rec-pres(ker(cayley(G)))",
+  "rec-pres-ctbl(ker(cayley(G)))",
+  "residually-finite(ker(cayley(G)))",
+  "residually-nilpotent(ker(cayley(G)))",
+  "solvable(ker(cayley(G)))",
+  "subgroup(ker(cayley(G)))",
+  "subnormal(ker(cayley(G)))",
+  "torsion-free(ker(cayley(G)))",
+  "trivial(ker(cayley(G)))",
+  "two-generated(ker(cayley(G)))",
+  "two-primes(ker(cayley(G)))",
+  "virtually-nilpotent(ker(cayley(G)))",
+  "virtually-solvable(ker(cayley(G)))",
+  "whitehead(ker(cayley(G)))",
+  "word-problem(ker(cayley(G)))",
+  "¬contains-free(ker(cayley(G)))",
+  "¬order-p2(ker(cayley(G)))",
+  "¬order-pq(ker(cayley(G)))",
+  "¬prime-order(ker(cayley(G)))",
+  "¬simple(ker(cayley(G)))",
+  "¬sylow(ker(cayley(G)))"
+ ],
+ "вопросы": {
+  "index-2(ker(cayley(G)))": {
+   "запретов": 59,
+   "групп": 1,
+   "неизвестно": 1,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "index-2(ker(cayley(G))) & odd-order(G)"
+  },
+  "simple(sym(G))": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 10095,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "simple(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  "divisible(sym(G))": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 10095,
+   "группы": [
+    "G = 1"
+   ],
+   "все группы": [
+    "G = 1"
+   ],
+   "пример": "divisible(sym(G)) & index-2(ker(cayley(G)))"
+  },
+  "¬centerless(sym(G))": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 10095,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "¬centerless(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  "prime-order(sym(G))": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 25,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "prime-order(sym(G)) & ¬index-2(ker(cayley(G)))"
+  },
+  "order-pq(sym(G))": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 9351,
+   "группы": [
+    "G = C3"
+   ],
+   "все группы": [
+    "G = C3"
+   ],
+   "пример": "index-2(ker(cayley(G))) & order-pq(sym(G))"
+  },
+  "odd-order(sym(G))": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 9351,
+   "группы": [
+    "G = 1"
+   ],
+   "все группы": [
+    "G = 1"
+   ],
+   "пример": "index-2(ker(cayley(G))) & odd-order(sym(G))"
+  },
+  "exponent-3(sym(G))": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 9351,
+   "группы": [
+    "G = 1"
+   ],
+   "все группы": [
+    "G = 1"
+   ],
+   "пример": "exponent-3(sym(G)) & index-2(ker(cayley(G)))"
+  },
+  "¬indecomposable(sym(G))": {
+   "запретов": 6,
+   "групп": 0,
+   "неизвестно": 10095,
+   "группы": [],
+   "все группы": [],
+   "пример": "index-2(ker(cayley(G))) & ¬indecomposable(sym(G))"
+  },
+  "¬hopfian(sym(G))": {
+   "запретов": 6,
+   "групп": 0,
+   "неизвестно": 10095,
+   "группы": [],
+   "все группы": [],
+   "пример": "index-2(ker(cayley(G))) & ¬hopfian(sym(G))"
+  },
+  "¬comp-series(sym(G))": {
+   "запретов": 6,
+   "групп": 0,
+   "неизвестно": 29055,
+   "группы": [],
+   "все группы": [],
+   "пример": "index-2(ker(cayley(G))) & ¬comp-series(sym(G))"
+  },
+  "¬idempotent(cayley(G))": {
+   "запретов": 6,
+   "групп": 0,
+   "неизвестно": 30753,
+   "группы": [],
+   "все группы": [],
+   "пример": "index-2(ker(cayley(G))) & ¬idempotent(cayley(G))"
+  },
+  "idempotent(cayley(G))": {
+   "запретов": 6,
+   "групп": 0,
+   "неизвестно": 30753,
+   "группы": [],
+   "все группы": [],
+   "пример": "idempotent(cayley(G)) & index-2(ker(cayley(G)))"
+  },
+  "¬inner-aut(cayley(G))": {
+   "запретов": 6,
+   "групп": 0,
+   "неизвестно": 30753,
+   "группы": [],
+   "все группы": [],
+   "пример": "index-2(ker(cayley(G))) & ¬inner-aut(cayley(G))"
+  },
+  "inner-aut(cayley(G))": {
+   "запретов": 6,
+   "групп": 0,
+   "неизвестно": 30753,
+   "группы": [],
+   "все группы": [],
+   "пример": "index-2(ker(cayley(G))) & inner-aut(cayley(G))"
+  },
+  "¬embeds(G, sym(G))": {
+   "запретов": 6,
+   "групп": 0,
+   "неизвестно": 30743,
+   "группы": [],
+   "все группы": [],
+   "пример": "index-2(ker(cayley(G))) & ¬embeds(G, sym(G))"
+  },
+  "abelian(sym(G))": {
+   "запретов": 63,
+   "групп": 2,
+   "неизвестно": 25,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "abelian(sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "cyclic(sym(G))": {
+   "запретов": 63,
+   "групп": 2,
+   "неизвестно": 25,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "cyclic(sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "nilpotent(sym(G))": {
+   "запретов": 71,
+   "групп": 2,
+   "неизвестно": 9624,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "nilpotent(sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "p-group(sym(G))": {
+   "запретов": 73,
+   "групп": 2,
+   "неизвестно": 10013,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "p-group(sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "exponent-2(sym(G))": {
+   "запретов": 63,
+   "групп": 2,
+   "неизвестно": 25,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "exponent-2(sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "dedekind(sym(G))": {
+   "запретов": 71,
+   "групп": 2,
+   "неизвестно": 9624,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "dedekind(sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "exponent-4(sym(G))": {
+   "запретов": 73,
+   "групп": 2,
+   "неизвестно": 9696,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "exponent-4(sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "exponent-6(sym(G))": {
+   "запретов": 166,
+   "групп": 3,
+   "неизвестно": 9778,
+   "группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "пример": "exponent-6(sym(G)) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "metabelian(sym(G))": {
+   "запретов": 166,
+   "групп": 3,
+   "неизвестно": 9624,
+   "группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "пример": "metabelian(sym(G)) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "class-2(sym(G))": {
+   "запретов": 71,
+   "групп": 2,
+   "неизвестно": 9624,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "class-2(sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "residually-nilpotent(sym(G))": {
+   "запретов": 73,
+   "групп": 2,
+   "неизвестно": 10013,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "residually-nilpotent(sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "prime-orders(sym(G))": {
+   "запретов": 166,
+   "групп": 3,
+   "неизвестно": 10095,
+   "группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "пример": "prime-orders(sym(G)) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "locally-cyclic(sym(G))": {
+   "запретов": 63,
+   "групп": 2,
+   "неизвестно": 25,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "locally-cyclic(sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "locally-nilpotent(sym(G))": {
+   "запретов": 73,
+   "групп": 2,
+   "неизвестно": 10013,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "locally-nilpotent(sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "proper-subs-abelian(sym(G))": {
+   "запретов": 166,
+   "групп": 3,
+   "неизвестно": 10013,
+   "группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "пример": "proper-subs-abelian(sym(G)) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "proper-subs-nilpotent(sym(G))": {
+   "запретов": 166,
+   "групп": 3,
+   "неизвестно": 10013,
+   "группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "пример": "proper-subs-nilpotent(sym(G)) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "proper-subs-cyclic(sym(G))": {
+   "запретов": 166,
+   "групп": 3,
+   "неизвестно": 9969,
+   "группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "пример": "proper-subs-cyclic(sym(G)) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "iso(cayley(G))": {
+   "запретов": 63,
+   "групп": 2,
+   "неизвестно": 9273,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "iso(cayley(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "iso(G, sym(G))": {
+   "запретов": 63,
+   "групп": 2,
+   "неизвестно": 8842,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "iso(G, sym(G)) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "embeds(sym(G), G)": {
+   "запретов": 63,
+   "групп": 2,
+   "неизвестно": 8961,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "embeds(sym(G), G) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "exponent-2(G) & simple(G)": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "exponent-2(G) & simple(G) & ¬index-2(ker(cayley(G)))"
+  },
+  "exponent-3(G) & simple(G)": {
+   "запретов": 2,
+   "групп": 1,
+   "неизвестно": 1,
+   "группы": [
+    "G = C3"
+   ],
+   "все группы": [
+    "G = C3"
+   ],
+   "пример": "exponent-3(G) & simple(G) & ¬prime-index(ker(cayley(G)))"
+  },
+  "exponent-4(G) & simple(G)": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 2,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "exponent-4(G) & simple(G) & ¬index-2(ker(cayley(G)))"
+  },
+  "exponent-6(G) & simple(G)": {
+   "запретов": 6,
+   "групп": 2,
+   "неизвестно": 9,
+   "группы": [
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = C2",
+    "G = C3"
+   ],
+   "пример": "exponent-6(G) & simple(G) & ¬prime-index(ker(cayley(G)))"
+  },
+  "solvable(sym(G))": {
+   "запретов": 372,
+   "групп": 5,
+   "неизвестно": 9624,
+   "группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2",
+    "G = C2 x C2",
+    "G = C3",
+    "G = C4"
+   ],
+   "пример": "simple(G) & solvable(sym(G)) & ¬prime-index(ker(cayley(G)))"
+  },
+  "polycyclic(sym(G))": {
+   "запретов": 372,
+   "групп": 5,
+   "неизвестно": 9351,
+   "группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2",
+    "G = C2 x C2",
+    "G = C3",
+    "G = C4"
+   ],
+   "пример": "polycyclic(sym(G)) & simple(G) & ¬prime-index(ker(cayley(G)))"
+  },
+  "two-primes(sym(G))": {
+   "запретов": 372,
+   "групп": 5,
+   "неизвестно": 9351,
+   "группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2",
+    "G = C2 x C2",
+    "G = C3",
+    "G = C4"
+   ],
+   "пример": "simple(G) & two-primes(sym(G)) & ¬prime-index(ker(cayley(G)))"
+  },
+  "clt(sym(G))": {
+   "запретов": 372,
+   "групп": 5,
+   "неизвестно": 9351,
+   "группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2",
+    "G = C2 x C2",
+    "G = C3",
+    "G = C4"
+   ],
+   "пример": "clt(sym(G)) & simple(G) & ¬prime-index(ker(cayley(G)))"
+  },
+  "locally-solvable(sym(G))": {
+   "запретов": 372,
+   "групп": 5,
+   "неизвестно": 10013,
+   "группы": [
+    "G = 1",
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2",
+    "G = C2 x C2",
+    "G = C3",
+    "G = C4"
+   ],
+   "пример": "locally-solvable(sym(G)) & simple(G) & ¬prime-index(ker(cayley(G)))"
+  },
+  "prime-order(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "prime-order(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "exponent-2(G) & prime-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "exponent-2(G) & prime-order(G) & ¬index-2(ker(cayley(G)))"
+  },
+  "exponent-4(G) & prime-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "exponent-4(G) & prime-order(G) & ¬index-2(ker(cayley(G)))"
+  },
+  "prime-index(ker(cayley(G))) & ¬odd-order(G)": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "prime-index(ker(cayley(G))) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "min-prime-index(ker(cayley(G))) & ¬odd-order(G)": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "min-prime-index(ker(cayley(G))) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "exponent-2(G) & prime-index(ker(cayley(G)))": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "exponent-2(G) & prime-index(ker(cayley(G))) & ¬index-2(ker(cayley(G)))"
+  },
+  "exponent-2(G) & min-prime-index(ker(cayley(G)))": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "exponent-2(G) & min-prime-index(ker(cayley(G))) & ¬index-2(ker(cayley(G)))"
+  },
+  "exponent-3(G) & prime-index(ker(cayley(G)))": {
+   "запретов": 13,
+   "групп": 1,
+   "неизвестно": 1,
+   "группы": [
+    "G = C3"
+   ],
+   "все группы": [
+    "G = C3"
+   ],
+   "пример": "exponent-3(G) & prime-index(ker(cayley(G))) & ¬solvable(sym(G))"
+  },
+  "exponent-3(G) & min-prime-index(ker(cayley(G)))": {
+   "запретов": 13,
+   "групп": 1,
+   "неизвестно": 1,
+   "группы": [
+    "G = C3"
+   ],
+   "все группы": [
+    "G = C3"
+   ],
+   "пример": "exponent-3(G) & min-prime-index(ker(cayley(G))) & ¬solvable(sym(G))"
+  },
+  "exponent-4(G) & prime-index(ker(cayley(G)))": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "exponent-4(G) & prime-index(ker(cayley(G))) & ¬index-2(ker(cayley(G)))"
+  },
+  "exponent-4(G) & min-prime-index(ker(cayley(G)))": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "exponent-4(G) & min-prime-index(ker(cayley(G))) & ¬index-2(ker(cayley(G)))"
+  },
+  "exponent-6(G) & prime-index(ker(cayley(G)))": {
+   "запретов": 56,
+   "групп": 2,
+   "неизвестно": 1,
+   "группы": [
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = C2",
+    "G = C3"
+   ],
+   "пример": "exponent-6(G) & prime-index(ker(cayley(G))) & ¬solvable(sym(G))"
+  },
+  "exponent-6(G) & min-prime-index(ker(cayley(G)))": {
+   "запретов": 56,
+   "групп": 2,
+   "неизвестно": 1,
+   "группы": [
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = C2",
+    "G = C3"
+   ],
+   "пример": "exponent-6(G) & min-prime-index(ker(cayley(G))) & ¬solvable(sym(G))"
+  },
+  "cyclic(G) & exponent-2(G)": {
+   "запретов": 57,
+   "групп": 2,
+   "неизвестно": 25,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "cyclic(G) & exponent-2(G) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "cyclic(G) & exponent-3(G)": {
+   "запретов": 66,
+   "групп": 2,
+   "неизвестно": 26,
+   "группы": [
+    "G = 1",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C3"
+   ],
+   "пример": "cyclic(G) & exponent-3(G) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "cyclic(G) & prime-orders(G) & ¬prime-index(ker(cayley(G)))": {
+   "запретов": 46,
+   "групп": 1,
+   "неизвестно": 38,
+   "группы": [
+    "G = 1"
+   ],
+   "все группы": [
+    "G = 1"
+   ],
+   "пример": "cyclic(G) & prime-orders(G) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "cyclic(G) & prime-orders(G) & ¬min-prime-index(ker(cayley(G)))": {
+   "запретов": 46,
+   "групп": 1,
+   "неизвестно": 38,
+   "группы": [
+    "G = 1"
+   ],
+   "все группы": [
+    "G = 1"
+   ],
+   "пример": "cyclic(G) & prime-orders(G) & ¬min-prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "exponent-2(G) & indecomposable(G)": {
+   "запретов": 57,
+   "групп": 2,
+   "неизвестно": 0,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "exponent-2(G) & indecomposable(G) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "embeds(G, sym(G))": {
+   "запретов": 339,
+   "групп": 10,
+   "неизвестно": 30743,
+   "группы": [
+    "G = 1",
+    "G = A_∞ (финитарная знакопеременная)",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = A_∞ (финитарная знакопеременная)",
+    "G = C2",
+    "G = C2 x C2",
+    "G = C3",
+    "G = C4",
+    "G = C5",
+    "G = C6",
+    "G = C₃ × A_∞",
+    "G = S3"
+   ],
+   "пример": "embeds(G, sym(G)) & odd-order(G) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "exponent-2(G) & two-generated(G)": {
+   "запретов": 57,
+   "групп": 2,
+   "неизвестно": 71,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "exponent-2(G) & two-generated(G) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "exponent-2(G) & locally-cyclic(G)": {
+   "запретов": 57,
+   "групп": 2,
+   "неизвестно": 25,
+   "группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C2"
+   ],
+   "пример": "exponent-2(G) & locally-cyclic(G) & ¬index-2(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "exponent-3(G) & two-generated(G)": {
+   "запретов": 66,
+   "групп": 2,
+   "неизвестно": 144,
+   "группы": [
+    "G = 1",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C3"
+   ],
+   "пример": "exponent-3(G) & two-generated(G) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "exponent-3(G) & locally-cyclic(G)": {
+   "запретов": 66,
+   "групп": 2,
+   "неизвестно": 26,
+   "группы": [
+    "G = 1",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = 1",
+    "G = C3"
+   ],
+   "пример": "exponent-3(G) & locally-cyclic(G) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "prime-orders(G) & two-generated(G) & ¬prime-index(ker(cayley(G)))": {
+   "запретов": 46,
+   "групп": 1,
+   "неизвестно": 2116,
+   "группы": [
+    "G = 1"
+   ],
+   "все группы": [
+    "G = 1"
+   ],
+   "пример": "prime-orders(G) & two-generated(G) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "prime-orders(G) & two-generated(G) & ¬min-prime-index(ker(cayley(G)))": {
+   "запретов": 46,
+   "групп": 1,
+   "неизвестно": 2116,
+   "группы": [
+    "G = 1"
+   ],
+   "все группы": [
+    "G = 1"
+   ],
+   "пример": "prime-orders(G) & two-generated(G) & ¬min-prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "locally-cyclic(G) & prime-orders(G) & ¬prime-index(ker(cayley(G)))": {
+   "запретов": 46,
+   "групп": 1,
+   "неизвестно": 357,
+   "группы": [
+    "G = 1"
+   ],
+   "все группы": [
+    "G = 1"
+   ],
+   "пример": "locally-cyclic(G) & prime-orders(G) & ¬prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "locally-cyclic(G) & prime-orders(G) & ¬min-prime-index(ker(cayley(G)))": {
+   "запретов": 46,
+   "групп": 1,
+   "неизвестно": 357,
+   "группы": [
+    "G = 1"
+   ],
+   "все группы": [
+    "G = 1"
+   ],
+   "пример": "locally-cyclic(G) & prime-orders(G) & ¬min-prime-index(ker(cayley(G))) & ¬trivial(G)"
+  },
+  "abelian(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "abelian(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "cyclic(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "cyclic(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "cyclic(G) & prime-orders(G) & ¬odd-order(G)": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 37,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "cyclic(G) & prime-orders(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "p-group(G) & simple(G) & ¬prime-index(ker(cayley(G)))": {
+   "запретов": 43,
+   "групп": 1,
+   "неизвестно": 4,
+   "группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "все группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "пример": "finite(G) & p-group(G) & simple(G) & ¬prime-index(ker(cayley(G)))"
+  },
+  "p-group(G) & simple(G) & ¬min-prime-index(ker(cayley(G)))": {
+   "запретов": 43,
+   "групп": 1,
+   "неизвестно": 4,
+   "группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "все группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "пример": "finite(G) & p-group(G) & simple(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  "proper-subs-abelian(G) & simple(G) & ¬prime-index(ker(cayley(G)))": {
+   "запретов": 43,
+   "групп": 1,
+   "неизвестно": 10,
+   "группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "все группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "пример": "finite(G) & proper-subs-abelian(G) & simple(G) & ¬prime-index(ker(cayley(G)))"
+  },
+  "proper-subs-abelian(G) & simple(G) & ¬min-prime-index(ker(cayley(G)))": {
+   "запретов": 43,
+   "групп": 1,
+   "неизвестно": 10,
+   "группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "все группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "пример": "finite(G) & proper-subs-abelian(G) & simple(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  "proper-subs-nilpotent(G) & simple(G) & ¬prime-index(ker(cayley(G)))": {
+   "запретов": 43,
+   "групп": 1,
+   "неизвестно": 11,
+   "группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "все группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "пример": "finite(G) & proper-subs-nilpotent(G) & simple(G) & ¬prime-index(ker(cayley(G)))"
+  },
+  "proper-subs-nilpotent(G) & simple(G) & ¬min-prime-index(ker(cayley(G)))": {
+   "запретов": 43,
+   "групп": 1,
+   "неизвестно": 11,
+   "группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "все группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "пример": "finite(G) & proper-subs-nilpotent(G) & simple(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  "proper-subs-cyclic(G) & simple(G) & ¬prime-index(ker(cayley(G)))": {
+   "запретов": 43,
+   "групп": 1,
+   "неизвестно": 9,
+   "группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "все группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "пример": "finite(G) & proper-subs-cyclic(G) & simple(G) & ¬prime-index(ker(cayley(G)))"
+  },
+  "proper-subs-cyclic(G) & simple(G) & ¬min-prime-index(ker(cayley(G)))": {
+   "запретов": 43,
+   "групп": 1,
+   "неизвестно": 9,
+   "группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "все группы": [
+    "G = монстр Тарского (Ольшанский)"
+   ],
+   "пример": "finite(G) & proper-subs-cyclic(G) & simple(G) & ¬min-prime-index(ker(cayley(G)))"
+  },
+  "simple(G) & solvable(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 2,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "simple(G) & solvable(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "nilpotent(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 1,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "nilpotent(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "simple(G) & ¬odd-order(G) & ¬perfect(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 6,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G) & ¬perfect(G)"
+  },
+  "simple(G) & ¬centerless(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 7,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "simple(G) & ¬centerless(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "polycyclic(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 1,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "polycyclic(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "simple(G) & two-primes(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "simple(G) & two-primes(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "clt(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "clt(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "simple(G) & two-generated(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 37,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "simple(G) & two-generated(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "dedekind(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "dedekind(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "metabelian(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 1,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "metabelian(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "class-2(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 1,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "class-2(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "residually-nilpotent(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 5,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "residually-nilpotent(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "locally-cyclic(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 0,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "locally-cyclic(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "locally-nilpotent(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 8,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "locally-nilpotent(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "locally-solvable(G) & simple(G) & ¬odd-order(G)": {
+   "запретов": 1,
+   "групп": 1,
+   "неизвестно": 9,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "locally-solvable(G) & simple(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "exponent-6(G) & prime-order(G)": {
+   "запретов": 3,
+   "групп": 2,
+   "неизвестно": 1,
+   "группы": [
+    "G = C2",
+    "G = C3"
+   ],
+   "все группы": [
+    "G = C2",
+    "G = C3"
+   ],
+   "пример": "exponent-6(G) & prime-order(G) & ¬exponent-3(G) & ¬index-2(ker(cayley(G)))"
+  },
+  "prime-orders(G) & two-generated(G) & ¬odd-order(G)": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 2081,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "prime-orders(G) & two-generated(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  },
+  "locally-cyclic(G) & prime-orders(G) & ¬odd-order(G)": {
+   "запретов": 3,
+   "групп": 1,
+   "неизвестно": 356,
+   "группы": [
+    "G = C2"
+   ],
+   "все группы": [
+    "G = C2"
+   ],
+   "пример": "locally-cyclic(G) & prime-orders(G) & ¬index-2(ker(cayley(G))) & ¬odd-order(G)"
+  }
+ },
+ "без вопроса": 89,
+ "трудный контрпример": {},
+ "короткий довод": {}
+}

@@ -1,0 +1,86 @@
+         347421753 function calls (343118315 primitive calls) in 307.432 seconds
+
+   Ordered by: cumulative time
+   List reduced from 279 to 45 due to restriction <45>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    2.912    2.912  262.449  262.449 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1497(run)
+   189296    0.519    0.000  166.164    0.001 /home/runner/work/AlGen/AlGen/py/algen/fast.py:309(decide)
+   558762    3.391    0.000  164.832    0.000 /home/runner/work/AlGen/AlGen/py/algen/fast.py:147(sat)
+     6645    0.004    0.000  133.608    0.020 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pysat/solvers.py:1045(solve)
+     6645    0.008    0.000  133.604    0.020 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pysat/solvers.py:5818(solve)
+     6645  133.587    0.020  133.587    0.020 {built-in method pysolvers.glucose41_solve}
+        1    0.013    0.013   70.271   70.271 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1085(enumerate_form)
+1524569/3   23.745    0.000   70.000   23.333 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1303(go)
+        1    0.379    0.379   42.940   42.940 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1740(render)
+        2   18.528    9.264   24.109   12.055 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1699(clusters)
+   533635    4.515    0.000   23.175    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1272(leaf_vec)
+        1    0.054    0.054   18.287   18.287 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:996(decisive)
+  5830728    1.556    0.000   17.722    0.000 {method 'any' of 'numpy.ndarray' objects}
+  7572040   16.328    0.000   16.328    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+  5830728    1.158    0.000   16.167    0.000 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/numpy/_core/_methods.py:55(_any)
+      870    0.002    0.000   14.992    0.017 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/collections/__init__.py:595(__init__)
+      870    0.001    0.000   14.990    0.017 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/collections/__init__.py:669(update)
+      870    7.690    0.009   14.984    0.017 {built-in method _collections._count_elements}
+   533635    0.478    0.000   11.841    0.000 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/numpy/lib/_arraysetops_impl.py:958(isin)
+      426    2.120    0.005   11.484    0.027 /home/runner/work/AlGen/AlGen/py/algen/fast.py:84(_add)
+   533635    5.248    0.000   11.152    0.000 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/numpy/lib/_arraysetops_impl.py:806(_isin)
+  2191231   11.037    0.000   11.037    0.000 {built-in method numpy.asarray}
+      426    0.001    0.000    8.403    0.020 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pysat/solvers.py:1495(get_model)
+      426    0.003    0.000    8.401    0.020 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pysat/solvers.py:5928(get_model)
+      426    8.398    0.020    8.398    0.020 {built-in method pysolvers.glucose41_model}
+ 97421618    7.288    0.000    7.288    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1002(<genexpr>)
+  3559410    2.772    0.000    7.268    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:495(value_name)
+   558762    0.145    0.000    7.265    0.000 /home/runner/work/AlGen/AlGen/py/algen/fast.py:126(witness)
+   558762    2.940    0.000    7.120    0.000 /home/runner/work/AlGen/AlGen/py/algen/fast.py:105(_witness_words)
+   862399    0.788    0.000    6.638    0.000 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/numpy/_core/numeric.py:675(flatnonzero)
+   328762    1.044    0.000    6.180    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:423(_rows)
+     8550    5.019    0.001    5.040    0.001 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1213(pack)
+   862399    0.235    0.000    4.883    0.000 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:2031(nonzero)
+   862400    0.304    0.000    4.648    0.000 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:48(_wrapfunc)
+32603497/30060860    4.034    0.000    4.514    0.000 {method 'get' of 'dict' objects}
+    19129    2.147    0.000    4.301    0.000 {built-in method builtins.max}
+   862399    4.236    0.000    4.236    0.000 {method 'nonzero' of 'numpy.ndarray' objects}
+3430337/3429911    1.159    0.000    4.223    0.000 {built-in method builtins.all}
+    94555    0.137    0.000    3.855    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:458(one_unknown)
+    33478    1.733    0.000    3.638    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:474(_one_unknown)
+    94555    0.520    0.000    3.477    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:426(unknown_goal)
+ 13951457    2.264    0.000    3.463    0.000 /home/runner/work/AlGen/AlGen/py/algen/logic.py:320(__hash__)
+ 38765194    3.159    0.000    3.159    0.000 {method 'append' of 'list' objects}
+  3139846    1.360    0.000    2.660    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1250(direct_mask)
+   618017    0.723    0.000    2.354    0.000 {built-in method builtins.sorted}
+
+
+         347421753 function calls (343118315 primitive calls) in 307.432 seconds
+
+   Ordered by: internal time
+   List reduced from 279 to 25 due to restriction <25>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     6645  133.587    0.020  133.587    0.020 {built-in method pysolvers.glucose41_solve}
+1524569/3   23.745    0.000   70.000   23.333 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1303(go)
+        2   18.528    9.264   24.109   12.055 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1699(clusters)
+  7572040   16.328    0.000   16.328    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+  2191231   11.037    0.000   11.037    0.000 {built-in method numpy.asarray}
+      426    8.398    0.020    8.398    0.020 {built-in method pysolvers.glucose41_model}
+      870    7.690    0.009   14.984    0.017 {built-in method _collections._count_elements}
+ 97421618    7.288    0.000    7.288    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1002(<genexpr>)
+   533635    5.248    0.000   11.152    0.000 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/numpy/lib/_arraysetops_impl.py:806(_isin)
+     8550    5.019    0.001    5.040    0.001 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1213(pack)
+   533635    4.515    0.000   23.175    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1272(leaf_vec)
+   862399    4.236    0.000    4.236    0.000 {method 'nonzero' of 'numpy.ndarray' objects}
+32603497/30060860    4.034    0.000    4.514    0.000 {method 'get' of 'dict' objects}
+   558762    3.391    0.000  164.832    0.000 /home/runner/work/AlGen/AlGen/py/algen/fast.py:147(sat)
+ 38765194    3.159    0.000    3.159    0.000 {method 'append' of 'list' objects}
+   558762    2.940    0.000    7.120    0.000 /home/runner/work/AlGen/AlGen/py/algen/fast.py:105(_witness_words)
+        1    2.912    2.912  262.449  262.449 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1497(run)
+  3559410    2.772    0.000    7.268    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:495(value_name)
+ 13951457    2.264    0.000    3.463    0.000 /home/runner/work/AlGen/AlGen/py/algen/logic.py:320(__hash__)
+    19129    2.147    0.000    4.301    0.000 {built-in method builtins.max}
+      426    2.120    0.005   11.484    0.027 /home/runner/work/AlGen/AlGen/py/algen/fast.py:84(_add)
+    33478    1.733    0.000    3.638    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:474(_one_unknown)
+  5830728    1.556    0.000   17.722    0.000 {method 'any' of 'numpy.ndarray' objects}
+  3139846    1.360    0.000    2.660    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1250(direct_mask)
+  5957819    1.344    0.000    1.765    0.000 /home/runner/work/AlGen/AlGen/py/algen/enumerate.py:1312(<genexpr>)
+
+
