@@ -1289,8 +1289,10 @@ def _one(job):
                          {"base": base, "class": CLASS, "scheme": sid, "theory": tp,
                           "library": fp, "declaration": BASES[base],
                           "dynamic": live_info,
-                          "variables": [str(t) for t in form.search.vars],
-                          "fixed": [E.lit_name(a, val) for a, val in form.fixed_lits]}, report,
+                          "worker_run": os.environ.get("ALGEN_WORKER_RUN", ""),
+                          "generation": dict(_STATE.get("generation", {}), k=k, terms=terms),
+                          "variables": sorted(str(t) for t in form.search.vars),
+                          "fixed": sorted({E.lit_name(a, val) for a, val in form.fixed_lits})}, report,
                          summary.get("факты без посылок", ()))
     except SchemeTimeout:
         summary, status = {}, f"таймаут {limit} с"
@@ -1337,6 +1339,10 @@ def run_schemes(a):
     _STATE.update(lib=lib, vocab=vocab, registry=E.load_registry(), forms={})
     from .live_bridge import settings as live_settings
     _STATE["live"] = live_settings()
+    _STATE["generation"] = {"size": SIZE, "fast": E.FAST_DERIVE, "k_spec": str(a.k),
+                            "term_limit": a.t, "skip": sorted(E.SKIP), "defer": E.DEFER,
+                            "close_marked": E.CLOSE_MARKED,
+                            "compress": bool(os.environ.get("ALGEN_COMPRESS"))}
     outdir = Path(a.out)
     outdir.mkdir(parents=True, exist_ok=True)
     # «--посылок 3/2» (при ALGEN_SIZE): k = 3 у схем из ⩽ 1 конструкции, k = 2 у остальных.

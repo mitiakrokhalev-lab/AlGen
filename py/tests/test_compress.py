@@ -499,6 +499,30 @@ class TestGenericFilterClass(unittest.TestCase):
 
 
 class TestAcross(unittest.TestCase):
+    def test_full_verification_does_not_accept_solver_unknown(self):
+        from unittest.mock import patch
+        from algen import compress_base as B
+        f = FakeForm(ATOMS, [["-a", "b"]])
+        class Unknown:
+            def __init__(self, answer):
+                self.answer = answer
+            def add_clause(self, clause):
+                pass
+            def solve(self, **kwargs):
+                return self.answer
+            def delete(self):
+                pass
+        calls = []
+        def solver():
+            calls.append(1)
+            return Unknown(True if len(calls) == 1 else None)
+        folded = {str(i): ["root"] for i in range(1101)}
+        enc = {"root": [1], **{qid: [2] for qid in folded}}
+        with patch.object(f.sc.T, "solver", side_effect=solver):
+            bad = B.verify_across(f.sc.T, enc, [], ["root"], folded, sample=None)
+        self.assertEqual(len(bad), 1101)
+        self.assertEqual({x[0] for x in bad}, set(folded))
+
     def test_fold_across_schemes(self):
         from algen import compress_base as B
         f = FakeForm(ATOMS, [["-a", "b"]])

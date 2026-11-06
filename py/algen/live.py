@@ -43,7 +43,9 @@ def source_checked(source):
 
 def write_report(path, header, report, unconditional=()):
     """Атомарный потоковый экспорт ВСЕГО report, включая свёрнутые вопросы."""
-    header = dict(header, format="algen.full-report", version=VERSION, complete=True)
+    unconditional = tuple(unconditional)
+    header = dict(header, format="algen.full-report", version=VERSION, complete=True,
+                  report_count=len(report), unconditional_count=len(unconditional))
     dst = Path(path)
     tmp = dst.with_name(dst.name + ".tmp")
     with gzip.open(tmp, "wt", encoding="utf-8") as f:
@@ -106,6 +108,14 @@ class LiveArchive:
         CREATE TABLE IF NOT EXISTS schemes(
           context TEXT REFERENCES contexts(id), name TEXT, complete INTEGER NOT NULL,
           PRIMARY KEY(context,name));
+        CREATE TABLE IF NOT EXISTS scheme_headers(
+          context TEXT, name TEXT, header TEXT NOT NULL, PRIMARY KEY(context,name));
+        CREATE TABLE IF NOT EXISTS worker_runs(
+          id TEXT PRIMARY KEY, context TEXT REFERENCES contexts(id), manifest TEXT NOT NULL,
+          status TEXT NOT NULL, detail TEXT NOT NULL DEFAULT '{}');
+        CREATE TABLE IF NOT EXISTS successors(
+          source TEXT PRIMARY KEY REFERENCES contexts(id), target TEXT REFERENCES contexts(id),
+          run TEXT REFERENCES worker_runs(id));
         CREATE TABLE IF NOT EXISTS records(
           context TEXT, scheme TEXT, position INTEGER, verdict TEXT NOT NULL, payload BLOB NOT NULL,
           PRIMARY KEY(context,scheme,position));
@@ -168,13 +178,23 @@ class LiveArchive:
 
     @contextmanager
     def transaction(self):
-        self.db.execute("BEGIN IMMEDIATE")
+        nested = self.db.in_transaction
+        self.db.execute("SAVEPOINT live_nested" if nested else "BEGIN IMMEDIATE")
         try:
             yield
-            self.db.execute("COMMIT")
+            self.db.execute("RELEASE live_nested" if nested else "COMMIT")
         except BaseException:
-            self.db.execute("ROLLBACK")
+            if nested:
+                self.db.execute("ROLLBACK TO live_nested")
+                self.db.execute("RELEASE live_nested")
+            else:
+                self.db.execute("ROLLBACK")
             raise
+
+    def _writable(self, ctx):
+        r = self.db.execute("SELECT target FROM successors WHERE source=?", (ctx,)).fetchone()
+        if r:
+            raise ValueError("снимок завершён; действующий контекст: " + r[0])
 
     def _context(self, header):
         required = ("base", "class", "theory", "library", "declaration")
@@ -207,8 +227,10 @@ class LiveArchive:
         with self.transaction():
             self.db.execute("DELETE FROM touched")
             ctx = self._context(header)
+            self._writable(ctx)
             sid = header["scheme"]
             self.db.execute("INSERT INTO schemes VALUES(?,?,?)", (ctx, sid, int(complete)))
+            self.db.execute("INSERT INTO scheme_headers VALUES(?,?,?)", (ctx, sid, dumps(header)))
             fixed = header.get("fixed", [])
             if not isinstance(fixed, list):
                 raise ValueError("fixed должен быть списком литералов")
@@ -368,6 +390,7 @@ class LiveArchive:
             raise ValueError("facts: атом → bool или null; 0/1 не принимаются вместо bool")
         with self.transaction():
             self.db.execute("DELETE FROM touched")
+            self._writable(ctx)
             if not self.db.execute("SELECT 1 FROM contexts WHERE id=?", (ctx,)).fetchone():
                 raise ValueError("неизвестный контекст")
             h = json.loads(self.db.execute("SELECT header FROM contexts WHERE id=?", (ctx,)).fetchone()[0])
@@ -406,6 +429,7 @@ class LiveArchive:
     def withdraw(self, ctx, key, source):
         source_checked(source)
         with self.transaction():
+            self._writable(ctx)
             self.db.execute("DELETE FROM touched")
             old = self.db.execute("SELECT * FROM examples WHERE context=? AND name=? AND active=1", (ctx, key)).fetchone()
             if old is None:
@@ -431,6 +455,8 @@ class LiveArchive:
                 "examples": self.db.execute("SELECT count(*) FROM examples WHERE context=? AND active=1", (ctx,)).fetchone()[0],
                 "invalidated": self.db.execute("SELECT count(*) FROM questions WHERE context=? AND invalidated=1", (ctx,)).fetchone()[0],
                 "unresolved": self.db.execute("SELECT count(*) FROM unresolved u JOIN questions q ON q.id=u.child WHERE q.context=?", (ctx,)).fetchone()[0],
+                "successor": next((r[0] for r in self.db.execute("SELECT target FROM successors WHERE source=?", (ctx,))), None),
+                "runs": [dict(r) for r in self.db.execute("SELECT id,status,detail FROM worker_runs WHERE context=? ORDER BY rowid", (ctx,))],
                 "pending": [dict(r) for r in self.db.execute("SELECT kind,revision FROM jobs WHERE context=? ORDER BY kind", (ctx,))]}
 
     def questions(self, ctx, state=None):

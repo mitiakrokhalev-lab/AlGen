@@ -49,7 +49,10 @@ def fold_across(T, name2lit, fixed, questions, budget=None, no_back=None):
 
     qs = sorted(questions, key=key)
     enc = {q["id"]: lits(q) for q in qs}
-    fx = [l for a, v in fixed if type(l := T.lit(a, v)) is int]
+    fixed_values = [T.lit(a, v) for a, v in fixed]
+    if any(l is False for l in fixed_values):
+        raise ValueError("фиксированная гипотеза тождественно ложна")
+    fx = [l for l in fixed_values if type(l) is int]
     nv = max([C._nvars(T)] + [abs(l) + 1 for F in enc.values() if F for l in F] + [abs(l) + 1 for l in fx])
     s = T.solver()
     sels, kept, folded, why, first = {}, [], {}, {}, {}
@@ -133,20 +136,23 @@ def verify_across(T, enc, fx, kept, folded, sample=1000, rng=None, chunk=100, lo
     включено только при его селекторе, после образца селектор гасится."""
     ks = set(kept)
     items = list(folded.items())
-    if len(items) > sample:
+    if sample is not None and len(items) > sample:
         items = (rng or random.Random(0)).sample(items, sample)
     nv0 = max([C._nvars(T)] + [abs(l) + 1 for F in enc.values() if F for l in F] + [abs(l) + 1 for l in fx])
     bad, s, nv, t0 = [], None, nv0, time.time()
     back = [q for q in kept if q not in (outside or ()) and enc.get(q)]
-    if back:  # фон совместен: иначе из него следует всё
-        s0 = T.solver()
-        try:
-            for q in back:
-                s0.add_clause([-l for l in enc[q]])
-            if s0.solve(assumptions=fx) is False:
-                bad.append(("фон", "оставленные вопросы вместе противоречивы"))
-        finally:
-            s0.delete()
+    # Проверять и пустой базис: сама теория с fixed должна быть совместна.
+    s0 = T.solver()
+    try:
+        for q in back:
+            s0.add_clause([-l for l in enc[q]])
+        answer = s0.solve(assumptions=fx)
+        if answer is False:
+            bad.append(("фон", "оставленные вопросы вместе противоречивы"))
+        elif answer is not True:
+            bad.append(("фон", "совместность не установлена"))
+    finally:
+        s0.delete()
     for qid, deps in items:
         dup = len(deps) == 1 and enc.get(qid) is not None and enc.get(deps[0]) is not None \
             and sorted(enc[deps[0]]) == sorted(enc[qid])
@@ -172,7 +178,7 @@ def verify_across(T, enc, fx, kept, folded, sample=1000, rng=None, chunk=100, lo
             nv += 1
             for d in deps:
                 s.add_clause([-nv] + [-l for l in enc[d]])
-            if s.solve(assumptions=[nv] + fx + enc[qid]):
+            if s.solve(assumptions=[nv] + fx + enc[qid]) is not False:
                 if not (len(deps) == 1 and sorted(enc[deps[0]]) == sorted(enc[qid])):
                     bad.append((qid, "не следует из источников"))
             s.add_clause([-nv])
@@ -192,12 +198,28 @@ def load_questions(paths):
     return qs
 
 
+def archive_questions(archive, ctx):
+    """Все неизвестные nonrefuted, включая старые свёртки, а не только summary."""
+    from .live import digest
+    return [dict(json.loads(r["payload"]), id=r["id"], **{"№": digest(r["signature"])} )
+            for r in archive.db.execute("SELECT id,payload,signature FROM questions "
+                                        "WHERE context=? AND state IN('open','folded') ORDER BY id", (ctx,))]
+
+
+def questions_hash(qs):
+    from .live import digest
+    return digest(sorted((q["id"], q["№"], q["запрет"]) for q in qs))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("base")
     ap.add_argument("dir")
     ap.add_argument("--класс", dest="cls", default="")
     ap.add_argument("--выход", dest="out", default="")
+    ap.add_argument("--live-db", default="")
+    ap.add_argument("--live-context", default="")
+    ap.add_argument("--полная-проверка", dest="full_verify", action="store_true")
     ap.add_argument("--фон-без-всегда", dest="no_always", type=int, default=0,
                     help="вопросы без посылок (запрет — один литерал) с ≥ N примеров — не в фон")
     a = ap.parse_args()
@@ -206,11 +228,25 @@ def main():
     from algen.logic import Var, Vocab
     from algen.table import skeleton
     t0 = time.time()
-    qs = load_questions(sorted(Path(a.dir).glob("*.json")))
+    if bool(a.live_db) != bool(a.live_context):
+        ap.error("--live-db и --live-context нужны вместе")
+    if a.live_db:
+        from .live import LiveArchive
+        with LiveArchive(a.live_db) as ar:
+            archive_header = json.loads(ar.db.execute("SELECT header FROM contexts WHERE id=?", (a.live_context,)).fetchone()[0])
+            if archive_header["base"] != a.base or archive_header["class"] != a.cls:
+                raise ValueError("область сжатия не совпадает с архивом")
+            qs = archive_questions(ar, a.live_context)
+    else:
+        qs = load_questions(sorted(Path(a.dir).glob("*.json")))
     print(f"схем {len({q['id'].split(':')[0] for q in qs})}, оставленных вопросов в схемах {len(qs)}", flush=True)
     v = Vocab.section("grp")
     lib = built_library(v)
     f = skeleton(lib, v, a.base)
+    if a.live_db:
+        from .table import theory_print
+        if theory_print(f, a.base) != archive_header["theory"]:
+            raise ValueError("теория сжатия не совпадает с архивом")
     print(f"каркас {time.time() - t0:.0f} с, атомов {len(f.atoms)}", flush=True)
     T = f.sc.T
     name2lit = {}
@@ -223,6 +259,8 @@ def main():
     if a.cls:
         X = next(t for t in f.own if isinstance(t, Var) and f.g.terms[t].sort == "Grp.obj")
         fixed.append((("p", a.cls, X), True))
+    if a.live_db and sorted({E.lit_name(at, val) for at, val in fixed}) != archive_header["fixed"]:
+        raise ValueError("fixed сжатия не совпадает с архивом")
     t = time.time()
     nb = None
     if a.no_always:
@@ -237,14 +275,18 @@ def main():
           f"{sum(1 for x in real if why.get(x, '').startswith('вне фона'))}", flush=True)
     out = {"база": a.base, "класс": a.cls, "оставлено": kept, "свёрнуто": folded,
            "особые": {x: w for x, w in why.items() if w != "тот же класс"}}
+    if a.live_db:
+        out.update(context=a.live_context, theory=archive_header["theory"], input_hash=questions_hash(qs), input_count=len(qs))
     if a.out:  # до verify: долгая проверка не должна терять сжатие
         Path(a.out).write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     t = time.time()
     outside = {x for x, w in why.items() if w.startswith("вне фона")}
-    bad = verify_across(T, enc, fx, kept, folded, log=lambda m: print(m, flush=True), outside=outside)
+    bad = verify_across(T, enc, fx, kept, folded, sample=None if a.full_verify else 1000,
+                        log=lambda m: print(m, flush=True), outside=outside)
     print(f"нарушений verify: {len(bad)} за {time.time() - t:.0f} с", bad[:10], flush=True)
     if a.out:
-        out["verify"] = {"нарушений": len(bad), "первые": bad[:50]}
+        out["verify"] = {"нарушений": len(bad), "первые": bad[:50], "full": a.full_verify,
+                         "checked": len(folded) if a.full_verify else min(1000, len(folded))}
         Path(a.out).write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     sys.exit(1 if bad else 0)
 

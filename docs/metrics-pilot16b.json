@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "planned": 105,
+  "reported": 103,
+  "statuses": {
+    "ok": 55,
+    "ошибка": 43,
+    "ошибка: память": 3,
+    "таймаут 3600.0 с": 2
+  },
+  "missing": [
+    "G-2-14-20-22-705-707-708-709",
+    "G-4-5-705-706-707-708-709"
+  ],
+  "unexpected": [],
+  "oom_confirmed": 46,
+  "errors_unclassified": [],
+  "time_seconds_all_observed": {
+    "n": 100,
+    "sum": 99594.0,
+    "median": 592.8499999999999,
+    "p95": 2980.0,
+    "max": 3601.8
+  },
+  "time_seconds_ok_only": {
+    "n": 55,
+    "sum": 24415.9,
+    "median": 295.0,
+    "p95": 1645.2,
+    "max": 2980.0
+  },
+  "time_unreported": [
+    "G-10-240-705-707-708-709",
+    "G-2-12-705-707-708-709",
+    "G-6-300-705-707-708-709"
+  ],
+  "ok_missing_verdicts": [],
+  "verdict_classes_ok": {
+    "неизвестно": 1247144,
+    "выводится": 337742,
+    "опровергается": 145
+  },
+  "kept_within_schemes": 7872,
+  "within_scheme_ratio": 158.4278455284553,
+  "compression_reports": 45,
+  "zero_unknown_without_compression_report": 10,
+  "rss_observations_historical_units": {
+    "n": 200,
+    "sum": 1289.45,
+    "median": 6.44,
+    "p95": 8.29,
+    "max": 8.52
+  },
+  "peak_rss_gib": null,
+  "cpu_seconds": null,
+  "workflow_wall_seconds": 10318.0,
+  "global_verified_basis": null,
+  "notes": [
+    "Сумма секунд схем не CPU-time и не wall workflow; отсутствующие времена не равны нулю.",
+    "RSS: Linux KiB / 1e6, две точки на схему; peak неизвестен.",
+    "Вердикты — классы симметрии в успешных схемах; общая полнота при ошибках не достигнута."
+  ],
+  "source": "https://github.com/mitiakrokhalev-lab/AlGen/actions/runs/42209559171"
+}
