@@ -805,7 +805,16 @@
       "local_tests": 13,
       "seconds": 2.334,
       "result": "OK",
-      "note": "Subsequent guard includes C++/headers in worker plan implementation hash; numerical kernel unchanged. Final full CI146 pending."
+      "note": "Subsequent guard includes C++/headers in worker plan implementation hash; numerical kernel unchanged. Final CI independently verified below."
+    },
+    "ci_worker_cpp_guard": {
+      "run": 42366449137,
+      "job": 128385417039,
+      "tests": 146,
+      "seconds": 365.782,
+      "result": "OK, no skips",
+      "commit": "d3a4157d4468e8653dbce531aaf5e9a372cc0ff5",
+      "independent_review": "verify_conditions: 146 test lines and 146 ok endings, skipped0; numerical kernel unchanged"
     }
   },
   "limitations": [
