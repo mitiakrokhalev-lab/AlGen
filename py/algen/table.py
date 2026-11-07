@@ -1306,9 +1306,12 @@ def _one(job):
     try:
         form = view(_STATE["forms"][base], terms)
         from . import fast
-        # Arm restoration before registration can mutate state or be interrupted.
-        phase_registration = (form.sc.T, fast.get_phase_scope(form.sc.T))
-        fast.set_phase_scope(form.sc.T, form.atoms)
+        phase_theory = getattr(getattr(form, "sc", None), "T", None)
+        phase_atoms = getattr(form, "atoms", None)
+        if phase_theory is not None and phase_atoms is not None:
+            # Arm restoration before registration can mutate state or be interrupted.
+            phase_registration = (phase_theory, fast.get_phase_scope(phase_theory))
+            fast.set_phase_scope(phase_theory, phase_atoms)
         if LOCAL_PRECHECK:  # локальная теория схемы: «невыполнимо» без решателя каркаса
             from . import fast
             local_T = form.sc.T
