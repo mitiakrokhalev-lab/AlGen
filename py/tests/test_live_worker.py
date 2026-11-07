@@ -16,6 +16,21 @@ GENERATION = dict(size=2, fast=True, k_spec="1", term_limit=None, skip=[], defer
 
 
 class WorkerTest(unittest.TestCase):
+    def test_native_source_change_invalidates_implementation(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            worker = root / "live_worker.py"
+            worker.write_text("# worker\n")
+            native = root / "native_enum.cpp"
+            native.write_text("// version 1\n")
+            with patch.object(W, "__file__", str(worker)):
+                before = W.implementation_hash()
+                native.write_text("// version 2\n")
+                after = W.implementation_hash()
+                self.assertNotEqual(before, after)
+                (root / "native_enum.so").write_bytes(b"platform-specific compiled cache")
+                self.assertEqual(after, W.implementation_hash())
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
