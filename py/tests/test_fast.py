@@ -2,6 +2,7 @@
 одинаковые ответы sat, первые свидетели и значения в моделях."""
 import random
 import unittest
+from unittest.mock import patch
 from pysat.solvers import Solver
 from algen import fast
 
@@ -105,6 +106,84 @@ class FastBankTest(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             b.sat([1, 2, -3, 3])  # нет свидетеля, решатель удалён
         fast._BANKS.pop(id(th), None)
+
+
+class PhaseScopeTest(unittest.TestCase):
+    def test_scope_is_preferences_only_and_does_not_allocate_variables(self):
+        clauses = [[1, 2], [-2, 3]]
+        theory = T(clauses)
+        theory._lc = {'one': 1, 'true': 0, 'false': False, 'outside': 99}
+        before = dict(theory._lc)
+        with Solver(name='g4', bootstrap_with=clauses) as solver:
+            bank = fast.Bank(theory, solver, cap=65)
+            previous = fast.set_phase_scope(theory, ['one', 'true', 'false', 'outside', 'missing'])
+            try:
+                with patch.object(fast, 'SCOPED_PHASES', True), \
+                     patch.object(solver, 'set_phases', wraps=solver.set_phases) as phases:
+                    self.assertTrue(bank.sat([1])[0])
+                    self.assertEqual(phases.call_args.args[0], [bank.phases[0][0]])
+                    # These variables are outside the phase scope, not outside the query language.
+                    self.assertFalse(bank.sat([-1, -3])[0])
+                    self.assertTrue(bank.sat([-1, 3])[0])
+                    self.assertFalse(bank.sat([99, -99])[0])
+                self.assertEqual(theory._lc, before)
+            finally:
+                fast.restore_phase_scope(theory, previous)
+            # After the scheme ends, the ordinary full-vector fallback is restored.
+            other = fast.Bank(theory, solver)
+            with patch.object(solver, 'set_phases', wraps=solver.set_phases) as phases:
+                self.assertTrue(other.sat([1])[0])
+                self.assertEqual(len(phases.call_args.args[0]), other.nclause)
+
+    def test_scoped_queries_match_independent_regular_sat(self):
+        for seed in range(40):
+            rng = random.Random(7000 + seed)
+            nv = rng.randint(3, 12)
+            clauses = [[rng.choice([-1, 1]) * rng.randint(1, nv)
+                        for _ in range(rng.randint(1, 4))] for _ in range(15)]
+            theory = T(clauses)
+            theory._lc = {('atom', i): i for i in range(1, nv + 1)}
+            with Solver(name='g4', bootstrap_with=clauses) as solver, \
+                 Solver(name='g4', bootstrap_with=clauses) as reference:
+                bank = fast.Bank(theory, solver, cap=65)
+                for context in range(3):
+                    atoms = rng.sample(list(theory._lc), rng.randint(0, nv))
+                    previous = fast.set_phase_scope(theory, atoms)
+                    try:
+                        with patch.object(fast, 'SCOPED_PHASES', True):
+                            for _ in range(70):
+                                query = [rng.choice([-1, 1]) * rng.randint(1, nv + 2)
+                                         for _ in range(rng.randint(0, 5))]
+                                self.assertEqual(bank.sat(query)[0], reference.solve(assumptions=query),
+                                                 (seed, context, query))
+                    finally:
+                        fast.restore_phase_scope(theory, previous)
+
+    def test_worker_restores_scope_when_registration_is_interrupted(self):
+        from tempfile import TemporaryDirectory
+        from types import SimpleNamespace
+        from algen import table
+        theory = T([[1, 2]])
+        theory._lc = {'outer': 1, 'inner': 2}
+        form = SimpleNamespace(sc=SimpleNamespace(T=theory), atoms=['inner'], skipped=[])
+        original_register = fast.set_phase_scope
+        before = original_register(theory, ['outer'])
+        outer = fast.get_phase_scope(theory)
+
+        def interrupted(*args):
+            original_register(*args)
+            raise table.SchemeTimeout()
+
+        try:
+            with TemporaryDirectory() as folder, \
+                 patch.dict(table._STATE, {'forms': {'G': form}, 'limit': 0}, clear=True), \
+                 patch.object(table, 'view', return_value=form), \
+                 patch.object(table, '_rss_gb', return_value=0.0), \
+                 patch.object(fast, 'set_phase_scope', side_effect=interrupted):
+                table._one(('G', 'phase-interruption', [], 3, folder, 'test-fingerprint'))
+            self.assertEqual(fast.get_phase_scope(theory), outer)
+        finally:
+            fast.restore_phase_scope(theory, before)
 
 
 class LocalTest(unittest.TestCase):

@@ -1296,6 +1296,7 @@ def _one(job):
     prof = None
     form = None
     local, local_T = None, None
+    phase_registration = None
     want_prof = os.environ.get("ALGEN_PROFILE", "")
     if want_prof == "1" or sid in want_prof.split(","):
         # профиль схемы: время по функциям — в <схема>.prof.txt рядом с выдачей
@@ -1304,6 +1305,10 @@ def _one(job):
         prof.enable()
     try:
         form = view(_STATE["forms"][base], terms)
+        from . import fast
+        # Arm restoration before registration can mutate state or be interrupted.
+        phase_registration = (form.sc.T, fast.get_phase_scope(form.sc.T))
+        fast.set_phase_scope(form.sc.T, form.atoms)
         if LOCAL_PRECHECK:  # локальная теория схемы: «невыполнимо» без решателя каркаса
             from . import fast
             local_T = form.sc.T
@@ -1350,9 +1355,11 @@ def _one(job):
         summary, status = {}, "ошибка"
         err.write(traceback.format_exc())
     finally:
-        E.VCACHE = E.VCACHE_OUT = None
         if limit:
             signal.alarm(0)
+        E.VCACHE = E.VCACHE_OUT = None
+        if phase_registration is not None:
+            fast.restore_phase_scope(*phase_registration)
         if local is not None:
             from . import fast
             fast.LOCAL.pop(id(local_T), None)

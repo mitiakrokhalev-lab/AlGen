@@ -26,6 +26,29 @@ STATS = {"вопросов": 0, "из банка": 0, "решатель": 0, "к
 import os
 
 BANK_MODELS = int(os.environ.get("ALGEN_BANK_MODELS", "4096"))  # моделей в банке (кольцо)
+SCOPED_PHASES = os.environ.get("ALGEN_SCOPED_PHASES", "1") != "0"
+_PHASE_SCOPES = {}  # id(T) → (T, cached variable IDs of this scheme); heuristics only
+
+
+def get_phase_scope(theory):
+    return _PHASE_SCOPES.get(id(theory))
+
+
+def set_phase_scope(theory, atoms):
+    """Register existing IDs only; never allocate variables or change clauses."""
+    previous = get_phase_scope(theory)
+    cache = getattr(theory, "_lc", None)
+    scope = (tuple(sorted({n for a in atoms if type(n := cache.get(a)) is int and n > 0}))
+             if cache is not None else None)
+    _PHASE_SCOPES[id(theory)] = (theory, scope)
+    return previous
+
+
+def restore_phase_scope(theory, previous):
+    if previous is None:
+        _PHASE_SCOPES.pop(id(theory), None)
+    else:
+        _PHASE_SCOPES[id(theory)] = previous
 
 
 class Bank:
@@ -59,6 +82,7 @@ class Bank:
         rng = random.Random(1)
         self.phases = [[v if rng.random() < 0.5 else -v for v in range(1, self.nclause + 1)] for _ in range(4)]
         self.calls = 0
+        self.phase_scoped_calls = self.phase_max_scope = 0
 
     @property
     def valid(self):
@@ -173,7 +197,15 @@ class Bank:
         # разнообразие моделей: случайная фаза у решателя
         if self.calls % 8 == 0:  # фаза меняется раз в 8 вызовов: список дорог
             try:
-                self.s.set_phases(self.phases[(self.calls // 8) % len(self.phases)])
+                phases = self.phases[(self.calls // 8) % len(self.phases)]
+                entry = _PHASE_SCOPES.get(id(self.T)) if SCOPED_PHASES else None
+                scoped = entry is not None and entry[0] is self.T and entry[1] is not None
+                if scoped:
+                    phases = [phases[v - 1] for v in entry[1] if v <= len(phases)]
+                self.s.set_phases(phases)
+                if scoped:
+                    self.phase_scoped_calls += 1
+                    self.phase_max_scope = max(self.phase_max_scope, len(phases))
             except Exception:
                 pass
         self.calls += 1
