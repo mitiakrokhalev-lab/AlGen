@@ -32,7 +32,8 @@ def file_hash(path):
 
 def implementation_hash():
     root = Path(__file__).resolve().parent
-    return digest([(p.name, file_hash(p)) for p in sorted(root.glob("*.py"))])
+    sources = (p for p in root.iterdir() if p.is_file() and p.suffix in {".py", ".cpp", ".h", ".hpp"})
+    return digest([(p.name, file_hash(p)) for p in sorted(sources)])
 
 
 def data_hash():

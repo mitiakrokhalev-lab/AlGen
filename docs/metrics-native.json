@@ -793,7 +793,20 @@
     "full_local_seconds": 324.358,
     "result": "OK",
     "independent_code_review": "review_live: no blockers after endian/ownership/mode/tests fixes",
-    "independent_binary_review": "verify_conditions: both 198724912-byte files cmp0, every code/support/empty validated in chunks; full Ulm gzip validated"
+    "independent_binary_review": "verify_conditions: both 198724912-byte files cmp0, every code/support/empty validated in chunks; full Ulm gzip validated",
+    "ci_native": {
+      "run": 42365474529,
+      "tests": 145,
+      "seconds": 380.959,
+      "result": "OK, no skips",
+      "commit": "11a42ed4efdc803ca3f2b6bc808a76b9f0847c28"
+    },
+    "worker_cpp_guard": {
+      "local_tests": 13,
+      "seconds": 2.334,
+      "result": "OK",
+      "note": "Subsequent guard includes C++/headers in worker plan implementation hash; numerical kernel unchanged. Final full CI146 pending."
+    }
   },
   "limitations": [
     "One ordered large C++/Python pair; full Ulm Python reference reused from PR12, no randomized repetitions.",
