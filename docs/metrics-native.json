@@ -1,0 +1,805 @@
+{
+  "version": 1,
+  "date_moscow": "2026-11-07",
+  "native_library_fingerprint": "73a2a35d2480ac9c:G::s2:быстро",
+  "runs": {
+    "native-cpp-ulm": {
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 160.764,
+        "cpu_seconds": 160.65716600000002,
+        "peak_rss_kib": 5378872,
+        "sampled_rss_kib": 5271316,
+        "limits": {
+          "seconds": 300,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "28d2f8eaa5ed66d3d3d8353b49b34ef4379f9b6ca11f6d4fbf0b110b32f6d71b",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "64a95fb543b2093a65fb9cdd14aff635913b0f19a4febf889579f98e97f07248"
+        }
+      },
+      "stages": [
+        {
+          "stage": "start",
+          "seconds": 0.061,
+          "memory_kib": {
+            "VmHWM": 48312,
+            "VmRSS": 35088
+          },
+          "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+          "table_fingerprint": "73a2a35d2480ac9c:G::s2:быстро",
+          "bank_models": 4096,
+          "legacy_empty_cache": false,
+          "eager_search": false,
+          "early_min": true,
+          "sparse_leaf": true,
+          "native_enum": true,
+          "native_minimal": true
+        },
+        {
+          "stage": "built_library:start",
+          "seconds": 0.077,
+          "memory_kib": {
+            "VmHWM": 48312,
+            "VmRSS": 42868
+          }
+        },
+        {
+          "stage": "built_library:end",
+          "seconds": 0.866,
+          "memory_kib": {
+            "VmHWM": 454692,
+            "VmRSS": 422100
+          }
+        },
+        {
+          "stage": "load:start",
+          "seconds": 0.873,
+          "memory_kib": {
+            "VmHWM": 454692,
+            "VmRSS": 422920
+          }
+        },
+        {
+          "stage": "skeleton:start",
+          "seconds": 0.873,
+          "memory_kib": {
+            "VmHWM": 454692,
+            "VmRSS": 422924
+          }
+        },
+        {
+          "stage": "solver:start",
+          "seconds": 8.843,
+          "memory_kib": {
+            "VmHWM": 1663552,
+            "VmRSS": 1283952
+          },
+          "number": 1,
+          "clauses": 14122127
+        },
+        {
+          "stage": "solver:end",
+          "seconds": 16.747,
+          "memory_kib": {
+            "VmHWM": 2100340,
+            "VmRSS": 2100340
+          },
+          "number": 1
+        },
+        {
+          "stage": "skeleton:end",
+          "seconds": 16.756,
+          "memory_kib": {
+            "VmHWM": 2100584,
+            "VmRSS": 2100584
+          }
+        },
+        {
+          "stage": "load:end",
+          "seconds": 44.115,
+          "memory_kib": {
+            "VmHWM": 4205628,
+            "VmRSS": 4069812
+          }
+        },
+        {
+          "stage": "enumerate_form:start",
+          "seconds": 73.79,
+          "memory_kib": {
+            "VmHWM": 4205628,
+            "VmRSS": 4075516
+          }
+        },
+        {
+          "stage": "enumerate_form:end",
+          "seconds": 111.978,
+          "memory_kib": {
+            "VmHWM": 4280148,
+            "VmRSS": 4245656
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            },
+            {
+              "entries": 65688,
+              "container_bytes": 562488,
+              "packed_bytes": null
+            }
+          ]
+        },
+        {
+          "stage": "enumeration:engine",
+          "seconds": 111.979,
+          "memory_kib": {
+            "VmHWM": 4280148,
+            "VmRSS": 4245660
+          },
+          "engine": "cpp:0ee505ceda851ffdb913191f"
+        },
+        {
+          "stage": "minimal:start",
+          "seconds": 111.979,
+          "memory_kib": {
+            "VmHWM": 4280148,
+            "VmRSS": 4245660
+          }
+        },
+        {
+          "stage": "minimal:end",
+          "seconds": 111.979,
+          "memory_kib": {
+            "VmHWM": 4280148,
+            "VmRSS": 4245660
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            }
+          ]
+        },
+        {
+          "stage": "generic_filter:start",
+          "seconds": 111.979,
+          "memory_kib": {
+            "VmHWM": 4280148,
+            "VmRSS": 4245660
+          }
+        },
+        {
+          "stage": "generic_filter:end",
+          "seconds": 111.979,
+          "memory_kib": {
+            "VmHWM": 4280148,
+            "VmRSS": 4245660
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            }
+          ]
+        },
+        {
+          "stage": "solver:start",
+          "seconds": 139.654,
+          "memory_kib": {
+            "VmHWM": 4292208,
+            "VmRSS": 4259676
+          },
+          "number": 2,
+          "clauses": 14122127
+        },
+        {
+          "stage": "solver:end",
+          "seconds": 147.441,
+          "memory_kib": {
+            "VmHWM": 4810068,
+            "VmRSS": 4810068
+          },
+          "number": 2
+        },
+        {
+          "stage": "run:end",
+          "seconds": 157.257,
+          "memory_kib": {
+            "VmHWM": 5378872,
+            "VmRSS": 4432276
+          },
+          "report_rows": 3671,
+          "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+          "alive": {
+            "entries": 3671,
+            "container_bytes": 48,
+            "packed_bytes": 36710
+          },
+          "empty": {
+            "entries": 65688,
+            "container_bytes": 562488,
+            "packed_bytes": null
+          },
+          "legacy_stages": [
+            [
+              "начало",
+              4.08,
+              0
+            ],
+            [
+              "перебор",
+              4.25,
+              3671
+            ],
+            [
+              "минимальные",
+              4.25,
+              3671
+            ],
+            [
+              "вердикты",
+              4.26,
+              3671
+            ],
+            [
+              "сжатие",
+              4.43,
+              3671
+            ]
+          ],
+          "search_solver": {
+            "deferred": true,
+            "materialized": false
+          },
+          "solver_factories": 2
+        },
+        {
+          "stage": "end",
+          "seconds": 158.451,
+          "memory_kib": {
+            "VmHWM": 5378872,
+            "VmRSS": 4257960
+          }
+        }
+      ],
+      "enumerate_form_seconds": 38.188,
+      "raw_rows": 3671,
+      "decoded_report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699"
+    },
+    "native-cpp-large": {
+      "measurement": {
+        "scheme": "G-10-13-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 149.99,
+        "cpu_seconds": 149.8087,
+        "peak_rss_kib": 5231176,
+        "sampled_rss_kib": 5018192,
+        "limits": {
+          "seconds": 1800,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": null,
+        "complete": true,
+        "scope": "native enumeration only",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "saved_report": false,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9f2d425d6827ff7435a0853050c0a9cd49b804154f6e3c3d614655fdb2c7e843",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "92caa57d717dc8b76cec1d6a366edb10f1dcb1bcb73419ada5a4fd1a5014eced"
+        }
+      },
+      "stages": [
+        {
+          "stage": "start",
+          "seconds": 0.032,
+          "memory_kib": {
+            "VmHWM": 48264,
+            "VmRSS": 35032
+          },
+          "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+          "table_fingerprint": "73a2a35d2480ac9c:G::s2:быстро",
+          "bank_models": 4096,
+          "legacy_empty_cache": false,
+          "eager_search": false,
+          "early_min": true,
+          "sparse_leaf": true,
+          "native_enum": true,
+          "native_minimal": true
+        },
+        {
+          "stage": "built_library:start",
+          "seconds": 0.049,
+          "memory_kib": {
+            "VmHWM": 48264,
+            "VmRSS": 42816
+          }
+        },
+        {
+          "stage": "built_library:end",
+          "seconds": 0.807,
+          "memory_kib": {
+            "VmHWM": 454640,
+            "VmRSS": 422052
+          }
+        },
+        {
+          "stage": "load:start",
+          "seconds": 0.814,
+          "memory_kib": {
+            "VmHWM": 454640,
+            "VmRSS": 422856
+          }
+        },
+        {
+          "stage": "skeleton:start",
+          "seconds": 0.814,
+          "memory_kib": {
+            "VmHWM": 454640,
+            "VmRSS": 422860
+          }
+        },
+        {
+          "stage": "solver:start",
+          "seconds": 8.76,
+          "memory_kib": {
+            "VmHWM": 1663524,
+            "VmRSS": 1283916
+          },
+          "number": 1,
+          "clauses": 14122127
+        },
+        {
+          "stage": "solver:end",
+          "seconds": 16.566,
+          "memory_kib": {
+            "VmHWM": 2100556,
+            "VmRSS": 2100556
+          },
+          "number": 1
+        },
+        {
+          "stage": "skeleton:end",
+          "seconds": 16.571,
+          "memory_kib": {
+            "VmHWM": 2100800,
+            "VmRSS": 2100800
+          }
+        },
+        {
+          "stage": "load:end",
+          "seconds": 43.128,
+          "memory_kib": {
+            "VmHWM": 4205780,
+            "VmRSS": 4070028
+          }
+        },
+        {
+          "stage": "enumerate_form:start",
+          "seconds": 72.739,
+          "memory_kib": {
+            "VmHWM": 4205780,
+            "VmRSS": 4075560
+          }
+        },
+        {
+          "stage": "enumerate_form:end",
+          "seconds": 144.162,
+          "memory_kib": {
+            "VmHWM": 4837332,
+            "VmRSS": 4706276
+          },
+          "containers": [
+            {
+              "entries": 17447922,
+              "container_bytes": 48,
+              "packed_bytes": 174479220
+            },
+            {
+              "entries": 3030679,
+              "container_bytes": 24387832,
+              "packed_bytes": null
+            }
+          ]
+        },
+        {
+          "stage": "enumeration:engine",
+          "seconds": 144.163,
+          "memory_kib": {
+            "VmHWM": 4837332,
+            "VmRSS": 4706284
+          },
+          "engine": "cpp:0ee505ceda851ffdb913191f"
+        },
+        {
+          "stage": "minimal-only:start",
+          "seconds": 145.11,
+          "memory_kib": {
+            "VmHWM": 4837332,
+            "VmRSS": 4706288
+          }
+        },
+        {
+          "stage": "minimal:start",
+          "seconds": 145.11,
+          "memory_kib": {
+            "VmHWM": 4837332,
+            "VmRSS": 4706288
+          }
+        },
+        {
+          "stage": "minimal:end",
+          "seconds": 146.732,
+          "memory_kib": {
+            "VmHWM": 5231176,
+            "VmRSS": 4837580
+          },
+          "containers": [
+            {
+              "entries": 17447922,
+              "container_bytes": 48,
+              "packed_bytes": 174479220
+            }
+          ]
+        },
+        {
+          "stage": "minimal-only:end",
+          "seconds": 146.732,
+          "memory_kib": {
+            "VmHWM": 5231176,
+            "VmRSS": 4837580
+          },
+          "entries": 17447922
+        },
+        {
+          "stage": "enumeration:verified",
+          "seconds": 147.685,
+          "memory_kib": {
+            "VmHWM": 5231176,
+            "VmRSS": 4837580
+          },
+          "entries": 17447922,
+          "empty": 3030679,
+          "n_alive": 514696725,
+          "enumeration_sha256": "e0b9d1ea7011f4bf14fe7c915428da3227788bbf407c786c6fb04e47665a2f1e",
+          "minimal_sha256": "e0b9d1ea7011f4bf14fe7c915428da3227788bbf407c786c6fb04e47665a2f1e",
+          "engine": "cpp:0ee505ceda851ffdb913191f"
+        },
+        {
+          "stage": "end",
+          "seconds": 147.69,
+          "memory_kib": {
+            "VmHWM": 5231176,
+            "VmRSS": 4706292
+          }
+        }
+      ],
+      "enumerate_form_seconds": 71.423,
+      "minimal-only_seconds": 1.622,
+      "binaries": {
+        "enumeration": {
+          "bytes": 198724912,
+          "sha256": "e0b9d1ea7011f4bf14fe7c915428da3227788bbf407c786c6fb04e47665a2f1e"
+        },
+        "minimal": {
+          "bytes": 198724912,
+          "sha256": "e0b9d1ea7011f4bf14fe7c915428da3227788bbf407c786c6fb04e47665a2f1e"
+        }
+      }
+    },
+    "native-python-large": {
+      "measurement": {
+        "scheme": "G-10-13-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 857.24,
+        "cpu_seconds": 855.475,
+        "peak_rss_kib": 4803280,
+        "sampled_rss_kib": 4803332,
+        "limits": {
+          "seconds": 1800,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": null,
+        "complete": true,
+        "scope": "native enumeration only",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": true,
+        "saved_report": false,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "92caa57d717dc8b76cec1d6a366edb10f1dcb1bcb73419ada5a4fd1a5014eced"
+        }
+      },
+      "stages": [
+        {
+          "stage": "start",
+          "seconds": 0.029,
+          "memory_kib": {
+            "VmHWM": 47780,
+            "VmRSS": 34552
+          },
+          "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+          "table_fingerprint": "73a2a35d2480ac9c:G::s2:быстро",
+          "bank_models": 4096,
+          "legacy_empty_cache": false,
+          "eager_search": false,
+          "early_min": true,
+          "sparse_leaf": true,
+          "native_enum": false,
+          "native_minimal": false
+        },
+        {
+          "stage": "built_library:start",
+          "seconds": 0.045,
+          "memory_kib": {
+            "VmHWM": 47780,
+            "VmRSS": 42344
+          }
+        },
+        {
+          "stage": "built_library:end",
+          "seconds": 0.725,
+          "memory_kib": {
+            "VmHWM": 454800,
+            "VmRSS": 422136
+          }
+        },
+        {
+          "stage": "load:start",
+          "seconds": 0.731,
+          "memory_kib": {
+            "VmHWM": 454800,
+            "VmRSS": 422932
+          }
+        },
+        {
+          "stage": "skeleton:start",
+          "seconds": 0.732,
+          "memory_kib": {
+            "VmHWM": 454800,
+            "VmRSS": 422936
+          }
+        },
+        {
+          "stage": "solver:start",
+          "seconds": 9.809,
+          "memory_kib": {
+            "VmHWM": 1663580,
+            "VmRSS": 1283984
+          },
+          "number": 1,
+          "clauses": 14122127
+        },
+        {
+          "stage": "solver:end",
+          "seconds": 18.142,
+          "memory_kib": {
+            "VmHWM": 2101864,
+            "VmRSS": 2101864
+          },
+          "number": 1
+        },
+        {
+          "stage": "skeleton:end",
+          "seconds": 18.146,
+          "memory_kib": {
+            "VmHWM": 2102108,
+            "VmRSS": 2102108
+          }
+        },
+        {
+          "stage": "load:end",
+          "seconds": 45.993,
+          "memory_kib": {
+            "VmHWM": 4207084,
+            "VmRSS": 4071332
+          }
+        },
+        {
+          "stage": "enumerate_form:start",
+          "seconds": 78.097,
+          "memory_kib": {
+            "VmHWM": 4207084,
+            "VmRSS": 4076880
+          }
+        },
+        {
+          "stage": "enumerate_form:end",
+          "seconds": 725.564,
+          "memory_kib": {
+            "VmHWM": 4671812,
+            "VmRSS": 4671812
+          },
+          "containers": [
+            {
+              "entries": 17447922,
+              "container_bytes": 48,
+              "packed_bytes": 174479220
+            },
+            {
+              "entries": 3030679,
+              "container_bytes": 24387832,
+              "packed_bytes": null
+            }
+          ]
+        },
+        {
+          "stage": "enumeration:engine",
+          "seconds": 725.565,
+          "memory_kib": {
+            "VmHWM": 4671816,
+            "VmRSS": 4671816
+          },
+          "engine": "python"
+        },
+        {
+          "stage": "minimal-only:start",
+          "seconds": 726.649,
+          "memory_kib": {
+            "VmHWM": 4671820,
+            "VmRSS": 4671820
+          }
+        },
+        {
+          "stage": "minimal:start",
+          "seconds": 726.65,
+          "memory_kib": {
+            "VmHWM": 4671820,
+            "VmRSS": 4671820
+          }
+        },
+        {
+          "stage": "minimal:end",
+          "seconds": 852.905,
+          "memory_kib": {
+            "VmHWM": 4803328,
+            "VmRSS": 4803328
+          },
+          "containers": [
+            {
+              "entries": 17447922,
+              "container_bytes": 48,
+              "packed_bytes": 174479220
+            }
+          ]
+        },
+        {
+          "stage": "minimal-only:end",
+          "seconds": 852.905,
+          "memory_kib": {
+            "VmHWM": 4803332,
+            "VmRSS": 4803332
+          },
+          "entries": 17447922
+        },
+        {
+          "stage": "enumeration:verified",
+          "seconds": 853.904,
+          "memory_kib": {
+            "VmHWM": 4803332,
+            "VmRSS": 4803332
+          },
+          "entries": 17447922,
+          "empty": 3030679,
+          "n_alive": 514696725,
+          "enumeration_sha256": "e0b9d1ea7011f4bf14fe7c915428da3227788bbf407c786c6fb04e47665a2f1e",
+          "minimal_sha256": "e0b9d1ea7011f4bf14fe7c915428da3227788bbf407c786c6fb04e47665a2f1e",
+          "engine": "python"
+        },
+        {
+          "stage": "end",
+          "seconds": 853.917,
+          "memory_kib": {
+            "VmHWM": 4803280,
+            "VmRSS": 4672044
+          }
+        }
+      ],
+      "enumerate_form_seconds": 647.467,
+      "minimal-only_seconds": 126.256,
+      "binaries": {
+        "enumeration": {
+          "bytes": 198724912,
+          "sha256": "e0b9d1ea7011f4bf14fe7c915428da3227788bbf407c786c6fb04e47665a2f1e"
+        },
+        "minimal": {
+          "bytes": 198724912,
+          "sha256": "e0b9d1ea7011f4bf14fe7c915428da3227788bbf407c786c6fb04e47665a2f1e"
+        }
+      }
+    }
+  },
+  "ulm_python_reference": {
+    "scheme": "G-15-320-705-707-708-709",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 261.112,
+    "cpu_seconds": 259.738153,
+    "peak_rss_kib": 5400016,
+    "sampled_rss_kib": 5360844,
+    "limits": {
+      "seconds": 420,
+      "rss_gib": 6.4
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "scheme_status": "ok",
+    "complete": true,
+    "scope": "full native scheme",
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "saved_report": true,
+    "code_sha256": {
+      "algen/enumerate.py": "c4f9be3549213454d315c22f919ac0f904ebd5d3326615a5770263ff752bc805",
+      "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+      "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+      "tools/profile_memory.py": "e2132a506bc7e22358e827837f03604488b1d0143904c45ad9e20e0fa4e74c6b"
+    }
+  },
+  "ratios": {
+    "ulm_full_wall": 1.6241944713990695,
+    "ulm_enum": 3.337854823504766,
+    "large_enum": 9.065245089116951,
+    "large_minimal": 77.83970406905055,
+    "large_total_wall": 5.715314354290285
+  },
+  "large_peak_delta_kib": 427896,
+  "cost_all_new_profiles": {
+    "wall_seconds": 1167.9940000000001,
+    "cpu_seconds": 1165.940866
+  },
+  "verification": {
+    "full_local_tests": 144,
+    "full_local_seconds": 324.358,
+    "result": "OK",
+    "independent_code_review": "review_live: no blockers after endian/ownership/mode/tests fixes",
+    "independent_binary_review": "verify_conditions: both 198724912-byte files cmp0, every code/support/empty validated in chunks; full Ulm gzip validated"
+  },
+  "limitations": [
+    "One ordered large C++/Python pair; full Ulm Python reference reused from PR12, no randomized repetitions.",
+    "Large measurements cover enumeration and minimal ONLY: not verdicts/report/basis and not a new completed stress scheme.",
+    "Some test activity on the other CPU; process CPU and wall both recorded.",
+    "Large native peak is higher by427896KiB; no assertion of whole-class OOM elimination.",
+    "Initial profile loader/control code preceded safety/receipt-only validation fixes; numeric C++ source hash is unchanged. All run manifests retained."
+  ]
+}

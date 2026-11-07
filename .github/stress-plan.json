@@ -1,6 +1,8 @@
 {
   "version": 1,
-  "name": "stress-codex-01",
+  "name": "stress-codex-02",
+  "comparison_run": 42307026640,
+  "compiled_backend_required": true,
   "date": "2026-11-07",
   "scope": "8 selected native G schemes; not the whole class",
   "base": "G",
