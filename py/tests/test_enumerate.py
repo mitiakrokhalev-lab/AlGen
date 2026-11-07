@@ -174,6 +174,32 @@ if __name__ == "__main__":
 
 
 class VecTest(unittest.TestCase):
+    def test_early_min_keeps_all_conditions_counts_and_order(self):
+        from unittest.mock import patch
+        for case in range(80):
+            rng = np.random.default_rng(700 + case)
+            n, rows = int(rng.integers(4, 9)), int(rng.integers(0, 80))
+            k = 3
+            if case == 79:
+                n, rows, k = 35, 7, 2  # >64 бит и неполный последний байт
+            results = []
+            for early, sparse in ((False, False), (True, False), (False, True), (True, True)):
+                form = RandomForm(np.random.default_rng(800 + case), n, rows,
+                                  req=case % 3 == 1, need=case % 4 == 2)
+                if case % 7 == 0:
+                    form.fixed = [0]
+                if case % 5 == 0:
+                    form.pair_atoms = {0: {1, 2}}
+                if case % 11 == 0:
+                    form.req = {1: {4}, 2: {2}}
+                with patch.object(E, "EARLY_MIN", early), patch.object(E, "SPARSE_LEAF", sparse), patch.object(E, "VEC", True):
+                    alive, empty = enumerate_form(form, k)
+                if not form.fixed:
+                    self.assertEqual(list(alive.items()), list(minimal(alive).items()))
+                results.append((list(alive.items()), empty, form.n_alive))
+            for result in results[1:]:
+                self.assertEqual(results[0], result, msg=f"случай {case}")
+
     def test_vector_leaf_keeps_output_and_order(self):
         """Лист векторами по целям: те же условия, тот же порядок, тот же счётчик."""
         import algen.enumerate as E
