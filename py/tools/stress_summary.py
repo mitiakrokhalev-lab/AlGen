@@ -53,6 +53,11 @@ def inspect_case(folder, case, plan):
                 or summary.get("отпечаток") != plan["native_fingerprint"] + ":" + str(plan["k"])):
             raise ValueError("неуспешная сводка, другая библиотека или противоречащие строки")
         stages = [json.loads(s) for s in (folder / "stages.jsonl").read_text().splitlines() if s.strip()]
+        engine = next((s.get("engine") for s in reversed(stages) if s.get("stage") == "enumeration:engine"), None)
+        result["enumeration_engine"] = engine
+        if plan.get("compiled_backend_required") and (
+                not isinstance(engine, str) or not re.fullmatch(r"cpp:[0-9a-f]{24}", engine)):
+            raise ValueError("скомпилированный backend не подтверждён этапами процесса")
         end = next((s for s in reversed(stages) if s.get("stage") == "run:end"), None)
         if end is None or m.get("saved_report") is not True:
             raise ValueError("нет полного raw report/квитанции E.run")

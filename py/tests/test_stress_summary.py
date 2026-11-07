@@ -9,6 +9,21 @@ from tools import stress_summary as S
 
 
 class StressSummaryTest(unittest.TestCase):
+    def test_required_backend_is_checked_in_summary(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            plan = self.plan("G-1")
+            plan["compiled_backend_required"] = True
+            for engine in (None, "python", "cpp:invalid", "cpp:" + "a" * 24):
+                folder = self.write_case(root, "G-1")
+                p = folder / "stages.jsonl"
+                original = p.read_text()
+                if engine is not None:
+                    p.write_text(json.dumps(dict(stage="enumeration:engine", engine=engine)) + "\n" + original)
+                result = S.collect(plan, root)
+                self.assertEqual(result["all_complete"], engine == "cpp:" + "a" * 24)
+                self.assertEqual(result["cases"][0]["enumeration_engine"], engine)
+
     def write_case(self, root, sid, **changes):
         folder = root / sid
         (folder / "results").mkdir(parents=True, exist_ok=True)

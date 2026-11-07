@@ -13,6 +13,8 @@ import json
 import os
 from pathlib import Path
 import resource
+import struct
+import re
 import subprocess
 import sys
 import time
@@ -27,6 +29,16 @@ def rss(pid):
         return {}
 
 
+def valid_enumeration_receipt(receipt, with_minimal):
+    if not isinstance(receipt, dict) or receipt.get("stage") != "enumeration:verified":
+        return False
+    digest = lambda x: isinstance(x, str) and re.fullmatch(r"[0-9a-f]{64}", x) is not None
+    return (all(type(receipt.get(k)) is int and receipt[k] >= 0 for k in ("entries", "empty", "n_alive"))
+            and digest(receipt.get("enumeration_sha256"))
+            and (not with_minimal or digest(receipt.get("minimal_sha256")))
+            and isinstance(receipt.get("engine"), str) and bool(receipt["engine"]))
+
+
 def child(a):
     from algen import enumerate as E, library, table, fast, logic
     library.CACHE = Path(a.library_cache).resolve()
@@ -39,6 +51,34 @@ def child(a):
     def size(x):
         return dict(entries=len(x), container_bytes=sys.getsizeof(x),
                     packed_bytes=getattr(x, "nbytes", None)) if x is not None else None
+    class EnumerationComplete(BaseException):
+        pass
+
+    def packed_digest(name, form, alive, empty):
+        header = dict(literals=alive.literals, max_premises=alive.max_premises,
+                      max_support=alive.max_support, n_alive=form.n_alive, empty=len(empty),
+                      blocks=[dict(depth=d, count=len(k), keys=k.typecode, supports=v.typecode)
+                              for d, (k, v) in alive.blocks.items()])
+        h = hashlib.sha256()
+        with ((out / (name + ".bin")).open("wb") if a.save_enumeration else nullcontext(None)) as dest:
+            def write(data):
+                h.update(data)
+                if dest is not None:
+                    dest.write(data)
+            write(json.dumps(header, sort_keys=True, separators=(",", ":")).encode() + b"\n")
+            for keys, values in alive.blocks.values():
+                write(memoryview(keys)); write(memoryview(values))
+            chunk = bytearray()
+            for prem in empty:
+                code = 1
+                for j in prem:
+                    code = (code << alive.width) | j
+                chunk.extend(struct.pack("<Q", code))
+                if len(chunk) >= 65536:
+                    write(chunk); chunk.clear()
+            if chunk:
+                write(chunk)
+        return h.hexdigest()
     def search_state(form):
         from algen.deferred import DeferredSolver
         handle = form.search.s
@@ -98,6 +138,22 @@ def child(a):
             result = _fn(*args, **kwargs)
             containers = result if _name == "enumerate_form" else (result,)
             record(_name + ":end", containers=[size(x) for x in containers])
+            if _name == "enumerate_form":
+                form = args[0]
+                record("enumeration:engine", engine=form.enumeration_engine)
+                if a.enumeration_only:
+                    alive, empty = result
+                    before = packed_digest("enumeration", form, alive, empty)
+                    if a.with_minimal:
+                        record("minimal-only:start")
+                        mins = E.minimal(alive)
+                        record("minimal-only:end", entries=len(mins))
+                        after = packed_digest("minimal", form, mins, empty)
+                    else:
+                        after = None
+                    record("enumeration:verified", entries=len(alive), empty=len(empty), n_alive=form.n_alive,
+                           enumeration_sha256=before, minimal_sha256=after, engine=form.enumeration_engine)
+                    raise EnumerationComplete()
             return result
         setattr(E, name, wrapper)
     original = E.cdecide
@@ -137,10 +193,14 @@ def child(a):
     E.run = run
     record("start", python=sys.version, table_fingerprint=table._fp("G"),
            bank_models=fast.BANK_MODELS, legacy_empty_cache=a.legacy_empty_cache,
-           eager_search=a.eager_search, early_min=E.EARLY_MIN, sparse_leaf=E.SPARSE_LEAF)
+           eager_search=a.eager_search, early_min=E.EARLY_MIN, sparse_leaf=E.SPARSE_LEAF,
+           native_enum=E.NATIVE_ENUM, native_minimal=E.NATIVE_MINIMAL)
     sys.argv = ["table", "перебор", "G", "--каталог", a.tables, "--выход", str(out / "results"),
                 "--схемы", a.scheme, "--нитей", "1", "--посылок", "3", "--предел", str(a.seconds)]
-    table.main()
+    try:
+        table.main()
+    except EnumerationComplete:
+        pass
     record("end")
 
 
@@ -158,12 +218,20 @@ def main():
     mode = p.add_mutually_exclusive_group()
     mode.add_argument("--table-only", action="store_true", help="изолировать storage, без теории/SAT/перебора")
     mode.add_argument("--load-only", action="store_true", help="native загрузка с каркасом, без перебора")
+    mode.add_argument("--enumeration-only", action="store_true", help="полный числовой перебор, без вердиктов/report")
+    p.add_argument("--with-minimal", action="store_true", help="в enumeration-only также проверить повторный minimal")
+    p.add_argument("--save-enumeration", action="store_true", help="сохранить все packed keys/support/empty в бинарный файл")
+    p.add_argument("--python-enum", action="store_true", help="прежние Python enumerate/minimal")
     p.add_argument("--eager-search", action="store_true", help="прежнее немедленное создание solver Search")
     p.add_argument("--legacy-leaf-minimal", action="store_true", help="полный обход подусловий без раннего выхода")
     p.add_argument("--legacy-leaf-matrix", action="store_true", help="битовые операции по всем целям листа")
     p.add_argument("--save-report", action="store_true", help="сохранить весь report в gzip по одной строке")
     p.add_argument("--child", action="store_true", help=argparse.SUPPRESS)
     a = p.parse_args()
+    if (a.with_minimal or a.save_enumeration) and not a.enumeration_only:
+        p.error("with-minimal/save-enumeration требуют enumeration-only")
+    if a.enumeration_only and a.save_report:
+        p.error("enumeration-only не создаёт полный raw report")
     if a.child:
         child(a)
         return
@@ -186,6 +254,8 @@ def main():
         env["ALGEN_EARLY_MIN"] = "0"
     if a.legacy_leaf_matrix:
         env["ALGEN_SPARSE_LEAF"] = "0"
+    if a.python_enum:
+        env["ALGEN_NATIVE_ENUM"] = env["ALGEN_NATIVE_MINIMAL"] = "0"
     cmd = [sys.executable, "-B", "-m", "tools.profile_memory", "--child", "--tables", a.tables,
            "--skel", a.skel, "--library-cache", a.library_cache, "--scheme", a.scheme, "--out", a.out,
            "--seconds", str(a.seconds), "--rss-gib", str(a.rss_gib)]
@@ -203,10 +273,14 @@ def main():
         cmd.append("--legacy-leaf-minimal")
     if a.legacy_leaf_matrix:
         cmd.append("--legacy-leaf-matrix")
+    for option in ("enumeration_only", "with_minimal", "save_enumeration", "python_enum"):
+        if getattr(a, option):
+            cmd.append("--" + option.replace("_", "-"))
     if a.save_report:
         cmd.append("--save-report")
     code = {name: hashlib.sha256((Path(__file__).resolve().parents[1] / name).read_bytes()).hexdigest()
-            for name in ("algen/enumerate.py", "algen/table.py", "algen/deferred.py", "tools/profile_memory.py")}
+            for name in ("algen/enumerate.py", "algen/table.py", "algen/deferred.py", "algen/native_enum.py",
+                         "algen/native_enum.cpp", "tools/profile_memory.py")}
     start = time.monotonic()
     reason = "exited"
     sampled = 0
@@ -251,10 +325,21 @@ def main():
         except (OSError, ValueError) as e:
             result["summary_error"] = str(e)
     result["complete"] = reason == "exited" and proc.returncode == 0 and (a.table_only or a.load_only or result["scheme_status"] == "ok")
-    result["scope"] = "table storage only" if a.table_only else ("native load only" if a.load_only else "full native scheme")
+    if a.enumeration_only:
+        receipt = None
+        try:
+            stages = [json.loads(s) for s in (out / "stages.jsonl").read_text().splitlines()] if (out / "stages.jsonl").exists() else []
+            receipt = next((s for s in reversed(stages) if s.get("stage") == "enumeration:verified"), None)
+        except (OSError, ValueError, TypeError, AttributeError) as e:
+            result["enumeration_receipt_error"] = str(e)
+        result["complete"] = reason == "exited" and proc.returncode == 0 and valid_enumeration_receipt(receipt, a.with_minimal)
+    result["scope"] = "table storage only" if a.table_only else ("native load only" if a.load_only else ("native enumeration only" if a.enumeration_only else "full native scheme"))
     result["eager_search"] = a.eager_search
     result["early_min"] = not a.legacy_leaf_minimal
     result["sparse_leaf"] = not a.legacy_leaf_matrix
+    result["python_enum"] = a.python_enum
+    result["with_minimal"] = a.with_minimal
+    result["saved_enumeration"] = a.save_enumeration
     result["saved_report"] = a.save_report
     result["code_sha256"] = code
     (out / "measurement.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")

@@ -71,6 +71,8 @@ VEC = os.environ.get("ALGEN_VEC", "1") != "0"
 EARLY_MIN = os.environ.get("ALGEN_EARLY_MIN", "1") != "0"
 # Не обрабатывать битовые строки заранее недопустимых целей.
 SPARSE_LEAF = os.environ.get("ALGEN_SPARSE_LEAF", "1") != "0"
+NATIVE_ENUM = os.environ.get("ALGEN_NATIVE_ENUM", "1") != "0"
+NATIVE_MINIMAL = os.environ.get("ALGEN_NATIVE_MINIMAL", "1") != "0"
 REFRESH = 200  # выводов строк до пересоздания решателя
 REDUCE = True  # сводить «неизвестно» к вопросу «посылки ⇒ переменная вырождена?»
 # Посылки только из свойств (без отношений ⩽, ≅, ↪ между термами), начиная с этой
@@ -1548,8 +1550,26 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     prune = PRUNE_FREE and not form.fixed  # alive_direct смотрит все строки, а не строки записи
     start = np.flatnonzero(m[:, form.fixed].all(axis=1)) if form.fixed else np.arange(nr)
     P0 = pack(start)
-    for depth in range(1, max_prem + 1):
-        go([], ones(len(start)), 0, depth, 0, P0, start)
+    native = None
+    form.enumeration_engine = "python"
+    if NATIVE_ENUM and vec and isinstance(alive, PackedConditions) and 0 <= max_prem <= 3:
+        from .native_enum import enumerate_numeric
+        skip = np.array([j in const or j ^ 1 in const or j // 2 in deferred or j in drop
+                         or (j // 2 in pairs and j % 2) for j in range(n_lit)], dtype=np.uint8)
+        fixed_mask = np.array([j in have0 for j in range(n_lit)], dtype=np.uint8)
+        req_mask = np.array([j in reqcols for j in range(n_lit)], dtype=np.uint8)
+        relation = np.array([PROPS_ONLY_FROM and form.atoms[a][0] == "r"
+                             for a in range(n_atoms)], dtype=np.uint8)
+        all_rows = P0 if not form.fixed else pack(every)
+        native = enumerate_numeric(alive, P0, all_rows, len(start), goal_static, skip, fixed_mask,
+                                   form.req, req_mask, clash, lmask if need else np.zeros(n_lit, dtype=np.uint64),
+                                   full if need else 0, prune, relation, PROPS_ONLY_FROM)
+    if native is None:
+        for depth in range(1, max_prem + 1):
+            go([], ones(len(start)), 0, depth, 0, P0, start)
+    else:
+        alive, empty, count, engine_hash = native
+        form.enumeration_engine = "cpp:" + engine_hash
     if ZERO_PREMISES:
         # Условия без посылок: цель, не опровергнутая ни одной строкой (записи), — вопрос
         # «всегда ли X?» (выводимые без посылок — form.const — исключены из целей и
@@ -1570,6 +1590,11 @@ def enumerate_form(form, max_prem, goals=None, m=None):
 
 def minimal(alive):
     """Оставить условия, у которых без любой посылки цель опровергается."""
+    if NATIVE_MINIMAL and isinstance(alive, PackedConditions):
+        from .native_enum import minimal_packed
+        result = minimal_packed(alive)
+        if result is not None:
+            return result
     out = empty_like(alive)
     for (prem, g), support in alive.items():
         if all((tuple(x for x in prem if x != p), g) not in alive for p in prem if len(prem) > 1):
