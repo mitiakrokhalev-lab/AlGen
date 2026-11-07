@@ -170,7 +170,9 @@ def child(a):
             record("verdicts:progress", report_rows=len(loc.get("report", [])),
                    degeneration_targets=len(loc.get("degen", [])),
                    degeneration_cache=size(memo), verdict_cache=size(E.VCACHE_OUT),
-                   bank_unsat=sum(len(b.unsat) for b in fast._BANKS.values()))
+                   bank_unsat=sum(len(b.unsat) for b in fast._BANKS.values()),
+                   phase_scoped_calls=sum(b.phase_scoped_calls for b in fast._BANKS.values()),
+                   phase_max_scope=max((b.phase_max_scope for b in fast._BANKS.values()), default=0))
         return result
     E.cdecide = decide
     original_run = E.run
@@ -188,13 +190,16 @@ def child(a):
                     archive.write(line)
         record("run:end", report_rows=len(report), report_sha256=h.hexdigest(),
                alive=size(alive), empty=size(empty), legacy_stages=form.mem,
-               search_solver=search_state(form), solver_factories=solver_count)
+               search_solver=search_state(form), solver_factories=solver_count,
+               phase_scoped_calls=sum(b.phase_scoped_calls for b in fast._BANKS.values()),
+               phase_max_scope=max((b.phase_max_scope for b in fast._BANKS.values()), default=0))
         return result
     E.run = run
     record("start", python=sys.version, table_fingerprint=table._fp("G"),
            bank_models=fast.BANK_MODELS, legacy_empty_cache=a.legacy_empty_cache,
            eager_search=a.eager_search, early_min=E.EARLY_MIN, sparse_leaf=E.SPARSE_LEAF,
-           native_enum=E.NATIVE_ENUM, native_minimal=E.NATIVE_MINIMAL)
+           native_enum=E.NATIVE_ENUM, native_minimal=E.NATIVE_MINIMAL,
+           scoped_phases=fast.SCOPED_PHASES)
     sys.argv = ["table", "перебор", "G", "--каталог", a.tables, "--выход", str(out / "results"),
                 "--схемы", a.scheme, "--нитей", "1", "--посылок", "3", "--предел", str(a.seconds)]
     try:
@@ -215,6 +220,7 @@ def main():
     p.add_argument("--rss-gib", type=float, default=6.4)
     p.add_argument("--legacy-empty-cache", action="store_true")
     p.add_argument("--legacy-table-load", action="store_true")
+    p.add_argument("--legacy-phase-scope", action="store_true", help="random phases for the entire theory")
     mode = p.add_mutually_exclusive_group()
     mode.add_argument("--table-only", action="store_true", help="изолировать storage, без теории/SAT/перебора")
     mode.add_argument("--load-only", action="store_true", help="native загрузка с каркасом, без перебора")
@@ -248,6 +254,8 @@ def main():
         env["ALGEN_DEGEN_EMPTY_CACHE"] = "1"
     if a.legacy_table_load:
         env["ALGEN_STREAM_TABLE"] = "0"
+    if a.legacy_phase_scope:
+        env["ALGEN_SCOPED_PHASES"] = "0"
     if a.eager_search:
         env["ALGEN_EAGER_SEARCH"] = "1"
     if a.legacy_leaf_minimal:
@@ -263,6 +271,8 @@ def main():
         cmd.append("--legacy-empty-cache")
     if a.legacy_table_load:
         cmd.append("--legacy-table-load")
+    if a.legacy_phase_scope:
+        cmd.append("--legacy-phase-scope")
     if a.table_only:
         cmd.append("--table-only")
     if a.load_only:
@@ -280,7 +290,7 @@ def main():
         cmd.append("--save-report")
     code = {name: hashlib.sha256((Path(__file__).resolve().parents[1] / name).read_bytes()).hexdigest()
             for name in ("algen/enumerate.py", "algen/table.py", "algen/deferred.py", "algen/native_enum.py",
-                         "algen/native_enum.cpp", "tools/profile_memory.py")}
+                         "algen/native_enum.cpp", "algen/fast.py", "tools/profile_memory.py")}
     start = time.monotonic()
     reason = "exited"
     sampled = 0
@@ -314,6 +324,7 @@ def main():
                   peak_rss_kib=usage.ru_maxrss, sampled_rss_kib=sampled,
                   limits=dict(seconds=a.seconds, rss_gib=a.rss_gib), legacy_empty_cache=a.legacy_empty_cache)
     result["legacy_table_load"] = a.legacy_table_load
+    result["legacy_phase_scope"] = a.legacy_phase_scope
     report = out / "results" / (a.scheme + ".json")
     result["scheme_status"] = None
     if report.is_file():
