@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_utc": "2026-11-07T20:06:28.470481+00:00",
+  "updated_utc": "2026-11-07T20:24:47.952674+00:00",
   "scope": "Readiness plan for first full fixed-domain enumeration; NOT a full-run receipt or an implemented automatic launch gate",
   "user_goal": {
     "first_complete_enumeration_once": true,
@@ -175,5 +175,12 @@
     "A SAT model is not a group counterexample; contradictory question backgrounds are not coverage proofs.",
     "No new full run, pilot, rental or purchase is initiated by this record."
   ],
-  "evidence_status_commit": "d7d820c8fd5c749149e1edd6d90226d5a46883ee"
+  "evidence_status_commit": "d7d820c8fd5c749149e1edd6d90226d5a46883ee",
+  "latest_research_check": {
+    "scope": "small selector-search experiment, not native/full grammar or archive frontier",
+    "metrics": "metrics-candidate-search.json",
+    "cases": 52,
+    "uncovered": 0,
+    "changes_gate_status": false
+  }
 }
