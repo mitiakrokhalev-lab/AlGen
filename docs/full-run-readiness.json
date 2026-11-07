@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_utc": "2026-11-07T20:24:47.952674+00:00",
+  "updated_utc": "2026-11-07T20:51:51.189155+00:00",
   "scope": "Readiness plan for first full fixed-domain enumeration; NOT a full-run receipt or an implemented automatic launch gate",
   "user_goal": {
     "first_complete_enumeration_once": true,
@@ -177,9 +177,11 @@
   ],
   "evidence_status_commit": "d7d820c8fd5c749149e1edd6d90226d5a46883ee",
   "latest_research_check": {
-    "scope": "small selector-search experiment, not native/full grammar or archive frontier",
-    "metrics": "metrics-candidate-search.json",
-    "cases": 52,
+    "scope": "lazy finite selector search and in-process row dynamics; not full native grammar or SQLite integration",
+    "metrics": "metrics-lazy-candidate-search.json",
+    "static_cases": 52,
+    "dynamic_generations": 6,
+    "verified_transitions": 5,
     "uncovered": 0,
     "changes_gate_status": false
   }
