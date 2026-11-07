@@ -66,6 +66,11 @@ FAST_DERIVE = bool(os.environ.get("ALGEN_FAST"))
 PRUNE_FREE = os.environ.get("ALGEN_PRUNE", "1") != "0"
 # Лист перебора векторами по целям (enumerate_form.leaf_vec); ALGEN_VEC=0 — прежний цикл.
 VEC = os.environ.get("ALGEN_VEC", "1") != "0"
+# Минимальность: маски целей как целые биты, выход после исключения всех целей.
+# 0 — прежний полный обход для точной сверки результата и замеров.
+EARLY_MIN = os.environ.get("ALGEN_EARLY_MIN", "1") != "0"
+# Не обрабатывать битовые строки заранее недопустимых целей.
+SPARSE_LEAF = os.environ.get("ALGEN_SPARSE_LEAF", "1") != "0"
 REFRESH = 200  # выводов строк до пересоздания решателя
 REDUCE = True  # сводить «неизвестно» к вопросу «посылки ⇒ переменная вырождена?»
 # Посылки только из свойств (без отношений ⩽, ≅, ↪ между термами), начиная с этой
@@ -1361,7 +1366,10 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     goal_static = np.zeros(n_lit, dtype=bool)
     goal_static[list(goal_cols)] = True
     req_goals = {g: form.req[g // 2] for g in range(n_lit) if form.req.get(g // 2)}
-    lower_vec, direct_vec = {}, {}
+    lower_vec, direct_vec, subset_bits = {}, {}, {}
+
+    def goal_bits(mask):
+        return int.from_bytes(np.packbits(mask, bitorder="little").tobytes(), "little")
 
     def req_ok(have):
         ok = np.ones(n_lit, dtype=bool)
@@ -1392,14 +1400,12 @@ def enumerate_form(form, max_prem, goals=None, m=None):
         direct_vec[q] = d
         return d
 
-    def leaf_vec(prem, atoms, have, gc, negs, buf, depth):
-        nonlocal count
+    def eligible_goals(atoms, have, gc):
         if gc is goal_cols:
-            m = goal_static & ~negs
+            m = goal_static.copy()
         else:  # то же, что np.isin(np.arange(n_lit), gc), без сортировки
             m = np.zeros(n_lit, dtype=bool)
             m[np.asarray(gc, dtype=np.intp)] = True
-            m &= ~negs
         for a in atoms:
             m[2 * a] = m[2 * a + 1] = False
         if req_goals:
@@ -1408,6 +1414,11 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             for g in np.flatnonzero(m):
                 if clash.get(int(g) // 2, set()) & atoms:
                     m[g] = False
+        return m
+
+    def leaf_vec(prem, atoms, have, gc, negs, buf, depth, eligible=None, P=None, R=None):
+        nonlocal count
+        m = (eligible if eligible is not None else eligible_goals(atoms, have, gc)) & ~negs
         n = int(m.sum())
         if not n:
             if depth < max_prem:
@@ -1417,6 +1428,22 @@ def enumerate_form(form, max_prem, goals=None, m=None):
         tp = tuple(prem)
         if depth < max_prem:
             lower_vec[tp] = m
+        if EARLY_MIN:
+            left = goal_bits(m)
+            for q in proper_subsets(prem):
+                b = subset_bits.get(q)
+                if b is None:
+                    d = direct_mask(q) if need else lower_vec.get(q)
+                    b = subset_bits[q] = 0 if d is None else goal_bits(d)
+                left &= ~b
+                if not left:
+                    return
+            while left:
+                bit = left & -left
+                g = bit.bit_length() - 1
+                alive[(tp, g)] = int(np.bitwise_count(P[g] & R if buf is None else buf[g]).sum())
+                left ^= bit
+            return
         sub = np.zeros(n_lit, dtype=bool)
         for q in proper_subsets(prem):
             if need:
@@ -1426,7 +1453,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 if x is not None:
                     sub |= x
         for g in np.flatnonzero(m & ~sub).tolist():
-            alive[(tp, g)] = int(np.bitwise_count(buf[g]).sum())
+            alive[(tp, g)] = int(np.bitwise_count(P[g] & R if buf is None else buf[g]).sum())
 
     def go(prem, R, start, depth, pm, P, rows_map):
         nonlocal count
@@ -1449,6 +1476,19 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 gc = [g for g in goal_cols if ok[g]]
                 if not gc:
                     return
+            eligible = None
+            if vec and SPARSE_LEAF:
+                eligible = eligible_goals(atoms, have, gc)
+                cols = np.flatnonzero(eligible)
+                if not len(cols):
+                    if depth < max_prem:
+                        lower_vec[tuple(prem)] = eligible
+                    return
+                if len(cols) * 4 < n_lit:
+                    negs = np.zeros(n_lit, dtype=bool)
+                    negs[cols] = (P[cols ^ 1] & R).any(axis=1)
+                    leaf_vec(prem, atoms, have, gc, negs, None, depth, eligible, P, R)
+                    return
             buf = bufs.get(P.shape)
             if buf is None:
                 buf = bufs[P.shape] = np.empty(P.shape, dtype=np.uint64)
@@ -1456,7 +1496,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             hits = buf.any(axis=1)  # литерал верен хотя бы в одной строке посылок
             negs = hits[neg_idx]
             if vec:
-                leaf_vec(prem, atoms, have, gc, negs, buf, depth)
+                leaf_vec(prem, atoms, have, gc, negs, buf, depth, eligible)
                 return
             for g in gc:
                 if g // 2 in atoms or not form.req.get(g // 2, set()) <= have:

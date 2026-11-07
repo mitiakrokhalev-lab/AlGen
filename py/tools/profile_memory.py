@@ -136,7 +136,8 @@ def child(a):
         return result
     E.run = run
     record("start", python=sys.version, table_fingerprint=table._fp("G"),
-           bank_models=fast.BANK_MODELS, legacy_empty_cache=a.legacy_empty_cache, eager_search=a.eager_search)
+           bank_models=fast.BANK_MODELS, legacy_empty_cache=a.legacy_empty_cache,
+           eager_search=a.eager_search, early_min=E.EARLY_MIN, sparse_leaf=E.SPARSE_LEAF)
     sys.argv = ["table", "перебор", "G", "--каталог", a.tables, "--выход", str(out / "results"),
                 "--схемы", a.scheme, "--нитей", "1", "--посылок", "3", "--предел", str(a.seconds)]
     table.main()
@@ -158,6 +159,8 @@ def main():
     mode.add_argument("--table-only", action="store_true", help="изолировать storage, без теории/SAT/перебора")
     mode.add_argument("--load-only", action="store_true", help="native загрузка с каркасом, без перебора")
     p.add_argument("--eager-search", action="store_true", help="прежнее немедленное создание solver Search")
+    p.add_argument("--legacy-leaf-minimal", action="store_true", help="полный обход подусловий без раннего выхода")
+    p.add_argument("--legacy-leaf-matrix", action="store_true", help="битовые операции по всем целям листа")
     p.add_argument("--save-report", action="store_true", help="сохранить весь report в gzip по одной строке")
     p.add_argument("--child", action="store_true", help=argparse.SUPPRESS)
     a = p.parse_args()
@@ -179,6 +182,10 @@ def main():
         env["ALGEN_STREAM_TABLE"] = "0"
     if a.eager_search:
         env["ALGEN_EAGER_SEARCH"] = "1"
+    if a.legacy_leaf_minimal:
+        env["ALGEN_EARLY_MIN"] = "0"
+    if a.legacy_leaf_matrix:
+        env["ALGEN_SPARSE_LEAF"] = "0"
     cmd = [sys.executable, "-B", "-m", "tools.profile_memory", "--child", "--tables", a.tables,
            "--skel", a.skel, "--library-cache", a.library_cache, "--scheme", a.scheme, "--out", a.out,
            "--seconds", str(a.seconds), "--rss-gib", str(a.rss_gib)]
@@ -192,6 +199,10 @@ def main():
         cmd.append("--load-only")
     if a.eager_search:
         cmd.append("--eager-search")
+    if a.legacy_leaf_minimal:
+        cmd.append("--legacy-leaf-minimal")
+    if a.legacy_leaf_matrix:
+        cmd.append("--legacy-leaf-matrix")
     if a.save_report:
         cmd.append("--save-report")
     code = {name: hashlib.sha256((Path(__file__).resolve().parents[1] / name).read_bytes()).hexdigest()
@@ -242,6 +253,8 @@ def main():
     result["complete"] = reason == "exited" and proc.returncode == 0 and (a.table_only or a.load_only or result["scheme_status"] == "ok")
     result["scope"] = "table storage only" if a.table_only else ("native load only" if a.load_only else "full native scheme")
     result["eager_search"] = a.eager_search
+    result["early_min"] = not a.legacy_leaf_minimal
+    result["sparse_leaf"] = not a.legacy_leaf_matrix
     result["saved_report"] = a.save_report
     result["code_sha256"] = code
     (out / "measurement.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
