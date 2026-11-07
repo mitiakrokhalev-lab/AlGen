@@ -1,0 +1,3218 @@
+{
+  "version": 1,
+  "scope": "research finite selector domain; NOT complete AlGen grammar/native coverage or production speedup",
+  "source_sha256": "8834b45fb94938fb8f57272395ebbd7f7648ce054e3a639f61a43f63df9cf5e4",
+  "complete": true,
+  "totals_scope": "Sum over separate fixture/k cases; candidates recur at different k. Not a count of unique AlGen questions.",
+  "totals": {
+    "candidates": 8306,
+    "checked_unknown": 1538,
+    "basis": 104,
+    "exceptions": 56,
+    "retained": 160,
+    "uncovered": 0
+  },
+  "wall_seconds": 3.7794347439994453,
+  "cpu_seconds": 3.7792465539999998,
+  "peak_rss_kib": 242712,
+  "limitations": [
+    "Two full theory copies may be too large for native schemes.",
+    "Explicit-domain structural rules are req/coverage/signs/fixed/k only; no numerical/pair/symmetry mapping.",
+    "No minimization, production filtering/order/core equivalence, archive frontier or dynamic update implementation.",
+    "Counts are directed candidates, not old raw forbidden classes/unknown IDs; ratios are not comparable.",
+    "Shared explicit oracle and meta timing is a research expense, not a production benchmark.",
+    "The52case total repeats fixtures for different k; it is not a count of unique archive questions.",
+    "Directed implications count contrapositives separately;26->3 cannot be reported as old report compression.",
+    "Tiny exhaustive truth-table oracle was faster than meta construction; no production speedup measured.",
+    "All first-full-run readiness blockers remain open, including exact stored frontier."
+  ],
+  "base_commit": "d9ee48fb2b9e80c1787cb7c9902e1e6768c3803c",
+  "production_code_commit_unchanged": "6e633789b2ac6a56eeea300d59af6a62bc0cb0f7",
+  "time_scope": "run() only, excludes interpreter startup/imports; process ru_maxrss includes process lifetime",
+  "environment": {
+    "ALGEN_SIZE": "2",
+    "ALGEN_FAST": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "watchdog_seconds": 60,
+    "python_flag": "-B"
+  },
+  "receipt": {
+    "local_path": "/workspace/work/candidate-search-01.json",
+    "bytes": 116095,
+    "sha256": "0331c4a3c4bd8986e494b0f90653007c930d1e8913353ae2b333bf9b805a492e",
+    "publication": "summary metrics only; complete experimental trace retained locally"
+  },
+  "verification": {
+    "reviewer": "review_phase_docs",
+    "code_review": "approved for bounded experiment",
+    "tests": 10,
+    "root_test_seconds": 0.035,
+    "independent_test_seconds": 0.034,
+    "test_result": "OK",
+    "independent_receipt_review": "all52 explicit domains/classifications/admissions/exceptions/final coverage and input SHA checked; meta search not repeated",
+    "independent_real_projection_solver": "MiniSat22",
+    "independent_review_wall_seconds": 2.728,
+    "new_theorems_or_Library_data": false,
+    "native_pipeline_run": false,
+    "full_suite_rerun": false,
+    "previous_unchanged_production_CI": {
+      "run": 42393621793,
+      "tests": 149,
+      "seconds": 488.839,
+      "result": "OK"
+    }
+  },
+  "aggregated_cases": [
+    {
+      "fixture": "synthetic-8100",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "fe1a2a34c53e676c7455ea71103c674809a2f1c8d7c61818cd456eb272e1af4e",
+      "verification": {
+        "candidates": 8,
+        "kinds": {
+          "derived": 2,
+          "library_refuted": 6
+        },
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 4
+      },
+      "meta_wall_seconds": 0.0003706700008478947,
+      "meta_cpu_seconds": 0.00036902700000007727,
+      "oracle_wall_seconds": 6.524700438603759e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 160
+      }
+    },
+    {
+      "fixture": "synthetic-8100",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "fe1a2a34c53e676c7455ea71103c674809a2f1c8d7c61818cd456eb272e1af4e",
+      "verification": {
+        "candidates": 72,
+        "kinds": {
+          "derived": 14,
+          "library_refuted": 24,
+          "inconsistent_premises": 20,
+          "theory_refuted": 5,
+          "unknown": 9
+        },
+        "checked_unknown": 9,
+        "basis": 2,
+        "exceptions": 4,
+        "retained": 6,
+        "covered_by_compatible_basis": 5,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0004083560052094981,
+      "meta_cpu_seconds": 0.0004085360000001259,
+      "oracle_wall_seconds": 0.0003403150039957836,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 7,
+          "compatibility_solves": 6,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 176
+      }
+    },
+    {
+      "fixture": "synthetic-8100",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "fe1a2a34c53e676c7455ea71103c674809a2f1c8d7c61818cd456eb272e1af4e",
+      "verification": {
+        "candidates": 264,
+        "kinds": {
+          "derived": 40,
+          "library_refuted": 37,
+          "inconsistent_premises": 124,
+          "theory_refuted": 26,
+          "unknown": 37
+        },
+        "checked_unknown": 37,
+        "basis": 3,
+        "exceptions": 14,
+        "retained": 17,
+        "covered_by_compatible_basis": 23,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0004977000062353909,
+      "meta_cpu_seconds": 0.0004978489999998281,
+      "oracle_wall_seconds": 0.0013427949961624108,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 18,
+          "compatibility_solves": 17,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 188
+      }
+    },
+    {
+      "fixture": "synthetic-8100",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "fe1a2a34c53e676c7455ea71103c674809a2f1c8d7c61818cd456eb272e1af4e",
+      "verification": {
+        "candidates": 520,
+        "kinds": {
+          "derived": 64,
+          "library_refuted": 40,
+          "inconsistent_premises": 304,
+          "theory_refuted": 49,
+          "unknown": 63
+        },
+        "checked_unknown": 63,
+        "basis": 3,
+        "exceptions": 22,
+        "retained": 25,
+        "covered_by_compatible_basis": 41,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0006106270011514425,
+      "meta_cpu_seconds": 0.0006106459999997149,
+      "oracle_wall_seconds": 0.0030379739982890896,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 26,
+          "compatibility_solves": 25,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 196
+      }
+    },
+    {
+      "fixture": "synthetic-8101",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          1,
+          -2,
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "ea8d3cc5385b8ecd15ec21a5615fd4386804e2cfdba0e8f2736d1d2ab7af2368",
+      "verification": {
+        "candidates": 2,
+        "kinds": {
+          "derived": 1,
+          "library_refuted": 1
+        },
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 4
+      },
+      "meta_wall_seconds": 0.00021096399723319337,
+      "meta_cpu_seconds": 0.00020954099999981324,
+      "oracle_wall_seconds": 4.0940001781564206e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 158
+      }
+    },
+    {
+      "fixture": "synthetic-8101",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          1,
+          -2,
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "ea8d3cc5385b8ecd15ec21a5615fd4386804e2cfdba0e8f2736d1d2ab7af2368",
+      "verification": {
+        "candidates": 66,
+        "kinds": {
+          "derived": 15,
+          "library_refuted": 23,
+          "theory_refuted": 4,
+          "unknown": 4,
+          "inconsistent_premises": 20
+        },
+        "checked_unknown": 4,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "covered_by_compatible_basis": 4,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0002354399985051714,
+      "meta_cpu_seconds": 0.0002355400000002561,
+      "oracle_wall_seconds": 0.0003179420018568635,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 3,
+          "compatibility_solves": 2,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 174
+      }
+    },
+    {
+      "fixture": "synthetic-8101",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          1,
+          -2,
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "ea8d3cc5385b8ecd15ec21a5615fd4386804e2cfdba0e8f2736d1d2ab7af2368",
+      "verification": {
+        "candidates": 306,
+        "kinds": {
+          "derived": 54,
+          "library_refuted": 56,
+          "theory_refuted": 27,
+          "unknown": 23,
+          "inconsistent_premises": 146
+        },
+        "checked_unknown": 23,
+        "basis": 2,
+        "exceptions": 5,
+        "retained": 7,
+        "covered_by_compatible_basis": 18,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.00037062000046717003,
+      "meta_cpu_seconds": 0.00037076999999996474,
+      "oracle_wall_seconds": 0.0015062879974721,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 8,
+          "compatibility_solves": 7,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 186
+      }
+    },
+    {
+      "fixture": "synthetic-8101",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          1,
+          -2,
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "ea8d3cc5385b8ecd15ec21a5615fd4386804e2cfdba0e8f2736d1d2ab7af2368",
+      "verification": {
+        "candidates": 626,
+        "kinds": {
+          "derived": 90,
+          "library_refuted": 68,
+          "theory_refuted": 57,
+          "unknown": 45,
+          "inconsistent_premises": 366
+        },
+        "checked_unknown": 45,
+        "basis": 2,
+        "exceptions": 11,
+        "retained": 13,
+        "covered_by_compatible_basis": 34,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0005074439977761358,
+      "meta_cpu_seconds": 0.0005076129999999068,
+      "oracle_wall_seconds": 0.0034747629979392514,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 14,
+          "compatibility_solves": 13,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 194
+      }
+    },
+    {
+      "fixture": "synthetic-8102",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "744a9d54598dab810aa14559d14c7513a5c78d4991f3b7aaf2d3c51b16285832",
+      "verification": {
+        "candidates": 2,
+        "kinds": {
+          "library_refuted": 2
+        },
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 4
+      },
+      "meta_wall_seconds": 0.00021588100207736716,
+      "meta_cpu_seconds": 0.00021544000000028873,
+      "oracle_wall_seconds": 3.539300087140873e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 158
+      }
+    },
+    {
+      "fixture": "synthetic-8102",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "744a9d54598dab810aa14559d14c7513a5c78d4991f3b7aaf2d3c51b16285832",
+      "verification": {
+        "candidates": 66,
+        "kinds": {
+          "library_refuted": 20,
+          "inconsistent_premises": 18,
+          "derived": 14,
+          "unknown": 9,
+          "theory_refuted": 5
+        },
+        "checked_unknown": 9,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "covered_by_compatible_basis": 9,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.00022759800049243495,
+      "meta_cpu_seconds": 0.00022766699999987594,
+      "oracle_wall_seconds": 0.0003381220012670383,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 3,
+          "compatibility_solves": 2,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 174
+      }
+    },
+    {
+      "fixture": "synthetic-8102",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "744a9d54598dab810aa14559d14c7513a5c78d4991f3b7aaf2d3c51b16285832",
+      "verification": {
+        "candidates": 306,
+        "kinds": {
+          "library_refuted": 50,
+          "inconsistent_premises": 144,
+          "derived": 53,
+          "unknown": 33,
+          "theory_refuted": 26
+        },
+        "checked_unknown": 33,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "covered_by_compatible_basis": 33,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.00033759200596250594,
+      "meta_cpu_seconds": 0.0003378009999996934,
+      "oracle_wall_seconds": 0.0015486409974982962,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 3,
+          "compatibility_solves": 2,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 186
+      }
+    },
+    {
+      "fixture": "synthetic-8102",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "744a9d54598dab810aa14559d14c7513a5c78d4991f3b7aaf2d3c51b16285832",
+      "verification": {
+        "candidates": 626,
+        "kinds": {
+          "library_refuted": 70,
+          "inconsistent_premises": 364,
+          "derived": 89,
+          "unknown": 53,
+          "theory_refuted": 50
+        },
+        "checked_unknown": 53,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "covered_by_compatible_basis": 53,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0002608079958008602,
+      "meta_cpu_seconds": 0.00026055700000027215,
+      "oracle_wall_seconds": 0.003600750002078712,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 3,
+          "compatibility_solves": 2,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 194
+      }
+    },
+    {
+      "fixture": "synthetic-8103",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "831cef44a1d1b57493d1b981f98c52efd7c7e7d2de8bd3fae19969a6686db0e5",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 3,
+        "basis_projected_models": 3
+      },
+      "meta_wall_seconds": 0.00020603599841706455,
+      "meta_cpu_seconds": 0.00020541400000029242,
+      "oracle_wall_seconds": 2.9092996555846184e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 166
+      }
+    },
+    {
+      "fixture": "synthetic-8103",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "831cef44a1d1b57493d1b981f98c52efd7c7e7d2de8bd3fae19969a6686db0e5",
+      "verification": {
+        "candidates": 26,
+        "kinds": {
+          "derived": 5,
+          "library_refuted": 8,
+          "unknown": 3,
+          "inconsistent_premises": 8,
+          "theory_refuted": 2
+        },
+        "checked_unknown": 3,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "covered_by_compatible_basis": 3,
+        "uncovered": 0,
+        "original_projected_models": 3,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0003129350006929599,
+      "meta_cpu_seconds": 0.0003133850000001104,
+      "oracle_wall_seconds": 0.00019901599443983287,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 3,
+          "compatibility_solves": 2,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 182
+      }
+    },
+    {
+      "fixture": "synthetic-8103",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "831cef44a1d1b57493d1b981f98c52efd7c7e7d2de8bd3fae19969a6686db0e5",
+      "verification": {
+        "candidates": 118,
+        "kinds": {
+          "derived": 16,
+          "library_refuted": 17,
+          "unknown": 11,
+          "inconsistent_premises": 66,
+          "theory_refuted": 8
+        },
+        "checked_unknown": 11,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "covered_by_compatible_basis": 11,
+        "uncovered": 0,
+        "original_projected_models": 3,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0002673370036063716,
+      "meta_cpu_seconds": 0.000267416999999881,
+      "oracle_wall_seconds": 0.0008062679989961907,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 3,
+          "compatibility_solves": 2,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 194
+      }
+    },
+    {
+      "fixture": "synthetic-8103",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "831cef44a1d1b57493d1b981f98c52efd7c7e7d2de8bd3fae19969a6686db0e5",
+      "verification": {
+        "candidates": 222,
+        "kinds": {
+          "derived": 21,
+          "library_refuted": 20,
+          "unknown": 14,
+          "inconsistent_premises": 156,
+          "theory_refuted": 11
+        },
+        "checked_unknown": 14,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "covered_by_compatible_basis": 14,
+        "uncovered": 0,
+        "original_projected_models": 3,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.00026577499374980107,
+      "meta_cpu_seconds": 0.0002652040000001854,
+      "oracle_wall_seconds": 0.0015945199993439019,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 3,
+          "compatibility_solves": 2,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 202
+      }
+    },
+    {
+      "fixture": "synthetic-8104",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "49c6155c947c9aed1848c5833969db3e8f8044a0393105a3c481c2f80ab632a8",
+      "verification": {
+        "candidates": 10,
+        "kinds": {
+          "library_refuted": 10
+        },
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 9,
+        "basis_projected_models": 9
+      },
+      "meta_wall_seconds": 0.0001671680001891218,
+      "meta_cpu_seconds": 0.00016708799999998192,
+      "oracle_wall_seconds": 3.778599784709513e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 5
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 156
+      }
+    },
+    {
+      "fixture": "synthetic-8104",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "49c6155c947c9aed1848c5833969db3e8f8044a0393105a3c481c2f80ab632a8",
+      "verification": {
+        "candidates": 90,
+        "kinds": {
+          "library_refuted": 58,
+          "derived": 14,
+          "theory_refuted": 2,
+          "unknown": 16
+        },
+        "checked_unknown": 16,
+        "basis": 5,
+        "exceptions": 0,
+        "retained": 5,
+        "covered_by_compatible_basis": 16,
+        "uncovered": 0,
+        "original_projected_models": 9,
+        "basis_projected_models": 2
+      },
+      "meta_wall_seconds": 0.0002659349993336946,
+      "meta_cpu_seconds": 0.00026603499999966473,
+      "oracle_wall_seconds": 0.0004883549991063774,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 6,
+          "compatibility_solves": 5,
+          "validation_solves": 5
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 172
+      }
+    },
+    {
+      "fixture": "synthetic-8104",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "49c6155c947c9aed1848c5833969db3e8f8044a0393105a3c481c2f80ab632a8",
+      "verification": {
+        "candidates": 330,
+        "kinds": {
+          "library_refuted": 130,
+          "derived": 65,
+          "theory_refuted": 26,
+          "unknown": 67,
+          "inconsistent_premises": 42
+        },
+        "checked_unknown": 67,
+        "basis": 6,
+        "exceptions": 0,
+        "retained": 6,
+        "covered_by_compatible_basis": 67,
+        "uncovered": 0,
+        "original_projected_models": 9,
+        "basis_projected_models": 2
+      },
+      "meta_wall_seconds": 0.0003432400044403039,
+      "meta_cpu_seconds": 0.0003429690000000818,
+      "oracle_wall_seconds": 0.0019033979988307692,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 7,
+          "compatibility_solves": 6,
+          "validation_solves": 5
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 184
+      }
+    },
+    {
+      "fixture": "synthetic-8104",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "49c6155c947c9aed1848c5833969db3e8f8044a0393105a3c481c2f80ab632a8",
+      "verification": {
+        "candidates": 650,
+        "kinds": {
+          "library_refuted": 174,
+          "derived": 125,
+          "theory_refuted": 66,
+          "unknown": 119,
+          "inconsistent_premises": 166
+        },
+        "checked_unknown": 119,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "covered_by_compatible_basis": 119,
+        "uncovered": 0,
+        "original_projected_models": 9,
+        "basis_projected_models": 2
+      },
+      "meta_wall_seconds": 0.00035719099832931533,
+      "meta_cpu_seconds": 0.0003569690000002623,
+      "oracle_wall_seconds": 0.004289933996915352,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 5,
+          "compatibility_solves": 4,
+          "validation_solves": 5
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 192
+      }
+    },
+    {
+      "fixture": "synthetic-8105",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "1d43ac6705cec1e4863cc5920a8a77b416911e97c6b5e1dc0140f1a71fe0865f",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 8,
+        "basis_projected_models": 8
+      },
+      "meta_wall_seconds": 0.00022094800078775734,
+      "meta_cpu_seconds": 0.00022014699999983733,
+      "oracle_wall_seconds": 3.049500082852319e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 166
+      }
+    },
+    {
+      "fixture": "synthetic-8105",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "1d43ac6705cec1e4863cc5920a8a77b416911e97c6b5e1dc0140f1a71fe0865f",
+      "verification": {
+        "candidates": 18,
+        "kinds": {
+          "library_refuted": 7,
+          "unknown": 8,
+          "derived": 3
+        },
+        "checked_unknown": 8,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "covered_by_compatible_basis": 8,
+        "uncovered": 0,
+        "original_projected_models": 8,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0002518239998607896,
+      "meta_cpu_seconds": 0.0002519340000000092,
+      "oracle_wall_seconds": 0.0002015290010604076,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 4,
+          "compatibility_solves": 3,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 182
+      }
+    },
+    {
+      "fixture": "synthetic-8105",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "1d43ac6705cec1e4863cc5920a8a77b416911e97c6b5e1dc0140f1a71fe0865f",
+      "verification": {
+        "candidates": 74,
+        "kinds": {
+          "library_refuted": 18,
+          "unknown": 23,
+          "derived": 15,
+          "theory_refuted": 6,
+          "inconsistent_premises": 12
+        },
+        "checked_unknown": 23,
+        "basis": 5,
+        "exceptions": 0,
+        "retained": 5,
+        "covered_by_compatible_basis": 23,
+        "uncovered": 0,
+        "original_projected_models": 8,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0004017469982500188,
+      "meta_cpu_seconds": 0.00040207699999994517,
+      "oracle_wall_seconds": 0.0009184739974443801,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 6,
+          "compatibility_solves": 5,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 194
+      }
+    },
+    {
+      "fixture": "synthetic-8105",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "1d43ac6705cec1e4863cc5920a8a77b416911e97c6b5e1dc0140f1a71fe0865f",
+      "verification": {
+        "candidates": 130,
+        "kinds": {
+          "library_refuted": 26,
+          "unknown": 27,
+          "derived": 26,
+          "theory_refuted": 11,
+          "inconsistent_premises": 40
+        },
+        "checked_unknown": 27,
+        "basis": 5,
+        "exceptions": 0,
+        "retained": 5,
+        "covered_by_compatible_basis": 27,
+        "uncovered": 0,
+        "original_projected_models": 8,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0003370909980731085,
+      "meta_cpu_seconds": 0.0003366690000001782,
+      "oracle_wall_seconds": 0.0015380250042653643,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 6,
+          "compatibility_solves": 5,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 202
+      }
+    },
+    {
+      "fixture": "synthetic-8106",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ba53d8a0bbf60d6e0e6ce1a9e8b31837bb764663b7d4578417c1df8898e37c2",
+      "verification": {
+        "candidates": 2,
+        "kinds": {
+          "unknown": 1,
+          "library_refuted": 1
+        },
+        "checked_unknown": 1,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "covered_by_compatible_basis": 1,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 2
+      },
+      "meta_wall_seconds": 0.00030153799889376387,
+      "meta_cpu_seconds": 0.00030140700000025333,
+      "oracle_wall_seconds": 4.504700336838141e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 2,
+          "compatibility_solves": 1,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 162
+      }
+    },
+    {
+      "fixture": "synthetic-8106",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ba53d8a0bbf60d6e0e6ce1a9e8b31837bb764663b7d4578417c1df8898e37c2",
+      "verification": {
+        "candidates": 54,
+        "kinds": {
+          "unknown": 8,
+          "library_refuted": 20,
+          "inconsistent_premises": 14,
+          "derived": 10,
+          "theory_refuted": 2
+        },
+        "checked_unknown": 8,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "covered_by_compatible_basis": 8,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 2
+      },
+      "meta_wall_seconds": 0.0002152699962607585,
+      "meta_cpu_seconds": 0.00021530999999974654,
+      "oracle_wall_seconds": 0.00027804300043499097,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 2,
+          "compatibility_solves": 1,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 178
+      }
+    },
+    {
+      "fixture": "synthetic-8106",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ba53d8a0bbf60d6e0e6ce1a9e8b31837bb764663b7d4578417c1df8898e37c2",
+      "verification": {
+        "candidates": 246,
+        "kinds": {
+          "unknown": 25,
+          "library_refuted": 57,
+          "inconsistent_premises": 118,
+          "derived": 36,
+          "theory_refuted": 10
+        },
+        "checked_unknown": 25,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "covered_by_compatible_basis": 25,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.00032910899608395994,
+      "meta_cpu_seconds": 0.00032938900000001325,
+      "oracle_wall_seconds": 0.0013401309988694265,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 3,
+          "compatibility_solves": 2,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 190
+      }
+    },
+    {
+      "fixture": "synthetic-8106",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ba53d8a0bbf60d6e0e6ce1a9e8b31837bb764663b7d4578417c1df8898e37c2",
+      "verification": {
+        "candidates": 502,
+        "kinds": {
+          "unknown": 42,
+          "library_refuted": 80,
+          "inconsistent_premises": 298,
+          "derived": 60,
+          "theory_refuted": 22
+        },
+        "checked_unknown": 42,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "covered_by_compatible_basis": 42,
+        "uncovered": 0,
+        "original_projected_models": 4,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0003475159974186681,
+      "meta_cpu_seconds": 0.00034748599999989693,
+      "oracle_wall_seconds": 0.0028338110059848987,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 3,
+          "compatibility_solves": 2,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 198
+      }
+    },
+    {
+      "fixture": "synthetic-8107",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          3,
+          -4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ff1cea79d8c8311c7a28cfc02454b7d6dde30152e7330d04a690bf0bdf5c045",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 3,
+        "basis_projected_models": 3
+      },
+      "meta_wall_seconds": 0.000236521998886019,
+      "meta_cpu_seconds": 0.00023630099999971677,
+      "oracle_wall_seconds": 8.811100269667804e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 166
+      }
+    },
+    {
+      "fixture": "synthetic-8107",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          3,
+          -4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ff1cea79d8c8311c7a28cfc02454b7d6dde30152e7330d04a690bf0bdf5c045",
+      "verification": {
+        "candidates": 18,
+        "kinds": {
+          "inconsistent_premises": 6,
+          "library_refuted": 7,
+          "derived": 5
+        },
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 3,
+        "basis_projected_models": 3
+      },
+      "meta_wall_seconds": 0.00020259099983377382,
+      "meta_cpu_seconds": 0.00020229100000035416,
+      "oracle_wall_seconds": 0.0001637230016058311,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 182
+      }
+    },
+    {
+      "fixture": "synthetic-8107",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          3,
+          -4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ff1cea79d8c8311c7a28cfc02454b7d6dde30152e7330d04a690bf0bdf5c045",
+      "verification": {
+        "candidates": 74,
+        "kinds": {
+          "inconsistent_premises": 44,
+          "library_refuted": 17,
+          "derived": 13
+        },
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 3,
+        "basis_projected_models": 3
+      },
+      "meta_wall_seconds": 0.00019219500245526433,
+      "meta_cpu_seconds": 0.00019225499999997453,
+      "oracle_wall_seconds": 0.0006500559975393116,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 194
+      }
+    },
+    {
+      "fixture": "synthetic-8107",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          3,
+          -4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ff1cea79d8c8311c7a28cfc02454b7d6dde30152e7330d04a690bf0bdf5c045",
+      "verification": {
+        "candidates": 130,
+        "kinds": {
+          "inconsistent_premises": 94,
+          "library_refuted": 20,
+          "derived": 16
+        },
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 3,
+        "basis_projected_models": 3
+      },
+      "meta_wall_seconds": 0.00020827900152653456,
+      "meta_cpu_seconds": 0.0002081289999997793,
+      "oracle_wall_seconds": 0.0012938219952047803,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 8
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 202
+      }
+    },
+    {
+      "fixture": "synthetic-8108",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": [
+          -3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "5d9ff6adfe3bc6c22ff0c35d5e2174d9260a94f1cf5b3b30c2ae1a4dbafe8f08",
+      "verification": {
+        "candidates": 10,
+        "kinds": {
+          "library_refuted": 7,
+          "unknown": 2,
+          "derived": 1
+        },
+        "checked_unknown": 2,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "covered_by_compatible_basis": 2,
+        "uncovered": 0,
+        "original_projected_models": 8,
+        "basis_projected_models": 2
+      },
+      "meta_wall_seconds": 0.0007375360000878572,
+      "meta_cpu_seconds": 0.0007380660000002592,
+      "oracle_wall_seconds": 6.169200059957802e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 3,
+          "compatibility_solves": 2,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 156
+      }
+    },
+    {
+      "fixture": "synthetic-8108",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": [
+          -3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "5d9ff6adfe3bc6c22ff0c35d5e2174d9260a94f1cf5b3b30c2ae1a4dbafe8f08",
+      "verification": {
+        "candidates": 90,
+        "kinds": {
+          "library_refuted": 37,
+          "unknown": 24,
+          "derived": 15,
+          "theory_refuted": 6,
+          "inconsistent_premises": 8
+        },
+        "checked_unknown": 24,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "covered_by_compatible_basis": 24,
+        "uncovered": 0,
+        "original_projected_models": 8,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.00031367600604426116,
+      "meta_cpu_seconds": 0.00031376600000010413,
+      "oracle_wall_seconds": 0.0005062420023023151,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 4,
+          "compatibility_solves": 3,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 172
+      }
+    },
+    {
+      "fixture": "synthetic-8108",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": [
+          -3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "5d9ff6adfe3bc6c22ff0c35d5e2174d9260a94f1cf5b3b30c2ae1a4dbafe8f08",
+      "verification": {
+        "candidates": 330,
+        "kinds": {
+          "library_refuted": 79,
+          "unknown": 80,
+          "derived": 60,
+          "theory_refuted": 37,
+          "inconsistent_premises": 74
+        },
+        "checked_unknown": 80,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "covered_by_compatible_basis": 80,
+        "uncovered": 0,
+        "original_projected_models": 8,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0002720039992709644,
+      "meta_cpu_seconds": 0.0002717730000001417,
+      "oracle_wall_seconds": 0.0019632669936981983,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 4,
+          "compatibility_solves": 3,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 184
+      }
+    },
+    {
+      "fixture": "synthetic-8108",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": [
+          -3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "5d9ff6adfe3bc6c22ff0c35d5e2174d9260a94f1cf5b3b30c2ae1a4dbafe8f08",
+      "verification": {
+        "candidates": 650,
+        "kinds": {
+          "library_refuted": 103,
+          "unknown": 133,
+          "derived": 112,
+          "theory_refuted": 80,
+          "inconsistent_premises": 222
+        },
+        "checked_unknown": 133,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "covered_by_compatible_basis": 133,
+        "uncovered": 0,
+        "original_projected_models": 8,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0003775610020966269,
+      "meta_cpu_seconds": 0.00037741000000002245,
+      "oracle_wall_seconds": 0.004485946003114805,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 4,
+          "compatibility_solves": 3,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 192
+      }
+    },
+    {
+      "fixture": "synthetic-8109",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "62b4ae44c7d2c369655f6793cafad7733669633f0709c7b47faea8215a194e52",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 5,
+        "basis_projected_models": 5
+      },
+      "meta_wall_seconds": 0.00021521000599022955,
+      "meta_cpu_seconds": 0.00021444900000000544,
+      "oracle_wall_seconds": 4.87120050820522e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 7
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 170
+      }
+    },
+    {
+      "fixture": "synthetic-8109",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "62b4ae44c7d2c369655f6793cafad7733669633f0709c7b47faea8215a194e52",
+      "verification": {
+        "candidates": 10,
+        "kinds": {
+          "inconsistent_premises": 4,
+          "library_refuted": 4,
+          "derived": 1,
+          "unknown": 1
+        },
+        "checked_unknown": 1,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "covered_by_compatible_basis": 1,
+        "uncovered": 0,
+        "original_projected_models": 5,
+        "basis_projected_models": 4
+      },
+      "meta_wall_seconds": 0.00041822200000751764,
+      "meta_cpu_seconds": 0.0004180800000002094,
+      "oracle_wall_seconds": 0.00020828000560868531,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 2,
+          "compatibility_solves": 1,
+          "validation_solves": 7
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 186
+      }
+    },
+    {
+      "fixture": "synthetic-8109",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "62b4ae44c7d2c369655f6793cafad7733669633f0709c7b47faea8215a194e52",
+      "verification": {
+        "candidates": 54,
+        "kinds": {
+          "inconsistent_premises": 34,
+          "library_refuted": 11,
+          "derived": 5,
+          "unknown": 3,
+          "theory_refuted": 1
+        },
+        "checked_unknown": 3,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "covered_by_compatible_basis": 3,
+        "uncovered": 0,
+        "original_projected_models": 5,
+        "basis_projected_models": 4
+      },
+      "meta_wall_seconds": 0.0002488699974492192,
+      "meta_cpu_seconds": 0.00024855900000009257,
+      "oracle_wall_seconds": 0.0006021349981892854,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 2,
+          "compatibility_solves": 1,
+          "validation_solves": 7
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 198
+      }
+    },
+    {
+      "fixture": "synthetic-8109",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "62b4ae44c7d2c369655f6793cafad7733669633f0709c7b47faea8215a194e52",
+      "verification": {
+        "candidates": 102,
+        "kinds": {
+          "inconsistent_premises": 76,
+          "library_refuted": 13,
+          "derived": 7,
+          "unknown": 4,
+          "theory_refuted": 2
+        },
+        "checked_unknown": 4,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "covered_by_compatible_basis": 4,
+        "uncovered": 0,
+        "original_projected_models": 5,
+        "basis_projected_models": 4
+      },
+      "meta_wall_seconds": 0.0002489399994374253,
+      "meta_cpu_seconds": 0.00024881999999992743,
+      "oracle_wall_seconds": 0.001478486999985762,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 2,
+          "compatibility_solves": 1,
+          "validation_solves": 7
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 206
+      }
+    },
+    {
+      "fixture": "synthetic-8110",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "7f1c8d19671de664c211cf0fb25be7f3c6fc55311e40df6278f6e16998c9729b",
+      "verification": {
+        "candidates": 2,
+        "kinds": {
+          "library_refuted": 1,
+          "unknown": 1
+        },
+        "checked_unknown": 1,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "covered_by_compatible_basis": 1,
+        "uncovered": 0,
+        "original_projected_models": 13,
+        "basis_projected_models": 8
+      },
+      "meta_wall_seconds": 0.000297111997497268,
+      "meta_cpu_seconds": 0.0002964300000001252,
+      "oracle_wall_seconds": 4.9704001867212355e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 2,
+          "compatibility_solves": 1,
+          "validation_solves": 5
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 158
+      }
+    },
+    {
+      "fixture": "synthetic-8110",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "7f1c8d19671de664c211cf0fb25be7f3c6fc55311e40df6278f6e16998c9729b",
+      "verification": {
+        "candidates": 66,
+        "kinds": {
+          "library_refuted": 19,
+          "unknown": 41,
+          "derived": 4,
+          "theory_refuted": 2
+        },
+        "checked_unknown": 41,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "covered_by_compatible_basis": 41,
+        "uncovered": 0,
+        "original_projected_models": 13,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0002650739988894202,
+      "meta_cpu_seconds": 0.00026517399999992364,
+      "oracle_wall_seconds": 0.0006137320015113801,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 5,
+          "compatibility_solves": 4,
+          "validation_solves": 5
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 174
+      }
+    },
+    {
+      "fixture": "synthetic-8110",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "7f1c8d19671de664c211cf0fb25be7f3c6fc55311e40df6278f6e16998c9729b",
+      "verification": {
+        "candidates": 306,
+        "kinds": {
+          "library_refuted": 49,
+          "unknown": 175,
+          "derived": 40,
+          "theory_refuted": 30,
+          "inconsistent_premises": 12
+        },
+        "checked_unknown": 175,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "covered_by_compatible_basis": 175,
+        "uncovered": 0,
+        "original_projected_models": 13,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.00028233999910298735,
+      "meta_cpu_seconds": 0.0002819179999997701,
+      "oracle_wall_seconds": 0.0026925709971692413,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 5,
+          "compatibility_solves": 4,
+          "validation_solves": 5
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 186
+      }
+    },
+    {
+      "fixture": "synthetic-8110",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "7f1c8d19671de664c211cf0fb25be7f3c6fc55311e40df6278f6e16998c9729b",
+      "verification": {
+        "candidates": 626,
+        "kinds": {
+          "library_refuted": 69,
+          "unknown": 291,
+          "derived": 104,
+          "theory_refuted": 86,
+          "inconsistent_premises": 76
+        },
+        "checked_unknown": 291,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "covered_by_compatible_basis": 291,
+        "uncovered": 0,
+        "original_projected_models": 13,
+        "basis_projected_models": 1
+      },
+      "meta_wall_seconds": 0.0003916220011888072,
+      "meta_cpu_seconds": 0.0003911909999998464,
+      "oracle_wall_seconds": 0.006323146000795532,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 5,
+          "compatibility_solves": 4,
+          "validation_solves": 5
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 194
+      }
+    },
+    {
+      "fixture": "synthetic-8111",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "d741121b8b8dfce9e8b4d7b34d7d79d9307c385da04c9eecbba72d1b78bf377a",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 10,
+        "basis_projected_models": 10
+      },
+      "meta_wall_seconds": 0.023063259999617003,
+      "meta_cpu_seconds": 0.023065174999999716,
+      "oracle_wall_seconds": 6.452499656006694e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 43,
+        "initial_meta_clauses": 166
+      }
+    },
+    {
+      "fixture": "synthetic-8111",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "d741121b8b8dfce9e8b4d7b34d7d79d9307c385da04c9eecbba72d1b78bf377a",
+      "verification": {
+        "candidates": 18,
+        "kinds": {
+          "unknown": 10,
+          "library_refuted": 6,
+          "derived": 1,
+          "theory_refuted": 1
+        },
+        "checked_unknown": 10,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "covered_by_compatible_basis": 10,
+        "uncovered": 0,
+        "original_projected_models": 10,
+        "basis_projected_models": 2
+      },
+      "meta_wall_seconds": 0.0003440910004428588,
+      "meta_cpu_seconds": 0.0003441109999999803,
+      "oracle_wall_seconds": 0.00034750600025290623,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 4,
+          "compatibility_solves": 3,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 52,
+        "initial_meta_clauses": 182
+      }
+    },
+    {
+      "fixture": "synthetic-8111",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "d741121b8b8dfce9e8b4d7b34d7d79d9307c385da04c9eecbba72d1b78bf377a",
+      "verification": {
+        "candidates": 74,
+        "kinds": {
+          "unknown": 34,
+          "library_refuted": 9,
+          "derived": 12,
+          "theory_refuted": 11,
+          "inconsistent_premises": 8
+        },
+        "checked_unknown": 34,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "covered_by_compatible_basis": 34,
+        "uncovered": 0,
+        "original_projected_models": 10,
+        "basis_projected_models": 2
+      },
+      "meta_wall_seconds": 0.0006383080035448074,
+      "meta_cpu_seconds": 0.0006381570000000281,
+      "oracle_wall_seconds": 0.0009295819982071407,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 5,
+          "compatibility_solves": 4,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 194
+      }
+    },
+    {
+      "fixture": "synthetic-8111",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "d741121b8b8dfce9e8b4d7b34d7d79d9307c385da04c9eecbba72d1b78bf377a",
+      "verification": {
+        "candidates": 130,
+        "kinds": {
+          "unknown": 50,
+          "library_refuted": 9,
+          "derived": 22,
+          "theory_refuted": 21,
+          "inconsistent_premises": 28
+        },
+        "checked_unknown": 50,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "covered_by_compatible_basis": 50,
+        "uncovered": 0,
+        "original_projected_models": 10,
+        "basis_projected_models": 2
+      },
+      "meta_wall_seconds": 0.00034047599910991266,
+      "meta_cpu_seconds": 0.00034033499999974737,
+      "oracle_wall_seconds": 0.001830159999371972,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 5,
+          "compatibility_solves": 4,
+          "validation_solves": 6
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 202
+      }
+    },
+    {
+      "fixture": "group-four-atom-slice",
+      "k": 0,
+      "domain": {
+        "n": 4,
+        "k": 0,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {
+        "atoms": [
+          "abelian(G)",
+          "cyclic(G)",
+          "perfect(G)",
+          "cyclic(center(G))"
+        ],
+        "objects": [
+          "1:1",
+          "2:1",
+          "4:2",
+          "6:1"
+        ],
+        "rows": 4,
+        "scope": "four selected atoms of G/center(G), actual grow=1 Theory and Library; no native pipeline or full grammar"
+      },
+      "input_sha256": "31b3d0a42121bb88f9b0c4ad563156e7f6807a5ba46d4e8e3b8ffbedf1542ae9",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "checked_unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "covered_by_compatible_basis": 0,
+        "uncovered": 0,
+        "original_projected_models": 7,
+        "basis_projected_models": 7
+      },
+      "meta_wall_seconds": 0.3125967390005826,
+      "meta_cpu_seconds": 0.312588603,
+      "oracle_wall_seconds": 8.755999442655593e-05,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 1,
+          "compatibility_solves": 0,
+          "validation_solves": 5
+        },
+        "theory_variables": 4815,
+        "meta_variables": 9657,
+        "initial_meta_clauses": 227907
+      }
+    },
+    {
+      "fixture": "group-four-atom-slice",
+      "k": 1,
+      "domain": {
+        "n": 4,
+        "k": 1,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {
+        "atoms": [
+          "abelian(G)",
+          "cyclic(G)",
+          "perfect(G)",
+          "cyclic(center(G))"
+        ],
+        "objects": [
+          "1:1",
+          "2:1",
+          "4:2",
+          "6:1"
+        ],
+        "rows": 4,
+        "scope": "four selected atoms of G/center(G), actual grow=1 Theory and Library; no native pipeline or full grammar"
+      },
+      "input_sha256": "31b3d0a42121bb88f9b0c4ad563156e7f6807a5ba46d4e8e3b8ffbedf1542ae9",
+      "verification": {
+        "candidates": 24,
+        "kinds": {
+          "library_refuted": 18,
+          "unknown": 4,
+          "derived": 2
+        },
+        "checked_unknown": 4,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "covered_by_compatible_basis": 4,
+        "uncovered": 0,
+        "original_projected_models": 7,
+        "basis_projected_models": 5
+      },
+      "meta_wall_seconds": 0.30651212699740427,
+      "meta_cpu_seconds": 0.306505343,
+      "oracle_wall_seconds": 0.00026413299929117784,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 2,
+          "compatibility_solves": 1,
+          "validation_solves": 5
+        },
+        "theory_variables": 4815,
+        "meta_variables": 9664,
+        "initial_meta_clauses": 227919
+      }
+    },
+    {
+      "fixture": "group-four-atom-slice",
+      "k": 2,
+      "domain": {
+        "n": 4,
+        "k": 2,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {
+        "atoms": [
+          "abelian(G)",
+          "cyclic(G)",
+          "perfect(G)",
+          "cyclic(center(G))"
+        ],
+        "objects": [
+          "1:1",
+          "2:1",
+          "4:2",
+          "6:1"
+        ],
+        "rows": 4,
+        "scope": "four selected atoms of G/center(G), actual grow=1 Theory and Library; no native pipeline or full grammar"
+      },
+      "input_sha256": "31b3d0a42121bb88f9b0c4ad563156e7f6807a5ba46d4e8e3b8ffbedf1542ae9",
+      "verification": {
+        "candidates": 96,
+        "kinds": {
+          "library_refuted": 51,
+          "unknown": 19,
+          "derived": 17,
+          "inconsistent_premises": 6,
+          "theory_refuted": 3
+        },
+        "checked_unknown": 19,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "covered_by_compatible_basis": 19,
+        "uncovered": 0,
+        "original_projected_models": 7,
+        "basis_projected_models": 4
+      },
+      "meta_wall_seconds": 0.3447794099993189,
+      "meta_cpu_seconds": 0.3447083820000003,
+      "oracle_wall_seconds": 0.0009466859992244281,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 3,
+          "compatibility_solves": 2,
+          "validation_solves": 5
+        },
+        "theory_variables": 4815,
+        "meta_variables": 9669,
+        "initial_meta_clauses": 227927
+      }
+    },
+    {
+      "fixture": "group-four-atom-slice",
+      "k": 3,
+      "domain": {
+        "n": 4,
+        "k": 3,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {
+        "atoms": [
+          "abelian(G)",
+          "cyclic(G)",
+          "perfect(G)",
+          "cyclic(center(G))"
+        ],
+        "objects": [
+          "1:1",
+          "2:1",
+          "4:2",
+          "6:1"
+        ],
+        "rows": 4,
+        "scope": "four selected atoms of G/center(G), actual grow=1 Theory and Library; no native pipeline or full grammar"
+      },
+      "input_sha256": "31b3d0a42121bb88f9b0c4ad563156e7f6807a5ba46d4e8e3b8ffbedf1542ae9",
+      "verification": {
+        "candidates": 160,
+        "kinds": {
+          "library_refuted": 67,
+          "unknown": 26,
+          "derived": 33,
+          "inconsistent_premises": 26,
+          "theory_refuted": 8
+        },
+        "checked_unknown": 26,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "covered_by_compatible_basis": 26,
+        "uncovered": 0,
+        "original_projected_models": 7,
+        "basis_projected_models": 4
+      },
+      "meta_wall_seconds": 0.32667581900022924,
+      "meta_cpu_seconds": 0.3266530030000001,
+      "oracle_wall_seconds": 0.001392808997479733,
+      "search_stats": {
+        "complete": true,
+        "stats": {
+          "meta_solves": 4,
+          "compatibility_solves": 3,
+          "validation_solves": 5
+        },
+        "theory_variables": 4815,
+        "meta_variables": 9672,
+        "initial_meta_clauses": 227931
+      }
+    }
+  ],
+  "search_totals": {
+    "meta_solves": 212,
+    "compatibility_solves": 160,
+    "validation_solves": 352,
+    "meta_wall_seconds": 1.3287023440061603,
+    "oracle_wall_seconds": 0.05927568198967492
+  }
+}
