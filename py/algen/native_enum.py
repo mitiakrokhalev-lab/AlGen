@@ -249,8 +249,9 @@ def minimal_inplace(alive):
     # прежние и обрезка ничего не меняет; если прошло — массивы согласуются.
     # Маска сигналов главной нити дополнительно сужает окно в однопоточном случае.
     blocked = {signal.SIGALRM, signal.SIGINT}
-    previous = signal.pthread_sigmask(signal.SIG_BLOCK, blocked)
+    previous = signal.pthread_sigmask(signal.SIG_BLOCK, [])  # только узнать маску
     try:
+        signal.pthread_sigmask(signal.SIG_BLOCK, blocked)  # исключение здесь тоже снимет маску
         if lib.algen_minimal_inplace(1, k, alive.width, ksize, vsize, key_ptr, val_ptr, sizes, drop_ptr) != 0:
             raise RuntimeError("native minimal compaction failed")
     finally:

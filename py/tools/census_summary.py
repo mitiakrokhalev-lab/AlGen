@@ -61,6 +61,8 @@ def main():
     Path(a.out).write_text(json.dumps(dict(сводка=summary, схемы=rows), ensure_ascii=False, indent=1),
                            encoding="utf-8")
     print(json.dumps({k: v for k, v in summary.items() if k != "крупнейшие"}, ensure_ascii=False, indent=1))
+    if not summary["полный_план"]:
+        print("ВНИМАНИЕ: план переписи неполный (части без плана или число схем не совпало)")
     for r in summary["крупнейшие"]:
         print(r["id"], r["минимальных"], r["секунд"], r["rss_конец"])
 
