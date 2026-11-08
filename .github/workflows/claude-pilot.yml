@@ -121,6 +121,7 @@ jobs:
           ALGEN_PROFILE: ${{ matrix.case.profile || '1' }}
           ALGEN_COMPRESS: "1"
           ALGEN_SAMPLE: ${{ matrix.case.sample || '' }}
+          ALGEN_SAMPLE_EXAMPLES: ${{ matrix.case.examples || '60' }}
           ALGEN_SKEL: ${{ github.workspace }}/native/skel
         run: |
           mkdir -p ../profiles/$CASE_ID
