@@ -80,6 +80,7 @@ CENSUS = os.environ.get("ALGEN_CENSUS") == "1"
 # статистику причин в form.census (статус схемы — «перепись», не результат).
 SAMPLE = int(os.environ.get("ALGEN_SAMPLE", "0") or 0)
 SAMPLE_EXAMPLES = int(os.environ.get("ALGEN_SAMPLE_EXAMPLES", "60") or 60)
+EXAMPLE_MIN_SUPPORT = int(os.environ.get("ALGEN_EXAMPLE_MIN_SUPPORT", "0") or 0)
 # Минимальность на месте (без второй копии условий); 0 — прежний путь с копией.
 INPLACE_MINIMAL = os.environ.get("ALGEN_INPLACE_MINIMAL", "1") != "0"
 REFRESH = 200  # выводов строк до пересоздания решателя
@@ -1973,7 +1974,7 @@ def _sample_stats(form, mins, report, total):
         for _, c in hits:
             for a, _v in form.lits(c):
                 atom_col.setdefault(atom_name(a), c)
-        if len(examples) < SAMPLE_EXAMPLES:
+        if len(examples) < SAMPLE_EXAMPLES and not EXAMPLE_MIN_SUPPORT:
             prem, g = cols[:-1], cols[-1] ^ 1
             sat = form._and(form.m, list(prem) + list(form.fixed))
             n_sat = int(unpack(sat).sum())
@@ -1984,6 +1985,22 @@ def _sample_stats(form, mins, report, total):
                              "из них синтетических": int((unpack(sat & ~P[g] & ~P[g ^ 1]) & synth).sum()),
                              "решающие": [form.value_name(x, form.lit(c)[0]) if form.lit(c)[0][0] != "pair" else
                                           form.value_name(x, form.lits(c)[0][0]) for x, c in hits[:3]]})
+    if EXAMPLE_MIN_SUPPORT:
+        # кандидаты в правила: цель верна во ВСЕХ строках с посылками, строк ⩾ порога
+        for r in report:
+            if r["вердикт"] != "неизвестно" or len(examples) >= SAMPLE_EXAMPLES:
+                continue
+            cols = r.get("_cols") or []
+            prem, g = cols[:-1], cols[-1] ^ 1
+            sat = form._and(form.m, list(prem) + list(form.fixed))
+            n_sat = int(unpack(sat).sum())
+            if n_sat < EXAMPLE_MIN_SUPPORT:
+                continue
+            n_true = int(unpack(sat & P[g]).sum())
+            if n_true != n_sat:
+                continue
+            examples.append({"посылки": r["посылки"], "цель": r["цель"], "строк с посылками": n_sat,
+                             "настоящих": int((unpack(sat) & ~synth).sum())})
     unknown_share = {}
     for name, _cnt in atoms.most_common(40):
         c = atom_col.get(name)
