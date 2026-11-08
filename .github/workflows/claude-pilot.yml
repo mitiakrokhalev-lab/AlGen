@@ -184,3 +184,50 @@ jobs:
           path: profiles/
           retention-days: 90
           compression-level: 6
+
+  summary:
+    needs: [plan, case]
+    if: always()
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: claude-*
+          path: parts
+      - name: Сводка в ветку results-<ветка>
+        run: |
+          python3 -B - <<'PY'
+          import json, glob, os
+          from pathlib import Path
+          out = {}
+          for d in sorted(glob.glob('parts/claude-*')):
+              case = d.split('claude-', 1)[1]
+              rec = {}
+              for name in ('verdict.json', 'commit.txt', 'exit.txt'):
+                  p = Path(d) / name
+                  if p.exists():
+                      rec[name] = json.loads(p.read_text()) if name.endswith('.json') else p.read_text().strip()
+              t = Path(d) / 'time.txt'
+              if t.exists():
+                  rec['time'] = [l.strip() for l in t.read_text(errors='replace').splitlines()
+                                 if any(k in l for k in ('Maximum resident', 'Elapsed (wall', 'User time', 'System time', 'Exit status'))]
+              for j in glob.glob(d + '/*/G-*.json'):
+                  r = json.loads(Path(j).read_text())
+                  rec.setdefault('schemes', []).append({k: r.get(k) for k in ('id', 'статус', 'секунд', 'память ГБ', 'память по этапам', 'перепись')})
+              for f in glob.glob(d + '/*/*.prof.txt'):
+                  rec['profile_head'] = Path(f).read_text(errors='replace').splitlines()[:110]
+              out[case] = rec
+          Path('pilot-summary.json').write_text(json.dumps(out, ensure_ascii=False, indent=1))
+          print(json.dumps({k: (v.get('verdict.json') or {}).get('report_sha_ok') for k, v in out.items()}, ensure_ascii=False))
+          PY
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e pilot-summary.json
+          git add pilot-summary.json
+          git commit -qm "Сводка ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"
