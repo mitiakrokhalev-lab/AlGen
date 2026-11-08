@@ -540,6 +540,16 @@ class Library:
                 if pr.get(p) is not None and pr[p] != v:
                     raise ValueError(f"grp-props2.jsonl: {k} {p} = {v}, а в библиотеке {pr[p]}")
                 pr[p] = v
+            if isinstance(r.get("exponent"), int):
+                # экспонента exp(G) — число (конструкция exponent); сверка с порядками классов
+                els = o.get("элементы")
+                if els:
+                    lcm = 1
+                    for c in els:
+                        lcm = lcm * c["ord"] // gcd(lcm, c["ord"])
+                    if lcm != r["exponent"]:
+                        raise ValueError(f"grp-props2.jsonl: {k} экспонента {r['exponent']}, а по классам {lcm}")
+                o["экспонента"] = r["exponent"]
             if r.get("rank_exact"):
                 if o.get("ранг") is not None and o["ранг"] != r["rank"]:
                     raise ValueError(f"grp-props2.jsonl: {k} ранг {r['rank']}, а в библиотеке {o['ранг']}")
@@ -1574,7 +1584,7 @@ class Search:
                 return None
             from math import factorial
             return ("num", factorial(n))
-        if t.op in ("ord", "index", "num-mul", "prod-card", "bs"):
+        if t.op in ("ord", "index", "num-mul", "prod-card", "bs", "exponent", "num-classes"):
             return self._num_image(t, args, env)
         if t.op == "eltord" and len(args) == 2 and args[1] and args[1][0] == "elt":
             # порядок элемента — из записи класса (0 — бесконечный)
@@ -1818,8 +1828,57 @@ class Search:
         fin = o["свойства"].get("finite")
         return INF if fin is False else None
 
+    def _im_exponent(self, im):
+        """exp(G): число, INF (экспонента не ограничена) или None (неизвестно)."""
+        k = self._obj(im)
+        if k is None:
+            return None
+        o = self.lib.obj[k]
+        if o.get("экспонента") is not None:  # GAP props2, сверено с классами
+            return o["экспонента"]
+        if o.get("конечная") and o.get("элементы"):
+            lcm = 1
+            for c in o["элементы"]:
+                if not c.get("ord"):
+                    return None
+                lcm = lcm * c["ord"] // gcd(lcm, c["ord"])
+            return lcm
+        pr = o.get("свойства", {})
+        if pr.get("trivial") is True:
+            return 1
+        if pr.get("bounded-exponent") is False:
+            return INF
+        return None
+
+    def _im_classes(self, im):
+        """k(G), число классов сопряжённости: число, INF или None (неизвестно).
+        У конечной группы — по полному списку классов GAP (сумма размеров = |G|)."""
+        k = self._obj(im)
+        if k is None:
+            return None
+        o = self.lib.obj[k]
+        pr = o.get("свойства", {})
+        if pr.get("trivial") is True:
+            return 1
+        if o.get("конечная"):
+            els, n = o.get("элементы"), self._im_order(("obj", k))
+            if els and isinstance(n, int) and sum(c["size"] for c in els) == n:
+                return len(els)
+            if pr.get("abelian") is True and isinstance(n, int):
+                return n
+            return None
+        if pr.get("abelian") is True and pr.get("finite") is False:
+            return INF  # у бесконечной абелевой каждый класс — один элемент
+        return None
+
     def _num_image(self, t, args, env):
         lib = self.lib
+        if t.op == "exponent":
+            n = self._im_exponent(args[0])
+            return ("num", n) if n is not None else None
+        if t.op == "num-classes":
+            n = self._im_classes(args[0])
+            return ("num", n) if n is not None else None
         if t.op == "ord":
             n = self._im_order(args[0])
             return ("num", n) if n is not None else None

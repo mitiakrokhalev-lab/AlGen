@@ -153,6 +153,8 @@ SIZE_EXTRA = ["ord", "index", "eltord", "rank", "prod-card", "core", "comm", "nc
               "ulm", "image-of", "preimage", "compose", "apply-mor", "conj-mor", "id-mor", "proj", "incl",
               "coset-act", "regular-act", "num-mul", "num-add", "num-sub", "num-pow", "num-gcd", "num-phi",
               "num-fact", "num-sylow", "cyc", "sym-n", "alt", "dih", "bs",
+              # 8.11, дорожка «Язык» Я1: числовые функции группы
+              "exponent", "num-classes",
               # 3.11, сверка словаря с вселенной: все конструкции словаря на сортах раздела grp,
               # кроме свидетелей и choose-* (Set, Top, Ring — других разделов, у баз таких переменных нет)
               "pres-grp", "semidirect", "equalizer", "coequalizer", "pullback", "pushout", "base-pt",
