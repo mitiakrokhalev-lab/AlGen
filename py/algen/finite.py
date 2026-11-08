@@ -22,6 +22,7 @@ import math
 import os
 import subprocess
 import tempfile
+import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -384,7 +385,7 @@ def props2x_jobs(max_order=100_000):
     return sorted(out, key=lambda x: int(x[0].split(":")[0]))
 
 
-def build_props2x(jobs, max_order=100_000, chunk=4, seconds=900):
+def build_props2x(jobs, max_order=100_000, chunk=4, seconds=900, total=320 * 60):
     """props2 построенных групп (gap/props2x.g) → grp-props2x.jsonl. Пачка, не уложившаяся
     в seconds, пропускается (её группы — без записи; повторный запуск досчитает остальное)."""
     todo = props2x_jobs(max_order)
@@ -393,8 +394,13 @@ def build_props2x(jobs, max_order=100_000, chunk=4, seconds=900):
         done = {r["key"]: r for r in map(json.loads, PROPS2X.open())}
     todo = [j for j in todo if j[0] not in done]
     parts = [todo[i:i + chunk] for i in range(0, len(todo), chunk)]
+    import threading
+    lock = threading.Lock()
+    deadline = time.time() + total if total else None
     with tempfile.TemporaryDirectory() as tmp:
         def one(i):
+            if deadline and time.time() > deadline:
+                return None
             path = os.path.join(tmp, f"{i}.jsonl")
             js = ", ".join("[" + json.dumps(k, ensure_ascii=False) + ", " + json.dumps(e) + "]" for k, e in parts[i])
             prog = f'JOBS:=[{js}];; OUT:="{path}";; Read("{PROPS2X_SCRIPT}");\n'
@@ -403,17 +409,25 @@ def build_props2x(jobs, max_order=100_000, chunk=4, seconds=900):
                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             except subprocess.TimeoutExpired:
                 pass
+            # сразу в файл: обрыв задания по сроку не теряет посчитанное
+            if os.path.exists(path):
+                with lock, PROPS2X.open("a") as out:
+                    for line in open(path):
+                        try:
+                            r = json.loads(line)
+                        except ValueError:
+                            continue
+                        out.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")
             return path
         with ThreadPoolExecutor(jobs) as ex:
             paths = list(ex.map(one, range(len(parts))))
-        for path in paths:
-            if os.path.exists(path):
-                for line in open(path):
-                    try:
-                        r = json.loads(line)
-                    except ValueError:
-                        continue
-                    done[r["key"]] = r
+    if PROPS2X.exists():
+        for line in PROPS2X.open():
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            done[r["key"]] = r
     with PROPS2X.open("w") as out:
         for k in sorted(done, key=lambda k: (int(k.split(":")[0]), k)):
             out.write(json.dumps(done[k], ensure_ascii=False, separators=(",", ":")) + "\n")
@@ -549,6 +563,15 @@ def build_chars(jobs, per=300, chunk=4):
                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             except subprocess.TimeoutExpired:
                 pass
+            # сразу в файл: обрыв задания по сроку не теряет посчитанное
+            if os.path.exists(path):
+                with lock, PROPS2X.open("a") as out:
+                    for line in open(path):
+                        try:
+                            r = json.loads(line)
+                        except ValueError:
+                            continue
+                        out.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")
             return path
         with ThreadPoolExecutor(jobs) as ex:
             paths = list(ex.map(one, range(len(chunks))))
