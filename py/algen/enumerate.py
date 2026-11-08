@@ -1644,6 +1644,7 @@ def pair_minimal(form, mins):
     если без одной половины пары цель всё ещё не опровергается, условие не
     минимально («A тривиальна и A, B абелевы ⇒ …» — хватает «B абелева»)."""
     m, pairs = form.m, form.pair_atoms
+    req = getattr(form, "req", {})
     have0 = set(form.fixed) | (set(getattr(form, "const", ())) if REQ_CONST else set())
     out = empty_like(mins)
     for (prem, g), sup in mins.items():
@@ -1663,7 +1664,7 @@ def pair_minimal(form, mins):
         for c in set(cols) - set(form.fixed):
             rest = [x for x in cols if x != c]
             have = set(rest) | have0
-            if any(not form.req.get(j // 2, set()) <= have for j in rest + [g]):
+            if any(not req.get(j // 2, set()) <= have for j in rest + [g]):
                 continue  # removing this literal makes a remaining term undefined
             rows = m[:, rest].all(axis=1) if rest else np.ones(m.shape[0], dtype=bool)
             if rows.any() and not m[rows, g ^ 1].any():
