@@ -189,6 +189,10 @@ EXCLUDED_OPS = {
 
 WITNESS_OPS = {"hnn-hull", "higman-hull", "free-cover", "free-cover-map"}
 
+# Graph.make uses this same subsort-aware check before any link construction.
+# Keep the former Cartesian product as a comparison path for the full plan.
+TYPED_UNIVERSE = os.environ.get("ALGEN_TYPED_UNIVERSE", "1") != "0"
+
 
 def _has_op(t, ops):
     return isinstance(t, App) and (t.op in ops or any(_has_op(a, ops) for a in t.args))
@@ -220,6 +224,9 @@ def size_universe(vocab, base, smax):
             pools = [small] * len(c["in"])
             if op == "quotient":
                 pools = [small, small + [t for t in canon if t not in small]]
+            if TYPED_UNIVERSE:
+                pools = [[t for t in pool if vocab.fits(g.terms[t].sort, slot["sort"])]
+                         for pool, slot in zip(pools, c["in"])]
             for args in product(*pools):
                 if args and not fresh.intersection(args):
                     continue  # такой набор аргументов уже пробовали в прошлом раунде (константы — t not in sz)
