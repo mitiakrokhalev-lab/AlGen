@@ -112,7 +112,30 @@ jobs:
           print('входы ok')
           PY
           grep MemTotal /proc/meminfo; nproc
+      - name: Прогон (table перебор с профилем)
+        if: matrix.case.mode == 'table'
+        working-directory: py
+        env:
+          SCHEME: ${{ matrix.case.scheme }}
+          SECONDS_LIMIT: ${{ matrix.case.seconds }}
+          ALGEN_PROFILE: "1"
+          ALGEN_COMPRESS: "1"
+          ALGEN_SKEL: ${{ github.workspace }}/native/skel
+        run: |
+          mkdir -p ../profiles/$CASE_ID
+          cp ../commit.txt ../profiles/
+          mv ../native/кэш ../кэш
+          set +e
+          /usr/bin/time -v python3 -B -m algen.table перебор G --каталог ../native-tabs \
+            --выход ../profiles/$CASE_ID --схемы "$SCHEME" --нитей 1 --посылок 3 \
+            --предел "$SECONDS_LIMIT" 2> ../profiles/time.txt
+          echo "exit=$?" | tee ../profiles/exit.txt
+          tail -30 ../profiles/time.txt
+          head -120 ../profiles/$CASE_ID/*.prof.txt || true
+          python3 -B -c "import json,glob; [print(f, {k: json.load(open(f)).get(k) for k in ('статус','секунд','память ГБ','память по этапам')}) for f in glob.glob('../profiles/$CASE_ID/G-*.json')]"
+          exit 0
       - name: Прогон
+        if: matrix.case.mode != 'table'
         working-directory: py
         env:
           SCHEME: ${{ matrix.case.scheme }}
@@ -130,6 +153,7 @@ jobs:
           tail -30 ../profiles/time.txt
           exit 0
       - name: Сверка
+        if: matrix.case.mode != 'table'
         env:
           EXPECT: ${{ matrix.case.expect_report_sha256 }}
         run: |

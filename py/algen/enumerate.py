@@ -73,6 +73,8 @@ EARLY_MIN = os.environ.get("ALGEN_EARLY_MIN", "1") != "0"
 SPARSE_LEAF = os.environ.get("ALGEN_SPARSE_LEAF", "1") != "0"
 NATIVE_ENUM = os.environ.get("ALGEN_NATIVE_ENUM", "1") != "0"
 NATIVE_MINIMAL = os.environ.get("ALGEN_NATIVE_MINIMAL", "1") != "0"
+# Перепись объёма выдачи: ALGEN_CENSUS=1 — run() останавливается после минимальности.
+CENSUS = os.environ.get("ALGEN_CENSUS") == "1"
 # Минимальность на месте (без второй копии условий); 0 — прежний путь с копией.
 INPLACE_MINIMAL = os.environ.get("ALGEN_INPLACE_MINIMAL", "1") != "0"
 REFRESH = 200  # выводов строк до пересоздания решателя
@@ -1793,6 +1795,15 @@ def run(max_prem, lib=None, vocab=None, form=None):
     if getattr(form, "pair_atoms", None):
         mins = pair_minimal(form, mins)
     mins = generic_filter(form, mins)
+    if CENSUS:
+        # Перепись объёма: только перебор и минимальность, без вердиктов. Отчёт пуст
+        # и результатом схемы не является (сводка помечена полем «перепись»).
+        blocks = getattr(mins, "blocks", None)
+        form.census = {"минимальных": len(mins), "пустых посылок": len(empty),
+                       "не опровергнуто": getattr(form, "n_alive", None),
+                       "по длине": ({str(d): len(k) for d, (k, _) in blocks.items()} if blocks is not None else None),
+                       "движок": getattr(form, "enumeration_engine", None)}
+        return form, mins, empty, []
     report, degen_memo = [], {}
     late_hints = bool(os.environ.get("ALGEN_COMPRESS")) and LATE_HINTS
     for (prem, g), support in mins.items():

@@ -1,0 +1,119 @@
+name: claude census
+
+# Перепись объёма выдачи базы: ALGEN_CENSUS=1 — каждая схема только перебирается
+# и минимизируется (без вердиктов); итог — число минимальных условий, время и
+# память на схему. Это не результаты схем (статус «перепись»).
+# Запуск: пуш в ветку claude-census-*; параметры — в .github/claude-census.json.
+
+on:
+  push:
+    branches: ["claude-census-*"]
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      parts: ${{ steps.p.outputs.parts }}
+      source: ${{ steps.p.outputs.source }}
+      base: ${{ steps.p.outputs.base }}
+      n: ${{ steps.p.outputs.n }}
+      limit: ${{ steps.p.outputs.limit }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: p
+        run: |
+          python3 -B - <<'PY'
+          import json, os
+          from pathlib import Path
+          c = json.loads(Path('.github/claude-census.json').read_text())
+          assert c['base'] == 'G' and 1 <= c['parts'] <= 20 and type(c['source_run']) is int
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write('parts=' + json.dumps(list(range(1, c['parts'] + 1))) + '\n')
+              f.write(f"source={c['source_run']}\nbase={c['base']}\nn={c['parts']}\nlimit={c['seconds_per_scheme']}\n")
+          print(c)
+          PY
+
+  part:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        part: ${{ fromJSON(needs.plan.outputs.parts) }}
+    env:
+      ALGEN_SIZE: "2"
+      ALGEN_FAST: "1"
+      ALGEN_CENSUS: "1"
+      ALGEN_SKEL: ${{ github.workspace }}/native/skel
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with: {name: skel, path: native, run-id: "${{ needs.plan.outputs.source }}", github-token: "${{ github.token }}"}
+      - uses: actions/download-artifact@v4
+        with: {name: tabs, path: native-tabs, run-id: "${{ needs.plan.outputs.source }}", github-token: "${{ github.token }}"}
+      - name: Входы
+        run: |
+          python3 -B - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          plan = json.loads(Path('.github/stress-plan.json').read_text())
+          for rel, want in plan['input_files_sha256'].items():
+              with Path(rel).open('rb') as f:
+                  assert hashlib.file_digest(f, 'sha256').hexdigest() == want, rel
+          print('входы ok')
+          PY
+          mv native/кэш кэш
+          git rev-parse HEAD > commit.txt
+      - name: Перепись части
+        continue-on-error: true
+        working-directory: py
+        run: |
+          /usr/bin/time -v timeout 320m python3 -B -m algen.table перебор ${{ needs.plan.outputs.base }} \
+            --каталог ../native-tabs --выход ../out --часть ${{ matrix.part }}/${{ needs.plan.outputs.n }} \
+            --нитей 1 --посылок 3 --предел ${{ needs.plan.outputs.limit }} 2> ../time-${{ matrix.part }}.txt
+          tail -25 ../time-${{ matrix.part }}.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: census-${{ matrix.part }}
+          path: |
+            out/*.json
+            time-*.txt
+            commit.txt
+          retention-days: 90
+
+  summary:
+    needs: part
+    if: always()
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: census-*
+          path: parts
+      - name: Сводка
+        working-directory: py
+        run: python3 -B -m tools.census_summary ../parts --out ../census.json
+      - name: Результаты в ветку results-<ветка>
+        run: |
+          tar czf census-parts.tar.gz parts
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e census.json -e census-parts.tar.gz
+          git add census.json census-parts.tar.gz
+          git commit -qm "Перепись ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"

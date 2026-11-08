@@ -1347,7 +1347,9 @@ def _one(job):
         summary = E.render(form, alive, empty, report, out=out, err=err, registry=_STATE["registry"])
         if live_info:
             summary["dynamic"] = live_info
-        status = "ok"
+        # перепись (ALGEN_CENSUS) — не результат схемы: другой статус, чтобы досчёт
+        # по «ok» никогда не принял её за готовую схему
+        status = "перепись" if getattr(form, "census", None) is not None else "ok"
         if STATE_IN or STATE_SAVE:
             summary["кэш вердиктов"] = {"было": len(E.VCACHE or {}), "попаданий": E.VCACHE_HITS[0],
                                         "промахов": E.VCACHE_HITS[1]}
@@ -1399,6 +1401,8 @@ def _one(job):
            "память по этапам": getattr(form, "mem", None) if form is not None else None,
            # строки библиотеки, чьи записи противоречат правилам (неверно правило или данные)
            "строк противоречат базе": len(getattr(_STATE["forms"][base], "skipped", []) or []), **summary}
+    if form is not None and getattr(form, "census", None) is not None:
+        rec["перепись"] = form.census  # только объём: вердиктов и отчёта нет
     p = Path(outdir) / sid
     p.with_suffix(".txt").write_text(err.getvalue() + "\n" + out.getvalue(), encoding="utf-8")
     p.with_suffix(".json").write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")

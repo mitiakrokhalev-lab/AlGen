@@ -1,24 +1,12 @@
 {
   "version": 1,
-  "name": "claude-pilot-01",
-  "purpose": "Память перебора/минимальности: старый код против нового на G-4-5-26-445-700; полный report новых на трёх схемах с известным SHA",
-  "source_run": 42173383257,
-  "preserve_inputs": true,
+  "name": "claude-pilot-02",
+  "purpose": "Профиль стадии вердиктов (cProfile, ALGEN_PROFILE=1): две схемы с таймаутом stress-02 и одна успешная тяжёлая",
+  "source_run": 42468127201,
+  "preserve_inputs": false,
   "cases": [
-    {"id": "new-G4526-enum-min", "ref": "", "scheme": "G-4-5-26-445-700-705-707-708-709",
-     "args": "--enumeration-only --with-minimal", "seconds": 2400, "rss_gib": 14},
-    {"id": "old-G4526-enum", "ref": "bc1950be8e0c27d92cb92fa0e4908de4c9de5400", "scheme": "G-4-5-26-445-700-705-707-708-709",
-     "args": "--enumeration-only", "seconds": 2400, "rss_gib": 14},
-    {"id": "old-G4526-enum-min", "ref": "bc1950be8e0c27d92cb92fa0e4908de4c9de5400", "scheme": "G-4-5-26-445-700-705-707-708-709",
-     "args": "--enumeration-only --with-minimal", "seconds": 2400, "rss_gib": 14},
-    {"id": "new-G1420390-full", "ref": "", "scheme": "G-14-20-390-705-707-708-709",
-     "args": "--save-report", "seconds": 1500, "rss_gib": 12,
-     "expect_report_sha256": "29a4c344434f4c391a62bdba55eff772b5151f62875db000c8f046d6f916233d"},
-    {"id": "new-G417-full", "ref": "", "scheme": "G-4-17-705-707-708-709",
-     "args": "--save-report", "seconds": 1500, "rss_gib": 12,
-     "expect_report_sha256": "d199dd500fda1f7602f0e98b9033de66c1659d581023b56701a87112ecd42e3a"},
-    {"id": "new-G15320-full", "ref": "", "scheme": "G-15-320-705-707-708-709",
-     "args": "--save-report", "seconds": 1500, "rss_gib": 12,
-     "expect_report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699"}
+    {"id": "prof-G1013", "mode": "table", "ref": "", "scheme": "G-10-13-705-707-708-709", "args": "", "seconds": 1500, "rss_gib": 14},
+    {"id": "prof-G4220", "mode": "table", "ref": "", "scheme": "G-4-220-705-707-708-709", "args": "", "seconds": 1500, "rss_gib": 14},
+    {"id": "prof-G1420390", "mode": "table", "ref": "", "scheme": "G-14-20-390-705-707-708-709", "args": "", "seconds": 1500, "rss_gib": 14}
   ]
 }
