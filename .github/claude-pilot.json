@@ -1,12 +1,141 @@
 {
-  "version": 1,
-  "name": "claude-pilot-02",
-  "purpose": "Профиль стадии вердиктов (cProfile, ALGEN_PROFILE=1): две схемы с таймаутом stress-02 и одна успешная тяжёлая",
-  "source_run": 42468127201,
-  "preserve_inputs": false,
-  "cases": [
-    {"id": "prof-G1013", "mode": "table", "ref": "", "scheme": "G-10-13-705-707-708-709", "args": "", "seconds": 1500, "rss_gib": 14},
-    {"id": "prof-G4220", "mode": "table", "ref": "", "scheme": "G-4-220-705-707-708-709", "args": "", "seconds": 1500, "rss_gib": 14},
-    {"id": "prof-G1420390", "mode": "table", "ref": "", "scheme": "G-14-20-390-705-707-708-709", "args": "", "seconds": 1500, "rss_gib": 14}
-  ]
+ "version": 1,
+ "name": "claude-pilot-03",
+ "purpose": "Состав условий (ALGEN_SAMPLE=20000): вердикты, отсев до отчёта, неизвестные на одном значении таблицы и решающие атомы; 7 тяжёлых, 4 по квантилям (p50/p75/p90/p95), G-14-20-390 — контроль",
+ "source_run": 42468127201,
+ "preserve_inputs": false,
+ "cases": [
+  {
+   "id": "smp-G45102426",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-4-5-10-24-26-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  },
+  {
+   "id": "smp-G2452226",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-2-4-5-22-26-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  },
+  {
+   "id": "smp-G4526463469",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-4-5-26-463-469-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  },
+  {
+   "id": "smp-G2102224",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-2-10-22-24-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  },
+  {
+   "id": "smp-G1102124",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-1-10-21-24-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  },
+  {
+   "id": "smp-G1024461467",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-10-24-461-467-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  },
+  {
+   "id": "smp-G1013",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-10-13-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  },
+  {
+   "id": "smp-G26780",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-2-67-80-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  },
+  {
+   "id": "smp-G45109",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-4-5-109-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  },
+  {
+   "id": "smp-G1420387",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-14-20-387-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  },
+  {
+   "id": "smp-G6209",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-6-209-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  },
+  {
+   "id": "smp-G1420390",
+   "mode": "table",
+   "ref": "",
+   "scheme": "G-14-20-390-705-707-708-709",
+   "args": "",
+   "seconds": 4500,
+   "rss_gib": 14,
+   "sample": "20000",
+   "profile": "0"
+  }
+ ]
 }

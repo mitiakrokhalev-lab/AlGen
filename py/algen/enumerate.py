@@ -75,6 +75,10 @@ NATIVE_ENUM = os.environ.get("ALGEN_NATIVE_ENUM", "1") != "0"
 NATIVE_MINIMAL = os.environ.get("ALGEN_NATIVE_MINIMAL", "1") != "0"
 # Перепись объёма выдачи: ALGEN_CENSUS=1 — run() останавливается после минимальности.
 CENSUS = os.environ.get("ALGEN_CENSUS") == "1"
+# Выборка состава (ALGEN_SAMPLE=N): после минимальности оставить N условий,
+# равномерно по порядку перебора, пройти ими прежний конвейер вердиктов и записать
+# статистику причин в form.census (статус схемы — «перепись», не результат).
+SAMPLE = int(os.environ.get("ALGEN_SAMPLE", "0") or 0)
 # Минимальность на месте (без второй копии условий); 0 — прежний путь с копией.
 INPLACE_MINIMAL = os.environ.get("ALGEN_INPLACE_MINIMAL", "1") != "0"
 REFRESH = 200  # выводов строк до пересоздания решателя
@@ -1795,6 +1799,32 @@ def run(max_prem, lib=None, vocab=None, form=None):
     if getattr(form, "pair_atoms", None):
         mins = pair_minimal(form, mins)
     mins = generic_filter(form, mins)
+    sample_total = None
+    if SAMPLE and not CENSUS and len(mins) > SAMPLE:
+        sample_total = len(mins)
+        step = len(mins) / SAMPLE
+        want, picked = sorted({int(i * step) for i in range(SAMPLE)}), empty_like(mins)
+        if isinstance(mins, PackedConditions):
+            # по индексу, без обхода сотен миллионов условий в Python
+            base, j = 0, 0
+            for n, (keys, values) in mins.blocks.items():
+                while j < len(want) and want[j] < base + len(keys):
+                    code, sup = keys[want[j] - base], values[want[j] - base]
+                    goal = code & mins.mask
+                    code >>= mins.width
+                    prem = []
+                    for _ in range(n):
+                        prem.append(code & mins.mask)
+                        code >>= mins.width
+                    picked[tuple(reversed(prem)), goal] = int(sup)
+                    j += 1
+                base += len(keys)
+        else:
+            wanted = set(want)
+            for i, (key, sup) in enumerate(mins.items()):
+                if i in wanted:
+                    picked[key] = sup
+        mins = picked
     if CENSUS:
         # Перепись объёма: только перебор и минимальность, без вердиктов. Отчёт пуст
         # и результатом схемы не является (сводка помечена полем «перепись»).
@@ -1900,9 +1930,35 @@ def run(max_prem, lib=None, vocab=None, form=None):
                                     form.value_name(x, form.lits(c)[0][0])
                                     for x, c in form.one_unknown(list(prem) + [g ^ 1], limit=60)})
         questions(form, [r for r in report if not r.get("свёрнута")])
+    if SAMPLE and not CENSUS:
+        form.census = _sample_stats(form, mins, report, sample_total)
     for r in report:
         r.pop("_cols", None)
     return form, alive, empty, report
+
+
+def _sample_stats(form, mins, report, total):
+    """Состав выборки: вердикты, отсеянные до отчёта, и для неизвестных — держится
+    ли запрет на одном неизвестном значении таблицы (и каком атоме)."""
+    from collections import Counter
+    kinds, blocked, atoms, reduce = Counter(r["вердикт"] for r in report), 0, Counter(), 0
+    for r in report:
+        if r["вердикт"] != "неизвестно":
+            continue
+        reduce += bool(r.get("сводится"))
+        cols = r.get("_cols") or []
+        hits = form.one_unknown(cols, limit=60) if cols else []
+        if hits:
+            blocked += 1
+            names = set()
+            for _, c in hits:
+                for a, _v in form.lits(c):
+                    names.add(atom_name(a))
+            atoms.update(names)
+    return {"минимальных": total if total is not None else len(mins), "выборка": len(mins),
+            "в отчёте": len(report), "отсеяно до отчёта": len(mins) - len(report),
+            "вердикты": dict(kinds), "неизвестно на одном значении": blocked,
+            "сводится к вырожденности": reduce, "решающие атомы": atoms.most_common(40)}
 
 
 # Вопрос запрета: наименьшее подмножество S его литералов, которому в библиотеке
