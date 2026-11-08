@@ -342,12 +342,93 @@ def library_finite_keys():
             if o.get("конечная") and re.fullmatch(r"\d+:\d+", k) and int(k.split(":")[0]) not in (512, 1024, 1536)]
 
 
-def load_props2(path=PROPS2):
-    """key → запись props2.g (если посчитана)."""
-    if not Path(path).exists():
-        return {}
-    with open(path) as f:
-        return {r["key"]: r for r in map(json.loads, f) if not r.get("skipped")}
+PROPS2X_SCRIPT = Path(__file__).with_name("gap") / "props2x.g"
+PROPS2X = ROOT / "data" / "finite" / "grp-props2x.jsonl"
+
+
+def gap_expr(key):
+    """Выражение GAP для построенной конечной группы библиотеки по её ключу:
+    «n:i» — SmallGroup; «n:Aut(K)», «n:Out(K)», «n:G′(K)», «n:K/Z», «n:K/Φ»,
+    где K — ключ библиотеки. None — ключ не разбирается."""
+    import re
+    order, _, desc = key.partition(":")
+    if not order.isdigit() or not desc:
+        return None
+    if desc.isdigit():
+        return f"SmallGroup({order}, {desc})"
+    for pat, fmt in ((r"Aut\((.+)\)", "AutomorphismGroup(AsPc({}))"),
+                     (r"Out\((.+)\)", "OutGroup(AutomorphismGroup(AsPc({})))"),
+                     (r"G′\((.+)\)", "DerivedSubgroup(AsPc({}))"),
+                     (r"(.+)/Z", "QZ(AsPc({}))"), (r"(.+)/Φ", "QF(AsPc({}))")):
+        m = re.fullmatch(pat, desc)
+        if m:
+            inner = gap_expr(m.group(1))
+            return None if inner is None else fmt.format(inner)
+    return None
+
+
+def props2x_jobs(max_order=100_000):
+    """[(ключ, выражение)] построенных конечных групп библиотеки без props2, порядок ⩽ max_order."""
+    import re
+    from .library import Library
+    lib = Library()
+    out = []
+    for k, o in lib.obj.items():
+        if not o.get("конечная") or re.fullmatch(r"\d+:\d+", k) or o["свойства"].get("two-generated") is not None:
+            continue
+        if int(k.split(":")[0]) > max_order:
+            continue
+        e = gap_expr(k)
+        if e is not None:
+            out.append((k, e))
+    return sorted(out, key=lambda x: int(x[0].split(":")[0]))
+
+
+def build_props2x(jobs, max_order=100_000, chunk=4, seconds=900):
+    """props2 построенных групп (gap/props2x.g) → grp-props2x.jsonl. Пачка, не уложившаяся
+    в seconds, пропускается (её группы — без записи; повторный запуск досчитает остальное)."""
+    todo = props2x_jobs(max_order)
+    done = {}
+    if PROPS2X.exists():
+        done = {r["key"]: r for r in map(json.loads, PROPS2X.open())}
+    todo = [j for j in todo if j[0] not in done]
+    parts = [todo[i:i + chunk] for i in range(0, len(todo), chunk)]
+    with tempfile.TemporaryDirectory() as tmp:
+        def one(i):
+            path = os.path.join(tmp, f"{i}.jsonl")
+            js = ", ".join("[" + json.dumps(k, ensure_ascii=False) + ", " + json.dumps(e) + "]" for k, e in parts[i])
+            prog = f'JOBS:=[{js}];; OUT:="{path}";; Read("{PROPS2X_SCRIPT}");\n'
+            try:
+                subprocess.run(["gap", "-q", "-o", "8g"], input=prog, text=True, timeout=seconds,
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except subprocess.TimeoutExpired:
+                pass
+            return path
+        with ThreadPoolExecutor(jobs) as ex:
+            paths = list(ex.map(one, range(len(parts))))
+        for path in paths:
+            if os.path.exists(path):
+                for line in open(path):
+                    try:
+                        r = json.loads(line)
+                    except ValueError:
+                        continue
+                    done[r["key"]] = r
+    with PROPS2X.open("w") as out:
+        for k in sorted(done, key=lambda k: (int(k.split(":")[0]), k)):
+            out.write(json.dumps(done[k], ensure_ascii=False, separators=(",", ":")) + "\n")
+
+
+def load_props2(path=PROPS2, extra=PROPS2X):
+    """key → запись props2.g (если посчитана); плюс построенные группы (props2x.g)."""
+    out = {}
+    for pth in (path, extra):
+        if pth is not None and Path(pth).exists():
+            with open(pth) as f:
+                for r in map(json.loads, f):
+                    if not r.get("skipped"):
+                        out[r["key"]] = r
+    return out
 
 
 def load_aut(path=AUT):
@@ -502,6 +583,9 @@ if __name__ == "__main__":
                     help="классы сопряжённых элементов всех групп таблицы в data/finite/grp-elts.jsonl")
     ap.add_argument("--свойства", dest="gprops", action="store_true",
                     help="метабелевость, ступень 2, экспонента, порядки элементов, дедекиндовость → data/finite/grp-props.jsonl")
+    ap.add_argument("--свойства2x", dest="gprops2x", action="store_true",
+                    help="props2 построенных групп библиотеки (Aut/Out/G′//Z//Φ) → data/finite/grp-props2x.jsonl")
+    ap.add_argument("--до-порядка", dest="max_order", type=int, default=100_000)
     ap.add_argument("--свойства2", dest="gprops2", action="store_true",
                     help="ранг, клт, дедекиндовость, свойства собственных подгрупп всех конечных групп "
                          "библиотеки с ключом n:i (gap/props2.g) → data/finite/grp-props2.jsonl")
@@ -540,6 +624,10 @@ if __name__ == "__main__":
         import time
         build_table(HOMS_SCRIPT, HOMS, a.jobs, stall=a.stall, deadline=time.time() + a.minutes * 60)
         print(HOMS, sum(1 for _ in HOMS.open()))
+        raise SystemExit
+    if a.gprops2x:
+        build_props2x(a.jobs, max_order=a.max_order)
+        print(PROPS2X, sum(1 for _ in PROPS2X.open()))
         raise SystemExit
     if a.gprops2:
         import time
