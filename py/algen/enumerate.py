@@ -103,6 +103,9 @@ THEORY_CONST = True
 # литералом-теоремой из form.const: он посылкой не перебирается, и без этого
 # все условия об атомах G/H, G/G′, G/Φ(G) терялись (проверщик 5.11).
 REQ_CONST = True
+# Semantic output version: paired premises now supply their primitive reqs.
+# This is separate from Library/table caches and changes only paired runs.
+PAIR_REQUIREMENTS_VERSION = 1
 
 # Кэш вердиктов (состояние схемы для динамического архива). Вердикт условия
 # зависит только от теории, не от библиотеки: при новой строке библиотеки схема
@@ -1204,6 +1207,29 @@ def add_pairs(form, pairs):
 WITNESS = {"hnn-hull", "higman-hull", "free-cover", "free-cover-map"}
 
 
+def pair_requirement_providers(form):
+    """Only the positive column of a pair supplies its signed constituents.
+
+    The other column means NOT(both), not two negated constituents. Synthetic
+    numeric test forms without atom descriptors have no logical expansion.
+    """
+    pairs = getattr(form, "pair_atoms", None) or {}
+    atoms = getattr(form, "atoms", None)
+    if not pairs or atoms is None:
+        return {}
+    index = {a: i for i, a in enumerate(atoms)}
+    out = {}
+    for i, components in pairs.items():
+        if not 0 <= i < len(atoms) or atoms[i][0] != "pair":
+            raise ValueError("pair metadata does not match atom descriptors")
+        _, p, x, y, pol = atoms[i]
+        ids = (index[("p", p, x)], index[("p", p, y)])
+        if set(ids) != set(components):
+            raise ValueError("pair components do not match atom descriptors")
+        out[2 * i] = tuple(2 * c + (0 if pol else 1) for c in ids)
+    return out
+
+
 def enumerate_form(form, max_prem, goals=None, m=None):
     """Все минимальные условия не длиннее max_prem посылок, которые библиотека
     не опровергает (по матрице m, по умолчанию — только понятными значениями).
@@ -1242,7 +1268,17 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 if m.shape[0] and m[:, j].all():
                     const.add(j)
     form.const = sorted(const)
-    have0 = set(form.fixed) | (const if REQ_CONST else set())  # для req: посылки записи и теоремы
+    providers = pair_requirement_providers(form)
+
+    def supplied(columns):
+        have = set(columns)
+        have.update(c for j in columns for c in providers.get(j, ()))
+        return have
+
+    have0 = supplied(set(form.fixed) | (const if REQ_CONST else set()))
+
+    def have_columns(prem):
+        return supplied(prem) | have0
     # атом посылки записи (класс базы, ALGEN_CLASS) целью не бывает: его значение задано
     fixed_atoms = {j // 2 for j in getattr(form, "fixed", [])}
     if fixed_atoms:
@@ -1312,7 +1348,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
 
     def alive_direct(q, g):
         """Подусловие (q, g) не опровергнуто (для минимальности при покрытии)."""
-        have = set(q) | have0
+        have = have_columns(q)
         if not all(form.req.get(j // 2, set()) <= have for j in list(q) + [g]):
             return False
         key = (q, g)
@@ -1385,7 +1421,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
         hit = direct_vec.get(q)
         if hit is not None:
             return hit
-        have = set(q) | have0
+        have = have_columns(q)
         if not all(form.req.get(j // 2, set()) <= have for j in q):
             d = np.zeros(n_lit, dtype=bool)
         else:
@@ -1465,7 +1501,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
                 return  # не хватит литералов, чтобы коснуться всех элементов
         if len(prem) == depth:
             atoms = {j // 2 for j in prem}
-            have = set(prem) | have0
+            have = have_columns(prem)
             if not all(form.req.get(i, set()) <= have for i in atoms):
                 return
             if not R.any():
@@ -1546,6 +1582,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
             go(prem + [j], P[j] & R, j + 1, depth, pm | (int(lmask[j]) if need else 0), P, rows_map)
 
     reqcols = set().union(*form.req.values()) if form.req else set()
+    reqcols |= {j for j, supplied_cols in providers.items() if reqcols.intersection(supplied_cols)}
     vec = VEC and goals is None
     prune = PRUNE_FREE and not form.fixed  # alive_direct смотрит все строки, а не строки записи
     start = np.flatnonzero(m[:, form.fixed].all(axis=1)) if form.fixed else np.arange(nr)
@@ -1563,7 +1600,7 @@ def enumerate_form(form, max_prem, goals=None, m=None):
         all_rows = P0 if not form.fixed else pack(every)
         native = enumerate_numeric(alive, P0, all_rows, len(start), goal_static, skip, fixed_mask,
                                    form.req, req_mask, clash, lmask if need else np.zeros(n_lit, dtype=np.uint64),
-                                   full if need else 0, prune, relation, PROPS_ONLY_FROM)
+                                   full if need else 0, prune, relation, PROPS_ONLY_FROM, providers=providers)
     if native is None:
         for depth in range(1, max_prem + 1):
             go([], ones(len(start)), 0, depth, 0, P0, start)
@@ -1607,6 +1644,7 @@ def pair_minimal(form, mins):
     если без одной половины пары цель всё ещё не опровергается, условие не
     минимально («A тривиальна и A, B абелевы ⇒ …» — хватает «B абелева»)."""
     m, pairs = form.m, form.pair_atoms
+    have0 = set(form.fixed) | (set(getattr(form, "const", ())) if REQ_CONST else set())
     out = empty_like(mins)
     for (prem, g), sup in mins.items():
         if not any(j // 2 in pairs for j in prem):
@@ -1624,6 +1662,9 @@ def pair_minimal(form, mins):
         redundant = False
         for c in set(cols) - set(form.fixed):
             rest = [x for x in cols if x != c]
+            have = set(rest) | have0
+            if any(not form.req.get(j // 2, set()) <= have for j in rest + [g]):
+                continue  # removing this literal makes a remaining term undefined
             rows = m[:, rest].all(axis=1) if rest else np.ones(m.shape[0], dtype=bool)
             if rows.any() and not m[rows, g ^ 1].any():
                 redundant = True
