@@ -68,7 +68,7 @@ jobs:
           path: |
             skel
             кэш
-          retention-days: 7
+          retention-days: 30
           compression-level: 1
 
   build:
@@ -99,7 +99,7 @@ jobs:
         with:
           name: tab-${{ matrix.job }}
           path: tab/*.pickle
-          retention-days: 7
+          retention-days: 30
           compression-level: 1
 
   prep:
@@ -137,7 +137,7 @@ jobs:
         with:
           name: tabs
           path: tab
-          retention-days: 7
+          retention-days: 30
           compression-level: 1
       - uses: actions/upload-artifact@v4
         if: always()
@@ -146,92 +146,3 @@ jobs:
           path: out
           retention-days: 30
 
-  enum:
-    needs: [cfg, prep]
-    if: always() && (needs.prep.result == 'success' || needs.cfg.outputs.prev != '')
-    permissions:
-      contents: read
-      actions: read
-    strategy:
-      fail-fast: false
-      matrix:
-        cls: [none]
-        part: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-    runs-on: ubuntu-latest
-    timeout-minutes: 340
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: pip install numpy python-sat pyyaml
-      - uses: actions/download-artifact@v4
-        with:
-          name: skel
-          path: .
-          run-id: ${{ needs.cfg.outputs.prev || github.run_id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/download-artifact@v4
-        with:
-          name: tabs
-          path: tab
-          run-id: ${{ needs.cfg.outputs.prev || github.run_id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: прежнее состояние схем
-        if: env.STATE_RUN != ''
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh run download $STATE_RUN -R $GITHUB_REPOSITORY -n part-${{ matrix.cls }}-${{ matrix.part }} -D state0
-          ls state0/${{ matrix.cls }} | grep -c vc.json.gz || true
-      - name: перебор
-        continue-on-error: true
-        run: |
-          cd py
-          if [ "${{ matrix.cls }}" != none ]; then export ALGEN_CLASS=${{ matrix.cls }}; fi
-          if [ -d ../state0/${{ matrix.cls }} ]; then export ALGEN_STATE=$PWD/../state0/${{ matrix.cls }}; fi
-          timeout 320m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../out/${{ matrix.cls }} --часть ${{ matrix.part }}/20 --выборка 10 --нитей $THREADS --память $MEM --посылок $K --до 300 --предел 3600 $ARGS
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: part-${{ matrix.cls }}-${{ matrix.part }}
-          path: out
-          retention-days: 30
-          compression-level: 1
-
-  summary:
-    needs: enum
-    if: always()
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: pip install numpy python-sat pyyaml
-      - uses: actions/download-artifact@v4
-        with:
-          pattern: part-*
-          path: parts
-      - run: |
-          for c in none finite abelian; do
-            mkdir -p all/$c
-            find parts -path "*/$c/*" -name '*.json' -exec cp {} all/$c/ \; || true
-            find parts -path "*/$c/*" -name '*.txt' -exec cp {} all/$c/ \; || true
-            (cd py && python3 -m algen.batch сводка ../all/$c) || echo "сводка упала" > all/$c/сводка.md
-          done
-          cat all/*/сводка.md > all/сводка.md || true
-      - name: результаты в ветку «results-…»
-        run: |
-          tar czf results.tar.gz all
-          cp all/сводка.md сводка.md || echo "нет сводки" > сводка.md
-          git config user.name "algen-bot"
-          git config user.email "algen-bot@users.noreply.github.com"
-          git checkout --orphan "results-${GITHUB_REF_NAME}"
-          git rm -rq --cached . && git clean -fdq -e results.tar.gz -e сводка.md
-          git add results.tar.gz сводка.md
-          git commit -qm "Пилот размера ⩽ 2: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
-          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"
