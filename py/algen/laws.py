@@ -166,7 +166,7 @@ def todd_coxeter(gens, rels, limit=50000):
             if prv is None:
                 break
             b, j = find(prv), j - 1
-        if j < i:
+        if j <= i:  # проходы встретились: классы f и b совпадают (ревью 8.11)
             coincide(f, b)
             return
         while j > i + 1:
@@ -200,6 +200,37 @@ def todd_coxeter(gens, rels, limit=50000):
     reps = [i for i in range(len(parent)) if find(i) == i]
     index = {r: k for k, r in enumerate(reps)}
     return {c: [index[find(table[c][r])] for r in reps] for c in cols}
+
+
+def valid_table(perms, gens, rels, max_points=3000):
+    """Таблица — регулярное представление группы ⟨gens | rels⟩: соотношения
+    выполняются во всех точках, а действие регулярно (для каждой точки i
+    отображение 0·w ↦ i·w корректно — граф Шрайера есть граф Кэли). Нужна,
+    чтобы считать точки элементами группы при опровержении. Больше max_points
+    точек — не проверяем (False: опровержения через такую таблицу нет)."""
+    import numpy as np
+    n = len(perms[(gens[0], 1)])
+    if n > max_points:
+        return False
+    P = {c: np.asarray(v, dtype=np.int64) for c, v in perms.items()}
+    if any(act(perms, list(r), i) != i for r in rels for i in range(n)):
+        return False
+    Phi = np.full((n, n), -1, dtype=np.int64)
+    Phi[:, 0] = np.arange(n)
+    order, seen = [0], {0}
+    for j in order:
+        for c, Pc in P.items():
+            k = int(Pc[j])
+            if k not in seen:
+                seen.add(k)
+                order.append(k)
+                Phi[:, k] = Pc[Phi[:, j]]
+    if len(order) != n:
+        return False  # нетранзитивно
+    for c, Pc in P.items():
+        if not np.array_equal(Phi[:, Pc], Pc[Phi]):
+            return False
+    return True
 
 
 def act(perms, w, start=0):
@@ -246,16 +277,47 @@ def law_holds_in(perms, gens, n, law, budget=2_000_000):
     return True
 
 
+MAX_RELS = 3000  # подстановок L в одном перечислении
+
 # Добавочные законы для поиска конечных контрпримеров в V(L)
 EXTRA = ["x^2 = 1", "x^3 = 1", "x^4 = 1", "x^5 = 1", "x^6 = 1", "[x, y, z] = 1", "[[x, y], [z, t]] = 1"]
 
 
-def decide_laws(premise, goal, length=2, limit=50000, max_class=4):
-    """«premise ⇒ goal» для законов-текстов. Возвращает (вердикт, пояснение)."""
+def _cyclic_forms(w):
+    w = reduce(w)
+    out = set()
+    for u in (w, inv(w)):
+        for k in range(max(1, len(u))):
+            out.add(tuple(u[k:] + u[:k]))
+    return out
+
+
+def decide_laws(premise, goal, length=2, limit=50000, max_class=4, seconds=120):
+    """«premise ⇒ goal» для законов-текстов. Возвращает (вердикт, пояснение).
+    seconds — общий бюджет; по его исчерпании — «неизвестно»."""
+    import time
+    deadline = time.time() + seconds
     L, M = law_word(premise), law_word(goal)
     gens = variables(M) or ["x"]
+    # 0) дешёво: M — подстановка L (с точностью до циклического сдвига и обращения)
+    if M and any(_cyclic_forms(M) & _cyclic_forms(w) for w in instances(L, gens, 1)):
+        return "выводится", "M — подстановка L"
+    # 0') L — закон нильпотентности ступени c ([x₁, …, x_{c+1}] = 1): M проверяется в свободной
+    #     нильпотентной группе ступени c (Магнус), ответ точный
+    for c in range(1, max_class + 1):
+        xs = [chr(ord("a") + i) for i in range(c + 1)]
+        word = parse("[" + ", ".join(xs) + "]")
+        from itertools import permutations
+        if len(variables(L)) == c + 1 and any(
+                _cyclic_forms(L) & _cyclic_forms(subst(word, {x: [(v, 1)] for x, v in zip(xs, perm)}))
+                for perm in permutations(variables(L))):
+            ok = holds(M, [], c)[0]
+            return ("выводится", f"L — ступень ⩽ {c}; M верно в свободной нильпотентной ступени {c}") if ok else \
+                   ("опровергается", f"L — ступень ⩽ {c}; свободная нильпотентная ступени {c}: M нет")
     # 1) конечная Q = ⟨gens | подстановки L⟩
     rels = instances(L, gens, length)
+    if len(rels) > MAX_RELS:  # много переменных: перечисление не по силам — честное «неизвестно»
+        return "неизвестно", f"{len(rels)} подстановок L — больше предела {MAX_RELS}"
     try:
         perms = todd_coxeter(gens, rels, limit)
     except TooBig as e:
@@ -265,16 +327,20 @@ def decide_laws(premise, goal, length=2, limit=50000, max_class=4):
         n = len(perms[(gens[0], 1)])
         if act(perms, M) == 0:
             return "выводится", f"M = 1 в ⟨{','.join(gens)} | {len(rels)} подстановок L⟩ порядка {n}"
-        ok = law_holds_in(perms, gens, n, L)
+        ok = law_holds_in(perms, gens, n, L) if valid_table(perms, gens, rels) else None
         if ok:
             return "опровергается", f"Q = F_{len(gens)}/V(L) порядка {n}: L верно, M нет"
         q_note = f"Q порядка {n} не из V(L)" if ok is False else f"Q порядка {n}: L не проверено (велика)"
+    if time.time() > deadline:
+        return "неизвестно", q_note + "; бюджет времени исчерпан"
     # 2) Кнут–Бендикс: M сводится к 1 в ⟨gens | подстановки L⟩ ⇒ выводится
     nf = knuth_bendix(gens, rels)
     if nf is not None and not nf(M):
         return "выводится", f"M = 1 в ⟨{','.join(gens)} | {len(rels)} подстановок L⟩ (Кнут–Бендикс)"
     # 3) конечные группы из V(L) ∩ V(E) для добавочных законов E
     for extra in EXTRA:
+        if time.time() > deadline:
+            return "неизвестно", q_note + "; бюджет времени исчерпан"
         E = law_word(extra)
         rels2 = rels + instances(E, gens, 1)
         try:
@@ -282,7 +348,7 @@ def decide_laws(premise, goal, length=2, limit=50000, max_class=4):
         except TooBig:
             continue
         n = len(perms[(gens[0], 1)])
-        if act(perms, M) != 0 and law_holds_in(perms, gens, n, L):
+        if act(perms, M) != 0 and valid_table(perms, gens, rels2) and law_holds_in(perms, gens, n, L):
             return "опровергается", (f"конечная группа порядка {n} (⟨подстановки L и {extra}⟩): "
                                      "L проверено на всех наборах её элементов, M нет")
     # 4) свободные нильпотентные
