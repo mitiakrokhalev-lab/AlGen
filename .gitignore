@@ -1,3 +1,4 @@
 node_modules/
 кэш/
 __pycache__/
+.claude/worktrees/
