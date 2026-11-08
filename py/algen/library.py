@@ -1836,9 +1836,10 @@ class Search:
         o = self.lib.obj[k]
         if o.get("экспонента") is not None:  # GAP props2, сверено с классами
             return o["экспонента"]
-        if o.get("конечная") and o.get("элементы"):
-            lcm = 1
-            for c in o["элементы"]:
+        els, n = o.get("элементы"), self._im_order(("obj", k))
+        if o.get("конечная") and els and isinstance(n, int) and sum(c["size"] for c in els) == n:
+            lcm = 1  # только по полному списку классов (сумма размеров = |G|)
+            for c in els:
                 if not c.get("ord"):
                     return None
                 lcm = lcm * c["ord"] // gcd(lcm, c["ord"])
@@ -1846,8 +1847,10 @@ class Search:
         pr = o.get("свойства", {})
         if pr.get("trivial") is True:
             return 1
-        if pr.get("bounded-exponent") is False:
-            return INF
+        if pr.get("trivial") is False and pr.get("exponent-2") is True:
+            return 2
+        if pr.get("bounded-exponent") is False or (pr.get("trivial") is False and pr.get("torsion-free") is True):
+            return INF  # нетривиальная без кручения — экспонента не ограничена
         return None
 
     def _im_classes(self, im):

@@ -21,7 +21,7 @@ class NumericFunctionsTest(unittest.TestCase):
     def test_values_agree_with_classes(self):
         checked = 0
         for k, o in self.lib.obj.items():
-            if not o.get("конечная") or not o.get("элементы"):
+            if not o.get("конечная") or not o.get("элементы") or not k.split(":")[0].isdigit():
                 continue
             els = o["элементы"]
             lcm = 1
@@ -57,7 +57,7 @@ class NumericFunctionsTest(unittest.TestCase):
             if pr.get("abelian") is True and pr.get("finite") is False:
                 self.assertEqual(c, INF, k)
             if e is not None and e != INF:
-                self.assertIs(pr.get("bounded-exponent"), True, k)
+                self.assertTrue(pr.get("bounded-exponent") is True or pr.get("exponent-2") is True, k)
 
     def _rows_consistent(self, goal_terms):
         g, prem, goal = scheme(self.v, {"раздел": "grp", "условие": "∀ G : Grp", "цель": goal_terms})
@@ -83,6 +83,77 @@ class NumericFunctionsTest(unittest.TestCase):
         finally:
             s.delete()
         return rows, bad
+
+    def test_independent_values(self):
+        """Не по тем же данным: циклические, диэдральные, произведения таблицы."""
+        S = Search.__new__(Search)
+        S.lib = self.lib
+        seen = 0
+        for k, o in self.lib.obj.items():
+            if not o.get("конечная") or not k.split(":")[0].isdigit():
+                continue  # синтезированные (Sym(n) и др.) — без порядка в ключе
+            n = int(k.split(":")[0])
+            if o["свойства"].get("cyclic") is True:
+                e, c = S._im_exponent(("obj", k)), S._im_classes(("obj", k))
+                if e is not None:
+                    self.assertEqual(e, n, k)
+                if c is not None:
+                    self.assertEqual(c, n, k)
+                seen += 1
+        self.assertGreater(seen, 50)
+        # D_n порядка 2n, n нечётно: k = (n + 3) / 2, exp = 2n
+        from algen.finite import load_products
+        prods = 0
+        for (a, b), key in load_products().items():
+            ea, eb, ek = (S._im_exponent(("obj", x)) for x in (a, b, key))
+            ca, cb, ck = (S._im_classes(("obj", x)) for x in (a, b, key))
+            if None not in (ea, eb, ek):
+                self.assertEqual(ek, ea * eb // gcd(ea, eb), (a, b))
+                prods += 1
+            if None not in (ca, cb, ck):
+                self.assertEqual(ck, ca * cb, (a, b))
+        self.assertGreater(prods, 500)
+
+    def test_finiteness_premises(self):
+        """Правила, ложные для бесконечных групп, обязаны требовать finite(X)."""
+        import json
+        from algen.logic import DATA
+        rules = json.loads((DATA / "new" / "grp.json").read_text())["добавить"]
+        for rid in ("конечная абелева: k(G) = |G|", "конечная с k(G) = |G| абелева",
+                    "конечная с k(G) = 2 — это C₂", "конечная G: k(G) ⩽ |G|", "конечная G: exp(G) делит |G|"):
+            r = next(x for x in rules if x["id"] == rid)
+            self.assertIn({"p": "finite", "t": "X"}, r["if"], rid)
+
+    def test_element_rows_agree_with_rules(self):
+        g, prem, goal = scheme(self.v, {"раздел": "grp", "условие": "∀ G : Grp; ∀ x : Elt(G)",
+                                         "цель": "num-divides(eltord(G, x), exponent(G))"})
+        T = Theory(g, grow=1, extra=[goal[0]])
+        S = Search(g, T, self.lib)
+        s = T.solver()
+        rows = bad = known = 0
+        try:
+            for env in S._assign(0, {}):
+                facts, _ = S.facts(env)
+                if facts.get(goal[0]) is not None:
+                    known += 1
+                lits = []
+                for a, val in facts.items():
+                    l = T.lit(a, val)
+                    if l is False:
+                        bad += 1
+                        break
+                    if l is not None and l is not True:
+                        lits.append(l)
+                else:
+                    if not s.solve(assumptions=lits):
+                        bad += 1
+                rows += 1
+                if rows >= 20000:
+                    break
+        finally:
+            s.delete()
+        self.assertGreater(known, 1000)
+        self.assertEqual(bad, 0)
 
     def test_library_rows_agree_with_rules(self):
         for goal in ("num-eq(num-classes(G), ord(G))", "num-divides(exponent(G), ord(G))",
@@ -112,7 +183,10 @@ class NumericFunctionsTest(unittest.TestCase):
                  ("∀ G : Grp | finite(G), num-eq(num-classes(G), ord(G))", "abelian(G)", "выводится"),
                  ("∀ G : Grp | finite(G)", "num-divides(exponent(G), ord(G))", "выводится"),
                  ("∀ G : Grp | bounded-exponent(G)", "num-finite(exponent(G))", "выводится"),
-                 ("∀ G : Grp | finite(G), num-two(num-classes(G))", "num-two(ord(G))", "выводится")]
+                 ("∀ G : Grp | finite(G), num-two(num-classes(G))", "num-two(ord(G))", "выводится"),
+                 ("∀ G : Grp | num-one(exponent(G))", "trivial(G)", "выводится"),
+                 ("∀ G : Grp | num-one(num-classes(G))", "trivial(G)", "выводится"),
+                 ("∀ G : Grp | ¬finite(G / commutator(G))", "¬num-finite(num-classes(G))", "выводится")]
         for cond, goal, want in cases:
             g, prem, gl = scheme(self.v, {"раздел": "grp", "условие": cond, "цель": goal})
             T = Theory(g, grow=1, extra=[a for a, _ in prem + [gl] if a[0] == "r"])
