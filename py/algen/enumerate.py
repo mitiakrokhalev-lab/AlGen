@@ -79,6 +79,7 @@ CENSUS = os.environ.get("ALGEN_CENSUS") == "1"
 # равномерно по порядку перебора, пройти ими прежний конвейер вердиктов и записать
 # статистику причин в form.census (статус схемы — «перепись», не результат).
 SAMPLE = int(os.environ.get("ALGEN_SAMPLE", "0") or 0)
+SAMPLE_EXAMPLES = int(os.environ.get("ALGEN_SAMPLE_EXAMPLES", "60") or 60)
 # Минимальность на месте (без второй копии условий); 0 — прежний путь с копией.
 INPLACE_MINIMAL = os.environ.get("ALGEN_INPLACE_MINIMAL", "1") != "0"
 REFRESH = 200  # выводов строк до пересоздания решателя
@@ -1972,7 +1973,7 @@ def _sample_stats(form, mins, report, total):
         for _, c in hits:
             for a, _v in form.lits(c):
                 atom_col.setdefault(atom_name(a), c)
-        if len(examples) < 60:
+        if len(examples) < SAMPLE_EXAMPLES:
             prem, g = cols[:-1], cols[-1] ^ 1
             sat = form._and(form.m, list(prem) + list(form.fixed))
             n_sat = int(unpack(sat).sum())
