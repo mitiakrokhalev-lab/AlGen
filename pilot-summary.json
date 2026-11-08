@@ -1,0 +1,134 @@
+{
+ "smp-G1013": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 999.48",
+   "System time (seconds): 13.72",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 15:39.85",
+   "Maximum resident set size (kbytes): 7115288",
+   "Exit status: 0"
+  ]
+ },
+ "smp-G1024461467": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1004.32",
+   "System time (seconds): 13.44",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 15:44.11",
+   "Maximum resident set size (kbytes): 7109760",
+   "Exit status: 0"
+  ]
+ },
+ "smp-G1102124": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1006.33",
+   "System time (seconds): 13.87",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 15:46.58",
+   "Maximum resident set size (kbytes): 7109344",
+   "Exit status: 0"
+  ]
+ },
+ "smp-G1420387": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1452.38",
+   "System time (seconds): 15.19",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 22:38.27",
+   "Maximum resident set size (kbytes): 7111540",
+   "Exit status: 0"
+  ]
+ },
+ "smp-G1420390": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1024.93",
+   "System time (seconds): 13.89",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 16:04.21",
+   "Maximum resident set size (kbytes): 7117140",
+   "Exit status: 0"
+  ]
+ },
+ "smp-G2102224": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1023.41",
+   "System time (seconds): 13.68",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 16:04.38",
+   "Maximum resident set size (kbytes): 7124524",
+   "Exit status: 0"
+  ]
+ },
+ "smp-G2452226": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1345.88",
+   "System time (seconds): 9.67",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 20:42.92",
+   "Maximum resident set size (kbytes): 7114504",
+   "Exit status: 0"
+  ]
+ },
+ "smp-G26780": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 991.21",
+   "System time (seconds): 13.53",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 15:33.63",
+   "Maximum resident set size (kbytes): 7115396",
+   "Exit status: 0"
+  ]
+ },
+ "smp-G45102426": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1346.56",
+   "System time (seconds): 13.72",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 20:58.14",
+   "Maximum resident set size (kbytes): 7116480",
+   "Exit status: 0"
+  ]
+ },
+ "smp-G45109": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1433.82",
+   "System time (seconds): 15.20",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 22:23.83",
+   "Maximum resident set size (kbytes): 7111156",
+   "Exit status: 0"
+  ]
+ },
+ "smp-G4526463469": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1361.08",
+   "System time (seconds): 14.74",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 21:13.98",
+   "Maximum resident set size (kbytes): 7114892",
+   "Exit status: 0"
+  ]
+ },
+ "smp-G6209": {
+  "commit.txt": "e51e5ce925838704f9ad9ea1573d2da66d696141",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1336.49",
+   "System time (seconds): 14.47",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 20:49.83",
+   "Maximum resident set size (kbytes): 7115076",
+   "Exit status: 0"
+  ]
+ }
+}
