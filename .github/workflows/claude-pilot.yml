@@ -118,8 +118,9 @@ jobs:
         env:
           SCHEME: ${{ matrix.case.scheme }}
           SECONDS_LIMIT: ${{ matrix.case.seconds }}
-          ALGEN_PROFILE: "1"
+          ALGEN_PROFILE: ${{ matrix.case.profile || '1' }}
           ALGEN_COMPRESS: "1"
+          ALGEN_SAMPLE: ${{ matrix.case.sample || '' }}
           ALGEN_SKEL: ${{ github.workspace }}/native/skel
         run: |
           mkdir -p ../profiles/$CASE_ID
