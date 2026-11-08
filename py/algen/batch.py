@@ -55,7 +55,11 @@ def _one(job):
         else:
             form, alive, empty, report = E.run(k, lib, vocab)
         summary = E.render(form, alive, empty, report, out=out, err=err, registry=_STATE["registry"])
-        status = "ok"
+        # перепись (ALGEN_CENSUS) — не результат схемы: досчёт по «ok» её не примет
+        census = getattr(form, "census", None)
+        status = "перепись" if census is not None else "ok"
+        if census is not None:
+            summary["перепись"] = census
     except Exception:
         summary, status = {}, "ошибка"
         err.write(traceback.format_exc())

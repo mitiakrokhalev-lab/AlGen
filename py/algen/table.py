@@ -1361,7 +1361,7 @@ def _one(job):
                     {"теория": tp, "вердикты": [[k, v[0], list(v[1])] for k, v in E.VCACHE_OUT.items()]},
                     ensure_ascii=False).encode(), 6))
                 os.replace(tmp, dst)  # SIGALRM посреди записи не оставит обрезанный файл
-        if export_live:
+        if export_live and getattr(form, "census", None) is None:  # перепись в архив не пишется
             from .live import write_report
             write_report(Path(outdir) / f"{sid}.archive.jsonl.gz",
                          {"base": base, "class": CLASS, "scheme": sid, "theory": tp,

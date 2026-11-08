@@ -2197,6 +2197,9 @@ def main():
         form, alive, empty, report = run(a.k, lib, vocab, form)
     else:
         form, alive, empty, report = run(a.k)
+    if getattr(form, "census", None) is not None:
+        print("ПЕРЕПИСЬ (ALGEN_CENSUS=1): вердиктов нет, это не результат схемы: "
+              + json.dumps(form.census, ensure_ascii=False), file=sys.stderr)
     render(form, alive, empty, report, short=a.short, full=a.full, json_path=a.out)
 
 

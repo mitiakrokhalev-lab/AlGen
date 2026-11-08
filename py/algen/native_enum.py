@@ -242,20 +242,22 @@ def minimal_inplace(alive):
         drop_ptr[depth] = bits.ctypes.data
     if lib.algen_minimal_inplace(0, k, alive.width, ksize, vsize, key_ptr, val_ptr, sizes, drop_ptr) != 0:
         raise RuntimeError("native minimal returned no result")
+    # Сжатие (mode 1) в C++ не прерывается и обновляет sizes по месту; обработчик
+    # Python-сигнала может сработать сразу до или сразу после вызова (сигнал,
+    # принятый другой нитью, например нитью OpenBLAS, маска главной нити не
+    # удерживает). Поэтому обрезка — в finally: если сжатие не начиналось, sizes
+    # прежние и обрезка ничего не меняет; если прошло — массивы согласуются.
+    # Маска сигналов главной нити дополнительно сужает окно в однопоточном случае.
     blocked = {signal.SIGALRM, signal.SIGINT}
     previous = signal.pthread_sigmask(signal.SIG_BLOCK, blocked)
     try:
         if lib.algen_minimal_inplace(1, k, alive.width, ksize, vsize, key_ptr, val_ptr, sizes, drop_ptr) != 0:
             raise RuntimeError("native minimal compaction failed")
+    finally:
         try:
             _truncate(alive, sizes)
-        except BaseException:
-            # сигнал, доставленный другой нити, может прервать Python-код и здесь:
-            # доводим обрезку до конца (она идемпотентна), затем пробрасываем
-            _truncate(alive, sizes)
-            raise
-    finally:
-        signal.pthread_sigmask(signal.SIG_SETMASK, previous)
+        finally:
+            signal.pthread_sigmask(signal.SIG_SETMASK, previous)
     return alive
 
 

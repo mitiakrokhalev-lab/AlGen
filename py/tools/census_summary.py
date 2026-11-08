@@ -13,11 +13,17 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("dir")
     p.add_argument("--out", required=True)
+    p.add_argument("--parts", type=int, required=True, help="число частей: план каждой обязателен")
+    p.add_argument("--expect", type=int, default=0, help="ожидаемое число схем базы (0 — не сверять)")
     a = p.parse_args()
     root = Path(a.dir)
-    planned = []
-    for f in sorted(root.rglob("_план-*.json")):
-        planned += json.loads(f.read_text(encoding="utf-8"))["схемы"]
+    planned, missing_parts = [], []
+    for i in range(1, a.parts + 1):
+        files = list(root.rglob(f"_план-{i}-{a.parts}.json"))
+        if not files:
+            missing_parts.append(i)
+            continue
+        planned += json.loads(files[0].read_text(encoding="utf-8"))["схемы"]
     recs = {}
     for f in root.rglob("*.json"):
         if f.name.startswith("_"):
@@ -44,7 +50,10 @@ def main():
     mins = sorted(r["минимальных"] for r in done)
     def q(x):
         return mins[min(len(mins) - 1, int(x * len(mins)))] if mins else None
-    summary = dict(схем_в_плане=len(planned), исходы=outcomes, посчитано=len(done),
+    summary = dict(схем_в_плане=len(planned), частей_без_плана=missing_parts,
+                   ожидалось_схем=a.expect or None,
+                   полный_план=(not missing_parts and (not a.expect or len(planned) == a.expect)),
+                   исходы=outcomes, посчитано=len(done),
                    минимальных_всего=sum(mins), медиана=q(.5), p90=q(.9), p99=q(.99),
                    максимум=mins[-1] if mins else None,
                    секунд_всего=round(sum(r["секунд"] or 0 for r in rows), 1),

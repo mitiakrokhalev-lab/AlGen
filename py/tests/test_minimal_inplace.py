@@ -141,6 +141,45 @@ class InplaceMinimalTest(unittest.TestCase):
             signal.signal(signal.SIGALRM, old)
         self.assertEqual(snapshot(alive), expected)
 
+    def test_process_signal_around_compaction_leaves_consistent_arrays(self):
+        """Сигнал процессу (его может принять нить OpenBLAS, маска главной нити
+        его не держит) прямо до или прямо после сжатия: alive либо прежний,
+        либо полностью минимальный — никогда не наполовину сжатый."""
+        import os
+
+        class Deadline(Exception):
+            pass
+        lib = N.library()
+        original = lib.algen_minimal_inplace
+        with patch.object(E, "NATIVE_MINIMAL", False):
+            expected = snapshot(E.minimal(big_packed()))
+        before = snapshot(big_packed())
+
+        def stop(*_):
+            raise Deadline("deadline")
+        for when in ("before", "after"):
+            def wrapped(mode, *args, when=when):
+                if mode == 1 and when == "before":
+                    os.kill(os.getpid(), signal.SIGALRM)
+                result = original(mode, *args)
+                if mode == 1 and when == "after":
+                    os.kill(os.getpid(), signal.SIGALRM)
+                return result
+            alive = big_packed()
+            old = signal.signal(signal.SIGALRM, stop)
+            try:
+                with patch.object(lib, "algen_minimal_inplace", wrapped):
+                    try:
+                        E.minimal(alive, inplace=True)
+                    except Deadline:
+                        pass
+            finally:
+                signal.signal(signal.SIGALRM, old)
+            got = snapshot(alive)
+            self.assertIn(got, (before, expected), msg=when)
+            if when == "after":
+                self.assertEqual(got, expected)
+
 def big_packed():
     """~1 млн условий длины 3 и 20 тыс. длины 2 (часть третьих — их надмножества)."""
     from array import array

@@ -93,7 +93,7 @@ jobs:
           retention-days: 90
 
   summary:
-    needs: part
+    needs: [plan, part]
     if: always()
     runs-on: ubuntu-24.04
     permissions:
@@ -106,7 +106,7 @@ jobs:
           path: parts
       - name: Сводка
         working-directory: py
-        run: python3 -B -m tools.census_summary ../parts --out ../census.json
+        run: python3 -B -m tools.census_summary ../parts --out ../census.json --parts ${{ needs.plan.outputs.n }} --expect 1047
       - name: Результаты в ветку results-<ветка>
         run: |
           tar czf census-parts.tar.gz parts
