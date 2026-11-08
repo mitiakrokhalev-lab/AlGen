@@ -1955,7 +1955,44 @@ def _sample_stats(form, mins, report, total):
                 for a, _v in form.lits(c):
                     names.add(atom_name(a))
             atoms.update(names)
-    return {"минимальных": total if total is not None else len(mins), "выборка": len(mins),
+    # диагностика: живые примеры и доля неизвестных значений решающих атомов
+    examples, atom_col = [], {}
+    import numpy as np
+    _, P, valid = form._bits(form.m)
+    nrows = form.m.shape[0]
+    synth = form.synth_mask()
+
+    def unpack(bits):
+        return np.unpackbits(bits.view(np.uint8), bitorder="little")[:nrows].astype(bool)
+    for r in report:
+        if r["вердикт"] != "неизвестно":
+            continue
+        cols = r.get("_cols") or []
+        hits = form.one_unknown(cols, limit=60) if cols else []
+        for _, c in hits:
+            for a, _v in form.lits(c):
+                atom_col.setdefault(atom_name(a), c)
+        if len(examples) < 60:
+            prem, g = cols[:-1], cols[-1] ^ 1
+            sat = form._and(form.m, list(prem) + list(form.fixed))
+            n_sat = int(unpack(sat).sum())
+            n_true = int(unpack(sat & P[g]).sum())
+            n_unk = int(unpack(sat & ~P[g] & ~P[g ^ 1]).sum())
+            examples.append({"посылки": r["посылки"], "цель": r["цель"], "строк с посылками": n_sat,
+                             "цель верна": n_true, "цель неизвестна": n_unk,
+                             "из них синтетических": int((unpack(sat & ~P[g] & ~P[g ^ 1]) & synth).sum()),
+                             "решающие": [form.value_name(x, form.lit(c)[0]) if form.lit(c)[0][0] != "pair" else
+                                          form.value_name(x, form.lits(c)[0][0]) for x, c in hits[:3]]})
+    unknown_share = {}
+    for name, _cnt in atoms.most_common(40):
+        c = atom_col.get(name)
+        if c is None:
+            continue
+        unk = unpack(valid & ~P[c] & ~P[c ^ 1])
+        unknown_share[name] = {"настоящих строк": int((~synth).sum()), "неизвестно у настоящих": int((unk & ~synth).sum()),
+                               "синтетических строк": int(synth.sum()), "неизвестно у синтетических": int((unk & synth).sum())}
+    return {"примеры": examples, "доля неизвестных": unknown_share,
+            "минимальных": total if total is not None else len(mins), "выборка": len(mins),
             "в отчёте": len(report), "отсеяно до отчёта": len(mins) - len(report),
             "вердикты": dict(kinds), "неизвестно на одном значении": blocked,
             "сводится к вырожденности": reduce, "решающие атомы": atoms.most_common(40)}
