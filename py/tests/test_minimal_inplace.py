@@ -114,6 +114,33 @@ class InplaceMinimalTest(unittest.TestCase):
         self.assertEqual(snapshot(E.minimal(alive, inplace=True)), expected)
 
 
+    def test_signal_after_compaction_waits_for_consistent_arrays(self):
+        """Сигнал в окне между сжатием и обрезкой доставляется только после обрезки."""
+        class Deadline(Exception):
+            pass
+        lib = N.library()
+        original = lib.algen_minimal_inplace
+
+        def late(mode, *args):
+            result = original(mode, *args)
+            if mode == 1:
+                signal.raise_signal(signal.SIGALRM)  # сразу после сжатия, до обрезки
+            return result
+
+        def stop(*_):
+            raise Deadline("deadline")
+        with patch.object(E, "NATIVE_MINIMAL", False):
+            expected = snapshot(E.minimal(big_packed()))
+        alive = big_packed()
+        old = signal.signal(signal.SIGALRM, stop)
+        try:
+            with patch.object(lib, "algen_minimal_inplace", late):
+                with self.assertRaises(Deadline):
+                    E.minimal(alive, inplace=True)
+        finally:
+            signal.signal(signal.SIGALRM, old)
+        self.assertEqual(snapshot(alive), expected)
+
 def big_packed():
     """~1 млн условий длины 3 и 20 тыс. длины 2 (часть третьих — их надмножества)."""
     from array import array

@@ -144,17 +144,18 @@ def child(a):
                 if a.enumeration_only:
                     alive, empty = result
                     before = packed_digest("enumeration", form, alive, empty)
+                    entries = len(alive)  # до минимальности: minimal на месте меняет alive
                     if a.with_minimal:
                         record("minimal-only:start")
                         # Как в run(): минимальность на месте, если код её поддерживает
-                        # (ALGEN_INPLACE_MINIMAL=0 — прежняя копия).
+                        # (--copy-minimal — прежняя копия).
                         inplace = hasattr(E, "INPLACE_MINIMAL")
                         mins = E.minimal(alive, inplace=True) if inplace else E.minimal(alive)
                         record("minimal-only:end", entries=len(mins), inplace=inplace and E.INPLACE_MINIMAL)
                         after = packed_digest("minimal", form, mins, empty)
                     else:
                         after = None
-                    record("enumeration:verified", entries=len(alive), empty=len(empty), n_alive=form.n_alive,
+                    record("enumeration:verified", entries=entries, empty=len(empty), n_alive=form.n_alive,
                            enumeration_sha256=before, minimal_sha256=after, engine=form.enumeration_engine)
                     raise EnumerationComplete()
             return result
@@ -231,6 +232,7 @@ def main():
     p.add_argument("--with-minimal", action="store_true", help="в enumeration-only также проверить повторный minimal")
     p.add_argument("--save-enumeration", action="store_true", help="сохранить все packed keys/support/empty в бинарный файл")
     p.add_argument("--python-enum", action="store_true", help="прежние Python enumerate/minimal")
+    p.add_argument("--copy-minimal", action="store_true", help="минимальность с копией (ALGEN_INPLACE_MINIMAL=0)")
     p.add_argument("--eager-search", action="store_true", help="прежнее немедленное создание solver Search")
     p.add_argument("--legacy-leaf-minimal", action="store_true", help="полный обход подусловий без раннего выхода")
     p.add_argument("--legacy-leaf-matrix", action="store_true", help="битовые операции по всем целям листа")
@@ -267,6 +269,8 @@ def main():
         env["ALGEN_SPARSE_LEAF"] = "0"
     if a.python_enum:
         env["ALGEN_NATIVE_ENUM"] = env["ALGEN_NATIVE_MINIMAL"] = "0"
+    if a.copy_minimal:
+        env["ALGEN_INPLACE_MINIMAL"] = "0"
     cmd = [sys.executable, "-B", "-m", "tools.profile_memory", "--child", "--tables", a.tables,
            "--skel", a.skel, "--library-cache", a.library_cache, "--scheme", a.scheme, "--out", a.out,
            "--seconds", str(a.seconds), "--rss-gib", str(a.rss_gib)]
@@ -286,7 +290,7 @@ def main():
         cmd.append("--legacy-leaf-minimal")
     if a.legacy_leaf_matrix:
         cmd.append("--legacy-leaf-matrix")
-    for option in ("enumeration_only", "with_minimal", "save_enumeration", "python_enum"):
+    for option in ("enumeration_only", "with_minimal", "save_enumeration", "python_enum", "copy_minimal"):
         if getattr(a, option):
             cmd.append("--" + option.replace("_", "-"))
     if a.save_report:

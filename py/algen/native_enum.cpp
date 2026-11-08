@@ -195,41 +195,44 @@ struct Engine {
     }
 };
 
-// In-place minimal for PackedConditions buffers. Phase 1 only reads and marks
-// (interruptible); phase 2 compacts stably and cannot be interrupted, so the
-// arrays are never left half-compacted. Same test as algen_minimal: a key of
-// length d>1 is dropped iff some key of length d-1 (one premise omitted, same
-// goal) is present in the ORIGINAL input. Returns 0, or -1 with a Python error.
+// In-place minimal for PackedConditions buffers, in two calls.
+// mode 0 (interruptible, read-only): mark dropped keys in caller bitmaps.
+// mode 1 (no signal checks): stable in-place compaction by those bitmaps;
+// Python masks signals around mode 1 and the truncation that follows, so the
+// arrays are never observed half-compacted. A key of length d>1 is dropped iff
+// some key of length (d minus all copies of one premise value) with the same
+// goal is present in the ORIGINAL input — exactly as algen_minimal.
 template<class K>
-static int minimal_inplace_t(int k,int width,size_t vsize,void *const *keys_v,void *const *vals_v,size_t *sizes) {
+static int minimal_inplace_t(int mode,int k,int width,size_t vsize,void *const *keys_v,void *const *vals_v,
+                             size_t *sizes,U *const *drop) {
     const U mask=(U(1)<<width)-1;
-    std::vector<std::vector<U>> drop(k+1);
-    for(int depth=2;depth<=k;++depth) {
-        size_t n=sizes[depth]; if(!n) continue;
-        const K *keys=static_cast<const K*>(keys_v[depth]);
-        drop[depth].assign((n+63)/64,0);
-        std::vector<int> prem(depth);
-        for(size_t i=0;i<n;++i) {
-            if(!(i%2048)) signals();
-            U c=keys[i], goal=c&mask, rest=c>>width;
-            for(int p=depth-1;p>=0;--p) { prem[p]=int(rest&mask); rest>>=width; }
-            for(int omit:prem) {
-                // repeated premises: omitting one value removes all its copies
-                U q=1; int length=0;
-                for(int x:prem) if(x!=omit) { q=(q<<width)|U(x); ++length; }
-                q=(q<<width)|goal;
-                const K *lower=static_cast<const K*>(keys_v[length]);
-                if(sizes[length] && std::binary_search(lower,lower+sizes[length],K(q))) {
-                    drop[depth][i/64]|=U(1)<<(i%64); break;
+    if(mode==0) {
+        for(int depth=2;depth<=k;++depth) {
+            size_t n=sizes[depth]; if(!n) continue;
+            const K *keys=static_cast<const K*>(keys_v[depth]);
+            std::vector<int> prem(depth);
+            for(size_t i=0;i<n;++i) {
+                if(!(i%2048)) signals();
+                U c=keys[i], goal=c&mask, rest=c>>width;
+                for(int p=depth-1;p>=0;--p) { prem[p]=int(rest&mask); rest>>=width; }
+                for(int omit:prem) {
+                    U q=1; int length=0;
+                    for(int x:prem) if(x!=omit) { q=(q<<width)|U(x); ++length; }
+                    q=(q<<width)|goal;
+                    const K *lower=static_cast<const K*>(keys_v[length]);
+                    if(sizes[length] && std::binary_search(lower,lower+sizes[length],K(q))) {
+                        drop[depth][i/64]|=U(1)<<(i%64); break;
+                    }
                 }
             }
         }
+        return 0;
     }
     for(int depth=2;depth<=k;++depth) {
-        if(drop[depth].empty()) continue;
+        size_t n=sizes[depth]; if(!n) continue;
         K *keys=static_cast<K*>(keys_v[depth]);
         unsigned char *vals=static_cast<unsigned char*>(vals_v[depth]);
-        size_t n=sizes[depth], w=0;
+        size_t w=0;
         for(size_t i=0;i<n;++i) {
             if((drop[depth][i/64]>>(i%64))&1) continue;
             if(w!=i) { keys[w]=keys[i]; std::memmove(vals+w*vsize,vals+i*vsize,vsize); }
@@ -283,13 +286,15 @@ void algen_release_chunk(void *p,int depth,int kind,size_t i) {
     std::vector<unsigned char>().swap(c.chunks[i]);
 }
 void algen_free(void *p) { delete static_cast<Result*>(p); }
-int algen_minimal_inplace(int k,int width,int ksize,int vsize,void *const *keys,void *const *vals,size_t *sizes) {
+int algen_minimal_inplace(int mode,int k,int width,int ksize,int vsize,void *const *keys,void *const *vals,
+                          size_t *sizes,U *const *drop) {
     try {
+        size_t v=size_t(vsize);
         switch(ksize) {
-            case 1: return minimal_inplace_t<uint8_t>(k,width,size_t(vsize),keys,vals,sizes);
-            case 2: return minimal_inplace_t<uint16_t>(k,width,size_t(vsize),keys,vals,sizes);
-            case 4: return minimal_inplace_t<uint32_t>(k,width,size_t(vsize),keys,vals,sizes);
-            case 8: return minimal_inplace_t<uint64_t>(k,width,size_t(vsize),keys,vals,sizes);
+            case 1: return minimal_inplace_t<uint8_t>(mode,k,width,v,keys,vals,sizes,drop);
+            case 2: return minimal_inplace_t<uint16_t>(mode,k,width,v,keys,vals,sizes,drop);
+            case 4: return minimal_inplace_t<uint32_t>(mode,k,width,v,keys,vals,sizes,drop);
+            case 8: return minimal_inplace_t<uint64_t>(mode,k,width,v,keys,vals,sizes,drop);
         }
         PyErr_SetString(PyExc_ValueError,"native minimal: key size"); return -1;
     } catch(const Interrupted &) { return -1; }

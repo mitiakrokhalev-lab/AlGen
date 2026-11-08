@@ -176,6 +176,7 @@ jobs:
               print(json.dumps(s, ensure_ascii=False)[:2000])
           for p in out['peaks']:
               print(p)
+          assert out['report_sha_ok'] is not False, 'report SHA не совпал с эталоном'
           PY
       - uses: actions/upload-artifact@v4
         if: always()

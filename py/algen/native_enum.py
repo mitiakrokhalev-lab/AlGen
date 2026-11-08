@@ -10,6 +10,7 @@ import hashlib
 import os
 from pathlib import Path
 import shutil
+import signal
 import subprocess
 import sys
 import sysconfig
@@ -75,8 +76,8 @@ def library():
         lib.algen_minimal.restype = C.c_void_p
         lib.algen_minimal.argtypes = [C.c_int, C.c_int, C.c_void_p, C.c_void_p, C.c_void_p]
         lib.algen_minimal_inplace.restype = C.c_int
-        lib.algen_minimal_inplace.argtypes = [C.c_int, C.c_int, C.c_int, C.c_int,
-                                              C.c_void_p, C.c_void_p, C.c_void_p]
+        lib.algen_minimal_inplace.argtypes = [C.c_int, C.c_int, C.c_int, C.c_int, C.c_int,
+                                              C.c_void_p, C.c_void_p, C.c_void_p, C.c_void_p]
         lib.source_hash = key
         _library = lib
     except (OSError, subprocess.SubprocessError) as e:
@@ -214,9 +215,10 @@ def minimal_packed(alive):
 def minimal_inplace(alive):
     """minimal() that reuses the buffers of `alive` (no copy of the conditions).
 
-    Same kept keys/supports/order/blocks as minimal_packed. Marking is
-    interruptible and changes nothing; compaction runs only after marking
-    finished. Returns `alive`, or None when the compiled kernel is unavailable.
+    Same kept keys/supports/order/blocks as minimal_packed. Marking (bitmaps,
+    1 bit per condition) is interruptible and changes nothing. Compaction and
+    truncation run with SIGALRM/SIGINT blocked, so a timeout is delivered only
+    after `alive` is consistent again. Returns `alive`, or None without kernel.
     """
     k = alive.max_premises
     if alive.width * (k+1) + 1 > 64 or any(not 0 <= d <= k for d in alive.blocks):
@@ -228,18 +230,42 @@ def minimal_inplace(alive):
     sizes = (C.c_size_t * (k+1))()
     key_ptr = (C.c_void_p * (k+1))()
     val_ptr = (C.c_void_p * (k+1))()
+    drop_ptr = (C.c_void_p * (k+1))()
+    bitmaps = []
     for depth, (kk, vv) in alive.blocks.items():
         if (kk.itemsize, vv.itemsize) != (ksize, vsize) or len(kk) != len(vv):
             raise ValueError("packed block layout")
         sizes[depth] = len(kk)
         key_ptr[depth], val_ptr[depth] = kk.buffer_info()[0], vv.buffer_info()[0]
-    if lib.algen_minimal_inplace(k, alive.width, ksize, vsize, key_ptr, val_ptr, sizes) != 0:
+        bits = np.zeros((len(kk) + 63) // 64, dtype=np.uint64)
+        bitmaps.append(bits)
+        drop_ptr[depth] = bits.ctypes.data
+    if lib.algen_minimal_inplace(0, k, alive.width, ksize, vsize, key_ptr, val_ptr, sizes, drop_ptr) != 0:
         raise RuntimeError("native minimal returned no result")
+    blocked = {signal.SIGALRM, signal.SIGINT}
+    previous = signal.pthread_sigmask(signal.SIG_BLOCK, blocked)
+    try:
+        if lib.algen_minimal_inplace(1, k, alive.width, ksize, vsize, key_ptr, val_ptr, sizes, drop_ptr) != 0:
+            raise RuntimeError("native minimal compaction failed")
+        try:
+            _truncate(alive, sizes)
+        except BaseException:
+            # сигнал, доставленный другой нити, может прервать Python-код и здесь:
+            # доводим обрезку до конца (она идемпотентна), затем пробрасываем
+            _truncate(alive, sizes)
+            raise
+    finally:
+        signal.pthread_sigmask(signal.SIG_SETMASK, previous)
+    return alive
+
+
+def _truncate(alive, sizes):
+    """Обрезать массивы до новых длин; повторный вызов ничего не меняет."""
     total = 0
     for depth in list(alive.blocks):
         kk, vv = alive.blocks[depth]
         n = sizes[depth]
-        if n > len(kk):
+        if n > len(kk) or n > len(vv):
             raise RuntimeError("native minimal size")
         del kk[n:]
         del vv[n:]
@@ -248,4 +274,3 @@ def minimal_inplace(alive):
         else:
             del alive.blocks[depth]
     alive.size = total
-    return alive
