@@ -232,10 +232,16 @@ class Model:
         self.raw = None  # записи GAP (размеры классов подгрупп) — по требованию
         with open(FAMILIES, encoding="utf-8") as f:
             self.fam = {k: {int(n): v for n, v in d.items()} for k, d in json.load(f)["семейства"].items()}
-        self.finite = [k for k, o in self.lib.obj.items() if o["конечная"]]
-        self.by_order = {}
-        for k in self.finite:
-            self.by_order.setdefault(int(k.split(":")[0]), []).append(k)
+        # Примеры — группы таблицы (ключ «порядок:номер»). Библиотека по ходу
+        # прогона синтезирует объекты (Sym(n) и т. п.), у их ключа нет порядка в
+        # начале: прежде это роняло весь прогон архива (8.11). Такие ключи
+        # пропускаются, как и до их синтеза.
+        self.finite, self.by_order = [], {}
+        for k, o in self.lib.obj.items():
+            head = k.split(":")[0]
+            if o["конечная"] and head.isdigit():
+                self.finite.append(k)
+                self.by_order.setdefault(int(head), []).append(k)
 
     # значение терма: ("num", n), ("grp", key), ("sub", key, i) или None
     def term(self, t, env):
