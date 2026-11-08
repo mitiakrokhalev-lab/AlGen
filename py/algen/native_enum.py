@@ -17,6 +17,8 @@ import tempfile
 
 import numpy as np
 
+from .conditions import PackedPremises
+
 _library = None
 _unavailable = None
 
@@ -53,17 +55,28 @@ def library():
         lib = C.PyDLL(str(target))
         lib.algen_enum.restype = C.c_void_p
         lib.algen_enum.argtypes = [C.c_int, C.c_int, C.c_int, C.c_uint64, C.c_int, C.c_int,
-                                  C.c_void_p, C.c_size_t, C.c_void_p, C.c_size_t] + [C.c_void_p] * 12
+                                  C.c_void_p, C.c_size_t, C.c_void_p, C.c_size_t] + [C.c_void_p] * 12 + [C.c_int, C.c_int]
         lib.algen_count.argtypes = [C.c_void_p]
         lib.algen_count.restype = C.c_uint64
         lib.algen_size.argtypes = [C.c_void_p, C.c_int, C.c_int]
         lib.algen_size.restype = C.c_size_t
         lib.algen_data.argtypes = [C.c_void_p, C.c_int, C.c_int]
         lib.algen_data.restype = C.POINTER(C.c_uint64)
+        lib.algen_itemsize.argtypes = [C.c_void_p, C.c_int, C.c_int]
+        lib.algen_itemsize.restype = C.c_size_t
+        lib.algen_nchunks.argtypes = [C.c_void_p, C.c_int, C.c_int]
+        lib.algen_nchunks.restype = C.c_size_t
+        lib.algen_chunk.argtypes = [C.c_void_p, C.c_int, C.c_int, C.c_size_t, C.POINTER(C.c_size_t)]
+        lib.algen_chunk.restype = C.c_void_p
+        lib.algen_release_chunk.argtypes = [C.c_void_p, C.c_int, C.c_int, C.c_size_t]
+        lib.algen_release_chunk.restype = None
         lib.algen_free.argtypes = [C.c_void_p]
         lib.algen_free.restype = None
         lib.algen_minimal.restype = C.c_void_p
         lib.algen_minimal.argtypes = [C.c_int, C.c_int, C.c_void_p, C.c_void_p, C.c_void_p]
+        lib.algen_minimal_inplace.restype = C.c_int
+        lib.algen_minimal_inplace.argtypes = [C.c_int, C.c_int, C.c_int, C.c_int,
+                                              C.c_void_p, C.c_void_p, C.c_void_p]
         lib.source_hash = key
         _library = lib
     except (OSError, subprocess.SubprocessError) as e:
@@ -122,7 +135,8 @@ def enumerate_numeric(alive, P0, pall, selected, goal_mask, skip, have0,
         raise ValueError("native enumeration input shape")
     handle = lib.algen_enum(n, k, alive.width, full, int(prune), props_from,
                             arrays[0].ctypes.data, nr, arrays[1].ctypes.data, selected,
-                            *[a.ctypes.data for a in arrays[2:]])
+                            *[a.ctypes.data for a in arrays[2:]],
+                            array(alive.key_type).itemsize, array(alive.support_type).itemsize)
     if not handle:
         raise RuntimeError("native enumeration returned no result")
     return _result(lib, handle, alive, range(1, k+1), True)
@@ -130,17 +144,30 @@ def enumerate_numeric(alive, P0, pall, selected, goal_mask, skip, have0,
 
 def _result(lib, handle, alive, order, include_empty):
     try:
-        empty = []
+        empty = PackedPremises(alive.width)
         for depth in order:
             block = []
             for kind, code in ((0, alive.key_type), (1, alive.support_type)):
+                # Chunk by chunk, freeing each native chunk once copied: the
+                # conditions are never held twice in full.
                 size = lib.algen_size(handle, depth, kind)
-                ptr = lib.algen_data(handle, depth, kind)
-                data = np.ctypeslib.as_array(ptr, shape=(size,)) if size else np.empty(0, dtype=np.uint64)
-                if size and int(data.max()) > np.iinfo(np.dtype(code)).max:
-                    raise OverflowError("native packed output overflow")
+                item = lib.algen_itemsize(handle, depth, kind)
                 out = array(code)
-                out.frombytes(data.astype(np.dtype(code), copy=False).tobytes())
+                count = C.c_size_t()
+                for i in range(lib.algen_nchunks(handle, depth, kind)):
+                    ptr = lib.algen_chunk(handle, depth, kind, i, C.byref(count))
+                    if count.value:
+                        raw = (C.c_ubyte * (count.value * item)).from_address(ptr)
+                        if item == out.itemsize:
+                            out.frombytes(raw)
+                        else:
+                            data = np.frombuffer(raw, dtype=np.dtype("u%d" % item))
+                            if int(data.max()) > np.iinfo(np.dtype(code)).max:
+                                raise OverflowError("native packed output overflow")
+                            out.frombytes(data.astype(np.dtype(code)).tobytes())
+                    lib.algen_release_chunk(handle, depth, kind, i)
+                if len(out) != size:
+                    raise ValueError("native packed output size")
                 block.append(out)
             if len(block[0]) != len(block[1]):
                 raise ValueError("native keys/supports length mismatch")
@@ -148,14 +175,11 @@ def _result(lib, handle, alive, order, include_empty):
                 alive.blocks[depth] = tuple(block)
                 alive.size += len(block[0])
             size = lib.algen_size(handle, depth, 2) if include_empty else 0
-            ptr = lib.algen_data(handle, depth, 2)
-            for i in range(size):
-                value = ptr[i]
-                prem = []
-                for _ in range(depth):
-                    prem.append(value & alive.mask)
-                    value >>= alive.width
-                empty.append(tuple(reversed(prem)))
+            if size:
+                codes = array("Q")
+                codes.frombytes((C.c_ubyte * (size * 8)).from_address(
+                    C.cast(lib.algen_data(handle, depth, 2), C.c_void_p).value))
+                empty.add_block(depth, codes)
         return alive, empty, int(lib.algen_count(handle)), lib.source_hash
     finally:
         lib.algen_free(handle)
@@ -185,3 +209,43 @@ def minimal_packed(alive):
         raise RuntimeError("native minimal returned no result")
     out, _, _, _ = _result(lib, handle, out, order, False)
     return out
+
+
+def minimal_inplace(alive):
+    """minimal() that reuses the buffers of `alive` (no copy of the conditions).
+
+    Same kept keys/supports/order/blocks as minimal_packed. Marking is
+    interruptible and changes nothing; compaction runs only after marking
+    finished. Returns `alive`, or None when the compiled kernel is unavailable.
+    """
+    k = alive.max_premises
+    if alive.width * (k+1) + 1 > 64 or any(not 0 <= d <= k for d in alive.blocks):
+        return None
+    lib = library()
+    if lib is None:
+        return None
+    ksize, vsize = array(alive.key_type).itemsize, array(alive.support_type).itemsize
+    sizes = (C.c_size_t * (k+1))()
+    key_ptr = (C.c_void_p * (k+1))()
+    val_ptr = (C.c_void_p * (k+1))()
+    for depth, (kk, vv) in alive.blocks.items():
+        if (kk.itemsize, vv.itemsize) != (ksize, vsize) or len(kk) != len(vv):
+            raise ValueError("packed block layout")
+        sizes[depth] = len(kk)
+        key_ptr[depth], val_ptr[depth] = kk.buffer_info()[0], vv.buffer_info()[0]
+    if lib.algen_minimal_inplace(k, alive.width, ksize, vsize, key_ptr, val_ptr, sizes) != 0:
+        raise RuntimeError("native minimal returned no result")
+    total = 0
+    for depth in list(alive.blocks):
+        kk, vv = alive.blocks[depth]
+        n = sizes[depth]
+        if n > len(kk):
+            raise RuntimeError("native minimal size")
+        del kk[n:]
+        del vv[n:]
+        if n:
+            total += n
+        else:
+            del alive.blocks[depth]
+    alive.size = total
+    return alive

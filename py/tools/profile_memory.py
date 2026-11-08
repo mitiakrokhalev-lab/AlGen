@@ -146,8 +146,11 @@ def child(a):
                     before = packed_digest("enumeration", form, alive, empty)
                     if a.with_minimal:
                         record("minimal-only:start")
-                        mins = E.minimal(alive)
-                        record("minimal-only:end", entries=len(mins))
+                        # Как в run(): минимальность на месте, если код её поддерживает
+                        # (ALGEN_INPLACE_MINIMAL=0 — прежняя копия).
+                        inplace = hasattr(E, "INPLACE_MINIMAL")
+                        mins = E.minimal(alive, inplace=True) if inplace else E.minimal(alive)
+                        record("minimal-only:end", entries=len(mins), inplace=inplace and E.INPLACE_MINIMAL)
                         after = packed_digest("minimal", form, mins, empty)
                     else:
                         after = None

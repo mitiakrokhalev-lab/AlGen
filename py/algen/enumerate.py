@@ -73,6 +73,8 @@ EARLY_MIN = os.environ.get("ALGEN_EARLY_MIN", "1") != "0"
 SPARSE_LEAF = os.environ.get("ALGEN_SPARSE_LEAF", "1") != "0"
 NATIVE_ENUM = os.environ.get("ALGEN_NATIVE_ENUM", "1") != "0"
 NATIVE_MINIMAL = os.environ.get("ALGEN_NATIVE_MINIMAL", "1") != "0"
+# Минимальность на месте (без второй копии условий); 0 — прежний путь с копией.
+INPLACE_MINIMAL = os.environ.get("ALGEN_INPLACE_MINIMAL", "1") != "0"
 REFRESH = 200  # выводов строк до пересоздания решателя
 REDUCE = True  # сводить «неизвестно» к вопросу «посылки ⇒ переменная вырождена?»
 # Посылки только из свойств (без отношений ⩽, ≅, ↪ между термами), начиная с этой
@@ -1625,8 +1627,20 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     return alive, empty
 
 
-def minimal(alive):
-    """Оставить условия, у которых без любой посылки цель опровергается."""
+def minimal(alive, inplace=False):
+    """Оставить условия, у которых без любой посылки цель опровергается.
+
+    inplace=True: результат пишется в те же массивы `alive` и возвращается сам
+    `alive` (без второй копии условий); ключи/поддержки/порядок те же.
+    """
+    if inplace and isinstance(alive, PackedConditions):
+        if NATIVE_MINIMAL and INPLACE_MINIMAL:
+            from .native_enum import minimal_inplace
+            if minimal_inplace(alive) is not None:
+                return alive
+        out = minimal(alive)
+        alive.blocks, alive.size = out.blocks, out.size
+        return alive
     if NATIVE_MINIMAL and isinstance(alive, PackedConditions):
         from .native_enum import minimal_packed
         result = minimal_packed(alive)
@@ -1774,7 +1788,7 @@ def run(max_prem, lib=None, vocab=None, form=None):
     _mem("начало", 0)
     alive, empty = enumerate_form(form, max_prem, m=form.m if CLOSE_MARKED else None)
     _mem("перебор", len(alive))
-    mins = minimal(alive)
+    mins = minimal(alive, inplace=True)  # alive дальше не нужен: run возвращает те же массивы
     _mem("минимальные", len(mins))
     if getattr(form, "pair_atoms", None):
         mins = pair_minimal(form, mins)

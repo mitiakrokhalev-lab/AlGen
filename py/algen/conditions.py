@@ -8,7 +8,7 @@
 
 from array import array
 from bisect import bisect_left
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 
 
 def _uint(maximum):
@@ -104,3 +104,65 @@ class PackedConditions(Mapping):
 
 def empty_like(conditions):
     return conditions.empty_like() if isinstance(conditions, PackedConditions) else {}
+
+
+class PackedPremises(Sequence):
+    """Посылки без единого примера: та же последовательность кортежей, что
+    список enumerate_form, но кодами в массиве (8 байт вместо кортежа Python).
+
+    Блоки идут в порядке добавления, внутри блока — порядок кодов как есть.
+    Код — маркер 1 и литералы по `width` бит, как ключ PackedConditions без цели.
+    """
+
+    def __init__(self, width):
+        self.width = width
+        self.mask = (1 << width) - 1
+        self.blocks = []  # [(длина посылок, array("Q"))]
+        self.size = 0
+
+    def add_block(self, depth, codes):
+        if len(codes):
+            self.blocks.append((depth, codes))
+            self.size += len(codes)
+
+    def _decode(self, depth, code):
+        prem = []
+        for _ in range(depth):
+            prem.append(code & self.mask)
+            code >>= self.width
+        return tuple(reversed(prem))
+
+    def __len__(self):
+        return self.size
+
+    def __iter__(self):
+        for depth, codes in self.blocks:
+            for code in codes:
+                yield self._decode(depth, code)
+
+    def __getitem__(self, i):
+        if isinstance(i, slice):
+            return list(self)[i]
+        if i < 0:
+            i += self.size
+        if not 0 <= i < self.size:
+            raise IndexError(i)
+        for depth, codes in self.blocks:
+            if i < len(codes):
+                return self._decode(depth, codes[i])
+            i -= len(codes)
+        raise IndexError(i)
+
+    def __eq__(self, other):
+        if isinstance(other, (list, tuple, PackedPremises)):
+            return len(self) == len(other) and all(a == b for a, b in zip(self, other))
+        return NotImplemented
+
+    __hash__ = None
+
+    def __repr__(self):
+        return f"PackedPremises({len(self)})"
+
+    @property
+    def nbytes(self):
+        return sum(len(c) * c.itemsize for _, c in self.blocks)
