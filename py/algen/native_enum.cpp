@@ -59,7 +59,7 @@ struct Engine {
     U full,ticks=0;
     const U *coverage;
     const uint8_t *goals,*skip,*have0,*reqcols,*relations;
-    const int32_t *reqoffs,*reqvalues,*clashoffs,*clashvalues;
+    const int32_t *reqoffs,*reqvalues,*clashoffs,*clashvalues,*provideroffs,*providervalues;
     int props_from;
     Matrix pall;
     Result out;
@@ -67,15 +67,19 @@ struct Engine {
     Engine(int n_,int k_,int width_,U full_,bool prune_,int props_,const U *all,size_t nr,
            const U *cov,const uint8_t *g,const uint8_t *s,const uint8_t *h,
            const uint8_t *rc,const uint8_t *rel,const int32_t *ro,const int32_t *rv,
-           const int32_t *co,const int32_t *cv)
+           const int32_t *co,const int32_t *cv,const int32_t *po,const int32_t *pv)
       :n(n_),k(k_),width(width_),atoms(n_/2),need(full_!=0),prune(prune_),full(full_),
        coverage(cov),goals(g),skip(s),have0(h),reqcols(rc),relations(rel),
-       reqoffs(ro),reqvalues(rv),clashoffs(co),clashvalues(cv),props_from(props_),pall(all,n_,nr),out(k_) {}
+       reqoffs(ro),reqvalues(rv),clashoffs(co),clashvalues(cv),provideroffs(po),providervalues(pv),
+       props_from(props_),pall(all,n_,nr),out(k_) {}
     U code(const std::vector<int> &p) const {
         U c=1; for(int j:p) c=(c<<width)|U(j); return c;
     }
     bool has(const std::vector<int> &p,int j) const {
-        return have0[j] || std::find(p.begin(),p.end(),j)!=p.end();
+        if(have0[j] || std::find(p.begin(),p.end(),j)!=p.end()) return true;
+        for(int selected:p) for(int i=provideroffs[selected];i<provideroffs[selected+1];++i)
+            if(providervalues[i]==j) return true;
+        return false;
     }
     bool req(const std::vector<int> &p,int atom) const {
         for(int i=reqoffs[atom];i<reqoffs[atom+1];++i) if(!has(p,reqvalues[i])) return false;
@@ -177,9 +181,10 @@ void *algen_enum(int n,int k,int width,U full,int prune,int props_from,
                 const U *coverage,const uint8_t *goals,const uint8_t *skip,const uint8_t *have0,
                 const uint8_t *reqcols,const uint8_t *relations,
                 const int32_t *reqoffs,const int32_t *reqvalues,
-                const int32_t *clashoffs,const int32_t *clashvalues) {
+                const int32_t *clashoffs,const int32_t *clashvalues,
+                const int32_t *provideroffs,const int32_t *providervalues) {
     try {
-        Engine e(n,k,width,full,prune,props_from,all,nr,coverage,goals,skip,have0,reqcols,relations,reqoffs,reqvalues,clashoffs,clashvalues);
+        Engine e(n,k,width,full,prune,props_from,all,nr,coverage,goals,skip,have0,reqcols,relations,reqoffs,reqvalues,clashoffs,clashvalues,provideroffs,providervalues);
         Matrix P(initial,n,selected); Bits r=ones(selected); std::vector<int> p;
         for(int depth=1;depth<=k;++depth) e.go(p,r,0,depth,0,P);
         signals(); return new Result(std::move(e.out));

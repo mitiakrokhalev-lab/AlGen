@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_utc": "2026-11-08T01:08:34.836137+00:00",
+  "updated_utc": "2026-11-08T01:50:12.074780+00:00",
   "scope": "Readiness plan for first full fixed-domain enumeration; NOT a full-run receipt or an implemented automatic launch gate",
   "user_goal": {
     "first_complete_enumeration_once": true,
@@ -16,13 +16,13 @@
   },
   "ready_for_full_run": false,
   "automatic_launch_gate_implemented": false,
-  "current_verified_code_commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
+  "current_verified_code_commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
   "ci": {
-    "run": 42421968228,
-    "job": 128552125593,
-    "commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
-    "tests": 178,
-    "seconds": 117.703,
+    "run": 42435664050,
+    "job": 128593834086,
+    "commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
+    "tests": 184,
+    "seconds": 123.646,
     "result": "OK",
     "skipped": 0
   },
@@ -152,10 +152,14 @@
       "required": "Each admissible candidate is retained or covered by a checked current reason; all omissions/failures remain explicit debt",
       "observed": {
         "whole_class_coverage_certificate": false,
-        "ordinary_report_retains_full_frontier": false
+        "ordinary_report_retains_full_frontier": false,
+        "paired_requirements_red_flag_fixed": true,
+        "paired_historical_results_need_coverage_refresh": true,
+        "automatic_archive_coverage_migration_implemented": false
       },
       "evidence": [
-        "граница-кандидатов.md"
+        "граница-кандидатов.md",
+        "metrics-pair-requirements.json"
       ]
     },
     {
@@ -235,12 +239,15 @@
     "uncovered": 0,
     "changes_gate_status": false
   },
-  "previous_verified_code_commit": "6e633789b2ac6a56eeea300d59af6a62bc0cb0f7",
+  "previous_verified_code_commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
   "previous_ci": {
-    "run": 42393621793,
-    "tests": 149,
-    "seconds": 488.839,
-    "result": "OK"
+    "run": 42421968228,
+    "job": 128552125593,
+    "commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
+    "tests": 178,
+    "seconds": 117.703,
+    "result": "OK",
+    "skipped": 0
   },
   "latest_planning_check": {
     "metrics": "metrics-scheme-plan.json",
@@ -249,5 +256,15 @@
     "schemes": 148991,
     "mathematical_coverage_audit_complete": false,
     "full_task_run_started": false
+  },
+  "latest_correctness_check": {
+    "metrics": "metrics-pair-requirements.json",
+    "code_commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
+    "new_red_flag": "paired premises lost primitive definedness requirements; half-pair removal allowed undefined terms",
+    "status": "fixed; independent code/math review and full CI184 OK",
+    "whole_class_coverage_audit_complete": false,
+    "old_paired_results_require_coverage_refresh": true,
+    "automatic_archive_coverage_migration_implemented": false,
+    "changes_gate_status": false
   }
 }

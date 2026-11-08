@@ -1,4 +1,4 @@
-"""Compiled numeric enumeration, with an unchanged Python fallback.
+"""Compiled numeric enumeration, with a matching Python reference fallback.
 
 No changes to vocabulary/Library fingerprints. A PyDLL call holds the GIL;
 the kernel polls PyErr_CheckSignals so existing Python scheme timeouts work.
@@ -53,7 +53,7 @@ def library():
         lib = C.PyDLL(str(target))
         lib.algen_enum.restype = C.c_void_p
         lib.algen_enum.argtypes = [C.c_int, C.c_int, C.c_int, C.c_uint64, C.c_int, C.c_int,
-                                  C.c_void_p, C.c_size_t, C.c_void_p, C.c_size_t] + [C.c_void_p] * 10
+                                  C.c_void_p, C.c_size_t, C.c_void_p, C.c_size_t] + [C.c_void_p] * 12
         lib.algen_count.argtypes = [C.c_void_p]
         lib.algen_count.restype = C.c_uint64
         lib.algen_size.argtypes = [C.c_void_p, C.c_int, C.c_int]
@@ -72,7 +72,7 @@ def library():
 
 
 def enumerate_numeric(alive, P0, pall, selected, goal_mask, skip, have0,
-                      req, reqcols, clash, coverage, full, prune, relations, props_from):
+                      req, reqcols, clash, coverage, full, prune, relations, props_from, providers=None):
     """Return (packed alive, list empty, count), or None before starting native.
 
     Bounds are checked before C++. Numerical arrays remain live for the call;
@@ -87,6 +87,9 @@ def enumerate_numeric(alive, P0, pall, selected, goal_mask, skip, have0,
         return None
     if any(not 0 <= a < n//2 or any(not 0 <= b < n//2 for b in others) for a, others in clash.items()):
         return None
+    providers = providers or {}
+    if any(not 0 <= j < n or any(not 0 <= c < n for c in cs) for j, cs in providers.items()):
+        return None
     lib = library()
     if lib is None:
         return None
@@ -98,12 +101,19 @@ def enumerate_numeric(alive, P0, pall, selected, goal_mask, skip, have0,
         clash_offsets.append(len(clash_values))
     if max(len(values), len(clash_values)) >= 2**31:
         return None
+    provider_offsets, provider_values = [0], []
+    for j in range(n):
+        provider_values.extend(sorted(providers.get(j, ())))
+        provider_offsets.append(len(provider_values))
+    if len(provider_values) >= 2**31:
+        return None
     arrays = [np.ascontiguousarray(pall, dtype=np.uint64), np.ascontiguousarray(P0, dtype=np.uint64),
               np.ascontiguousarray(coverage, dtype=np.uint64), np.ascontiguousarray(goal_mask, dtype=np.uint8),
               np.ascontiguousarray(skip, dtype=np.uint8), np.ascontiguousarray(have0, dtype=np.uint8),
               np.ascontiguousarray(reqcols, dtype=np.uint8), np.ascontiguousarray(relations, dtype=np.uint8),
               np.array(offsets, dtype=np.int32), np.array(values, dtype=np.int32),
-              np.array(clash_offsets, dtype=np.int32), np.array(clash_values, dtype=np.int32)]
+              np.array(clash_offsets, dtype=np.int32), np.array(clash_values, dtype=np.int32),
+              np.array(provider_offsets, dtype=np.int32), np.array(provider_values, dtype=np.int32)]
     nr = alive.max_support
     if (arrays[0].shape != (n, max(1, (nr+63)//64))
             or arrays[1].shape != (n, max(1, (selected+63)//64))

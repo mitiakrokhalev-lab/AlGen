@@ -523,6 +523,17 @@ def _fp(base):
     return f"{_fingerprint()}:{base}:{','.join(sorted(E.SKIP))}{mode}"
 
 
+def result_fp(base, k, defer=0):
+    """Completed paired reports made before provider expansion are incomplete.
+
+    Keep Library/table fingerprints and unaffected nonpaired reports reusable.
+    """
+    fp = _fp(base) + f":{k}" + (f":d{defer}" if defer else "")
+    if base in SWAP:
+        fp += f":pair-req:{E.PAIR_REQUIREMENTS_VERSION}"
+    return fp
+
+
 def theory_fp(base, form=None):
     """Хэш того, от чего зависит вывод строки по её записанным значениям.
 
@@ -1423,7 +1434,7 @@ def run_schemes(a):
         print(f"нет таблицы G для фильтра: {e}", file=sys.stderr)
     by_base = {}
     for base in a.bases.split(","):
-        fp = _fp(base) + f":{a.k}" + (f":d{a.defer}" if a.defer else "")
+        fp = result_fp(base, a.k, a.defer)
         if _STATE["live"]:
             if (_STATE["live"]["header"]["base"] != base or _STATE["live"]["header"]["class"] != CLASS):
                 raise ValueError("один динамический контекст применяется только к своей базе и классу")
