@@ -1,0 +1,2575 @@
+{
+ "new-G1420390-full": {
+  "verdict.json": {
+   "case": "new-G1420390-full",
+   "complete": true,
+   "measurement": {
+    "scheme": "G-14-20-390-705-707-708-709",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 709.04,
+    "cpu_seconds": 702.2345389999999,
+    "peak_rss_kib": 6902736,
+    "sampled_rss_kib": 6796724,
+    "limits": {
+     "seconds": 1500,
+     "rss_gib": 12.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": "ok",
+    "complete": true,
+    "scope": "full native scheme",
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": true,
+    "code_sha256": {
+     "algen/enumerate.py": "5a4ac2458845d6eb81c2c835ad4d4847ce632ed9a3668c64360e6b919d72d1a3",
+     "algen/table.py": "93a59834439cddb1507b591c2adf420b152dd0917043a538daa78199d725a677",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "59595a4ea48e433a421bf01dc564a2d50f0ba2a019ae34da90c57573493beca5",
+     "algen/native_enum.cpp": "11c17cbe426ebd17666534149df9c74843c304ed0a386c88dbf0de13316a4275",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "tools/profile_memory.py": "330d566d64b55989ac7f7cd56e3630f60fb10bddf2d25bac342170eecf16ea1d"
+    }
+   },
+   "verified": [
+    {
+     "stage": "run:end",
+     "seconds": 701.015,
+     "memory_kib": {
+      "VmHWM": 6902736,
+      "VmRSS": 5812816
+     },
+     "report_rows": 721011,
+     "report_sha256": "29a4c344434f4c391a62bdba55eff772b5151f62875db000c8f046d6f916233d",
+     "alive": {
+      "entries": 721011,
+      "container_bytes": 48,
+      "packed_bytes": 7210110
+     },
+     "empty": {
+      "entries": 2746960,
+      "container_bytes": 48,
+      "packed_bytes": 21975680
+     },
+     "legacy_stages": [
+      [
+       "начало",
+       4.09,
+       0
+      ],
+      [
+       "перебор",
+       4.26,
+       721011
+      ],
+      [
+       "минимальные",
+       4.26,
+       721011
+      ],
+      [
+       "вердикты",
+       5.37,
+       721011
+      ],
+      [
+       "сжатие",
+       5.81,
+       721011
+      ]
+     ],
+     "search_solver": {
+      "deferred": true,
+      "materialized": false
+     },
+     "solver_factories": 3,
+     "phase_scoped_calls": 150,
+     "phase_max_scope": 269
+    }
+   ],
+   "peaks": [
+    [
+     "start",
+     0.038,
+     {
+      "VmHWM": 72320,
+      "VmRSS": 59304
+     }
+    ],
+    [
+     "built_library:start",
+     0.059,
+     {
+      "VmHWM": 72320,
+      "VmRSS": 64760
+     }
+    ],
+    [
+     "built_library:end",
+     0.923,
+     {
+      "VmHWM": 471528,
+      "VmRSS": 439200
+     }
+    ],
+    [
+     "load:start",
+     0.956,
+     {
+      "VmHWM": 471528,
+      "VmRSS": 440744
+     }
+    ],
+    [
+     "skeleton:start",
+     0.956,
+     {
+      "VmHWM": 471528,
+      "VmRSS": 440744
+     }
+    ],
+    [
+     "solver:start",
+     7.142,
+     {
+      "VmHWM": 1681168,
+      "VmRSS": 1301748
+     }
+    ],
+    [
+     "solver:end",
+     19.784,
+     {
+      "VmHWM": 2118832,
+      "VmRSS": 2118832
+     }
+    ],
+    [
+     "skeleton:end",
+     19.789,
+     {
+      "VmHWM": 2119076,
+      "VmRSS": 2119076
+     }
+    ],
+    [
+     "load:end",
+     43.758,
+     {
+      "VmHWM": 4223768,
+      "VmRSS": 4088224
+     }
+    ],
+    [
+     "enumerate_form:start",
+     92.835,
+     {
+      "VmHWM": 4223768,
+      "VmRSS": 4093844
+     }
+    ],
+    [
+     "enumerate_form:end",
+     149.334,
+     {
+      "VmHWM": 4293608,
+      "VmRSS": 4256984
+     }
+    ],
+    [
+     "enumeration:engine",
+     149.334,
+     {
+      "VmHWM": 4293608,
+      "VmRSS": 4256984
+     }
+    ],
+    [
+     "minimal:start",
+     149.334,
+     {
+      "VmHWM": 4293608,
+      "VmRSS": 4256984
+     }
+    ],
+    [
+     "minimal:end",
+     149.381,
+     {
+      "VmHWM": 4293608,
+      "VmRSS": 4256984
+     }
+    ],
+    [
+     "generic_filter:start",
+     149.381,
+     {
+      "VmHWM": 4293608,
+      "VmRSS": 4256984
+     }
+    ],
+    [
+     "generic_filter:end",
+     149.381,
+     {
+      "VmHWM": 4293608,
+      "VmRSS": 4256984
+     }
+    ],
+    [
+     "verdicts:progress",
+     179.311,
+     {
+      "VmHWM": 4315132,
+      "VmRSS": 4277556
+     }
+    ],
+    [
+     "verdicts:progress",
+     189.095,
+     {
+      "VmHWM": 4325240,
+      "VmRSS": 4287588
+     }
+    ],
+    [
+     "verdicts:progress",
+     196.415,
+     {
+      "VmHWM": 4334296,
+      "VmRSS": 4296448
+     }
+    ],
+    [
+     "verdicts:progress",
+     205.38,
+     {
+      "VmHWM": 4345756,
+      "VmRSS": 4307876
+     }
+    ],
+    [
+     "verdicts:progress",
+     207.959,
+     {
+      "VmHWM": 4349564,
+      "VmRSS": 4313396
+     }
+    ],
+    [
+     "verdicts:progress",
+     219.44,
+     {
+      "VmHWM": 4364364,
+      "VmRSS": 4326420
+     }
+    ],
+    [
+     "verdicts:progress",
+     226.286,
+     {
+      "VmHWM": 4372052,
+      "VmRSS": 4339220
+     }
+    ],
+    [
+     "verdicts:progress",
+     229.124,
+     {
+      "VmHWM": 4380420,
+      "VmRSS": 4349580
+     }
+    ],
+    [
+     "verdicts:progress",
+     242.902,
+     {
+      "VmHWM": 4393536,
+      "VmRSS": 4371764
+     }
+    ],
+    [
+     "verdicts:progress",
+     243.754,
+     {
+      "VmHWM": 4394304,
+      "VmRSS": 4372564
+     }
+    ],
+    [
+     "verdicts:progress",
+     253.651,
+     {
+      "VmHWM": 4411824,
+      "VmRSS": 4386012
+     }
+    ],
+    [
+     "verdicts:progress",
+     255.486,
+     {
+      "VmHWM": 4418832,
+      "VmRSS": 4390036
+     }
+    ],
+    [
+     "verdicts:progress",
+     256.345,
+     {
+      "VmHWM": 4419212,
+      "VmRSS": 4390476
+     }
+    ],
+    [
+     "verdicts:progress",
+     256.91,
+     {
+      "VmHWM": 4419212,
+      "VmRSS": 4392916
+     }
+    ],
+    [
+     "verdicts:progress",
+     262.839,
+     {
+      "VmHWM": 4440132,
+      "VmRSS": 4408252
+     }
+    ],
+    [
+     "verdicts:progress",
+     263.386,
+     {
+      "VmHWM": 4440132,
+      "VmRSS": 4408256
+     }
+    ],
+    [
+     "verdicts:progress",
+     263.95,
+     {
+      "VmHWM": 4440132,
+      "VmRSS": 4414152
+     }
+    ],
+    [
+     "verdicts:progress",
+     264.517,
+     {
+      "VmHWM": 4440132,
+      "VmRSS": 4420552
+     }
+    ],
+    [
+     "verdicts:progress",
+     270.538,
+     {
+      "VmHWM": 4467712,
+      "VmRSS": 4432828
+     }
+    ],
+    [
+     "verdicts:progress",
+     275.94,
+     {
+      "VmHWM": 4475424,
+      "VmRSS": 4441592
+     }
+    ],
+    [
+     "verdicts:progress",
+     276.502,
+     {
+      "VmHWM": 4475424,
+      "VmRSS": 4445752
+     }
+    ],
+    [
+     "verdicts:progress",
+     282.646,
+     {
+      "VmHWM": 4492080,
+      "VmRSS": 4459328
+     }
+    ],
+    [
+     "verdicts:progress",
+     286.835,
+     {
+      "VmHWM": 4500856,
+      "VmRSS": 4464008
+     }
+    ],
+    [
+     "verdicts:progress",
+     287.42,
+     {
+      "VmHWM": 4500856,
+      "VmRSS": 4468996
+     }
+    ],
+    [
+     "verdicts:progress",
+     291.595,
+     {
+      "VmHWM": 4514256,
+      "VmRSS": 4482652
+     }
+    ],
+    [
+     "verdicts:progress",
+     292.155,
+     {
+      "VmHWM": 4514256,
+      "VmRSS": 4483740
+     }
+    ],
+    [
+     "verdicts:progress",
+     293.037,
+     {
+      "VmHWM": 4527160,
+      "VmRSS": 4490096
+     }
+    ],
+    [
+     "verdicts:progress",
+     294.587,
+     {
+      "VmHWM": 4529928,
+      "VmRSS": 4496452
+     }
+    ],
+    [
+     "verdicts:progress",
+     295.789,
+     {
+      "VmHWM": 4537780,
+      "VmRSS": 4502796
+     }
+    ],
+    [
+     "verdicts:progress",
+     296.348,
+     {
+      "VmHWM": 4537780,
+      "VmRSS": 4509188
+     }
+    ],
+    [
+     "verdicts:progress",
+     297.568,
+     {
+      "VmHWM": 4551472,
+      "VmRSS": 4515600
+     }
+    ],
+    [
+     "verdicts:progress",
+     300.304,
+     {
+      "VmHWM": 4558528,
+      "VmRSS": 4523996
+     }
+    ],
+    [
+     "verdicts:progress",
+     300.865,
+     {
+      "VmHWM": 4558528,
+      "VmRSS": 4530316
+     }
+    ],
+    [
+     "verdicts:progress",
+     304.037,
+     {
+      "VmHWM": 4574844,
+      "VmRSS": 4542308
+     }
+    ],
+    [
+     "verdicts:progress",
+     305.236,
+     {
+      "VmHWM": 4576188,
+      "VmRSS": 4543572
+     }
+    ],
+    [
+     "verdicts:progress",
+     308.902,
+     {
+      "VmHWM": 4584760,
+      "VmRSS": 4551356
+     }
+    ],
+    [
+     "verdicts:progress",
+     309.468,
+     {
+      "VmHWM": 4584760,
+      "VmRSS": 4557756
+     }
+    ],
+    [
+     "verdicts:progress",
+     311.568,
+     {
+      "VmHWM": 4596496,
+      "VmRSS": 4564168
+     }
+    ],
+    [
+     "verdicts:progress",
+     313.386,
+     {
+      "VmHWM": 4610916,
+      "VmRSS": 4575272
+     }
+    ],
+    [
+     "verdicts:progress",
+     314.694,
+     {
+      "VmHWM": 4614284,
+      "VmRSS": 4578920
+     }
+    ],
+    [
+     "verdicts:progress",
+     315.264,
+     {
+      "VmHWM": 4614284,
+      "VmRSS": 4585272
+     }
+    ],
+    [
+     "verdicts:progress",
+     316.163,
+     {
+      "VmHWM": 4625748,
+      "VmRSS": 4591636
+     }
+    ],
+    [
+     "verdicts:progress",
+     316.728,
+     {
+      "VmHWM": 4625748,
+      "VmRSS": 4598040
+     }
+    ],
+    [
+     "verdicts:progress",
+     317.294,
+     {
+      "VmHWM": 4625748,
+      "VmRSS": 4604408
+     }
+    ],
+    [
+     "verdicts:progress",
+     318.788,
+     {
+      "VmHWM": 4646896,
+      "VmRSS": 4610736
+     }
+    ],
+    [
+     "verdicts:progress",
+     319.641,
+     {
+      "VmHWM": 4652224,
+      "VmRSS": 4617052
+     }
+    ],
+    [
+     "verdicts:progress",
+     320.224,
+     {
+      "VmHWM": 4652224,
+      "VmRSS": 4623424
+     }
+    ],
+    [
+     "verdicts:progress",
+     320.785,
+     {
+      "VmHWM": 4652224,
+      "VmRSS": 4629828
+     }
+    ],
+    [
+     "verdicts:progress",
+     321.66,
+     {
+      "VmHWM": 4674592,
+      "VmRSS": 4636940
+     }
+    ],
+    [
+     "verdicts:progress",
+     322.519,
+     {
+      "VmHWM": 4675264,
+      "VmRSS": 4642400
+     }
+    ],
+    [
+     "verdicts:progress",
+     323.381,
+     {
+      "VmHWM": 4683140,
+      "VmRSS": 4650888
+     }
+    ],
+    [
+     "verdicts:progress",
+     323.954,
+     {
+      "VmHWM": 4683140,
+      "VmRSS": 4657372
+     }
+    ],
+    [
+     "verdicts:progress",
+     324.53,
+     {
+      "VmHWM": 4683140,
+      "VmRSS": 4663844
+     }
+    ],
+    [
+     "verdicts:progress",
+     325.11,
+     {
+      "VmHWM": 4683140,
+      "VmRSS": 4670292
+     }
+    ],
+    [
+     "verdicts:progress",
+     325.681,
+     {
+      "VmHWM": 4683140,
+      "VmRSS": 4676700
+     }
+    ],
+    [
+     "verdicts:progress",
+     328.794,
+     {
+      "VmHWM": 4721644,
+      "VmRSS": 4685904
+     }
+    ],
+    [
+     "verdicts:progress",
+     340.083,
+     {
+      "VmHWM": 4734692,
+      "VmRSS": 4712884
+     }
+    ],
+    [
+     "verdicts:progress",
+     348.048,
+     {
+      "VmHWM": 4743136,
+      "VmRSS": 4730412
+     }
+    ],
+    [
+     "verdicts:progress",
+     349.802,
+     {
+      "VmHWM": 4746800,
+      "VmRSS": 4737104
+     }
+    ],
+    [
+     "verdicts:progress",
+     354.07,
+     {
+      "VmHWM": 4758904,
+      "VmRSS": 4747228
+     }
+    ],
+    [
+     "verdicts:progress",
+     357.4,
+     {
+      "VmHWM": 4764080,
+      "VmRSS": 4757384
+     }
+    ],
+    [
+     "verdicts:progress",
+     358.924,
+     {
+      "VmHWM": 4774340,
+      "VmRSS": 4759676
+     }
+    ],
+    [
+     "verdicts:progress",
+     362.844,
+     {
+      "VmHWM": 4778352,
+      "VmRSS": 4768716
+     }
+    ],
+    [
+     "verdicts:progress",
+     378.102,
+     {
+      "VmHWM": 4796036,
+      "VmRSS": 4796036
+     }
+    ],
+    [
+     "verdicts:progress",
+     386.572,
+     {
+      "VmHWM": 4808744,
+      "VmRSS": 4808188
+     }
+    ],
+    [
+     "verdicts:progress",
+     388.427,
+     {
+      "VmHWM": 4813736,
+      "VmRSS": 4812140
+     }
+    ],
+    [
+     "verdicts:progress",
+     397.831,
+     {
+      "VmHWM": 4826076,
+      "VmRSS": 4825476
+     }
+    ],
+    [
+     "verdicts:progress",
+     404.397,
+     {
+      "VmHWM": 4837544,
+      "VmRSS": 4837544
+     }
+    ],
+    [
+     "verdicts:progress",
+     416.563,
+     {
+      "VmHWM": 4850308,
+      "VmRSS": 4850308
+     }
+    ],
+    [
+     "verdicts:progress",
+     423.571,
+     {
+      "VmHWM": 4859860,
+      "VmRSS": 4859860
+     }
+    ],
+    [
+     "verdicts:progress",
+     436.861,
+     {
+      "VmHWM": 4871044,
+      "VmRSS": 4871044
+     }
+    ],
+    [
+     "verdicts:progress",
+     444.188,
+     {
+      "VmHWM": 4882196,
+      "VmRSS": 4882196
+     }
+    ],
+    [
+     "verdicts:progress",
+     444.806,
+     {
+      "VmHWM": 4882196,
+      "VmRSS": 4882196
+     }
+    ],
+    [
+     "verdicts:progress",
+     445.424,
+     {
+      "VmHWM": 4882196,
+      "VmRSS": 4882196
+     }
+    ],
+    [
+     "verdicts:progress",
+     448.237,
+     {
+      "VmHWM": 4902668,
+      "VmRSS": 4889988
+     }
+    ],
+    [
+     "verdicts:progress",
+     450.767,
+     {
+      "VmHWM": 4910856,
+      "VmRSS": 4896212
+     }
+    ],
+    [
+     "verdicts:progress",
+     452.986,
+     {
+      "VmHWM": 4912000,
+      "VmRSS": 4901320
+     }
+    ],
+    [
+     "verdicts:progress",
+     454.246,
+     {
+      "VmHWM": 4923220,
+      "VmRSS": 4904472
+     }
+    ],
+    [
+     "verdicts:progress",
+     454.866,
+     {
+      "VmHWM": 4923220,
+      "VmRSS": 4904472
+     }
+    ],
+    [
+     "verdicts:progress",
+     457.445,
+     {
+      "VmHWM": 4939276,
+      "VmRSS": 4910552
+     }
+    ],
+    [
+     "verdicts:progress",
+     458.081,
+     {
+      "VmHWM": 4939276,
+      "VmRSS": 4910552
+     }
+    ],
+    [
+     "verdicts:progress",
+     458.721,
+     {
+      "VmHWM": 4939276,
+      "VmRSS": 4914672
+     }
+    ],
+    [
+     "verdicts:progress",
+     472.442,
+     {
+      "VmHWM": 4963740,
+      "VmRSS": 4929888
+     }
+    ],
+    [
+     "verdicts:progress",
+     474.85,
+     {
+      "VmHWM": 4972876,
+      "VmRSS": 4936076
+     }
+    ],
+    [
+     "verdicts:progress",
+     477.092,
+     {
+      "VmHWM": 4978504,
+      "VmRSS": 4942820
+     }
+    ],
+    [
+     "verdicts:progress",
+     481.813,
+     {
+      "VmHWM": 4986932,
+      "VmRSS": 4950196
+     }
+    ],
+    [
+     "verdicts:progress",
+     485.713,
+     {
+      "VmHWM": 4994972,
+      "VmRSS": 4959240
+     }
+    ],
+    [
+     "verdicts:progress",
+     495.377,
+     {
+      "VmHWM": 5006524,
+      "VmRSS": 4975772
+     }
+    ],
+    [
+     "verdicts:progress",
+     501.827,
+     {
+      "VmHWM": 5015284,
+      "VmRSS": 4985600
+     }
+    ],
+    [
+     "verdicts:progress",
+     504.049,
+     {
+      "VmHWM": 5025260,
+      "VmRSS": 4991464
+     }
+    ],
+    [
+     "verdicts:progress",
+     504.682,
+     {
+      "VmHWM": 5025260,
+      "VmRSS": 4993324
+     }
+    ],
+    [
+     "verdicts:progress",
+     506.277,
+     {
+      "VmHWM": 5033800,
+      "VmRSS": 5000000
+     }
+    ],
+    [
+     "verdicts:progress",
+     506.922,
+     {
+      "VmHWM": 5033800,
+      "VmRSS": 5006708
+     }
+    ],
+    [
+     "verdicts:progress",
+     508.216,
+     {
+      "VmHWM": 5048232,
+      "VmRSS": 5013324
+     }
+    ],
+    [
+     "verdicts:progress",
+     512.758,
+     {
+      "VmHWM": 5056868,
+      "VmRSS": 5022152
+     }
+    ],
+    [
+     "verdicts:progress",
+     514.37,
+     {
+      "VmHWM": 5067096,
+      "VmRSS": 5030216
+     }
+    ],
+    [
+     "verdicts:progress",
+     521.453,
+     {
+      "VmHWM": 5077172,
+      "VmRSS": 5041292
+     }
+    ],
+    [
+     "verdicts:progress",
+     522.432,
+     {
+      "VmHWM": 5080720,
+      "VmRSS": 5046308
+     }
+    ],
+    [
+     "verdicts:progress",
+     523.727,
+     {
+      "VmHWM": 5088264,
+      "VmRSS": 5053012
+     }
+    ],
+    [
+     "verdicts:progress",
+     524.364,
+     {
+      "VmHWM": 5088264,
+      "VmRSS": 5059724
+     }
+    ],
+    [
+     "verdicts:progress",
+     524.999,
+     {
+      "VmHWM": 5088264,
+      "VmRSS": 5066448
+     }
+    ],
+    [
+     "verdicts:progress",
+     528.242,
+     {
+      "VmHWM": 5114004,
+      "VmRSS": 5080112
+     }
+    ],
+    [
+     "verdicts:progress",
+     529.823,
+     {
+      "VmHWM": 5118884,
+      "VmRSS": 5083044
+     }
+    ],
+    [
+     "verdicts:progress",
+     534.056,
+     {
+      "VmHWM": 5128344,
+      "VmRSS": 5095572
+     }
+    ],
+    [
+     "verdicts:progress",
+     534.689,
+     {
+      "VmHWM": 5128344,
+      "VmRSS": 5097420
+     }
+    ],
+    [
+     "verdicts:progress",
+     536.305,
+     {
+      "VmHWM": 5137544,
+      "VmRSS": 5104112
+     }
+    ],
+    [
+     "verdicts:progress",
+     537.644,
+     {
+      "VmHWM": 5146108,
+      "VmRSS": 5110772
+     }
+    ],
+    [
+     "verdicts:progress",
+     540.126,
+     {
+      "VmHWM": 5153788,
+      "VmRSS": 5117976
+     }
+    ],
+    [
+     "verdicts:progress",
+     545.523,
+     {
+      "VmHWM": 5165384,
+      "VmRSS": 5135612
+     }
+    ],
+    [
+     "verdicts:progress",
+     547.043,
+     {
+      "VmHWM": 5170032,
+      "VmRSS": 5138268
+     }
+    ],
+    [
+     "verdicts:progress",
+     550.455,
+     {
+      "VmHWM": 5182104,
+      "VmRSS": 5148236
+     }
+    ],
+    [
+     "verdicts:progress",
+     551.091,
+     {
+      "VmHWM": 5182104,
+      "VmRSS": 5150428
+     }
+    ],
+    [
+     "verdicts:progress",
+     552.459,
+     {
+      "VmHWM": 5195644,
+      "VmRSS": 5158844
+     }
+    ],
+    [
+     "verdicts:progress",
+     553.094,
+     {
+      "VmHWM": 5195644,
+      "VmRSS": 5163824
+     }
+    ],
+    [
+     "verdicts:progress",
+     553.729,
+     {
+      "VmHWM": 5195644,
+      "VmRSS": 5170508
+     }
+    ],
+    [
+     "verdicts:progress",
+     554.373,
+     {
+      "VmHWM": 5195644,
+      "VmRSS": 5177224
+     }
+    ],
+    [
+     "verdicts:progress",
+     556.645,
+     {
+      "VmHWM": 5195644,
+      "VmRSS": 5183932
+     }
+    ],
+    [
+     "verdicts:progress",
+     557.283,
+     {
+      "VmHWM": 5195644,
+      "VmRSS": 5190640
+     }
+    ],
+    [
+     "verdicts:progress",
+     557.924,
+     {
+      "VmHWM": 5197328,
+      "VmRSS": 5197328
+     }
+    ],
+    [
+     "verdicts:progress",
+     558.561,
+     {
+      "VmHWM": 5204044,
+      "VmRSS": 5204044
+     }
+    ],
+    [
+     "verdicts:progress",
+     559.199,
+     {
+      "VmHWM": 5210704,
+      "VmRSS": 5210704
+     }
+    ],
+    [
+     "verdicts:progress",
+     559.831,
+     {
+      "VmHWM": 5217392,
+      "VmRSS": 5217392
+     }
+    ],
+    [
+     "verdicts:progress",
+     562.662,
+     {
+      "VmHWM": 5261172,
+      "VmRSS": 5226336
+     }
+    ],
+    [
+     "verdicts:progress",
+     563.604,
+     {
+      "VmHWM": 5268932,
+      "VmRSS": 5231152
+     }
+    ],
+    [
+     "verdicts:progress",
+     564.898,
+     {
+      "VmHWM": 5272284,
+      "VmRSS": 5237360
+     }
+    ],
+    [
+     "verdicts:progress",
+     565.536,
+     {
+      "VmHWM": 5272284,
+      "VmRSS": 5244044
+     }
+    ],
+    [
+     "verdicts:progress",
+     567.701,
+     {
+      "VmHWM": 5287828,
+      "VmRSS": 5253984
+     }
+    ],
+    [
+     "verdicts:progress",
+     569.612,
+     {
+      "VmHWM": 5292052,
+      "VmRSS": 5259388
+     }
+    ],
+    [
+     "verdicts:progress",
+     570.253,
+     {
+      "VmHWM": 5292052,
+      "VmRSS": 5266092
+     }
+    ],
+    [
+     "verdicts:progress",
+     570.89,
+     {
+      "VmHWM": 5292052,
+      "VmRSS": 5272776
+     }
+    ],
+    [
+     "verdicts:progress",
+     571.528,
+     {
+      "VmHWM": 5292052,
+      "VmRSS": 5279584
+     }
+    ],
+    [
+     "verdicts:progress",
+     572.498,
+     {
+      "VmHWM": 5324052,
+      "VmRSS": 5286244
+     }
+    ],
+    [
+     "verdicts:progress",
+     573.143,
+     {
+      "VmHWM": 5324052,
+      "VmRSS": 5292868
+     }
+    ],
+    [
+     "verdicts:progress",
+     575.455,
+     {
+      "VmHWM": 5338880,
+      "VmRSS": 5302996
+     }
+    ],
+    [
+     "verdicts:progress",
+     578.558,
+     {
+      "VmHWM": 5344212,
+      "VmRSS": 5311380
+     }
+    ],
+    [
+     "verdicts:progress",
+     579.19,
+     {
+      "VmHWM": 5344212,
+      "VmRSS": 5314948
+     }
+    ],
+    [
+     "verdicts:progress",
+     581.085,
+     {
+      "VmHWM": 5357116,
+      "VmRSS": 5321636
+     }
+    ],
+    [
+     "verdicts:progress",
+     582.073,
+     {
+      "VmHWM": 5366464,
+      "VmRSS": 5328648
+     }
+    ],
+    [
+     "verdicts:progress",
+     582.73,
+     {
+      "VmHWM": 5366464,
+      "VmRSS": 5335016
+     }
+    ],
+    [
+     "verdicts:progress",
+     583.383,
+     {
+      "VmHWM": 5366464,
+      "VmRSS": 5341692
+     }
+    ],
+    [
+     "verdicts:progress",
+     584.031,
+     {
+      "VmHWM": 5366464,
+      "VmRSS": 5348412
+     }
+    ],
+    [
+     "verdicts:progress",
+     584.677,
+     {
+      "VmHWM": 5366464,
+      "VmRSS": 5355124
+     }
+    ],
+    [
+     "verdicts:progress",
+     585.706,
+     {
+      "VmHWM": 5398992,
+      "VmRSS": 5363960
+     }
+    ],
+    [
+     "verdicts:progress",
+     587.018,
+     {
+      "VmHWM": 5408808,
+      "VmRSS": 5371080
+     }
+    ],
+    [
+     "solver:start",
+     588.983,
+     {
+      "VmHWM": 5603544,
+      "VmRSS": 5603544
+     }
+    ],
+    [
+     "solver:end",
+     601.693,
+     {
+      "VmHWM": 6212936,
+      "VmRSS": 6212936
+     }
+    ],
+    [
+     "solver:start",
+     609.473,
+     {
+      "VmHWM": 6212484,
+      "VmRSS": 5737860
+     }
+    ],
+    [
+     "solver:end",
+     622.317,
+     {
+      "VmHWM": 6295716,
+      "VmRSS": 6295716
+     }
+    ],
+    [
+     "run:end",
+     701.015,
+     {
+      "VmHWM": 6902736,
+      "VmRSS": 5812816
+     }
+    ],
+    [
+     "end",
+     706.576,
+     {
+      "VmHWM": 6902736,
+      "VmRSS": 4776772
+     }
+    ]
+   ],
+   "expect_report_sha256": "29a4c344434f4c391a62bdba55eff772b5151f62875db000c8f046d6f916233d",
+   "report_sha_ok": true
+  },
+  "commit.txt": "56795c6c90b32b570f39990129b655132ee99806",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 682.86",
+   "System time (seconds): 20.55",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 11:49.37",
+   "Maximum resident set size (kbytes): 6902736",
+   "Exit status: 0"
+  ]
+ },
+ "new-G15320-full": {
+  "verdict.json": {
+   "case": "new-G15320-full",
+   "complete": true,
+   "measurement": {
+    "scheme": "G-15-320-705-707-708-709",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 170.758,
+    "cpu_seconds": 170.222071,
+    "peak_rss_kib": 5380632,
+    "sampled_rss_kib": 5371020,
+    "limits": {
+     "seconds": 1500,
+     "rss_gib": 12.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": "ok",
+    "complete": true,
+    "scope": "full native scheme",
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": true,
+    "code_sha256": {
+     "algen/enumerate.py": "5a4ac2458845d6eb81c2c835ad4d4847ce632ed9a3668c64360e6b919d72d1a3",
+     "algen/table.py": "93a59834439cddb1507b591c2adf420b152dd0917043a538daa78199d725a677",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "59595a4ea48e433a421bf01dc564a2d50f0ba2a019ae34da90c57573493beca5",
+     "algen/native_enum.cpp": "11c17cbe426ebd17666534149df9c74843c304ed0a386c88dbf0de13316a4275",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "tools/profile_memory.py": "330d566d64b55989ac7f7cd56e3630f60fb10bddf2d25bac342170eecf16ea1d"
+    }
+   },
+   "verified": [
+    {
+     "stage": "run:end",
+     "seconds": 167.408,
+     "memory_kib": {
+      "VmHWM": 5380632,
+      "VmRSS": 4317980
+     },
+     "report_rows": 3671,
+     "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+     "alive": {
+      "entries": 3671,
+      "container_bytes": 48,
+      "packed_bytes": 36710
+     },
+     "empty": {
+      "entries": 65688,
+      "container_bytes": 48,
+      "packed_bytes": 525504
+     },
+     "legacy_stages": [
+      [
+       "начало",
+       4.09,
+       0
+      ],
+      [
+       "перебор",
+       4.26,
+       3671
+      ],
+      [
+       "минимальные",
+       4.26,
+       3671
+      ],
+      [
+       "вердикты",
+       4.27,
+       3671
+      ],
+      [
+       "сжатие",
+       4.32,
+       3671
+      ]
+     ],
+     "search_solver": {
+      "deferred": true,
+      "materialized": false
+     },
+     "solver_factories": 2,
+     "phase_scoped_calls": 11,
+     "phase_max_scope": 299
+    }
+   ],
+   "peaks": [
+    [
+     "start",
+     0.04,
+     {
+      "VmHWM": 72524,
+      "VmRSS": 59364
+     }
+    ],
+    [
+     "built_library:start",
+     0.062,
+     {
+      "VmHWM": 72524,
+      "VmRSS": 64816
+     }
+    ],
+    [
+     "built_library:end",
+     0.947,
+     {
+      "VmHWM": 471736,
+      "VmRSS": 439276
+     }
+    ],
+    [
+     "load:start",
+     0.96,
+     {
+      "VmHWM": 471736,
+      "VmRSS": 440824
+     }
+    ],
+    [
+     "skeleton:start",
+     0.961,
+     {
+      "VmHWM": 471736,
+      "VmRSS": 440824
+     }
+    ],
+    [
+     "solver:start",
+     7.331,
+     {
+      "VmHWM": 1680964,
+      "VmRSS": 1301536
+     }
+    ],
+    [
+     "solver:end",
+     20.122,
+     {
+      "VmHWM": 2118292,
+      "VmRSS": 2118292
+     }
+    ],
+    [
+     "skeleton:end",
+     20.127,
+     {
+      "VmHWM": 2118540,
+      "VmRSS": 2118540
+     }
+    ],
+    [
+     "load:end",
+     45.34,
+     {
+      "VmHWM": 4223068,
+      "VmRSS": 4087696
+     }
+    ],
+    [
+     "enumerate_form:start",
+     93.882,
+     {
+      "VmHWM": 4223068,
+      "VmRSS": 4093440
+     }
+    ],
+    [
+     "enumerate_form:end",
+     131.307,
+     {
+      "VmHWM": 4296548,
+      "VmRSS": 4258784
+     }
+    ],
+    [
+     "enumeration:engine",
+     131.307,
+     {
+      "VmHWM": 4296548,
+      "VmRSS": 4258784
+     }
+    ],
+    [
+     "minimal:start",
+     131.308,
+     {
+      "VmHWM": 4296548,
+      "VmRSS": 4258784
+     }
+    ],
+    [
+     "minimal:end",
+     131.331,
+     {
+      "VmHWM": 4296548,
+      "VmRSS": 4258784
+     }
+    ],
+    [
+     "generic_filter:start",
+     131.331,
+     {
+      "VmHWM": 4296548,
+      "VmRSS": 4258784
+     }
+    ],
+    [
+     "generic_filter:end",
+     131.332,
+     {
+      "VmHWM": 4296548,
+      "VmRSS": 4258784
+     }
+    ],
+    [
+     "solver:start",
+     144.338,
+     {
+      "VmHWM": 4304520,
+      "VmRSS": 4272384
+     }
+    ],
+    [
+     "solver:end",
+     156.81,
+     {
+      "VmHWM": 4810164,
+      "VmRSS": 4810164
+     }
+    ],
+    [
+     "run:end",
+     167.408,
+     {
+      "VmHWM": 5380632,
+      "VmRSS": 4317980
+     }
+    ],
+    [
+     "end",
+     168.393,
+     {
+      "VmHWM": 5380632,
+      "VmRSS": 4314956
+     }
+    ]
+   ],
+   "expect_report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+   "report_sha_ok": true
+  },
+  "commit.txt": "56795c6c90b32b570f39990129b655132ee99806",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 165.01",
+   "System time (seconds): 5.46",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 2:50.81",
+   "Maximum resident set size (kbytes): 5380632",
+   "Exit status: 0"
+  ]
+ },
+ "new-G417-full": {
+  "verdict.json": {
+   "case": "new-G417-full",
+   "complete": true,
+   "measurement": {
+    "scheme": "G-4-17-705-707-708-709",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 461.251,
+    "cpu_seconds": 458.04308,
+    "peak_rss_kib": 5463132,
+    "sampled_rss_kib": 5389084,
+    "limits": {
+     "seconds": 1500,
+     "rss_gib": 12.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": "ok",
+    "complete": true,
+    "scope": "full native scheme",
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": true,
+    "code_sha256": {
+     "algen/enumerate.py": "5a4ac2458845d6eb81c2c835ad4d4847ce632ed9a3668c64360e6b919d72d1a3",
+     "algen/table.py": "93a59834439cddb1507b591c2adf420b152dd0917043a538daa78199d725a677",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "59595a4ea48e433a421bf01dc564a2d50f0ba2a019ae34da90c57573493beca5",
+     "algen/native_enum.cpp": "11c17cbe426ebd17666534149df9c74843c304ed0a386c88dbf0de13316a4275",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "tools/profile_memory.py": "330d566d64b55989ac7f7cd56e3630f60fb10bddf2d25bac342170eecf16ea1d"
+    }
+   },
+   "verified": [
+    {
+     "stage": "run:end",
+     "seconds": 457.339,
+     "memory_kib": {
+      "VmHWM": 5463132,
+      "VmRSS": 4629952
+     },
+     "report_rows": 20627,
+     "report_sha256": "d199dd500fda1f7602f0e98b9033de66c1659d581023b56701a87112ecd42e3a",
+     "alive": {
+      "entries": 20627,
+      "container_bytes": 48,
+      "packed_bytes": 206270
+     },
+     "empty": {
+      "entries": 575040,
+      "container_bytes": 48,
+      "packed_bytes": 4600320
+     },
+     "legacy_stages": [
+      [
+       "начало",
+       4.09,
+       0
+      ],
+      [
+       "перебор",
+       4.26,
+       20627
+      ],
+      [
+       "минимальные",
+       4.26,
+       20627
+      ],
+      [
+       "вердикты",
+       4.32,
+       20627
+      ],
+      [
+       "сжатие",
+       4.63,
+       20627
+      ]
+     ],
+     "search_solver": {
+      "deferred": true,
+      "materialized": false
+     },
+     "solver_factories": 2,
+     "phase_scoped_calls": 58,
+     "phase_max_scope": 198
+    }
+   ],
+   "peaks": [
+    [
+     "start",
+     0.039,
+     {
+      "VmHWM": 72596,
+      "VmRSS": 59324
+     }
+    ],
+    [
+     "built_library:start",
+     0.059,
+     {
+      "VmHWM": 72596,
+      "VmRSS": 64792
+     }
+    ],
+    [
+     "built_library:end",
+     0.932,
+     {
+      "VmHWM": 471804,
+      "VmRSS": 439264
+     }
+    ],
+    [
+     "load:start",
+     0.974,
+     {
+      "VmHWM": 471804,
+      "VmRSS": 440808
+     }
+    ],
+    [
+     "skeleton:start",
+     0.975,
+     {
+      "VmHWM": 471804,
+      "VmRSS": 440808
+     }
+    ],
+    [
+     "solver:start",
+     7.337,
+     {
+      "VmHWM": 1681272,
+      "VmRSS": 1301816
+     }
+    ],
+    [
+     "solver:end",
+     20.555,
+     {
+      "VmHWM": 2119004,
+      "VmRSS": 2119004
+     }
+    ],
+    [
+     "skeleton:end",
+     20.561,
+     {
+      "VmHWM": 2119252,
+      "VmRSS": 2119252
+     }
+    ],
+    [
+     "load:end",
+     46.105,
+     {
+      "VmHWM": 4223880,
+      "VmRSS": 4088388
+     }
+    ],
+    [
+     "enumerate_form:start",
+     95.506,
+     {
+      "VmHWM": 4223880,
+      "VmRSS": 4093928
+     }
+    ],
+    [
+     "enumerate_form:end",
+     119.099,
+     {
+      "VmHWM": 4292784,
+      "VmRSS": 4255024
+     }
+    ],
+    [
+     "enumeration:engine",
+     119.099,
+     {
+      "VmHWM": 4292784,
+      "VmRSS": 4255024
+     }
+    ],
+    [
+     "minimal:start",
+     119.099,
+     {
+      "VmHWM": 4292784,
+      "VmRSS": 4255024
+     }
+    ],
+    [
+     "minimal:end",
+     119.101,
+     {
+      "VmHWM": 4292784,
+      "VmRSS": 4255024
+     }
+    ],
+    [
+     "generic_filter:start",
+     119.101,
+     {
+      "VmHWM": 4292784,
+      "VmRSS": 4255024
+     }
+    ],
+    [
+     "generic_filter:end",
+     119.101,
+     {
+      "VmHWM": 4292784,
+      "VmRSS": 4255024
+     }
+    ],
+    [
+     "verdicts:progress",
+     166.355,
+     {
+      "VmHWM": 4317692,
+      "VmRSS": 4280740
+     }
+    ],
+    [
+     "verdicts:progress",
+     199.633,
+     {
+      "VmHWM": 4334444,
+      "VmRSS": 4296580
+     }
+    ],
+    [
+     "verdicts:progress",
+     217.628,
+     {
+      "VmHWM": 4347384,
+      "VmRSS": 4309480
+     }
+    ],
+    [
+     "verdicts:progress",
+     221.05,
+     {
+      "VmHWM": 4355620,
+      "VmRSS": 4317728
+     }
+    ],
+    [
+     "solver:start",
+     221.319,
+     {
+      "VmHWM": 4355620,
+      "VmRSS": 4327716
+     }
+    ],
+    [
+     "solver:end",
+     234.534,
+     {
+      "VmHWM": 4868096,
+      "VmRSS": 4868096
+     }
+    ],
+    [
+     "run:end",
+     457.339,
+     {
+      "VmHWM": 5463132,
+      "VmRSS": 4629952
+     }
+    ],
+    [
+     "end",
+     458.645,
+     {
+      "VmHWM": 5463132,
+      "VmRSS": 4622924
+     }
+    ]
+   ],
+   "expect_report_sha256": "d199dd500fda1f7602f0e98b9033de66c1659d581023b56701a87112ecd42e3a",
+   "report_sha_ok": true
+  },
+  "commit.txt": "56795c6c90b32b570f39990129b655132ee99806",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 450.17",
+   "System time (seconds): 8.53",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 7:41.31",
+   "Maximum resident set size (kbytes): 5463132",
+   "Exit status: 0"
+  ]
+ },
+ "new-G4526-enum-min": {
+  "verdict.json": {
+   "case": "new-G4526-enum-min",
+   "complete": true,
+   "measurement": {
+    "scheme": "G-4-5-26-445-700-705-707-708-709",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 613.756,
+    "cpu_seconds": 613.1451790000001,
+    "peak_rss_kib": 7695348,
+    "sampled_rss_kib": 7368060,
+    "limits": {
+     "seconds": 2400,
+     "rss_gib": 14.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": null,
+    "complete": true,
+    "scope": "native enumeration only",
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": true,
+    "saved_enumeration": false,
+    "saved_report": false,
+    "code_sha256": {
+     "algen/enumerate.py": "5a4ac2458845d6eb81c2c835ad4d4847ce632ed9a3668c64360e6b919d72d1a3",
+     "algen/table.py": "93a59834439cddb1507b591c2adf420b152dd0917043a538daa78199d725a677",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "59595a4ea48e433a421bf01dc564a2d50f0ba2a019ae34da90c57573493beca5",
+     "algen/native_enum.cpp": "11c17cbe426ebd17666534149df9c74843c304ed0a386c88dbf0de13316a4275",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "tools/profile_memory.py": "330d566d64b55989ac7f7cd56e3630f60fb10bddf2d25bac342170eecf16ea1d"
+    }
+   },
+   "verified": [
+    {
+     "stage": "enumeration:verified",
+     "seconds": 611.161,
+     "memory_kib": {
+      "VmHWM": 7695348,
+      "VmRSS": 7368060
+     },
+     "entries": 205509771,
+     "empty": 15669963,
+     "n_alive": 5644380566,
+     "enumeration_sha256": "af248933da0862f1749d11c38a8c2e0c732396e629ec55bf9f83c3710afc1457",
+     "minimal_sha256": "af248933da0862f1749d11c38a8c2e0c732396e629ec55bf9f83c3710afc1457",
+     "engine": "cpp:2e3c8bc6ce53b5c4c6314d26"
+    }
+   ],
+   "peaks": [
+    [
+     "start",
+     0.029,
+     {
+      "VmHWM": 72784,
+      "VmRSS": 59516
+     }
+    ],
+    [
+     "built_library:start",
+     0.043,
+     {
+      "VmHWM": 72784,
+      "VmRSS": 64984
+     }
+    ],
+    [
+     "built_library:end",
+     0.738,
+     {
+      "VmHWM": 472124,
+      "VmRSS": 439452
+     }
+    ],
+    [
+     "load:start",
+     0.794,
+     {
+      "VmHWM": 472124,
+      "VmRSS": 440996
+     }
+    ],
+    [
+     "skeleton:start",
+     0.795,
+     {
+      "VmHWM": 472124,
+      "VmRSS": 440996
+     }
+    ],
+    [
+     "solver:start",
+     6.327,
+     {
+      "VmHWM": 1681388,
+      "VmRSS": 1301704
+     }
+    ],
+    [
+     "solver:end",
+     14.165,
+     {
+      "VmHWM": 2118760,
+      "VmRSS": 2118760
+     }
+    ],
+    [
+     "skeleton:end",
+     14.169,
+     {
+      "VmHWM": 2119008,
+      "VmRSS": 2119008
+     }
+    ],
+    [
+     "load:end",
+     31.262,
+     {
+      "VmHWM": 4223852,
+      "VmRSS": 4088180
+     }
+    ],
+    [
+     "enumerate_form:start",
+     59.629,
+     {
+      "VmHWM": 4223852,
+      "VmRSS": 4095752
+     }
+    ],
+    [
+     "enumerate_form:end",
+     575.169,
+     {
+      "VmHWM": 7695348,
+      "VmRSS": 7368060
+     }
+    ],
+    [
+     "enumeration:engine",
+     575.17,
+     {
+      "VmHWM": 7695348,
+      "VmRSS": 7368060
+     }
+    ],
+    [
+     "minimal-only:start",
+     586.594,
+     {
+      "VmHWM": 7695348,
+      "VmRSS": 7368060
+     }
+    ],
+    [
+     "minimal:start",
+     586.594,
+     {
+      "VmHWM": 7695348,
+      "VmRSS": 7368060
+     }
+    ],
+    [
+     "minimal:end",
+     599.798,
+     {
+      "VmHWM": 7695348,
+      "VmRSS": 7368060
+     }
+    ],
+    [
+     "minimal-only:end",
+     599.798,
+     {
+      "VmHWM": 7695348,
+      "VmRSS": 7368060
+     }
+    ],
+    [
+     "enumeration:verified",
+     611.161,
+     {
+      "VmHWM": 7695348,
+      "VmRSS": 7368060
+     }
+    ],
+    [
+     "end",
+     611.164,
+     {
+      "VmHWM": 7695348,
+      "VmRSS": 7368060
+     }
+    ]
+   ],
+   "expect_report_sha256": null,
+   "report_sha_ok": null
+  },
+  "commit.txt": "56795c6c90b32b570f39990129b655132ee99806",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 609.58",
+   "System time (seconds): 4.44",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 10:13.83",
+   "Maximum resident set size (kbytes): 7695348",
+   "Exit status: 0"
+  ]
+ },
+ "old-G4526-enum": {
+  "verdict.json": {
+   "case": "old-G4526-enum",
+   "complete": true,
+   "measurement": {
+    "scheme": "G-4-5-26-445-700-705-707-708-709",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 601.091,
+    "cpu_seconds": 598.118718,
+    "peak_rss_kib": 11497844,
+    "sampled_rss_kib": 11448536,
+    "limits": {
+     "seconds": 2400,
+     "rss_gib": 14.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": null,
+    "complete": true,
+    "scope": "native enumeration only",
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": false,
+    "code_sha256": {
+     "algen/enumerate.py": "7ff8c1cbc19c6539f4ba43fb497598e8b6bc88d303b3bba988d0c83548183556",
+     "algen/table.py": "93a59834439cddb1507b591c2adf420b152dd0917043a538daa78199d725a677",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "c1c32422bf97a1530c3d501c3365036f29a5c915b6c9a4be46253313a42cbaf5",
+     "algen/native_enum.cpp": "7671c1b6cf25077532ab0d25ac036fdf395a64d8910fe66abd9aa0d82392179b",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "tools/profile_memory.py": "2783da9e7bee3a85fb41e4e7a31e4b6fe84ce9791afa8bd1e9c2c028fcbe40f2"
+    }
+   },
+   "verified": [
+    {
+     "stage": "enumeration:verified",
+     "seconds": 597.837,
+     "memory_kib": {
+      "VmHWM": 11497844,
+      "VmRSS": 8230304
+     },
+     "entries": 205509771,
+     "empty": 15669963,
+     "n_alive": 5644380566,
+     "enumeration_sha256": "af248933da0862f1749d11c38a8c2e0c732396e629ec55bf9f83c3710afc1457",
+     "minimal_sha256": null,
+     "engine": "cpp:59c2518039f5aa52fef9d86b"
+    }
+   ],
+   "peaks": [
+    [
+     "start",
+     0.028,
+     {
+      "VmHWM": 72568,
+      "VmRSS": 59400
+     }
+    ],
+    [
+     "built_library:start",
+     0.04,
+     {
+      "VmHWM": 72568,
+      "VmRSS": 64884
+     }
+    ],
+    [
+     "built_library:end",
+     0.711,
+     {
+      "VmHWM": 471908,
+      "VmRSS": 439352
+     }
+    ],
+    [
+     "load:start",
+     0.721,
+     {
+      "VmHWM": 471908,
+      "VmRSS": 440900
+     }
+    ],
+    [
+     "skeleton:start",
+     0.721,
+     {
+      "VmHWM": 471908,
+      "VmRSS": 440900
+     }
+    ],
+    [
+     "solver:start",
+     6.19,
+     {
+      "VmHWM": 1681360,
+      "VmRSS": 1301900
+     }
+    ],
+    [
+     "solver:end",
+     13.763,
+     {
+      "VmHWM": 2118524,
+      "VmRSS": 2118524
+     }
+    ],
+    [
+     "skeleton:end",
+     13.766,
+     {
+      "VmHWM": 2118772,
+      "VmRSS": 2118772
+     }
+    ],
+    [
+     "load:end",
+     29.532,
+     {
+      "VmHWM": 4223568,
+      "VmRSS": 4087924
+     }
+    ],
+    [
+     "enumerate_form:start",
+     56.8,
+     {
+      "VmHWM": 4223568,
+      "VmRSS": 4095508
+     }
+    ],
+    [
+     "enumerate_form:end",
+     593.98,
+     {
+      "VmHWM": 11497844,
+      "VmRSS": 8230304
+     }
+    ],
+    [
+     "enumeration:engine",
+     593.981,
+     {
+      "VmHWM": 11497844,
+      "VmRSS": 8230304
+     }
+    ],
+    [
+     "enumeration:verified",
+     597.837,
+     {
+      "VmHWM": 11497844,
+      "VmRSS": 8230304
+     }
+    ],
+    [
+     "end",
+     597.84,
+     {
+      "VmHWM": 11497844,
+      "VmRSS": 8230308
+     }
+    ]
+   ],
+   "expect_report_sha256": null,
+   "report_sha_ok": null
+  },
+  "commit.txt": "bc1950be8e0c27d92cb92fa0e4908de4c9de5400",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 591.10",
+   "System time (seconds): 7.73",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 10:01.14",
+   "Maximum resident set size (kbytes): 11497844",
+   "Exit status: 0"
+  ]
+ },
+ "old-G4526-enum-min": {
+  "verdict.json": {
+   "case": "old-G4526-enum-min",
+   "complete": false,
+   "measurement": {
+    "scheme": "G-4-5-26-445-700-705-707-708-709",
+    "returncode": -15,
+    "stop_reason": "rss_budget",
+    "wall_seconds": 932.786,
+    "cpu_seconds": 930.647528,
+    "peak_rss_kib": 15000232,
+    "sampled_rss_kib": 15000292,
+    "limits": {
+     "seconds": 2400,
+     "rss_gib": 14.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": null,
+    "complete": false,
+    "scope": "native enumeration only",
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": true,
+    "saved_enumeration": false,
+    "saved_report": false,
+    "code_sha256": {
+     "algen/enumerate.py": "7ff8c1cbc19c6539f4ba43fb497598e8b6bc88d303b3bba988d0c83548183556",
+     "algen/table.py": "93a59834439cddb1507b591c2adf420b152dd0917043a538daa78199d725a677",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "c1c32422bf97a1530c3d501c3365036f29a5c915b6c9a4be46253313a42cbaf5",
+     "algen/native_enum.cpp": "7671c1b6cf25077532ab0d25ac036fdf395a64d8910fe66abd9aa0d82392179b",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "tools/profile_memory.py": "2783da9e7bee3a85fb41e4e7a31e4b6fe84ce9791afa8bd1e9c2c028fcbe40f2"
+    }
+   },
+   "verified": [],
+   "peaks": [
+    [
+     "start",
+     0.039,
+     {
+      "VmHWM": 72596,
+      "VmRSS": 59324
+     }
+    ],
+    [
+     "built_library:start",
+     0.06,
+     {
+      "VmHWM": 72596,
+      "VmRSS": 64808
+     }
+    ],
+    [
+     "built_library:end",
+     0.979,
+     {
+      "VmHWM": 471932,
+      "VmRSS": 439280
+     }
+    ],
+    [
+     "load:start",
+     1.015,
+     {
+      "VmHWM": 471932,
+      "VmRSS": 440832
+     }
+    ],
+    [
+     "skeleton:start",
+     1.016,
+     {
+      "VmHWM": 471932,
+      "VmRSS": 440832
+     }
+    ],
+    [
+     "solver:start",
+     7.447,
+     {
+      "VmHWM": 1681412,
+      "VmRSS": 1301824
+     }
+    ],
+    [
+     "solver:end",
+     20.14,
+     {
+      "VmHWM": 2118616,
+      "VmRSS": 2118616
+     }
+    ],
+    [
+     "skeleton:end",
+     20.146,
+     {
+      "VmHWM": 2118864,
+      "VmRSS": 2118864
+     }
+    ],
+    [
+     "load:end",
+     46.001,
+     {
+      "VmHWM": 4223596,
+      "VmRSS": 4088004
+     }
+    ],
+    [
+     "enumerate_form:start",
+     94.946,
+     {
+      "VmHWM": 4223596,
+      "VmRSS": 4094432
+     }
+    ],
+    [
+     "enumerate_form:end",
+     899.643,
+     {
+      "VmHWM": 11497600,
+      "VmRSS": 8230268
+     }
+    ],
+    [
+     "enumeration:engine",
+     899.644,
+     {
+      "VmHWM": 11497600,
+      "VmRSS": 8230272
+     }
+    ],
+    [
+     "minimal-only:start",
+     907.363,
+     {
+      "VmHWM": 11497600,
+      "VmRSS": 8230272
+     }
+    ],
+    [
+     "minimal:start",
+     907.363,
+     {
+      "VmHWM": 11497600,
+      "VmRSS": 8230272
+     }
+    ]
+   ],
+   "expect_report_sha256": null,
+   "report_sha_ok": null
+  },
+  "commit.txt": "bc1950be8e0c27d92cb92fa0e4908de4c9de5400",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 917.62",
+   "System time (seconds): 14.32",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 15:32.85",
+   "Maximum resident set size (kbytes): 15000232",
+   "Exit status: 0"
+  ]
+ }
+}
