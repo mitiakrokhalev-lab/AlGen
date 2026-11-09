@@ -1,0 +1,1097 @@
+{
+  "version": 1,
+  "scope": "One complete Ulm control plus diagnostic prefix and bounded probes, NOT full class",
+  "parent_commit": "233f1c6e3450eef23c11ef8e02a87c3d25757340",
+  "reference": {
+    "measurement": {
+      "scheme": "G-15-320-705-707-708-709",
+      "returncode": 0,
+      "stop_reason": "exited",
+      "wall_seconds": 160.764,
+      "cpu_seconds": 160.65716600000002,
+      "peak_rss_kib": 5378872,
+      "sampled_rss_kib": 5271316,
+      "limits": {
+        "seconds": 300,
+        "rss_gib": 6.4
+      },
+      "legacy_empty_cache": false,
+      "legacy_table_load": false,
+      "scheme_status": "ok",
+      "complete": true,
+      "scope": "full native scheme",
+      "eager_search": false,
+      "early_min": true,
+      "sparse_leaf": true,
+      "python_enum": false,
+      "saved_report": true,
+      "code_sha256": {
+        "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+        "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+        "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+        "algen/native_enum.py": "28d2f8eaa5ed66d3d3d8353b49b34ef4379f9b6ca11f6d4fbf0b110b32f6d71b",
+        "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+        "tools/profile_memory.py": "64a95fb543b2093a65fb9cdd14aff635913b0f19a4febf889579f98e97f07248"
+      }
+    },
+    "raw_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+    "reused_from_pr": 13,
+    "new_run_cost": false
+  },
+  "diagnostic_prefix_before": {
+    "measurement": {
+      "scheme": "G-10-13-705-707-708-709",
+      "returncode": 0,
+      "stop_reason": "exited",
+      "wall_seconds": 343.61,
+      "cpu_seconds": 343.492705,
+      "peak_rss_kib": 5232140,
+      "sampled_rss_kib": 5019316,
+      "limits": {
+        "seconds": 600,
+        "rss_gib": 6.4
+      },
+      "legacy_empty_cache": false,
+      "legacy_table_load": false,
+      "scheme_status": null,
+      "complete": false,
+      "scope": "full native scheme",
+      "eager_search": false,
+      "early_min": true,
+      "sparse_leaf": true,
+      "python_enum": false,
+      "with_minimal": false,
+      "saved_enumeration": false,
+      "saved_report": false,
+      "code_sha256": {
+        "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+        "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+        "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+        "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+        "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+        "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+      }
+    },
+    "findings": {
+      "scope": "diagnostic verdict prefix, NOT full scheme",
+      "full_scheme_complete": false,
+      "stop_reason": "diagnostic_prefix_limit",
+      "decisions": 12000,
+      "limit": 12000,
+      "kinds": {
+        "неизвестно": 11448,
+        "выводится": 552
+      },
+      "profiled_seconds": 188.294734193998,
+      "solver_internal_seconds": 166.920811769,
+      "bank_witness_cumulative_seconds": 0.5006801980000001,
+      "profile_total_seconds": 188.179240247
+    },
+    "harness_snapshot": "docs/experiments/verdict-prefix.py",
+    "harness_sha256": "aaceae3c2b1b600dc55667eb070e44adce1270792da437bffd6a8df8a2142ca6"
+  },
+  "full_control_probes": {
+    "g4_incremental": {
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 160.521,
+        "cpu_seconds": 160.271575,
+        "peak_rss_kib": 5384840,
+        "sampled_rss_kib": 5279724,
+        "limits": {
+          "seconds": 600,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "diagnostic_backend": {
+        "scope": "diagnostic backend selection; completion is in measurement.json",
+        "requested_backend": "g4-incr",
+        "created": [
+          {
+            "actual": "Glucose4",
+            "incremental": true,
+            "variables": 1249506,
+            "clauses": 13037818
+          },
+          {
+            "actual": "Glucose4",
+            "incremental": true,
+            "variables": 1249506,
+            "clauses": 13037818
+          }
+        ],
+        "solve_times": {
+          "Glucose4:True": {
+            "calls": 71,
+            "seconds": 37.162589509978716
+          }
+        },
+        "timing_scope": "completed global Solver.solve only; excludes solve_limited and interrupted calls",
+        "harness_sha256": "f4f257819b87fd2da15ebc9d23555141cad936ad2cb51f7dac8d0fbc83d4da96"
+      },
+      "harness_snapshot": "docs/experiments/backend-f4f257819b87.py",
+      "run_end": {
+        "stage": "run:end",
+        "seconds": 156.987,
+        "memory_kib": {
+          "VmHWM": 5384840,
+          "VmRSS": 4468652
+        },
+        "report_rows": 3671,
+        "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+        "alive": {
+          "entries": 3671,
+          "container_bytes": 48,
+          "packed_bytes": 36710
+        },
+        "empty": {
+          "entries": 65688,
+          "container_bytes": 562488,
+          "packed_bytes": null
+        },
+        "legacy_stages": [
+          [
+            "начало",
+            4.08,
+            0
+          ],
+          [
+            "перебор",
+            4.24,
+            3671
+          ],
+          [
+            "минимальные",
+            4.24,
+            3671
+          ],
+          [
+            "вердикты",
+            4.26,
+            3671
+          ],
+          [
+            "сжатие",
+            4.47,
+            3671
+          ]
+        ],
+        "search_solver": {
+          "deferred": true,
+          "materialized": false
+        },
+        "solver_factories": 2
+      }
+    },
+    "minisat22": {
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 153.249,
+        "cpu_seconds": 153.088619,
+        "peak_rss_kib": 4972412,
+        "sampled_rss_kib": 4891668,
+        "limits": {
+          "seconds": 600,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "diagnostic_backend": {
+        "scope": "diagnostic backend selection; completion is in measurement.json",
+        "requested_backend": "m22",
+        "created": [
+          {
+            "actual": "Minisat22",
+            "incremental": false,
+            "variables": 1249506,
+            "clauses": 13037818
+          },
+          {
+            "actual": "Minisat22",
+            "incremental": false,
+            "variables": 1249506,
+            "clauses": 13037818
+          }
+        ],
+        "solve_times": {
+          "Minisat22:True": {
+            "calls": 68,
+            "seconds": 30.489758957002778
+          }
+        },
+        "timing_scope": "completed global Solver.solve only; excludes solve_limited and interrupted calls",
+        "harness_sha256": "f4f257819b87fd2da15ebc9d23555141cad936ad2cb51f7dac8d0fbc83d4da96"
+      },
+      "harness_snapshot": "docs/experiments/backend-f4f257819b87.py",
+      "run_end": {
+        "stage": "run:end",
+        "seconds": 149.819,
+        "memory_kib": {
+          "VmHWM": 4972412,
+          "VmRSS": 4297080
+        },
+        "report_rows": 3671,
+        "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+        "alive": {
+          "entries": 3671,
+          "container_bytes": 48,
+          "packed_bytes": 36710
+        },
+        "empty": {
+          "entries": 65688,
+          "container_bytes": 562488,
+          "packed_bytes": null
+        },
+        "legacy_stages": [
+          [
+            "начало",
+            3.88,
+            0
+          ],
+          [
+            "перебор",
+            4.05,
+            3671
+          ],
+          [
+            "минимальные",
+            4.05,
+            3671
+          ],
+          [
+            "вердикты",
+            4.06,
+            3671
+          ],
+          [
+            "сжатие",
+            4.3,
+            3671
+          ]
+        ],
+        "search_solver": {
+          "deferred": true,
+          "materialized": false
+        },
+        "solver_factories": 2
+      }
+    },
+    "cadical195": {
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": -2,
+        "stop_reason": "rss_budget",
+        "wall_seconds": 138.11,
+        "cpu_seconds": 138.039472,
+        "peak_rss_kib": 6748468,
+        "sampled_rss_kib": 6748700,
+        "limits": {
+          "seconds": 600,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": null,
+        "complete": false,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "diagnostic_backend": {
+        "scope": "diagnostic backend selection; completion is in measurement.json",
+        "requested_backend": "cadical195",
+        "created": [
+          {
+            "actual": "Cadical195",
+            "incremental": false,
+            "variables": 1249506,
+            "clauses": 13037818
+          },
+          {
+            "actual": "Cadical195",
+            "incremental": false,
+            "variables": 1249506,
+            "clauses": 13037818
+          }
+        ],
+        "solve_times": {
+          "Cadical195:True": {
+            "calls": 53,
+            "seconds": 18.136695309985953
+          }
+        },
+        "timing_scope": "completed global Solver.solve only; excludes solve_limited and interrupted calls",
+        "harness_sha256": "f4f257819b87fd2da15ebc9d23555141cad936ad2cb51f7dac8d0fbc83d4da96"
+      },
+      "harness_snapshot": "docs/experiments/backend-f4f257819b87.py",
+      "run_end": null
+    },
+    "g4_saved_phases": {
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 152.758,
+        "cpu_seconds": 152.44671499999998,
+        "peak_rss_kib": 5185596,
+        "sampled_rss_kib": 5178108,
+        "limits": {
+          "seconds": 300,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "diagnostic_backend": {
+        "scope": "diagnostic backend selection; completion is in measurement.json",
+        "requested_backend": "g4",
+        "phase_policy": "saved",
+        "created": [
+          {
+            "actual": "Glucose4",
+            "incremental": false,
+            "variables": 1249506,
+            "clauses": 13037818
+          },
+          {
+            "actual": "Glucose4",
+            "incremental": false,
+            "variables": 1249506,
+            "clauses": 13037818
+          }
+        ],
+        "solve_times": {
+          "Glucose4:True": {
+            "calls": 177,
+            "seconds": 25.025145208030153
+          }
+        },
+        "timing_scope": "completed global Solver.solve only; excludes solve_limited and interrupted calls",
+        "harness_sha256": "8deec9d13897d7b663717413422122cddc8141963fe06116d80391827224deba"
+      },
+      "harness_snapshot": "docs/experiments/backend-8deec9d13897.py",
+      "run_end": {
+        "stage": "run:end",
+        "seconds": 149.258,
+        "memory_kib": {
+          "VmHWM": 5185596,
+          "VmRSS": 4122940
+        },
+        "report_rows": 3671,
+        "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+        "alive": {
+          "entries": 3671,
+          "container_bytes": 48,
+          "packed_bytes": 36710
+        },
+        "empty": {
+          "entries": 65688,
+          "container_bytes": 562488,
+          "packed_bytes": null
+        },
+        "legacy_stages": [
+          [
+            "начало",
+            4.08,
+            0
+          ],
+          [
+            "перебор",
+            4.1,
+            3671
+          ],
+          [
+            "минимальные",
+            4.1,
+            3671
+          ],
+          [
+            "вердикты",
+            4.11,
+            3671
+          ],
+          [
+            "сжатие",
+            4.12,
+            3671
+          ]
+        ],
+        "search_solver": {
+          "deferred": true,
+          "materialized": false
+        },
+        "solver_factories": 2
+      }
+    },
+    "g4_registered_scope": {
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 152.753,
+        "cpu_seconds": 152.53285,
+        "peak_rss_kib": 5386288,
+        "sampled_rss_kib": 5342320,
+        "limits": {
+          "seconds": 300,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "diagnostic_backend": {
+        "scope": "diagnostic backend selection; completion is in measurement.json",
+        "requested_backend": "g4",
+        "phase_policy": "projected",
+        "created": [
+          {
+            "actual": "Glucose4",
+            "incremental": false,
+            "variables": 1249506,
+            "clauses": 13037818
+          },
+          {
+            "actual": "Glucose4",
+            "incremental": false,
+            "variables": 1249506,
+            "clauses": 13037818
+          }
+        ],
+        "solve_times": {
+          "Glucose4:True": {
+            "calls": 183,
+            "seconds": 25.16828335900209
+          }
+        },
+        "phase_scope_sizes": [
+          0,
+          8,
+          16,
+          24,
+          32,
+          40,
+          48,
+          60,
+          69,
+          79,
+          87,
+          96,
+          104,
+          113,
+          125,
+          133,
+          145,
+          178,
+          195,
+          195,
+          219,
+          250,
+          263
+        ],
+        "phase_scope_kind": "last registered Bank variables, up to 2048; not an LRU",
+        "timing_scope": "completed global Solver.solve only; excludes solve_limited and interrupted calls",
+        "harness_sha256": "23569ac3eca5604b13de5fca2dda0b66b8979e416c4154ce1427e76edbdf07a4"
+      },
+      "harness_snapshot": "docs/experiments/backend-23569ac3eca5.py",
+      "run_end": {
+        "stage": "run:end",
+        "seconds": 149.199,
+        "memory_kib": {
+          "VmHWM": 5386288,
+          "VmRSS": 4282500
+        },
+        "report_rows": 3671,
+        "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+        "alive": {
+          "entries": 3671,
+          "container_bytes": 48,
+          "packed_bytes": 36710
+        },
+        "empty": {
+          "entries": 65688,
+          "container_bytes": 562488,
+          "packed_bytes": null
+        },
+        "legacy_stages": [
+          [
+            "начало",
+            4.08,
+            0
+          ],
+          [
+            "перебор",
+            4.26,
+            3671
+          ],
+          [
+            "минимальные",
+            4.26,
+            3671
+          ],
+          [
+            "вердикты",
+            4.27,
+            3671
+          ],
+          [
+            "сжатие",
+            4.28,
+            3671
+          ]
+        ],
+        "search_solver": {
+          "deferred": true,
+          "materialized": false
+        },
+        "solver_factories": 2
+      }
+    },
+    "g4_schema_scope": {
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 147.261,
+        "cpu_seconds": 147.06103399999998,
+        "peak_rss_kib": 5371712,
+        "sampled_rss_kib": 5343000,
+        "limits": {
+          "seconds": 300,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "diagnostic_backend": {
+        "scope": "diagnostic backend selection; completion is in measurement.json",
+        "requested_backend": "g4",
+        "phase_policy": "schema",
+        "created": [
+          {
+            "actual": "Glucose4",
+            "incremental": false,
+            "variables": 1249506,
+            "clauses": 13037818
+          },
+          {
+            "actual": "Glucose4",
+            "incremental": false,
+            "variables": 1249506,
+            "clauses": 13037818
+          }
+        ],
+        "solve_times": {
+          "Glucose4:True": {
+            "calls": 87,
+            "seconds": 18.410593888984295
+          }
+        },
+        "phase_scope_sizes": [
+          299,
+          299,
+          299,
+          299,
+          299,
+          299,
+          299,
+          299,
+          299,
+          299,
+          299
+        ],
+        "phase_scope_kind": "cached variable IDs of schema atoms at E.run entry",
+        "timing_scope": "completed global Solver.solve only; excludes solve_limited and interrupted calls",
+        "harness_sha256": "10b6804dae9cb117cba40ac3191ee119f40c23880b97a3347a2d82d7587848f7"
+      },
+      "harness_snapshot": "docs/experiments/backend-10b6804dae9c.py",
+      "run_end": {
+        "stage": "run:end",
+        "seconds": 143.694,
+        "memory_kib": {
+          "VmHWM": 5371712,
+          "VmRSS": 4321948
+        },
+        "report_rows": 3671,
+        "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+        "alive": {
+          "entries": 3671,
+          "container_bytes": 48,
+          "packed_bytes": 36710
+        },
+        "empty": {
+          "entries": 65688,
+          "container_bytes": 562488,
+          "packed_bytes": null
+        },
+        "legacy_stages": [
+          [
+            "начало",
+            4.08,
+            0
+          ],
+          [
+            "перебор",
+            4.25,
+            3671
+          ],
+          [
+            "минимальные",
+            4.25,
+            3671
+          ],
+          [
+            "вердикты",
+            4.26,
+            3671
+          ],
+          [
+            "сжатие",
+            4.32,
+            3671
+          ]
+        ],
+        "search_solver": {
+          "deferred": true,
+          "materialized": false
+        },
+        "solver_factories": 2
+      }
+    },
+    "production_schema_scope": {
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 138.986,
+        "cpu_seconds": 138.87210000000002,
+        "peak_rss_kib": 5369280,
+        "sampled_rss_kib": 5307804,
+        "limits": {
+          "seconds": 300,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "legacy_phase_scope": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "205afb139e96e43fd13d9397c7703c85ce5140f6897a58d830bedffcb81d3234",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+          "tools/profile_memory.py": "2783da9e7bee3a85fb41e4e7a31e4b6fe84ce9791afa8bd1e9c2c028fcbe40f2"
+        }
+      },
+      "run_end": {
+        "stage": "run:end",
+        "seconds": 135.463,
+        "memory_kib": {
+          "VmHWM": 5369280,
+          "VmRSS": 4265348
+        },
+        "report_rows": 3671,
+        "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+        "alive": {
+          "entries": 3671,
+          "container_bytes": 48,
+          "packed_bytes": 36710
+        },
+        "empty": {
+          "entries": 65688,
+          "container_bytes": 562488,
+          "packed_bytes": null
+        },
+        "legacy_stages": [
+          [
+            "начало",
+            4.08,
+            0
+          ],
+          [
+            "перебор",
+            4.25,
+            3671
+          ],
+          [
+            "минимальные",
+            4.25,
+            3671
+          ],
+          [
+            "вердикты",
+            4.26,
+            3671
+          ],
+          [
+            "сжатие",
+            4.27,
+            3671
+          ]
+        ],
+        "search_solver": {
+          "deferred": true,
+          "materialized": false
+        },
+        "solver_factories": 2,
+        "phase_scoped_calls": 11,
+        "phase_max_scope": 299
+      }
+    }
+  },
+  "cost_new_processes_including_incomplete": {
+    "wall_seconds": 1625.644,
+    "cpu_seconds": 1624.030856,
+    "processes": 9,
+    "complete_full_controls": 6,
+    "intentional_prefixes": 2,
+    "rss_budget_stops": 1,
+    "old_reference_cost_excluded": true
+  },
+  "native_fingerprint": "73a2a35d2480ac9c:G::s2:быстро",
+  "candidate_class": {
+    "k": 3,
+    "s": 2,
+    "narrowed": false
+  },
+  "production_change": "Bound solver phase preferences to cached variable IDs of current scheme; same ordinary Glucose4 and full clauses/assumptions",
+  "rollback": "ALGEN_SCOPED_PHASES=0; tools/profile_memory.py --legacy-phase-scope",
+  "heavy_prefix_after": {
+    "measurement": {
+      "scheme": "G-10-13-705-707-708-709",
+      "returncode": 0,
+      "stop_reason": "exited",
+      "wall_seconds": 238.396,
+      "cpu_seconds": 238.225786,
+      "peak_rss_kib": 5208476,
+      "sampled_rss_kib": 5067784,
+      "limits": {
+        "seconds": 600,
+        "rss_gib": 6.4
+      },
+      "legacy_empty_cache": false,
+      "legacy_table_load": false,
+      "legacy_phase_scope": false,
+      "scheme_status": null,
+      "complete": false,
+      "scope": "full native scheme",
+      "eager_search": false,
+      "early_min": true,
+      "sparse_leaf": true,
+      "python_enum": false,
+      "with_minimal": false,
+      "saved_enumeration": false,
+      "saved_report": false,
+      "code_sha256": {
+        "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+        "algen/table.py": "205afb139e96e43fd13d9397c7703c85ce5140f6897a58d830bedffcb81d3234",
+        "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+        "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+        "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+        "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+        "tools/profile_memory.py": "2783da9e7bee3a85fb41e4e7a31e4b6fe84ce9791afa8bd1e9c2c028fcbe40f2"
+      }
+    },
+    "receipt": {
+      "scope": "diagnostic verdict prefix, NOT full scheme",
+      "full_scheme_complete": false,
+      "stop_reason": "diagnostic_prefix_limit",
+      "decisions": 12000,
+      "limit": 12000,
+      "kinds": {
+        "неизвестно": 11448,
+        "выводится": 552
+      },
+      "profiled_seconds": 95.16344908300016
+    },
+    "findings": {
+      "profile_total_seconds": 95.05700048599999,
+      "models_added": 240,
+      "solver_internal_seconds": 78.565303473,
+      "sat_solve": {
+        "calls": 498,
+        "seconds": 78.527712108
+      },
+      "unsat_core_solve": {
+        "calls": 532,
+        "seconds": 0.04807886
+      }
+    },
+    "harness_snapshot": "docs/experiments/verdict-prefix.py",
+    "harness_sha256": "aaceae3c2b1b600dc55667eb070e44adce1270792da437bffd6a8df8a2142ca6"
+  },
+  "verification": {
+    "independent_code_review": "verify_conditions: lifecycle race fixed and approved",
+    "target_tests": {
+      "tests": 8,
+      "seconds": 0.582,
+      "result": "OK",
+      "queries_compared_with_independent_regular_sat": 8400
+    },
+    "production_full_raw_review": "verify_conditions: gzipCRC/JSON/errors/ID/kept-folded/deps, direct bytes equal baseline, semantic summaries equal",
+    "ci": {
+      "run": 42393621793,
+      "job": 128466206595,
+      "url": "https://github.com/mitiakrokhalev-lab/AlGen/actions/runs/42393621793",
+      "commit": "6e633789b2ac6a56eeea300d59af6a62bc0cb0f7",
+      "tests": 149,
+      "seconds": 488.839,
+      "result": "OK",
+      "status": "completed",
+      "conclusion": "success",
+      "skipped": 0
+    },
+    "ci_attempts": [
+      {
+        "run": 42392630520,
+        "commit": "6c3d0c8d64f82ace371f8db160f936af5fd50028",
+        "tests": 149,
+        "seconds": 489.03,
+        "result": "FAILED",
+        "failures": 1,
+        "failure": "test_table_export_does_not_enable_unrequested_verdict_cache: metadata absent on minimal export form"
+      },
+      {
+        "run": 42393621793,
+        "job": 128466206595,
+        "url": "https://github.com/mitiakrokhalev-lab/AlGen/actions/runs/42393621793",
+        "commit": "6e633789b2ac6a56eeea300d59af6a62bc0cb0f7",
+        "tests": 149,
+        "seconds": 488.839,
+        "result": "OK",
+        "status": "completed",
+        "conclusion": "success",
+        "skipped": 0
+      }
+    ]
+  },
+  "limitations": [
+    "Single ordered controls; reference reused, not randomized replications.",
+    "Prefix profiling describes first12000cdecide, not full verdict stage or whole class.",
+    "External probes patched runtime constructor/phase policy and are not accepted production defaults.",
+    "Production source fast.py changes verdict-state fingerprint but Library/Theory/native table inputs unchanged.",
+    "Four full random vectors are still stored; no claim to eliminate205.5Mcase memory failure.",
+    "No change to compress.py contradictory-background guard.",
+    "Source selected from several probes on one control; heavy prefix is a separate validation.",
+    "Large-prefix order of verdict cores was NOT recorded by old diagnostic; only12000decision counts and aggregate kinds compared.",
+    "Full benchmark is cold verdict cache with persisted Library/skel/native tables; constructing those original inputs is not timed.",
+    "Measurements on6c3d0c8 precede export compatibility guard6e633789; fast.py/preference algorithm unchanged and real-form path identical; no repeated heavy runs."
+  ],
+  "canonical_raw_archive": {
+    "path": "/workspace/work/phase-report-local-only.jsonl.gz",
+    "compressed_sha256": "1b786a06eb5adb7d714d0bb483869394cb0c1ce02225d662b1f55f035a0b3539",
+    "decoded_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+    "rows": 3671,
+    "publication": "local only; automatic approval rejected full raw upload to public GitHub; code/metrics/checksums published instead"
+  },
+  "ratios": {
+    "full_ulm_wall": 1.1566920409249855,
+    "full_ulm_cpu": 1.1568714378194036,
+    "prefix_process_wall": 1.44134129767278,
+    "prefix_profile": 1.9796463099497343
+  },
+  "source_code_commit": "6c3d0c8d64f82ace371f8db160f936af5fd50028",
+  "software": {
+    "pysat": "1.9.dev21"
+  },
+  "old_fast_source_sha256": "9d5d2fc6f07725e414ba44e6142f8ce2efede10f2e4c29172cac1595dad542bd",
+  "rejected_warm_start_smoke": {
+    "scope": "external tiny diagnostic; not enabled in project or any backend probe",
+    "clauses": [
+      [
+        1,
+        2
+      ],
+      [
+        -2,
+        3
+      ]
+    ],
+    "queries": [
+      [
+        1
+      ],
+      [
+        -1
+      ],
+      [
+        -3
+      ],
+      [
+        -1,
+        -3
+      ],
+      [
+        1,
+        -3
+      ],
+      [
+        -1,
+        3
+      ]
+    ],
+    "expected": [
+      true,
+      true,
+      true,
+      false,
+      true,
+      true
+    ],
+    "ordinary_g4_and_m22": [
+      true,
+      true,
+      true,
+      false,
+      true,
+      true
+    ],
+    "warm_start_g4_and_m22": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "independent_review": "verify_conditions reproduced; unsuitable for changing-assumption protocol"
+  },
+  "configuration": {
+    "numpy": "2.5.4",
+    "bank_models": 4096,
+    "OPENBLAS_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1,
+    "inputs": "persisted Library/skel/native tables; verdict cache not loaded",
+    "startup_included": true,
+    "source_input_manifest": "docs/metrics-stress02.json plan.input_files_sha256"
+  },
+  "compatibility_followup": {
+    "commit": "6e633789b2ac6a56eeea300d59af6a62bc0cb0f7",
+    "table_sha256": "02aebb585f0fd6a584da407126db5fe4c38a130fe5bda06bf17a4c76e6293b26",
+    "change": "Skip phase-scope registration when sc.T or atoms is absent; exact same branch for real measured forms",
+    "targeted_tests": 4,
+    "seconds": 0.119,
+    "result": "OK",
+    "native_measurements_reused_after_guard_only_change": true
+  }
+}

@@ -1,0 +1,833 @@
+{
+  "version": 1,
+  "date_moscow": "2026-11-07",
+  "scope": "one complete native Ulm scheme k=3, s=2; first verdict pass, Library/tables/skeleton reused",
+  "runs": {
+    "earlymin-before": {
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 273.497,
+        "cpu_seconds": 273.289807,
+        "peak_rss_kib": 5428396,
+        "sampled_rss_kib": 5379608,
+        "limits": {
+          "seconds": 420,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "471ccc4075aac786d80006ae1289b56da9c2a669d6bd523b6ac2d8f979b023e1",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "tools/profile_memory.py": "dbd8dca4eda68ccbd5f5a7237dd0248f2fa8cc71035c952f49dcb7cdcde5a083"
+        }
+      },
+      "stages": [
+        {
+          "stage": "start",
+          "seconds": 0.031,
+          "memory_kib": {
+            "VmHWM": 51492,
+            "VmRSS": 38272
+          },
+          "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+          "table_fingerprint": "73a2a35d2480ac9c:G::s2:быстро",
+          "bank_models": 4096,
+          "legacy_empty_cache": false,
+          "eager_search": false
+        },
+        {
+          "stage": "built_library:start",
+          "seconds": 0.047,
+          "memory_kib": {
+            "VmHWM": 51492,
+            "VmRSS": 46056
+          }
+        },
+        {
+          "stage": "built_library:end",
+          "seconds": 0.793,
+          "memory_kib": {
+            "VmHWM": 458512,
+            "VmRSS": 425832
+          }
+        },
+        {
+          "stage": "load:start",
+          "seconds": 0.799,
+          "memory_kib": {
+            "VmHWM": 458512,
+            "VmRSS": 426636
+          }
+        },
+        {
+          "stage": "skeleton:start",
+          "seconds": 0.8,
+          "memory_kib": {
+            "VmHWM": 458512,
+            "VmRSS": 426644
+          }
+        },
+        {
+          "stage": "solver:start",
+          "seconds": 9.709,
+          "memory_kib": {
+            "VmHWM": 1667280,
+            "VmRSS": 1287684
+          },
+          "number": 1,
+          "clauses": 14122127
+        },
+        {
+          "stage": "solver:end",
+          "seconds": 17.72,
+          "memory_kib": {
+            "VmHWM": 2105016,
+            "VmRSS": 2105016
+          },
+          "number": 1
+        },
+        {
+          "stage": "skeleton:end",
+          "seconds": 17.725,
+          "memory_kib": {
+            "VmHWM": 2105260,
+            "VmRSS": 2105260
+          }
+        },
+        {
+          "stage": "load:end",
+          "seconds": 44.566,
+          "memory_kib": {
+            "VmHWM": 4210100,
+            "VmRSS": 4074412
+          }
+        },
+        {
+          "stage": "enumerate_form:start",
+          "seconds": 74.435,
+          "memory_kib": {
+            "VmHWM": 4210100,
+            "VmRSS": 4079728
+          }
+        },
+        {
+          "stage": "enumerate_form:end",
+          "seconds": 222.937,
+          "memory_kib": {
+            "VmHWM": 4283132,
+            "VmRSS": 4249424
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            },
+            {
+              "entries": 65688,
+              "container_bytes": 562488,
+              "packed_bytes": null
+            }
+          ]
+        },
+        {
+          "stage": "minimal:start",
+          "seconds": 222.937,
+          "memory_kib": {
+            "VmHWM": 4283132,
+            "VmRSS": 4249428
+          }
+        },
+        {
+          "stage": "minimal:end",
+          "seconds": 222.961,
+          "memory_kib": {
+            "VmHWM": 4283132,
+            "VmRSS": 4249560
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            }
+          ]
+        },
+        {
+          "stage": "generic_filter:start",
+          "seconds": 222.961,
+          "memory_kib": {
+            "VmHWM": 4283132,
+            "VmRSS": 4249564
+          }
+        },
+        {
+          "stage": "generic_filter:end",
+          "seconds": 222.961,
+          "memory_kib": {
+            "VmHWM": 4283132,
+            "VmRSS": 4249564
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            }
+          ]
+        },
+        {
+          "stage": "solver:start",
+          "seconds": 251.234,
+          "memory_kib": {
+            "VmHWM": 4296116,
+            "VmRSS": 4263500
+          },
+          "number": 2,
+          "clauses": 14122127
+        },
+        {
+          "stage": "solver:end",
+          "seconds": 259.832,
+          "memory_kib": {
+            "VmHWM": 4855368,
+            "VmRSS": 4855368
+          },
+          "number": 2
+        },
+        {
+          "stage": "run:end",
+          "seconds": 270.233,
+          "memory_kib": {
+            "VmHWM": 5428396,
+            "VmRSS": 4386312
+          },
+          "report_rows": 3671,
+          "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+          "alive": {
+            "entries": 3671,
+            "container_bytes": 48,
+            "packed_bytes": 36710
+          },
+          "empty": {
+            "entries": 65688,
+            "container_bytes": 562488,
+            "packed_bytes": null
+          },
+          "legacy_stages": [
+            [
+              "начало",
+              4.08,
+              0
+            ],
+            [
+              "перебор",
+              4.25,
+              3671
+            ],
+            [
+              "минимальные",
+              4.25,
+              3671
+            ],
+            [
+              "вердикты",
+              4.26,
+              3671
+            ],
+            [
+              "сжатие",
+              4.39,
+              3671
+            ]
+          ],
+          "search_solver": {
+            "deferred": true,
+            "materialized": false
+          },
+          "solver_factories": 2
+        },
+        {
+          "stage": "end",
+          "seconds": 271.349,
+          "memory_kib": {
+            "VmHWM": 5428396,
+            "VmRSS": 4383316
+          }
+        }
+      ],
+      "decoded_rows": 3671,
+      "decoded_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+      "enumeration_seconds": 148.502
+    },
+    "earlymin-after": {
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 272.699,
+        "cpu_seconds": 272.51527,
+        "peak_rss_kib": 5427816,
+        "sampled_rss_kib": 5415336,
+        "limits": {
+          "seconds": 420,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "c77d8d5f25839f2a2b6b2509f88855c12673d6074c7b1eac58d67f3acffe7b70",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "tools/profile_memory.py": "d2852869c30b2bd90fc34b25e3388c27c8bfa8c5df83d1d0fa61935e2f439ef7"
+        }
+      },
+      "stages": [
+        {
+          "stage": "start",
+          "seconds": 0.036,
+          "memory_kib": {
+            "VmHWM": 54368,
+            "VmRSS": 41140
+          },
+          "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+          "table_fingerprint": "73a2a35d2480ac9c:G::s2:быстро",
+          "bank_models": 4096,
+          "legacy_empty_cache": false,
+          "eager_search": false,
+          "early_min": true
+        },
+        {
+          "stage": "built_library:start",
+          "seconds": 0.054,
+          "memory_kib": {
+            "VmHWM": 54368,
+            "VmRSS": 48924
+          }
+        },
+        {
+          "stage": "built_library:end",
+          "seconds": 0.878,
+          "memory_kib": {
+            "VmHWM": 460872,
+            "VmRSS": 428176
+          }
+        },
+        {
+          "stage": "load:start",
+          "seconds": 0.884,
+          "memory_kib": {
+            "VmHWM": 460872,
+            "VmRSS": 428976
+          }
+        },
+        {
+          "stage": "skeleton:start",
+          "seconds": 0.884,
+          "memory_kib": {
+            "VmHWM": 460872,
+            "VmRSS": 428984
+          }
+        },
+        {
+          "stage": "solver:start",
+          "seconds": 9.052,
+          "memory_kib": {
+            "VmHWM": 1669632,
+            "VmRSS": 1290036
+          },
+          "number": 1,
+          "clauses": 14122127
+        },
+        {
+          "stage": "solver:end",
+          "seconds": 16.777,
+          "memory_kib": {
+            "VmHWM": 2107240,
+            "VmRSS": 2107240
+          },
+          "number": 1
+        },
+        {
+          "stage": "skeleton:end",
+          "seconds": 16.783,
+          "memory_kib": {
+            "VmHWM": 2107484,
+            "VmRSS": 2107484
+          }
+        },
+        {
+          "stage": "load:end",
+          "seconds": 44.55,
+          "memory_kib": {
+            "VmHWM": 4212508,
+            "VmRSS": 4076692
+          }
+        },
+        {
+          "stage": "enumerate_form:start",
+          "seconds": 74.462,
+          "memory_kib": {
+            "VmHWM": 4212508,
+            "VmRSS": 4082020
+          }
+        },
+        {
+          "stage": "enumerate_form:end",
+          "seconds": 221.72,
+          "memory_kib": {
+            "VmHWM": 4286296,
+            "VmRSS": 4252720
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            },
+            {
+              "entries": 65688,
+              "container_bytes": 562488,
+              "packed_bytes": null
+            }
+          ]
+        },
+        {
+          "stage": "minimal:start",
+          "seconds": 221.721,
+          "memory_kib": {
+            "VmHWM": 4286296,
+            "VmRSS": 4252728
+          }
+        },
+        {
+          "stage": "minimal:end",
+          "seconds": 221.746,
+          "memory_kib": {
+            "VmHWM": 4286296,
+            "VmRSS": 4252868
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            }
+          ]
+        },
+        {
+          "stage": "generic_filter:start",
+          "seconds": 221.747,
+          "memory_kib": {
+            "VmHWM": 4286296,
+            "VmRSS": 4252872
+          }
+        },
+        {
+          "stage": "generic_filter:end",
+          "seconds": 221.747,
+          "memory_kib": {
+            "VmHWM": 4286296,
+            "VmRSS": 4252872
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            }
+          ]
+        },
+        {
+          "stage": "solver:start",
+          "seconds": 251.017,
+          "memory_kib": {
+            "VmHWM": 4299448,
+            "VmRSS": 4266812
+          },
+          "number": 2,
+          "clauses": 14122127
+        },
+        {
+          "stage": "solver:end",
+          "seconds": 258.859,
+          "memory_kib": {
+            "VmHWM": 4857824,
+            "VmRSS": 4857824
+          },
+          "number": 2
+        },
+        {
+          "stage": "run:end",
+          "seconds": 269.192,
+          "memory_kib": {
+            "VmHWM": 5427816,
+            "VmRSS": 4272292
+          },
+          "report_rows": 3671,
+          "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+          "alive": {
+            "entries": 3671,
+            "container_bytes": 48,
+            "packed_bytes": 36710
+          },
+          "empty": {
+            "entries": 65688,
+            "container_bytes": 562488,
+            "packed_bytes": null
+          },
+          "legacy_stages": [
+            [
+              "начало",
+              4.08,
+              0
+            ],
+            [
+              "перебор",
+              4.25,
+              3671
+            ],
+            [
+              "минимальные",
+              4.25,
+              3671
+            ],
+            [
+              "вердикты",
+              4.26,
+              3671
+            ],
+            [
+              "сжатие",
+              4.27,
+              3671
+            ]
+          ],
+          "search_solver": {
+            "deferred": true,
+            "materialized": false
+          },
+          "solver_factories": 2
+        },
+        {
+          "stage": "end",
+          "seconds": 270.346,
+          "memory_kib": {
+            "VmHWM": 5427816,
+            "VmRSS": 4266272
+          }
+        }
+      ],
+      "decoded_rows": 3671,
+      "decoded_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+      "enumeration_seconds": 147.258
+    },
+    "leafmatrix-after": {
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 261.112,
+        "cpu_seconds": 259.738153,
+        "peak_rss_kib": 5400016,
+        "sampled_rss_kib": 5360844,
+        "limits": {
+          "seconds": 420,
+          "rss_gib": 6.4
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "c4f9be3549213454d315c22f919ac0f904ebd5d3326615a5770263ff752bc805",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "tools/profile_memory.py": "e2132a506bc7e22358e827837f03604488b1d0143904c45ad9e20e0fa4e74c6b"
+        }
+      },
+      "stages": [
+        {
+          "stage": "start",
+          "seconds": 0.032,
+          "memory_kib": {
+            "VmHWM": 52068,
+            "VmRSS": 38840
+          },
+          "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+          "table_fingerprint": "73a2a35d2480ac9c:G::s2:быстро",
+          "bank_models": 4096,
+          "legacy_empty_cache": false,
+          "eager_search": false,
+          "early_min": true,
+          "sparse_leaf": true
+        },
+        {
+          "stage": "built_library:start",
+          "seconds": 0.048,
+          "memory_kib": {
+            "VmHWM": 52068,
+            "VmRSS": 46628
+          }
+        },
+        {
+          "stage": "built_library:end",
+          "seconds": 0.859,
+          "memory_kib": {
+            "VmHWM": 458704,
+            "VmRSS": 426060
+          }
+        },
+        {
+          "stage": "load:start",
+          "seconds": 0.866,
+          "memory_kib": {
+            "VmHWM": 458704,
+            "VmRSS": 426860
+          }
+        },
+        {
+          "stage": "skeleton:start",
+          "seconds": 0.866,
+          "memory_kib": {
+            "VmHWM": 458704,
+            "VmRSS": 426868
+          }
+        },
+        {
+          "stage": "solver:start",
+          "seconds": 9.631,
+          "memory_kib": {
+            "VmHWM": 1667512,
+            "VmRSS": 1287912
+          },
+          "number": 1,
+          "clauses": 14122127
+        },
+        {
+          "stage": "solver:end",
+          "seconds": 17.006,
+          "memory_kib": {
+            "VmHWM": 2105264,
+            "VmRSS": 2105264
+          },
+          "number": 1
+        },
+        {
+          "stage": "skeleton:end",
+          "seconds": 17.011,
+          "memory_kib": {
+            "VmHWM": 2105508,
+            "VmRSS": 2105508
+          }
+        },
+        {
+          "stage": "load:end",
+          "seconds": 47.685,
+          "memory_kib": {
+            "VmHWM": 4210540,
+            "VmRSS": 4074728
+          }
+        },
+        {
+          "stage": "enumerate_form:start",
+          "seconds": 78.084,
+          "memory_kib": {
+            "VmHWM": 4210540,
+            "VmRSS": 4080052
+          }
+        },
+        {
+          "stage": "enumerate_form:end",
+          "seconds": 205.55,
+          "memory_kib": {
+            "VmHWM": 4283208,
+            "VmRSS": 4249620
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            },
+            {
+              "entries": 65688,
+              "container_bytes": 562488,
+              "packed_bytes": null
+            }
+          ]
+        },
+        {
+          "stage": "minimal:start",
+          "seconds": 205.551,
+          "memory_kib": {
+            "VmHWM": 4283208,
+            "VmRSS": 4249624
+          }
+        },
+        {
+          "stage": "minimal:end",
+          "seconds": 205.576,
+          "memory_kib": {
+            "VmHWM": 4283208,
+            "VmRSS": 4249752
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            }
+          ]
+        },
+        {
+          "stage": "generic_filter:start",
+          "seconds": 205.576,
+          "memory_kib": {
+            "VmHWM": 4283208,
+            "VmRSS": 4249756
+          }
+        },
+        {
+          "stage": "generic_filter:end",
+          "seconds": 205.576,
+          "memory_kib": {
+            "VmHWM": 4283208,
+            "VmRSS": 4249756
+          },
+          "containers": [
+            {
+              "entries": 3671,
+              "container_bytes": 48,
+              "packed_bytes": 36710
+            }
+          ]
+        },
+        {
+          "stage": "solver:start",
+          "seconds": 234.58,
+          "memory_kib": {
+            "VmHWM": 4296108,
+            "VmRSS": 4263684
+          },
+          "number": 2,
+          "clauses": 14122127
+        },
+        {
+          "stage": "solver:end",
+          "seconds": 244.028,
+          "memory_kib": {
+            "VmHWM": 4827112,
+            "VmRSS": 4827112
+          },
+          "number": 2
+        },
+        {
+          "stage": "run:end",
+          "seconds": 257.568,
+          "memory_kib": {
+            "VmHWM": 5400016,
+            "VmRSS": 4374872
+          },
+          "report_rows": 3671,
+          "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+          "alive": {
+            "entries": 3671,
+            "container_bytes": 48,
+            "packed_bytes": 36710
+          },
+          "empty": {
+            "entries": 65688,
+            "container_bytes": 562488,
+            "packed_bytes": null
+          },
+          "legacy_stages": [
+            [
+              "начало",
+              4.08,
+              0
+            ],
+            [
+              "перебор",
+              4.25,
+              3671
+            ],
+            [
+              "минимальные",
+              4.25,
+              3671
+            ],
+            [
+              "вердикты",
+              4.26,
+              3671
+            ],
+            [
+              "сжатие",
+              4.37,
+              3671
+            ]
+          ],
+          "search_solver": {
+            "deferred": true,
+            "materialized": false
+          },
+          "solver_factories": 2
+        },
+        {
+          "stage": "end",
+          "seconds": 258.787,
+          "memory_kib": {
+            "VmHWM": 5400016,
+            "VmRSS": 4366836
+          }
+        }
+      ],
+      "decoded_rows": 3671,
+      "decoded_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+      "enumeration_seconds": 127.466
+    }
+  },
+  "ratios": {
+    "wall": 1.047431753423818,
+    "cpu": 1.0521742910830663,
+    "enumeration": 1.1650322438924892
+  },
+  "cost_all_profiles": {
+    "wall_seconds": 807.308,
+    "cpu_seconds": 805.54323
+  },
+  "limitations": [
+    "One ordered before/intermediate/after sequence; not randomized repeated timing.",
+    "Small audit probes ran on the other CPU during final profile; tests began after all profiles ended.",
+    "All three runs include startup and raw report serialization; native library/skeleton reused, no previous verdict cache loaded.",
+    "No full-class speed coefficient; different component ratios must not be multiplied."
+  ],
+  "verification": {
+    "full_local_tests": 140,
+    "full_local_seconds": 320.246,
+    "full_local_result": "OK",
+    "independent_code_review": "review_live: no blockers; fixed M06 translation before final audit",
+    "independent_metrics_review": "verify_conditions: all five complete reports and all eight measurements, three leaf raw reports and stated counts checked"
+  }
+}

@@ -1,0 +1,3007 @@
+{
+  "заметка": "Бесконечные группы. В отличие от конечных, они НЕ вычисляются: свойства и результаты конструкций записаны руками. Поэтому здесь всё, что записано, обязано проверяться правилами базы (tools/check-infinite.mjs), а всё, в чём я не уверен, ПРОПУЩЕНО — «не знаем» и «знаем, что нет» разные вещи.",
+  "договор": {
+    "props": "свойства объекта; отсутствующее свойство значит «неизвестно», а не «ложно»",
+    "подгруппы": "представительные подгруппы: id локальный, «объект» — id группы (конечной или бесконечной), которой подгруппа изоморфна, «props» — свойства ВЛОЖЕНИЯ",
+    "конструкции": "center, commutator, torsion дают id ПОДГРУППЫ; ab, aut — id ОБЪЕКТА",
+    "факторы": "id подгруппы → id объекта, которому изоморфен фактор",
+    "произведения": "id второго сомножителя → id объекта",
+    "морфизмы": "представительные гомоморфизмы: «в» — id цели, «ядро» — id подгруппы ИСТОЧНИКА либо «тривиальный»/«всё», «образ» — то же для ЦЕЛИ. Нулевой и тождественный не записываются: они есть всегда. Список неполон по существу — все гомоморфизмы бесконечной группы не перечислить, и для опровержения это не нужно.",
+    "семейства": "бесконечные семейства объявляются так же, как группы: «произведение» — id объекта ∏, «сумма» — id подгруппы В НЁМ, изоморфной ⊕. Свойство объекта на семействе значит «у каждого члена»."
+  },
+  "объекты": [
+    {
+      "id": "Z",
+      "имя": "ℤ",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": true,
+        "finite": false,
+        "fin-gen": true,
+        "free": true,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": true
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          },
+          "индекс": null
+        },
+        {
+          "id": "2Z",
+          "имя": "2ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": true,
+            "finite-index": true
+          },
+          "индекс": 2
+        },
+        {
+          "id": "3Z",
+          "имя": "3ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": true,
+            "finite-index": true
+          },
+          "индекс": 3
+        },
+        {
+          "id": "4Z",
+          "имя": "4ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": true
+          },
+          "индекс": 4
+        },
+        {
+          "id": "все",
+          "имя": "ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          },
+          "индекс": 1
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "0", "ab": "Z", "aut": "C2" },
+      "факторы": { "0": "Z", "2Z": "C2", "3Z": "C3", "4Z": "C4", "все": "C1" },
+      "произведения": { "Z": "ZxZ", "C2": "ZxC2", "A5": "A5xZ" },
+      "морфизмы": [
+        {
+          "в": "Z",
+          "имя": "умножение на 2",
+          "ядро": "0",
+          "образ": "2Z",
+          "props": { "injective": true, "surjective": false }
+        },
+        {
+          "в": "Q",
+          "имя": "вложение ℤ в ℚ",
+          "ядро": "0",
+          "образ": "Z",
+          "props": { "injective": true, "surjective": false }
+        }
+      ],
+      "модуль": {
+        "free": true,
+        "artinian": false,
+        "почему": "ℤ свободен над собой ранга 1; цепь ℤ ⊃ 2ℤ ⊃ 4ℤ ⊃ … не обрывается"
+      },
+      "элементы": [
+        {
+          "id": "один",
+          "имя": "образующая 1",
+          "props": {
+            "identity-elt": false,
+            "central-elt": true,
+            "torsion-elt": false,
+            "involution": false,
+            "generator": true
+          },
+          "порождает": "все",
+          "централизатор": "все"
+        }
+      ]
+    },
+    {
+      "id": "ZxZ",
+      "имя": "ℤ²",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "ось",
+          "имя": "ℤ × 0",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "ℤ²",
+          "объект": "ZxZ",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "0", "ab": "ZxZ", "aut": "GL2Z" },
+      "факторы": { "0": "ZxZ", "ось": "Z", "все": "C1" },
+      "модуль": {
+        "free": true,
+        "artinian": false,
+        "почему": "свободен ранга 2 — и это ровно то, чем ℤ² НЕ является как группа (свободная группа ранга 2 неабелева)"
+      },
+      "элементы": [
+        {
+          "id": "вектор",
+          "имя": "(1, 0)",
+          "props": {
+            "identity-elt": false,
+            "central-elt": true,
+            "torsion-elt": false,
+            "involution": false,
+            "generator": false
+          },
+          "порождает": "ось",
+          "централизатор": "все"
+        }
+      ]
+    },
+    {
+      "id": "ZxC2",
+      "имя": "ℤ × C₂",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          },
+          "индекс": null
+        },
+        {
+          "id": "кручение",
+          "имя": "0 × C₂",
+          "объект": "C2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          },
+          "индекс": null
+        },
+        {
+          "id": "ось",
+          "имя": "ℤ × 0",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": true,
+            "finite-index": true
+          },
+          "индекс": 2
+        },
+        {
+          "id": "все",
+          "имя": "ℤ × C₂",
+          "объект": "ZxC2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          },
+          "индекс": 1
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "кручение", "ab": "ZxC2" },
+      "факторы": { "0": "ZxC2", "кручение": "Z", "ось": "C2", "все": "C1" },
+      "модуль": { "free": false, "artinian": false, "почему": "кручение мешает свободности" }
+    },
+    {
+      "id": "A5xZ",
+      "имя": "A₅ × ℤ",
+      "бесконечная": true,
+      "заметка": "Неразрешимая группа с НЕТРИВИАЛЬНЫМ центром. В конечной части библиотеки такой нет вовсе: наименьшая — SL(2,5) порядка 120, а из объявленных бесконечных F₂ и F_∞ без центра, D∞ разрешима. Без этой записи задача «неразрешима, центр нетривиален, есть нетривиальный гомоморфизм в конечно порождённую неделимую — верно ли, что конечна?» оставалась без единого примера.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "множитель",
+          "имя": "A₅ × 0",
+          "объект": "A5",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "центр",
+          "имя": "1 × ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": true
+          },
+          "почему_исправлено": "индекс 60 конечен — расхождение поймала сверка базы с моделью, когда индекс научился считаться числом."
+        },
+        {
+          "id": "все",
+          "имя": "A₅ × ℤ",
+          "объект": "A5xZ",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "центр", "commutator": "множитель", "ab": "Z" },
+      "факторы": { "0": "A5xZ", "множитель": "Z", "центр": "A5", "все": "C1" },
+      "морфизмы": [
+        {
+          "в": "Z",
+          "имя": "проекция A₅ × ℤ → ℤ",
+          "ядро": "множитель",
+          "образ": "все",
+          "props": { "injective": false, "surjective": true },
+          "заметка": "Нетривиальный гомоморфизм в конечно порождённую неделимую группу — ровно то, чего требовало условие."
+        }
+      ]
+    },
+    {
+      "id": "Q",
+      "имя": "ℚ⁺",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": true,
+        "centerless": false,
+        "residually-finite": false,
+        "indecomposable": true
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "Z",
+          "имя": "ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "ℚ⁺",
+          "объект": "Q",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "0", "ab": "Q", "aut": "Qmul" },
+      "факторы": { "0": "Q", "Z": "QmodZ", "все": "C1" },
+      "морфизмы": [
+        {
+          "в": "R",
+          "имя": "вложение ℚ в ℝ",
+          "ядро": "0",
+          "образ": "Q",
+          "props": { "injective": true, "surjective": false }
+        }
+      ],
+      "модуль": {
+        "free": false,
+        "artinian": false,
+        "почему": "делимый ненулевой не бывает свободным; ℚ ⊃ ℤ ⊃ 2ℤ ⊃ … не обрывается"
+      },
+      "произведения": { "Q": "QxQ", "A5": "A5xQ" },
+      "элементы": [
+        {
+          "id": "один",
+          "имя": "1",
+          "props": {
+            "identity-elt": false,
+            "central-elt": true,
+            "torsion-elt": false,
+            "involution": false,
+            "generator": false
+          },
+          "порождает": "Z",
+          "централизатор": "все"
+        }
+      ]
+    },
+    {
+      "id": "QmodZ",
+      "имя": "ℚ/ℤ",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": true,
+        "divisible": true,
+        "centerless": false,
+        "residually-finite": false,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "C2",
+          "имя": "⟨1/2⟩",
+          "объект": "C2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "C6",
+          "имя": "⟨1/6⟩",
+          "объект": "C6",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "ℚ/ℤ",
+          "объект": "QmodZ",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "все", "ab": "QmodZ" },
+      "факторы": { "0": "QmodZ", "C2": "QmodZ", "C6": "QmodZ", "все": "C1" },
+      "почему": "Фактор ℚ/ℤ по любой конечной подгруппе снова ℚ/ℤ — задача 3.18 задачника.",
+      "морфизмы": [
+        {
+          "в": "QmodZ",
+          "имя": "умножение на 2",
+          "ядро": "C2",
+          "образ": "всё",
+          "props": { "injective": false, "surjective": true }
+        }
+      ],
+      "модуль": { "free": false, "artinian": false, "почему": "периодический; ⊕ по простым даёт бесконечную убывающую цепь" }
+    },
+    {
+      "id": "Pruf2",
+      "имя": "ℤ(2^∞)",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": true,
+        "divisible": true,
+        "centerless": false,
+        "residually-finite": false,
+        "indecomposable": true
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "C2",
+          "имя": "C₂",
+          "объект": "C2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "C4",
+          "имя": "C₄",
+          "объект": "C4",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "ℤ(2^∞)",
+          "объект": "Pruf2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "все", "ab": "Pruf2" },
+      "факторы": { "0": "Pruf2", "C2": "Pruf2", "C4": "Pruf2", "все": "C1" },
+      "почему": "Все собственные подгруппы конечны и циклические, а фактор по любой из них снова группа Прюфера.",
+      "морфизмы": [
+        {
+          "в": "Pruf2",
+          "имя": "умножение на 2",
+          "ядро": "C2",
+          "образ": "всё",
+          "props": { "injective": false, "surjective": true }
+        }
+      ],
+      "модуль": {
+        "free": false,
+        "artinian": true,
+        "почему": "подгруппы образуют цепь 0 ⊂ ℤ/2 ⊂ ℤ/4 ⊂ …, поэтому убывающие цепи обрываются"
+      },
+      "произведения": { "V4": "Pruf2xV4" },
+      "элементы": [
+        {
+          "id": "половина",
+          "имя": "1/2",
+          "props": {
+            "identity-elt": false,
+            "central-elt": true,
+            "torsion-elt": true,
+            "involution": true,
+            "generator": false
+          },
+          "порождает": "C2",
+          "централизатор": "все"
+        }
+      ]
+    },
+    {
+      "id": "R",
+      "имя": "ℝ⁺",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": true,
+        "centerless": false,
+        "residually-finite": false,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "Z",
+          "имя": "ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "Q",
+          "имя": "ℚ",
+          "объект": "Q",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "ℝ⁺",
+          "объект": "R",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "0", "ab": "R" },
+      "факторы": { "0": "R", "Z": "U", "все": "C1" },
+      "морфизмы": [
+        {
+          "в": "R",
+          "имя": "умножение на 2",
+          "ядро": "0",
+          "образ": "всё",
+          "props": { "injective": true, "surjective": true, "iso": true }
+        }
+      ],
+      "модуль": { "free": false, "artinian": false, "почему": "делимый ненулевой" }
+    },
+    {
+      "id": "U",
+      "имя": "U (окружность)",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": true,
+        "centerless": false,
+        "residually-finite": false,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "pm1",
+          "имя": "{±1}",
+          "объект": "C2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "корни",
+          "имя": "корни из 1",
+          "объект": "QmodZ",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "C4",
+          "имя": "корни 4-й степени",
+          "объект": "C4",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "U",
+          "объект": "U",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "1", "torsion": "корни", "ab": "U" },
+      "факторы": { "1": "U", "C4": "U", "все": "C1" },
+      "морфизмы": [
+        {
+          "в": "U",
+          "имя": "возведение в квадрат",
+          "ядро": "pm1",
+          "образ": "всё",
+          "props": { "injective": false, "surjective": true }
+        }
+      ],
+      "модуль": { "free": false, "artinian": false, "почему": "делимый ненулевой" }
+    },
+    {
+      "id": "Cmul",
+      "имя": "ℂ*",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": true,
+        "centerless": false,
+        "residually-finite": false,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "pm1",
+          "имя": "{±1}",
+          "объект": "C2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "U",
+          "имя": "U",
+          "объект": "U",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "Rpos",
+          "имя": "ℝ*₊",
+          "объект": "R",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "корни",
+          "имя": "корни из 1",
+          "объект": "QmodZ",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "ℂ*",
+          "объект": "Cmul",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "1", "torsion": "корни", "ab": "Cmul" },
+      "факторы": { "1": "Cmul", "U": "R", "Rpos": "U", "все": "C1" },
+      "почему": "ℂ* ≅ U × ℝ*₊, отсюда оба фактора.",
+      "морфизмы": [
+        {
+          "в": "R",
+          "имя": "модуль |z|",
+          "ядро": "U",
+          "образ": "всё",
+          "props": { "injective": false, "surjective": true }
+        },
+        {
+          "в": "Cmul",
+          "имя": "возведение в квадрат",
+          "ядро": "pm1",
+          "образ": "всё",
+          "props": { "injective": false, "surjective": true }
+        },
+        {
+          "в": "U",
+          "имя": "z ↦ z/|z|",
+          "ядро": "Rpos",
+          "образ": "всё",
+          "props": { "injective": false, "surjective": true }
+        }
+      ],
+      "модуль": { "free": false, "artinian": false, "почему": "≅ U × ℝ⁺, делимый" }
+    },
+    {
+      "id": "Qmul",
+      "имя": "ℚ*",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "pm1",
+          "имя": "{±1}",
+          "объект": "C2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "pos",
+          "имя": "ℚ*₊",
+          "объект": "Qpos",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": true,
+            "finite-index": true
+          },
+          "почему_максимальна": "Фактор ℚ*/ℚ*₊ ≅ C₂, то есть индекс 2; подгруппа простого индекса максимальна. Стояло «не максимальна» — поймала сверка базы с моделью, когда индекс научился считаться числом."
+        },
+        {
+          "id": "все",
+          "имя": "ℚ*",
+          "объект": "Qmul",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "1", "torsion": "pm1", "ab": "Qmul" },
+      "факторы": { "1": "Qmul", "pm1": "Qpos", "pos": "C2", "все": "C1" },
+      "почему": "ℚ* ≅ {±1} × ℚ*₊, а ℚ*₊ — свободная абелева счётного ранга.",
+      "морфизмы": [
+        {
+          "в": "C2",
+          "имя": "знак",
+          "ядро": "pos",
+          "образ": "всё",
+          "props": { "injective": false, "surjective": true }
+        }
+      ],
+      "модуль": { "free": false, "artinian": false, "почему": "≅ {±1} × ⊕ℤ — кручение мешает свободности" }
+    },
+    {
+      "id": "Qpos",
+      "имя": "ℚ*₊",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "двойки",
+          "имя": "⟨2⟩",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "ℚ*₊",
+          "объект": "Qpos",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "1", "torsion": "1", "ab": "Qpos" },
+      "факторы": { "1": "Qpos", "все": "C1" },
+      "модуль": { "free": true, "artinian": false, "почему": "свободна абелева на простых числах" }
+    },
+    {
+      "id": "F2",
+      "имя": "F₂",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": true,
+        "free": true,
+        "simple": false,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": true,
+        "residually-finite": true,
+        "indecomposable": true
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "a",
+          "имя": "⟨a⟩",
+          "объект": "Z",
+          "props": {
+            "normal": false,
+            "characteristic": false,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "коммутант",
+          "имя": "[F₂, F₂]",
+          "объект": "Foo",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "F₂",
+          "объект": "F2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "1", "commutator": "коммутант", "ab": "ZxZ" },
+      "факторы": { "1": "F2", "коммутант": "ZxZ", "все": "C1" },
+      "почему": "F₂/[F₂,F₂] ≅ ℤ², а сам коммутант свободен бесконечного ранга.",
+      "морфизмы": [
+        {
+          "в": "Z",
+          "имя": "сумма показателей по a",
+          "ядро": null,
+          "образ": "всё",
+          "props": { "surjective": true, "injective": false }
+        }
+      ],
+      "произведения": { "C2": "C2xF2" },
+      "элементы": [
+        {
+          "id": "a",
+          "имя": "a",
+          "props": {
+            "identity-elt": false,
+            "central-elt": false,
+            "torsion-elt": false,
+            "involution": false,
+            "generator": false
+          },
+          "порождает": "a",
+          "централизатор": "a"
+        }
+      ]
+    },
+    {
+      "id": "Foo",
+      "имя": "F_∞",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": true,
+        "simple": false,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": true,
+        "residually-finite": true,
+        "indecomposable": true
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "F_∞",
+          "объект": "Foo",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "1", "ab": "Zoo" },
+      "факторы": { "1": "Foo", "все": "C1" }
+    },
+    {
+      "id": "Zoo",
+      "имя": "⊕ℤ",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "⊕ℤ",
+          "объект": "Zoo",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "0", "ab": "Zoo" },
+      "факторы": { "0": "Zoo", "все": "C1" },
+      "модуль": { "free": true, "artinian": false, "почему": "свободна абелева счётного ранга" }
+    },
+    {
+      "id": "Dinf",
+      "имя": "D∞",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": false,
+        "centerless": true,
+        "residually-finite": true,
+        "indecomposable": true
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "отражение",
+          "имя": "⟨s⟩",
+          "объект": "C2",
+          "props": {
+            "normal": false,
+            "characteristic": false,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "r2",
+          "имя": "⟨r²⟩",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": true
+          }
+        },
+        {
+          "id": "вращения",
+          "имя": "⟨r⟩",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": false,
+            "maximal": true,
+            "finite-index": true
+          },
+          "индекс": 2
+        },
+        {
+          "id": "все",
+          "имя": "D∞",
+          "объект": "Dinf",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          },
+          "индекс": 1
+        }
+      ],
+      "конструкции": { "center": "1", "commutator": "r2", "ab": "V4", "aut": "Dinf" },
+      "факторы": { "1": "Dinf", "вращения": "C2", "r2": "V4", "все": "C1" },
+      "почему": "D∞ = ⟨r, s | s² = 1, srs = r⁻¹⟩; коммутант — ⟨r²⟩, абелианизация — C₂ × C₂.",
+      "элементы": [
+        {
+          "id": "поворот",
+          "имя": "поворот бесконечного порядка",
+          "props": {
+            "identity-elt": false,
+            "central-elt": false,
+            "torsion-elt": false,
+            "involution": false,
+            "generator": false
+          },
+          "порождает": "вращения",
+          "централизатор": "вращения"
+        },
+        {
+          "id": "отражение",
+          "имя": "отражение",
+          "props": {
+            "identity-elt": false,
+            "central-elt": false,
+            "torsion-elt": true,
+            "involution": true,
+            "generator": false
+          },
+          "порождает": "отражение",
+          "централизатор": "отражение"
+        }
+      ],
+      "множествоКручения": { "subgroup": false, "set-whole": false },
+      "заметка_о_кручении": "Произведение двух отражений — поворот бесконечного порядка, поэтому множество элементов конечного порядка ЗАМКНУТЫМ не является. Классический пример того, что «кручение» подгруппой быть не обязано."
+    },
+    {
+      "id": "Zpow",
+      "имя": "ℤ^ℕ",
+      "бесконечная": true,
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "сумма",
+          "имя": "⊕ℤ",
+          "объект": "Zoo",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "ℤ^ℕ",
+          "объект": "Zpow",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "0", "ab": "Zpow" },
+      "факторы": { "0": "Zpow", "все": "C1" },
+      "почему": "Произведение счётного числа копий ℤ. По теореме Шпеккера оно не свободно, в отличие от прямой суммы ⊕ℤ, которая лежит в нём собственной подгруппой, — на этом и держится разница ⊕ и ∏.",
+      "модуль": {
+        "free": false,
+        "artinian": false,
+        "почему": "по теореме Шпеккера ℤ^ℕ НЕ свободен — и это главное, чего конечная модель не увидела бы"
+      }
+    },
+    {
+      "id": "SumC2",
+      "имя": "⊕C₂",
+      "бесконечная": true,
+      "заметка": "Бесконечная ПЕРИОДИЧЕСКАЯ группа — в библиотеке её не было вовсе, а без неё «периодична и финитно аппроксимируема ⇒ конечна» нечем опровергнуть, хотя это одна из первых задач про бесконечные группы.",
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": true,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "слагаемое",
+          "имя": "одно слагаемое C₂",
+          "объект": "C2",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "пара",
+          "имя": "два слагаемых ≅ C₂ × C₂",
+          "объект": "V4",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "⊕C₂",
+          "объект": "SumC2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "все", "ab": "SumC2" },
+      "факторы": { "0": "SumC2", "слагаемое": "SumC2", "все": "C1", "пара": "SumC2" },
+      "модуль": {
+        "экспонента": 2,
+        "free": false,
+        "artinian": false,
+        "почему": "Над 𝔽₂ это векторное пространство счётной размерности: свободно как 𝔽₂-модуль, но над ℤ — нет. Экспонента 2 и делает его модулем над ℤ/2ℤ."
+      }
+    },
+    {
+      "id": "QxQ",
+      "имя": "ℚ²",
+      "бесконечная": true,
+      "заметка": "Нужна как фактор UT₃(ℚ) по центру: именно она показывает, что финитная аппроксимируемость факторами НЕ наследуется.",
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": true,
+        "centerless": false,
+        "residually-finite": false,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "ось",
+          "имя": "ℚ × 0",
+          "объект": "Q",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "ℚ²",
+          "объект": "QxQ",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "0", "ab": "QxQ" },
+      "факторы": { "0": "QxQ", "ось": "Q", "все": "C1" }
+    },
+    {
+      "id": "UT3Q",
+      "имя": "UT₃(ℚ)",
+      "бесконечная": true,
+      "заметка": "Группа Гейзенберга над ℚ: НЕАБЕЛЕВА и при этом ДЕЛИМА, с центром ℚ и фактором ℚ². Закрывает сразу три слепых пятна: неабелева делимая, нефинитно аппроксимируемая разрешимая, и фактор по центру, теряющий финитную аппроксимируемость.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": true,
+        "centerless": false,
+        "residually-finite": false,
+        "indecomposable": true
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "центр",
+          "имя": "центр ≅ ℚ",
+          "объект": "Q",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "UT₃(ℚ)",
+          "объект": "UT3Q",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "центр", "commutator": "центр", "ab": "QxQ" },
+      "факторы": { "0": "UT3Q", "центр": "QxQ", "все": "C1" }
+    },
+    {
+      "id": "Klein",
+      "имя": "K (бутылка Клейна)",
+      "бесконечная": true,
+      "заметка": "K = ⟨x, y | y x y⁻¹ = x⁻¹⟩. Без кручения, но K/Z(K) ≅ D∞ — С кручением. Единственный в библиотеке пример того, что отсутствие кручения не переносится на фактор по центру.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": true
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "коммутант",
+          "имя": "⟨x²⟩ ≅ ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "центр",
+          "имя": "⟨y²⟩ ≅ ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "ось",
+          "имя": "⟨x⟩ ≅ ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "K",
+          "объект": "Klein",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "центр", "commutator": "коммутант", "ab": "ZxC2" },
+      "факторы": { "0": "Klein", "коммутант": "ZxC2", "центр": "Dinf", "ось": "Z", "все": "C1" }
+    },
+    {
+      "id": "C2xF2",
+      "имя": "C₂ × F₂",
+      "бесконечная": true,
+      "заметка": "Неабелева, непериодическая, с КОНЕЧНЫМ нетривиальным центром. На ней ломаются «центр свободен» и «фактор по центру периодичен».",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "центр",
+          "имя": "C₂ × 1",
+          "объект": "C2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "коммутант",
+          "имя": "[F₂, F₂] ≅ F_∞",
+          "объект": "Foo",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "множитель",
+          "имя": "1 × F₂",
+          "объект": "F2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": false,
+            "maximal": true,
+            "finite-index": true
+          },
+          "почему_максимальна": "Индекс 2, а подгруппа простого индекса максимальна: между ней и всей группой промежуточной быть не может. Стояло «не максимальна» — сверка с базой это и поймала.",
+          "почему_исправлено": "индекс 2 конечен — расхождение поймала сверка базы с моделью, когда индекс научился считаться числом."
+        },
+        {
+          "id": "все",
+          "имя": "C₂ × F₂",
+          "объект": "C2xF2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "центр", "commutator": "коммутант" },
+      "факторы": { "0": "C2xF2", "центр": "F2", "множитель": "C2", "все": "C1" },
+      "множествоКручения": { "subgroup": true, "set-whole": false }
+    },
+    {
+      "id": "A5xQ",
+      "имя": "A₅ × ℚ⁺",
+      "бесконечная": true,
+      "заметка": "Не нильпотентна, не финитно аппроксимируема, а фактор по центру — A₅, то есть НЕразрешим. Ровно этого сочетания в библиотеке не было.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": false,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "множитель",
+          "имя": "A₅ × 0",
+          "объект": "A5",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "центр",
+          "имя": "1 × ℚ",
+          "объект": "Q",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": true
+          },
+          "почему_исправлено": "индекс 60 конечен — расхождение поймала сверка базы с моделью, когда индекс научился считаться числом."
+        },
+        {
+          "id": "все",
+          "имя": "A₅ × ℚ⁺",
+          "объект": "A5xQ",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "центр", "commutator": "множитель", "ab": "Q" },
+      "факторы": { "0": "A5xQ", "множитель": "Q", "центр": "A5", "все": "C1" }
+    },
+    {
+      "id": "Pruf2xV4",
+      "имя": "ℤ(2^∞) × V₄",
+      "бесконечная": true,
+      "заметка": "Периодическая и НЕ финитно аппроксимируемая, с конечной нециклической подгруппой. Без неё «G периодична, N не циклична и финитно аппроксимируема ⇒ G финитно аппроксимируема» нечем опровергнуть.",
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": true,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": false
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "множитель",
+          "имя": "1 × V₄",
+          "объект": "V4",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "прюфер",
+          "имя": "ℤ(2^∞) × 1",
+          "объект": "Pruf2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": true
+          },
+          "почему_исправлено": "индекс 4 конечен — расхождение поймала сверка базы с моделью, когда индекс научился считаться числом."
+        },
+        {
+          "id": "все",
+          "имя": "ℤ(2^∞) × V₄",
+          "объект": "Pruf2xV4",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "все", "ab": "Pruf2xV4" },
+      "факторы": { "0": "Pruf2xV4", "множитель": "Pruf2", "прюфер": "V4", "все": "C1" }
+    },
+    {
+      "id": "GL2Z",
+      "имя": "GL₂(ℤ)",
+      "бесконечная": true,
+      "заметка": "Группа автоморфизмов ℤ². Конечно порождена и финитно аппроксимируема (конечно порождённая линейная над ℤ — по Мальцеву), но неразрешима: содержит свободную подгруппу. Центр {±E} ≅ C₂. Без неё ни один вопрос вида «Aut(G) конечна?» на бесконечной G не получал ответа.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "центр",
+          "имя": "{±E} ≅ C₂",
+          "объект": "C2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "GL₂(ℤ)",
+          "объект": "GL2Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "центр" },
+      "факторы": { "0": "GL2Z", "все": "C1" }
+    },
+    {
+      "id": "Z2adic",
+      "имя": "ℤ₂ (целые 2-адические)",
+      "бесконечная": true,
+      "заметка": "Обратный предел ℤ/2ⁿ. Финитно аппроксимируема и без кручения, но НЕ периодична и НЕ делима, хотя все члены системы конечны, — ровно поэтому «обратный предел сохраняет периодичность» в базе нет.",
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true
+      },
+      "подгруппы": [
+        {
+          "id": "0",
+          "имя": "0",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "2Z2",
+          "имя": "2ℤ₂",
+          "объект": "Z2adic",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": true
+          }
+        },
+        {
+          "id": "все",
+          "имя": "ℤ₂",
+          "объект": "Z2adic",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "0", "torsion": "0", "ab": "Z2adic" },
+      "факторы": { "0": "Z2adic", "все": "C1" },
+      "модуль": {
+        "free": false,
+        "artinian": false,
+        "почему": "ℤ₂ как ℤ-модуль без кручения, но не свободна: она несчётна и делима на все нечётные числа"
+      }
+    },
+    {
+      "id": "PSL2R",
+      "имя": "PSL₂(ℝ)",
+      "бесконечная": true,
+      "заметка": "Первая в библиотеке БЕСКОНЕЧНАЯ простая группа. Проста и при этом НЕ периодична и НЕ финитно аппроксимируема — до неё вопросы «простая группа периодична?» и «простая финитно аппроксимируема?» оставались без контрпримера, потому что все простые в библиотеке были конечны.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": true,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": true,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": false,
+        "centerless": true,
+        "residually-finite": false,
+        "indecomposable": true
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "поворот",
+          "имя": "поворот порядка 2",
+          "объект": "C2",
+          "props": {
+            "normal": false,
+            "characteristic": false,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "гипербола",
+          "имя": "циклическая ⟨h⟩ ≅ ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": false,
+            "characteristic": false,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "PSL₂(ℝ)",
+          "объект": "PSL2R",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "1", "commutator": "все", "ab": "C1" },
+      "факторы": { "1": "PSL2R", "все": "C1" },
+      "элементы": [
+        {
+          "id": "гипербола",
+          "имя": "элемент бесконечного порядка",
+          "props": {
+            "identity-elt": false,
+            "central-elt": false,
+            "torsion-elt": false,
+            "involution": false,
+            "generator": false
+          },
+          "порождает": "гипербола",
+          "заметка": "Гиперболический элемент: бесконечного порядка, порождает циклическую подгруппу ≅ ℤ. Нужен, чтобы «совершенная группа, x ≠ e ⇒ ⟨x⟩ периодична» получило контрпример: A_∞ периодична, и на ней вопрос не проверяется."
+        }
+      ]
+    },
+    {
+      "id": "BS23",
+      "имя": "BS(2, 3)",
+      "заметка": "⟨a, b | b a² b⁻¹ = a³⟩. Конечно порождена и НЕ финитно аппроксимируема — первая такая в библиотеке. До неё «конечно порождена ⇒ финитно аппроксимируема» нечем было опровергнуть, хотя это одно из самых известных заблуждений темы.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": true,
+        "residually-finite": false
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "ось",
+          "имя": "⟨a⟩ ≅ ℤ",
+          "объект": "Z",
+          "props": {
+            "normal": false,
+            "characteristic": false,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "BS(2,3)",
+          "объект": "BS23",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "1", "ab": "Z" },
+      "факторы": { "1": "BS23", "все": "C1" },
+      "бесконечная": true
+    },
+    {
+      "id": "Ainf",
+      "имя": "A_∞ (финитарная знакопеременная)",
+      "заметка": "Объединение цепочки A₅ ↪ A₆ ↪ … Бесконечная простая ПЕРИОДИЧЕСКАЯ группа — дополняет PSL₂(ℝ), которая проста и непериодична. Не конечно порождена и не финитно аппроксимируема.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": true,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": true,
+        "torsion-free": false,
+        "periodic": true,
+        "divisible": false,
+        "centerless": true,
+        "residually-finite": false,
+        "indecomposable": true
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "A5",
+          "имя": "A₅",
+          "объект": "A5",
+          "props": {
+            "normal": false,
+            "characteristic": false,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "A_∞",
+          "объект": "Ainf",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          }
+        }
+      ],
+      "конструкции": { "center": "1", "commutator": "все", "ab": "C1" },
+      "факторы": { "1": "Ainf", "все": "C1" },
+      "бесконечная": true
+    },
+    {
+      "id": "PSL2Z",
+      "имя": "PSL₂(ℤ)",
+      "почему": "PSL₂(ℤ) ≅ C₂ ∗ C₃ — классическое свободное произведение двух КОНЕЧНЫХ групп. Коммутант свободен ранга 2 и имеет индекс 6, абелианизация — C₆. Нужна здесь ровно затем, чтобы терм A ∗ B был вычислим не только когда один сомножитель тривиален: без такой записи «свободное произведение конечных групп» нечем ни подтвердить, ни опровергнуть.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": false,
+        "centerless": true,
+        "residually-finite": true,
+        "indecomposable": true
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "дваS",
+          "имя": "⟨S⟩",
+          "объект": "C2",
+          "заметка": "Конечная подгруппа порядка 2. Не максимальна: по теореме Куроша в C₂ ∗ C₃ есть подгруппы вида C₂ ∗ C₂, её содержащие.",
+          "props": {
+            "normal": false,
+            "characteristic": false,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "триST",
+          "имя": "⟨ST⟩",
+          "объект": "C3",
+          "props": {
+            "normal": false,
+            "characteristic": false,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "коммутант",
+          "имя": "[PSL₂(ℤ), PSL₂(ℤ)]",
+          "объект": "F2",
+          "заметка": "Свободная группа ранга 2 индекса 6: подгруппа конечного индекса БЕЗ кручения в группе С кручением.",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": false,
+            "maximal": false,
+            "finite-index": true
+          },
+          "индекс": 6
+        },
+        {
+          "id": "все",
+          "имя": "PSL₂(ℤ)",
+          "объект": "PSL2Z",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          },
+          "индекс": 1
+        }
+      ],
+      "конструкции": { "center": "1", "commutator": "коммутант", "ab": "C6" },
+      "факторы": { "1": "PSL2Z", "коммутант": "C6", "все": "C1" },
+      "элементы": [
+        {
+          "id": "S",
+          "имя": "S (порядка 2)",
+          "props": {
+            "identity-elt": false,
+            "central-elt": false,
+            "torsion-elt": true,
+            "involution": true,
+            "generator": false
+          },
+          "порождает": "дваS",
+          "централизатор": "дваS"
+        },
+        {
+          "id": "ST",
+          "имя": "ST (порядка 3)",
+          "props": {
+            "identity-elt": false,
+            "central-elt": false,
+            "torsion-elt": true,
+            "involution": false,
+            "generator": false
+          },
+          "порождает": "триST",
+          "централизатор": "триST"
+        }
+      ],
+      "множествоКручения": { "subgroup": false, "set-whole": false },
+      "заметка_о_кручении": "Произведение элемента порядка 2 на элемент порядка 3 имеет бесконечный порядок (это образующая коммутанта), поэтому кручение подгруппой не является.",
+      "бесконечная": true
+    },
+    {
+      "id": "ProdC2",
+      "имя": "∏C₂",
+      "почему": "Прямое ПРОИЗВЕДЕНИЕ счётного числа копий C₂, в отличие от прямой суммы ⊕C₂: у суммы носитель счётен, у произведения — континуум, но периодичность и экспонента 2 у них одинаковы. Заведено ради группы Галуа: Gal(ℚ(√2, √3, √5, …)/ℚ) — это именно произведение, а не сумма, и без него «нормальное расширение имеет конечную группу Галуа» нечем было опровергнуть.",
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": true,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "indecomposable": false
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "сумма",
+          "имя": "⊕C₂",
+          "объект": "SumC2",
+          "заметка": "Собственная подгруппа конечных носителей: плотная, но не вся. Индекс бесконечен.",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "множитель",
+          "имя": "C₂ (первый множитель)",
+          "объект": "C2",
+          "props": {
+            "normal": true,
+            "characteristic": false,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "∏C₂",
+          "объект": "ProdC2",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          },
+          "индекс": 1
+        }
+      ],
+      "конструкции": { "center": "все", "commutator": "1", "ab": "ProdC2", "torsion": "все" },
+      "факторы": { "1": "ProdC2", "все": "C1" },
+      "множествоКручения": { "subgroup": true, "set-whole": true },
+      "бесконечная": true
+    },
+    {
+      "id": "PGL2Q",
+      "имя": "PGL₂(ℚ)",
+      "почему": "Группа автоморфизмов поля рациональных функций: Aut(ℚ(x)/ℚ) — это дробно-линейные замены x ↦ (ax + b)/(cx + d), то есть ровно PGL₂(ℚ). Заведена ради единственного в библиотеке НЕ-Галуа расширения с БЕСКОНЕЧНОЙ группой автоморфизмов. Чего не знаю — не объявляю: финитная аппроксимируемость и разложимость здесь пропущены нарочно.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": false,
+        "free": false,
+        "simple": false,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": false,
+        "divisible": false,
+        "centerless": true
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "PGL₂(ℚ)",
+          "объект": "PGL2Q",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          },
+          "индекс": 1
+        }
+      ],
+      "конструкции": { "center": "1" },
+      "факторы": { "1": "PGL2Q", "все": "C1" },
+      "множествоКручения": { "subgroup": false, "set-whole": false },
+      "заметка_о_кручении": "Инволюций много (класс diag(1, −1) и её сопряжённые), а произведение двух инволюций бывает бесконечного порядка — замкнутым множество кручения не является.",
+      "бесконечная": true
+    },
+    {
+      "id": "Grig",
+      "имя": "𝒢 (группа Григорчука)",
+      "почему": "Конечно порождённая БЕСКОНЕЧНАЯ периодическая группа — отрицательный ответ на общую проблему Бернсайда. Заведена ради этого одного свойства: во всей прежней библиотеке конечно порождённые периодические группы были только конечными, и «конечно порождена и периодична ⇒ конечна» подтверждалось на всех примерах. Порядок каждого элемента — степень двойки, группа действует на двоичном дереве, растёт промежуточно (это свойство языком не выражается). Разложимость в прямое произведение НЕ объявлена: не знаю.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": false,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": true,
+        "divisible": false,
+        "centerless": true,
+        "residually-finite": true
+      },
+      "подгруппы": [
+        {
+          "id": "1",
+          "имя": "1",
+          "объект": "C1",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": true,
+            "whole": false,
+            "maximal": false,
+            "finite-index": false
+          }
+        },
+        {
+          "id": "все",
+          "имя": "𝒢",
+          "объект": "Grig",
+          "props": {
+            "normal": true,
+            "characteristic": true,
+            "central": false,
+            "whole": true,
+            "maximal": false,
+            "finite-index": true
+          },
+          "индекс": 1
+        }
+      ],
+      "конструкции": { "center": "1", "ab": "C2xC2xC2" },
+      "факторы": { "1": "Grig", "все": "C1" },
+      "заметка_об_абелианизации": "𝒢 порождена инволюциями a, b, c, d с bcd = 1, поэтому 𝒢/[𝒢, 𝒢] ≅ C₂³ — коммутант имеет индекс 8. Сам коммутант в библиотеке не объявлен: назвать его тип изоморфизма нечем.",
+      "бесконечная": true
+    }
+  ],
+  "заметка_о_свободных": "Свободное произведение не вычисляется: оно бесконечно почти всегда. Но оно и не безнадёжно — у него есть ТОЖДЕСТВО (1 ∗ B = B, его считает модель) и есть классические значения, которые можно объявить. Без этой таблицы каждая схема со свободным произведением давала одни пробелы: ни подтвердить, ни опровергнуть было нечем, и десять тысяч задач выходили из ничего.",
+  "свободные": [
+    {
+      "слева": "C2",
+      "справа": "C2",
+      "равно": "Dinf",
+      "почему": "C₂ ∗ C₂ ≅ D∞: два отражения, их произведение — поворот бесконечного порядка."
+    },
+    { "слева": "C2", "справа": "C3", "равно": "PSL2Z", "почему": "C₂ ∗ C₃ ≅ PSL₂(ℤ)." },
+    {
+      "слева": "Z",
+      "справа": "Z",
+      "равно": "F2",
+      "почему": "Свободное произведение свободных свободно, ранг складывается: 1 + 1 = 2."
+    },
+    { "слева": "Z", "справа": "Foo", "равно": "Foo", "почему": "1 + ℵ₀ = ℵ₀." },
+    { "слева": "F2", "справа": "Foo", "равно": "Foo", "почему": "2 + ℵ₀ = ℵ₀." },
+    { "слева": "Foo", "справа": "Foo", "равно": "Foo", "почему": "ℵ₀ + ℵ₀ = ℵ₀." }
+  ],
+  "семейства": [
+    {
+      "id": "ZfamN",
+      "имя": "(ℤ)ᵢ∈ℕ",
+      "семейство": true,
+      "props": {
+        "finite-fam": false,
+        "trivial": false,
+        "abelian": true,
+        "cyclic": true,
+        "finite": false,
+        "fin-gen": true,
+        "free": true,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true
+      },
+      "произведение": "Zpow",
+      "сумма": "сумма"
+    }
+  ],
+  "системы": [
+    {
+      "id": "ZtoQ",
+      "имя": "(ℤ →ⁿ ℤ → …)",
+      "система": true,
+      "заметка": "Копии ℤ с умножениями: прямой предел равен ℚ. На ней ломаются сразу три соблазнительных правила — предел конечно порождённых не конечно порождён, предел свободных не свободен, предел финитно аппроксимируемых не финитно аппроксимируем. Обратный предел той же системы тривиален: элемент, делящийся на всякое n, в ℤ только нулевой.",
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": true,
+        "finite": false,
+        "fin-gen": true,
+        "free": true,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": true,
+        "periodic": false,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "injective-sys": true,
+        "surjective-sys": false,
+        "constant-sys": false
+      },
+      "копредел": "Q",
+      "предел": "C1"
+    },
+    {
+      "id": "C2n",
+      "имя": "(C₂ ↪ C₄ ↪ C₈ ↪ …)",
+      "система": true,
+      "заметка": "Вложения конечных циклических: прямой предел — группа Прюфера ℤ(2^∞). Все члены конечны, а предел бесконечен и делим. Обратный предел той же системы равен C₂ — совместимое семейство задаётся первым членом. Значит colim и lim расходятся, и «пределы совпадают» опровергается.",
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": true,
+        "finite": true,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": true,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "injective-sys": true,
+        "surjective-sys": false,
+        "constant-sys": false
+      },
+      "копредел": "Pruf2",
+      "предел": "C2"
+    },
+    {
+      "id": "C2nInv",
+      "имя": "(… ↠ C₈ ↠ C₄ ↠ C₂)",
+      "система": true,
+      "заметка": "Эпиморфизмы конечных циклических: обратный предел — ℤ₂. Члены периодичны, а предел нет; члены конечны, а предел несчётен.",
+      "props": {
+        "trivial": false,
+        "abelian": true,
+        "cyclic": true,
+        "finite": true,
+        "fin-gen": true,
+        "free": false,
+        "simple": false,
+        "solvable": true,
+        "nilpotent": true,
+        "perfect": false,
+        "torsion-free": false,
+        "periodic": true,
+        "divisible": false,
+        "centerless": false,
+        "residually-finite": true,
+        "injective-sys": false,
+        "surjective-sys": true,
+        "constant-sys": false
+      },
+      "предел": "Z2adic"
+    },
+    {
+      "id": "Alt",
+      "имя": "(A₅ ↪ A₆ ↪ A₇ ↪ …)",
+      "система": true,
+      "заметка": "Вложения конечных простых. Прямой предел — A_∞: члены конечны и финитно аппроксимируемы, а предел бесконечен и не аппроксимируем. Обратный предел равен A₅: совместимое семейство задаётся первым членом.",
+      "props": {
+        "trivial": false,
+        "abelian": false,
+        "cyclic": false,
+        "finite": true,
+        "fin-gen": true,
+        "free": false,
+        "simple": true,
+        "solvable": false,
+        "nilpotent": false,
+        "perfect": true,
+        "torsion-free": false,
+        "periodic": true,
+        "divisible": false,
+        "centerless": true,
+        "residually-finite": true,
+        "injective-sys": true,
+        "surjective-sys": false,
+        "constant-sys": false
+      },
+      "копредел": "Ainf",
+      "предел": "A5"
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+== решающих значений 13: касаются 23 запретов; без кандидата 16 ==
+значение free(максимальная подгруппа группы Губы) — запретов 4; например: divisible(G) & free(N) & maximal(N)
+значение hopfian(ℤ × C₂ × монстр Тарского (Ольшанский)) — запретов 3; например: finite-index(N) & hopfian(N) & ¬hopfian(G)
+значение hopfian(группа Губы (к. п. делимая)) — запретов 3; например: divisible(G) & fin-gen(G) & ¬hopfian(N)
+значение indecomposable(B(∞, n), n нечётно ⩾ 665) — запретов 2; например: bounded-exponent(G) & indecomposable(G) & ¬hopfian(N)
+значение fin-gen(максимальная подгруппа группы Губы) — запретов 2; например: divisible(G) & fin-gen(G) & ¬fin-gen(N)
+значение divisible(максимальная подгруппа группы Губы) — запретов 2; например: divisible(G) & fin-gen(G) & ¬divisible(N)
+значение simple(максимальная подгруппа группы Губы) — запретов 1; например: divisible(G) & fin-gen(G) & simple(N)
+значение residually-finite(максимальная подгруппа группы Губы) — запретов 1; например: divisible(G) & maximal(N) & residually-finite(N)
+значение polycyclic(максимальная подгруппа группы Губы) — запретов 1; например: divisible(G) & maximal(N) & polycyclic(N)
+значение perfect(максимальная подгруппа группы Губы) — запретов 1; например: divisible(G) & fin-gen(G) & ¬perfect(N)
+значение indecomposable(BS(2, 3)) — запретов 1; например: indecomposable(G) & ¬hopfian(G) & ¬linear(N)
+значение hopfian(UT₃(𝔽₃(t))) — запретов 1; например: bounded-exponent(G) & hopfian(G) & ¬hopfian(N)
+значение centerless(максимальная подгруппа группы Губы) — запретов 1; например: divisible(G) & fin-gen(G) & ¬centerless(N)
+== без кандидата: нужен пример или правило ==
+не бывает? finite(N) & maximal(N) & одно из: divisible(G), ¬bounded-exponent(G), ¬hopfian(G), ¬periodic(G)   [запретов 4]
+не бывает? bounded-exponent(N) & maximal(N) & одно из: divisible(G), ¬bounded-exponent(G), ¬periodic(G)   [запретов 3]
+не бывает? bounded-exponent(G) & ¬fin-gen(N) & одно из: simple(G), simple(N)   [запретов 2]
+не бывает? maximal(N) & ¬hopfian(G) & одно из: cyclic(N), simple(N)   [запретов 2]
+не бывает? divisible(G) & maximal(N) & cyclic(N)   [примеров посылок: 75]
+не бывает? divisible(G) & ¬residually-finite(N) & bounded-exponent(N)   [примеров посылок: 2035]
+не бывает? fin-gen(G) & ¬torsion-free(N) & divisible(G)   [примеров посылок: 1]
+не бывает? periodic(N) & ¬periodic(G) & maximal(N)   [примеров посылок: 6792]
+не бывает? simple(G) & ¬hopfian(N) & bounded-exponent(G)   [примеров посылок: 61]
+== все запреты остатка ==
+не бывает? divisible(G) & maximal(N) & одно из: bounded-exponent(N), cyclic(N), fin-gen(N), finite(N), free(N), polycyclic(N), residually-finite(N), ¬divisible(N)   [запретов 8; заполнить divisible(N) у G = Guba, N = максимальная, fin-gen(N) у G = Guba, N = максимальная, free(N) у G = Guba, N = максимальная …]
+не бывает? divisible(G) & fin-gen(G) & одно из: simple(N), ¬centerless(N), ¬divisible(N), ¬fin-gen(N), ¬hopfian(N), ¬perfect(N), ¬torsion-free(N)   [запретов 7; заполнить centerless(N) у G = Guba, N = максимальная, divisible(N) у G = Guba, N = максимальная, fin-gen(N) у G = Guba, N = максимальная …]
+не бывает? maximal(N) & ¬hopfian(G) & одно из: cyclic(N), finite(N), hopfian(N), polycyclic(N), simple(N)   [запретов 5; заполнить hopfian(G) у G = 6:1×ExtraInf, N = №1 × B, hopfian(G) у G = ZxZ×Tarski, N = A × ⟨x⟩]
+не бывает? bounded-exponent(G) & ¬hopfian(N) & одно из: hopfian(G), indecomposable(G), indecomposable(N), simple(G)   [запретов 4; заполнить hopfian(G) у G = S3wrZc, N = ⊕C₃, indecomposable(G) у G = S3wrZc, N = ⊕C₃, indecomposable(N) у G = Binf, N = все]
+не бывает? free(N) & maximal(N) & одно из: perfect(G), ¬linear(G), ¬residually-finite(G)   [запретов 3; заполнить free(N) у G = Guba, N = максимальная]
+не бывает? maximal(N) & ¬periodic(G) & одно из: bounded-exponent(N), finite(N), periodic(N)   [запретов 3]
+не бывает? bounded-exponent(G) & ¬fin-gen(N) & одно из: simple(G), simple(N)   [запретов 2]
+не бывает? maximal(N) & ¬bounded-exponent(G) & одно из: bounded-exponent(N), finite(N)   [запретов 2]
+не бывает? perfect(N) & ¬hopfian(N) & одно из: fin-gen(G), torsion-free(G)   [запретов 2; заполнить hopfian(N) у G = Guba, N = все, perfect(N) у G = Grig, N = ⊕K]
+не бывает? bounded-exponent(N) & divisible(G) & ¬residually-finite(N)   [примеров посылок: 2035]
+не бывает? finite-index(N) & hopfian(N) & ¬hopfian(G)   [примеров посылок: 7779; заполнить hopfian(G) у G = 6:1×ExtraInf, N = 1 × B]
+не бывает? indecomposable(G) & ¬hopfian(G) & ¬linear(N)   [примеров посылок: 16; заполнить hopfian(G) у G = SLinfC, N = все, indecomposable(G) у G = BS23, N = все]
+трудный контрпример: divisible(Guba) — запретов 30
+    бывает: divisible(G) & fin-gen(G) & ¬normal(N)   [G = Guba, N = максимальная]
+    бывает: divisible(G) & fin-gen(G) & ¬characteristic(N)   [G = Guba, N = максимальная]
+    бывает: divisible(G) & fin-gen(G) & maximal(N)   [G = Guba, N = максимальная]
+    бывает: divisible(G) & fin-gen(G) & ¬whole(N)   [G = Guba, N = 1]
+    бывает: divisible(G) & fin-gen(G) & ¬central(N)   [G = Guba, N = максимальная]
+    бывает: divisible(G) & fin-gen(G) & ¬finite-index(N)   [G = Guba, N = 1]
+    бывает: divisible(G) & fin-gen(G) & ¬trivial(N)   [G = Guba, N = максимальная]
+    бывает: divisible(G) & fin-gen(G) & ¬abelian(N)   [G = Guba, N = максимальная]
+    бывает: divisible(G) & fin-gen(G) & ¬cyclic(N)   [G = Guba, N = максимальная]
+    бывает: divisible(G) & fin-gen(G) & ¬finite(N)   [G = Guba, N = максимальная]
+    бывает: divisible(G) & fin-gen(G) & ¬free(N)   [G = Guba, N = все]
+    бывает: divisible(G) & fin-gen(G) & ¬solvable(N)   [G = Guba, N = все]
+    бывает: divisible(G) & fin-gen(G) & ¬nilpotent(N)   [G = Guba, N = все]
+    бывает: divisible(G) & fin-gen(G) & ¬periodic(N)   [G = Guba, N = максимальная]
+    бывает: divisible(G) & fin-gen(G) & ¬residually-finite(N)   [G = Guba, N = все]
+    бывает: divisible(G) & fin-gen(G) & ¬indecomposable(N)   [G = Guba×Guba, N = максимальная × B]
+    бывает: divisible(G) & fin-gen(G) & ¬polycyclic(N)   [G = Guba, N = все]
+    бывает: divisible(G) & fin-gen(G) & ¬bounded-exponent(N)   [G = Guba, N = максимальная]
+    бывает: divisible(N) & fin-gen(G) & ¬normal(N)   [G = Guba×Guba, N = диагональ]
+    бывает: divisible(N) & fin-gen(G) & ¬characteristic(N)   [G = Guba×Guba, N = A × 1]
+    бывает: divisible(N) & fin-gen(G) & ¬periodic(N)   [G = Guba, N = все]
+    бывает: divisible(N) & fin-gen(G) & ¬indecomposable(N)   [G = Guba×Guba, N = все]
+    бывает: divisible(G) & torsion-free(G) & ¬solvable(N)   [G = Guba, N = все]
+    бывает: fin-gen(N) & torsion-free(G) & ¬residually-finite(N)   [G = Guba, N = все]
+    бывает: divisible(N) & torsion-free(G) & ¬solvable(N)   [G = Guba, N = все]
+    бывает: perfect(N) & torsion-free(G) & ¬linear(N)   [G = Guba, N = все]
+    бывает: divisible(G) & fin-gen(N) & ¬residually-finite(N)   [G = Guba, N = все]
+    бывает: divisible(N) & fin-gen(N) & ¬normal(N)   [G = Guba×Guba, N = диагональ]
+    бывает: divisible(N) & fin-gen(N) & ¬characteristic(N)   [G = Guba×Guba, N = A × 1]
+    бывает: divisible(N) & fin-gen(N) & ¬central(N)   [G = Guba, N = все]
+трудный контрпример: fin-gen(Hall54) — запретов 13
+    бывает: fin-gen(G) & solvable(G) & ¬residually-finite(N)   [G = Hall54, N = ℚ в центре]
+    бывает: central(N) & fin-gen(G) & ¬fin-gen(N)   [G = Hall54, N = ℚ в центре]
+    бывает: central(N) & fin-gen(G) & ¬residually-finite(N)   [G = Hall54, N = ℚ в центре]
+    бывает: central(N) & fin-gen(G) & ¬hopfian(N)   [G = Hall54, N = ℚ/ℤ в центре]
+    бывает: central(N) & fin-gen(G) & ¬polycyclic(N)   [G = Hall54, N = ℚ в центре]
+    бывает: abelian(N) & fin-gen(G) & ¬residually-finite(N)   [G = Hall54, N = ℚ в центре]
+    бывает: fin-gen(G) & solvable(N) & ¬residually-finite(N)   [G = Hall54, N = ℚ в центре]
+    бывает: fin-gen(G) & nilpotent(N) & ¬residually-finite(N)   [G = Hall54, N = ℚ в центре]
+    бывает: divisible(N) & fin-gen(G) & ¬perfect(N)   [G = Hall54, N = ℚ в центре]
+    бывает: divisible(N) & fin-gen(G) & ¬centerless(N)   [G = Hall54, N = ℚ в центре]
+    бывает: divisible(N) & fin-gen(G) & ¬hopfian(N)   [G = Hall54, N = ℚ/ℤ в центре]
+    бывает: fin-gen(G) & linear(N) & ¬residually-finite(N)   [G = Hall54, N = ℚ в центре]
+    бывает: fin-gen(N) & solvable(G) & ¬residually-finite(N)   [G = Hall54, N = все]
+трудный контрпример: simple(ThompsonT) — запретов 10
+    бывает: fin-gen(G) & simple(G) & ¬finite-index(N)   [G = ThompsonT, N = 1]
+    бывает: fin-gen(G) & simple(G) & ¬finite(N)   [G = ThompsonT, N = F]
+    бывает: fin-gen(G) & simple(G) & ¬fin-gen(N)   [G = ThompsonT, N = F′]
+    бывает: fin-gen(G) & simple(G) & ¬periodic(N)   [G = ThompsonT, N = F]
+    бывает: fin-gen(G) & simple(G) & ¬residually-finite(N)   [G = ThompsonT, N = F′]
+    бывает: fin-gen(G) & simple(G) & ¬hopfian(N)   [G = ThompsonT, N = ⊕ℤ]
+    бывает: fin-gen(G) & simple(G) & ¬bounded-exponent(N)   [G = ThompsonT, N = F]
+    бывает: fin-gen(G) & simple(N) & ¬periodic(N)   [G = ThompsonT, N = все]
+    бывает: simple(G) & ¬divisible(G) & ¬periodic(N)   [G = ThompsonT, N = F]
+    бывает: fin-gen(N) & simple(G) & ¬residually-finite(N)   [G = ThompsonT, N = все]
+трудный контрпример: bounded-exponent(Tarski) — запретов 8
+    бывает: cyclic(N) & maximal(N) & ¬residually-finite(G)   [G = Tarski, N = ⟨x⟩]
+    бывает: finite(N) & maximal(N) & ¬residually-finite(G)   [G = Tarski, N = ⟨x⟩]
+    бывает: maximal(N) & polycyclic(N) & ¬residually-finite(G)   [G = Tarski, N = ⟨x⟩]
+    бывает: cyclic(N) & maximal(N) & ¬linear(G)   [G = Tarski, N = ⟨x⟩]
+    бывает: finite(N) & maximal(N) & ¬linear(G)   [G = Tarski, N = ⟨x⟩]
+    бывает: linear(N) & maximal(N) & ¬linear(G)   [G = Tarski, N = ⟨x⟩]
+    бывает: maximal(N) & polycyclic(N) & ¬linear(G)   [G = Tarski, N = ⟨x⟩]
+    бывает: bounded-exponent(G) & maximal(N) & ¬finite-index(N)   [G = Tarski, N = ⟨x⟩]
+трудный контрпример: hopfian(BS23) — запретов 8
+    бывает: fin-gen(G) & normal(N) & ¬hopfian(quotient(G, N))   [G = F2, N = ядро на BS(2,3)]
+    бывает: fin-gen(G) & finite-index(N) & ¬hopfian(N)   [G = BS23, N = все]
+    бывает: free(G) & normal(N) & ¬residually-finite(quotient(G, N))   [G = F2, N = ядро на BS(2,3)]
+    бывает: free(G) & normal(N) & ¬linear(quotient(G, N))   [G = F2, N = ядро на BS(2,3)]
+    бывает: fin-gen(N) & maximal(N) & ¬hopfian(G)   [G = 2:1×BS23, N = 1 × B]
+    бывает: fin-gen(N) & finite-index(N) & ¬hopfian(G)   [G = BS23, N = все]
+    бывает: linear(G) & normal(N) & ¬linear(quotient(G, N))   [G = F2, N = ядро на BS(2,3)]
+    бывает: fin-gen(quotient(G, N)) & normal(N) & ¬hopfian(quotient(G, N))   [G = F2, N = ядро на BS(2,3)]
+трудный контрпример: bounded-exponent(Tarski) & residually-finite(Tarski) — запретов 6
+    бывает: bounded-exponent(G) & perfect(G) & ¬residually-finite(N)   [G = Tarski, N = все]
+    бывает: bounded-exponent(N) & perfect(G) & ¬residually-finite(N)   [G = Tarski, N = все]
+    бывает: bounded-exponent(G) & centerless(G) & ¬residually-finite(N)   [G = Tarski, N = все]
+    бывает: bounded-exponent(N) & centerless(G) & ¬residually-finite(N)   [G = Tarski, N = все]
+    бывает: bounded-exponent(G) & perfect(N) & ¬residually-finite(N)   [G = Tarski, N = все]
+    бывает: bounded-exponent(G) & centerless(N) & ¬residually-finite(N)   [G = Tarski, N = все]
+трудный контрпример: bounded-exponent(Tarski) & residually-finite(Tarski) & simple(Tarski) — запретов 5
+    бывает: bounded-exponent(G) & simple(G) & ¬finite(N)   [G = Tarski, N = все]
+    бывает: bounded-exponent(G) & simple(G) & ¬residually-finite(N)   [G = Tarski, N = все]
+    бывает: bounded-exponent(N) & simple(G) & ¬residually-finite(N)   [G = Tarski, N = все]
+    бывает: bounded-exponent(G) & simple(N) & ¬finite(N)   [G = Tarski, N = все]
+    бывает: bounded-exponent(G) & simple(N) & ¬residually-finite(N)   [G = Tarski, N = все]
+трудный контрпример: periodic(Grigc) & residually-finite(Grigc) — запретов 2
+    бывает: fin-gen(G) & periodic(G) & ¬bounded-exponent(N)   [G = Grigc, N = все]
+    бывает: fin-gen(N) & periodic(G) & ¬bounded-exponent(N)   [G = Grigc, N = все]
+трудный контрпример: simple(ThompsonF1) — запретов 2
+    бывает: simple(N) & torsion-free(G)   [G = ThompsonF1, N = все]
+    бывает: normal(N) & simple(quotient(G, N)) & torsion-free(quotient(G, N))   [G = ThompsonF1, N = 1]
+трудный контрпример: bounded-exponent(Tarski) & simple(Tarski) — запретов 1
+    бывает: bounded-exponent(G) & simple(G) & ¬finite-index(N)   [G = Tarski, N = 1]
