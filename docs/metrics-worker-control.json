@@ -1,0 +1,110 @@
+{
+  "seconds": 14.277,
+  "before": {
+    "context": "875b9e3d422fdaea5e3cf28be564dd5d1216ffcfcadcf06739a03fb485557318",
+    "revision": 0,
+    "states": {
+      "folded": 5270,
+      "open": 1095,
+      "proved": 541
+    },
+    "record_verdicts": {
+      "выводится": 541,
+      "неизвестно": 6365
+    },
+    "schemes": {
+      "1": 1
+    },
+    "examples": 0,
+    "invalidated": 1079,
+    "unresolved": 1079,
+    "successor": null,
+    "pending": [
+      {
+        "kind": "compress",
+        "revision": 0
+      }
+    ]
+  },
+  "after": {
+    "context": "875b9e3d422fdaea5e3cf28be564dd5d1216ffcfcadcf06739a03fb485557318",
+    "revision": 1,
+    "states": {
+      "folded": 3442,
+      "open": 1633,
+      "proved": 541,
+      "refuted": 1290
+    },
+    "record_verdicts": {
+      "выводится": 541,
+      "неизвестно": 6365
+    },
+    "schemes": {
+      "1": 1
+    },
+    "examples": 1,
+    "invalidated": 2907,
+    "unresolved": 1079,
+    "successor": null,
+    "pending": [
+      {
+        "kind": "compress",
+        "revision": 1
+      },
+      {
+        "kind": "enumerate",
+        "revision": 1
+      }
+    ]
+  },
+  "receipt": {
+    "target": "d52fbea8c36576327220d637097bcf0d1c7bf94c841d0498dbdcfef866ef304c",
+    "source": "875b9e3d422fdaea5e3cf28be564dd5d1216ffcfcadcf06739a03fb485557318",
+    "run": "8937a34ea1b24491aa33307ba2e81f7d",
+    "schemes": 1,
+    "exports": {
+      "S": "a908c145c2721fa959e673a64b96097b5f998f90509f644103f274b9f86b671a"
+    },
+    "basis_sha256": "891e2f1fd22ddc9363c1cf56bfc2af66a993f93fb41575d4e1d4120b5eac295f",
+    "basis_kept": 16,
+    "basis_folded": 6218,
+    "seconds": 8.995,
+    "scope": "imported complete schemes"
+  },
+  "final": {
+    "context": "d52fbea8c36576327220d637097bcf0d1c7bf94c841d0498dbdcfef866ef304c",
+    "revision": 1,
+    "states": {
+      "folded": 6218,
+      "open": 16,
+      "proved": 662
+    },
+    "record_verdicts": {
+      "выводится": 739,
+      "неизвестно": 6567
+    },
+    "schemes": {
+      "1": 1
+    },
+    "examples": 1,
+    "invalidated": 0,
+    "unresolved": 0,
+    "successor": null,
+    "pending": []
+  },
+  "kind": "bounded in-process fixture",
+  "groups": [
+    "1:1",
+    "2:1"
+  ],
+  "real_theory_and_SAT": true,
+  "native_table_loader": false,
+  "subprocess": false,
+  "verdict_cache": false,
+  "verification": {
+    "нарушений": 0,
+    "первые": [],
+    "full": true,
+    "checked": 6218
+  }
+}

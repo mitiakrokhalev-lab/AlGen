@@ -1,0 +1,59 @@
+name: measure
+
+# Замеры для ускорения (A9) по таблицам готового пилота (TABLES_RUN): сжатие строк
+# таблицы под схему и профиль перебора нескольких схем (py-spy). Запуск: пуш в ветку «measure-…».
+
+on:
+  push:
+    branches: ["measure-*"]
+
+env:
+  TABLES_RUN: "41640102876"
+  ALGEN_SIZE: "2"
+  ALGEN_FAST: "1"
+  BASE: "G"
+  K: "3"
+  ALGEN_SKEL: ${{ github.workspace }}/skel
+
+jobs:
+  measure:
+    permissions:
+      actions: read
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml py-spy
+      - name: таблицы и каркас пилота
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh run download $TABLES_RUN -R $GITHUB_REPOSITORY -n tabs -D tab
+          gh run download $TABLES_RUN -R $GITHUB_REPOSITORY -n skel -D .
+          ls -la tab | head; du -sh tab skel кэш
+      - name: сжатие строк под схему
+        run: |
+          mkdir -p res
+          cd py && timeout 90m python3 -m algen.measure строки $BASE --каталог ../tab --выборка 40 2>&1 | tee ../res/строки.txt
+      - name: профиль перебора 5 схем
+        continue-on-error: true
+        run: |
+          cd py
+          timeout 150m py-spy record --subprocesses -r 20 -f speedscope -o ../res/prof.json -- \
+            python3 -m algen.table перебор $BASE --каталог ../tab --выход ../res/out --выборка 190 --нитей 1 --посылок $K --предел 3600 2>&1 | tail -30 | tee ../res/перебор.txt
+          python3 -m algen.measure профиль ../res/prof.json | tee ../res/профиль.txt
+      - name: результаты в ветку «results-…»
+        if: always()
+        run: |
+          rm -f res/prof.json.gz; gzip -k res/prof.json 2>/dev/null || true
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e res
+          git add res/*.txt res/prof.json.gz res/out 2>/dev/null || true
+          git commit -qm "Замеры по таблицам запуска ${TABLES_RUN}: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"

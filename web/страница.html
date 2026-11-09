@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AlGen — генератор задач по алгебре</title>
+<style>
+:root {
+  --фон: #fbfaf7;
+  --карточка: #fff;
+  --рамка: #ddd8ce;
+  --текст: #22201c;
+  --тусклый: #6d675d;
+  --акцент: #7a4b18;
+  --акцент-фон: #f3ead9;
+  --пробел: #2e6b45;
+  --выводится: #5a5a5a;
+  --опровергается: #9a3a2a;
+  --тень: 0 1px 2px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --фон: #1b1a18; --карточка: #232220; --рамка: #3a3733; --текст: #e9e5dd;
+    --тусклый: #9a9488; --акцент: #d9a86a; --акцент-фон: #332b20;
+    --пробел: #7fc79b; --выводится: #9a958c; --опровергается: #e0897a;
+    --тень: 0 1px 2px rgba(0,0,0,.3);
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0; background: var(--фон); color: var(--текст);
+  font: 15px/1.5 "Segoe UI", "PT Sans", system-ui, sans-serif;
+}
+h1 { font-size: 20px; margin: 0; font-weight: 600; }
+h2 { font-size: 14px; margin: 0 0 8px; font-weight: 600; letter-spacing: .02em; }
+header {
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  padding: 14px 18px; border-bottom: 1px solid var(--рамка); background: var(--карточка);
+}
+header .подпись { color: var(--тусклый); font-size: 13px; }
+main { display: grid; grid-template-columns: minmax(340px, 420px) 1fr; gap: 0; align-items: start; }
+@media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+.колонка { padding: 16px 18px; }
+.колонка.левая { border-right: 1px solid var(--рамка); }
+@media (max-width: 900px) { .колонка.левая { border-right: none; border-bottom: 1px solid var(--рамка); } }
+.блок {
+  background: var(--карточка); border: 1px solid var(--рамка); border-radius: 8px;
+  padding: 12px; margin-bottom: 14px; box-shadow: var(--тень);
+}
+label { display: block; font-size: 13px; color: var(--тусклый); margin-bottom: 3px; }
+select, input[type=number], input[type=text] {
+  width: 100%; padding: 6px 8px; border: 1px solid var(--рамка); border-radius: 5px;
+  background: var(--фон); color: var(--текст); font: inherit; font-size: 14px;
+}
+button {
+  font: inherit; font-size: 14px; padding: 7px 13px; border-radius: 6px;
+  border: 1px solid var(--рамка); background: var(--карточка); color: var(--текст); cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--акцент); }
+button:disabled { opacity: .45; cursor: default; }
+button.главная { background: var(--акцент-фон); border-color: var(--акцент); color: var(--акцент); font-weight: 600; }
+.ряд { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; }
+.ряд > * { flex: 1 1 0; min-width: 0; }
+.ряд.кнопки > * { flex: 0 0 auto; }
+.сетка3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.галка { display: flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--текст); margin-top: 8px; }
+.галка input { width: auto; }
+.галка label { margin: 0; color: inherit; }
+
+#схема-рисунок { width: 100%; height: 210px; background: var(--фон); border: 1px solid var(--рамка); border-radius: 6px; }
+#схема-рисунок text { font: 13px "Segoe UI", sans-serif; fill: var(--текст); }
+#схема-рисунок .подпись { font-size: 10.5px; fill: var(--тусклый); }
+#схема-рисунок rect { fill: var(--карточка); stroke: var(--рамка); }
+#схема-рисунок rect.свободный { stroke: var(--акцент); stroke-width: 1.6; }
+#схема-рисунок line { stroke: var(--рамка); stroke-width: 1.4; }
+#схема-рисунок path.морфизм { stroke: var(--акцент); stroke-width: 1.3; fill: none; stroke-dasharray: 4 3; }
+#схема-рисунок text.морфизм { font-size: 11px; fill: var(--акцент); }
+
+table.узлы { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.узлы td { padding: 3px 4px; border-bottom: 1px solid var(--рамка); vertical-align: middle; }
+table.узлы td.имя { font-weight: 600; width: 1%; white-space: nowrap; }
+table.узлы td.что { color: var(--тусклый); }
+table.узлы button { padding: 1px 7px; font-size: 12px; }
+
+.ошибка { color: var(--опровергается); font-size: 13px; margin-top: 8px; white-space: pre-wrap; }
+.состояние { font-size: 13px; color: var(--тусклый); min-height: 20px; }
+progress { width: 100%; height: 6px; }
+
+.задача { border: 1px solid var(--рамка); border-left-width: 3px; border-radius: 6px;
+  background: var(--карточка); padding: 10px 12px; margin-bottom: 9px; }
+.задача.пробел { border-left-color: var(--пробел); }
+.задача.выводится { border-left-color: var(--выводится); }
+.задача.опровергается { border-left-color: var(--опровергается); }
+.задача[class*="примером"] { border-left-color: var(--опровергается); }
+.задача .текст { font-size: 14.5px; }
+.задача .пометки { font-size: 12.5px; color: var(--тусклый); margin-top: 5px; }
+.ярлык { display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: .05em;
+  padding: 1px 6px; border-radius: 4px; background: var(--акцент-фон); color: var(--акцент); margin-right: 6px; }
+.корзины { font-size: 13px; color: var(--тусклый); display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; }
+.корзины b { color: var(--текст); font-weight: 600; }
+/* РАЗБОР ПРОБЕЛОВ. «Пробелов 2293» — число, по которому нельзя понять ничего:
+   в нём и кандидаты в научные, и условия, под которые не подошёл ни один
+   объект библиотеки. Это противоположные вещи, и здесь они разведены. */
+.разряды { font-size: 13px; margin-top: 10px; display: grid; gap: 2px 10px;
+  grid-template-columns: auto auto auto 1fr; align-items: baseline; }
+.разряды .имя { color: var(--текст); }
+.разряды .сколько { font-weight: 600; text-align: right; }
+.разряды .доля { color: var(--тусклый); text-align: right; }
+.разряды .что { color: var(--тусклый); font-size: 12.5px; }
+.разряды .кандидат .имя, .разряды .кандидат .сколько { color: var(--акцент); font-weight: 700; }
+.разряды .итог { border-top: 1px solid var(--рамка); padding-top: 3px; margin-top: 3px; }
+.пусто-выдача { color: var(--тусклый); font-size: 14px; padding: 20px 0; }
+details.объяснение { margin-top: 10px; font-size: 13px; color: var(--тусклый); }
+details.объяснение summary { cursor: pointer; }
+details.объяснение p { margin: 6px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AlGen</h1>
+  <span class="подпись">генератор задач по алгебре и общей топологии — условие рисуется граф-схемой построения</span>
+</header>
+
+<main>
+  <div class="колонка левая">
+    <div class="блок">
+      <h2>Раздел</h2>
+      <select id="раздел"></select>
+      <div class="галка" style="margin-top:10px">
+        <span id="сводка-базы" class="подпись" style="color:var(--тусклый);font-size:12.5px"></span>
+      </div>
+    </div>
+
+    <div class="блок">
+      <h2>Схема условия</h2>
+      <div class="ряд">
+        <div style="flex:2 1 0">
+          <label for="заготовка">Взять заготовку</label>
+          <select id="заготовка"></select>
+        </div>
+        <div class="ряд кнопки" style="flex:0 0 auto">
+          <button id="очистить">Очистить</button>
+        </div>
+      </div>
+      <svg id="схема-рисунок" viewBox="0 0 400 210" preserveAspectRatio="xMidYMid meet">
+        <defs><marker id="стрелка" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" fill="var(--акцент)"></path></marker></defs>
+      </svg>
+      <table class="узлы"><tbody id="список-узлов"></tbody></table>
+      <div id="про-что" class="подпись" style="font-size:12.5px;color:var(--тусклый);margin-top:6px"></div>
+      <div id="ошибка-схемы" class="ошибка"></div>
+    </div>
+
+    <div class="блок">
+      <h2>Добавить вершину</h2>
+      <label for="операция">Операция</label>
+      <select id="операция"></select>
+      <div id="слоты"></div>
+      <div class="ряд кнопки" style="margin-top:9px">
+        <button id="добавить" class="главная">Добавить</button>
+        <button id="дорастить" title="Добавить случайную вершину поверх уже построенных">Дорастить случайно</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="колонка">
+    <div class="блок">
+      <h2>Границы и поиск</h2>
+      <div class="сетка3">
+        <div><label for="гр-объект">Свойств на объект</label><input type="number" id="гр-объект" min="0" max="4" value="1"></div>
+        <div><label for="гр-подобъект">на подобъект</label><input type="number" id="гр-подобъект" min="0" max="4" value="1"></div>
+        <div><label for="гр-морфизм">на морфизм</label><input type="number" id="гр-морфизм" min="0" max="4" value="1"></div>
+        <div id="строка-кольцо" hidden><label for="гр-кольцо">на кольцо</label><input type="number" id="гр-кольцо" min="0" max="3" value="1"></div>
+        <div id="строка-число" hidden><label for="гр-число">на число</label><input type="number" id="гр-число" min="0" max="3" value="1"></div>
+      </div>
+      <div class="сетка3" style="margin-top:9px">
+        <div><label for="достройка">Достройка термов</label><input type="number" id="достройка" min="0" max="3" value="1"></div>
+        <div><label for="хватит">Остановиться на</label><input type="number" id="хватит" min="0" placeholder="без предела"></div>
+        <div><label for="зерно">Зерно случайности</label><input type="number" id="зерно" min="1" value="1"></div>
+      </div>
+      <div class="сетка3" style="margin-top:9px">
+        <div><label for="примеров">Примеров на схему</label><input type="number" id="примеров" min="0" value="1500"></div>
+        <div><label for="порядок">Порядок групп до</label><input type="number" id="порядок" min="1" value="200"></div>
+        <div style="display:flex;align-items:flex-end"><div class="галка" style="margin:0"><input type="checkbox" id="случайно"><label for="случайно">случайный порядок</label></div></div>
+      </div>
+      <div class="ряд кнопки" style="margin-top:11px">
+        <button id="искать" class="главная">Искать задачи</button>
+        <button id="случайная">Случайная задача</button>
+        <button id="стоп" disabled>Остановить</button>
+      </div>
+      <progress id="полоса" value="0" max="1" style="margin-top:10px;display:none"></progress>
+      <div id="состояние" class="состояние"></div>
+    </div>
+
+    <div class="блок">
+      <h2>Показывать</h2>
+      <div id="фильтры" class="ряд" style="gap:14px"></div>
+      <div id="корзины" class="корзины"></div>
+      <div id="разряды" class="разряды"></div>
+    </div>
+
+    <div id="выдача"></div>
+
+    <details class="объяснение">
+      <summary>Как читать выдачу</summary>
+      <p><b>Пробел</b> — база не может ни доказать, ни опровергнуть. Это самое ценное, что
+      инструмент умеет находить: вопрос, на который его знаний не хватает.</p>
+      <p><b>Выводится</b> — задача доказывается из базы; глубина вывода показывает, насколько
+      она учебная. Длинное доказательство очевидного факта означает дыру в таблице сохранения,
+      а не находку.</p>
+      <p><b>Квантор у вершины.</b> «Для всякой» — утверждение про любую такую вершину, и контрпримером
+      служит одна неудачная. «Существует» — надо предъявить хотя бы одну, и контрпримером служит
+      целый объект, для которого подходящей не нашлось.</p>
+      <p><b>Про что спрашиваем.</b> Галочка у вершины сужает перебор до целей про неё. Если не отмечено
+      ничего, спрашиваем про все вершины сразу.</p>
+      <p><b>Опровергается примером</b> — в библиотеке конечных групп нашёлся контрпример, и он назван. 
+      Это самый надёжный ответ: пример — факт, а не следствие правил.</p>
+      <p><b>Опровергается</b> — база доказывает обратное утверждение.</p>
+      <p>Модель конечна: ℤ, ℚ и свободные группы в ней непредставимы. Поэтому свойства вроде 
+      «конечна» или «периодична» верны на каждом примере, и опровергать их нечем — такие помечены.</p>
+      <p>Условия, которые распались на куски, свернулись вырождениями, оказались неопределёнными
+      или противоречивыми, в выдачу не идут, но пересчитаны в корзинах: сумма корзин обязана
+      сойтись с числом пар «посылки × цель». Ничто не выбрасывается молча.</p>
+      <p>Пока нет библиотеки примеров, пробелы про <i>произвольный</i> объект без посылок почти
+      всегда решаются первым же контрпримером. Такие помечены вслух и стоят в конце списка.</p>
+    </details>
+  </div>
+</main>
+
+<script type="module">
+/*СКРИПТ*/
+</script>
+</body>
+</html>

@@ -1,0 +1,888 @@
+{
+  "заметка": "Библиотека полей и расширений. Как и кольца, объявлена рукой: вычислять расширения полей нечем, а всё интересное в теме бесконечно или требует символьной арифметики. Проверяет объявления tools/check-fld.mjs — гоняет по ним всю базу.",
+  "заметка_о_сепарабельности": "У четырёх трансцендентных расширений separable и normal-ext объявлены ЛОЖНЫМИ, а не пропущены. Это следствие собственных правил базы: при algebraic = false противоположение «сепарабельно ⇒ алгебраично» вынуждает separable = false. Тем самым выбран УЗКИЙ (классический) смысл слова: в широком смысле «сепарабельно» значит «сепарабельно порождено», и ℚ(x)/ℚ в характеристике нуль сепарабельно. Выбор назван вслух в README, раздел «Поля».",
+  "заметка_о_галуа": "Поле «галуа» — ссылка в каталог ГРУПП по id. Gal(ℚ(∛2, ζ₃)/ℚ) = S₃, Gal(ℚ(√2, √3)/ℚ) = V₄, Gal(𝔽₈/𝔽₂) = C₃ — все они уже посчитаны в модели групп, и всё, что база знает про S₃, немедленно становится знанием о расширении. У НЕнормального расширения это группа автоморфизмов над основным полем, и она меньше степени: Aut(ℚ(∛2)/ℚ) тривиальна.",
+  "поля": [
+    {
+      "id": "Q",
+      "имя": "ℚ",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": true },
+      "простое": "Q",
+      "замыкание": "Qbar",
+      "рациональные": "Qx",
+      "мультипликативная": "Qmul",
+      "аддитивная": "Q"
+    },
+    {
+      "id": "R",
+      "имя": "ℝ",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "C",
+      "аддитивная": "R"
+    },
+    {
+      "id": "C",
+      "имя": "ℂ",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": true, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "C",
+      "мультипликативная": "Cmul"
+    },
+    {
+      "id": "Qbar",
+      "имя": "ℚ̄",
+      "заметка": "Алгебраические числа: алгебраически замкнуто и при этом счётно — ℂ такого не умеет.",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": true, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "F2",
+      "имя": "𝔽₂",
+      "props": { "char-zero": false, "finite-field": true, "alg-closed": false, "perfect-field": true, "prime-field": true },
+      "простое": "F2",
+      "замыкание": "F2bar",
+      "рациональные": "F2x",
+      "мультипликативная": "C1",
+      "аддитивная": "C2"
+    },
+    {
+      "id": "F3",
+      "имя": "𝔽₃",
+      "props": { "char-zero": false, "finite-field": true, "alg-closed": false, "perfect-field": true, "prime-field": true },
+      "простое": "F3",
+      "мультипликативная": "C2",
+      "аддитивная": "C3",
+      "рациональные": "F3x"
+    },
+    {
+      "id": "F4",
+      "имя": "𝔽₄",
+      "заметка": "Не простое поле: содержит 𝔽₂. Аддитивно — четверная группа Клейна, мультипликативно — C₃.",
+      "props": { "char-zero": false, "finite-field": true, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "F2",
+      "замыкание": "F2bar",
+      "мультипликативная": "C3",
+      "аддитивная": "V4"
+    },
+    {
+      "id": "F5",
+      "имя": "𝔽₅",
+      "props": { "char-zero": false, "finite-field": true, "alg-closed": false, "perfect-field": true, "prime-field": true },
+      "простое": "F5",
+      "мультипликативная": "C4",
+      "аддитивная": "C5"
+    },
+    {
+      "id": "F8",
+      "имя": "𝔽₈",
+      "props": { "char-zero": false, "finite-field": true, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "F2",
+      "замыкание": "F2bar",
+      "мультипликативная": "C7",
+      "аддитивная": "C2xC2xC2"
+    },
+    {
+      "id": "F9",
+      "имя": "𝔽₉",
+      "props": { "char-zero": false, "finite-field": true, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "F3",
+      "мультипликативная": "C8",
+      "аддитивная": "C3xC3"
+    },
+    {
+      "id": "F2bar",
+      "имя": "𝔽̄₂",
+      "props": { "char-zero": false, "finite-field": false, "alg-closed": true, "perfect-field": true, "prime-field": false },
+      "простое": "F2",
+      "замыкание": "F2bar"
+    },
+    {
+      "id": "Qsqrt2",
+      "имя": "ℚ(√2)",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "Qcbrt2",
+      "имя": "ℚ(∛2)",
+      "заметка": "Главный пример ненормального расширения: x³ − 2 имеет в ℚ(∛2) один корень из трёх, два других комплексные.",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "Qzeta3",
+      "имя": "ℚ(ζ₃)",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "Qzeta5",
+      "имя": "ℚ(ζ₅)",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "Qsqrt23",
+      "имя": "ℚ(√2, √3)",
+      "заметка": "Степень 4, группа Галуа — четверная группа Клейна: расширение Галуа с НЕциклической группой.",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "Qsplit3",
+      "имя": "ℚ(∛2, ζ₃)",
+      "заметка": "Поле разложения x³ − 2. Степень 6, группа Галуа — S₃: расширение Галуа с НЕАБЕЛЕВОЙ группой.",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "Qx",
+      "имя": "ℚ(x)",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q"
+    },
+    {
+      "id": "F2x",
+      "имя": "𝔽₂(t)",
+      "заметка": "Единственное НЕСОВЕРШЕННОЕ поле библиотеки: t не имеет квадратного корня, и 𝔽₂(t)/𝔽₂(t²) несепарабельно. Без него «алгебраическое ⇒ сепарабельное» нечем опровергнуть.",
+      "props": {
+        "char-zero": false,
+        "finite-field": false,
+        "alg-closed": false,
+        "perfect-field": false,
+        "prime-field": false
+      },
+      "простое": "F2",
+      "мультипликативная": "Zoo",
+      "аддитивная": "SumC2",
+      "заметка_о_группах": "K^× ≅ ⊕ℤ: свободная абелева на неприводимых многочленах, единиц в 𝔽₂[t] нет кроме 1. K⁺ ≅ ⊕C₂: счётномерное пространство над 𝔽₂. Без этих двух ссылок «поле положительной характеристики имеет конечную (циклическую) мультипликативную группу» нечем было опровергнуть: все остальные поля характеристики p в библиотеке конечны."
+    },
+    {
+      "id": "F2t2",
+      "имя": "𝔽₂(t²)",
+      "заметка": "Как поле изоморфно 𝔽₂(t), но здесь оно нужно ОСНОВНЫМ: 𝔽₂(t)/𝔽₂(t²) — расширение степени 2, нормальное и несепарабельное.",
+      "props": {
+        "char-zero": false,
+        "finite-field": false,
+        "alg-closed": false,
+        "perfect-field": false,
+        "prime-field": false
+      },
+      "простое": "F2",
+      "мультипликативная": "Zoo",
+      "аддитивная": "SumC2"
+    },
+    {
+      "id": "F2xy",
+      "имя": "𝔽₂(x, y)",
+      "заметка": "Два независимых трансцендентных элемента в характеристике 2. Несовершенно.",
+      "props": {
+        "char-zero": false,
+        "finite-field": false,
+        "alg-closed": false,
+        "perfect-field": false,
+        "prime-field": false
+      },
+      "простое": "F2",
+      "мультипликативная": "Zoo",
+      "аддитивная": "SumC2"
+    },
+    {
+      "id": "F2xy2",
+      "имя": "𝔽₂(x², y²)",
+      "заметка": "Основное поле для единственного в библиотеке конечного НЕПРОСТОГО расширения.",
+      "props": {
+        "char-zero": false,
+        "finite-field": false,
+        "alg-closed": false,
+        "perfect-field": false,
+        "prime-field": false
+      },
+      "простое": "F2",
+      "мультипликативная": "Zoo",
+      "аддитивная": "SumC2"
+    },
+    {
+      "id": "Qmq",
+      "имя": "ℚ(√2, √3, √5, …)",
+      "заметка": "Бесконечное расширение Галуа, НЕ алгебраически замкнутое: ∛2 в нём нет. Группа Галуа — счётное произведение C₂, в каталоге групп её нет.",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "F2perf",
+      "имя": "𝔽₂(t^(1/2^∞))",
+      "заметка": "Совершенное замыкание 𝔽₂(t): присоединены все корни степени 2^n из t. СОВЕРШЕННОЕ поле над НЕСОВЕРШЕННЫМ, и расширение чисто несепарабельно — без него «L совершенно ⇒ σ сепарабельно» нечем опровергнуть.",
+      "props": {
+        "char-zero": false,
+        "finite-field": false,
+        "alg-closed": false,
+        "perfect-field": true,
+        "prime-field": false
+      },
+      "простое": "F2"
+    },
+    {
+      "id": "Q4rt2",
+      "имя": "ℚ(∜2)",
+      "заметка": "Степень 4 и НЕ нормально: x⁴ − 2 имеет в ℚ(∜2) два корня из четырёх, ∜2 и −∜2, а два мнимых — нет. Единственное в библиотеке расширение чётной составной степени, которое не нормально.",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "Qcbrt23",
+      "имя": "ℚ(∛2, ∛3)",
+      "заметка": "Степень 9 — НЕЧЁТНАЯ СОСТАВНАЯ, единственная такая в библиотеке. Без неё «степень не простая ⇒ степень чётна» нечем опровергнуть.",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "Qsqrt23cbrt2",
+      "имя": "ℚ(√2, √3, ∛2)",
+      "заметка": "Степень 12, не нормально, а группа автоморфизмов над ℚ — четверная группа Клейна: НЕциклическая. Лежит в ℝ, поэтому ∛2 никуда не сдвинуть, а √2 и √3 меняют знак независимо.",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "QS3x5",
+      "имя": "ℚ(∛2, ζ₃, ⁵√2)",
+      "заметка": "Степень 30, не нормально (ζ₅ ∉ L, ибо 4 ∤ 30), а Aut(L/ℚ) ≅ S₃ — НЕАБЕЛЕВА. Единственный пример в библиотеке, где расширение не Галуа, а группа автоморфизмов неабелева: ⁵√2 обязан остаться на месте, а на поле разложения x³ − 2 действует вся S₃.",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "Qc3",
+      "имя": "ℚ(ζ₇ + ζ₇⁻¹)",
+      "заметка": "Вещественное подполе ℚ(ζ₇): степень 3 над ℚ, расширение Галуа с группой C₃. Единственное в библиотеке нормальное расширение НЕЧЁТНОЙ степени больше единицы — без него «нормальное нетривиальное расширение имеет чётную степень» нечем опровергнуть.",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "QA5",
+      "имя": "ℚ(корни x⁵ + 20x + 16)",
+      "заметка": "Поле разложения x⁵ + 20x + 16 над ℚ: степень 60, группа Галуа — A₅. Единственное в библиотеке расширение Галуа с НЕРАЗРЕШИМОЙ группой; без него «расширение Галуа имеет разрешимую группу» нечем опровергнуть, а это ровно то утверждение, ложность которого и есть неразрешимость уравнения пятой степени в радикалах.",
+      "props": { "char-zero": true, "finite-field": false, "alg-closed": false, "perfect-field": true, "prime-field": false },
+      "простое": "Q",
+      "замыкание": "Qbar"
+    },
+    {
+      "id": "F3x",
+      "имя": "𝔽₃(t)",
+      "заметка": "Нужно для НЕСЕПАРАБЕЛЬНОГО расширения НЕЧЁТНОЙ степени: во всей прежней библиотеке несепарабельность была только в характеристике 2, то есть только чётной степени, и условие «несепарабельно, степень нечётна» оставалось пустым.",
+      "props": {
+        "char-zero": false,
+        "finite-field": false,
+        "alg-closed": false,
+        "perfect-field": false,
+        "prime-field": false
+      },
+      "простое": "F3",
+      "рациональные": "F3x"
+    },
+    {
+      "id": "F3t3",
+      "имя": "𝔽₃(t^(1/3))",
+      "заметка": "Чисто несепарабельное расширение степени 3 поля 𝔽₃(t): (x − t^(1/3))³ = x³ − t в характеристике 3.",
+      "props": {
+        "char-zero": false,
+        "finite-field": false,
+        "alg-closed": false,
+        "perfect-field": false,
+        "prime-field": false
+      },
+      "простое": "F3"
+    },
+    {
+      "id": "F2tAS",
+      "имя": "𝔽₂(t)(β), β² + β = t",
+      "заметка": "Расширение Артина — Шрайера: x² + x + t сепарабелен (производная 1 ≠ 0) даже в характеристике 2. Нужно потому, что НЕСОВЕРШЕННОЕ поле с СЕПАРАБЕЛЬНЫМ расширением в библиотеке отсутствовало вовсе, и условие «L не совершенно, расширение сепарабельно» было пустым.",
+      "props": {
+        "char-zero": false,
+        "finite-field": false,
+        "alg-closed": false,
+        "perfect-field": false,
+        "prime-field": false
+      },
+      "простое": "F2"
+    },
+    {
+      "id": "F2tcbrt",
+      "имя": "𝔽₂(t)(∛t)",
+      "заметка": "Степень 3, сепарабельно (3 не делится на характеристику 2) и НЕ нормально: ζ₃ лежит в 𝔽₄, а не в 𝔽₂(t), поэтому два других корня x³ − t вне поля. Единственное в библиотеке ненормальное расширение в положительной характеристике.",
+      "props": {
+        "char-zero": false,
+        "finite-field": false,
+        "alg-closed": false,
+        "perfect-field": false,
+        "prime-field": false
+      },
+      "простое": "F2"
+    }
+  ],
+  "расширения": [
+    {
+      "id": "Q<Q",
+      "имя": "ℚ/ℚ",
+      "дом": "Q",
+      "код": "Q",
+      "степень": 1,
+      "props": {
+        "trivial-ext": true,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C1"
+    },
+    {
+      "id": "Q<Qsqrt2",
+      "имя": "ℚ(√2)/ℚ",
+      "дом": "Q",
+      "код": "Qsqrt2",
+      "степень": 2,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C2"
+    },
+    {
+      "id": "Q<Qcbrt2",
+      "имя": "ℚ(∛2)/ℚ",
+      "дом": "Q",
+      "код": "Qcbrt2",
+      "степень": 3,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": false,
+        "separable": true,
+        "galois": false,
+        "simple-ext": true
+      },
+      "галуа": "C1",
+      "заметка": "Степень 3, а группа автоморфизмов тривиальна: два корня из трёх лежат вне поля."
+    },
+    {
+      "id": "Q<Qzeta3",
+      "имя": "ℚ(ζ₃)/ℚ",
+      "дом": "Q",
+      "код": "Qzeta3",
+      "степень": 2,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C2"
+    },
+    {
+      "id": "Q<Qzeta5",
+      "имя": "ℚ(ζ₅)/ℚ",
+      "дом": "Q",
+      "код": "Qzeta5",
+      "степень": 4,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C4"
+    },
+    {
+      "id": "Q<Qsqrt23",
+      "имя": "ℚ(√2, √3)/ℚ",
+      "дом": "Q",
+      "код": "Qsqrt23",
+      "степень": 4,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "V4",
+      "заметка": "Простое по теореме о примитивном элементе: ℚ(√2 + √3) — то же поле."
+    },
+    {
+      "id": "Qsqrt2<Qsqrt23",
+      "имя": "ℚ(√2, √3)/ℚ(√2)",
+      "дом": "Qsqrt2",
+      "код": "Qsqrt23",
+      "степень": 2,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C2"
+    },
+    {
+      "id": "Q<Qsplit3",
+      "имя": "ℚ(∛2, ζ₃)/ℚ",
+      "дом": "Q",
+      "код": "Qsplit3",
+      "степень": 6,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "S3"
+    },
+    {
+      "id": "Qcbrt2<Qsplit3",
+      "имя": "ℚ(∛2, ζ₃)/ℚ(∛2)",
+      "дом": "Qcbrt2",
+      "код": "Qsplit3",
+      "степень": 2,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C2"
+    },
+    {
+      "id": "R<C",
+      "имя": "ℂ/ℝ",
+      "дом": "R",
+      "код": "C",
+      "степень": 2,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C2"
+    },
+    {
+      "id": "Q<R",
+      "имя": "ℝ/ℚ",
+      "дом": "Q",
+      "код": "R",
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": false,
+        "algebraic": false,
+        "separable": false,
+        "normal-ext": false,
+        "galois": false,
+        "simple-ext": false
+      }
+    },
+    {
+      "id": "Q<C",
+      "имя": "ℂ/ℚ",
+      "дом": "Q",
+      "код": "C",
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": false,
+        "algebraic": false,
+        "separable": false,
+        "normal-ext": false,
+        "galois": false,
+        "simple-ext": false
+      }
+    },
+    {
+      "id": "Q<Qbar",
+      "имя": "ℚ̄/ℚ",
+      "дом": "Q",
+      "код": "Qbar",
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": false,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": false
+      },
+      "заметка": "Бесконечное расширение Галуа: группа Галуа — проконечная, в каталоге групп её нет, и терм Gal честно невычислим."
+    },
+    {
+      "id": "Q<Qx",
+      "имя": "ℚ(x)/ℚ",
+      "дом": "Q",
+      "код": "Qx",
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": false,
+        "algebraic": false,
+        "separable": false,
+        "normal-ext": false,
+        "galois": false,
+        "simple-ext": true
+      },
+      "заметка": "Простое и БЕСКОНЕЧНОЕ: порождено одним трансцендентным элементом. Опровергает «простое ⇒ конечно» и «простое ⇒ алгебраично».",
+      "галуа": "PGL2Q",
+      "почему": "Aut(ℚ(x)/ℚ) ≅ PGL₂(ℚ): автоморфизм задаётся образом x, а им может быть любая дробно-линейная функция (ax + b)/(ad − bc ≠ 0). Расширение трансцендентно, поэтому не Галуа, — а группа автоморфизмов у него бесконечна."
+    },
+    {
+      "id": "F2<F4",
+      "имя": "𝔽₄/𝔽₂",
+      "дом": "F2",
+      "код": "F4",
+      "степень": 2,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C2"
+    },
+    {
+      "id": "F2<F8",
+      "имя": "𝔽₈/𝔽₂",
+      "дом": "F2",
+      "код": "F8",
+      "степень": 3,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C3"
+    },
+    {
+      "id": "F3<F9",
+      "имя": "𝔽₉/𝔽₃",
+      "дом": "F3",
+      "код": "F9",
+      "степень": 2,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C2"
+    },
+    {
+      "id": "F2<F2bar",
+      "имя": "𝔽̄₂/𝔽₂",
+      "дом": "F2",
+      "код": "F2bar",
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": false,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": false
+      }
+    },
+    {
+      "id": "F2<F2x",
+      "имя": "𝔽₂(t)/𝔽₂",
+      "дом": "F2",
+      "код": "F2x",
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": false,
+        "algebraic": false,
+        "separable": false,
+        "normal-ext": false,
+        "galois": false,
+        "simple-ext": true
+      },
+      "заметка": "Простое и БЕСКОНЕЧНОЕ: порождено одним трансцендентным элементом. Опровергает «простое ⇒ конечно» и «простое ⇒ алгебраично»."
+    },
+    {
+      "id": "F2t2<F2x",
+      "имя": "𝔽₂(t)/𝔽₂(t²)",
+      "дом": "F2t2",
+      "код": "F2x",
+      "степень": 2,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": false,
+        "galois": false,
+        "simple-ext": true
+      },
+      "галуа": "C1",
+      "заметка": "Несепарабельное расширение: x² − t² = (x − t)² в характеристике 2. Нормально (корень один и он в поле), конечно, алгебраично — и не Галуа. Единственное такое в библиотеке, и без него равносильность «нормально и сепарабельно ⟺ Галуа» проверялась бы вхолостую."
+    },
+    {
+      "id": "F2xy2<F2xy",
+      "имя": "𝔽₂(x, y)/𝔽₂(x², y²)",
+      "дом": "F2xy2",
+      "код": "F2xy",
+      "степень": 4,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": false,
+        "galois": false,
+        "simple-ext": false
+      },
+      "галуа": "C1",
+      "заметка": "Степень 4, а всякий промежуточный элемент даёт подполе степени не выше 2: примитивного элемента нет. Единственное конечное непростое расширение библиотеки — без него «конечное ⇒ простое» нечем опровергнуть."
+    },
+    {
+      "id": "Q<Qmq",
+      "имя": "ℚ(√2, √3, √5, …)/ℚ",
+      "дом": "Q",
+      "код": "Qmq",
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": false,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": true,
+        "galois": true,
+        "simple-ext": false
+      },
+      "заметка": "Сепарабельное и бесконечное при неалгебраически замкнутом L.",
+      "галуа": "ProdC2",
+      "почему": "Gal ≅ ∏C₂ по одному множителю на каждое простое: независимые выборы знака у каждого √p. Именно ПРОИЗВЕДЕНИЕ, не сумма — предельный автоморфизм может менять знак у бесконечно многих корней сразу."
+    },
+    {
+      "id": "F2x<F2perf",
+      "имя": "𝔽₂(t^(1/2^∞))/𝔽₂(t)",
+      "дом": "F2x",
+      "код": "F2perf",
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": false,
+        "algebraic": true,
+        "normal-ext": true,
+        "separable": false,
+        "galois": false,
+        "simple-ext": false
+      },
+      "заметка": "Чисто несепарабельное: у каждого t^(1/2^n) минимальный многочлен x^(2^n) − t с единственным корнем. Верхнее поле совершенно, нижнее — нет."
+    },
+    {
+      "id": "Q<Q4rt2",
+      "имя": "ℚ(∜2)/ℚ",
+      "дом": "Q",
+      "код": "Q4rt2",
+      "степень": 4,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "separable": true,
+        "galois": false,
+        "normal-ext": false,
+        "simple-ext": true
+      },
+      "галуа": "C2",
+      "почему": "Не нормально: ∜2 ↦ i∜2 из ℚ(∜2) выводит. Автоморфизмов над ℚ ровно два — ∜2 ↦ ±∜2, значит Aut ≅ C₂, и это НЕ группа Галуа: её порядок 2, а степень 4."
+    },
+    {
+      "id": "Q<Qcbrt23",
+      "имя": "ℚ(∛2, ∛3)/ℚ",
+      "дом": "Q",
+      "код": "Qcbrt23",
+      "степень": 9,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "separable": true,
+        "galois": false,
+        "normal-ext": false,
+        "simple-ext": true
+      },
+      "галуа": "C1",
+      "почему": "Степень 9 = 3·3: x³ − 2 неприводим над ℚ, x³ − 3 остаётся неприводимым над ℚ(∛2). Оба корня действительны, поле лежит в ℝ, других корней в нём нет — Aut тривиальна."
+    },
+    {
+      "id": "Q<Qsqrt23cbrt2",
+      "имя": "ℚ(√2, √3, ∛2)/ℚ",
+      "дом": "Q",
+      "код": "Qsqrt23cbrt2",
+      "степень": 12,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "separable": true,
+        "galois": false,
+        "normal-ext": false,
+        "simple-ext": true
+      },
+      "галуа": "V4",
+      "почему": "[ℚ(√2, √3) : ℚ] = 4, присоединение ∛2 умножает на 3. Поле действительно, поэтому ∛2 неподвижен, а знаки √2 и √3 переключаются независимо: Aut ≅ V₄."
+    },
+    {
+      "id": "Q<QS3x5",
+      "имя": "ℚ(∛2, ζ₃, ⁵√2)/ℚ",
+      "дом": "Q",
+      "код": "QS3x5",
+      "степень": 30,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "separable": true,
+        "galois": false,
+        "normal-ext": false,
+        "simple-ext": true
+      },
+      "галуа": "S3",
+      "почему": "M = ℚ(∛2, ζ₃) — поле разложения x³ − 2, степень 6 и Галуа с группой S₃. x⁵ − 2 остаётся неприводимым над M (5 не делит 6), откуда степень 30. ζ₅ ∉ L, потому что [ℚ(ζ₅) : ℚ] = 4 не делит 30, — значит ⁵√2 неподвижен, и ограничение на M даёт изоморфизм Aut(L/ℚ) ≅ S₃."
+    },
+    {
+      "id": "Q<Qc3",
+      "имя": "ℚ(ζ₇ + ζ₇⁻¹)/ℚ",
+      "дом": "Q",
+      "код": "Qc3",
+      "степень": 3,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "separable": true,
+        "normal-ext": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C3",
+      "почему": "Gal(ℚ(ζ₇)/ℚ) ≅ C₆, подгруппа ⟨комплексное сопряжение⟩ ≅ C₂ нормальна, значит вещественное подполе нормально над ℚ с группой C₆/C₂ ≅ C₃."
+    },
+    {
+      "id": "Q<QA5",
+      "имя": "ℚ(корни x⁵ + 20x + 16)/ℚ",
+      "дом": "Q",
+      "код": "QA5",
+      "степень": 60,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "separable": true,
+        "normal-ext": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "A5",
+      "почему": "x⁵ + 20x + 16 неприводим над ℚ, дискриминант — полный квадрат (значит группа лежит в A₅), и группа транзитивна порядка, делящегося на 5, — классический пример с группой Галуа A₅. Степень поля разложения равна |A₅| = 60."
+    },
+    {
+      "id": "F3x<F3t3",
+      "имя": "𝔽₃(t^(1/3))/𝔽₃(t)",
+      "дом": "F3x",
+      "код": "F3t3",
+      "степень": 3,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "separable": false,
+        "normal-ext": true,
+        "galois": false,
+        "simple-ext": true
+      },
+      "галуа": "C1",
+      "почему": "Чисто несепарабельное: x³ − t = (x − t^(1/3))³ в характеристике 3. Нормально (единственный корень лежит в поле), но не Галуа, и группа автоморфизмов тривиальна. Степень 3 — НЕЧЁТНАЯ, чего у несепарабельных расширений библиотеки не было."
+    },
+    {
+      "id": "F2x<F2tAS",
+      "имя": "𝔽₂(t)(β)/𝔽₂(t)",
+      "дом": "F2x",
+      "код": "F2tAS",
+      "степень": 2,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "separable": true,
+        "normal-ext": true,
+        "galois": true,
+        "simple-ext": true
+      },
+      "галуа": "C2",
+      "почему": "Артин — Шрайер: у x² + x + t производная равна 1, значит кратных корней нет и расширение сепарабельно, несмотря на характеристику 2. Степень 2 ⇒ нормально ⇒ Галуа с группой C₂. Основное и надполе оба НЕСОВЕРШЕННЫ."
+    },
+    {
+      "id": "F2x<F2tcbrt",
+      "имя": "𝔽₂(t)(∛t)/𝔽₂(t)",
+      "дом": "F2x",
+      "код": "F2tcbrt",
+      "степень": 3,
+      "props": {
+        "trivial-ext": false,
+        "finite-ext": true,
+        "algebraic": true,
+        "separable": true,
+        "normal-ext": false,
+        "galois": false,
+        "simple-ext": true
+      },
+      "галуа": "C1",
+      "почему": "3 взаимно просто с характеристикой 2, значит x³ − t сепарабелен. Но ζ₃ ∉ 𝔽₂(t), поэтому в поле лежит лишь один корень из трёх: расширение НЕ нормально, и группа автоморфизмов тривиальна."
+    }
+  ]
+}

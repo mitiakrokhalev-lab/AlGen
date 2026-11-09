@@ -1,0 +1,237 @@
+name: pilot
+
+# Пилот меры по размеру (решение 2–3.11): база G, вселенная — все термы из ⩽ 2
+# конструкций (ALGEN_SIZE=2), строки — записанные значения и распространение
+# (ALGEN_FAST=1), схемы — наборы термов с ⩽ 2 конструкциями вместе, k = 3.
+#   0) skel  — каркас G (теория, атомы) и библиотека один раз, раздаются всем (ALGEN_SKEL, кэш/);
+#   1) build — 20 машин строят части таблицы G;
+#   2) enum  — 20 машин перебирают схемы;
+#   3) summary — сводка в ветку «results-<ветка>».
+# Поправки по архиву (A6): G/Z(G) — одна конструкция (в коде), класс базы — матрица cls
+# (none — без класса, finite / abelian — «∀ G конечная / абелева», ALGEN_CLASS).
+# Запуск: пуш в ветку «pilot-…».
+
+on:
+  push:
+    branches: ["pilot-*"]
+
+env:
+  ALGEN_SIZE: "2"
+  ALGEN_FAST: "1"
+  BASE: "G"
+  K: "3"
+  ARGS: ""  # полный класс: все свойства словаря (прежде пропускали bounded-exponent, причина не записана)
+  THREADS: "1"  # одна схема на машину: отчёт схемы G при k = 3 — до миллиона строк, две схемы сразу не влезают в 16 ГБ
+  MEM: "4"
+  ALGEN_SKEL: ${{ github.workspace }}/skel
+  # Номер прошлого запуска pilot: каркас, таблица и классы равносильных берутся из его
+  # артефактов (хранятся 7 дней), сразу перебор. Годится, если с тех пор не менялись
+  # library.py, logic.py, finite.py и данные (иначе таблица не загрузится: отпечаток).
+  PREV_RUN: ""
+  # Динамический архив: каждая схема пишет кэш вердиктов (<схема>.vc.json.gz);
+  # STATE_RUN — номер прошлого запуска pilot, чьи кэши берутся (решатель — только
+  # о новых условиях). Пусто — без прежнего кэша.
+  ALGEN_STATE_SAVE: "1"
+  ALGEN_COMPRESS: "1"  # сжатие внутри схемы: базис вопросов и фактов в сводке схемы (было только в ветке pilot-15)
+  STATE_RUN: ""
+
+jobs:
+  cfg:
+    runs-on: ubuntu-latest
+    outputs:
+      prev: ${{ steps.c.outputs.prev }}
+    steps:
+      - id: c
+        run: echo "prev=$PREV_RUN" >> "$GITHUB_OUTPUT"
+
+  skel:
+    needs: cfg
+    if: needs.cfg.outputs.prev == ''
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: каркас
+        run: |
+          cd py
+          /usr/bin/time -v timeout 290m python3 -m algen.table каркас $BASE $ARGS 2>&1 | tail -30
+          ls -la $ALGEN_SKEL/$BASE.skel.pickle
+      - uses: actions/upload-artifact@v4
+        with:
+          name: skel
+          path: |
+            skel
+            кэш
+          retention-days: 7
+          compression-level: 1
+
+  build:
+    needs: skel
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        job: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          name: skel
+          path: .
+      - name: часть таблицы
+        run: |
+          cd py
+          timeout 290m python3 -m algen.table строить $BASE --часть ${{ matrix.job }}/20 --каталог ../tab $ARGS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tab-${{ matrix.job }}
+          path: tab/*.pickle
+          retention-days: 7
+          compression-level: 1
+
+  prep:
+    needs: build
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          name: skel
+          path: .
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: tab-*
+          path: tab
+          merge-multiple: true
+      - name: классы равносильных
+        run: |
+          cd py
+          du -sh ../tab
+          timeout 320m python3 -m algen.table равносильные $BASE --каталог ../tab $ARGS
+      - name: аудит таблицы
+        continue-on-error: true
+        run: |
+          cd py
+          timeout 60m python3 -m algen.audit_table $BASE --каталог ../tab --выход ../out/none
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tabs
+          path: tab
+          retention-days: 7
+          compression-level: 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: part-none-audit
+          path: out
+          retention-days: 30
+
+  enum:
+    needs: [cfg, prep]
+    if: always() && (needs.prep.result == 'success' || needs.cfg.outputs.prev != '')
+    permissions:
+      contents: read
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        cls: [none]
+        part: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          name: skel
+          path: .
+          run-id: ${{ needs.cfg.outputs.prev || github.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: tabs
+          path: tab
+          run-id: ${{ needs.cfg.outputs.prev || github.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: прежнее состояние схем
+        if: env.STATE_RUN != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh run download $STATE_RUN -R $GITHUB_REPOSITORY -n part-${{ matrix.cls }}-${{ matrix.part }} -D state0
+          ls state0/${{ matrix.cls }} | grep -c vc.json.gz || true
+      - name: перебор
+        continue-on-error: true
+        run: |
+          cd py
+          if [ "${{ matrix.cls }}" != none ]; then export ALGEN_CLASS=${{ matrix.cls }}; fi
+          if [ -d ../state0/${{ matrix.cls }} ]; then export ALGEN_STATE=$PWD/../state0/${{ matrix.cls }}; fi
+          timeout 320m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../out/${{ matrix.cls }} --часть ${{ matrix.part }}/20 --выборка 10 --нитей $THREADS --память $MEM --посылок $K --до 300 --предел 3600 $ARGS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: part-${{ matrix.cls }}-${{ matrix.part }}
+          path: out
+          retention-days: 30
+          compression-level: 1
+
+  summary:
+    needs: enum
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: part-*
+          path: parts
+      - run: |
+          for c in none finite abelian; do
+            mkdir -p all/$c
+            find parts -path "*/$c/*" -name '*.json' -exec cp {} all/$c/ \; || true
+            find parts -path "*/$c/*" -name '*.txt' -exec cp {} all/$c/ \; || true
+            (cd py && python3 -m algen.batch сводка ../all/$c) || echo "сводка упала" > all/$c/сводка.md
+          done
+          cat all/*/сводка.md > all/сводка.md || true
+      - name: результаты в ветку «results-…»
+        run: |
+          tar czf results.tar.gz all
+          cp all/сводка.md сводка.md || echo "нет сводки" > сводка.md
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e results.tar.gz -e сводка.md
+          git add results.tar.gz сводка.md
+          git commit -qm "Пилот размера ⩽ 2: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"
