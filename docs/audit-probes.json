@@ -1,0 +1,504 @@
+{
+  "version": 1,
+  "scope": "local grow=1 SAT; structural universe check; no native enumeration",
+  "source_sha256": "5ab4b3f3de57bd2d0055639f5f2e353dfac1ac54460d3490c49871d2f9131f7e",
+  "probes": [
+    {
+      "id": "M01",
+      "base": "G",
+      "условие": "∀ G : Grp | cyclic(G / center(G))",
+      "цель": "abelian(G)",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 3,
+      "premises": 1,
+      "constructions": 1,
+      "terms": [
+        "center(G)",
+        "quotient(G, center(G))"
+      ],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'cyclic', App(op='quotient', args=(Var(name='G'), App(op='center', args=(Var(name='G'),)))))",
+          true
+        ]
+      ],
+      "clauses": 74769,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 2.075981
+    },
+    {
+      "id": "M02",
+      "base": "G",
+      "условие": "∀ G : Grp | finite(G / center(G))",
+      "цель": "finite(commutator(G))",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 4,
+      "premises": 1,
+      "constructions": 2,
+      "terms": [
+        "center(G)",
+        "commutator(G)",
+        "quotient(G, center(G))"
+      ],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'finite', App(op='quotient', args=(Var(name='G'), App(op='center', args=(Var(name='G'),)))))",
+          true
+        ]
+      ],
+      "clauses": 122032,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.765758
+    },
+    {
+      "id": "M03",
+      "base": "GN",
+      "условие": "∀ G : Grp; ∀ N : Sub(G) | index-2(N)",
+      "цель": "normal(N)",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 2,
+      "premises": 1,
+      "constructions": 0,
+      "terms": [],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'index-2', Var(name='N'))",
+          true
+        ]
+      ],
+      "clauses": 83877,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.503424
+    },
+    {
+      "id": "M04",
+      "base": "GMN",
+      "условие": "∀ G : Grp; ∀ M : Sub(G); ∀ N : Sub(M) | normal(M), characteristic(N)",
+      "цель": "normal(as-sub(G, M, N))",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 4,
+      "premises": 2,
+      "constructions": 1,
+      "terms": [
+        "as-sub(G, M, N)"
+      ],
+      "structural_status": "not_finished",
+      "local_verdict": "неизвестно",
+      "core": [],
+      "clauses": 314857,
+      "native_pipeline": "not_run",
+      "reason": "лимит локальной пробы",
+      "wall_seconds": 20.001363
+    },
+    {
+      "id": "M05.a",
+      "base": "GHK",
+      "условие": "∀ G : Grp; ∀ H : Sub(G); ∀ K : Sub(G) | normal(H), normal(K)",
+      "цель": "permutes(H, K)",
+      "scope": "product characterization",
+      "parse": "ok",
+      "objects": 3,
+      "premises": 2,
+      "constructions": 0,
+      "terms": [],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'normal', Var(name='H'))",
+          true
+        ]
+      ],
+      "clauses": 292782,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 2.014825
+    },
+    {
+      "id": "M05.b",
+      "base": "GHK",
+      "условие": "∀ G : Grp; ∀ H : Sub(G); ∀ K : Sub(G) | normal(H), normal(K)",
+      "цель": "normal(join(G, H, K))",
+      "scope": "normal join; combine with permutes",
+      "parse": "ok",
+      "objects": 4,
+      "premises": 2,
+      "constructions": 1,
+      "terms": [
+        "join(G, H, K)"
+      ],
+      "structural_status": "not_finished",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'normal', Var(name='K'))",
+          true
+        ],
+        [
+          "('p', 'normal', Var(name='H'))",
+          true
+        ]
+      ],
+      "clauses": 720148,
+      "native_pipeline": "not_run",
+      "reason": "лимит локальной пробы",
+      "wall_seconds": 20.001625
+    },
+    {
+      "id": "M06",
+      "base": "G",
+      "условие": "∀ G : Grp | finite(G), p-group(G), ¬trivial(G)",
+      "цель": "¬trivial(center(G))",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 2,
+      "premises": 3,
+      "constructions": 1,
+      "terms": [
+        "center(G)"
+      ],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'trivial', Var(name='G'))",
+          false
+        ],
+        [
+          "('p', 'p-group', Var(name='G'))",
+          true
+        ],
+        [
+          "('p', 'finite', Var(name='G'))",
+          true
+        ]
+      ],
+      "clauses": 114098,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.565696
+    },
+    {
+      "id": "M07",
+      "base": "G",
+      "условие": "∀ G : Grp | exponent-2(G)",
+      "цель": "abelian(G)",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 1,
+      "premises": 1,
+      "constructions": 0,
+      "terms": [],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'exponent-2', Var(name='G'))",
+          true
+        ]
+      ],
+      "clauses": 22165,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.150862
+    },
+    {
+      "id": "M12",
+      "base": "G",
+      "условие": "∀ G : Grp | cyclic(aut(G))",
+      "цель": "abelian(G)",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 2,
+      "premises": 1,
+      "constructions": 1,
+      "terms": [
+        "aut(G)"
+      ],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'cyclic', App(op='aut', args=(Var(name='G'),)))",
+          true
+        ]
+      ],
+      "clauses": 75698,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.408539
+    },
+    {
+      "id": "M13",
+      "base": "GE",
+      "условие": "∀ G : Grp; ∀ F : Mor(G, G) | finite(G), surjective(F)",
+      "цель": "iso(F)",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 2,
+      "premises": 2,
+      "constructions": 0,
+      "terms": [],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'surjective', Var(name='F'))",
+          true
+        ],
+        [
+          "('p', 'finite', Var(name='G'))",
+          true
+        ]
+      ],
+      "clauses": 30969,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.187761
+    },
+    {
+      "id": "M14",
+      "base": "G",
+      "условие": "∀ G : Grp | fin-gen(G), residually-finite(G)",
+      "цель": "hopfian(G)",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 1,
+      "premises": 2,
+      "constructions": 0,
+      "terms": [],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'residually-finite', Var(name='G'))",
+          true
+        ],
+        [
+          "('p', 'fin-gen', Var(name='G'))",
+          true
+        ]
+      ],
+      "clauses": 22165,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.150709
+    },
+    {
+      "id": "M15.a",
+      "base": "G",
+      "условие": "∀ G : Grp | finite(G), fin-gen(G), abelian(G)",
+      "цель": "co-hopfian(G)",
+      "scope": "forward",
+      "parse": "ok",
+      "objects": 1,
+      "premises": 3,
+      "constructions": 0,
+      "terms": [],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'finite', Var(name='G'))",
+          true
+        ]
+      ],
+      "clauses": 22165,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.162037
+    },
+    {
+      "id": "M15.b",
+      "base": "G",
+      "условие": "∀ G : Grp | co-hopfian(G), fin-gen(G), abelian(G)",
+      "цель": "finite(G)",
+      "scope": "reverse",
+      "parse": "ok",
+      "objects": 1,
+      "premises": 3,
+      "constructions": 0,
+      "terms": [],
+      "structural_status": "terms_available",
+      "local_verdict": "неизвестно",
+      "core": [],
+      "clauses": 22165,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.149548
+    },
+    {
+      "id": "M16",
+      "base": "GN",
+      "условие": "∀ G : Grp; ∀ N : Sub(G) | free(G)",
+      "цель": "free(N)",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 2,
+      "premises": 1,
+      "constructions": 0,
+      "terms": [],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'free', Var(name='G'))",
+          true
+        ]
+      ],
+      "clauses": 83877,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.491728
+    },
+    {
+      "id": "M17",
+      "base": "G",
+      "условие": "∀ G : Grp | free(G), ¬abelian(G)",
+      "цель": "centerless(G)",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 1,
+      "premises": 2,
+      "constructions": 0,
+      "terms": [],
+      "structural_status": "terms_available",
+      "local_verdict": "выводится",
+      "core": [
+        [
+          "('p', 'abelian', Var(name='G'))",
+          false
+        ],
+        [
+          "('p', 'free', Var(name='G'))",
+          true
+        ]
+      ],
+      "clauses": 22165,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.152464
+    },
+    {
+      "id": "M19.partial",
+      "base": "G",
+      "условие": "∀ G : Grp | fin-gen(G), nilpotent(G)",
+      "цель": "subgroup(torsion-set(G))",
+      "scope": "only subgroup, not finite/characteristic",
+      "parse": "ok",
+      "objects": 2,
+      "premises": 2,
+      "constructions": 1,
+      "terms": [
+        "torsion-set(G)"
+      ],
+      "structural_status": "terms_available",
+      "local_verdict": "неизвестно",
+      "core": [],
+      "clauses": 22165,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.163727
+    },
+    {
+      "id": "M20",
+      "base": "G",
+      "условие": "∀ G : Grp | polycyclic(G), hirsch(G) = 0",
+      "цель": "finite(G)",
+      "scope": "attempt full; missing hirsch expected",
+      "parse": "unsupported",
+      "reason": "терм 'hirsch(G)'",
+      "native_pipeline": "not_run",
+      "wall_seconds": 0.000228
+    },
+    {
+      "id": "M21",
+      "base": "G",
+      "условие": "∀ G : Grp | divisible(G)",
+      "цель": "no-finite-quotients(G)",
+      "scope": "full",
+      "parse": "ok",
+      "objects": 1,
+      "premises": 1,
+      "constructions": 0,
+      "terms": [],
+      "structural_status": "terms_available",
+      "local_verdict": "неизвестно",
+      "core": [],
+      "clauses": 22165,
+      "native_pipeline": "not_run",
+      "universe_missing": [],
+      "structural_terms_available": true,
+      "wall_seconds": 0.146604
+    },
+    {
+      "id": "M23.partial",
+      "base": "GHK",
+      "условие": "∀ G : Grp; ∀ H : Sub(G); ∀ K : Sub(G) | finite-index(H), finite-index(K)",
+      "цель": "finite-index(meet(G, H, K))",
+      "scope": "only finiteness; not numerical bound",
+      "parse": "ok",
+      "objects": 4,
+      "premises": 2,
+      "constructions": 1,
+      "terms": [
+        "meet(G, H, K)"
+      ],
+      "structural_status": "not_finished",
+      "local_verdict": "неизвестно",
+      "core": [],
+      "clauses": 720147,
+      "native_pipeline": "not_run",
+      "reason": "лимит локальной пробы",
+      "wall_seconds": 20.001293
+    },
+    {
+      "id": "P05.a",
+      "base": "GHK",
+      "условие": "∀ G : Grp; ∀ H : Sub(G); ∀ K : Sub(G) | finite(G), ¬whole(H), ¬whole(K)",
+      "цель": "¬set-whole(union(G, H, K))",
+      "scope": "two subgroup part only",
+      "parse": "ok",
+      "objects": 4,
+      "premises": 3,
+      "constructions": 1,
+      "terms": [
+        "union(G, H, K)"
+      ],
+      "structural_status": "not_finished",
+      "local_verdict": "неизвестно",
+      "core": [],
+      "clauses": 292782,
+      "native_pipeline": "not_run",
+      "reason": "лимит локальной пробы",
+      "wall_seconds": 20.001598
+    }
+  ]
+}

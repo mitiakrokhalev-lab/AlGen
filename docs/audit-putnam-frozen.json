@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "date_moscow": "2026-11-07",
+  "frozen_before_audit": true,
+  "source_note": "Парафразы; год/номер и условия проверены по PDF конкурса (2007/2008/2016/2018) и тематическому листку E. Barbeau (1969/1977).",
+  "cases": [
+    {
+      "id": "P01",
+      "year": 2007,
+      "number": "A5",
+      "statement": "Если n — число элементов порядка простого p в конечной G, то n=0 или p делит n+1.",
+      "source": "https://kskedlaya.org/putnam-archive/2007.pdf",
+      "audit_status": "not_checked"
+    },
+    {
+      "id": "P02",
+      "year": 2008,
+      "number": "A6",
+      "statement": "Доказать существование абсолютной c>0: любая нетривиальная конечная G допускает последовательность длины ≤c log|G|, подпроизведения которой дают все элементы G.",
+      "source": "https://kskedlaya.org/putnam-archive/2008.pdf",
+      "audit_status": "not_checked"
+    },
+    {
+      "id": "P03",
+      "year": 2016,
+      "number": "A5",
+      "statement": "Конечная G порождена g,h, ord(g) нечётен. Каждый элемент записывается как g^m1 h^n1 … g^mr h^nr, r≤|G|, все показатели ±1.",
+      "source": "https://kskedlaya.org/putnam-archive/2016.pdf",
+      "audit_status": "not_checked"
+    },
+    {
+      "id": "P04",
+      "year": 2018,
+      "number": "A4",
+      "statement": "Для взаимно простых m,n>0 положим a_k=⌊mk/n⌋−⌊m(k−1)/n⌋. Из ∏(g h^a_k)=e следует gh=hg.",
+      "source": "https://kskedlaya.org/putnam-archive/2018.pdf",
+      "audit_status": "not_checked"
+    },
+    {
+      "id": "P05",
+      "year": 1969,
+      "number": "B2",
+      "statement": "Конечная группа не является объединением двух собственных подгрупп. Проверить, сохраняется ли это для трёх.",
+      "source": "https://www.math.toronto.edu/barbeau/putnamgp.pdf",
+      "audit_status": "not_checked"
+    },
+    {
+      "id": "P06",
+      "year": 1977,
+      "number": "B6",
+      "statement": "H≤G конечна порядка h; для каждого x∈H выполнено (xa)^3=e. Множество всех положительных произведений x1 a … xn a конечно и содержит ≤3h² элементов.",
+      "source": "https://www.math.toronto.edu/barbeau/putnamgp.pdf",
+      "audit_status": "not_checked"
+    }
+  ]
+}
