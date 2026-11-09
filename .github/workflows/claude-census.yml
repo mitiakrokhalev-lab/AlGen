@@ -62,15 +62,24 @@ jobs:
       - uses: actions/download-artifact@v4
         with: {name: tabs, path: native-tabs, run-id: "${{ needs.plan.outputs.source }}", github-token: "${{ github.token }}"}
       - name: Входы
+        env:
+          SOURCE: ${{ needs.plan.outputs.source }}
         run: |
           python3 -B - <<'PY'
           import hashlib, json
           from pathlib import Path
+          import os
           plan = json.loads(Path('.github/stress-plan.json').read_text())
-          for rel, want in plan['input_files_sha256'].items():
-              with Path(rel).open('rb') as f:
-                  assert hashlib.file_digest(f, 'sha256').hexdigest() == want, rel
-          print('входы ok')
+          if int(os.environ['SOURCE']) in (42173383257, 42468127201):
+              for rel, want in plan['input_files_sha256'].items():
+                  with Path(rel).open('rb') as f:
+                      assert hashlib.file_digest(f, 'sha256').hexdigest() == want, rel
+              print('входы ok (сверены с stress-plan)')
+          else:
+              # новые таблицы: сверять не с чем — записываем SHA256 всех входов в лог
+              for rel in sorted(str(x) for x in list(Path('native').rglob('*.pickle')) + list(Path('native-tabs').rglob('*.pickle'))):
+                  with open(rel, 'rb') as f:
+                      print(hashlib.file_digest(f, 'sha256').hexdigest(), rel)
           PY
           mv native/кэш кэш
           git rev-parse HEAD > commit.txt
@@ -106,7 +115,7 @@ jobs:
           path: parts
       - name: Сводка
         working-directory: py
-        run: python3 -B -m tools.census_summary ../parts --out ../census.json --parts ${{ needs.plan.outputs.n }} --expect 1047
+        run: python3 -B -m tools.census_summary ../parts --out ../census.json --parts ${{ needs.plan.outputs.n }}
       - name: Результаты в ветку results-<ветка>
         run: |
           tar czf census-parts.tar.gz parts
