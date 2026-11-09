@@ -291,6 +291,21 @@ class Library:
                       "bounded-exponent": True, "polycyclic": False, "amenable": True, "left-orderable": False,
                       "bi-orderable": False, "property-t": False, "locally-finite": True, "locally-cyclic": False,
                       "free-abelian": False, "countable": True})
+            # 9.11 (2а.4): ⊕_ℕ H — счётная, не к. п. (два-порождённость, конечная и рекурсивная
+            # определённость, разрешимая проблема слов, гиперболичность требуют к. п.); копредставление
+            # из таблиц копий H рекурсивно; локально конечна ⇒ без свободных подгрупп.
+            # Виртуальные и локальные свойства, свойства собственных подгрупп — как у H:
+            # подгруппа конечного индекса содержит почти все копии H; собственная подгруппа
+            # H × H × … (без одной копии) бесконечна и нециклична.
+            p.update({"rec-pres-ctbl": True, "two-generated": False, "fin-pres": False, "rec-pres": False,
+                      "word-problem": False, "hyperbolic": False, "contains-free": False,
+                      "proper-subs-cyclic": False, "proper-subs-finite": False})
+            for x, y in (("nilpotent", ("virtually-nilpotent", "locally-nilpotent", "proper-subs-nilpotent")),
+                         ("solvable", ("virtually-solvable", "locally-solvable")),
+                         ("abelian", ("proper-subs-abelian",))):
+                if hp.get(x) is not None:
+                    for z in y:
+                        p[z] = hp[x]
             if hp.get("nilpotent") is not None:
                 p["residually-nilpotent"] = hp["nilpotent"]
             if hp.get("abelian") is not None:
