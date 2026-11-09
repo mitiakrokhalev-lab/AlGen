@@ -385,7 +385,7 @@ def props2x_jobs(max_order=100_000):
     return sorted(out, key=lambda x: int(x[0].split(":")[0]))
 
 
-def build_props2x(jobs, max_order=100_000, chunk=4, seconds=900, total=320 * 60):
+def build_props2x(jobs, max_order=100_000, chunk=4, seconds=900, total=320 * 60, share=(0, 1)):
     """props2 построенных групп (gap/props2x.g) → grp-props2x.jsonl. Пачка, не уложившаяся
     в seconds, пропускается (её группы — без записи; повторный запуск досчитает остальное)."""
     todo = props2x_jobs(max_order)
@@ -393,6 +393,7 @@ def build_props2x(jobs, max_order=100_000, chunk=4, seconds=900, total=320 * 60)
     if PROPS2X.exists():
         done = {r["key"]: r for r in map(json.loads, PROPS2X.open())}
     todo = [j for j in todo if j[0] not in done]
+    todo = todo[share[0]::share[1]]  # доля i/n: задания с номерами ≡ i (mod n)
     parts = [todo[i:i + chunk] for i in range(0, len(todo), chunk)]
     import threading
     lock = threading.Lock()
@@ -609,6 +610,10 @@ if __name__ == "__main__":
     ap.add_argument("--свойства2x", dest="gprops2x", action="store_true",
                     help="props2 построенных групп библиотеки (Aut/Out/G′//Z//Φ) → data/finite/grp-props2x.jsonl")
     ap.add_argument("--до-порядка", dest="max_order", type=int, default=100_000)
+    ap.add_argument("--доля", dest="share", default="0/1",
+                    help="i/n — считать только задания props2x с номерами ≡ i (mod n)")
+    ap.add_argument("--пачка", dest="chunk", type=int, default=4, help="групп props2x на один вызов GAP")
+    ap.add_argument("--секунд", dest="seconds", type=int, default=900, help="срок одной пачки props2x")
     ap.add_argument("--свойства2", dest="gprops2", action="store_true",
                     help="ранг, клт, дедекиндовость, свойства собственных подгрупп всех конечных групп "
                          "библиотеки с ключом n:i (gap/props2.g) → data/finite/grp-props2.jsonl")
@@ -649,7 +654,10 @@ if __name__ == "__main__":
         print(HOMS, sum(1 for _ in HOMS.open()))
         raise SystemExit
     if a.gprops2x:
-        build_props2x(a.jobs, max_order=a.max_order)
+        i, n = map(int, a.share.split("/"))
+        assert 0 <= i < n, a.share
+        build_props2x(a.jobs, max_order=a.max_order, chunk=a.chunk, seconds=a.seconds,
+                      total=a.minutes * 60, share=(i, n))
         print(PROPS2X, sum(1 for _ in PROPS2X.open()))
         raise SystemExit
     if a.gprops2:
