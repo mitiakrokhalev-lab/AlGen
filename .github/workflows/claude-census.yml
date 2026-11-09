@@ -22,6 +22,7 @@ jobs:
       base: ${{ steps.p.outputs.base }}
       n: ${{ steps.p.outputs.n }}
       limit: ${{ steps.p.outputs.limit }}
+      ref: ${{ steps.p.outputs.ref }}
     steps:
       - uses: actions/checkout@v4
       - id: p
@@ -34,6 +35,7 @@ jobs:
           with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
               f.write('parts=' + json.dumps(list(range(1, c['parts'] + 1))) + '\n')
               f.write(f"source={c['source_run']}\nbase={c['base']}\nn={c['parts']}\nlimit={c['seconds_per_scheme']}\n")
+              f.write(f"ref={c.get('ref', '')}\n")
           print(c)
           PY
 
@@ -53,6 +55,11 @@ jobs:
       ALGEN_SKEL: ${{ github.workspace }}/native/skel
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.plan.outputs.ref || github.sha }}
+      - uses: actions/checkout@v4
+        with:
+          path: pilot-control
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -69,7 +76,7 @@ jobs:
           import hashlib, json
           from pathlib import Path
           import os
-          plan = json.loads(Path('.github/stress-plan.json').read_text())
+          plan = json.loads(Path('pilot-control/.github/stress-plan.json').read_text())
           if int(os.environ['SOURCE']) in (42173383257, 42468127201):
               for rel, want in plan['input_files_sha256'].items():
                   with Path(rel).open('rb') as f:
