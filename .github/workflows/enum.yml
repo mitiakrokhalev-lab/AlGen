@@ -1,0 +1,132 @@
+name: enum
+
+# Перебор по готовой таблице другого запуска (TABLES_RUN), без пересборки.
+#   1) prep — классы равносильных литералов базы один раз (у G ≈ 2 ч), файл <база>.rep.pickle;
+#   2) enum — машины перебирают схемы (cls: без класса / «∀ G конечная» / «∀ G абелева»);
+#   3) summary — сводка в ветку «results-<ветка>».
+# Код algen должен давать те же атомы и отпечаток, что у таблицы (вселенная, data, logic, library).
+# Запуск: пуш в ветку «enum-…».
+
+on:
+  push:
+    branches: ["enum-*"]
+
+env:
+  TABLES_RUN: "41581415039"
+  ALGEN_SIZE: "2"
+  ALGEN_FAST: "1"
+  BASE: "G"
+  K: "3"
+  ARGS: ""
+  THREADS: "2"
+  MEM: "4"
+
+jobs:
+  prep:
+    permissions:
+      actions: read
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: только таблицы (*.pickle) из артефактов сборки
+        # артефакт части — 1,4 ГБ (кэши значений), 20 частей не влезают на диск машины перебора
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p tab
+          df -h / /mnt || true
+          for i in $(seq 1 20); do
+            sudo mkdir -p /mnt/t && sudo chmod 777 /mnt/t
+            gh run download $TABLES_RUN -R $GITHUB_REPOSITORY -n tab-$i -D /mnt/t
+            find /mnt/t -name "$BASE.*.pickle" -exec mv {} tab/ \;
+            rm -rf /mnt/t/*
+          done
+          ls -la tab | head -30; du -sh tab
+      - name: классы равносильных
+        run: |
+          cd py
+          timeout 300m python3 -m algen.table равносильные $BASE --каталог ../tab $ARGS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tabs
+          path: tab
+          retention-days: 7
+          compression-level: 1
+
+  enum:
+    needs: prep
+    permissions:
+      actions: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        cls: [none, finite, abelian]
+        part: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          name: tabs
+          path: tab
+      - name: перебор
+        continue-on-error: true
+        run: |
+          cd py
+          if [ "${{ matrix.cls }}" != none ]; then export ALGEN_CLASS=${{ matrix.cls }}; fi
+          timeout 320m python3 -m algen.table перебор $BASE --каталог ../tab --выход ../out/${{ matrix.cls }} --часть ${{ matrix.part }}/10 --нитей $THREADS --память $MEM --посылок $K --до 300 --предел 3600 $ARGS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: part-${{ matrix.cls }}-${{ matrix.part }}
+          path: out
+          retention-days: 30
+          compression-level: 1
+
+  summary:
+    needs: enum
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: part-*
+          path: parts
+      - run: |
+          for c in none finite abelian; do
+            mkdir -p all/$c
+            find parts -path "*/$c/*" -name '*.json' -exec cp {} all/$c/ \; || true
+            find parts -path "*/$c/*" -name '*.txt' -exec cp {} all/$c/ \; || true
+            (cd py && python3 -m algen.batch сводка ../all/$c) || echo "сводка упала" > all/$c/сводка.md
+          done
+          cat all/*/сводка.md > all/сводка.md || true
+      - name: результаты в ветку «results-…»
+        run: |
+          tar czf results.tar.gz all
+          cp all/сводка.md сводка.md || echo "нет сводки" > сводка.md
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e results.tar.gz -e сводка.md
+          git add results.tar.gz сводка.md
+          git commit -qm "Перебор по таблице запуска ${TABLES_RUN}: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"

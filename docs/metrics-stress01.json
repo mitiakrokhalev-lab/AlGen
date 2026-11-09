@@ -1,0 +1,573 @@
+{
+  "version": 1,
+  "name": "stress-codex-01",
+  "scope": "8 selected native G schemes; not the whole class",
+  "planned": 8,
+  "outcomes": {
+    "ok": 5,
+    "incomplete": 3
+  },
+  "all_complete": false,
+  "measurements_all_observed": {
+    "wall_seconds": {
+      "observed": 8,
+      "value": 6371.231
+    },
+    "cpu_seconds": {
+      "observed": 8,
+      "value": 6369.660274
+    },
+    "peak_rss_kib": {
+      "observed": 8,
+      "value": 7149308
+    }
+  },
+  "unknown_ids_ok": 218188,
+  "kept_ids_ok": 838,
+  "within_scheme_ratio_ok": 260.3675417661098,
+  "cases": [
+    {
+      "id": "G-1-183-470-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ok",
+        "scheme_seconds": 101.2,
+        "k": 3,
+        "verdict_cache": {
+          "было": 187,
+          "попаданий": 187,
+          "промахов": 0
+        }
+      },
+      "outcome": "ok",
+      "measurement": {
+        "scheme": "G-1-183-470-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 217.052,
+        "cpu_seconds": 216.97743,
+        "peak_rss_kib": 4772876,
+        "sampled_rss_kib": 4772912,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "471ccc4075aac786d80006ae1289b56da9c2a669d6bd523b6ac2d8f979b023e1",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "tools/profile_memory.py": "dbd8dca4eda68ccbd5f5a7237dd0248f2fa8cc71035c952f49dcb7cdcde5a083"
+        }
+      },
+      "measurement_matches_plan": true,
+      "report_rows": 0,
+      "report_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_verdicts": {},
+      "first_class_verdicts": {},
+      "unknown_ids": 0,
+      "kept_ids": 0,
+      "folded_ids": 0,
+      "enumeration_seconds": 96.755,
+      "last_stage": "end",
+      "enumeration_containers": [
+        {
+          "entries": 0,
+          "container_bytes": 48,
+          "packed_bytes": 0
+        },
+        {
+          "entries": 208838,
+          "container_bytes": 1827096,
+          "packed_bytes": null
+        }
+      ]
+    },
+    {
+      "id": "G-14-20-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ok",
+        "scheme_seconds": 166.9,
+        "k": 3,
+        "verdict_cache": {
+          "было": 28126,
+          "попаданий": 17662,
+          "промахов": 0
+        }
+      },
+      "outcome": "ok",
+      "measurement": {
+        "scheme": "G-14-20-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 376.564,
+        "cpu_seconds": 376.37685,
+        "peak_rss_kib": 5552856,
+        "sampled_rss_kib": 5477352,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "471ccc4075aac786d80006ae1289b56da9c2a669d6bd523b6ac2d8f979b023e1",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "tools/profile_memory.py": "dbd8dca4eda68ccbd5f5a7237dd0248f2fa8cc71035c952f49dcb7cdcde5a083"
+        }
+      },
+      "measurement_matches_plan": true,
+      "report_rows": 17344,
+      "report_sha256": "77ed743c613ab1b49e0db506e1baf44bcd383e56372f28cf58d04f35765bde05",
+      "raw_verdicts": {
+        "выводится": 6628,
+        "неизвестно": 10716
+      },
+      "first_class_verdicts": {
+        "выводится": 2088,
+        "неизвестно": 2858
+      },
+      "unknown_ids": 2858,
+      "kept_ids": 84,
+      "folded_ids": 2774,
+      "enumeration_seconds": 108.486,
+      "last_stage": "end",
+      "enumeration_containers": [
+        {
+          "entries": 17344,
+          "container_bytes": 48,
+          "packed_bytes": 173440
+        },
+        {
+          "entries": 609133,
+          "container_bytes": 5274392,
+          "packed_bytes": null
+        }
+      ]
+    },
+    {
+      "id": "G-4-17-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ok",
+        "scheme_seconds": 269.0,
+        "k": 3,
+        "verdict_cache": {
+          "было": 37386,
+          "попаданий": 23229,
+          "промахов": 0
+        }
+      },
+      "outcome": "ok",
+      "measurement": {
+        "scheme": "G-4-17-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 752.487,
+        "cpu_seconds": 752.2054830000001,
+        "peak_rss_kib": 5557752,
+        "sampled_rss_kib": 5478792,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "471ccc4075aac786d80006ae1289b56da9c2a669d6bd523b6ac2d8f979b023e1",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "tools/profile_memory.py": "dbd8dca4eda68ccbd5f5a7237dd0248f2fa8cc71035c952f49dcb7cdcde5a083"
+        }
+      },
+      "measurement_matches_plan": true,
+      "report_rows": 20627,
+      "report_sha256": "d199dd500fda1f7602f0e98b9033de66c1659d581023b56701a87112ecd42e3a",
+      "raw_verdicts": {
+        "выводится": 3928,
+        "неизвестно": 16699
+      },
+      "first_class_verdicts": {
+        "выводится": 1160,
+        "неизвестно": 4311
+      },
+      "unknown_ids": 4311,
+      "kept_ids": 669,
+      "folded_ids": 3642,
+      "enumeration_seconds": 216.967,
+      "last_stage": "end",
+      "enumeration_containers": [
+        {
+          "entries": 20627,
+          "container_bytes": 48,
+          "packed_bytes": 206270
+        },
+        {
+          "entries": 575040,
+          "container_bytes": 4688312,
+          "packed_bytes": null
+        }
+      ]
+    },
+    {
+      "id": "G-15-320-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 143.3,
+        "k": 3,
+        "verdict_cache": null
+      },
+      "outcome": "ok",
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 327.013,
+        "cpu_seconds": 326.740621,
+        "peak_rss_kib": 5442656,
+        "sampled_rss_kib": 5431664,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "471ccc4075aac786d80006ae1289b56da9c2a669d6bd523b6ac2d8f979b023e1",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "tools/profile_memory.py": "dbd8dca4eda68ccbd5f5a7237dd0248f2fa8cc71035c952f49dcb7cdcde5a083"
+        }
+      },
+      "measurement_matches_plan": true,
+      "report_rows": 3671,
+      "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+      "raw_verdicts": {
+        "неизвестно": 3507,
+        "выводится": 157,
+        "опровергается": 7
+      },
+      "first_class_verdicts": {
+        "неизвестно": 1781,
+        "выводится": 90,
+        "опровергается": 7
+      },
+      "unknown_ids": 1788,
+      "kept_ids": 9,
+      "folded_ids": 1779,
+      "enumeration_seconds": 174.761,
+      "last_stage": "end",
+      "enumeration_containers": [
+        {
+          "entries": 3671,
+          "container_bytes": 48,
+          "packed_bytes": 36710
+        },
+        {
+          "entries": 65688,
+          "container_bytes": 562488,
+          "packed_bytes": null
+        }
+      ]
+    },
+    {
+      "id": "G-10-13-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 277.2,
+        "k": 3,
+        "verdict_cache": null
+      },
+      "outcome": "incomplete",
+      "measurement": {
+        "scheme": "G-10-13-705-707-708-709",
+        "returncode": -15,
+        "stop_reason": "time_budget",
+        "wall_seconds": 1200.274,
+        "cpu_seconds": 1200.122199,
+        "peak_rss_kib": 4611320,
+        "sampled_rss_kib": 4611656,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": null,
+        "complete": false,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "471ccc4075aac786d80006ae1289b56da9c2a669d6bd523b6ac2d8f979b023e1",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "tools/profile_memory.py": "dbd8dca4eda68ccbd5f5a7237dd0248f2fa8cc71035c952f49dcb7cdcde5a083"
+        }
+      },
+      "measurement_matches_plan": true,
+      "reason": "time_budget; exit=-15; scheme=None",
+      "enumeration_seconds": 984.533,
+      "last_stage": "minimal:start",
+      "enumeration_containers": [
+        {
+          "entries": 17447922,
+          "container_bytes": 48,
+          "packed_bytes": 174479220
+        },
+        {
+          "entries": 3030679,
+          "container_bytes": 24387832,
+          "packed_bytes": null
+        }
+      ]
+    },
+    {
+      "id": "G-4-220-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 762.1,
+        "k": 3,
+        "verdict_cache": null
+      },
+      "outcome": "incomplete",
+      "measurement": {
+        "scheme": "G-4-220-705-707-708-709",
+        "returncode": -15,
+        "stop_reason": "time_budget",
+        "wall_seconds": 1200.478,
+        "cpu_seconds": 1200.306336,
+        "peak_rss_kib": 4603556,
+        "sampled_rss_kib": 4603900,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": null,
+        "complete": false,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "471ccc4075aac786d80006ae1289b56da9c2a669d6bd523b6ac2d8f979b023e1",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "tools/profile_memory.py": "dbd8dca4eda68ccbd5f5a7237dd0248f2fa8cc71035c952f49dcb7cdcde5a083"
+        }
+      },
+      "measurement_matches_plan": true,
+      "reason": "time_budget; exit=-15; scheme=None",
+      "enumeration_seconds": 1007.68,
+      "last_stage": "minimal:start",
+      "enumeration_containers": [
+        {
+          "entries": 13218958,
+          "container_bytes": 48,
+          "packed_bytes": 132189580
+        },
+        {
+          "entries": 3073044,
+          "container_bytes": 27436344,
+          "packed_bytes": null
+        }
+      ]
+    },
+    {
+      "id": "G-4-5-26-445-700-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 464.5,
+        "k": 3,
+        "verdict_cache": null
+      },
+      "outcome": "incomplete",
+      "measurement": {
+        "scheme": "G-4-5-26-445-700-705-707-708-709",
+        "returncode": -15,
+        "stop_reason": "time_budget",
+        "wall_seconds": 1200.455,
+        "cpu_seconds": 1200.266113,
+        "peak_rss_kib": 5014692,
+        "sampled_rss_kib": 5014980,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": null,
+        "complete": false,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "471ccc4075aac786d80006ae1289b56da9c2a669d6bd523b6ac2d8f979b023e1",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "tools/profile_memory.py": "dbd8dca4eda68ccbd5f5a7237dd0248f2fa8cc71035c952f49dcb7cdcde5a083"
+        }
+      },
+      "measurement_matches_plan": true,
+      "reason": "time_budget; exit=-15; scheme=None",
+      "enumeration_seconds": null,
+      "last_stage": "enumerate_form:start",
+      "enumeration_containers": null
+    },
+    {
+      "id": "G-14-20-390-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 712.6,
+        "k": 3,
+        "verdict_cache": null
+      },
+      "outcome": "ok",
+      "measurement": {
+        "scheme": "G-14-20-390-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 1096.908,
+        "cpu_seconds": 1096.6652419999998,
+        "peak_rss_kib": 7149308,
+        "sampled_rss_kib": 7132804,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "471ccc4075aac786d80006ae1289b56da9c2a669d6bd523b6ac2d8f979b023e1",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "tools/profile_memory.py": "dbd8dca4eda68ccbd5f5a7237dd0248f2fa8cc71035c952f49dcb7cdcde5a083"
+        }
+      },
+      "measurement_matches_plan": true,
+      "report_rows": 721011,
+      "report_sha256": "29a4c344434f4c391a62bdba55eff772b5151f62875db000c8f046d6f916233d",
+      "raw_verdicts": {
+        "неизвестно": 719505,
+        "выводится": 1506
+      },
+      "first_class_verdicts": {
+        "неизвестно": 209231,
+        "выводится": 749
+      },
+      "unknown_ids": 209231,
+      "kept_ids": 76,
+      "folded_ids": 209155,
+      "enumeration_seconds": 383.521,
+      "last_stage": "end",
+      "enumeration_containers": [
+        {
+          "entries": 721011,
+          "container_bytes": 48,
+          "packed_bytes": 7210110
+        },
+        {
+          "entries": 2746960,
+          "container_bytes": 24387832,
+          "packed_bytes": null
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Сумма wall процессов не wall workflow; неизвестные времена не нули.",
+    "RSS — пик отдельного процесса, не дерева/cgroup.",
+    "Выдача посчитана только для проверенных ok; охват — ровно схемы плана.",
+    "Baseline 16б использовал кэш вердиктов и считал scheme_seconds без startup; новый wall включает startup без прежнего кэша. Прямого коэффициента ускорения нет.",
+    "Проверяются целостность и согласованность свёрток, а не новое SAT-доказательство базиса."
+  ],
+  "source": {
+    "run": "https://github.com/mitiakrokhalev-lab/AlGen/actions/runs/42307026640",
+    "commit": "c5196d4af4463f7354b53bdf3a543c0759505bbb",
+    "workflow_wall_to_last_job_seconds": 1950,
+    "workflow_wall_to_status_update_seconds": 1951,
+    "independent_review": "verify_conditions: streaming audit all 5 complete reports; all 8 measurements; earlier successes match baseline verdict/unknown/kept sets"
+  },
+  "artifacts": [
+    {
+      "name": "stress-G-1-183-470-705-707-708-709",
+      "bytes": 101851243,
+      "sha256": "8a11a4707f43ce1e4105d298360f49cbd32253ddd3ae08ef05be5c8ebfe13ffd"
+    },
+    {
+      "name": "stress-G-10-13-705-707-708-709",
+      "bytes": 101885955,
+      "sha256": "fc01183aacdf9191b1b0dc88ba4fb8a28a7e02ef3ff9f7452485fe7c0960a32f"
+    },
+    {
+      "name": "stress-G-14-20-390-705-707-708-709",
+      "bytes": 135388844,
+      "sha256": "3623a2496ff17631049f8a0b1ec0008aa3e8e265b7f45bb225aed4bf9ceea14a"
+    },
+    {
+      "name": "stress-G-14-20-705-707-708-709",
+      "bytes": 102788783,
+      "sha256": "5629870f53977694dde45005e0e52ad3fb71bdfdfb9b25f238c4e77b23e11467"
+    },
+    {
+      "name": "stress-G-15-320-705-707-708-709",
+      "bytes": 102037453,
+      "sha256": "300c321b7e17028d059eb3a0c375489ec31680151187dc86bb231957b904154a"
+    },
+    {
+      "name": "stress-G-4-17-705-707-708-709",
+      "bytes": 103313923,
+      "sha256": "7a13d8c74b7ad7de386ea3072bd00dd86e53647f4125d624a21cdaf7751d6b35"
+    },
+    {
+      "name": "stress-G-4-220-705-707-708-709",
+      "bytes": 101885440,
+      "sha256": "bffa2c99b885e274e567ccee829681e432723305f6ad5a3d84939169ddaee621"
+    },
+    {
+      "name": "stress-G-4-5-26-445-700-705-707-708-709",
+      "bytes": 101887626,
+      "sha256": "9c93548582faea12f4900aa15f86f298e72562c8f7dfbac14de885b8a71785dc"
+    },
+    {
+      "name": "stress-summary",
+      "bytes": 3441,
+      "sha256": "da02a918abcf2970d186db57a705725708a5e2fed1384d08594b4497e7128392"
+    }
+  ],
+  "report_rows_ok": 762653
+}

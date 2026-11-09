@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "checked_moscow": "2026-11-08T01:39:59.185554+03:00",
+  "scope": "public specifications and advertised price, not checkout/availability or whole-class24h proof",
+  "budget_rub_per_day": 1000,
+  "rental_or_payment_authorized": false,
+  "rented": false,
+  "whole_class24h_confirmed": false,
+  "options": [
+    {
+      "provider": "GitHub Actions",
+      "type": "free standard public Linux runners",
+      "vcpu_per_runner": 4,
+      "ram_gb_per_runner": 16,
+      "free_plan_max_concurrent_standard_jobs": 20,
+      "max_job_hours": 6,
+      "effective_simultaneously_used_cpu_measured": null,
+      "current_process_threads_approx": 1,
+      "ram_not_pooled": true,
+      "sources": [
+        "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+        "https://docs.github.com/en/actions/reference/limits"
+      ]
+    },
+    {
+      "provider": "Kaggle",
+      "type": "free CPU notebook candidate",
+      "documented_ram_gb": 30,
+      "documented_cpu_session_hours": 12,
+      "access_or_runtime_confirmed": false,
+      "sources": [
+        "https://www.kaggle.com/docs/notebooks",
+        "https://www.kaggle.com/product-feedback/361104"
+      ]
+    },
+    {
+      "provider": "RUVDS",
+      "type": "paid bare-metal advertised daily candidate",
+      "name": "start-128-2S",
+      "ram_gb": 128,
+      "listed_ssd_gb_each": 838,
+      "listed_ssd_count": 2,
+      "usable_disk_gb": null,
+      "advertised_rub_per_day": 833.33,
+      "remainder_before_unverified_extras_rub": 166.67,
+      "listed_cpu_label": "2 CPU Xeon E5-2660, 8 cores",
+      "total_physical_cores_confirmed": null,
+      "threads_confirmed": null,
+      "daily_rental_supported_by_faq": true,
+      "availability_confirmed": false,
+      "all_in_checkout_price_confirmed": false,
+      "purchased": false,
+      "source": "https://ruvds.com/ru/baremetal_start/"
+    },
+    {
+      "provider": "RUVDS",
+      "type": "paid lower-RAM alternative",
+      "name": "start-64-2S",
+      "ram_gb": 64,
+      "advertised_rub_per_day": 805.33,
+      "remainder_before_unverified_extras_rub": 194.67,
+      "availability_confirmed": false,
+      "all_in_checkout_price_confirmed": false,
+      "source": "https://ruvds.com/ru/baremetal_start/"
+    }
+  ],
+  "known_compute_blockers": {
+    "current_full_scheme_count": 148991,
+    "bases": 42,
+    "stress02_successful": 5,
+    "stress02_planned": 8,
+    "time_budget_cases": 2,
+    "rss_budget_cases": 1,
+    "stopped_case_peak_rss_gib": 12.294,
+    "completed_case_peak_rss_upper_bound": null,
+    "whole_cpu_work_seconds": null,
+    "effective_cpu_on_selected_machine": null,
+    "inventory_evidence": "metrics-scheme-plan.json"
+  },
+  "notes": [
+    "Do not multiply ambiguous CPU/core labels.",
+    "Do not sum runner RAM or treat vCPU quota as measured utilization.",
+    "Do not divide RAM by12.294 to admit concurrent workers: the task did not complete.",
+    "Do not treat advertised daily charge as confirmed all-in checkout or stock.",
+    "Paid RAM reserve does not itself establish throughput or complete-domain correctness.",
+    "Calendar duration to launch is not supported by current receipts."
+  ],
+  "conditional_day_capacity": [
+    {
+      "fully_utilized_cpu": 20,
+      "total_cpu_seconds": 1728000,
+      "max_average_seconds_per_scheme_before_other_cost": 11.598015987542873
+    },
+    {
+      "fully_utilized_cpu": 40,
+      "total_cpu_seconds": 3456000,
+      "max_average_seconds_per_scheme_before_other_cost": 23.196031975085745
+    },
+    {
+      "fully_utilized_cpu": 64,
+      "total_cpu_seconds": 5529600,
+      "max_average_seconds_per_scheme_before_other_cost": 37.11365116013719
+    },
+    {
+      "fully_utilized_cpu": 128,
+      "total_cpu_seconds": 11059200,
+      "max_average_seconds_per_scheme_before_other_cost": 74.22730232027438
+    }
+  ]
+}

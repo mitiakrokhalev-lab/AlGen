@@ -1,0 +1,245 @@
+name: claude pilot
+
+# Пилоты Claude: ветки claude-pilot-*, план в .github/claude-pilot.json.
+# Каждый case — отдельный runner; ref пустой = код этого push, иначе указанный commit.
+# Входы (skel/tabs) берутся из source_run и проверяются по SHA256 из stress-plan.json.
+
+on:
+  push:
+    branches: ["claude-pilot-*"]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: claude-pilot-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      cases: ${{ steps.plan.outputs.cases }}
+      source: ${{ steps.plan.outputs.source }}
+      preserve: ${{ steps.plan.outputs.preserve }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: plan
+        run: |
+          python3 -B - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = json.loads(Path('.github/claude-pilot.json').read_text())
+          assert p['version'] == 1 and type(p['source_run']) is int
+          ids = [c['id'] for c in p['cases']]
+          assert 1 <= len(ids) <= 20 and len(ids) == len(set(ids))
+          for c in p['cases']:
+              assert 0 < c['seconds'] <= 5400 and 0 < c['rss_gib'] <= 15, c
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write('cases=' + json.dumps(p['cases'], ensure_ascii=False) + '\n')
+              f.write(f"source={p['source_run']}\n")
+              f.write(f"preserve={str(bool(p.get('preserve_inputs'))).lower()}\n")
+          print(json.dumps(p, ensure_ascii=False, indent=1))
+          PY
+
+  preserve:
+    # skel/tabs исходного запуска истекают 13.11.2026: копия с хранением 90 дней
+    needs: plan
+    if: needs.plan.outputs.preserve == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: {name: skel, path: native, run-id: "${{ needs.plan.outputs.source }}", github-token: "${{ github.token }}"}
+      - uses: actions/download-artifact@v4
+        with: {name: tabs, path: native-tabs, run-id: "${{ needs.plan.outputs.source }}", github-token: "${{ github.token }}"}
+      - name: SHA256 входов
+        run: |
+          python3 -B - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          plan = json.loads(Path('.github/stress-plan.json').read_text())
+          for rel, want in plan['input_files_sha256'].items():
+              with Path(rel).open('rb') as f:
+                  assert hashlib.file_digest(f, 'sha256').hexdigest() == want, rel
+          print('ok', len(plan['input_files_sha256']), 'файлов')
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: skel, path: native/, retention-days: 90, compression-level: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: tabs, path: native-tabs/, retention-days: 90, compression-level: 1}
+
+  case:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        case: ${{ fromJSON(needs.plan.outputs.cases) }}
+    env:
+      ALGEN_SIZE: "2"
+      ALGEN_FAST: "1"
+      CASE_ID: ${{ matrix.case.id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.case.ref || github.sha }}
+      - uses: actions/checkout@v4
+        with:
+          path: pilot-control
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with: {name: skel, path: native, run-id: "${{ needs.plan.outputs.source }}", github-token: "${{ github.token }}"}
+      - uses: actions/download-artifact@v4
+        with: {name: tabs, path: native-tabs, run-id: "${{ needs.plan.outputs.source }}", github-token: "${{ github.token }}"}
+      - name: Входы и код
+        env:
+          SOURCE: ${{ needs.plan.outputs.source }}
+        run: |
+          git rev-parse HEAD | tee commit.txt
+          python3 -B - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          import os
+          plan = json.loads(Path('pilot-control/.github/stress-plan.json').read_text())
+          if int(os.environ['SOURCE']) in (42173383257, 42468127201):
+              for rel, want in plan['input_files_sha256'].items():
+                  with Path(rel).open('rb') as f:
+                      assert hashlib.file_digest(f, 'sha256').hexdigest() == want, rel
+              print('входы ok (сверены с stress-plan)')
+          else:
+              # новые таблицы: сверять не с чем — записываем SHA256 всех входов в лог
+              for rel in sorted(str(x) for x in list(Path('native').rglob('*.pickle')) + list(Path('native-tabs').rglob('*.pickle'))):
+                  with open(rel, 'rb') as f:
+                      print(hashlib.file_digest(f, 'sha256').hexdigest(), rel)
+          PY
+          grep MemTotal /proc/meminfo; nproc
+      - name: Прогон (table перебор с профилем)
+        if: matrix.case.mode == 'table'
+        working-directory: py
+        env:
+          SCHEME: ${{ matrix.case.scheme }}
+          SECONDS_LIMIT: ${{ matrix.case.seconds }}
+          ALGEN_PROFILE: ${{ matrix.case.profile || '1' }}
+          ALGEN_COMPRESS: "1"
+          ALGEN_SAMPLE: ${{ matrix.case.sample || '' }}
+          ALGEN_SAMPLE_EXAMPLES: ${{ matrix.case.examples || '60' }}
+          ALGEN_SKEL: ${{ github.workspace }}/native/skel
+        run: |
+          mkdir -p ../profiles/$CASE_ID
+          cp ../commit.txt ../profiles/
+          mv ../native/кэш ../кэш
+          set +e
+          /usr/bin/time -v python3 -B -m algen.table перебор G --каталог ../native-tabs \
+            --выход ../profiles/$CASE_ID --схемы "$SCHEME" --нитей 1 --посылок 3 \
+            --предел "$SECONDS_LIMIT" 2> ../profiles/time.txt
+          echo "exit=$?" | tee ../profiles/exit.txt
+          tail -30 ../profiles/time.txt
+          head -120 ../profiles/$CASE_ID/*.prof.txt || true
+          python3 -B -c "import json,glob; [print(f, {k: json.load(open(f)).get(k) for k in ('статус','секунд','память ГБ','память по этапам')}) for f in glob.glob('../profiles/$CASE_ID/G-*.json')]"
+          exit 0
+      - name: Прогон
+        if: matrix.case.mode != 'table'
+        working-directory: py
+        env:
+          SCHEME: ${{ matrix.case.scheme }}
+          ARGS: ${{ matrix.case.args }}
+          SECONDS_LIMIT: ${{ matrix.case.seconds }}
+          RSS: ${{ matrix.case.rss_gib }}
+        run: |
+          mkdir -p ../profiles
+          cp ../commit.txt ../profiles/
+          set +e
+          /usr/bin/time -v python3 -B -m tools.profile_memory --tables ../native-tabs --skel ../native/skel \
+            --library-cache ../native/кэш --scheme "$SCHEME" --out "../profiles/$CASE_ID" \
+            --seconds "$SECONDS_LIMIT" --rss-gib "$RSS" $ARGS 2> ../profiles/time.txt
+          echo "exit=$?" | tee ../profiles/exit.txt
+          tail -30 ../profiles/time.txt
+          exit 0
+      - name: Сверка
+        if: matrix.case.mode != 'table'
+        env:
+          EXPECT: ${{ matrix.case.expect_report_sha256 }}
+        run: |
+          python3 -B - <<'PY'
+          import json, os
+          from pathlib import Path
+          d = Path('profiles') / os.environ['CASE_ID']
+          stages = [json.loads(s) for s in (d / 'stages.jsonl').read_text().splitlines()] if (d / 'stages.jsonl').exists() else []
+          m = json.loads((d / 'measurement.json').read_text()) if (d / 'measurement.json').exists() else {}
+          out = dict(case=os.environ['CASE_ID'], complete=m.get('complete'), measurement=m,
+                     verified=[s for s in stages if s.get('stage') in ('enumeration:verified', 'run:end')],
+                     peaks=[(s.get('stage'), s.get('seconds'), s.get('memory_kib')) for s in stages])
+          want = os.environ.get('EXPECT')
+          got = next((s.get('report_sha256') for s in stages if s.get('stage') == 'run:end'), None)
+          out['expect_report_sha256'] = want or None
+          out['report_sha_ok'] = (got == want) if want else None
+          Path('profiles/verdict.json').write_text(json.dumps(out, ensure_ascii=False, indent=1))
+          print(json.dumps({k: out[k] for k in ('case', 'complete', 'report_sha_ok')}, ensure_ascii=False))
+          for s in out['verified']:
+              print(json.dumps(s, ensure_ascii=False)[:2000])
+          for p in out['peaks']:
+              print(p)
+          assert out['report_sha_ok'] is not False, 'report SHA не совпал с эталоном'
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: claude-${{ matrix.case.id }}
+          path: profiles/
+          retention-days: 90
+          compression-level: 6
+
+  summary:
+    needs: [plan, case]
+    if: always()
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: claude-*
+          path: parts
+      - name: Сводка в ветку results-<ветка>
+        run: |
+          python3 -B - <<'PY'
+          import json, glob, os
+          from pathlib import Path
+          out = {}
+          for d in sorted(glob.glob('parts/claude-*')):
+              case = d.split('claude-', 1)[1]
+              rec = {}
+              for name in ('verdict.json', 'commit.txt', 'exit.txt'):
+                  p = Path(d) / name
+                  if p.exists():
+                      rec[name] = json.loads(p.read_text()) if name.endswith('.json') else p.read_text().strip()
+              t = Path(d) / 'time.txt'
+              if t.exists():
+                  rec['time'] = [l.strip() for l in t.read_text(errors='replace').splitlines()
+                                 if any(k in l for k in ('Maximum resident', 'Elapsed (wall', 'User time', 'System time', 'Exit status'))]
+              for j in glob.glob(d + '/*/G-*.json'):
+                  r = json.loads(Path(j).read_text())
+                  rec.setdefault('schemes', []).append({k: r.get(k) for k in ('id', 'статус', 'секунд', 'память ГБ', 'память по этапам', 'перепись')})
+              for f in glob.glob(d + '/*/*.prof.txt'):
+                  rec['profile_head'] = Path(f).read_text(errors='replace').splitlines()[:110]
+              out[case] = rec
+          Path('pilot-summary.json').write_text(json.dumps(out, ensure_ascii=False, indent=1))
+          print(json.dumps({k: (v.get('verdict.json') or {}).get('report_sha_ok') for k, v in out.items()}, ensure_ascii=False))
+          PY
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e pilot-summary.json
+          git add pilot-summary.json
+          git commit -qm "Сводка ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"
