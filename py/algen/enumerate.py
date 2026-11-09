@@ -637,14 +637,24 @@ class Form:
         t = atom[2]
         if im is not None and im[0] not in ("obj", "sub"):  # гомоморфизм, семейство, действие, элемент…
             return f"{atom_name(atom)} у {self.where(r)}"
-        if im is None and isinstance(t, App) and t.op in ("center", "commutator", "quotient"):
-            # Не записан центр или коммутант: приписываем это группе, у которой его нет.
+        if im is None and isinstance(t, App) and (t.op in FIELD_OF or t.op == "quotient"):
+            # Не записана характеристическая подгруппа (центр, коммутант, Фраттини, кручение)
+            # или фактор по ней: приписываем это группе, у которой её нет. Для G/N сначала
+            # смотрим, есть ли образ N: иначе не записана сама N, а не фактор (прежде любой
+            # G/N подписывался «не записан центр»).
             g = t.args[0]
             gim = self._image(r, g)
             if gim is not None and gim[0] == "obj":
-                field = "коммутант" if t.op == "commutator" else "центр"
+                if t.op in FIELD_OF:
+                    field, what = FIELD_OF[t.op], None
+                else:
+                    n = t.args[1]
+                    known = isinstance(n, App) and n.op in FIELD_OF
+                    field = FIELD_OF[n.op] if known else None
+                    what = None if known and self._image(r, n) is None else f"фактор по {n}"
                 key = base_factor(self.lib, gim[1], None, field)
-                return f"не записан {field} у {self.lib.obj[key].get('имя', key)}"
+                name = self.lib.obj[key].get('имя', key)
+                return f"не записан {what} у {name}" if what else f"не записан {field} у {name}"
         if im is None:
             return f"{atom_name(atom)} у {self.where(r)}"
         p, lib = atom[1], self.lib
@@ -1096,6 +1106,10 @@ def _unknowns(o):
     """Сколько у записи не хватает: незаписанные свойства, центр, коммутант."""
     return (sum(o["свойства"].get(p) is None for p in GROUP_PROPS)
             + (o.get("центр") is None) + (o.get("коммутант") is None))
+
+
+# Поля записи группы библиотеки для характеристических подгрупп (подсказки «не записан …»).
+FIELD_OF = {"center": "центр", "commutator": "коммутант", "frattini": "фраттини", "torsion": "кручение"}
 
 
 def base_factor(lib, key, p, field=None):
