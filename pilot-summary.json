@@ -1,0 +1,2682 @@
+{
+ "v2-G1013": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 895.50",
+   "System time (seconds): 36.97",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 15:42.18",
+   "Maximum resident set size (kbytes): 12753536",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-10-13-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 886.6,
+    "память ГБ": [
+     7.17,
+     10.18
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.17,
+      0
+     ],
+     [
+      "перебор",
+      8.06,
+      14169074
+     ],
+     [
+      "минимальные",
+      8.06,
+      14169074
+     ],
+     [
+      "вердикты",
+      8.82,
+      20000
+     ],
+     [
+      "сжатие",
+      10.18,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 14169074,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "выводится": 215,
+      "неизвестно": 19781,
+      "опровергается": 4
+     },
+     "неизвестно на одном значении": 18049,
+     "сводится к вырожденности": 1,
+     "решающие атомы": [
+      [
+       "proper-subs-abelian(G)",
+       607
+      ],
+      [
+       "rec-pres-ctbl(G)",
+       605
+      ],
+      [
+       "exponent-3(profinite(G))",
+       504
+      ],
+      [
+       "dedekind(profinite(G))",
+       461
+      ],
+      [
+       "locally-nilpotent(G)",
+       441
+      ],
+      [
+       "proper-subs-cyclic(frattini(G))",
+       431
+      ],
+      [
+       "indecomposable(profinite(G))",
+       426
+      ],
+      [
+       "embeds(profinite(G), G)",
+       408
+      ],
+      [
+       "centerless(profinite(G))",
+       399
+      ],
+      [
+       "exponent-4(profinite(G))",
+       398
+      ],
+      [
+       "two-generated(profinite(G))",
+       398
+      ],
+      [
+       "perfect(profinite(G))",
+       396
+      ],
+      [
+       "co-hopfian(G)",
+       394
+      ],
+      [
+       "prime-orders(profinite(G))",
+       390
+      ],
+      [
+       "free-abelian(profinite(G))",
+       384
+      ],
+      [
+       "linear-c(profinite(G))",
+       380
+      ],
+      [
+       "proper-subs-cyclic(profinite(G))",
+       373
+      ],
+      [
+       "kaplansky(G)",
+       369
+      ],
+      [
+       "torsion-free(profinite(G))",
+       363
+      ],
+      [
+       "proper-subs-nilpotent(G)",
+       358
+      ],
+      [
+       "proper-subs-abelian(profinite(G))",
+       358
+      ],
+      [
+       "whitehead(profinite(G))",
+       358
+      ],
+      [
+       "cyclic(profinite(G))",
+       357
+      ],
+      [
+       "exponent-6(profinite(G))",
+       353
+      ],
+      [
+       "left-orderable(profinite(G))",
+       351
+      ],
+      [
+       "exponent-2(profinite(G))",
+       350
+      ],
+      [
+       "clt(profinite(G))",
+       346
+      ],
+      [
+       "two-primes(profinite(G))",
+       345
+      ],
+      [
+       "bi-orderable(profinite(G))",
+       345
+      ],
+      [
+       "finite(profinite(G))",
+       345
+      ],
+      [
+       "p-group(profinite(G))",
+       344
+      ],
+      [
+       "virtually-nilpotent(G)",
+       332
+      ],
+      [
+       "polycyclic(profinite(G))",
+       330
+      ],
+      [
+       "proper-subs-finite(frattini(G))",
+       329
+      ],
+      [
+       "comp-series(profinite(G))",
+       328
+      ],
+      [
+       "proper-subs-finite(profinite(G))",
+       324
+      ],
+      [
+       "odd-order(profinite(G))",
+       321
+      ],
+      [
+       "hopfian(profinite(G))",
+       321
+      ],
+      [
+       "comp-series(G)",
+       319
+      ],
+      [
+       "linear(profinite(G))",
+       315
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "v2-G1024461467": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 2527.45",
+   "System time (seconds): 36.66",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 42:46.53",
+   "Maximum resident set size (kbytes): 14530404",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-10-26-511-517-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 2475.3,
+    "память ГБ": [
+     7.16,
+     12.22
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.17,
+      0
+     ],
+     [
+      "перебор",
+      10.77,
+      172362706
+     ],
+     [
+      "минимальные",
+      10.77,
+      172362706
+     ],
+     [
+      "вердикты",
+      11.3,
+      20000
+     ],
+     [
+      "сжатие",
+      12.22,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 172362706,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "выводится": 549,
+      "неизвестно": 19451
+     },
+     "неизвестно на одном значении": 14141,
+     "сводится к вырожденности": 1,
+     "решающие атомы": [
+      [
+       "index-2(inn(quotient(G, frattini(G))))",
+       370
+      ],
+      [
+       "embeds(aut(quotient(G, frattini(G))), inn(quotient(G, frattini(G))))",
+       342
+      ],
+      [
+       "prime-index(inn(quotient(G, frattini(G))))",
+       334
+      ],
+      [
+       "iso(aut(quotient(G, frattini(G))), inn(quotient(G, frattini(G))))",
+       313
+      ],
+      [
+       "embeds(aut(quotient(G, frattini(G))), G)",
+       310
+      ],
+      [
+       "rec-pres-ctbl(G)",
+       297
+      ],
+      [
+       "embeds(quotient(G, frattini(G)), aut(quotient(G, frattini(G))))",
+       285
+      ],
+      [
+       "finite-index(inn(quotient(G, frattini(G))))",
+       281
+      ],
+      [
+       "maximal(inn(quotient(G, frattini(G))))",
+       278
+      ],
+      [
+       "two-generated(aut(quotient(G, frattini(G))))",
+       264
+      ],
+      [
+       "embeds(aut(quotient(G, frattini(G))), quotient(G, frattini(G)))",
+       243
+      ],
+      [
+       "iso(aut(quotient(G, frattini(G))), quotient(G, frattini(G)))",
+       230
+      ],
+      [
+       "whole(inn(quotient(G, frattini(G))))",
+       211
+      ],
+      [
+       "rec-pres(aut(quotient(G, frattini(G))))",
+       211
+      ],
+      [
+       "proper-subs-abelian(G)",
+       205
+      ],
+      [
+       "hyperbolic(G)",
+       196
+      ],
+      [
+       "perfect(aut(quotient(G, frattini(G))))",
+       195
+      ],
+      [
+       "comp-series(aut(quotient(G, frattini(G))))",
+       192
+      ],
+      [
+       "rec-pres-ctbl(aut(quotient(G, frattini(G))))",
+       190
+      ],
+      [
+       "fin-pres(aut(quotient(G, frattini(G))))",
+       189
+      ],
+      [
+       "two-generated(quotient(G, frattini(G)))",
+       182
+      ],
+      [
+       "word-problem(aut(quotient(G, frattini(G))))",
+       180
+      ],
+      [
+       "virtually-solvable(G)",
+       177
+      ],
+      [
+       "proper-subs-nilpotent(inn(quotient(G, frattini(G))))",
+       170
+      ],
+      [
+       "countable(aut(quotient(G, frattini(G))))",
+       163
+      ],
+      [
+       "hyperbolic(aut(quotient(G, frattini(G))))",
+       163
+      ],
+      [
+       "proper-subs-abelian(inn(quotient(G, frattini(G))))",
+       161
+      ],
+      [
+       "proper-subs-nilpotent(G)",
+       161
+      ],
+      [
+       "virtually-nilpotent(G)",
+       160
+      ],
+      [
+       "two-generated(G)",
+       159
+      ],
+      [
+       "complemented(frattini(G))",
+       159
+      ],
+      [
+       "no-finite-quotients(aut(quotient(G, frattini(G))))",
+       158
+      ],
+      [
+       "fin-gen(aut(quotient(G, frattini(G))))",
+       157
+      ],
+      [
+       "two-generated(inn(quotient(G, frattini(G))))",
+       156
+      ],
+      [
+       "locally-solvable(aut(quotient(G, frattini(G))))",
+       156
+      ],
+      [
+       "co-hopfian(G)",
+       153
+      ],
+      [
+       "rec-pres-ctbl(quotient(G, frattini(G)))",
+       152
+      ],
+      [
+       "indecomposable(aut(quotient(G, frattini(G))))",
+       152
+      ],
+      [
+       "co-hopfian(inn(quotient(G, frattini(G))))",
+       152
+      ],
+      [
+       "embeds(G, aut(quotient(G, frattini(G))))",
+       147
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "v2-G1102124": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 3331.60",
+   "System time (seconds): 51.75",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 56:53.28",
+   "Maximum resident set size (kbytes): 14751844",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-1-10-23-26-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 3330.3,
+    "память ГБ": [
+     7.17,
+     12.24
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.17,
+      0
+     ],
+     [
+      "перебор",
+      10.16,
+      177784431
+     ],
+     [
+      "минимальные",
+      10.16,
+      177784431
+     ],
+     [
+      "вердикты",
+      10.92,
+      20000
+     ],
+     [
+      "сжатие",
+      12.24,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 177784431,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "выводится": 771,
+      "неизвестно": 19229
+     },
+     "неизвестно на одном значении": 14534,
+     "сводится к вырожденности": 0,
+     "решающие атомы": [
+      [
+       "rec-pres-ctbl(G)",
+       342
+      ],
+      [
+       "proper-subs-cyclic(quotient(G, frattini(G)))",
+       330
+      ],
+      [
+       "embeds(quotient(G, frattini(G)), quotient(G, center(G)))",
+       330
+      ],
+      [
+       "proper-subs-abelian(quotient(G, center(G)))",
+       316
+      ],
+      [
+       "embeds(quotient(G, center(G)), quotient(G, frattini(G)))",
+       308
+      ],
+      [
+       "two-generated(quotient(G, frattini(G)))",
+       293
+      ],
+      [
+       "proper-subs-finite(quotient(G, frattini(G)))",
+       284
+      ],
+      [
+       "co-hopfian(quotient(G, frattini(G)))",
+       271
+      ],
+      [
+       "co-hopfian(quotient(G, center(G)))",
+       270
+      ],
+      [
+       "rec-pres-ctbl(quotient(G, center(G)))",
+       264
+      ],
+      [
+       "hyperbolic(quotient(G, frattini(G)))",
+       264
+      ],
+      [
+       "embeds(quotient(G, frattini(G)), center(G))",
+       256
+      ],
+      [
+       "iso(quotient(G, center(G)), quotient(G, frattini(G)))",
+       253
+      ],
+      [
+       "proper-subs-nilpotent(quotient(G, center(G)))",
+       247
+      ],
+      [
+       "embeds(quotient(G, frattini(G)), frattini(G))",
+       242
+      ],
+      [
+       "embeds(quotient(G, frattini(G)), G)",
+       239
+      ],
+      [
+       "iso(center(G), quotient(G, frattini(G)))",
+       232
+      ],
+      [
+       "rec-pres-ctbl(quotient(G, frattini(G)))",
+       211
+      ],
+      [
+       "proper-subs-cyclic(quotient(G, center(G)))",
+       209
+      ],
+      [
+       "embeds(frattini(G), quotient(G, frattini(G)))",
+       203
+      ],
+      [
+       "indecomposable(quotient(G, frattini(G)))",
+       203
+      ],
+      [
+       "embeds(center(G), quotient(G, frattini(G)))",
+       201
+      ],
+      [
+       "locally-nilpotent(quotient(G, center(G)))",
+       199
+      ],
+      [
+       "two-generated(quotient(G, center(G)))",
+       198
+      ],
+      [
+       "virtually-nilpotent(quotient(G, center(G)))",
+       198
+      ],
+      [
+       "prime-orders(quotient(G, frattini(G)))",
+       198
+      ],
+      [
+       "polynomial-growth(quotient(G, frattini(G)))",
+       181
+      ],
+      [
+       "co-hopfian(G)",
+       177
+      ],
+      [
+       "embeds(center(G), quotient(G, center(G)))",
+       175
+      ],
+      [
+       "proper-subs-finite(quotient(G, center(G)))",
+       169
+      ],
+      [
+       "comp-series(quotient(G, frattini(G)))",
+       168
+      ],
+      [
+       "proper-subs-abelian(quotient(G, frattini(G)))",
+       166
+      ],
+      [
+       "comp-series(quotient(G, center(G)))",
+       163
+      ],
+      [
+       "odd-order(quotient(G, frattini(G)))",
+       160
+      ],
+      [
+       "fin-pres(quotient(G, frattini(G)))",
+       160
+      ],
+      [
+       "proper-subs-nilpotent(quotient(G, frattini(G)))",
+       158
+      ],
+      [
+       "hyperbolic(quotient(G, center(G)))",
+       156
+      ],
+      [
+       "kaplansky(quotient(G, center(G)))",
+       154
+      ],
+      [
+       "property-t(quotient(G, frattini(G)))",
+       153
+      ],
+      [
+       "exponent-6(quotient(G, frattini(G)))",
+       153
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "v2-G1420387": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1047.45",
+   "System time (seconds): 54.24",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 18:23.79",
+   "Maximum resident set size (kbytes): 12687324",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-14-22-437-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 1018.4,
+    "память ГБ": [
+     7.17,
+     10.18
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.17,
+      0
+     ],
+     [
+      "перебор",
+      7.9,
+      6947901
+     ],
+     [
+      "минимальные",
+      7.9,
+      6947901
+     ],
+     [
+      "вердикты",
+      8.7,
+      20000
+     ],
+     [
+      "сжатие",
+      10.18,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 6947901,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "неизвестно": 19852,
+      "выводится": 148
+     },
+     "неизвестно на одном значении": 14610,
+     "сводится к вырожденности": 1,
+     "решающие атомы": [
+      [
+       "rec-pres-ctbl(pullback(cayley(G), cayley(G)))",
+       818
+      ],
+      [
+       "co-hopfian(pullback(cayley(G), cayley(G)))",
+       811
+      ],
+      [
+       "proper-subs-cyclic(pullback(cayley(G), cayley(G)))",
+       766
+      ],
+      [
+       "rec-pres-ctbl(G)",
+       742
+      ],
+      [
+       "embeds(pullback(cayley(G), cayley(G)), sym(G))",
+       691
+      ],
+      [
+       "hyperbolic(pullback(cayley(G), cayley(G)))",
+       657
+      ],
+      [
+       "co-hopfian(G)",
+       622
+      ],
+      [
+       "proper-subs-cyclic(G)",
+       620
+      ],
+      [
+       "proper-subs-abelian(pullback(cayley(G), cayley(G)))",
+       619
+      ],
+      [
+       "proper-subs-finite(pullback(cayley(G), cayley(G)))",
+       534
+      ],
+      [
+       "embeds(G, sym(G))",
+       530
+      ],
+      [
+       "hyperbolic(G)",
+       496
+      ],
+      [
+       "proper-subs-abelian(G)",
+       488
+      ],
+      [
+       "no-finite-quotients(pullback(cayley(G), cayley(G)))",
+       470
+      ],
+      [
+       "prime-orders(pullback(cayley(G), cayley(G)))",
+       385
+      ],
+      [
+       "proper-subs-finite(G)",
+       381
+      ],
+      [
+       "proper-subs-nilpotent(pullback(cayley(G), cayley(G)))",
+       378
+      ],
+      [
+       "no-finite-quotients(G)",
+       357
+      ],
+      [
+       "comp-series(pullback(cayley(G), cayley(G)))",
+       343
+      ],
+      [
+       "fin-pres(pullback(cayley(G), cayley(G)))",
+       331
+      ],
+      [
+       "two-generated(pullback(cayley(G), cayley(G)))",
+       319
+      ],
+      [
+       "word-problem(pullback(cayley(G), cayley(G)))",
+       282
+      ],
+      [
+       "prime-orders(G)",
+       278
+      ],
+      [
+       "proper-subs-nilpotent(G)",
+       269
+      ],
+      [
+       "rec-pres(pullback(cayley(G), cayley(G)))",
+       256
+      ],
+      [
+       "residually-nilpotent(pullback(cayley(G), cayley(G)))",
+       255
+      ],
+      [
+       "virtually-nilpotent(pullback(cayley(G), cayley(G)))",
+       252
+      ],
+      [
+       "virtually-solvable(pullback(cayley(G), cayley(G)))",
+       241
+      ],
+      [
+       "two-generated(G)",
+       240
+      ],
+      [
+       "fin-pres(G)",
+       222
+      ],
+      [
+       "word-problem(G)",
+       220
+      ],
+      [
+       "comp-series(G)",
+       220
+      ],
+      [
+       "virtually-solvable(G)",
+       204
+      ],
+      [
+       "virtually-nilpotent(G)",
+       197
+      ],
+      [
+       "rec-pres(G)",
+       194
+      ],
+      [
+       "perfect(pullback(cayley(G), cayley(G)))",
+       187
+      ],
+      [
+       "residually-nilpotent(G)",
+       181
+      ],
+      [
+       "property-t(pullback(cayley(G), cayley(G)))",
+       172
+      ],
+      [
+       "locally-nilpotent(pullback(cayley(G), cayley(G)))",
+       168
+      ],
+      [
+       "locally-solvable(pullback(cayley(G), cayley(G)))",
+       156
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "v2-G1420390": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 709.12",
+   "System time (seconds): 50.54",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 12:39.84",
+   "Maximum resident set size (kbytes): 12512096",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-14-22-440-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 677.6,
+    "память ГБ": [
+     7.16,
+     9.97
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.16,
+      0
+     ],
+     [
+      "перебор",
+      7.81,
+      721011
+     ],
+     [
+      "минимальные",
+      7.81,
+      721011
+     ],
+     [
+      "вердикты",
+      8.54,
+      20000
+     ],
+     [
+      "сжатие",
+      9.97,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 721011,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "неизвестно": 19955,
+      "выводится": 45
+     },
+     "неизвестно на одном значении": 11239,
+     "сводится к вырожденности": 0,
+     "решающие атомы": [
+      [
+       "embeds(G, sym(G))",
+       1044
+      ],
+      [
+       "no-finite-quotients(G)",
+       575
+      ],
+      [
+       "rec-pres-ctbl(G)",
+       566
+      ],
+      [
+       "co-hopfian(G)",
+       537
+      ],
+      [
+       "proper-subs-cyclic(G)",
+       525
+      ],
+      [
+       "two-generated(pushout(cayley(G), cayley(G)))",
+       339
+      ],
+      [
+       "proper-subs-abelian(G)",
+       337
+      ],
+      [
+       "residually-nilpotent(pushout(cayley(G), cayley(G)))",
+       297
+      ],
+      [
+       "comp-series(G)",
+       295
+      ],
+      [
+       "proper-subs-finite(G)",
+       288
+      ],
+      [
+       "fin-gen(pushout(cayley(G), cayley(G)))",
+       274
+      ],
+      [
+       "hyperbolic(G)",
+       274
+      ],
+      [
+       "word-problem(pushout(cayley(G), cayley(G)))",
+       259
+      ],
+      [
+       "two-generated(G)",
+       257
+      ],
+      [
+       "countable(pushout(cayley(G), cayley(G)))",
+       252
+      ],
+      [
+       "virtually-nilpotent(G)",
+       252
+      ],
+      [
+       "rec-pres(pushout(cayley(G), cayley(G)))",
+       251
+      ],
+      [
+       "hyperbolic(pushout(cayley(G), cayley(G)))",
+       251
+      ],
+      [
+       "fin-pres(pushout(cayley(G), cayley(G)))",
+       246
+      ],
+      [
+       "residually-finite(pushout(cayley(G), cayley(G)))",
+       245
+      ],
+      [
+       "rec-pres-ctbl(pushout(cayley(G), cayley(G)))",
+       239
+      ],
+      [
+       "virtually-solvable(G)",
+       239
+      ],
+      [
+       "proper-subs-nilpotent(G)",
+       233
+      ],
+      [
+       "contains-free(G)",
+       225
+      ],
+      [
+       "fin-pres(G)",
+       224
+      ],
+      [
+       "rec-pres(G)",
+       216
+      ],
+      [
+       "bi-orderable(G)",
+       214
+      ],
+      [
+       "linear(pushout(cayley(G), cayley(G)))",
+       199
+      ],
+      [
+       "linear-c(pushout(cayley(G), cayley(G)))",
+       199
+      ],
+      [
+       "prime-orders(G)",
+       193
+      ],
+      [
+       "hopfian(pushout(cayley(G), cayley(G)))",
+       189
+      ],
+      [
+       "property-t(G)",
+       189
+      ],
+      [
+       "divisible(G)",
+       186
+      ],
+      [
+       "word-problem(G)",
+       180
+      ],
+      [
+       "perfect(G)",
+       161
+      ],
+      [
+       "locally-solvable(G)",
+       148
+      ],
+      [
+       "amenable(G)",
+       134
+      ],
+      [
+       "residually-nilpotent(G)",
+       128
+      ],
+      [
+       "virtually-nilpotent(pushout(cayley(G), cayley(G)))",
+       109
+      ],
+      [
+       "hopfian(G)",
+       107
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "v2-G2102224": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 3320.10",
+   "System time (seconds): 54.48",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 56:23.67",
+   "Maximum resident set size (kbytes): 15045100",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-2-10-24-26-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 3299.9,
+    "память ГБ": [
+     7.17,
+     12.77
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.17,
+      0
+     ],
+     [
+      "перебор",
+      11.21,
+      208077334
+     ],
+     [
+      "минимальные",
+      11.21,
+      208077334
+     ],
+     [
+      "вердикты",
+      11.98,
+      20000
+     ],
+     [
+      "сжатие",
+      12.59,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 208077334,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "выводится": 751,
+      "неизвестно": 19246,
+      "опровергается": 3
+     },
+     "неизвестно на одном значении": 14319,
+     "сводится к вырожденности": 0,
+     "решающие атомы": [
+      [
+       "embeds(quotient(G, commutator(G)), quotient(G, frattini(G)))",
+       415
+      ],
+      [
+       "rec-pres-ctbl(quotient(G, commutator(G)))",
+       357
+      ],
+      [
+       "embeds(quotient(G, frattini(G)), quotient(G, commutator(G)))",
+       318
+      ],
+      [
+       "embeds(quotient(G, frattini(G)), commutator(G))",
+       300
+      ],
+      [
+       "two-generated(quotient(G, frattini(G)))",
+       282
+      ],
+      [
+       "proper-subs-cyclic(quotient(G, commutator(G)))",
+       278
+      ],
+      [
+       "proper-subs-cyclic(quotient(G, frattini(G)))",
+       271
+      ],
+      [
+       "rec-pres-ctbl(G)",
+       269
+      ],
+      [
+       "proper-subs-finite(quotient(G, commutator(G)))",
+       262
+      ],
+      [
+       "iso(commutator(G), quotient(G, frattini(G)))",
+       260
+      ],
+      [
+       "embeds(commutator(G), quotient(G, frattini(G)))",
+       247
+      ],
+      [
+       "proper-subs-finite(quotient(G, frattini(G)))",
+       245
+      ],
+      [
+       "hyperbolic(quotient(G, frattini(G)))",
+       241
+      ],
+      [
+       "co-hopfian(quotient(G, frattini(G)))",
+       239
+      ],
+      [
+       "embeds(frattini(G), quotient(G, frattini(G)))",
+       229
+      ],
+      [
+       "proper-subs-abelian(quotient(G, frattini(G)))",
+       229
+      ],
+      [
+       "embeds(quotient(G, commutator(G)), frattini(G))",
+       211
+      ],
+      [
+       "proper-subs-nilpotent(quotient(G, frattini(G)))",
+       210
+      ],
+      [
+       "rec-pres-ctbl(quotient(G, frattini(G)))",
+       207
+      ],
+      [
+       "embeds(quotient(G, commutator(G)), G)",
+       206
+      ],
+      [
+       "exponent-6(quotient(G, frattini(G)))",
+       198
+      ],
+      [
+       "embeds(quotient(G, commutator(G)), commutator(G))",
+       197
+      ],
+      [
+       "prime-orders(quotient(G, frattini(G)))",
+       195
+      ],
+      [
+       "embeds(quotient(G, frattini(G)), frattini(G))",
+       186
+      ],
+      [
+       "polynomial-growth(quotient(G, frattini(G)))",
+       186
+      ],
+      [
+       "iso(quotient(G, commutator(G)), quotient(G, frattini(G)))",
+       183
+      ],
+      [
+       "embeds(quotient(G, frattini(G)), G)",
+       177
+      ],
+      [
+       "no-finite-quotients(quotient(G, frattini(G)))",
+       165
+      ],
+      [
+       "whitehead(quotient(G, commutator(G)))",
+       162
+      ],
+      [
+       "complemented(commutator(G))",
+       162
+      ],
+      [
+       "property-t(quotient(G, frattini(G)))",
+       161
+      ],
+      [
+       "locally-nilpotent(quotient(G, frattini(G)))",
+       160
+      ],
+      [
+       "comp-series(quotient(G, frattini(G)))",
+       156
+      ],
+      [
+       "rec-pres-ctbl(commutator(G))",
+       156
+      ],
+      [
+       "indecomposable(quotient(G, frattini(G)))",
+       156
+      ],
+      [
+       "virtually-nilpotent(quotient(G, frattini(G)))",
+       154
+      ],
+      [
+       "kaplansky(quotient(G, frattini(G)))",
+       154
+      ],
+      [
+       "proper-subs-abelian(G)",
+       153
+      ],
+      [
+       "bi-orderable(quotient(G, frattini(G)))",
+       153
+      ],
+      [
+       "hyperbolic(quotient(G, commutator(G)))",
+       152
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "v2-G26780": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1909.58",
+   "System time (seconds): 41.28",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 32:31.08",
+   "Maximum resident set size (kbytes): 13433124",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-2-69-82-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 1870.4,
+    "память ГБ": [
+     7.17,
+     10.93
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.17,
+      0
+     ],
+     [
+      "перебор",
+      9.05,
+      69283314
+     ],
+     [
+      "минимальные",
+      9.05,
+      69283314
+     ],
+     [
+      "вердикты",
+      9.6,
+      20000
+     ],
+     [
+      "сжатие",
+      10.92,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 69283314,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "выводится": 668,
+      "неизвестно": 19332
+     },
+     "неизвестно на одном значении": 17373,
+     "сводится к вырожденности": 0,
+     "решающие атомы": [
+      [
+       "complemented(commutator(G))",
+       830
+      ],
+      [
+       "co-hopfian(G)",
+       740
+      ],
+      [
+       "embeds(aut(commutator(G)), G)",
+       594
+      ],
+      [
+       "embeds(G, aut(commutator(G)))",
+       568
+      ],
+      [
+       "no-finite-quotients(G)",
+       504
+      ],
+      [
+       "complemented(inn(commutator(G)))",
+       425
+      ],
+      [
+       "prime-index(inn(commutator(G)))",
+       377
+      ],
+      [
+       "rec-pres-ctbl(G)",
+       375
+      ],
+      [
+       "maximal(inn(commutator(G)))",
+       355
+      ],
+      [
+       "index-2(inn(commutator(G)))",
+       353
+      ],
+      [
+       "perfect(aut(commutator(G)))",
+       335
+      ],
+      [
+       "embeds(commutator(G), aut(commutator(G)))",
+       333
+      ],
+      [
+       "embeds(aut(commutator(G)), commutator(G))",
+       332
+      ],
+      [
+       "two-generated(inn(commutator(G)))",
+       327
+      ],
+      [
+       "two-generated(aut(commutator(G)))",
+       320
+      ],
+      [
+       "embeds(aut(commutator(G)), inn(commutator(G)))",
+       320
+      ],
+      [
+       "iso(aut(commutator(G)), inn(commutator(G)))",
+       316
+      ],
+      [
+       "proper-subs-nilpotent(G)",
+       314
+      ],
+      [
+       "proper-subs-nilpotent(inn(commutator(G)))",
+       313
+      ],
+      [
+       "finite-index(inn(commutator(G)))",
+       307
+      ],
+      [
+       "proper-subs-abelian(inn(commutator(G)))",
+       302
+      ],
+      [
+       "whole(inn(commutator(G)))",
+       301
+      ],
+      [
+       "co-hopfian(commutator(G))",
+       287
+      ],
+      [
+       "iso(G, aut(commutator(G)))",
+       282
+      ],
+      [
+       "linear-c(aut(commutator(G)))",
+       278
+      ],
+      [
+       "linear(aut(commutator(G)))",
+       268
+      ],
+      [
+       "indecomposable(aut(commutator(G)))",
+       264
+      ],
+      [
+       "rec-pres-ctbl(commutator(G))",
+       264
+      ],
+      [
+       "co-hopfian(inn(commutator(G)))",
+       262
+      ],
+      [
+       "countable(aut(commutator(G)))",
+       256
+      ],
+      [
+       "locally-nilpotent(G)",
+       236
+      ],
+      [
+       "comp-series(aut(commutator(G)))",
+       236
+      ],
+      [
+       "proper-subs-cyclic(inn(commutator(G)))",
+       234
+      ],
+      [
+       "fully-invariant(inn(commutator(G)))",
+       225
+      ],
+      [
+       "proper-subs-abelian(G)",
+       225
+      ],
+      [
+       "rec-pres-ctbl(inn(commutator(G)))",
+       224
+      ],
+      [
+       "hyperbolic(G)",
+       213
+      ],
+      [
+       "iso(aut(commutator(G)), commutator(G))",
+       212
+      ],
+      [
+       "virtually-nilpotent(G)",
+       210
+      ],
+      [
+       "characteristic(inn(commutator(G)))",
+       208
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "v2-G417": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 685.06",
+   "System time (seconds): 21.71",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 11:49.31",
+   "Maximum resident set size (kbytes): 12328908",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-4-17-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 654.8,
+    "память ГБ": [
+     7.17,
+     9.71
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.17,
+      0
+     ],
+     [
+      "перебор",
+      7.76,
+      20627
+     ],
+     [
+      "минимальные",
+      7.76,
+      20627
+     ],
+     [
+      "вердикты",
+      8.32,
+      20000
+     ],
+     [
+      "сжатие",
+      9.71,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 20627,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "выводится": 3817,
+      "неизвестно": 16183
+     },
+     "неизвестно на одном значении": 11767,
+     "сводится к вырожденности": 435,
+     "решающие атомы": [
+      [
+       "perfect(aut(G))",
+       1274
+      ],
+      [
+       "iso(G, aut(G))",
+       1212
+      ],
+      [
+       "embeds(G, aut(G))",
+       1191
+      ],
+      [
+       "embeds(aut(G), G)",
+       784
+      ],
+      [
+       "comp-series(aut(G))",
+       416
+      ],
+      [
+       "indecomposable(aut(G))",
+       311
+      ],
+      [
+       "centerless(aut(G))",
+       286
+      ],
+      [
+       "simple(aut(G))",
+       285
+      ],
+      [
+       "no-finite-quotients(aut(G))",
+       273
+      ],
+      [
+       "residually-nilpotent(aut(G))",
+       242
+      ],
+      [
+       "two-generated(aut(G))",
+       236
+      ],
+      [
+       "exponent-3(G)",
+       225
+      ],
+      [
+       "contains-free(aut(G))",
+       216
+      ],
+      [
+       "divisible(aut(G))",
+       215
+      ],
+      [
+       "kaplansky(G)",
+       214
+      ],
+      [
+       "hyperbolic(aut(G))",
+       213
+      ],
+      [
+       "proper-subs-abelian(G)",
+       207
+      ],
+      [
+       "proper-subs-nilpotent(G)",
+       205
+      ],
+      [
+       "co-hopfian(aut(G))",
+       200
+      ],
+      [
+       "exponent-6(G)",
+       200
+      ],
+      [
+       "proper-subs-cyclic(G)",
+       200
+      ],
+      [
+       "proper-subs-nilpotent(aut(G))",
+       189
+      ],
+      [
+       "proper-subs-abelian(aut(G))",
+       181
+      ],
+      [
+       "proper-subs-cyclic(aut(G))",
+       168
+      ],
+      [
+       "property-t(aut(G))",
+       150
+      ],
+      [
+       "proper-subs-finite(aut(G))",
+       147
+      ],
+      [
+       "word-problem(aut(G))",
+       145
+      ],
+      [
+       "countable(aut(G))",
+       134
+      ],
+      [
+       "whitehead(G)",
+       130
+      ],
+      [
+       "hopfian(aut(G))",
+       130
+      ],
+      [
+       "torsion-free(aut(G))",
+       125
+      ],
+      [
+       "locally-nilpotent(aut(G))",
+       125
+      ],
+      [
+       "fin-pres(aut(G))",
+       123
+      ],
+      [
+       "rec-pres-ctbl(aut(G))",
+       121
+      ],
+      [
+       "rec-pres(aut(G))",
+       120
+      ],
+      [
+       "locally-nilpotent(G)",
+       120
+      ],
+      [
+       "prime-orders(aut(G))",
+       117
+      ],
+      [
+       "locally-solvable(aut(G))",
+       115
+      ],
+      [
+       "two-generated(G)",
+       113
+      ],
+      [
+       "exponent-6(aut(G))",
+       110
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "v2-G45102426": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 2552.40",
+   "System time (seconds): 33.96",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 43:54.08",
+   "Maximum resident set size (kbytes): 15475660",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-4-5-10-26-28-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 2576.9,
+    "память ГБ": [
+     7.17,
+     14.19
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.18,
+      0
+     ],
+     [
+      "перебор",
+      14.08,
+      348812201
+     ],
+     [
+      "минимальные",
+      14.08,
+      348812201
+     ],
+     [
+      "вердикты",
+      14.67,
+      20000
+     ],
+     [
+      "сжатие",
+      13.37,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 348812201,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "выводится": 198,
+      "неизвестно": 19795,
+      "опровергается": 7
+     },
+     "неизвестно на одном значении": 17594,
+     "сводится к вырожденности": 6,
+     "решающие атомы": [
+      [
+       "embeds(quotient(G, frattini(G)), quotient(aut(G), inn(G)))",
+       746
+      ],
+      [
+       "embeds(G, quotient(aut(G), inn(G)))",
+       319
+      ],
+      [
+       "embeds(quotient(aut(G), inn(G)), quotient(G, frattini(G)))",
+       316
+      ],
+      [
+       "indecomposable(quotient(aut(G), inn(G)))",
+       310
+      ],
+      [
+       "hyperbolic(quotient(G, frattini(G)))",
+       275
+      ],
+      [
+       "fin-pres(quotient(aut(G), inn(G)))",
+       263
+      ],
+      [
+       "comp-series(quotient(G, frattini(G)))",
+       251
+      ],
+      [
+       "bi-orderable(quotient(aut(G), inn(G)))",
+       251
+      ],
+      [
+       "rec-pres-ctbl(quotient(aut(G), inn(G)))",
+       242
+      ],
+      [
+       "residually-nilpotent(quotient(aut(G), inn(G)))",
+       240
+      ],
+      [
+       "left-orderable(quotient(aut(G), inn(G)))",
+       239
+      ],
+      [
+       "proper-subs-cyclic(quotient(aut(G), inn(G)))",
+       233
+      ],
+      [
+       "proper-subs-abelian(quotient(aut(G), inn(G)))",
+       233
+      ],
+      [
+       "virtually-solvable(quotient(aut(G), inn(G)))",
+       231
+      ],
+      [
+       "kaplansky(quotient(aut(G), inn(G)))",
+       231
+      ],
+      [
+       "centerless(quotient(aut(G), inn(G)))",
+       230
+      ],
+      [
+       "dedekind(quotient(aut(G), inn(G)))",
+       229
+      ],
+      [
+       "two-generated(quotient(G, frattini(G)))",
+       228
+      ],
+      [
+       "nilpotent(quotient(aut(G), inn(G)))",
+       227
+      ],
+      [
+       "virtually-nilpotent(quotient(aut(G), inn(G)))",
+       226
+      ],
+      [
+       "prime-orders(quotient(aut(G), inn(G)))",
+       226
+      ],
+      [
+       "embeds(quotient(aut(G), inn(G)), G)",
+       226
+      ],
+      [
+       "amenable(quotient(aut(G), inn(G)))",
+       225
+      ],
+      [
+       "two-generated(quotient(aut(G), inn(G)))",
+       225
+      ],
+      [
+       "solvable(quotient(aut(G), inn(G)))",
+       224
+      ],
+      [
+       "comp-series(quotient(aut(G), inn(G)))",
+       223
+      ],
+      [
+       "exponent-4(quotient(aut(G), inn(G)))",
+       222
+      ],
+      [
+       "bounded-exponent(quotient(aut(G), inn(G)))",
+       222
+      ],
+      [
+       "property-t(quotient(aut(G), inn(G)))",
+       222
+      ],
+      [
+       "metabelian(quotient(aut(G), inn(G)))",
+       222
+      ],
+      [
+       "torsion-free(quotient(aut(G), inn(G)))",
+       221
+      ],
+      [
+       "exponent-6(quotient(aut(G), inn(G)))",
+       216
+      ],
+      [
+       "cyclic(quotient(aut(G), inn(G)))",
+       215
+      ],
+      [
+       "proper-subs-cyclic(quotient(G, frattini(G)))",
+       215
+      ],
+      [
+       "proper-subs-nilpotent(quotient(aut(G), inn(G)))",
+       215
+      ],
+      [
+       "rec-pres(quotient(aut(G), inn(G)))",
+       214
+      ],
+      [
+       "abelian(quotient(aut(G), inn(G)))",
+       214
+      ],
+      [
+       "periodic(quotient(aut(G), inn(G)))",
+       213
+      ],
+      [
+       "class-2(quotient(aut(G), inn(G)))",
+       213
+      ],
+      [
+       "p-group(quotient(aut(G), inn(G)))",
+       209
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "v2-G45109": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 1721.32",
+   "System time (seconds): 43.05",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 29:27.60",
+   "Maximum resident set size (kbytes): 13056520",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-4-5-111-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 1694.1,
+    "память ГБ": [
+     7.17,
+     10.55
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.17,
+      0
+     ],
+     [
+      "перебор",
+      8.8,
+      37786301
+     ],
+     [
+      "минимальные",
+      8.8,
+      37786301
+     ],
+     [
+      "вердикты",
+      9.29,
+      20000
+     ],
+     [
+      "сжатие",
+      10.55,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 37786301,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "выводится": 415,
+      "неизвестно": 19584,
+      "опровергается": 1
+     },
+     "неизвестно на одном значении": 18479,
+     "сводится к вырожденности": 1,
+     "решающие атомы": [
+      [
+       "embeds(prod(inn(G), inn(G)), G)",
+       935
+      ],
+      [
+       "embeds(aut(G), prod(inn(G), inn(G)))",
+       770
+      ],
+      [
+       "embeds(prod(inn(G), inn(G)), aut(G))",
+       662
+      ],
+      [
+       "proper-subs-abelian(prod(inn(G), inn(G)))",
+       523
+      ],
+      [
+       "proper-subs-nilpotent(prod(inn(G), inn(G)))",
+       504
+      ],
+      [
+       "embeds(aut(G), G)",
+       482
+      ],
+      [
+       "iso(G, aut(G))",
+       471
+      ],
+      [
+       "embeds(prod(inn(G), inn(G)), inn(G))",
+       466
+      ],
+      [
+       "co-hopfian(G)",
+       451
+      ],
+      [
+       "two-generated(prod(inn(G), inn(G)))",
+       449
+      ],
+      [
+       "embeds(G, aut(G))",
+       429
+      ],
+      [
+       "co-hopfian(prod(inn(G), inn(G)))",
+       417
+      ],
+      [
+       "no-finite-quotients(prod(inn(G), inn(G)))",
+       391
+      ],
+      [
+       "locally-solvable(aut(G))",
+       378
+      ],
+      [
+       "linear(aut(G))",
+       363
+      ],
+      [
+       "finite-index(inn(G))",
+       360
+      ],
+      [
+       "iso(aut(G), prod(inn(G), inn(G)))",
+       360
+      ],
+      [
+       "rec-pres-ctbl(prod(inn(G), inn(G)))",
+       360
+      ],
+      [
+       "perfect(aut(G))",
+       359
+      ],
+      [
+       "virtually-nilpotent(prod(inn(G), inn(G)))",
+       348
+      ],
+      [
+       "prime-orders(prod(inn(G), inn(G)))",
+       345
+      ],
+      [
+       "two-generated(aut(G))",
+       338
+      ],
+      [
+       "exponent-6(prod(inn(G), inn(G)))",
+       320
+      ],
+      [
+       "embeds(aut(G), inn(G))",
+       318
+      ],
+      [
+       "locally-nilpotent(prod(inn(G), inn(G)))",
+       317
+      ],
+      [
+       "embeds(G, prod(inn(G), inn(G)))",
+       316
+      ],
+      [
+       "indecomposable(aut(G))",
+       316
+      ],
+      [
+       "proper-subs-finite(prod(inn(G), inn(G)))",
+       312
+      ],
+      [
+       "rec-pres-ctbl(G)",
+       309
+      ],
+      [
+       "centerless(aut(G))",
+       306
+      ],
+      [
+       "linear-c(aut(G))",
+       303
+      ],
+      [
+       "solvable(aut(G))",
+       301
+      ],
+      [
+       "amenable(aut(G))",
+       291
+      ],
+      [
+       "comp-series(prod(inn(G), inn(G)))",
+       288
+      ],
+      [
+       "virtually-solvable(aut(G))",
+       288
+      ],
+      [
+       "iso(aut(G), inn(G))",
+       285
+      ],
+      [
+       "proper-subs-cyclic(prod(inn(G), inn(G)))",
+       278
+      ],
+      [
+       "fully-invariant(inn(G))",
+       276
+      ],
+      [
+       "prime-index(inn(G))",
+       275
+      ],
+      [
+       "complemented(inn(G))",
+       275
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "v2-G4526445700": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 2839.93",
+   "System time (seconds): 40.13",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 48:02.47",
+   "Maximum resident set size (kbytes): 14929148",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-4-5-28-495-762-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 2810.6,
+    "память ГБ": [
+     7.16,
+     12.62
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.17,
+      0
+     ],
+     [
+      "перебор",
+      11.33,
+      205509771
+     ],
+     [
+      "минимальные",
+      11.33,
+      205509771
+     ],
+     [
+      "вердикты",
+      11.85,
+      20000
+     ],
+     [
+      "сжатие",
+      12.55,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 205509771,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "выводится": 192,
+      "неизвестно": 19808
+     },
+     "неизвестно на одном значении": 14577,
+     "сводится к вырожденности": 0,
+     "решающие атомы": [
+      [
+       "embeds(quotient(aut(G), inn(G)), quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       317
+      ],
+      [
+       "embeds(center(quotient(aut(G), inn(G))), quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       285
+      ],
+      [
+       "rec-pres-ctbl(aut(G))",
+       267
+      ],
+      [
+       "two-generated(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       246
+      ],
+      [
+       "hyperbolic(G)",
+       243
+      ],
+      [
+       "rec-pres-ctbl(G)",
+       241
+      ],
+      [
+       "embeds(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))), aut(G))",
+       240
+      ],
+      [
+       "embeds(G, aut(G))",
+       234
+      ],
+      [
+       "two-generated(aut(G))",
+       222
+      ],
+      [
+       "indecomposable(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       201
+      ],
+      [
+       "embeds(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))), quotient(aut(G), inn(G)))",
+       190
+      ],
+      [
+       "rec-pres-ctbl(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       183
+      ],
+      [
+       "linear-c(aut(G))",
+       183
+      ],
+      [
+       "divisible(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       181
+      ],
+      [
+       "fin-pres(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       180
+      ],
+      [
+       "perfect(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       180
+      ],
+      [
+       "locally-solvable(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       179
+      ],
+      [
+       "iso(quotient(aut(G), inn(G)), quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       179
+      ],
+      [
+       "fin-pres(G)",
+       177
+      ],
+      [
+       "iso(aut(G), quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       176
+      ],
+      [
+       "no-finite-quotients(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       175
+      ],
+      [
+       "embeds(G, quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       174
+      ],
+      [
+       "rec-pres(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       174
+      ],
+      [
+       "word-problem(G)",
+       173
+      ],
+      [
+       "residually-nilpotent(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       171
+      ],
+      [
+       "two-generated(G)",
+       170
+      ],
+      [
+       "fin-pres(aut(G))",
+       169
+      ],
+      [
+       "prime-orders(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       167
+      ],
+      [
+       "rec-pres(aut(G))",
+       166
+      ],
+      [
+       "proper-subs-nilpotent(inn(G))",
+       164
+      ],
+      [
+       "hyperbolic(aut(G))",
+       161
+      ],
+      [
+       "property-t(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       159
+      ],
+      [
+       "embeds(G, quotient(aut(G), inn(G)))",
+       157
+      ],
+      [
+       "hopfian(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       156
+      ],
+      [
+       "embeds(aut(G), quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       156
+      ],
+      [
+       "locally-nilpotent(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       156
+      ],
+      [
+       "contains-free(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       153
+      ],
+      [
+       "torsion-free(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       151
+      ],
+      [
+       "two-generated(inn(G))",
+       151
+      ],
+      [
+       "proper-subs-cyclic(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))))",
+       148
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "v2-G6209": {
+  "commit.txt": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 617.95",
+   "System time (seconds): 34.68",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 10:52.79",
+   "Maximum resident set size (kbytes): 12354928",
+   "Exit status: 0"
+  ],
+  "schemes": [
+   {
+    "id": "G-6-211-767-769-770-771",
+    "статус": "перепись",
+    "секунд": 565.4,
+    "память ГБ": [
+     7.17,
+     9.79
+    ],
+    "память по этапам": [
+     [
+      "начало",
+      7.17,
+      0
+     ],
+     [
+      "перебор",
+      7.79,
+      354940
+     ],
+     [
+      "минимальные",
+      7.79,
+      354940
+     ],
+     [
+      "вердикты",
+      8.32,
+      20000
+     ],
+     [
+      "сжатие",
+      9.78,
+      20000
+     ]
+    ],
+    "перепись": {
+     "минимальных": 354940,
+     "выборка": 20000,
+     "в отчёте": 20000,
+     "отсеяно до отчёта": 0,
+     "вердикты": {
+      "выводится": 9853,
+      "неизвестно": 10147
+     },
+     "неизвестно на одном значении": 7782,
+     "сводится к вырожденности": 1,
+     "решающие атомы": [
+      [
+       "proper-subs-cyclic(torsion(prod(G, G)))",
+       497
+      ],
+      [
+       "embeds(prod(G, G), G)",
+       496
+      ],
+      [
+       "co-hopfian(prod(G, G))",
+       484
+      ],
+      [
+       "proper-subs-finite(G)",
+       438
+      ],
+      [
+       "proper-subs-cyclic(G)",
+       388
+      ],
+      [
+       "rec-pres-ctbl(prod(G, G))",
+       387
+      ],
+      [
+       "proper-subs-finite(prod(G, G))",
+       367
+      ],
+      [
+       "embeds(torsion(prod(G, G)), G)",
+       347
+      ],
+      [
+       "rec-pres-ctbl(G)",
+       292
+      ],
+      [
+       "prime-orders(torsion(prod(G, G)))",
+       283
+      ],
+      [
+       "rec-pres-ctbl(torsion(prod(G, G)))",
+       267
+      ],
+      [
+       "co-hopfian(G)",
+       244
+      ],
+      [
+       "proper-subs-finite(torsion(prod(G, G)))",
+       242
+      ],
+      [
+       "no-finite-quotients(torsion(prod(G, G)))",
+       225
+      ],
+      [
+       "hopfian(prod(G, G))",
+       214
+      ],
+      [
+       "iso(G, torsion(prod(G, G)))",
+       212
+      ],
+      [
+       "locally-cyclic(torsion(prod(G, G)))",
+       196
+      ],
+      [
+       "proper-subs-cyclic(prod(G, G))",
+       195
+      ],
+      [
+       "co-hopfian(torsion(prod(G, G)))",
+       193
+      ],
+      [
+       "two-generated(G)",
+       176
+      ],
+      [
+       "two-generated(prod(G, G))",
+       164
+      ],
+      [
+       "two-primes(torsion(prod(G, G)))",
+       159
+      ],
+      [
+       "iso(G, prod(G, G))",
+       155
+      ],
+      [
+       "no-finite-quotients(prod(G, G))",
+       154
+      ],
+      [
+       "hyperbolic(G)",
+       140
+      ],
+      [
+       "p-group(torsion(prod(G, G)))",
+       134
+      ],
+      [
+       "hyperbolic(prod(G, G))",
+       130
+      ],
+      [
+       "two-generated(torsion(prod(G, G)))",
+       122
+      ],
+      [
+       "exponent-6(torsion(prod(G, G)))",
+       101
+      ],
+      [
+       "odd-order(torsion(prod(G, G)))",
+       100
+      ],
+      [
+       "prime-orders(prod(G, G))",
+       89
+      ],
+      [
+       "prime-orders(G)",
+       78
+      ],
+      [
+       "order-p2(torsion(prod(G, G)))",
+       73
+      ],
+      [
+       "exponent-3(torsion(prod(G, G)))",
+       69
+      ],
+      [
+       "complemented(torsion(prod(G, G)))",
+       67
+      ],
+      [
+       "locally-cyclic(G)",
+       58
+      ],
+      [
+       "no-finite-quotients(G)",
+       57
+      ],
+      [
+       "exponent-4(torsion(prod(G, G)))",
+       56
+      ],
+      [
+       "exponent-6(G)",
+       52
+      ],
+      [
+       "divisible(torsion(prod(G, G)))",
+       51
+      ]
+     ]
+    }
+   }
+  ]
+ }
+}
