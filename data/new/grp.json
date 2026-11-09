@@ -28340,6 +28340,10 @@
    },
    "if": [
     {
+     "p": "abelian",
+     "t": "X"
+    },
+    {
      "p": "whole",
      "t": {
       "op": "ulm",
@@ -28364,6 +28368,10 @@
    },
    "if": [
     {
+     "p": "abelian",
+     "t": "X"
+    },
+    {
      "p": "divisible",
      "t": "X"
     }
@@ -28386,7 +28394,12 @@
    "scene": {
     "X": "Grp.obj"
    },
-   "if": [],
+   "if": [
+    {
+     "p": "abelian",
+     "t": "X"
+    }
+   ],
    "then": {
     "rel": "le",
     "args": [

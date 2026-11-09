@@ -119,7 +119,11 @@ class RulesCTest(unittest.TestCase):
                 ("abelian(G)", "complemented(torsion(G))"),
                 ("cyclic(quotient(G, frattini(G)))", "cyclic(G)"),
                 ("abelian(G)", "trivial(ulm(G))"),
-                ("abelian(commutator(G))", "central(commutator(G))")):
+                ("abelian(commutator(G))", "central(commutator(G))"),
+                # потеря посылок «конечна» / «к. п.» в правилах о Φ: у бесконечных без них ложно
+                ("p-group(quotient(G, frattini(G)))", "p-group(G)"),
+                ("complemented(frattini(G))", "trivial(frattini(G))"),
+                ("two-generated(quotient(G, frattini(G)))", "two-generated(G)")):
             self.assertNotEqual(self._kind("∀ G : Grp | " + cond, goal), "выводится", (cond, goal))
 
 
