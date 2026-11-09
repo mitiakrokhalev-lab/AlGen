@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "date": "2026-11-08",
+  "scope": "Correctness/coverage fix for paired explicit premises; no speedup claim",
+  "code_commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
+  "code_tree": "866e9552e04a42fd23fd23b3fb3d4d22b2a4c8a5",
+  "parent_commit": "3a264f03eb0545d6c449bef415e5ff5125b3819f",
+  "pull_request": 18,
+  "class": {
+    "k_max": 3,
+    "s_max": 2,
+    "pair_counts_as_one_premise": true
+  },
+  "red_flag": {
+    "kind": "enumeration_omission_and_invalid_definedness_weakening",
+    "example": "normal(H) AND normal(K) [one pair]; H <= K; cyclic(G/H) => cyclic(G/K)",
+    "base": "GHK",
+    "constructions": [
+      "quotient(G,H)",
+      "quotient(G,K)"
+    ],
+    "premise_count": 3,
+    "fixed": true,
+    "independently_reproduced": true,
+    "old_enumerators_lost_target": {
+      "python_vec_prune_combinations": 4,
+      "native_vec_path": true
+    },
+    "old_pair_minimal_deleted_manually_supplied_target": true,
+    "whole_class_audit_complete": false
+  },
+  "test_fixture": {
+    "primitive_atoms": 5,
+    "pair_atoms": 2,
+    "concrete_rows": 4,
+    "extra_negative_pair_supported_concrete_rows": 1,
+    "undefined_quotient_value": null,
+    "abstract_partial_matrix_cases": 25,
+    "abstract_matrices_claimed_as_groups": false,
+    "native_vec_prune_combinations": 8
+  },
+  "local_checks": [
+    {
+      "name": "initial new regressions before final negative-pair strengthening",
+      "tests": 6,
+      "seconds": 0.918,
+      "result": "OK"
+    },
+    {
+      "name": "final new regressions",
+      "tests": 6,
+      "seconds": 0.87,
+      "result": "OK"
+    },
+    {
+      "name": "existing native regressions",
+      "tests": 4,
+      "seconds": 0.288,
+      "result": "OK"
+    },
+    {
+      "name": "independent final new regressions",
+      "tests": 6,
+      "seconds": 0.904,
+      "result": "OK"
+    },
+    {
+      "name": "independent existing native regressions",
+      "tests": 4,
+      "seconds": 0.281,
+      "result": "OK"
+    },
+    {
+      "name": "final paired regressions after compatibility fix",
+      "tests": 6,
+      "seconds": 0.943,
+      "result": "OK"
+    },
+    {
+      "name": "conditions compatibility regressions",
+      "tests": 9,
+      "seconds": 0.462,
+      "result": "OK"
+    },
+    {
+      "name": "independent conditions compatibility regressions",
+      "tests": 9,
+      "seconds": 0.491,
+      "result": "OK"
+    }
+  ],
+  "ci": {
+    "run": 42435664050,
+    "job": 128593834086,
+    "commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
+    "tests": 184,
+    "seconds": 123.646,
+    "result": "OK",
+    "skipped": 0
+  },
+  "independent_review": {
+    "code_and_math": "approved",
+    "reviewer": "review_readiness",
+    "additional_checks": [
+      "fault-injected wrong polarity proves negative regression non-vacuous",
+      "const and REQ_CONST toggle",
+      "fixed pair and negated-pair zero-premise checks",
+      "provider bounds rejected before C++",
+      "22-argument ABI and CSR ownership",
+      "all table.view pair creation is inside SWAP result-version scope"
+    ],
+    "initial_review_test_command_import_failure": {
+      "failed_seconds": null,
+      "recovered_with_separate_targeted_commands": true
+    },
+    "final_ci": "approved; decoded logs checked independently"
+  },
+  "cache_compatibility": {
+    "paired_completed_result_version": 1,
+    "affected_bases": [
+      "AB",
+      "GHK",
+      "MN",
+      "Gxy",
+      "GFE",
+      "pqG",
+      "pqGH"
+    ],
+    "library_table_fingerprint_changed": false,
+    "nonpaired_completed_fingerprint_changed": false,
+    "structural_inventory_changed": false,
+    "historical_inventory_code_commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
+    "historical_inventory_schemes": 148991,
+    "old_paired_reports_accepted_as_new_complete": false,
+    "automatic_archive_coverage_migration_implemented": false,
+    "old_results_deleted": false
+  },
+  "resources": {
+    "new_heavy_local_runs": 0,
+    "new_stress_pilots": 0,
+    "whole_class_cpu_seconds": null,
+    "whole_class_wall_seconds": null,
+    "whole_class_peak_rss_bytes": null,
+    "whole_class_output_count": null,
+    "new_speedup_claimed": false
+  },
+  "not_changed": [
+    "Library rows",
+    "Theory rules",
+    "compression contradictory-background guard",
+    "scheme inventory generation",
+    "dynamic archive persistence"
+  ],
+  "excluded_unreviewed_draft": [
+    "py/tools/check_candidate_lazy.py",
+    "py/tools/form_candidate_domain.py",
+    "py/tests/test_form_domain.py"
+  ],
+  "initial_code_commit": "3a264f03eb0545d6c449bef415e5ff5125b3819f",
+  "ci_attempts": [
+    {
+      "run": 42435398227,
+      "job": 128593020267,
+      "commit": "3a264f03eb0545d6c449bef415e5ff5125b3819f",
+      "tests": 184,
+      "seconds": 96.349,
+      "result": "FAILED",
+      "errors": 1,
+      "reason": "old SimpleNamespace lacks req; paired-minimal compatibility fallback added"
+    }
+  ],
+  "initial_parent_commit": "a9988b1136eb034064226be7a9a48c5ad202c018"
+}

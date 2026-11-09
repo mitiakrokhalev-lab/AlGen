@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "updated_utc": "2026-11-08T01:50:12.074780+00:00",
+  "scope": "Readiness plan for first full fixed-domain enumeration; NOT a full-run receipt or an implemented automatic launch gate",
+  "user_goal": {
+    "first_complete_enumeration_once": true,
+    "serve_future_updates_from_archive": true,
+    "avoid_repeating_verified_successful_schemes": true,
+    "candidate_class": {
+      "k_max": 3,
+      "s_max": 2
+    },
+    "target_wall_hours": 24,
+    "resource_selection_budget_rub_per_day": 1000,
+    "rental_or_payment_authorized": false
+  },
+  "ready_for_full_run": false,
+  "automatic_launch_gate_implemented": false,
+  "current_verified_code_commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
+  "ci": {
+    "run": 42435664050,
+    "job": 128593834086,
+    "commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
+    "tests": 184,
+    "seconds": 123.646,
+    "result": "OK",
+    "skipped": 0
+  },
+  "gates": [
+    {
+      "id": "manifest",
+      "status": "partial",
+      "required": "Exact immutable list/hash/count of all allowed schemes across all42bases; independent coverage and symmetry check",
+      "observed": {
+        "bases": 42,
+        "completed_bases": 42,
+        "inventory_complete": true,
+        "completed_counts": {
+          "G": 1047,
+          "GN": 5332,
+          "AB": 1713,
+          "GHK": 8907,
+          "GMN": 13840,
+          "GHF": 3645,
+          "Fam": 79,
+          "GX": 1284,
+          "Gx": 1367,
+          "GE": 1354,
+          "GXxy": 1564,
+          "Gxy": 1389,
+          "D": 54,
+          "MN": 843,
+          "ABH": 6941,
+          "ABC": 7012,
+          "n": 310,
+          "pG": 1781,
+          "pqG": 2507,
+          "pGH": 6709,
+          "pqGH": 7733,
+          "GxA": 1655,
+          "GxF": 1787,
+          "GAB": 1564,
+          "GAF": 1642,
+          "GAa": 1422,
+          "GHx": 3765,
+          "GHA": 3621,
+          "GHE": 3721,
+          "GHn": 4399,
+          "GHK2": 9900,
+          "GFE": 1735,
+          "Gnx": 2132,
+          "GnA": 2015,
+          "GnF": 2096,
+          "GNx": 5947,
+          "GNy": 6016,
+          "GNA": 5760,
+          "GNF": 6195,
+          "lmn": 4870,
+          "P": 27,
+          "NQA": 3311
+        },
+        "total_schemes": 148991,
+        "ordered_full_plan_sha256": "fae6a4d9a63c72d9189019f7f014dfedc4493682402ec7c8a77cc81d4de48b56",
+        "inputs_sha256": "83f262286fa9cf250969e97f4245da18418e4f1b9e1d64fe030d2b46a94df6c0",
+        "unresolved_bases": [],
+        "not_attempted_bases": 0,
+        "independent_full_class_and_symmetry_audit_complete": false,
+        "historical_30s_timeouts": [
+          "GHK",
+          "GMN",
+          "GHK2"
+        ]
+      },
+      "evidence": [
+        "metrics-scheme-plan.json",
+        "план-масштабирования.md"
+      ]
+    },
+    {
+      "id": "time",
+      "status": "blocked",
+      "required": "Measured CPU/P_eff, critical path, setup/archive/compression/storage and failure reserve within24h on a specific configuration",
+      "observed": {
+        "stress02_ok": 5,
+        "stress02_planned": 8,
+        "time_budget": 2,
+        "rss_budget": 1,
+        "whole_class_estimate_seconds": null
+      },
+      "evidence": [
+        "metrics-stress02.json",
+        "metrics-phase-scope.json"
+      ]
+    },
+    {
+      "id": "memory_disk",
+      "status": "blocked",
+      "required": "Bounded process/tree/cgroup and disk use including frontier/archive/global compression and temporary files; measured reserve and safe parallelism",
+      "observed": {
+        "largest_candidate_count": 205509771,
+        "stopped_peak_rss_gib": 12.294,
+        "completed_peak_for_largest_case": null,
+        "workspace_free_mib_approx": 54.7,
+        "new_large_local_runs_allowed": false
+      },
+      "evidence": [
+        "metrics-stress02.json"
+      ]
+    },
+    {
+      "id": "dynamic_updates",
+      "status": "partial",
+      "required": "Exact frontier and local update with candidate coverage, including newly minimal stronger questions, theorem/example changes/retractions and crash recovery",
+      "observed": {
+        "sqlite_archive": true,
+        "dependency_reopening": true,
+        "worker_for_imported_complete_schemes": true,
+        "worker_currently_requires_full_enumeration": true,
+        "complete_candidate_frontier_implemented": false,
+        "no_repeat_full_enumeration_update_contract_verified": false
+      },
+      "evidence": [
+        "динамический-архив.md",
+        "граница-кандидатов.md",
+        "../py/algen/live.py",
+        "../py/algen/live_worker.py"
+      ]
+    },
+    {
+      "id": "candidate_coverage",
+      "status": "blocked",
+      "required": "Each admissible candidate is retained or covered by a checked current reason; all omissions/failures remain explicit debt",
+      "observed": {
+        "whole_class_coverage_certificate": false,
+        "ordinary_report_retains_full_frontier": false,
+        "paired_requirements_red_flag_fixed": true,
+        "paired_historical_results_need_coverage_refresh": true,
+        "automatic_archive_coverage_migration_implemented": false
+      },
+      "evidence": [
+        "граница-кандидатов.md",
+        "metrics-pair-requirements.json"
+      ]
+    },
+    {
+      "id": "mathematical_audit",
+      "status": "blocked",
+      "required": "Independent audit of frozen external tasks, representation/generation reachability and Library vs Theory; resolve known gaps in declared scope",
+      "observed": {
+        "frozen_tasks": 30,
+        "memory_tasks": 24,
+        "putnam_tasks": 6,
+        "local_probes": 20,
+        "native_generation_checks": 0,
+        "hirsch_gap_open": true,
+        "unported_sidebranch_files_to_review": 5,
+        "absence_of_all_possible_red_flags_proved": false
+      },
+      "evidence": [
+        "audit-coverage.json",
+        "audit-putnam-frozen.json",
+        "пробел-хирша.md",
+        "ветки-и-статус.md"
+      ]
+    },
+    {
+      "id": "compression",
+      "status": "blocked",
+      "required": "Verified global basis/templates, each dependency/instance and compatible background, reopening on refutation, measured raw and already-kept denominators and absolute manual workload",
+      "observed": {
+        "within_scheme_kept_stress02_successful_subset": 838,
+        "subset_schemes": 5,
+        "global_basis_size": null,
+        "global_compression_factor": null
+      },
+      "evidence": [
+        "metrics-stress02.json",
+        "поиск-базиса.md"
+      ]
+    },
+    {
+      "id": "storage_resume",
+      "status": "partial",
+      "required": "Frozen inputs, immutable receipts and per-scheme hash/checkpoint ledger, atomic exports, verified completed-result reuse and planned storage for the entire frontier",
+      "observed": {
+        "imported_scheme_worker_exists": true,
+        "whole_class_frontier_storage_measured": false,
+        "whole_class_manifest_complete": true
+      },
+      "evidence": [
+        "динамический-архив.md",
+        "../py/algen/live_worker.py"
+      ]
+    },
+    {
+      "id": "final_independent_review",
+      "status": "pending",
+      "required": "After all blockers close, freeze code/data/class/manifest/frontier format/resources and independently review all evidence before starting first full run",
+      "observed": {
+        "performed_for_first_full_run": false
+      }
+    }
+  ],
+  "notes": [
+    "Current successful pilots and benchmarks are subsets, not completion of all schemes.",
+    "Exactly once is the target for verified successful first enumeration of a fixed domain; interrupted work leaves resumable debt.",
+    "Adding language/class creates a new domain. The archive must distinguish example/theorem additions and corrections or withdrawals.",
+    "A list of current minimal questions cannot support all future updates; new counterexamples may expose previously nonminimal stronger questions.",
+    "A SAT model is not a group counterexample; contradictory question backgrounds are not coverage proofs.",
+    "No new full run, pilot, rental or purchase is initiated by this record."
+  ],
+  "evidence_status_commit": "d7d820c8fd5c749149e1edd6d90226d5a46883ee",
+  "latest_research_check": {
+    "scope": "lazy finite selector search and in-process row dynamics; not full native grammar or SQLite integration",
+    "metrics": "metrics-lazy-candidate-search.json",
+    "static_cases": 52,
+    "dynamic_generations": 6,
+    "verified_transitions": 5,
+    "uncovered": 0,
+    "changes_gate_status": false
+  },
+  "previous_verified_code_commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
+  "previous_ci": {
+    "run": 42421968228,
+    "job": 128552125593,
+    "commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
+    "tests": 178,
+    "seconds": 117.703,
+    "result": "OK",
+    "skipped": 0
+  },
+  "latest_planning_check": {
+    "metrics": "metrics-scheme-plan.json",
+    "inventory_complete": true,
+    "bases": 42,
+    "schemes": 148991,
+    "mathematical_coverage_audit_complete": false,
+    "full_task_run_started": false
+  },
+  "latest_correctness_check": {
+    "metrics": "metrics-pair-requirements.json",
+    "code_commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
+    "new_red_flag": "paired premises lost primitive definedness requirements; half-pair removal allowed undefined terms",
+    "status": "fixed; independent code/math review and full CI184 OK",
+    "whole_class_coverage_audit_complete": false,
+    "old_paired_results_require_coverage_refresh": true,
+    "automatic_archive_coverage_migration_implemented": false,
+    "changes_gate_status": false
+  }
+}

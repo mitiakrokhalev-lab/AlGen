@@ -1,0 +1,33 @@
+name: generic-diff
+
+# Сверка generic_filter до/после поправки класса (дыра 4.11) на схеме с G ∗ G (G, Z(G), G′ — прогон 41765647904: потерь 0)
+# с классами finite и abelian. Запуск: «[generic-diff]» в сообщении коммита.
+
+on:
+  push:
+    branches: ["claude/project-thread-x5hadw"]
+
+jobs:
+  diff:
+    if: contains(github.event.head_commit.message, '[generic-diff]')
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        cls: [finite, abelian]
+        terms: ["freeprod(G, G)"]
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    env:
+      ALGEN_FAST: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: сверка фильтра
+        run: |
+          cd py
+          timeout 190m python3 -m algen.generic_diff ${{ matrix.cls }} 3 "∀ G : Grp" "${{ matrix.terms }}"
