@@ -821,7 +821,9 @@ class Library:
         base = [k for k, o in self.obj.items() if not o.get("синтез") and not o.get("без произведений") and (
             not o["конечная"] or 1 < int(k.split(":")[0]) <= max_order or k in EXTRA_FINITE
             or (o["свойства"].get("simple") and not o["свойства"].get("abelian")))]
-        prime_cyclic = {k for k, o in self.obj.items() if o["конечная"] and o["свойства"].get("simple")
+        # простые абелевы = C_p, в том числе записи вне таблицы GAP (C_p при p > 10⁷⁵ — в бесконечном
+        # файле): A × 1 ⊂ A × C_p индекса p максимальна (ревью 13.11: прежде фильтр «конечная» их терял)
+        prime_cyclic = {k for k, o in self.obj.items() if o["свойства"].get("simple")
                         and o["свойства"].get("abelian")}
 
         def small(a, b):
@@ -963,14 +965,18 @@ class Library:
             subs = o["подгруппы"]
             pairs = {x["пара"]: x["id"] for x in subs if "пара" in x}
             # Кручение абелевой: T(A × B) = T(A) × T(B).
-            # Фраттини: Φ(A × B) = Φ(A) × Φ(B), если A и B конечно порождены или обе
-            # абелевы. ⩽ — всегда: M × B и A × M′ максимальны при максимальных M ⩽ A,
-            # M′ ⩽ B. ⩾ — для к. п.: Φ(N) ⩽ Φ(G) при нормальной к. п. N (если Φ(N) ⊄ M,
-            # то G = MΦ(N), N = (N ∩ M)Φ(N), а Φ(N) — непорождающие, так что N ⩽ M);
-            # для абелевых Φ(X) = ⋂ pX. Для бесконечно порождённых неабелевых не пишем.
+            # Фраттини: Φ(A × B) = Φ(A) × Φ(B), если каждый множитель конечно порождён
+            # или абелев. ⩽ — всегда: M × B и A × M′ максимальны при максимальных M ⩽ A,
+            # M′ ⩽ B (без максимальных — пересечение пустого семейства, Φ = вся). ⩾ —
+            # Φ(N) ⩽ Φ(G) для N = A × 1 и N = 1 × B, если N к. п. или центральна:
+            # Φ(N) char N ⊴ G, так что Φ(N) ⊴ G. К. п. N: если Φ(N) ⊄ M (M максимальна),
+            # то G = MΦ(N), N = (N ∩ M)Φ(N), а конечное число непорождающих выбрасывается:
+            # N = N ∩ M ⩽ M — противоречие. Центральная N ⊄ M: M ⊴ MN = G, G/M ≅ N/(N ∩ M)
+            # простая абелева, т. е. N ∩ M максимальна в N и содержит Φ(N).
+            # Множитель бесконечно порождённый и неабелев — не пишем.
             pa_, pb_ = self.obj[a]["свойства"], self.obj[b]["свойства"]
-            fg = lambda p: p.get("fin-gen") or p.get("finite")
-            frat = bool((fg(pa_) and fg(pb_)) or (pa_.get("abelian") and pb_.get("abelian")))
+            ok = lambda p: bool(p.get("fin-gen") or p.get("finite") or p.get("abelian"))
+            frat = ok(pa_) and ok(pb_)
             for field in ("центр", "коммутант", "кручение") + (("фраттини",) if frat else ()):
                 sa, sb = (self._sub(k, self.obj[k].get(field)) for k in (a, b))
                 if sa is None or sb is None:

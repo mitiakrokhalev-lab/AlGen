@@ -32,12 +32,12 @@ class RulesDTest(unittest.TestCase):
             self.assertEqual(self._kind(cond, goal), "выводится", (cond, goal))
 
     def test_false_not_derived(self):
-        # Z(G) бывает нетривиален; BS(n, n) при n = ∞ не определена, при n = 0 это F₂ — гиперболична;
-        # инъективный эндоморфизм ℤ (x ↦ 2x) не сюръективен, и его квадрат тоже
+        # Z(G) бывает нетривиален; BS(n, n) при n = ∞ не определена; ранг тривиальной группы 0,
+        # BS(0, 0) = F₂ гиперболична; инъективный эндоморфизм ℤ (x ↦ 2x) не сюръективен, и его квадрат тоже
         for cond, goal in (
                 ("∀ G : Grp", "injective(proj(G, center(G)))"),
                 ("∀ G : Grp", "two-generated(bs(ord(G), ord(G)))"),
-                ("∀ G : Grp | finite(G)", "¬hyperbolic(bs(ord(G), ord(G)))"),
+                ("∀ G : Grp | trivial(G)", "¬hyperbolic(bs(rank(G), rank(G)))"),
                 ("∀ G : Grp; ∀ F : Mor(G, G) | injective(F)", "surjective(compose(F, F))"),
                 ("∀ G : Grp; ∀ F : Mor(G, G) | injective(compose(F, F))", "surjective(F)")):
             self.assertNotEqual(self._kind(cond, goal), "выводится", (cond, goal))

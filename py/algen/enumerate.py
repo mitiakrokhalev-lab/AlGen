@@ -1138,6 +1138,8 @@ def base_factor(lib, key, p, field=None):
         ua, ub = oa.get(field) is None, ob.get(field) is None
         if ua != ub:
             return fa if ua else fb
+        if not ua:
+            return key  # у обоих множителей поле есть — не записано у самого произведения
     if p is not None:
         ua, ub = oa["свойства"].get(p) is None, ob["свойства"].get(p) is None
         if ua != ub:
