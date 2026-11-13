@@ -132,12 +132,13 @@ jobs:
           ALGEN_SAMPLE: ${{ matrix.case.sample || '' }}
           ALGEN_SAMPLE_EXAMPLES: ${{ matrix.case.examples || '60' }}
           ALGEN_SKEL: ${{ github.workspace }}/native/skel
+          MODULE: ${{ matrix.case.module || 'algen.table' }}
         run: |
           mkdir -p ../profiles/$CASE_ID
           cp ../commit.txt ../profiles/
           mv ../native/кэш ../кэш
           set +e
-          /usr/bin/time -v python3 -B -m algen.table перебор G --каталог ../native-tabs \
+          /usr/bin/time -v python3 -B -m "$MODULE" перебор G --каталог ../native-tabs \
             --выход ../profiles/$CASE_ID --схемы "$SCHEME" --нитей 1 --посылок 3 \
             --предел "$SECONDS_LIMIT" 2> ../profiles/time.txt
           echo "exit=$?" | tee ../profiles/exit.txt
