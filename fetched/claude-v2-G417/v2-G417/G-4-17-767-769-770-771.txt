@@ -1,0 +1,236 @@
+строк в библиотеке 30953, литералов 396
+не опровергнуто библиотекой 2730540, минимальных обо всех переменных 20000, запретов 5519: неизвестно 3943, выводится 1576
+посылок без единого примера: 545407
+решающих значений 112 на 448 запретов, без кандидата 43 в 24 кластерах, в реестре 62
+свёрнуто вопросов 3306 (список: --полностью)
+вопросов «какие группы бывают с S»: 288 на 634 запретов; без вопроса 3309
+запретов без примера: 637, кластеров: 131
+
+== решающих значений 112: касаются 448 запретов; без кандидата 127; уже в реестре 62 ==
+значение embeds(G, aut(G)) у C2 x C2 x C2 x C2 x C2 x C2 x C2 — запретов 25; например: abelian(G) & centerless(aut(G)) & embeds(G, aut(G)) & ¬primitive(regular-act(G))
+значение perfect(aut(G)) у G = UT₅(ℚ) — запретов 18; например: amenable(G) & divisible(G) & perfect(aut(G)) & ¬primitive(regular-act(G))
+значение comp-series(aut(G)) у G = ℚ⁵ — запретов 16; например: amenable(G) & comp-series(aut(G)) & divisible(G) & ¬primitive(regular-act(G))
+значение perfect(aut(G)) у G = 5616:G′(11232:Aut(27:5)) — запретов 14; например: amenable(aut(G)) & embeds(G, aut(G)) & perfect(aut(G)) & ¬primitive(regular-act(G))
+значение no-finite-quotients(aut(G)) у G = UT₃(ℤ) ∘ ℚ — запретов 13; например: countable(G) & no-finite-quotients(aut(G)) & ¬primitive(regular-act(G))
+значение indecomposable(Aut(M(ℚ, ℚ))) — запретов 13; например: bi-orderable(G) & indecomposable(aut(G)) & perfect(G) & ¬primitive(regular-act(G))
+значение centerless(aut(G)) у G = ℚ⁵ — запретов 13; например: bi-orderable(G) & centerless(aut(G)) & co-hopfian(G) & ¬primitive(regular-act(G))
+значение contains-free(aut(G)) у G = F′ (коммутант группы Томпсона F) — запретов 12; например: bi-orderable(G) & comp-series(G) & ¬contains-free(aut(G)) & ¬primitive(regular-act(G))
+значение embeds(aut(G), G) у order 20158709760 — запретов 11; например: amenable(G) & embeds(aut(G), G) & perfect(G) & ¬primitive(regular-act(G))
+значение embeds(G, aut(G)) у ℚ³ — запретов 11; например: bi-orderable(G) & co-hopfian(G) & embeds(G, aut(G)) & ¬primitive(regular-act(G))
+значение amenable(aut(G)) у G = F′ (коммутант группы Томпсона F) — запретов 11; например: amenable(aut(G)) & bi-orderable(G) & comp-series(G) & ¬primitive(regular-act(G))
+значение property-t(aut(G)) у G = F₅ — запретов 10; например: bi-orderable(G) & centerless(aut(G)) & property-t(aut(G)) & ¬primitive(regular-act(G))
+значение divisible(aut(G)) у G = ⊕_p UT₃(𝔽_p) — запретов 10; например: co-hopfian(G) & divisible(aut(G)) & ¬primitive(regular-act(G))
+значение polynomial-growth(aut(G)) у G = ℚ ≀ ℚ — запретов 9; например: bi-orderable(G) & centerless(aut(G)) & polynomial-growth(aut(G)) & ¬primitive(regular-act(G))
+значение kaplansky(π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий) — запретов 9; например: centerless(aut(G)) & hyperbolic(aut(G)) & kaplansky(G) & ¬primitive(regular-act(G))
+значение left-orderable(π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий) — запретов 8; например: centerless(aut(G)) & hyperbolic(aut(G)) & left-orderable(G) & ¬primitive(regular-act(G))
+значение hopfian(aut(G)) у G = F′ (коммутант группы Томпсона F) — запретов 8; например: bi-orderable(G) & comp-series(G) & hopfian(aut(G)) & ¬primitive(regular-act(G))
+значение countable(aut(G)) у G = F′ (коммутант группы Томпсона F) — запретов 8; например: bi-orderable(G) & comp-series(G) & countable(aut(G)) & ¬primitive(regular-act(G))
+значение bi-orderable(π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий) — запретов 8; например: bi-orderable(G) & centerless(aut(G)) & hyperbolic(aut(G)) & ¬primitive(regular-act(G))
+значение torsion-free(aut(G)) у G = UT₃(ℤ) (группа Гейзенберга) — запретов 7; например: locally-solvable(G) & torsion-free(aut(G)) & ¬primitive(regular-act(G))
+значение embeds(aut(G), G) у ℤ(2^∞)² — запретов 7; например: amenable(G) & embeds(aut(G), G) & no-finite-quotients(G) & ¬primitive(regular-act(G))
+значение countable(aut(G)) у G = универсальная группа Холла U × универсальная группа Холла U — запретов 7; например: centerless(aut(G)) & countable(aut(G)) & divisible(G) & ¬primitive(regular-act(G))
+значение comp-series(aut(G)) у G = F′ (коммутант группы Томпсона F) — запретов 7; например: bi-orderable(G) & comp-series(G) & comp-series(aut(G)) & ¬primitive(regular-act(G))
+значение prime-orders((C2 x ((C4 x C2) : C2)) : ((C2 x ((C2 x C2 x C2) : C4)) : D8)) — запретов 6; например: indecomposable(G) & prime-orders(G) & ¬centerless(aut(G)) & ¬primitive(regular-act(G))
+значение periodic(aut(G)) у G = ℚ⁵ — запретов 6; например: bi-orderable(G) & co-hopfian(G) & periodic(aut(G)) & ¬primitive(regular-act(G))
+значение locally-solvable(aut(G)) у G = PSL_∞(ℂ) = ⋃ PSL_{n!}(ℂ) × PSL_∞(ℂ) = ⋃ PSL_{n!}(ℂ) — запретов 6; например: centerless(aut(G)) & divisible(G) & locally-solvable(aut(G)) & ¬primitive(regular-act(G))
+значение co-hopfian(aut(G)) у G = F′ (коммутант группы Томпсона F) — запретов 6; например: bi-orderable(G) & co-hopfian(aut(G)) & comp-series(G) & ¬primitive(regular-act(G))
+значение bounded-exponent(aut(G)) у G = ℚ⁵ — запретов 6; например: bi-orderable(G) & bounded-exponent(aut(G)) & co-hopfian(G) & ¬primitive(regular-act(G))
+значение locally-finite(aut(G)) у G = ℚ⁵ — запретов 5; например: bi-orderable(G) & co-hopfian(G) & locally-finite(aut(G)) & ¬primitive(regular-act(G))
+значение embeds(G, aut(G)) у C9 x C3 — запретов 5; например: class-2(G) & embeds(G, aut(G)) & odd-order(G) & ¬primitive(regular-act(G))
+значение comp-series(группа Маклейна M(ℚ, ℚ)) — запретов 5; например: bi-orderable(G) & comp-series(G) & ¬primitive(regular-act(G)) & ¬simple(aut(G))
+значение virtually-nilpotent(aut(G)) у G = ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 4; например: bi-orderable(G) & centerless(aut(G)) & virtually-nilpotent(aut(G)) & ¬primitive(regular-act(G))
+значение proper-subs-finite(aut(G)) у G = ℤ³ × UT₄(ℚ) — запретов 4; например: bi-orderable(G) & proper-subs-finite(aut(G)) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G))
+значение prime-orders(aut(G)) у G = W(A₅): W ≅ W ≀ W = W′ — запретов 4; например: centerless(aut(G)) & prime-orders(aut(G)) & ¬order-pq(aut(G)) & ¬primitive(regular-act(G))
+значение no-finite-quotients(aut(G)) у G = Dih(ℤ(2^∞)) = ℤ(2^∞) ⋊ C₂ — запретов 4; например: co-hopfian(G) & no-finite-quotients(aut(G)) & ¬primitive(regular-act(G))
+значение embeds(G, aut(G)) у ℤ⁵ × ℤ⁵ — запретов 4; например: bi-orderable(G) & embeds(G, aut(G)) & polynomial-growth(G) & ¬primitive(regular-act(G))
+значение contains-free(aut(G)) у G = универсальная группа Холла U × универсальная группа Холла U — запретов 4; например: centerless(aut(G)) & divisible(G) & ¬contains-free(aut(G)) & ¬primitive(regular-act(G))
+значение co-hopfian(Aut(M(ℚ, 𝔽₂))) — запретов 4; например: centerless(G) & co-hopfian(aut(G)) & locally-nilpotent(G) & ¬primitive(regular-act(G))
+значение amenable(aut(G)) у G = универсальная группа Холла U × универсальная группа Холла U — запретов 4; например: amenable(aut(G)) & centerless(aut(G)) & divisible(G) & ¬primitive(regular-act(G))
+значение residually-nilpotent(π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий) — запретов 3; например: centerless(G) & co-hopfian(aut(G)) & residually-nilpotent(G) & ¬primitive(regular-act(G))
+значение residually-nilpotent(aut(G)) у G = ⊕C₃ × UT₃(𝔽₃(t)) — запретов 3; например: exponent-3(G) & residually-nilpotent(aut(G)) & ¬primitive(regular-act(G))
+значение proper-subs-finite(aut(G)) у G = ℚ⁵ — запретов 3; например: bi-orderable(G) & co-hopfian(G) & proper-subs-finite(aut(G)) & ¬primitive(regular-act(G))
+значение prime-orders(order 24261120) — запретов 3; например: exponent-3(G) & prime-orders(aut(G)) & ¬primitive(regular-act(G))
+значение prime-order(aut(G)) у G = ⊕_ℕ C3 x C3 — запретов 3; например: p-group(G) & prime-order(aut(G)) & ¬exponent-4(G) & ¬primitive(regular-act(G))
+значение perfect(π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий) — запретов 3; например: embeds(aut(G), G) & perfect(aut(G)) & ¬no-finite-quotients(G) & ¬primitive(regular-act(G))
+значение perfect(aut(G)) у G = 243:37 — запретов 3; например: exponent-6(G) & perfect(aut(G)) & ¬primitive(regular-act(G)) & ¬simple(aut(G))
+значение hopfian(Aut(M(ℚ, ℚ))) — запретов 3; например: centerless(G) & hopfian(aut(G)) & locally-nilpotent(G) & ¬primitive(regular-act(G))
+значение embeds(G, aut(G)) у SU(2) — запретов 3; например: divisible(aut(G)) & embeds(G, aut(G)) & ¬primitive(regular-act(G)) & ¬simple(G)
+значение embeds(G, aut(G)) у E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩ — запретов 3; например: embeds(G, aut(G)) & exponent-3(G) & ¬primitive(regular-act(G))
+значение embeds(G, aut(G)) у C7 x C7 — запретов 3; например: embeds(G, aut(G)) & locally-nilpotent(G) & proper-subs-cyclic(G) & ¬primitive(regular-act(G))
+значение comp-series(Aut(M(ℚ, ℚ))) — запретов 3; например: centerless(G) & comp-series(aut(G)) & locally-nilpotent(G) & ¬primitive(regular-act(G))
+значение residually-nilpotent(aut(G)) у G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) — запретов 2; например: centerless(G) & locally-nilpotent(G) & residually-nilpotent(aut(G)) & ¬primitive(regular-act(G))
+значение property-t(aut(G)) у G = ℚ⁵ — запретов 2; например: co-hopfian(G) & property-t(aut(G)) & torsion-free(G) & ¬primitive(regular-act(G))
+значение polycyclic(aut(G)) у G = ℤ² ⋊_A ℤ, A = (2 1; 1 1) × ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 2; например: centerless(aut(G)) & polycyclic(aut(G)) & torsion-free(G) & ¬primitive(regular-act(G))
+значение p-group(aut(G)) у G = ⊕_ℕ C3 x C3 — запретов 2; например: exponent-3(G) & p-group(aut(G)) & ¬primitive(regular-act(G))
+значение order-pq(aut(G)) у G = 729:309 — запретов 2; например: odd-order(G) & order-pq(aut(G)) & ¬order-p2(G) & ¬primitive(regular-act(G))
+значение order-p2(aut(G)) у G = C9 × C9 : C3 — запретов 2; например: odd-order(G) & order-p2(aut(G)) & ¬primitive(regular-act(G))
+значение locally-solvable(aut(G)) у G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) — запретов 2; например: centerless(G) & locally-nilpotent(G) & locally-solvable(aut(G)) & ¬primitive(regular-act(G))
+значение locally-nilpotent(aut(G)) у G = ⊕C₃ × UT₃(𝔽₃(t)) — запретов 2; например: exponent-3(G) & locally-nilpotent(aut(G)) & ¬primitive(regular-act(G))
+значение locally-cyclic(aut(G)) у G = ⊕_ℕ ℤ(2^∞) — запретов 2; например: divisible(G) & locally-cyclic(aut(G)) & ¬primitive(regular-act(G))
+значение linear(aut(G)) у G = S̃L₂(ℝ) (универсальная накрывающая) — запретов 2; например: kaplansky(G) & linear(aut(G)) & perfect(G) & ¬primitive(regular-act(G))
+значение indecomposable(GL₃(ℚ)) — запретов 2; например: countable(aut(G)) & divisible(G) & indecomposable(aut(G)) & ¬primitive(regular-act(G))
+значение fin-gen(aut(G)) у G = ⊕_ℕ ℤ(2^∞) — запретов 2; например: divisible(G) & fin-gen(aut(G)) & ¬primitive(regular-act(G))
+значение exponent-6(order 9999360) — запретов 2; например: exponent-6(aut(G)) & perfect(aut(G)) & ¬primitive(regular-act(G))
+значение embeds(aut(G), G) у SU(2) — запретов 2; например: centerless(aut(G)) & embeds(aut(G), G) & ¬iso(G, aut(G)) & ¬primitive(regular-act(G))
+значение divisible(⊕_ℕ M(ℚ, 𝔽₂)) — запретов 2; например: centerless(aut(G)) & divisible(G) & p-group(G) & ¬primitive(regular-act(G))
+значение co-hopfian(GL₃(ℤ)) — запретов 2; например: co-hopfian(aut(G)) & free-abelian(G) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G))
+значение centerless(aut(G)) у G = ⊕ℤ × ℤ⁵ — запретов 2; например: centerless(aut(G)) & free-abelian(G) & ¬primitive(regular-act(G))
+значение centerless(aut(G)) у G = E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩ — запретов 2; например: exponent-3(G) & indecomposable(G) & ¬centerless(aut(G)) & ¬primitive(regular-act(G))
+значение amenable(aut(G)) у G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) — запретов 2; например: amenable(aut(G)) & centerless(G) & locally-nilpotent(G) & ¬primitive(regular-act(G))
+значение whitehead(aut(G)) у G = ⊕ℤ × H(ℤ^(ℕ), ⊕ℚ/ℤ): [eᵢ, eⱼ] = (1/j!)δᵢ при i < j — запретов 1; например: whitehead(aut(G)) & ¬primitive(regular-act(G))
+значение virtually-solvable(aut(G)) у G = ℚ ≀ ℚ × ⊕_ℕ M(ℚ, 𝔽₂) — запретов 1; например: embeds(G, aut(G)) & no-finite-quotients(G) & virtually-solvable(aut(G)) & ¬primitive(regular-act(G))
+значение two-primes(aut(G)) у G = C7 : C3 × C7 : C3 — запретов 1; например: centerless(G) & odd-order(G) & two-primes(aut(G)) & ¬primitive(regular-act(G))
+значение two-generated(π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий) — запретов 1; например: co-hopfian(G) & torsion-free(G) & two-generated(aut(G)) & ¬primitive(regular-act(G))
+значение two-generated(aut(G)) у G = F₅ — запретов 1; например: free(G) & two-generated(aut(G)) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G))
+значение torsion-free(aut(G)) у G = UT₅(𝔽₂) × T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) — запретов 1; например: comp-series(G) & torsion-free(aut(G)) & ¬primitive(regular-act(G))
+значение torsion-free(aut(G)) у G = Sp₄(ℤ)′ × GL₃(ℤ) — запретов 1; например: property-t(G) & torsion-free(aut(G)) & ¬primitive(regular-act(G))
+значение simple(aut(G)) у G = C7 × C_p (p > 10⁷⁵) — запретов 1; например: odd-order(G) & simple(aut(G)) & ¬primitive(regular-act(G))
+значение residually-nilpotent(aut(G)) у G = ⊕_ℕ SL(2, 5) × Out(⊕_ℕ A₅) = (∏S₅ ⋊ Sym(ℕ))/⊕A₅ — запретов 1; например: perfect(G) & residually-nilpotent(aut(G)) & ¬primitive(regular-act(G))
+значение residually-nilpotent(aut(G)) у G = ⊕_ℕ C2 x C2 x C2 x C2 — запретов 1; например: exponent-2(G) & residually-nilpotent(aut(G)) & ¬primitive(regular-act(G))
+значение residually-nilpotent(aut(G)) у G = F₅ — запретов 1; например: centerless(aut(G)) & residually-nilpotent(aut(G)) & ¬iso(G, aut(G)) & ¬primitive(regular-act(G))
+значение rec-pres(aut(G)) у G = ⊕_ℕ ℤ(2^∞) — запретов 1; например: no-finite-quotients(G) & rec-pres(aut(G)) & ¬primitive(regular-act(G))
+значение proper-subs-nilpotent(aut(G)) у G = ⊕_ℕ C3 x C3 — запретов 1; например: exponent-3(G) & proper-subs-nilpotent(aut(G)) & ¬primitive(regular-act(G))
+значение proper-subs-cyclic(aut(G)) у G = ⊕_ℕ C4 x C4 — запретов 1; например: exponent-4(G) & proper-subs-cyclic(aut(G)) & ¬order-p2(G) & ¬primitive(regular-act(G))
+значение prime-orders(order 9999360) — запретов 1; например: perfect(aut(G)) & prime-orders(aut(G)) & ¬primitive(regular-act(G))
+значение prime-order(aut(G)) у G = C7 × C_p (p > 10⁷⁵) — запретов 1; например: prime-order(aut(G)) & proper-subs-finite(G) & ¬embeds(aut(G), G) & ¬primitive(regular-act(G))
+значение polynomial-growth(aut(G)) у G = ℚ⁵ — запретов 1; например: co-hopfian(G) & polynomial-growth(aut(G)) & torsion-free(G) & ¬primitive(regular-act(G))
+значение polycyclic(aut(G)) у G = ℚ⁵ — запретов 1; например: co-hopfian(G) & polycyclic(aut(G)) & torsion-free(G) & ¬primitive(regular-act(G))
+значение perfect(aut(G)) у G = ⊕_ℕ ℤ(2^∞) — запретов 1; например: divisible(G) & perfect(aut(G)) & periodic(G) & ¬primitive(regular-act(G))
+значение p-group(aut(G)) у G = C9 × C9 : C3 — запретов 1; например: odd-order(G) & p-group(aut(G)) & ¬order-pq(G) & ¬primitive(regular-act(G))
+значение odd-order(aut(G)) у G = C32 : (C8 x C2) — запретов 1; например: odd-order(aut(G)) & ¬primitive(regular-act(G))
+значение metabelian(aut(G)) у G = ⊕_ℕ C3 x C3 — запретов 1; например: exponent-3(G) & metabelian(aut(G)) & ¬primitive(regular-act(G))
+значение locally-solvable(aut(G)) у G = ⊕_ℕ C2 x C2 x C2 x C2 — запретов 1; например: exponent-2(G) & locally-solvable(aut(G)) & ¬order-p2(G) & ¬primitive(regular-act(G))
+значение hyperbolic(aut(G)) у G = F₅ — запретов 1; например: free(G) & hyperbolic(aut(G)) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G))
+значение hopfian(GL₃(ℚ)) — запретов 1; например: countable(aut(G)) & divisible(G) & hopfian(aut(G)) & ¬primitive(regular-act(G))
+значение fin-pres(aut(G)) у G = ⊕_ℕ ℤ(2^∞) — запретов 1; например: fin-pres(aut(G)) & no-finite-quotients(G) & ¬primitive(regular-act(G))
+значение exponent-6(order 1440) — запретов 1; например: exponent-6(aut(G)) & perfect(G) & ¬primitive(regular-act(G))
+значение exponent-6(aut(G)) у G = ⊕_ℕ C3 x C3 — запретов 1; например: exponent-3(G) & exponent-6(aut(G)) & ¬primitive(regular-act(G))
+значение exponent-6(aut(G)) у G = C7 : C3 × C7 : C3 — запретов 1; например: centerless(aut(G)) & exponent-6(aut(G)) & odd-order(G) & ¬primitive(regular-act(G))
+значение exponent-2(aut(G)) у G = C7 × C_p (p > 10⁷⁵) — запретов 1; например: exponent-2(aut(G)) & odd-order(G) & ¬primitive(regular-act(G))
+значение embeds(aut(G), G) у ℤ × C₂ — запретов 1; например: embeds(aut(G), G) & exponent-2(aut(G)) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G))
+значение embeds(aut(G), G) у PSL₂(ℚ) — запретов 1; например: countable(aut(G)) & embeds(aut(G), G) & no-finite-quotients(G) & ¬primitive(regular-act(G))
+значение embeds(G, aut(G)) у ⊕_p C_p — запретов 1; например: embeds(G, aut(G)) & locally-cyclic(G) & ¬primitive(regular-act(G))
+значение divisible(aut(G)) у G = ⊕ℤ × ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 1; например: divisible(aut(G)) & torsion-free(G) & ¬primitive(regular-act(G))
+значение countable(aut(G)) у G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) — запретов 1; например: centerless(G) & countable(aut(G)) & locally-nilpotent(G) & ¬primitive(regular-act(G))
+значение contains-free(aut(G)) у G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) — запретов 1; например: centerless(G) & locally-nilpotent(G) & ¬contains-free(aut(G)) & ¬primitive(regular-act(G))
+значение contains-free(aut(G)) у G = F₅ — запретов 1; например: free(G) & ¬contains-free(aut(G)) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G))
+значение co-hopfian(aut(G)) у G = ⊕_ℕ ℤ(2^∞) — запретов 1; например: co-hopfian(aut(G)) & divisible(G) & ¬primitive(regular-act(G))
+значение co-hopfian(aut(G)) у G = F₅ — запретов 1; например: co-hopfian(aut(G)) & free(G) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G))
+значение centerless(aut(G)) у G = ⊕_ℕ C3 x C3 — запретов 1; например: centerless(aut(G)) & dedekind(G) & exponent-3(G) & ¬primitive(regular-act(G))
+значение centerless(aut(G)) у G = ⊕_p C_p — запретов 1; например: centerless(aut(G)) & locally-cyclic(G) & ¬primitive(regular-act(G))
+значение centerless(aut(G)) у G = C7 × C_p (p > 10⁷⁵) — запретов 1; например: abelian(G) & centerless(aut(G)) & odd-order(G) & ¬primitive(regular-act(G))
+== сводятся к вырожденности: 84 вопросов на 84 запретов ==
+вырождено? amenable(aut(G)) & bounded-exponent(G) & no-finite-quotients(G) ⇒ trivial(G)   [запретов 1]
+вырождено? amenable(aut(G)) & free-abelian(G) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? amenable(aut(G)) & locally-solvable(G) & perfect(G) ⇒ trivial(G)   [запретов 1]
+вырождено? amenable(aut(G)) & p-group(G) & perfect(G) ⇒ trivial(G)   [запретов 1]
+вырождено? amenable(aut(G)) & perfect(G) & proper-subs-nilpotent(G) ⇒ trivial(G)   [запретов 1]
+вырождено? amenable(aut(G)) & whitehead(G) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? bi-orderable(G) & bounded-exponent(aut(G)) & centerless(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? bi-orderable(G) & bounded-exponent(aut(G)) & perfect(G) ⇒ trivial(G)   [запретов 1]
+вырождено? bi-orderable(G) & centerless(aut(G)) & locally-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? bi-orderable(G) & centerless(aut(G)) & periodic(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? bi-orderable(G) & comp-series(G) & linear(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? bi-orderable(G) & comp-series(G) & residually-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? bi-orderable(G) & perfect(G) & periodic(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? bounded-exponent(G) & linear(aut(G)) & no-finite-quotients(G) ⇒ trivial(G)   [запретов 1]
+вырождено? bounded-exponent(aut(G)) & centerless(aut(G)) & kaplansky(G) ⇒ trivial(G)   [запретов 1]
+вырождено? bounded-exponent(aut(G)) & centerless(aut(G)) & left-orderable(G) ⇒ trivial(G)   [запретов 1]
+вырождено? bounded-exponent(aut(G)) & centerless(aut(G)) & torsion-free(G) ⇒ trivial(G)   [запретов 1]
+вырождено? bounded-exponent(aut(G)) & kaplansky(G) & perfect(G) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(G) & comp-series(aut(G)) & residually-nilpotent(G) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(G) & linear(aut(G)) & locally-nilpotent(G) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(G) & linear(aut(G)) & p-group(G) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(G) & locally-nilpotent(G) & residually-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(G) & proper-subs-nilpotent(G) & residually-nilpotent(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(aut(G)) & divisible(G) & proper-subs-finite(G) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(aut(G)) & divisible(G) & residually-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(aut(G)) & exponent-3(G) & proper-subs-cyclic(G) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(aut(G)) & kaplansky(G) & locally-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(aut(G)) & left-orderable(G) & locally-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(aut(G)) & left-orderable(G) & periodic(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(aut(G)) & locally-finite(aut(G)) & torsion-free(G) ⇒ trivial(G)   [запретов 1]
+вырождено? centerless(aut(G)) & no-finite-quotients(G) & residually-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(G) & kaplansky(G) & linear(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(G) & left-orderable(G) & linear(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(G) & left-orderable(G) & residually-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(G) & linear(aut(G)) & torsion-free(G) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(G) & no-finite-quotients(G) & residually-nilpotent(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(G) & residually-finite(aut(G)) & torsion-free(G) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(aut(G)) & countable(aut(G)) & divisible(G) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(aut(G)) & countable(aut(G)) & no-finite-quotients(G) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(aut(G)) & divisible(G) & proper-subs-finite(G) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(aut(G)) & divisible(G) & ¬contains-free(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(aut(G)) & locally-solvable(aut(G)) & no-finite-quotients(G) ⇒ trivial(G)   [запретов 1]
+вырождено? comp-series(aut(G)) & no-finite-quotients(G) & ¬contains-free(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? countable(aut(G)) & divisible(G) & proper-subs-finite(G) ⇒ trivial(G)   [запретов 1]
+вырождено? countable(aut(G)) & locally-solvable(G) & perfect(G) ⇒ trivial(G)   [запретов 1]
+вырождено? divisible(G) & embeds(G, aut(G)) & proper-subs-finite(G) ⇒ trivial(G)   [запретов 1]
+вырождено? divisible(G) & indecomposable(aut(G)) & residually-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? divisible(G) & indecomposable(aut(G)) & ¬contains-free(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? embeds(G, aut(G)) & exponent-4(G) & proper-subs-cyclic(G) ⇒ trivial(G)   [запретов 1]
+вырождено? embeds(G, aut(G)) & exponent-6(aut(G)) & locally-nilpotent(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? embeds(G, aut(G)) & locally-cyclic(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? embeds(G, aut(G)) & locally-nilpotent(aut(G)) & odd-order(G) ⇒ trivial(G)   [запретов 1]
+вырождено? embeds(G, aut(G)) & odd-order(G) & proper-subs-nilpotent(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? embeds(aut(G), G) & locally-solvable(G) & perfect(G) ⇒ trivial(G)   [запретов 1]
+вырождено? embeds(aut(G), G) & locally-solvable(aut(G)) & no-finite-quotients(G) ⇒ trivial(G)   [запретов 1]
+вырождено? embeds(aut(G), G) & no-finite-quotients(G) & residually-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? embeds(aut(G), G) & no-finite-quotients(G) & residually-nilpotent(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? embeds(aut(G), G) & no-finite-quotients(G) & ¬contains-free(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? free(G) & locally-solvable(G) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? free-abelian(G) & hyperbolic(G) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? free-abelian(G) & indecomposable(G) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? free-abelian(G) & locally-cyclic(G) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? free-abelian(G) & residually-nilpotent(aut(G)) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? free-abelian(G) & ¬contains-free(aut(G)) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? indecomposable(G) & whitehead(G) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? indecomposable(aut(G)) & locally-solvable(aut(G)) & no-finite-quotients(G) ⇒ trivial(G)   [запретов 1]
+вырождено? indecomposable(aut(G)) & no-finite-quotients(G) & residually-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? indecomposable(aut(G)) & no-finite-quotients(G) & residually-nilpotent(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? indecomposable(aut(G)) & no-finite-quotients(G) & ¬contains-free(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? kaplansky(G) & perfect(G) & periodic(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? left-orderable(G) & perfect(G) & periodic(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? linear(aut(G)) & locally-solvable(G) & perfect(G) ⇒ trivial(G)   [запретов 1]
+вырождено? linear(aut(G)) & p-group(G) & perfect(G) ⇒ trivial(G)   [запретов 1]
+вырождено? linear(aut(G)) & perfect(G) & proper-subs-nilpotent(G) ⇒ trivial(G)   [запретов 1]
+вырождено? locally-cyclic(aut(G)) & torsion-free(G) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? locally-solvable(G) & perfect(G) & proper-subs-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? locally-solvable(G) & perfect(G) & residually-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? locally-solvable(G) & perfect(G) & ¬contains-free(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? locally-solvable(aut(G)) & whitehead(G) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? p-group(G) & perfect(G) & residually-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? perfect(G) & proper-subs-nilpotent(G) & residually-finite(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? proper-subs-cyclic(G) & torsion-free(G) & ¬simple(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? residually-nilpotent(aut(G)) & whitehead(G) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+вырождено? whitehead(G) & ¬contains-free(aut(G)) & ¬prime-order(aut(G)) ⇒ trivial(G)   [запретов 1]
+== без кандидата: нужен пример или правило ==
+не бывает? centerless(aut(G)) & residually-nilpotent(aut(G)) & ¬primitive(regular-act(G)) & одно из: bounded-exponent(aut(G)), comp-series(G), comp-series(aut(G)), locally-finite(aut(G)), periodic(aut(G)), proper-subs-finite(G), property-t(aut(G)), ¬centerless(G)   [запретов 8]
+не бывает? perfect(aut(G)) & ¬primitive(regular-act(G)) & одно из: locally-solvable(aut(G)), p-group(aut(G)), proper-subs-nilpotent(aut(G)), residually-nilpotent(aut(G))   [запретов 4]
+не бывает? divisible(aut(G)) & ¬primitive(regular-act(G)) & одно из: countable(aut(G)), locally-solvable(aut(G)), ¬contains-free(aut(G))   [запретов 3]
+не бывает? torsion-free(aut(G)) & ¬primitive(regular-act(G)) & одно из: proper-subs-finite(G), property-t(aut(G)), ¬contains-free(aut(G))   [запретов 3]
+не бывает? exponent-2(G) & ¬order-pq(aut(G)) & ¬primitive(regular-act(G)) & одно из: locally-solvable(aut(G)), two-generated(G)   [запретов 2]
+не бывает? exponent-4(G) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G)) & одно из: cyclic(aut(G)), locally-cyclic(aut(G))   [запретов 2]
+не бывает? order-pq(aut(G)) & ¬exponent-6(aut(G)) & ¬primitive(regular-act(G)) & одно из: indecomposable(G), ¬order-pq(G)   [запретов 2]
+не бывает? prime-orders(G) & ¬centerless(aut(G)) & ¬primitive(regular-act(G)) & одно из: exponent-6(aut(G)), metabelian(aut(G))   [запретов 2]
+не бывает? prime-orders(G) & ¬prime-orders(aut(G)) & ¬primitive(regular-act(G)) & одно из: exponent-6(aut(G)), proper-subs-abelian(aut(G))   [запретов 2]
+не бывает? centerless(aut(G)) & indecomposable(G) & ¬primitive(regular-act(G)) & abelian(G)   [примеров посылок: 2]
+не бывает? left-orderable(G) & perfect(G) & ¬primitive(regular-act(G)) & bounded-exponent(aut(G))   [примеров посылок: 9]
+не бывает? linear(aut(G)) & perfect(G) & ¬primitive(regular-act(G)) & bi-orderable(G)   [примеров посылок: 5]
+не бывает? locally-nilpotent(aut(G)) & proper-subs-cyclic(G) & ¬primitive(regular-act(G)) & embeds(G, aut(G))   [примеров посылок: 77]
+не бывает? locally-solvable(aut(G)) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G)) & free-abelian(G)   [примеров посылок: 2]
+не бывает? no-finite-quotients(G) & residually-nilpotent(aut(G)) & ¬primitive(regular-act(G)) & comp-series(aut(G))   [примеров посылок: 3]
+не бывает? no-finite-quotients(aut(G)) & ¬primitive(regular-act(G)) & countable(aut(G))   [примеров посылок: 2]
+не бывает? odd-order(G) & proper-subs-nilpotent(aut(G)) & ¬primitive(regular-act(G)) & indecomposable(aut(G))   [примеров посылок: 4]
+не бывает? p-group(aut(G)) & proper-subs-cyclic(aut(G)) & ¬primitive(regular-act(G)) & odd-order(G)   [примеров посылок: 4]
+не бывает? perfect(aut(G)) & ¬perfect(G) & ¬primitive(regular-act(G)) & embeds(aut(G), G)   [примеров посылок: 8]
+не бывает? periodic(aut(G)) & torsion-free(G) & ¬primitive(regular-act(G)) & centerless(aut(G))   [примеров посылок: 4]
+не бывает? prime-orders(G) & ¬indecomposable(aut(G)) & ¬primitive(regular-act(G)) & locally-solvable(aut(G))   [примеров посылок: 21]
+не бывает? prime-orders(G) & ¬iso(G, aut(G)) & ¬primitive(regular-act(G)) & embeds(aut(G), G)   [примеров посылок: 73]
+не бывает? primitive(regular-act(G)) & ¬indecomposable(aut(G)) & p-group(aut(G))   [примеров посылок: 192]
+не бывает? simple(aut(G)) & ¬exponent-3(G) & primitive(regular-act(G))   [примеров посылок: 12]
+== уже в реестре (data/registry/grp.json) ==
+В-7 — запретов 53: Произведения с монстром Тарского: хопфовость.
+В-1 — запретов 6: Группа Губы и её максимальная подгруппа: центр, простота, хопфовость, неразложимость; свойства максимальной подгруппы.
+В-6 — запретов 3: Коммутант 𝒢′ группы Григорчука: центр, коммутант, неразложимость, совершенность — заполнить по литературе.
+== свёрнуто вопросов 3306: следуют из теории и оставленных вопросов ==

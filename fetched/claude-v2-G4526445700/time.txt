@@ -1,0 +1,27 @@
+схем к перебору 1, нитей 1: G 1
+G: таблица (30953, 93898), 0 с
+[1/1] 2561 с
+готово за 2562 с
+	Command being timed: "python3 -B -m algen.table перебор G --каталог ../native-tabs --выход ../profiles/v2-G4526445700 --схемы G-4-5-28-495-762-767-769-770-771 --нитей 1 --посылок 3 --предел 4500"
+	User time (seconds): 2554.70
+	System time (seconds): 37.24
+	Percent of CPU this job got: 98%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 43:38.68
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 14922600
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 6287
+	Minor (reclaiming a frame) page faults: 23804588
+	Voluntary context switches: 17900
+	Involuntary context switches: 20405
+	Swaps: 0
+	File system inputs: 166592
+	File system outputs: 51008
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

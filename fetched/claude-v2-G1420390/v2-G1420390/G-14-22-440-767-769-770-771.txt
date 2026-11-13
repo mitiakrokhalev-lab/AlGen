@@ -1,0 +1,37 @@
+строк в библиотеке 30953, литералов 538
+не опровергнуто библиотекой 56389272, минимальных обо всех переменных 20000, запретов 17788: неизвестно 9717, выводится 8066, опровергается 5
+посылок без единого примера: 833152
+решающих значений 24 на 37 запретов, без кандидата 1 в 1 кластерах, в реестре 0
+свёрнуто вопросов 9679 (список: --полностью)
+вопросов «какие группы бывают с S»: 26 на 28 запретов; без вопроса 9689
+запретов без примера: 38, кластеров: 23
+
+== решающих значений 24: касаются 37 запретов; без кандидата 1; уже в реестре 0 ==
+значение no-finite-quotients(Sym∗Sym над F2) — запретов 4; например: bi-orderable(G) & ¬no-finite-quotients(pushout(cayley(G), cayley(G)))
+значение divisible(Sym∗Sym над F2) — запретов 4; например: divisible(pushout(cayley(G), cayley(G))) & ¬dedekind(pushout(cayley(G), cayley(G)))
+значение hopfian(Sym∗Sym над ZxQmodZ) — запретов 3; например: comp-series(sym(G)) & ¬hopfian(pushout(cayley(G), cayley(G)))
+значение embeds(pushout(cayley(G), cayley(G)), sym(G)) у ⊕_ℤ S₃ — запретов 3; например: embeds(pushout(cayley(G), cayley(G)), sym(G)) & ¬abelian(pushout(cayley(G), cayley(G)))
+значение two-generated(Sym∗Sym над 4:2) — запретов 2; например: clt(sym(G)) & ¬two-generated(pushout(cayley(G), cayley(G)))
+значение comp-series(pushout(cayley(G), cayley(G))) у G = 768:Out(32:46) — запретов 2; например: comp-series(pushout(cayley(G), cayley(G))) & ¬class-2(G)
+значение co-hopfian(pushout(cayley(G), cayley(G))) у G = 768:Out(32:46) — запретов 2; например: co-hopfian(pushout(cayley(G), cayley(G))) & ¬bounded-exponent(pushout(cayley(G), cayley(G)))
+значение two-generated(pushout(cayley(G), cayley(G))) у G = 768:Out(32:46) — запретов 1; например: two-generated(pushout(cayley(G), cayley(G))) & ¬exponent-2(pushout(cayley(G), cayley(G)))
+значение residually-nilpotent(sym(G)) у G = ∏_p C_p — запретов 1; например: residually-nilpotent(sym(G)) & ¬abelian(pushout(cayley(G), cayley(G)))
+значение residually-nilpotent(pushout(cayley(G), cayley(G))) у G = ∏_p C_p — запретов 1; например: residually-nilpotent(pushout(cayley(G), cayley(G))) & ¬exponent-2(pushout(cayley(G), cayley(G)))
+значение property-t(pushout(cayley(G), cayley(G))) у G = order 1440 — запретов 1; например: property-t(pushout(cayley(G), cayley(G))) & ¬cyclic(sym(G))
+значение proper-subs-nilpotent(sym(G)) у G = C_p (p > 10⁷⁵) — запретов 1; например: proper-subs-nilpotent(sym(G)) & ¬solvable(pushout(cayley(G), cayley(G)))
+значение odd-order(sym(G)) у G = C_p (p > 10⁷⁵) — запретов 1; например: odd-order(sym(G)) & ¬class-2(pushout(cayley(G), cayley(G)))
+значение no-finite-quotients(pushout(cayley(G), cayley(G))) у G = ⊕_ℕ PSL₂(ℝ) × UT₃(ℚ)/⟨e₁₃⟩ — запретов 1; например: divisible(G) & ¬no-finite-quotients(pushout(cayley(G), cayley(G)))
+значение metabelian(Sym∗Sym над 3:1) — запретов 1; например: metabelian(pushout(cayley(G), cayley(G))) & ¬abelian(sym(G))
+значение locally-solvable(pushout(cayley(G), cayley(G))) у G = ⊕_ℕ PSL₂(ℝ) — запретов 1; например: locally-solvable(pushout(cayley(G), cayley(G))) & ¬prime-orders(sym(G))
+значение locally-nilpotent(pushout(cayley(G), cayley(G))) у G = ⊕_ℕ PSL₂(ℝ) — запретов 1; например: locally-nilpotent(pushout(cayley(G), cayley(G))) & ¬exponent-4(sym(G))
+значение iso(G, sym(G)) у order 303264 — запретов 1; например: iso(G, sym(G)) & ¬cyclic(pushout(cayley(G), cayley(G)))
+значение indecomposable(pushout(cayley(G), cayley(G))) у G = ℤ₂ (целые 2-адические) — запретов 1; например: abelian(G) & ¬indecomposable(pushout(cayley(G), cayley(G)))
+значение hopfian(sym(G)) у G = ⊕_ℕ PSL₂(ℝ) — запретов 1; например: ¬bounded-exponent(pushout(cayley(G), cayley(G))) & ¬hopfian(sym(G))
+значение embeds(sym(G), G) у ⊕_ℕ PSL₂(ℝ) — запретов 1; например: embeds(sym(G), G) & ¬iso(G, pushout(cayley(G), cayley(G)))
+значение embeds(pushout(cayley(G), cayley(G)), G) у ⊕_ℕ PSL₂(ℝ) — запретов 1; например: embeds(pushout(cayley(G), cayley(G)), G) & ¬cyclic(sym(G))
+значение comp-series(sym(G)) у G = ⊕_ℕ PSL₂(ℝ) — запретов 1; например: ¬comp-series(sym(G)) & ¬solvable(pushout(cayley(G), cayley(G)))
+значение centerless(pushout(cayley(G), cayley(G))) у G = order 1440 — запретов 1; например: ¬centerless(pushout(cayley(G), cayley(G))) & ¬dedekind(sym(G))
+== сводятся к вырожденности: 0 вопросов на 0 запретов ==
+== без кандидата: нужен пример или правило ==
+не бывает? ¬iso(G, pushout(cayley(G), cayley(G))) & clt(pushout(cayley(G), cayley(G)))   [примеров посылок: 30951]
+== свёрнуто вопросов 9679: следуют из теории и оставленных вопросов ==

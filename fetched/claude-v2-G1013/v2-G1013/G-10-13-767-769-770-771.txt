@@ -1,0 +1,344 @@
+строк в библиотеке 30953, литералов 562
+не опровергнуто библиотекой 382155181, минимальных обо всех переменных 20000, запретов 19963: неизвестно 19565, выводится 398
+посылок без единого примера: 1683960
+решающих значений 239 на 769 запретов, без кандидата 91 в 89 кластерах, в реестре 80
+свёрнуто вопросов 18625 (список: --полностью)
+вопросов «какие группы бывают с S»: 529 на 553 запретов; без вопроса 19012
+запретов без примера: 940, кластеров: 916
+
+== решающих значений 239: касаются 769 запретов; без кандидата 91; уже в реестре 80 ==
+значение не записана подгруппа Фраттини у универсальная группа Холла U — запретов 56; например: amenable(G) & exponent-4(frattini(G)) & free-abelian(profinite(G)) & ¬indecomposable(G)
+значение не записана подгруппа Фраттини у SAut(F₃) = Aut(F₃)′ — запретов 34; например: centerless(G) & prime-order(frattini(G)) & ¬metabelian(G) & ¬two-generated(profinite(G))
+значение не записана подгруппа Фраттини у Aut(C_{p−1}) ≅ (ℤ/(p−1))ˣ (p > 10⁷⁵) — запретов 33; например: abelian(frattini(G)) & clt(G) & proper-subs-nilpotent(G) & ¬metabelian(profinite(G))
+значение не записана подгруппа Фраттини у 1944:Aut(972:455) — запретов 22; например: centerless(G) & exponent-6(G) & ¬exponent-4(frattini(G)) & ¬two-generated(profinite(G))
+значение не записана подгруппа Фраттини у ℝ⁺ × ℚ ≀ ℚ — запретов 19; например: bi-orderable(G) & centerless(profinite(G)) & ¬complemented(frattini(G))
+значение не записана подгруппа Фраттини у 43008:Out(128:1578) — запретов 15; например: amenable(G) & two-generated(G) & ¬exponent-6(frattini(G)) & ¬solvable(profinite(G))
+значение не записана подгруппа Фраттини у C2 x C2 x C2 x D8 — запретов 13; например: amenable(profinite(G)) & ¬exponent-4(frattini(G)) & ¬locally-solvable(G) & ¬two-generated(profinite(G))
+значение не записана подгруппа Фраттини у 729:309 — запретов 12; например: dedekind(frattini(G)) & odd-order(profinite(G)) & ¬class-2(G) & ¬two-generated(profinite(G))
+значение не записана подгруппа Фраттини у C2 x C2 x C2 x C2 x C2 — запретов 10; например: abelian(frattini(G)) & exponent-4(profinite(G)) & residually-finite(G) & ¬prime-orders(frattini(G))
+значение indecomposable(profinite(G)) у G = UT₅(ℤ) — запретов 10; например: embeds(frattini(G), profinite(G)) & indecomposable(profinite(G)) & ¬centerless(G) & ¬property-t(G)
+значение proper-subs-abelian(profinite(G)) у G = UT₃(ℤ) × ℤ³ — запретов 9; например: central(frattini(G)) & virtually-nilpotent(profinite(G)) & ¬hyperbolic(G) & ¬proper-subs-abelian(profinite(G))
+значение prime-orders(profinite(G)) у G = ⊕_ℕ SL(2,3) — запретов 9; например: bounded-exponent(G) & prime-orders(profinite(G)) & ¬bi-orderable(frattini(G)) & ¬exponent-3(G)
+значение co-hopfian(T (группа Томпсона)) — запретов 9; например: clt(profinite(G)) & co-hopfian(G) & finite(frattini(G)) & ¬proper-subs-finite(G)
+значение не записана подгруппа Фраттини у ℤ̂^× = ∏_p ℤ_p^× — запретов 8; например: bounded-exponent(frattini(G)) & ¬linear(profinite(G)) & ¬proper-subs-finite(profinite(G)) & ¬trivial(frattini(G))
+значение не записана подгруппа Фраттини у 2048:8192:Aut(64:208)/Z — запретов 8; например: abelian(frattini(G)) & hyperbolic(G) & p-group(profinite(G)) & ¬metabelian(G)
+значение proper-subs-cyclic(profinite(G)) у G = ⊕_ℕ C9 — запретов 8; например: abelian(G) & ¬fin-pres(frattini(G)) & ¬proper-subs-cyclic(profinite(G))
+значение iso(frattini(G), profinite(G)) у UT₃(𝔽₃(t)) — запретов 8; например: amenable(G) & iso(frattini(G), profinite(G)) & proper-subs-nilpotent(G) & ¬hall(frattini(G))
+значение exponent-6(profinite(G)) у G = ⊕_ℕ C5 : C4 — запретов 8; например: exponent-4(frattini(G)) & exponent-6(profinite(G)) & ¬exponent-3(frattini(G)) & ¬indecomposable(G)
+значение centerless(profinite(G)) у G = ⊕_ℕ SL(2,3) — запретов 8; например: centerless(profinite(G)) & central(frattini(G)) & ¬contains-free(G) & ¬no-finite-quotients(frattini(G))
+значение не записана подгруппа Фраттини у ℚ/ℤ[1/2] ≅ ⊕_{p > 2} ℤ(p^∞) × Aff⁺(ℝ) = ℝ ⋊ ℝ*₊ — запретов 7; например: bi-orderable(profinite(G)) & bounded-exponent(frattini(G)) & solvable(G) & ¬bi-orderable(G)
+значение proper-subs-nilpotent(profinite(G)) у G = ⊕_ℕ ((C₄² ⋊ C₃) × D₁₈) — запретов 7; например: centerless(G) & metabelian(G) & proper-subs-nilpotent(profinite(G)) & ¬kaplansky(frattini(G))
+значение fully-invariant(C2 x C2 x C2 x D8) — запретов 7; например: bounded-exponent(frattini(G)) & fully-invariant(frattini(G)) & ¬class-2(profinite(G)) & ¬two-primes(frattini(G))
+значение co-hopfian(Aut(F₂)) — запретов 7; например: clt(frattini(G)) & co-hopfian(G) & ¬centerless(frattini(G)) & ¬iso(G, profinite(G))
+значение не записана подгруппа Фраттини у E₂(ℂ[x₁, x₂, …]) — запретов 6; например: centerless(profinite(G)) & contains-free(G) & ¬proper-subs-abelian(frattini(G))
+значение не записана подгруппа Фраттини у 243:37 — запретов 6; например: exponent-3(frattini(G)) & fin-gen(frattini(G)) & proper-subs-nilpotent(profinite(G)) & ¬proper-subs-cyclic(frattini(G))
+значение не записана подгруппа Фраттини у 1080:Aut(1080:Aut(90:3)) — запретов 6; например: centerless(profinite(G)) & metabelian(G) & polycyclic(frattini(G)) & ¬two-generated(frattini(G))
+значение proper-subs-finite(profinite(G)) у G = ⊕_ℕ C6 x C2 — запретов 6; например: abelian(G) & locally-cyclic(frattini(G)) & proper-subs-finite(profinite(G)) & ¬co-hopfian(G)
+значение proper-subs-abelian(profinite(G)) у G = ⊕C₃ × UT₃(𝔽₃(t)) — запретов 6; например: abelian(frattini(G)) & nilpotent(profinite(G)) & ¬fin-gen(G) & ¬proper-subs-abelian(profinite(G))
+значение linear-c(profinite(G)) у G = UT₅(ℤ) × ℤ₃^× ≅ C₂ × ℤ₃ — запретов 6; например: linear(G) & linear-c(profinite(G)) & ¬embeds(G, frattini(G)) & ¬rec-pres-ctbl(frattini(G))
+значение linear(profinite(G)) у G = UT₅(ℤ) — запретов 6; например: fin-pres(frattini(G)) & torsion-free(G) & ¬linear(profinite(G))
+значение kaplansky(profinite(G)) у G = Dih(ℤ(2^∞)) = ℤ(2^∞) ⋊ C₂ — запретов 6; например: co-hopfian(G) & ¬class-2(G) & ¬kaplansky(profinite(G)) & ¬word-problem(frattini(G))
+значение не записана подгруппа Фраттини у C2 x C2 x C2 x Q8 — запретов 5; например: dedekind(G) & ¬proper-subs-abelian(G) & ¬simple(frattini(G)) & ¬two-generated(profinite(G))
+значение virtually-nilpotent(profinite(G)) у G = 𝒢 (группа Григорчука) × ⊕_ℕ C₃₆ — запретов 5; например: virtually-nilpotent(profinite(G)) & ¬exponent-3(profinite(G)) & ¬solvable(frattini(G))
+значение prime-orders(C_p (p > 10⁷⁵)) — запретов 5; например: embeds(frattini(G), profinite(G)) & hopfian(G) & prime-orders(G) & ¬comp-series(G)
+значение perfect(profinite(G)) у G = SL(2,5) × UT₃(ℤ) (группа Гейзенберга) — запретов 5; например: perfect(profinite(G)) & two-generated(frattini(G)) & virtually-nilpotent(G) & ¬proper-subs-finite(G)
+значение p-group(profinite(G)) у G = 𝒢 (группа Григорчука) — запретов 5; например: fin-gen(G) & p-group(profinite(G)) & ¬embeds(profinite(G), frattini(G)) & ¬polycyclic(G)
+значение iso(G, profinite(G)) у ℤ₃^× ≅ C₂ × ℤ₃ — запретов 5; например: iso(G, profinite(G)) & proper-subs-abelian(profinite(G)) & ¬exponent-4(frattini(G)) & ¬two-generated(frattini(G))
+значение hyperbolic(QD16) — запретов 5; например: hyperbolic(G) & order-p2(frattini(G)) & ¬clt(G) & ¬two-generated(profinite(G))
+значение fully-invariant(C2) — запретов 5; например: centerless(profinite(G)) & fully-invariant(frattini(G)) & prime-order(frattini(G)) & ¬odd-order(frattini(G))
+значение exponent-6(GL(2,5) x S3) — запретов 5; например: exponent-4(frattini(G)) & exponent-6(profinite(G)) & finite-index(frattini(G)) & ¬two-primes(G)
+значение divisible(группа Маклейна M(ℚ, 𝔽₂)) — запретов 5; например: divisible(G) & locally-finite(G) & ¬dedekind(G) & ¬embeds(frattini(G), profinite(G))
+значение co-hopfian(profinite(G)) у G = UT₃(ℤ) (группа Гейзенберга) — запретов 5; например: co-hopfian(profinite(G)) & indecomposable(frattini(G)) & ¬p-group(frattini(G)) & ¬whitehead(profinite(G))
+значение не записана подгруппа Фраттини у ⊕_ℕ UT₃(ℤ) × ℤ ≀ ℤ — запретов 4; например: bi-orderable(G) & metabelian(profinite(G)) & prime-orders(frattini(G)) & ¬linear-c(G)
+значение не записана подгруппа Фраттини у ⊕_ℕ SL(2, 5) × ⊕_p C_p² — запретов 4; например: locally-finite(G) & ¬bounded-exponent(profinite(G)) & ¬order-pq(frattini(G)) & ¬virtually-nilpotent(G)
+значение torsion-free(profinite(G)) у G = ⊕ℤ × ℤ[1/p : p ∈ S] (S — нерекурсивно перечислимое множество простых) — запретов 4; например: complemented(frattini(G)) & exponent-6(frattini(G)) & torsion-free(profinite(G)) & ¬iso(frattini(G), profinite(G))
+значение rec-pres-ctbl(⊕_i R_{P_i}, R_P = ⟨1/p : p ∈ P⟩, P_i — непересекающиеся бесконечные множества простых) — запретов 4; например: exponent-6(frattini(G)) & rec-pres-ctbl(G) & ¬periodic(profinite(G)) & ¬proper-subs-cyclic(frattini(G))
+значение proper-subs-cyclic(profinite(G)) у G = UT₄(ℤ) — запретов 4; например: left-orderable(frattini(G)) & proper-subs-cyclic(profinite(G)) & ¬class-2(profinite(G)) & ¬order-pq(profinite(G))
+значение proper-subs-cyclic(C8 × ℤ) — запретов 4; например: abelian(G) & proper-subs-cyclic(G) & ¬cyclic(profinite(G)) & ¬exponent-3(frattini(G))
+значение periodic(profinite(G)) у G = ⊕_p UT₃(𝔽_p)^p — запретов 4; например: fully-invariant(frattini(G)) & periodic(frattini(G)) & ¬periodic(profinite(G)) & ¬rec-pres(frattini(G))
+значение locally-nilpotent(profinite(G)) у G = ℤ ≀ ℤ — запретов 4; например: exponent-3(frattini(G)) & locally-nilpotent(profinite(G)) & ¬class-2(profinite(G)) & ¬iso(G, profinite(G))
+значение locally-finite(profinite(G)) у G = Q8 × 𝒢 (группа Григорчука) — запретов 4; например: fin-gen(frattini(G)) & locally-finite(profinite(G)) & ¬indecomposable(frattini(G)) & ¬virtually-nilpotent(G)
+значение left-orderable(profinite(G)) у G = ⊕_ℕ UT₃(ℤ) — запретов 4; например: embeds(frattini(G), profinite(G)) & left-orderable(profinite(G)) & solvable(G) & ¬divisible(G)
+значение kaplansky(profinite(G)) у G = UT₄(ℤ) × ℤ⁵ — запретов 4; например: fin-pres(G) & kaplansky(profinite(G)) & linear-c(G) & ¬iso(G, frattini(G))
+значение hopfian(группа Маклейна M(ℚ, 𝔽₂)) — запретов 4; например: exponent-4(profinite(G)) & hopfian(frattini(G)) & ¬solvable(frattini(G))
+значение hopfian(profinite(G)) у G = ⊕ℤ — запретов 4; например: bounded-exponent(frattini(G)) & hopfian(profinite(G)) & virtually-nilpotent(G) & ¬hyperbolic(G)
+значение fully-invariant(ℤ₃^× ≅ C₂ × ℤ₃) — запретов 4; например: fully-invariant(frattini(G)) & linear(G) & ¬cyclic(profinite(G)) & ¬word-problem(frattini(G))
+значение exponent-6(profinite(G)) у G = C9 × UT₅(𝔽₂) — запретов 4; например: exponent-6(profinite(G)) & polynomial-growth(frattini(G)) & ¬indecomposable(frattini(G)) & ¬p-group(frattini(G))
+значение embeds(frattini(G), profinite(G)) у UT₃(ℚ)/⟨e₁₃⟩ — запретов 4; например: countable(G) & embeds(frattini(G), profinite(G)) & free-abelian(profinite(G)) & ¬comp-series(G)
+значение embeds(frattini(G), profinite(G)) у F (группа Томпсона) — запретов 4; например: hopfian(frattini(G)) & proper-subs-finite(frattini(G)) & ¬comp-series(G) & ¬embeds(frattini(G), profinite(G))
+значение two-primes(profinite(G)) у G = (C3 x C3) : C3 × UT₅(𝔽₂) — запретов 3; например: embeds(profinite(G), G) & proper-subs-nilpotent(G) & ¬indecomposable(frattini(G)) & ¬two-primes(profinite(G))
+значение torsion-free(profinite(G)) у G = QD16 × S₃ ≀ ℤ — запретов 3; например: abelian(frattini(G)) & torsion-free(profinite(G)) & ¬central(frattini(G))
+значение residually-nilpotent(profinite(G)) у G = Q8 × ℤ ∗ C₃ — запретов 3; например: embeds(frattini(G), profinite(G)) & residually-nilpotent(profinite(G)) & ¬exponent-3(frattini(G)) & ¬locally-nilpotent(G)
+значение proper-subs-nilpotent(profinite(G)) у G = S₃ × ℤ² — запретов 3; например: centerless(frattini(G)) & proper-subs-nilpotent(profinite(G)) & ¬dedekind(profinite(G)) & ¬prime-orders(G)
+значение proper-subs-finite(profinite(G)) у G = ⊕_ℕ D18 — запретов 3; например: bounded-exponent(frattini(G)) & ¬exponent-4(frattini(G)) & ¬proper-subs-finite(profinite(G)) & ¬simple(frattini(G))
+значение proper-subs-cyclic(profinite(G)) у G = 𝒢 (группа Григорчука) — запретов 3; например: p-group(G) & proper-subs-cyclic(profinite(G)) & ¬abelian(profinite(G)) & ¬exponent-2(frattini(G))
+значение proper-subs-cyclic(profinite(G)) у G = Dih(ℤ(2^∞)²) — запретов 3; например: divisible(frattini(G)) & ¬exponent-3(frattini(G)) & ¬proper-subs-cyclic(profinite(G))
+значение proper-subs-abelian(profinite(G)) у G = 𝒢 (группа Григорчука) — запретов 3; например: proper-subs-abelian(profinite(G)) & ¬class-2(G) & ¬embeds(profinite(G), frattini(G)) & ¬two-primes(G)
+значение prime-orders(profinite(G)) у G = ⊕_ℕ D18 — запретов 3; например: exponent-3(frattini(G)) & ¬prime-orders(profinite(G)) & ¬proper-subs-cyclic(frattini(G)) & ¬property-t(G)
+значение prime-orders(profinite(G)) у G = C9 × C4 x C4 — запретов 3; например: prime-orders(profinite(G)) & two-generated(G) & ¬exponent-2(frattini(G)) & ¬indecomposable(G)
+значение prime-orders(order 24261120) — запретов 3; например: finite(G) & prime-orders(profinite(G)) & ¬centerless(frattini(G)) & ¬odd-order(G)
+значение polycyclic(profinite(G)) у G = ℤ(2^∞) × ℤ[1/2]² — запретов 3; например: polycyclic(profinite(G)) & residually-nilpotent(G) & ¬finite(G) & ¬whole(frattini(G))
+значение perfect(profinite(G)) у G = ⊕C₃ × T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) — запретов 3; например: cyclic(frattini(G)) & no-finite-quotients(frattini(G)) & perfect(profinite(G)) & ¬centerless(G)
+значение locally-nilpotent(Aut(F₂)) — запретов 3; например: comp-series(frattini(G)) & locally-nilpotent(G) & whitehead(frattini(G)) & ¬abelian(profinite(G))
+значение linear(profinite(G)) у G = ⊕_ℕ C9 — запретов 3; например: amenable(G) & linear(profinite(G)) & ¬linear-c(frattini(G)) & ¬whole(frattini(G))
+значение left-orderable(profinite(G)) у G = QD16 × T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) — запретов 3; например: left-orderable(profinite(G)) & polynomial-growth(frattini(G)) & ¬perfect(G) & ¬torsion-free(frattini(G))
+значение indecomposable(profinite(G)) у G = Q_sf = ⟨1/p : p простое⟩ = {a/n : n бесквадратно} ⊂ ℚ — запретов 3; например: abelian(G) & indecomposable(profinite(G)) & ¬maximal(frattini(G)) & ¬prime-orders(profinite(G))
+значение hopfian(profinite(G)) у G = ⊕_ℕ SL(2,3) — запретов 3; например: hopfian(profinite(G)) & locally-finite(G) & residually-finite(frattini(G)) & ¬hopfian(G)
+значение free(profinite(G)) у G = C₂ × M(ℚ, 𝔽₂) — запретов 3; например: finite-index(frattini(G)) & locally-nilpotent(frattini(G)) & ¬free(profinite(G)) & ¬linear-c(frattini(G))
+значение exponent-4(profinite(G)) у G = ⊕_ℕ QD16 — запретов 3; например: exponent-4(profinite(G)) & ¬clt(frattini(G)) & ¬polycyclic(profinite(G))
+значение comp-series(profinite(G)) у G = ℤ^ℕ × SL(2, 5) × ℤ — запретов 3; например: comp-series(profinite(G)) & embeds(frattini(G), profinite(G)) & ¬countable(G) & ¬iso(frattini(G), profinite(G))
+значение co-hopfian(S̃L₂(ℝ) (универсальная накрывающая)) — запретов 3; например: centerless(profinite(G)) & co-hopfian(G) & hyperbolic(frattini(G)) & ¬centerless(G)
+значение co-hopfian(Aff⁺(ℝ) = ℝ ⋊ ℝ*₊) — запретов 3; например: co-hopfian(G) & hopfian(profinite(G)) & property-t(frattini(G)) & ¬fin-gen(G)
+значение centerless(profinite(G)) у G = 𝒢 (группа Григорчука) — запретов 3; например: centerless(frattini(G)) & ¬centerless(profinite(G)) & ¬iso(G, profinite(G)) & ¬proper-subs-abelian(G)
+значение centerless(profinite(G)) у G = SL(2,5) × ℤ² × C₂ — запретов 3; например: centerless(profinite(G)) & cyclic(frattini(G)) & ¬odd-order(frattini(G)) & ¬odd-order(profinite(G))
+значение bi-orderable(profinite(G)) у G = ⊕ℤ — запретов 3; например: bi-orderable(profinite(G)) & central(frattini(G)) & metabelian(G) & ¬divisible(G)
+значение не записана подгруппа Фраттини у 768:Out(64:64) — запретов 2; например: indecomposable(G) & perfect(frattini(G)) & ¬centerless(profinite(G)) & ¬class-2(G)
+значение не записана подгруппа Фраттини у 288:1038 — запретов 2; например: centerless(G) & ¬exponent-2(frattini(G)) & ¬indecomposable(profinite(G)) & ¬two-generated(profinite(G))
+значение whitehead(profinite(G)) у G = ⊕ℤ × ℤ[1/p : p ∈ S] (S — нерекурсивно перечислимое множество простых) — запретов 2; например: divisible(frattini(G)) & free(frattini(G)) & whitehead(profinite(G)) & ¬iso(frattini(G), profinite(G))
+значение virtually-solvable(profinite(G)) у G = 𝒢 (группа Григорчука) × 𝒢 (группа Григорчука) — запретов 2; например: fin-gen(G) & finite-index(frattini(G)) & virtually-solvable(profinite(G)) & ¬proper-subs-finite(frattini(G))
+значение virtually-nilpotent(profinite(G)) у G = ⊕_ℕ A₅ — запретов 2; например: proper-subs-cyclic(frattini(G)) & virtually-nilpotent(profinite(G)) & ¬metabelian(profinite(G)) & ¬property-t(G)
+значение two-primes(C_p (p > 10⁷⁵)) — запретов 2; например: finite(frattini(G)) & locally-nilpotent(G) & odd-order(profinite(G)) & ¬two-primes(G)
+значение two-generated(profinite(G)) у G = C₂ × M(ℚ, 𝔽₂) — запретов 2; например: indecomposable(frattini(G)) & locally-finite(frattini(G)) & ¬proper-subs-finite(frattini(G)) & ¬two-generated(profinite(G))
+значение two-generated(T (группа Томпсона)) — запретов 2; например: exponent-6(profinite(G)) & rec-pres(G) & ¬finite-index(frattini(G)) & ¬two-generated(G)
+значение residually-nilpotent(ℚ ≀ ℚ) — запретов 2; например: exponent-6(profinite(G)) & residually-nilpotent(G) & ¬divisible(frattini(G)) & ¬prime-orders(frattini(G))
+значение proper-subs-finite(profinite(G)) у G = ⊕ℤ × ℚ³ — запретов 2; например: amenable(G) & proper-subs-finite(profinite(G)) & ¬embeds(frattini(G), profinite(G)) & ¬whole(frattini(G))
+значение proper-subs-finite(profinite(G)) у G = ℤ — запретов 2; например: fin-pres(G) & kaplansky(G) & proper-subs-finite(profinite(G)) & ¬iso(frattini(G), profinite(G))
+значение proper-subs-abelian(profinite(G)) у G = Dih(ℤ(2^∞)²) — запретов 2; например: co-hopfian(G) & proper-subs-abelian(profinite(G)) & ¬central(frattini(G)) & ¬kaplansky(G)
+значение periodic(profinite(G)) у G = 𝒢 (группа Григорчука) × 𝒢 (группа Григорчука) — запретов 2; например: fin-gen(frattini(G)) & periodic(profinite(G)) & ¬proper-subs-finite(frattini(G)) & ¬whitehead(profinite(G))
+значение perfect(profinite(G)) у G = QD16 × GL₂(ℤ)′ — запретов 2; например: locally-cyclic(frattini(G)) & order-p2(frattini(G)) & perfect(profinite(G))
+значение metabelian(profinite(G)) у G = ℤ(2^∞) × V₄ × T (группа Томпсона) — запретов 2; например: divisible(frattini(G)) & ¬left-orderable(frattini(G)) & ¬metabelian(profinite(G))
+значение locally-solvable(profinite(G)) у G = ℤ × Sp₄(ℤ) — запретов 2; например: contains-free(G) & countable(G) & locally-solvable(profinite(G)) & ¬iso(frattini(G), profinite(G))
+значение locally-nilpotent(profinite(G)) у G = UT₅(ℤ) × C₂ ≀ ℤ² — запретов 2; например: locally-nilpotent(profinite(G)) & rec-pres(frattini(G)) & ¬indecomposable(frattini(G)) & ¬virtually-nilpotent(G)
+значение locally-finite(profinite(G)) у G = ℤ(2^∞) × ⊕ℤ — запретов 2; например: dedekind(frattini(G)) & proper-subs-finite(frattini(G)) & ¬locally-finite(profinite(G)) & ¬two-generated(frattini(G))
+значение linear-c(profinite(G)) у G = ℤ² × UT₅(𝔽₂) — запретов 2; например: fin-gen(G) & linear-c(frattini(G)) & ¬complemented(frattini(G)) & ¬linear-c(profinite(G))
+значение linear(profinite(G)) у G = группа Хантцше — Вендт × UT₅(𝔽₂) — запретов 2; например: polycyclic(frattini(G)) & ¬central(frattini(G)) & ¬linear(profinite(G)) & ¬locally-nilpotent(G)
+значение hopfian(ℚ ≀ ℚ) — запретов 2; например: bi-orderable(profinite(G)) & hopfian(frattini(G)) & metabelian(G) & ¬divisible(frattini(G))
+значение free-abelian(profinite(G)) у G = UT₄(ℤ) × T (группа Томпсона) — запретов 2; например: free-abelian(profinite(G)) & rec-pres(G) & ¬complemented(frattini(G))
+значение free(profinite(G)) у G = группа Гейзенберга бесконечного ранга — запретов 2; например: countable(G) & free(profinite(G)) & ¬divisible(frattini(G)) & ¬embeds(G, frattini(G))
+значение exponent-6(profinite(G)) у G = QD16 × ⊕_ℕ C₆ — запретов 2; например: cyclic(frattini(G)) & exponent-6(profinite(G)) & locally-nilpotent(G) & ¬exponent-6(frattini(G))
+значение exponent-6(profinite(G)) у G = C₂ × M(ℚ, 𝔽₂) — запретов 2; например: index-2(frattini(G)) & ¬exponent-6(profinite(G)) & ¬fin-gen(frattini(G))
+значение exponent-6(profinite(G)) у G = C7 × SL(2,3) — запретов 2; например: exponent-2(frattini(G)) & exponent-6(profinite(G)) & prime-order(frattini(G)) & ¬free(profinite(G))
+значение exponent-3(profinite(G)) у G = 𝒢 (группа Григорчука) × ℤ² × ℚ/ℤ — запретов 2; например: exponent-3(profinite(G)) & ¬centerless(frattini(G)) & ¬virtually-nilpotent(frattini(G))
+значение exponent-3(profinite(G)) у G = Dih(ℤ(2^∞)²) — запретов 2; например: co-hopfian(G) & finite-index(frattini(G)) & ¬bounded-exponent(G) & ¬exponent-3(profinite(G))
+значение exponent-2(profinite(G)) у G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) — запретов 2; например: embeds(G, frattini(G)) & ¬exponent-2(profinite(G)) & ¬solvable(G)
+значение embeds(profinite(G), G) у ℤ₃^× ≅ C₂ × ℤ₃ — запретов 2; например: central(frattini(G)) & embeds(profinite(G), G) & ¬clt(profinite(G)) & ¬two-generated(frattini(G))
+значение embeds(frattini(G), profinite(G)) у группа Гейзенберга бесконечного ранга — запретов 2; например: bi-orderable(frattini(G)) & fully-invariant(frattini(G)) & ¬embeds(frattini(G), profinite(G)) & ¬finite-index(frattini(G))
+значение dedekind(profinite(G)) у G = E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩ × E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩ — запретов 2; например: dedekind(profinite(G)) & odd-order(frattini(G)) & ¬abelian(G) & ¬exponent-2(frattini(G))
+значение cyclic(profinite(G)) у G = ⊕C₃ × UT₃(𝔽₃(t)) — запретов 2; например: cyclic(profinite(G)) & p-group(frattini(G)) & ¬free-abelian(profinite(G)) & ¬indecomposable(frattini(G))
+значение cyclic(profinite(G)) у G = Dih(ℤ(2^∞)²) — запретов 2; например: cyclic(profinite(G)) & proper-subs-abelian(frattini(G)) & ¬central(frattini(G))
+значение contains-free(profinite(G)) у G = 𝒢 (группа Григорчука) × ℤ² × C₂ — запретов 2; например: contains-free(profinite(G)) & ¬exponent-2(frattini(G))
+значение comp-series(profinite(G)) у G = ℚ² × ⊕_p C_p^{2p} — запретов 2; например: comp-series(profinite(G)) & linear-c(frattini(G)) & virtually-nilpotent(G) & ¬linear(G)
+значение clt(profinite(G)) у G = ∏C₂ × ℤ × ℚ/ℤ — запретов 2; например: clt(profinite(G)) & locally-finite(frattini(G)) & virtually-nilpotent(G) & ¬rec-pres-ctbl(G)
+значение clt(profinite(G)) у G = F (группа Томпсона) — запретов 2; например: bi-orderable(G) & clt(profinite(G)) & proper-subs-finite(frattini(G)) & ¬iso(frattini(G), profinite(G))
+значение amenable(profinite(G)) у G = 𝒢 (группа Григорчука) × ⊕_p C_p² — запретов 2; например: amenable(profinite(G)) & p-group(frattini(G)) & ¬perfect(G) & ¬virtually-nilpotent(frattini(G))
+значение не записана подгруппа Фраттини у ⊕ℤ × ⊕_ℕ UT₃(ℤ) — запретов 1; например: proper-subs-finite(frattini(G)) & ¬finite(profinite(G)) & ¬order-pq(frattini(G)) & ¬p-group(frattini(G))
+значение не записана подгруппа Фраттини у ⊕_ℤ S₃ × ⊕_ℕ C₆ — запретов 1; например: exponent-6(G) & ¬complemented(frattini(G)) & ¬embeds(profinite(G), G) & ¬prime-orders(G)
+значение не записана подгруппа Фраттини у ⊕_ℤ S₃ × ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 1; например: centerless(G) & locally-solvable(frattini(G)) & ¬bounded-exponent(profinite(G)) & ¬exponent-3(frattini(G))
+значение не записана подгруппа Фраттини у ∏C₂ × ⊕_p UT₃(𝔽_p)^p — запретов 1; например: locally-finite(frattini(G)) & ¬bounded-exponent(frattini(G)) & ¬exponent-6(profinite(G)) & ¬rec-pres-ctbl(G)
+значение не записана подгруппа Фраттини у ℤ(2^∞) × UT₅(ℚ) — запретов 1; например: co-hopfian(frattini(G)) & cyclic(profinite(G)) & ¬hopfian(G) & ¬proper-subs-abelian(frattini(G))
+значение не записана подгруппа Фраттини у ℝ⁺ × S̃L₂(ℝ) (универсальная накрывающая) — запретов 1; например: clt(profinite(G)) & locally-finite(frattini(G)) & torsion-free(G) & ¬bi-orderable(G)
+значение не записана подгруппа Фраттини у ℚ ≀ ℚ × H∞(ℚ): ⟨xᵢ, yᵢ, z | [xᵢ, yᵢ] = z⟩ над ℚ (Гейзенберг счётного ранга над ℚ) — запретов 1; например: linear(frattini(G)) & polycyclic(profinite(G)) & solvable(G) & ¬linear-c(G)
+значение не записана подгруппа Фраттини у U ≀ U (U — группа Холла) — запретов 1; например: co-hopfian(profinite(G)) & fin-pres(frattini(G)) & locally-finite(G) & ¬comp-series(G)
+значение не записана подгруппа Фраттини у SL_∞(ℂ) = ⋃ SL_{n!}(ℂ) — запретов 1; например: indecomposable(G) & ¬co-hopfian(G) & ¬countable(frattini(G)) & ¬iso(frattini(G), profinite(G))
+значение не записана подгруппа Фраттини у F′ (коммутант группы Томпсона F) — запретов 1; например: kaplansky(G) & locally-nilpotent(profinite(G)) & periodic(frattini(G)) & ¬linear-c(G)
+значение не записана подгруппа Фраттини у C6 x C2 x C2 x C2 x C2 — запретов 1; например: exponent-6(profinite(G)) & proper-subs-nilpotent(G) & ¬cyclic(frattini(G)) & ¬prime-orders(profinite(G))
+значение не записана подгруппа Фраттини у B(2, n), n нечётно ⩾ 665 × B(2, n), n нечётно ⩾ 665 — запретов 1; например: bounded-exponent(G) & rec-pres(G) & virtually-nilpotent(frattini(G)) & ¬iso(G, profinite(G))
+значение не записана подгруппа Фраттини у 8192:Out(512:Aut(64:17)) — запретов 1; например: solvable(profinite(G)) & ¬divisible(frattini(G)) & ¬metabelian(frattini(G))
+значение не записана подгруппа Фраттини у 480:1134 — запретов 1; например: polycyclic(profinite(G)) & ¬clt(G) & ¬torsion-free(frattini(G)) & ¬two-primes(profinite(G))
+значение whitehead(ℝ⁺ × ⊕_ℕ ℚ) — запретов 1; например: complemented(frattini(G)) & whitehead(frattini(G)) & ¬embeds(frattini(G), profinite(G))
+значение whitehead(profinite(G)) у G = UT₅(𝔽₂) × T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) — запретов 1; например: clt(frattini(G)) & whitehead(profinite(G)) & ¬indecomposable(frattini(G))
+значение two-primes(profinite(G)) у G = ℤ(2^∞) × V₄ × ℤ⁵ — запретов 1; например: proper-subs-cyclic(frattini(G)) & two-primes(profinite(G)) & ¬free(profinite(G)) & ¬two-generated(frattini(G))
+значение two-primes(profinite(G)) у G = C_p (p > 10⁷⁵) × C4 x C4 — запретов 1; например: class-2(profinite(G)) & linear(profinite(G)) & order-p2(frattini(G)) & ¬two-primes(profinite(G))
+значение two-generated(profinite(G)) у G = ⊕_ℕ ℚ/ℤ × UT₅(𝔽₂) — запретов 1; например: nilpotent(G) & periodic(frattini(G)) & two-generated(profinite(G)) & ¬metabelian(G)
+значение two-generated(profinite(G)) у G = C8 × C4 x C4 — запретов 1; например: abelian(G) & fin-pres(frattini(G)) & two-generated(profinite(G)) & ¬two-generated(frattini(G))
+значение two-generated(profinite(G)) у G = C7 × C7 : C3 — запретов 1; например: left-orderable(frattini(G)) & odd-order(profinite(G)) & ¬dedekind(G) & ¬two-generated(profinite(G))
+значение two-generated(SL(2,3) × ℤ[ω] ⋊ C₃) — запретов 1; например: two-generated(G) & ¬left-orderable(frattini(G)) & ¬proper-subs-finite(profinite(G))
+значение two-generated(C_p (p > 10⁷⁵)) — запретов 1; например: odd-order(profinite(G)) & torsion-free(frattini(G)) & ¬exponent-6(profinite(G)) & ¬two-generated(G)
+значение two-generated(A6) — запретов 1; например: odd-order(frattini(G)) & simple(frattini(G)) & two-generated(G) & ¬locally-solvable(profinite(G))
+значение torsion-free(profinite(G)) у G = ℤ³ × ℤ(2^∞) — запретов 1; например: proper-subs-cyclic(frattini(G)) & ¬fin-pres(frattini(G)) & ¬torsion-free(profinite(G))
+значение torsion-free(profinite(G)) у G = T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) × ⊕_ℕ C₃₆ — запретов 1; например: exponent-6(frattini(G)) & torsion-free(profinite(G)) & ¬two-generated(frattini(G))
+значение residually-nilpotent(profinite(G)) у G = 𝒢 (группа Григорчука) × ∏_p C_p — запретов 1; например: rec-pres(frattini(G)) & ¬countable(G) & ¬exponent-2(frattini(G)) & ¬residually-nilpotent(profinite(G))
+значение residually-nilpotent(profinite(G)) у G = ⊕_p C_p × ℤ ≀ C₂ = ℤ² ⋊ C₂ — запретов 1; например: odd-order(frattini(G)) & residually-nilpotent(profinite(G)) & torsion-free(frattini(G)) & ¬abelian(profinite(G))
+значение residually-nilpotent(profinite(G)) у G = Dih(ℤ(2^∞)) = ℤ(2^∞) ⋊ C₂ — запретов 1; например: proper-subs-nilpotent(G) & residually-nilpotent(profinite(G)) & ¬finite(frattini(G)) & ¬nilpotent(G)
+значение rec-pres-ctbl(ℤ³ × ⊕_ℕ C₆) — запретов 1; например: ¬linear(frattini(G)) & ¬proper-subs-cyclic(profinite(G)) & ¬rec-pres-ctbl(frattini(G))
+значение proper-subs-nilpotent(profinite(G)) у G = 𝒢 (группа Григорчука) × 𝒢 (группа Григорчука) — запретов 1; например: proper-subs-nilpotent(profinite(G)) & ¬abelian(frattini(G)) & ¬nilpotent(profinite(G))
+значение proper-subs-nilpotent(C2 x (((C2 x C2 x C2 x C2) : ((C4 x C2) : D8)) : C3)) — запретов 1; например: finite(G) & proper-subs-nilpotent(profinite(G)) & ¬cyclic(frattini(G)) & ¬residually-nilpotent(G)
+значение proper-subs-finite(profinite(G)) у G = ℤ₂ (целые 2-адические) × ⊕_ℕ ℚ — запретов 1; например: proper-subs-finite(profinite(G)) & ¬embeds(frattini(G), profinite(G)) & ¬free(profinite(G))
+значение proper-subs-cyclic(C_p (p > 10⁷⁵)) — запретов 1; например: bi-orderable(frattini(G)) & proper-subs-cyclic(G) & ¬hall(frattini(G)) & ¬left-orderable(profinite(G))
+значение proper-subs-cyclic(C9 × ℤ) — запретов 1; например: proper-subs-cyclic(G) & ¬clt(profinite(G)) & ¬exponent-4(frattini(G))
+значение proper-subs-cyclic(8192:Out(512:Aut(96:172))) — запретов 1; например: p-group(profinite(G)) & proper-subs-cyclic(G) & ¬indecomposable(G) & ¬kaplansky(frattini(G))
+значение proper-subs-abelian(profinite(G)) у G = 𝒢 (группа Григорчука) × ⊕_ℕ ℤ(2^∞) — запретов 1; например: proper-subs-abelian(profinite(G)) & ¬centerless(frattini(G)) & ¬solvable(frattini(G))
+значение proper-subs-abelian(profinite(G)) у G = Sp₄(ℤ) × Sp₄(ℤ) — запретов 1; например: order-p2(frattini(G)) & ¬embeds(profinite(G), G) & ¬indecomposable(frattini(G)) & ¬proper-subs-abelian(profinite(G))
+значение proper-subs-abelian(profinite(G)) у G = (C3 x C3) : C3 × ⊕C₃ — запретов 1; например: exponent-3(profinite(G)) & proper-subs-abelian(profinite(G)) & ¬free(frattini(G)) & ¬two-generated(profinite(G))
+значение prime-orders(profinite(G)) у G = 𝒢 (группа Григорчука) × 𝒢 (группа Григорчука) — запретов 1; например: prime-orders(profinite(G)) & word-problem(frattini(G)) & ¬hyperbolic(frattini(G))
+значение prime-orders(profinite(G)) у G = 𝒢 (группа Григорчука) × ⊕_ℕ C₃₆ — запретов 1; например: prime-orders(profinite(G)) & ¬nilpotent(profinite(G)) & ¬p-group(frattini(G))
+значение prime-orders(profinite(G)) у G = ⊕_ℕ Q8 — запретов 1; например: exponent-4(G) & prime-orders(profinite(G)) & ¬torsion-free(frattini(G))
+значение prime-orders(profinite(G)) у G = ⊕_ℕ C₆ × ⊕_p C_p^{2p} — запретов 1; например: abelian(G) & prime-orders(profinite(G)) & ¬embeds(profinite(G), frattini(G)) & ¬p-group(G)
+значение prime-orders(profinite(G)) у G = ℤ₂ (целые 2-адические) × ⊕_ℕ ℚ — запретов 1; например: iso(G, frattini(G)) & ¬hopfian(G) & ¬prime-orders(profinite(G))
+значение prime-order(profinite(G)) у G = 𝒢 (группа Григорчука) × S₃ ≀ ℤ — запретов 1; например: ¬locally-cyclic(frattini(G)) & ¬no-finite-quotients(frattini(G)) & ¬prime-order(profinite(G)) & ¬residually-finite(G)
+значение prime-order(profinite(G)) у G = ℤ(2^∞) × V₄ — запретов 1; например: co-hopfian(G) & ¬centerless(profinite(G)) & ¬hopfian(frattini(G)) & ¬prime-order(profinite(G))
+значение periodic(profinite(G)) у G = ⊕_p UT₃(𝔽_p) — запретов 1; например: linear-c(frattini(G)) & periodic(profinite(G)) & ¬fin-pres(frattini(G)) & ¬whitehead(profinite(G))
+значение periodic(profinite(G)) у G = ⊕_p C_p² × C4 x C4 — запретов 1; например: periodic(profinite(G)) & two-generated(frattini(G)) & ¬bounded-exponent(G) & ¬indecomposable(frattini(G))
+значение periodic(profinite(G)) у G = ℤ³ × ℤ(2^∞) — запретов 1; например: proper-subs-cyclic(frattini(G)) & ¬periodic(profinite(G)) & ¬rec-pres(frattini(G))
+значение periodic(profinite(G)) у G = T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) — запретов 1; например: contains-free(G) & periodic(profinite(G)) & word-problem(G) & ¬iso(frattini(G), profinite(G))
+значение periodic(profinite(G)) у G = QD16 × S₃ ≀ ℤ — запретов 1; например: locally-solvable(G) & order-p2(frattini(G)) & periodic(profinite(G)) & ¬virtually-nilpotent(G)
+значение perfect(profinite(G)) у G = 𝒢 (группа Григорчука) — запретов 1; например: p-group(G) & perfect(profinite(G)) & ¬locally-finite(frattini(G))
+значение perfect(profinite(G)) у G = W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) — запретов 1; например: centerless(frattini(G)) & ¬perfect(profinite(G)) & ¬word-problem(frattini(G))
+значение order-p2(C_p (p > 10⁷⁵)) — запретов 1; например: order-p2(G) & whitehead(frattini(G)) & ¬exponent-2(G) & ¬odd-order(profinite(G))
+значение odd-order(profinite(G)) у G = ⊕C₃ × UT₃(𝔽₃(t)) — запретов 1; например: odd-order(profinite(G)) & ¬exponent-4(profinite(G)) & ¬finite-index(frattini(G))
+значение nilpotent(profinite(G)) у G = ℤ² × ℚ/ℤ × ℤ ∗ C₂ — запретов 1; например: locally-cyclic(frattini(G)) & ¬bi-orderable(frattini(G)) & ¬nilpotent(profinite(G)) & ¬two-primes(frattini(G))
+значение nilpotent(profinite(G)) у G = ℝ⁺ × ℤ² ∗ ℤ — запретов 1; например: divisible(frattini(G)) & ¬locally-finite(frattini(G)) & ¬nilpotent(profinite(G))
+значение metabelian(profinite(G)) у G = ⊕C₃ × F (группа Томпсона) — запретов 1; например: metabelian(profinite(G)) & ¬embeds(profinite(G), frattini(G)) & ¬locally-solvable(G)
+значение locally-nilpotent(profinite(G)) у G = ℤ[ω] ⋊ C₃ × Q_sf = ⟨1/p : p простое⟩ = {a/n : n бесквадратно} ⊂ ℚ — запретов 1; например: free(frattini(G)) & ¬complemented(frattini(G)) & ¬locally-nilpotent(profinite(G))
+значение locally-finite(profinite(G)) у G = ⊕_p C_p — запретов 1; например: clt(frattini(G)) & locally-cyclic(G) & locally-finite(profinite(G)) & ¬cyclic(G)
+значение locally-finite(profinite(G)) у G = C9 × ⊕_p C_p^p — запретов 1; например: exponent-3(frattini(G)) & ¬exponent-4(frattini(G)) & ¬linear(profinite(G)) & ¬locally-finite(profinite(G))
+значение locally-cyclic(⊕ℤ × C12) — запретов 1; например: locally-cyclic(G) & ¬bounded-exponent(profinite(G)) & ¬left-orderable(frattini(G))
+значение linear-c(profinite(G)) у G = ⊕C₃ × UT₃(𝔽₃(t)) — запретов 1; например: bounded-exponent(G) & linear-c(profinite(G)) & ¬comp-series(frattini(G))
+значение linear(⊕_ℕ QD16) — запретов 1; например: linear(G) & locally-finite(frattini(G)) & ¬abelian(profinite(G)) & ¬fin-gen(frattini(G))
+значение linear(profinite(G)) у G = ℤ₂^× ≅ C₂ × ℤ₂ × ℤ² ∗ ℤ — запретов 1; например: hopfian(frattini(G)) & ¬class-2(profinite(G)) & ¬linear(profinite(G)) & ¬rec-pres-ctbl(frattini(G))
+значение linear(profinite(G)) у G = SL₂(ℤ) × Sp₄(ℤ) — запретов 1; например: central(frattini(G)) & order-p2(frattini(G)) & ¬abelian(profinite(G)) & ¬linear(profinite(G))
+значение left-orderable(profinite(G)) у G = 𝒢 (группа Григорчука) × T (группа Томпсона) — запретов 1; например: left-orderable(profinite(G)) & rec-pres(G) & ¬locally-finite(frattini(G))
+значение left-orderable(profinite(G)) у G = C₂ × M(ℚ, 𝔽₂) — запретов 1; например: perfect(frattini(G)) & ¬exponent-3(frattini(G)) & ¬left-orderable(profinite(G))
+значение left-orderable(profinite(G)) у G = C9 × T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) — запретов 1; например: left-orderable(profinite(G)) & odd-order(frattini(G)) & ¬complemented(frattini(G))
+значение kaplansky(profinite(G)) у G = ℤ — запретов 1; например: free(G) & kaplansky(profinite(G)) & ¬iso(G, frattini(G))
+значение iso(frattini(G), profinite(G)) у ℤ⁵ × C₃ × A_∞ — запретов 1; например: hopfian(G) & iso(frattini(G), profinite(G)) & ¬fin-pres(G) & ¬indecomposable(G)
+значение iso(G, profinite(G)) у ⊕C₂ × ∏C₂ — запретов 1; например: exponent-2(G) & iso(G, profinite(G)) & ¬hall(frattini(G))
+значение iso(G, profinite(G)) у ℤ₃ (целые 3-адические) × ℤ₃ (целые 3-адические) — запретов 1; например: iso(G, frattini(G)) & iso(G, profinite(G)) & ¬exponent-3(profinite(G))
+значение index-2(frattini(G)) у C_p (p > 10⁷⁵) — запретов 1; например: exponent-6(frattini(G)) & index-2(frattini(G)) & ¬exponent-4(profinite(G))
+значение indecomposable(profinite(G)) у G = ⊕ℤ × C4 x C4 — запретов 1; например: dedekind(profinite(G)) & indecomposable(profinite(G)) & polynomial-growth(frattini(G)) & ¬indecomposable(frattini(G))
+значение indecomposable(profinite(G)) у G = ⊕_ℕ UT₃(ℤ) — запретов 1; например: indecomposable(profinite(G)) & residually-finite(G) & ¬fin-gen(frattini(G))
+значение indecomposable(profinite(G)) у G = ⊕C₃ × UT₃(𝔽₃(t)) — запретов 1; например: exponent-3(profinite(G)) & ¬free(frattini(G)) & ¬indecomposable(profinite(G)) & ¬odd-order(G)
+значение hopfian(ℤ₂ (целые 2-адические) × ℚ⁵) — запретов 1; например: hopfian(G) & ¬co-hopfian(G) & ¬embeds(frattini(G), profinite(G)) & ¬indecomposable(frattini(G))
+значение hopfian(ℚ⁺ × UT₅(ℚ)) — запретов 1; например: abelian(profinite(G)) & hopfian(G) & ¬indecomposable(frattini(G)) & ¬metabelian(frattini(G))
+значение hopfian(profinite(G)) у G = ℤ ∗ C₃ — запретов 1; например: hopfian(profinite(G)) & hyperbolic(G) & torsion-free(frattini(G)) & ¬hall(frattini(G))
+значение hopfian(Sym(ℕ) ∗ Sym(ℕ)) — запретов 1; например: indecomposable(G) & polycyclic(profinite(G)) & property-t(frattini(G)) & ¬hopfian(G)
+значение fully-invariant(⊕C₃) — запретов 1; например: embeds(frattini(G), profinite(G)) & exponent-3(frattini(G)) & fully-invariant(frattini(G)) & ¬fin-gen(frattini(G))
+значение fully-invariant(C9 x C3) — запретов 1; например: centerless(profinite(G)) & fully-invariant(frattini(G)) & polynomial-growth(G) & ¬proper-subs-cyclic(frattini(G))
+значение fully-invariant(C3) — запретов 1; например: fully-invariant(frattini(G)) & odd-order(profinite(G)) & ¬proper-subs-nilpotent(profinite(G)) & ¬torsion-free(frattini(G))
+значение free-abelian(profinite(G)) у G = ⊕ℤ × S₃ ≀ ℤ — запретов 1; например: free-abelian(profinite(G)) & two-primes(frattini(G)) & virtually-solvable(G) & ¬iso(frattini(G), profinite(G))
+значение free(profinite(G)) у G = UT₅(𝔽₂) × T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) — запретов 1; например: fin-pres(G) & free(profinite(G)) & ¬indecomposable(frattini(G))
+значение free(profinite(G)) у G = T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) × ⊕_ℕ C₃₆ — запретов 1; например: bounded-exponent(frattini(G)) & free(profinite(G)) & ¬exponent-4(frattini(G))
+значение finite(profinite(G)) у G = ⊕_p C_p × ⊕_ℕ ℚ — запретов 1; например: finite(profinite(G)) & linear-c(G) & ¬embeds(G, frattini(G)) & ¬residually-finite(frattini(G))
+значение finite(profinite(G)) у G = ⊕C₃ × UT₃(𝔽₃(t)) — запретов 1; например: exponent-3(frattini(G)) & finite(profinite(G)) & ¬indecomposable(G) & ¬proper-subs-cyclic(frattini(G))
+значение finite(profinite(G)) у G = ∏C₂ × ℤ² × ℚ/ℤ — запретов 1; например: finite(profinite(G)) & locally-cyclic(frattini(G)) & locally-nilpotent(G) & ¬rec-pres-ctbl(G)
+значение exponent-4(profinite(G)) у G = ⊕ℤ × ℚ³ — запретов 1; например: no-finite-quotients(frattini(G)) & ¬exponent-4(profinite(G)) & ¬two-primes(frattini(G))
+значение exponent-4(profinite(G)) у G = группа Гейзенберга бесконечного ранга — запретов 1; например: exponent-4(profinite(G)) & locally-solvable(G) & two-generated(frattini(G)) & ¬exponent-6(frattini(G))
+значение embeds(profinite(G), frattini(G)) у 𝒢 (группа Григорчука) × S₃ ≀ ℤ — запретов 1; например: amenable(G) & embeds(profinite(G), frattini(G)) & rec-pres(G) & ¬embeds(G, frattini(G))
+значение embeds(profinite(G), frattini(G)) у BS(2, 3) — запретов 1; например: embeds(profinite(G), frattini(G)) & two-generated(G) & ¬co-hopfian(G)
+значение embeds(profinite(G), G) у ∏C₂ × ⊕_ℕ C₃₆ — запретов 1; например: embeds(profinite(G), G) & ¬fin-pres(frattini(G)) & ¬indecomposable(profinite(G))
+значение embeds(profinite(G), G) у C₂ × M(ℚ, 𝔽₂) — запретов 1; например: locally-solvable(G) & ¬embeds(profinite(G), G) & ¬virtually-solvable(frattini(G))
+значение embeds(frattini(G), profinite(G)) у 𝒢 (группа Григорчука) × S₃ ≀ ℤ — запретов 1; например: amenable(G) & ¬complemented(frattini(G)) & ¬embeds(frattini(G), profinite(G)) & ¬nilpotent(G)
+значение embeds(frattini(G), profinite(G)) у ⊕_ℕ ℚ/ℤ × универсальная группа Холла U — запретов 1; например: divisible(G) & embeds(frattini(G), profinite(G)) & locally-finite(G) & ¬two-primes(G)
+значение embeds(G, frattini(G)) у ⊕_ℕ C₆ × ⊕_ℕ C₃₆ — запретов 1; например: bounded-exponent(profinite(G)) & embeds(G, frattini(G)) & ¬no-finite-quotients(frattini(G))
+значение dedekind(profinite(G)) у G = ℤ² × ℚ/ℤ × Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^× — запретов 1; например: co-hopfian(frattini(G)) & linear-c(G) & ¬dedekind(profinite(G)) & ¬rec-pres(frattini(G))
+значение comp-series(profinite(G)) у G = 𝒢 (группа Григорчука) × 𝒢 (группа Григорчука) — запретов 1; например: comp-series(profinite(G)) & ¬clt(profinite(G)) & ¬linear(frattini(G))
+значение comp-series(profinite(G)) у G = ℤ ∗ C₃ × Q_sf = ⟨1/p : p простое⟩ = {a/n : n бесквадратно} ⊂ ℚ — запретов 1; например: comp-series(profinite(G)) & hyperbolic(frattini(G)) & ¬kaplansky(G) & ¬property-t(frattini(G))
+значение comp-series(profinite(G)) у G = C₂ × M(ℚ, 𝔽₂) — запретов 1; например: comp-series(profinite(G)) & locally-nilpotent(frattini(G)) & ¬perfect(G) & ¬virtually-nilpotent(frattini(G))
+значение co-hopfian(profinite(G)) у G = ⊕ℤ × ℤ⁵ — запретов 1; например: co-hopfian(profinite(G)) & whitehead(G) & ¬whole(frattini(G))
+значение co-hopfian(profinite(G)) у G = ⊕_ℕ C₆ × ℤ₃ (целые 3-адические) — запретов 1; например: co-hopfian(profinite(G)) & ¬free-abelian(profinite(G)) & ¬rec-pres-ctbl(frattini(G))
+значение clt(profinite(G)) у G = Dih(ℚ) = ℚ ⋊ C₂ — запретов 1; например: centerless(G) & locally-cyclic(frattini(G)) & ¬clt(profinite(G)) & ¬exponent-6(frattini(G))
+значение clt(C7 : C3 × C9) — запретов 1; например: odd-order(profinite(G)) & ¬class-2(profinite(G)) & ¬clt(G) & ¬free(frattini(G))
+значение class-2(profinite(G)) у G = ℤ(2^∞) × ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 1; например: proper-subs-finite(frattini(G)) & ¬class-2(profinite(G)) & ¬rec-pres(frattini(G))
+значение centerless(profinite(G)) у G = ⊕_ℕ D18 — запретов 1; например: centerless(profinite(G)) & exponent-3(frattini(G)) & ¬clt(profinite(G)) & ¬free-abelian(frattini(G))
+значение centerless(profinite(G)) у G = ℤ₂^× ≅ C₂ × ℤ₂ × ℤ² ∗ ℤ — запретов 1; например: ¬centerless(profinite(G)) & ¬countable(frattini(G)) & ¬proper-subs-nilpotent(G)
+значение centerless(profinite(G)) у G = UT₅(ℤ) × ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 1; например: centerless(profinite(G)) & polycyclic(G) & ¬finite(frattini(G))
+значение bi-orderable(profinite(G)) у G = 𝒢 (группа Григорчука) × T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) — запретов 1; например: bi-orderable(profinite(G)) & word-problem(G) & ¬locally-cyclic(frattini(G))
+значение bi-orderable(profinite(G)) у G = ℚ⁵ × C4 x C4 — запретов 1; например: bi-orderable(profinite(G)) & hopfian(G) & solvable(G) & ¬bi-orderable(frattini(G))
+значение bi-orderable(profinite(G)) у G = T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) × ⊕_ℕ C₃₆ — запретов 1; например: bi-orderable(profinite(G)) & bounded-exponent(frattini(G)) & ¬word-problem(frattini(G))
+значение abelian(profinite(G)) у G = E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩ × E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩ — запретов 1; например: exponent-3(frattini(G)) & order-p2(frattini(G)) & ¬abelian(profinite(G)) & ¬hyperbolic(G)
+== сводятся к вырожденности: 0 вопросов на 0 запретов ==
+== без кандидата: нужен пример или правило ==
+не бывает? amenable(G) & embeds(profinite(G), frattini(G)) & fin-pres(G) & одно из: ¬p-group(G), ¬periodic(G)   [запретов 2]
+не бывает? exponent-3(profinite(G)) & two-generated(G) & одно из: ¬dedekind(frattini(G)), ¬exponent-3(frattini(G))   [запретов 2]
+не бывает? bounded-exponent(frattini(G)) & divisible(G) & ¬iso(frattini(G), profinite(G)) & bi-orderable(frattini(G))   [примеров посылок: 4345]
+не бывает? comp-series(profinite(G)) & ¬linear(frattini(G)) & co-hopfian(frattini(G))   [примеров посылок: 95]
+не бывает? embeds(frattini(G), profinite(G)) & p-group(G) & ¬locally-cyclic(G) & divisible(G)   [примеров посылок: 891]
+не бывает? embeds(frattini(G), profinite(G)) & proper-subs-finite(G) & ¬exponent-6(G) & divisible(G)   [примеров посылок: 2648]
+не бывает? embeds(frattini(G), profinite(G)) & proper-subs-nilpotent(G) & ¬free(frattini(G)) & centerless(profinite(G))   [примеров посылок: 289]
+не бывает? embeds(frattini(G), profinite(G)) & virtually-nilpotent(G) & ¬class-2(G) & divisible(G)   [примеров посылок: 4290]
+не бывает? embeds(profinite(G), frattini(G)) & prime-orders(G) & ¬locally-nilpotent(G) & amenable(G)   [примеров посылок: 80]
+не бывает? embeds(profinite(G), frattini(G)) & proper-subs-finite(G) & ¬two-generated(G) & clt(frattini(G))   [примеров посылок: 1269]
+не бывает? exponent-3(frattini(G)) & proper-subs-nilpotent(profinite(G)) & ¬central(frattini(G)) & cyclic(frattini(G))   [примеров посылок: 152]
+не бывает? exponent-3(frattini(G)) & ¬class-2(profinite(G)) & ¬odd-order(frattini(G)) & central(frattini(G))   [примеров посылок: 1]
+не бывает? exponent-4(G) & ¬free(profinite(G)) & ¬index-2(frattini(G)) & cyclic(G)   [примеров посылок: 402]
+не бывает? exponent-4(profinite(G)) & two-generated(profinite(G)) & ¬proper-subs-cyclic(profinite(G)) & complemented(frattini(G))   [примеров посылок: 188]
+не бывает? exponent-6(frattini(G)) & ¬central(frattini(G)) & ¬iso(G, profinite(G)) & cyclic(frattini(G))   [примеров посылок: 4705]
+не бывает? fin-pres(frattini(G)) & periodic(G) & ¬iso(frattini(G), profinite(G)) & divisible(G)   [примеров посылок: 3488]
+не бывает? fin-pres(frattini(G)) & ¬clt(profinite(G)) & ¬two-generated(frattini(G)) & exponent-3(frattini(G))   [примеров посылок: 295]
+не бывает? finite(frattini(G)) & ¬finite(profinite(G)) & ¬two-generated(frattini(G)) & abelian(frattini(G))   [примеров посылок: 4810]
+не бывает? finite(profinite(G)) & kaplansky(G) & ¬bi-orderable(G) & embeds(frattini(G), profinite(G))   [примеров посылок: 3065]
+не бывает? free(profinite(G)) & ¬perfect(frattini(G)) & bounded-exponent(G)   [примеров посылок: 3]
+не бывает? hyperbolic(G) & ¬left-orderable(frattini(G)) & free(profinite(G))   [примеров посылок: 1785]
+не бывает? indecomposable(G) & odd-order(profinite(G)) & ¬prime-orders(G) & hall(frattini(G))   [примеров посылок: 21]
+не бывает? indecomposable(frattini(G)) & ¬cyclic(frattini(G)) & ¬p-group(profinite(G)) & bounded-exponent(frattini(G))   [примеров посылок: 423]
+не бывает? indecomposable(frattini(G)) & ¬locally-cyclic(frattini(G)) & ¬nilpotent(profinite(G)) & fin-pres(G)   [примеров посылок: 469]
+не бывает? indecomposable(profinite(G)) & locally-nilpotent(profinite(G)) & ¬indecomposable(frattini(G)) & cyclic(frattini(G))   [примеров посылок: 26]
+не бывает? kaplansky(profinite(G)) & virtually-nilpotent(G) & ¬kaplansky(G) & fin-pres(frattini(G))   [примеров посылок: 5751]
+не бывает? locally-nilpotent(profinite(G)) & virtually-nilpotent(G) & ¬divisible(frattini(G)) & centerless(G)   [примеров посылок: 2900]
+не бывает? locally-solvable(G) & perfect(G) & ¬iso(frattini(G), profinite(G)) & co-hopfian(G)   [примеров посылок: 2677]
+не бывает? nilpotent(profinite(G)) & order-p2(frattini(G)) & ¬p-group(profinite(G)) & exponent-3(frattini(G))   [примеров посылок: 5]
+не бывает? nilpotent(profinite(G)) & ¬class-2(G) & ¬odd-order(frattini(G)) & exponent-3(frattini(G))   [примеров посылок: 872]
+не бывает? odd-order(frattini(G)) & order-p2(frattini(G)) & ¬clt(G) & centerless(profinite(G))   [примеров посылок: 98]
+не бывает? odd-order(frattini(G)) & order-p2(frattini(G)) & ¬metabelian(profinite(G)) & central(frattini(G))   [примеров посылок: 97]
+не бывает? odd-order(frattini(G)) & ¬exponent-3(frattini(G)) & ¬two-primes(profinite(G)) & nilpotent(profinite(G))   [примеров посылок: 854]
+не бывает? odd-order(frattini(G)) & ¬indecomposable(frattini(G)) & ¬proper-subs-nilpotent(profinite(G)) & central(frattini(G))   [примеров посылок: 142]
+не бывает? odd-order(profinite(G)) & ¬metabelian(G) & hall(frattini(G))   [примеров посылок: 849]
+не бывает? order-p2(G) & ¬simple(frattini(G)) & cyclic(profinite(G))   [примеров посылок: 4]
+не бывает? order-p2(frattini(G)) & proper-subs-cyclic(G) & ¬abelian(G) & nilpotent(profinite(G))   [примеров посылок: 2]
+не бывает? order-pq(frattini(G)) & ¬cyclic(profinite(G)) & ¬exponent-6(frattini(G)) & dedekind(profinite(G))   [примеров посылок: 1]
+не бывает? p-group(G) & two-generated(G) & ¬proper-subs-cyclic(profinite(G)) & complemented(frattini(G))   [примеров посылок: 94]
+не бывает? p-group(profinite(G)) & ¬central(frattini(G)) & exponent-6(G)   [примеров посылок: 63]
+не бывает? p-group(profinite(G)) & ¬exponent-3(frattini(G)) & ¬indecomposable(frattini(G)) & odd-order(frattini(G))   [примеров посылок: 14]
+не бывает? perfect(G) & virtually-nilpotent(G) & ¬trivial(frattini(G)) & metabelian(profinite(G))   [примеров посылок: 6219]
+не бывает? perfect(profinite(G)) & proper-subs-finite(G) & ¬indecomposable(frattini(G)) & abelian(profinite(G))   [примеров посылок: 308]
+не бывает? polycyclic(profinite(G)) & ¬clt(profinite(G)) & ¬locally-cyclic(frattini(G)) & exponent-3(frattini(G))   [примеров посылок: 3]
+не бывает? polycyclic(profinite(G)) & ¬property-t(frattini(G)) & exponent-4(frattini(G))   [примеров посылок: 1554]
+не бывает? proper-subs-abelian(G) & two-generated(profinite(G)) & ¬co-hopfian(frattini(G)) & indecomposable(frattini(G))   [примеров посылок: 238]
+не бывает? proper-subs-abelian(G) & ¬locally-nilpotent(profinite(G)) & ¬trivial(frattini(G)) & exponent-6(profinite(G))   [примеров посылок: 17]
+не бывает? proper-subs-abelian(profinite(G)) & ¬abelian(frattini(G)) & hyperbolic(G)   [примеров посылок: 362]
+не бывает? proper-subs-abelian(profinite(G)) & ¬cyclic(frattini(G)) & ¬odd-order(profinite(G)) & odd-order(frattini(G))   [примеров посылок: 3]
+не бывает? proper-subs-cyclic(G) & simple(frattini(G)) & exponent-6(profinite(G))   [примеров посылок: 9]
+не бывает? proper-subs-cyclic(G) & ¬dedekind(G) & ¬odd-order(frattini(G)) & class-2(profinite(G))   [примеров посылок: 953]
+не бывает? proper-subs-cyclic(G) & ¬dedekind(profinite(G)) & ¬prime-orders(frattini(G)) & odd-order(frattini(G))   [примеров посылок: 3]
+не бывает? proper-subs-finite(G) & torsion-free(profinite(G)) & ¬prime-orders(G) & hopfian(frattini(G))   [примеров посылок: 2167]
+не бывает? proper-subs-finite(G) & ¬locally-cyclic(frattini(G)) & free-abelian(profinite(G))   [примеров посылок: 772]
+не бывает? proper-subs-finite(frattini(G)) & ¬bounded-exponent(profinite(G)) & embeds(G, frattini(G))   [примеров посылок: 4659]
+не бывает? proper-subs-nilpotent(G) & ¬class-2(profinite(G)) & ¬two-generated(G) & hall(frattini(G))   [примеров посылок: 23]
+не бывает? proper-subs-nilpotent(profinite(G)) & ¬exponent-6(frattini(G)) & ¬locally-nilpotent(G) & odd-order(frattini(G))   [примеров посылок: 11]
+не бывает? proper-subs-nilpotent(profinite(G)) & ¬indecomposable(frattini(G)) & ¬left-orderable(profinite(G)) & centerless(profinite(G))   [примеров посылок: 894]
+не бывает? proper-subs-nilpotent(profinite(G)) & ¬locally-nilpotent(profinite(G)) & ¬proper-subs-abelian(profinite(G)) & odd-order(frattini(G))   [примеров посылок: 33]
+не бывает? property-t(G) & ¬proper-subs-abelian(frattini(G)) & bi-orderable(profinite(G))   [примеров посылок: 168]
+не бывает? residually-finite(frattini(G)) & ¬iso(frattini(G), profinite(G)) & ¬perfect(G) & embeds(profinite(G), frattini(G))   [примеров посылок: 11993]
+не бывает? trivial(frattini(G)) & ¬centerless(G) & ¬dedekind(profinite(G)) & proper-subs-nilpotent(G)   [примеров посылок: 2256]
+не бывает? two-generated(G) & ¬free(frattini(G)) & bi-orderable(profinite(G))   [примеров посылок: 577]
+не бывает? two-generated(G) & ¬metabelian(profinite(G)) & ¬proper-subs-cyclic(frattini(G)) & proper-subs-nilpotent(G)   [примеров посылок: 146]
+не бывает? two-generated(G) & ¬whitehead(frattini(G)) & kaplansky(profinite(G))   [примеров посылок: 318]
+не бывает? two-generated(frattini(G)) & ¬indecomposable(frattini(G)) & ¬virtually-nilpotent(G) & metabelian(profinite(G))   [примеров посылок: 431]
+не бывает? two-generated(profinite(G)) & ¬cyclic(frattini(G)) & ¬exponent-3(profinite(G)) & indecomposable(frattini(G))   [примеров посылок: 603]
+не бывает? two-primes(G) & ¬exponent-4(frattini(G)) & ¬two-generated(frattini(G)) & dedekind(profinite(G))   [примеров посылок: 1628]
+не бывает? two-primes(G) & ¬p-group(frattini(G)) & ¬proper-subs-cyclic(frattini(G)) & indecomposable(profinite(G))   [примеров посылок: 307]
+не бывает? whitehead(frattini(G)) & ¬proper-subs-abelian(profinite(G)) & dedekind(profinite(G))   [примеров посылок: 472]
+не бывает? ¬abelian(profinite(G)) & ¬exponent-6(frattini(G)) & ¬order-p2(frattini(G)) & odd-order(G)   [примеров посылок: 1423]
+не бывает? ¬amenable(profinite(G)) & ¬central(frattini(G)) & order-pq(frattini(G))   [примеров посылок: 9]
+не бывает? ¬cyclic(frattini(G)) & ¬cyclic(profinite(G)) & ¬locally-nilpotent(G) & odd-order(profinite(G))   [примеров посылок: 764]
+не бывает? ¬cyclic(frattini(G)) & ¬p-group(frattini(G)) & ¬residually-nilpotent(profinite(G)) & property-t(frattini(G))   [примеров посылок: 33]
+не бывает? ¬dedekind(frattini(G)) & ¬exponent-4(frattini(G)) & ¬residually-nilpotent(profinite(G)) & two-primes(frattini(G))   [примеров посылок: 60]
+не бывает? ¬dedekind(profinite(G)) & ¬p-group(G) & ¬proper-subs-cyclic(frattini(G)) & proper-subs-abelian(G)   [примеров посылок: 1305]
+не бывает? ¬embeds(frattini(G), profinite(G)) & ¬free(frattini(G)) & ¬proper-subs-finite(frattini(G)) & two-generated(frattini(G))   [примеров посылок: 2399]
+не бывает? ¬exponent-2(frattini(G)) & ¬locally-finite(profinite(G)) & ¬simple(frattini(G)) & exponent-3(frattini(G))   [примеров посылок: 1573]
+не бывает? ¬exponent-2(profinite(G)) & ¬periodic(frattini(G)) & prime-orders(profinite(G))   [примеров посылок: 289]
+не бывает? ¬exponent-6(frattini(G)) & ¬hyperbolic(frattini(G)) & ¬locally-finite(profinite(G)) & bounded-exponent(frattini(G))   [примеров посылок: 834]
+не бывает? ¬exponent-6(frattini(G)) & ¬periodic(profinite(G)) & prime-orders(frattini(G))   [примеров посылок: 1502]
+не бывает? ¬finite-index(frattini(G)) & ¬locally-solvable(profinite(G)) & prime-orders(profinite(G))   [примеров посылок: 5]
+не бывает? ¬hyperbolic(frattini(G)) & ¬periodic(profinite(G)) & exponent-4(frattini(G))   [примеров посылок: 893]
+не бывает? ¬iso(G, profinite(G)) & ¬locally-cyclic(frattini(G)) & ¬prime-orders(G) & odd-order(frattini(G))   [примеров посылок: 2152]
+не бывает? ¬left-orderable(profinite(G)) & ¬virtually-nilpotent(frattini(G)) & bi-orderable(frattini(G))   [примеров посылок: 4344]
+не бывает? ¬odd-order(profinite(G)) & ¬periodic(frattini(G)) & bounded-exponent(profinite(G))   [примеров посылок: 289]
+не бывает? ¬p-group(frattini(G)) & ¬proper-subs-cyclic(frattini(G)) & ¬residually-nilpotent(profinite(G)) & two-generated(profinite(G))   [примеров посылок: 56]
+не бывает? ¬rec-pres(frattini(G)) & ¬residually-nilpotent(profinite(G)) & proper-subs-abelian(G)   [примеров посылок: 40]
+не бывает? ¬rec-pres-ctbl(frattini(G)) & ¬torsion-free(profinite(G)) & exponent-6(profinite(G))   [примеров посылок: 405]
+== уже в реестре (data/registry/grp.json) ==
+В-7 — запретов 42: Произведения с монстром Тарского: хопфовость.
+В-6 — запретов 21: Коммутант 𝒢′ группы Григорчука: центр, коммутант, неразложимость, совершенность — заполнить по литературе.
+В-1 — запретов 17: Группа Губы и её максимальная подгруппа: центр, простота, хопфовость, неразложимость; свойства максимальной подгруппы.
+== свёрнуто вопросов 18625: следуют из теории и оставленных вопросов ==

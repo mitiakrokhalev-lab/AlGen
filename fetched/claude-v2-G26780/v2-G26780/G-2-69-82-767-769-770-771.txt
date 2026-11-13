@@ -1,0 +1,706 @@
+строк в библиотеке 30953, литералов 748
+не опровергнуто библиотекой 1779816351, минимальных обо всех переменных 20000, запретов 19994: неизвестно 19143, выводится 850, опровергается 1
+посылок без единого примера: 4839573
+решающих значений 420 на 1110 запретов, без кандидата 270 в 269 кластерах, в реестре 111
+свёрнуто вопросов 17652 (список: --полностью)
+вопросов «какие группы бывают с S»: 638 на 668 запретов; без вопроса 18475
+запретов без примера: 1491, кластеров: 1478
+
+== решающих значений 420: касаются 1110 запретов; без кандидата 270; уже в реестре 111 ==
+значение two-generated(A5) — запретов 37; например: bounded-exponent(G) & prime-orders(inn(commutator(G))) & two-generated(inn(commutator(G))) & ¬proper-subs-nilpotent(inn(commutator(G)))
+значение complemented(commutator(G)) у группа Корнера A (счётного ранга) — запретов 24; например: centerless(commutator(G)) & finite-index(inn(commutator(G))) & ¬complemented(commutator(G)) & ¬locally-finite(G)
+значение complemented(A5) — запретов 21; например: co-hopfian(inn(commutator(G))) & complemented(inn(commutator(G))) & ¬finite(G) & ¬proper-subs-cyclic(inn(commutator(G)))
+значение co-hopfian(SO(3)) — запретов 16; например: co-hopfian(G) & divisible(G) & ¬iso(commutator(G), inn(commutator(G))) & ¬left-orderable(G)
+значение two-generated(S5) — запретов 15; например: amenable(aut(commutator(G))) & ¬exponent-3(inn(commutator(G))) & ¬polycyclic(aut(commutator(G))) & ¬two-generated(aut(commutator(G)))
+значение maximal(1) — запретов 15; например: centerless(G) & exponent-6(commutator(G)) & maximal(inn(commutator(G))) & ¬prime-index(commutator(G))
+значение prime-orders(Aut(C_p) ≅ C_{p−1} (p > 10⁷⁵)) — запретов 13; например: class-2(inn(commutator(G))) & prime-orders(G) & ¬locally-solvable(aut(commutator(G))) & ¬prime-index(commutator(G))
+значение embeds(commutator(G), aut(commutator(G))) у ⊕_ℕ C2 x D8 — запретов 13; например: centerless(inn(commutator(G))) & embeds(commutator(G), aut(commutator(G))) & odd-order(inn(commutator(G))) & ¬left-orderable(aut(commutator(G)))
+значение index-2(commutator(G)) у C_p (p > 10⁷⁵) — запретов 12; например: centerless(aut(commutator(G))) & divisible(inn(commutator(G))) & index-2(commutator(G)) & ¬dedekind(G)
+значение не записан коммутант у 240:199 — запретов 11; например: bounded-exponent(commutator(G)) & clt(inn(commutator(G))) & linear-c(G) & ¬two-primes(commutator(G))
+значение prime-index(1) — запретов 11; например: centerless(G) & finite(aut(commutator(G))) & ¬prime-index(inn(commutator(G))) & ¬proper-subs-finite(G)
+значение embeds(aut(commutator(G)), G) у A × A для группы Корнера A — запретов 11; например: bi-orderable(inn(commutator(G))) & embeds(aut(commutator(G)), G) & ¬polycyclic(G) & ¬residually-nilpotent(aut(commutator(G)))
+значение finite-index(группа Маклейна M(ℚ, ℚ)) — запретов 10; например: centerless(G) & finite-index(inn(commutator(G))) & ¬iso(G, commutator(G)) & ¬word-problem(G)
+значение hyperbolic(C4) — запретов 9; например: co-hopfian(inn(commutator(G))) & hyperbolic(G) & ¬proper-subs-finite(commutator(G)) & ¬residually-nilpotent(G)
+значение embeds(inn(commutator(G)), G) у ⊕_ℕ SL(2,3) — запретов 9; например: countable(inn(commutator(G))) & ¬embeds(inn(commutator(G)), G) & ¬hall(commutator(G)) & ¬two-generated(commutator(G))
+значение embeds(inn(commutator(G)), G) у SU(2) — запретов 9; например: centerless(aut(commutator(G))) & ¬embeds(inn(commutator(G)), G) & ¬metabelian(commutator(G)) & ¬two-generated(G)
+значение embeds(aut(commutator(G)), commutator(G)) у C2 x C2 x C2 x D8 — запретов 9; например: embeds(aut(commutator(G)), commutator(G)) & exponent-4(aut(commutator(G))) & ¬min-prime-index(inn(commutator(G))) & ¬nilpotent(G)
+значение embeds(G, aut(commutator(G))) у C2 x ((C4 x C2 x C2) : D8) — запретов 9; например: bounded-exponent(inn(commutator(G))) & embeds(G, aut(commutator(G))) & locally-nilpotent(G) & ¬left-orderable(G)
+значение complemented(commutator(G)) у (C2 x C2 x C2 x C2) : (C15 : C4) — запретов 9; например: complemented(commutator(G)) & polycyclic(inn(commutator(G))) & ¬clt(G) & ¬proper-subs-nilpotent(inn(commutator(G)))
+значение index-2(1) — запретов 8; например: class-2(commutator(G)) & index-2(inn(commutator(G))) & prime-index(commutator(G)) & ¬proper-subs-cyclic(G)
+значение fully-invariant(A5) — запретов 8; например: bounded-exponent(aut(commutator(G))) & fully-invariant(inn(commutator(G))) & ¬finite(commutator(G)) & ¬two-primes(aut(commutator(G)))
+значение exponent-6(C2 x C2 x C2 x D8) — запретов 8; например: cyclic(aut(commutator(G))) & exponent-6(G) & ¬free-abelian(commutator(G)) & ¬min-prime-index(inn(commutator(G)))
+значение comp-series(aut(commutator(G))) у G = F (группа Томпсона) — запретов 8; например: bi-orderable(inn(commutator(G))) & comp-series(aut(commutator(G))) & ¬dedekind(inn(commutator(G)))
+значение perfect(Aut(ℝ⁺) = GL_ℚ(ℝ)) — запретов 7; например: characteristic(inn(commutator(G))) & no-finite-quotients(G) & ¬locally-nilpotent(G) & ¬perfect(aut(commutator(G)))
+значение no-finite-quotients(Aut(⊕C₂) = GL(ℵ₀, 𝔽₂)) — запретов 7; например: class-2(inn(commutator(G))) & ¬abelian(aut(commutator(G))) & ¬linear-c(aut(commutator(G))) & ¬no-finite-quotients(aut(commutator(G)))
+значение locally-nilpotent(∏C₂ × Dih(ℤ(2^∞)) = ℤ(2^∞) ⋊ C₂) — запретов 7; например: class-2(inn(commutator(G))) & ¬embeds(commutator(G), aut(commutator(G))) & ¬linear-c(G) & ¬locally-nilpotent(G)
+значение hopfian(Aut(ℝ⁺) = GL_ℚ(ℝ)) — запретов 7; например: comp-series(inn(commutator(G))) & hopfian(aut(commutator(G))) & ¬embeds(G, inn(commutator(G))) & ¬linear(aut(commutator(G)))
+значение finite-index(ℤ[ω] ⋊ C₃) — запретов 7; например: finite-index(inn(commutator(G))) & indecomposable(G) & ¬comp-series(commutator(G)) & ¬cyclic(aut(commutator(G)))
+значение embeds(inn(commutator(G)), commutator(G)) у ℂ* × UT₅(𝔽₂) — запретов 7; например: embeds(inn(commutator(G)), commutator(G)) & exponent-4(inn(commutator(G))) & ¬locally-finite(G) & ¬metabelian(G)
+значение embeds(aut(commutator(G)), G) у S3 × PGL₂(ℤ) — запретов 7; например: contains-free(commutator(G)) & embeds(aut(commutator(G)), G) & linear-c(commutator(G)) & ¬simple(inn(commutator(G)))
+значение divisible(Aut(⊕_ℕ M(ℚ, 𝔽₂))) — запретов 7; например: centerless(aut(commutator(G))) & ¬divisible(aut(commutator(G))) & ¬indecomposable(inn(commutator(G))) & ¬two-generated(aut(commutator(G)))
+значение complemented(commutator(G)) у Aut(C_p) ≅ C_{p−1} (p > 10⁷⁵) — запретов 7; например: bounded-exponent(inn(commutator(G))) & complemented(commutator(G)) & fin-pres(commutator(G)) & ¬virtually-nilpotent(G)
+значение co-hopfian(SL₃(ℤ)) — запретов 7; например: co-hopfian(G) & fin-gen(G) & ¬finite(G) & ¬simple(inn(commutator(G)))
+значение two-generated(order 9999360) — запретов 6; например: centerless(aut(commutator(G))) & comp-series(commutator(G)) & two-primes(inn(commutator(G))) & ¬two-generated(aut(commutator(G)))
+значение proper-subs-cyclic(inn(commutator(G))) у G = (C2 x C2 x C2 x C2 x C2 x C2 x C2 x C2 x C2) : (C7 : C3) — запретов 6; например: embeds(commutator(G), aut(commutator(G))) & hall(commutator(G)) & proper-subs-cyclic(inn(commutator(G))) & ¬kaplansky(inn(commutator(G)))
+значение prime-orders(C2 x C2 x C2 x D8) — запретов 6; например: amenable(aut(commutator(G))) & prime-orders(commutator(G)) & proper-subs-nilpotent(G) & ¬exponent-3(inn(commutator(G)))
+значение locally-solvable(F′ (коммутант группы Томпсона F)) — запретов 6; например: comp-series(commutator(G)) & locally-solvable(inn(commutator(G))) & ¬fin-pres(inn(commutator(G)))
+значение indecomposable(Aut(⊕_ℕ A₅) = S₅ ≀ Sym(ℕ)) — запретов 6; например: indecomposable(aut(commutator(G))) & residually-finite(inn(commutator(G))) & ¬rec-pres-ctbl(aut(commutator(G)))
+значение hall(commutator(G)) у C_p (p > 10⁷⁵) — запретов 6; например: centerless(commutator(G)) & hall(commutator(G)) & ¬embeds(G, inn(commutator(G))) & ¬proper-subs-nilpotent(commutator(G))
+значение fin-pres(aut(commutator(G))) у G = UT₅(ℚ) — запретов 6; например: fin-pres(aut(commutator(G))) & locally-nilpotent(inn(commutator(G))) & ¬polynomial-growth(inn(commutator(G)))
+значение embeds(commutator(G), aut(commutator(G))) у (C2 x C2 x C2) : C7 — запретов 6; например: class-2(inn(commutator(G))) & embeds(commutator(G), aut(commutator(G))) & maximal(commutator(G)) & ¬centerless(commutator(G))
+значение embeds(G, aut(commutator(G))) у (C2 x C2 x C2 x C2) : ((C2 x C2 x C2 x C2) : D8) — запретов 6; например: class-2(commutator(G)) & ¬abelian(aut(commutator(G))) & ¬embeds(G, aut(commutator(G))) & ¬proper-subs-cyclic(inn(commutator(G)))
+значение complemented(commutator(G)) у ⊕C₃ × ℤ ≀ C₂ = ℤ² ⋊ C₂ — запретов 6; например: class-2(inn(commutator(G))) & complemented(commutator(G)) & index-2(inn(commutator(G))) & ¬exponent-6(commutator(G))
+значение characteristic(PSL(3,2)) — запретов 6; например: amenable(aut(commutator(G))) & centerless(aut(commutator(G))) & characteristic(inn(commutator(G))) & ¬exponent-4(commutator(G))
+значение не записан коммутант у 512:Out(64:205) — запретов 5; например: clt(G) & proper-subs-cyclic(commutator(G)) & ¬torsion-free(inn(commutator(G))) & ¬two-generated(G)
+значение virtually-nilpotent(ℂ* × C₂ ≀ ℤ (лампочник)) — запретов 5; например: countable(commutator(G)) & ¬countable(G) & ¬maximal(inn(commutator(G))) & ¬virtually-nilpotent(G)
+значение solvable(aut(commutator(G))) у G = ⊕_ℕ S4 — запретов 5; например: exponent-6(inn(commutator(G))) & ¬co-hopfian(commutator(G)) & ¬metabelian(G) & ¬solvable(aut(commutator(G)))
+значение rec-pres-ctbl(aut(commutator(G))) у G = ℚ³ × UT₅(ℤ) — запретов 5; например: bi-orderable(commutator(G)) & countable(G) & linear(inn(commutator(G))) & ¬rec-pres-ctbl(aut(commutator(G)))
+значение exponent-6(order 20158709760) — запретов 5; например: centerless(G) & exponent-6(inn(commutator(G))) & simple(commutator(G)) & ¬clt(G)
+значение embeds(aut(commutator(G)), inn(commutator(G))) у группа Маклейна M(ℚ, ℚ) — запретов 5; например: bi-orderable(inn(commutator(G))) & embeds(aut(commutator(G)), inn(commutator(G))) & ¬fin-gen(commutator(G))
+значение embeds(aut(commutator(G)), inn(commutator(G))) у order 1440 — запретов 5; например: amenable(aut(commutator(G))) & embeds(aut(commutator(G)), inn(commutator(G))) & ¬polycyclic(inn(commutator(G)))
+значение embeds(aut(commutator(G)), G) у группа Маклейна M(ℚ, ℚ) — запретов 5; например: amenable(G) & ¬centerless(inn(commutator(G))) & ¬embeds(aut(commutator(G)), G) & ¬proper-subs-nilpotent(inn(commutator(G)))
+значение embeds(aut(commutator(G)), G) у C_p (p > 10⁷⁵) — запретов 5; например: centerless(commutator(G)) & metabelian(inn(commutator(G))) & ¬embeds(aut(commutator(G)), G) & ¬finite(G)
+значение divisible(PSL₂(ℚ)) — запретов 5; например: divisible(G) & ¬bi-orderable(commutator(G)) & ¬nilpotent(aut(commutator(G))) & ¬whole(inn(commutator(G)))
+значение contains-free(ℤ² × F_∞) — запретов 5; например: bi-orderable(inn(commutator(G))) & residually-finite(inn(commutator(G))) & ¬contains-free(commutator(G)) & ¬virtually-solvable(inn(commutator(G)))
+значение complemented(группа Маклейна M(ℚ, 𝔽₂)) — запретов 5; например: amenable(G) & complemented(inn(commutator(G))) & no-finite-quotients(inn(commutator(G))) & ¬odd-order(inn(commutator(G)))
+значение co-hopfian(A4) — запретов 5; например: clt(commutator(G)) & co-hopfian(G) & ¬embeds(commutator(G), inn(commutator(G))) & ¬hopfian(G)
+значение characteristic(F₃) — запретов 5; например: bi-orderable(commutator(G)) & characteristic(inn(commutator(G))) & ¬central(inn(commutator(G)))
+значение не записан коммутант у W′ для W = W(ℤ(2^∞)) — запретов 4; например: bounded-exponent(commutator(G)) & p-group(G) & ¬bi-orderable(inn(commutator(G))) & ¬property-t(G)
+значение whole(inn(commutator(G))) у G = (C2 x C2 x C2 x C2) : (C15 : C4) — запретов 4; например: co-hopfian(aut(commutator(G))) & whole(inn(commutator(G))) & ¬exponent-3(inn(commutator(G)))
+значение virtually-solvable(aut(commutator(G))) у G = UT₅(ℤ) — запретов 4; например: indecomposable(G) & virtually-solvable(aut(commutator(G))) & ¬finite-index(commutator(G)) & ¬free(inn(commutator(G)))
+значение two-generated(order 688128) — запретов 4; например: clt(inn(commutator(G))) & ¬clt(aut(commutator(G))) & ¬free(inn(commutator(G))) & ¬two-generated(aut(commutator(G)))
+значение two-generated(aut(commutator(G))) у G = ℤ[ω] ⋊ S₃ (p3m1) — запретов 4; например: indecomposable(commutator(G)) & ¬left-orderable(inn(commutator(G))) & ¬perfect(commutator(G)) & ¬two-generated(aut(commutator(G)))
+значение solvable(aut(commutator(G))) у G = ℤ[ω] ⋊ S₃ (p3m1) — запретов 4; например: indecomposable(commutator(G)) & polycyclic(inn(commutator(G))) & ¬solvable(aut(commutator(G))) & ¬two-primes(G)
+значение proper-subs-nilpotent(W(A₅): W ≅ W ≀ W = W′) — запретов 4; например: amenable(G) & perfect(inn(commutator(G))) & proper-subs-nilpotent(commutator(G)) & ¬polycyclic(inn(commutator(G)))
+значение proper-subs-cyclic(24576:G′(49152:Aut(64:211))) — запретов 4; например: embeds(inn(commutator(G)), commutator(G)) & proper-subs-cyclic(commutator(G)) & virtually-nilpotent(commutator(G)) & ¬odd-order(inn(commutator(G)))
+значение prime-index(⊕_ℕ C2 x C2) — запретов 4; например: dedekind(inn(commutator(G))) & prime-index(inn(commutator(G))) & ¬left-orderable(inn(commutator(G)))
+значение maximal(ℤ²) — запретов 4; например: locally-nilpotent(inn(commutator(G))) & ¬maximal(inn(commutator(G))) & ¬two-primes(inn(commutator(G)))
+значение locally-solvable(aut(commutator(G))) у G = D10 × группа Маклейна M(ℚ, 𝔽₂) — запретов 4; например: locally-solvable(aut(commutator(G))) & no-finite-quotients(inn(commutator(G))) & ¬proper-subs-nilpotent(commutator(G))
+значение locally-nilpotent(SL(2,3) × ⊕_i R_{P_i}, R_P = ⟨1/p : p ∈ P⟩, P_i — непересекающиеся бесконечные множества простых) — запретов 4; например: centerless(aut(commutator(G))) & locally-nilpotent(G) & polycyclic(commutator(G)) & ¬kaplansky(inn(commutator(G)))
+значение linear-c(aut(commutator(G))) у G = ℤ[ω] ⋊ S₃ (p3m1) — запретов 4; например: embeds(commutator(G), aut(commutator(G))) & linear-c(aut(commutator(G))) & polynomial-growth(inn(commutator(G))) & ¬bounded-exponent(aut(commutator(G)))
+значение iso(aut(commutator(G)), inn(commutator(G))) у группа Маклейна M(ℚ, ℚ) — запретов 4; например: bi-orderable(G) & iso(aut(commutator(G)), inn(commutator(G))) & ¬property-t(commutator(G))
+значение iso(aut(commutator(G)), commutator(G)) у (S₃ ≀ ℤ)′ — запретов 4; например: exponent-6(commutator(G)) & ¬iso(aut(commutator(G)), commutator(G)) & ¬odd-order(inn(commutator(G))) & ¬two-primes(commutator(G))
+значение iso(G, aut(commutator(G))) у ℚ ≀ ℚ — запретов 4; например: bounded-exponent(inn(commutator(G))) & ¬embeds(commutator(G), inn(commutator(G))) & ¬iso(G, aut(commutator(G))) & ¬linear(inn(commutator(G)))
+значение index-2(группа Маклейна M(ℚ, ℚ)) — запретов 4; например: divisible(commutator(G)) & ¬contains-free(inn(commutator(G))) & ¬index-2(inn(commutator(G))) & ¬polycyclic(inn(commutator(G)))
+значение index-2(commutator(G)) у группа Маклейна M(ℚ, ℚ) — запретов 4; например: bi-orderable(inn(commutator(G))) & maximal(commutator(G)) & ¬fin-pres(G) & ¬index-2(commutator(G))
+значение embeds(inn(commutator(G)), G) у SL(2, 5) × ℤ × Aff⁺(ℝ) = ℝ ⋊ ℝ*₊ — запретов 4; например: finite(inn(commutator(G))) & ¬embeds(inn(commutator(G)), G) & ¬p-group(commutator(G)) & ¬two-generated(G)
+значение embeds(commutator(G), aut(commutator(G))) у ℚ ≀ ℚ — запретов 4; например: embeds(commutator(G), aut(commutator(G))) & exponent-3(inn(commutator(G))) & ¬bounded-exponent(G) & ¬locally-cyclic(commutator(G))
+значение embeds(aut(commutator(G)), commutator(G)) у (C2 x C2 x C2 x C2) : ((C2 x C2) : ((C6 x C2) : C2)) — запретов 4; например: centerless(G) & clt(inn(commutator(G))) & embeds(aut(commutator(G)), commutator(G)) & ¬exponent-3(commutator(G))
+значение embeds(aut(commutator(G)), G) у C2 x ((C4 x C4) : D8) — запретов 4; например: comp-series(G) & embeds(aut(commutator(G)), G) & two-primes(inn(commutator(G))) & ¬two-generated(commutator(G))
+значение embeds(G, aut(commutator(G))) у C2 x ((C4 x C4) : ((C2 x C2) : ((C6 x C2) : C2))) — запретов 4; например: clt(commutator(G)) & embeds(commutator(G), inn(commutator(G))) & ¬embeds(G, aut(commutator(G))) & ¬perfect(commutator(G))
+значение divisible(Aut(ℝ⁺) = GL_ℚ(ℝ)) — запретов 4; например: bounded-exponent(inn(commutator(G))) & ¬co-hopfian(commutator(G)) & ¬divisible(aut(commutator(G))) & ¬rec-pres(aut(commutator(G)))
+значение countable(aut(commutator(G))) у G = UT₅(ℤ) — запретов 4; например: countable(aut(commutator(G))) & ¬clt(commutator(G)) & ¬indecomposable(inn(commutator(G))) & ¬iso(aut(commutator(G)), inn(commutator(G)))
+значение complemented(commutator(G)) у ℚ ≀ ℚ — запретов 4; например: centerless(G) & complemented(commutator(G)) & rec-pres(inn(commutator(G))) & ¬rec-pres-ctbl(G)
+значение clt(aut(commutator(G))) у G = ((C3 x C3) : ((C3 x C3) : C3)) : (C2 x C2) — запретов 4; например: class-2(inn(commutator(G))) & clt(commutator(G)) & ¬clt(aut(commutator(G))) & ¬exponent-4(inn(commutator(G)))
+значение centerless(aut(commutator(G))) у G = UT₅(ℤ) — запретов 4; например: centerless(aut(commutator(G))) & class-2(commutator(G)) & ¬exponent-4(inn(commutator(G))) & ¬two-primes(G)
+значение word-problem(aut(commutator(G))) у G = UT₅(ℚ) × ⊕_ℕ ℚ — запретов 3; например: locally-nilpotent(inn(commutator(G))) & word-problem(aut(commutator(G))) & ¬clt(G) & ¬exponent-6(inn(commutator(G)))
+значение virtually-solvable(группа Маклейна M(ℚ, ℚ)) — запретов 3; например: left-orderable(inn(commutator(G))) & virtually-solvable(commutator(G)) & ¬nilpotent(commutator(G))
+значение virtually-nilpotent(A6) — запретов 3; например: embeds(G, commutator(G)) & virtually-nilpotent(inn(commutator(G))) & ¬residually-finite(G)
+значение two-primes(C_p (p > 10⁷⁵)) — запретов 3; например: clt(G) & locally-nilpotent(commutator(G)) & ¬two-primes(G) & ¬whitehead(inn(commutator(G)))
+значение two-generated(ℤ² × ℤ²) — запретов 3; например: fin-pres(inn(commutator(G))) & proper-subs-nilpotent(G) & ¬prime-orders(aut(commutator(G))) & ¬two-generated(inn(commutator(G)))
+значение solvable(aut(commutator(G))) у G = ℚ³ × UT₅(ℤ) — запретов 3; например: kaplansky(commutator(G)) & ¬co-hopfian(inn(commutator(G))) & ¬indecomposable(commutator(G)) & ¬solvable(aut(commutator(G)))
+значение rec-pres-ctbl(S4 × ⊕_ℕ ℚ/ℤ) — запретов 3; например: finite(commutator(G)) & rec-pres-ctbl(G) & ¬hopfian(G) & ¬iso(aut(commutator(G)), inn(commutator(G)))
+значение prime-orders(⊕_ℕ C2 x C2 x S3) — запретов 3; например: exponent-4(inn(commutator(G))) & prime-orders(G) & ¬residually-finite(G) & ¬residually-nilpotent(G)
+значение prime-index(commutator(G)) у C_p (p > 10⁷⁵) — запретов 3; например: embeds(aut(commutator(G)), G) & prime-index(commutator(G)) & ¬prime-index(inn(commutator(G))) & ¬proper-subs-cyclic(aut(commutator(G)))
+значение prime-index(F′ (коммутант группы Томпсона F)) — запретов 3; например: comp-series(commutator(G)) & embeds(G, commutator(G)) & ¬indecomposable(G) & ¬prime-index(inn(commutator(G)))
+значение perfect(aut(commutator(G))) у G = ℚ³ × UT₅(ℤ) — запретов 3; например: bi-orderable(commutator(G)) & ¬hyperbolic(inn(commutator(G))) & ¬perfect(aut(commutator(G)))
+значение min-prime-index(A5 × A5) — запретов 3; например: amenable(aut(commutator(G))) & embeds(commutator(G), inn(commutator(G))) & ¬indecomposable(commutator(G)) & ¬min-prime-index(inn(commutator(G)))
+значение maximal(группа Маклейна M(ℚ, ℚ)) — запретов 3; например: embeds(G, aut(commutator(G))) & iso(commutator(G), inn(commutator(G))) & ¬indecomposable(G) & ¬maximal(inn(commutator(G)))
+значение locally-nilpotent(aut(commutator(G))) у G = UT₅(ℚ) — запретов 3; например: class-2(inn(commutator(G))) & ¬finite(G) & ¬locally-nilpotent(aut(commutator(G))) & ¬two-generated(inn(commutator(G)))
+значение locally-nilpotent(F′ (коммутант группы Томпсона F)) — запретов 3; например: hopfian(inn(commutator(G))) & locally-nilpotent(commutator(G)) & perfect(G) & ¬free(G)
+значение locally-nilpotent(BS(1, 2) = ℤ[1/2] ⋊ ℤ × Aff⁺(ℝ) = ℝ ⋊ ℝ*₊) — запретов 3; например: centerless(G) & co-hopfian(inn(commutator(G))) & locally-nilpotent(G) & ¬fin-pres(commutator(G))
+значение locally-finite(aut(commutator(G))) у G = группа Хантцше — Вендт × C₂ × M(ℚ, 𝔽₂) — запретов 3; например: locally-finite(aut(commutator(G))) & p-group(inn(commutator(G))) & ¬exponent-2(inn(commutator(G))) & ¬two-primes(G)
+значение linear-c(aut(commutator(G))) у G = UT₄(ℤ) × группа Гейзенберга бесконечного ранга — запретов 3; например: co-hopfian(inn(commutator(G))) & kaplansky(G) & rec-pres-ctbl(commutator(G)) & ¬linear-c(aut(commutator(G)))
+значение iso(aut(commutator(G)), inn(commutator(G))) у order 24261120 — запретов 3; например: amenable(aut(commutator(G))) & iso(aut(commutator(G)), inn(commutator(G))) & ¬metabelian(aut(commutator(G)))
+значение iso(G, aut(commutator(G))) у UT₅(ℤ) — запретов 3; например: dedekind(inn(commutator(G))) & iso(G, aut(commutator(G))) & ¬clt(G)
+значение index-2(ℤ[ω] ⋊ C₃) — запретов 3; например: indecomposable(commutator(G)) & two-generated(commutator(G)) & ¬index-2(inn(commutator(G))) & ¬periodic(commutator(G))
+значение indecomposable(aut(commutator(G))) у G = ∗_ℕ C₂ — запретов 3; например: indecomposable(aut(commutator(G))) & ¬perfect(commutator(G)) & ¬word-problem(inn(commutator(G)))
+значение indecomposable(aut(commutator(G))) у G = Dih(ℤ(2^∞)²) — запретов 3; например: countable(commutator(G)) & indecomposable(aut(commutator(G))) & no-finite-quotients(commutator(G)) & ¬iso(commutator(G), inn(commutator(G)))
+значение indecomposable(Aut(M(ℚ, ℚ))) — запретов 3; например: indecomposable(aut(commutator(G))) & iso(G, commutator(G)) & locally-solvable(inn(commutator(G))) & ¬cyclic(G)
+значение hyperbolic(aut(commutator(G))) у G = ∗_ℕ C₂ — запретов 3; например: hyperbolic(aut(commutator(G))) & residually-nilpotent(inn(commutator(G))) & ¬exponent-4(commutator(G)) & ¬two-generated(inn(commutator(G)))
+значение hyperbolic(Q8) — запретов 3; например: bi-orderable(inn(commutator(G))) & hyperbolic(G) & ¬free(commutator(G)) & ¬property-t(commutator(G))
+значение hopfian(aut(commutator(G))) у G = ⊕_ℕ S4 — запретов 3; например: countable(G) & hopfian(aut(commutator(G))) & ¬linear(inn(commutator(G)))
+значение hall(inn(commutator(G))) у G = order 24261120 — запретов 3; например: finite(G) & hall(inn(commutator(G))) & ¬locally-solvable(aut(commutator(G))) & ¬two-primes(G)
+значение hall(commutator(G)) у C2 x C2 x C2 x D8 — запретов 3; например: abelian(aut(commutator(G))) & hall(commutator(G)) & min-prime-index(inn(commutator(G))) & ¬sylow(commutator(G))
+значение fully-invariant(F₄) — запретов 3; например: fully-invariant(inn(commutator(G))) & hopfian(commutator(G)) & residually-nilpotent(G) & ¬virtually-nilpotent(G)
+значение exponent-6(C2 x C2 × ⊕_ℕ A₅) — запретов 3; например: exponent-6(inn(commutator(G))) & finite-index(commutator(G)) & ¬two-generated(inn(commutator(G))) & ¬two-primes(G)
+значение embeds(inn(commutator(G)), commutator(G)) у ℚ⁺ × UT₅(ℤ) — запретов 3; например: kaplansky(commutator(G)) & ¬embeds(aut(commutator(G)), inn(commutator(G))) & ¬embeds(inn(commutator(G)), commutator(G))
+значение embeds(inn(commutator(G)), G) у C_p (p > 10⁷⁵) — запретов 3; например: bounded-exponent(G) & ¬embeds(inn(commutator(G)), G) & ¬proper-subs-nilpotent(inn(commutator(G))) & ¬simple(inn(commutator(G)))
+значение embeds(commutator(G), aut(commutator(G))) у ℚ*₊ × UT₅(ℤ) — запретов 3; например: left-orderable(inn(commutator(G))) & rec-pres(commutator(G)) & ¬embeds(commutator(G), aut(commutator(G))) & ¬hall(inn(commutator(G)))
+значение embeds(aut(commutator(G)), commutator(G)) у D8 × F_∞ — запретов 3; например: countable(inn(commutator(G))) & embeds(aut(commutator(G)), commutator(G)) & ¬exponent-2(aut(commutator(G))) & ¬fin-pres(G)
+значение embeds(aut(commutator(G)), G) у UT₃(ℝ) — запретов 3; например: dedekind(inn(commutator(G))) & embeds(aut(commutator(G)), G) & no-finite-quotients(G) & ¬bi-orderable(commutator(G))
+значение contains-free(aut(commutator(G))) у G = UT₅(ℤ) — запретов 3; например: contains-free(aut(commutator(G))) & polynomial-growth(inn(commutator(G))) & ¬hyperbolic(inn(commutator(G)))
+значение complemented(commutator(G)) у S5 x S3 — запретов 3; например: complemented(commutator(G)) & proper-subs-finite(G) & ¬exponent-6(inn(commutator(G))) & ¬indecomposable(commutator(G))
+значение complemented((C3 x C3) : C3) — запретов 3; например: complemented(inn(commutator(G))) & embeds(G, aut(commutator(G))) & odd-order(commutator(G)) & ¬bi-orderable(aut(commutator(G)))
+значение co-hopfian(группа Корнера A (счётного ранга)) — запретов 3; например: clt(aut(commutator(G))) & co-hopfian(G) & prime-index(inn(commutator(G))) & ¬finite(G)
+значение centerless(aut(commutator(G))) у G = D10 × SO(3) ∗ SO(3) — запретов 3; например: maximal(commutator(G)) & ¬centerless(aut(commutator(G))) & ¬residually-nilpotent(inn(commutator(G))) & ¬two-generated(commutator(G))
+значение word-problem(aut(commutator(G))) у G = ⊕_ℤ S₃ × ⊕_ℕ ((C₄² ⋊ C₃) × D₁₈) — запретов 2; например: bounded-exponent(commutator(G)) & torsion-free(inn(commutator(G))) & word-problem(aut(commutator(G))) & ¬clt(commutator(G))
+значение word-problem(aut(commutator(G))) у G = ⊕_p C_p² × PGL₂(ℤ) — запретов 2; например: hyperbolic(inn(commutator(G))) & ¬polycyclic(inn(commutator(G))) & ¬word-problem(aut(commutator(G)))
+значение whole(inn(commutator(G))) у G = S4 x PSL(3,2) — запретов 2; например: embeds(commutator(G), inn(commutator(G))) & fin-gen(G) & ¬indecomposable(inn(commutator(G))) & ¬whole(inn(commutator(G)))
+значение virtually-solvable(aut(commutator(G))) у G = ⊕_ℕ ℚ/ℤ × Dih(ℤ(2^∞)²) — запретов 2; например: locally-finite(commutator(G)) & rec-pres(inn(commutator(G))) & ¬bounded-exponent(commutator(G)) & ¬virtually-solvable(aut(commutator(G)))
+значение virtually-nilpotent(aut(commutator(G))) у G = ⊕ℤ × U ≀ U (U — группа Холла) — запретов 2; например: embeds(commutator(G), inn(commutator(G))) & virtually-nilpotent(aut(commutator(G))) & ¬rec-pres(commutator(G))
+значение virtually-nilpotent(aut(commutator(G))) у G = A₅ × ℚ⁺ × ℤ[ω] ⋊ S₃ (p3m1) — запретов 2; например: polynomial-growth(commutator(G)) & ¬polycyclic(inn(commutator(G))) & ¬virtually-nilpotent(aut(commutator(G)))
+значение two-primes(aut(commutator(G))) у G = C2 x ((C4 x C4) : ((C2 x C2) : ((C6 x C2) : C2))) — запретов 2; например: clt(inn(commutator(G))) & indecomposable(commutator(G)) & ¬residually-nilpotent(aut(commutator(G))) & ¬two-primes(aut(commutator(G)))
+значение two-generated(aut(commutator(G))) у G = 𝒢 (группа Григорчука) — запретов 2; например: periodic(inn(commutator(G))) & ¬complemented(commutator(G)) & ¬dedekind(inn(commutator(G))) & ¬two-generated(aut(commutator(G)))
+значение two-generated(aut(commutator(G))) у G = ⊕_ℤ S₃ × F (группа Томпсона) — запретов 2; например: left-orderable(inn(commutator(G))) & ¬linear(G) & ¬locally-nilpotent(G) & ¬two-generated(aut(commutator(G)))
+значение two-generated(aut(commutator(G))) у G = UT₅(ℚ) — запретов 2; например: proper-subs-nilpotent(G) & two-generated(aut(commutator(G))) & ¬centerless(inn(commutator(G))) & ¬p-group(commutator(G))
+значение two-generated(aut(commutator(G))) у G = (C2 x C2 x C2 x C2) : (C15 : C4) — запретов 2; например: amenable(aut(commutator(G))) & centerless(G) & ¬free(inn(commutator(G))) & ¬two-generated(aut(commutator(G)))
+значение two-generated(C_p (p > 10⁷⁵)) — запретов 2; например: co-hopfian(inn(commutator(G))) & two-generated(G) & ¬linear(G) & ¬no-finite-quotients(G)
+значение solvable(aut(commutator(G))) у G = ℤ[ω] ⋊ S₃ (p3m1) × C₃ ≀ ℤ — запретов 2; например: polycyclic(inn(commutator(G))) & ¬bi-orderable(inn(commutator(G))) & ¬solvable(aut(commutator(G))) & ¬virtually-nilpotent(G)
+значение solvable(aut(commutator(G))) у G = C4 x ((C3 x C3) : GL(2,3)) — запретов 2; например: locally-solvable(inn(commutator(G))) & two-generated(commutator(G)) & ¬residually-nilpotent(inn(commutator(G))) & ¬solvable(aut(commutator(G)))
+значение residually-nilpotent(aut(commutator(G))) у G = F_∞ — запретов 2; например: embeds(G, inn(commutator(G))) & ¬complemented(commutator(G)) & ¬residually-nilpotent(aut(commutator(G)))
+значение residually-finite(aut(commutator(G))) у G = QD16 × Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^× — запретов 2; например: fin-gen(inn(commutator(G))) & fin-pres(G) & kaplansky(inn(commutator(G))) & ¬residually-finite(aut(commutator(G)))
+значение rec-pres(aut(commutator(G))) у G = UT₃(ℝ) × ⊕_ℕ (S₃ × A₄) — запретов 2; например: clt(inn(commutator(G))) & ¬divisible(commutator(G)) & ¬p-group(commutator(G)) & ¬rec-pres(aut(commutator(G)))
+значение proper-subs-nilpotent(inn(commutator(G))) у G = ℤ² ⋊_A ℤ, A = (2 1; 1 1) × π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий — запретов 2; например: linear(G) & proper-subs-nilpotent(inn(commutator(G))) & ¬virtually-solvable(commutator(G))
+значение proper-subs-nilpotent(aut(commutator(G))) у G = ⊕_ℕ SL(2,3) — запретов 2; например: p-group(commutator(G)) & proper-subs-nilpotent(aut(commutator(G))) & ¬nilpotent(G) & ¬perfect(inn(commutator(G)))
+значение proper-subs-nilpotent(aut(commutator(G))) у G = Dih(ℤ(2^∞)²) — запретов 2; например: kaplansky(inn(commutator(G))) & no-finite-quotients(commutator(G)) & periodic(commutator(G)) & ¬proper-subs-nilpotent(aut(commutator(G)))
+значение proper-subs-finite(группа Корнера A (счётного ранга)) — запретов 2; например: exponent-3(inn(commutator(G))) & proper-subs-finite(G) & ¬hyperbolic(G) & ¬locally-cyclic(G)
+значение proper-subs-finite(W(A₅): W ≅ W ≀ W = W′) — запретов 2; например: finite-index(commutator(G)) & locally-finite(commutator(G)) & proper-subs-finite(inn(commutator(G))) & ¬linear-c(G)
+значение proper-subs-abelian(inn(commutator(G))) у G = C2 x (((C2 x C2 x C2 x C2) : ((C4 x C2) : D8)) : C3) — запретов 2; например: hopfian(commutator(G)) & locally-nilpotent(inn(commutator(G))) & ¬proper-subs-abelian(inn(commutator(G)))
+значение prime-orders(C3 × A5) — запретов 2; например: embeds(commutator(G), inn(commutator(G))) & prime-orders(G) & ¬embeds(G, aut(commutator(G))) & ¬locally-nilpotent(aut(commutator(G)))
+значение prime-index(⊕_ℕ A4) — запретов 2; например: embeds(commutator(G), inn(commutator(G))) & exponent-6(inn(commutator(G))) & prime-index(inn(commutator(G))) & ¬prime-orders(commutator(G))
+значение prime-index(SL₃(ℤ)) — запретов 2; например: index-2(commutator(G)) & prime-index(inn(commutator(G))) & ¬clt(aut(commutator(G))) & ¬simple(inn(commutator(G)))
+значение polynomial-growth(aut(commutator(G))) у G = ⊕_ℕ SL(2,3) — запретов 2; например: exponent-4(inn(commutator(G))) & polynomial-growth(aut(commutator(G))) & ¬fin-gen(G) & ¬proper-subs-cyclic(inn(commutator(G)))
+значение polycyclic(aut(commutator(G))) у G = ⊕_ℕ ℚ/ℤ × UT₅(ℤ) — запретов 2; например: locally-nilpotent(inn(commutator(G))) & polycyclic(aut(commutator(G))) & ¬perfect(inn(commutator(G))) & ¬two-primes(aut(commutator(G)))
+значение polycyclic(aut(commutator(G))) у G = ⊕_p C_p × ℤ[ω] ⋊ S₃ (p3m1) — запретов 2; например: polycyclic(aut(commutator(G))) & ¬iso(G, aut(commutator(G))) & ¬locally-nilpotent(inn(commutator(G))) & ¬two-primes(aut(commutator(G)))
+значение no-finite-quotients(aut(commutator(G))) у G = ⊕_ℕ S4 — запретов 2; например: locally-finite(G) & no-finite-quotients(aut(commutator(G))) & ¬virtually-nilpotent(inn(commutator(G)))
+значение no-finite-quotients(aut(commutator(G))) у G = ∗_ℕ C₂ — запретов 2; например: contains-free(G) & no-finite-quotients(aut(commutator(G))) & torsion-free(inn(commutator(G)))
+значение no-finite-quotients(aut(commutator(G))) у G = SL₃(ℤ) × ⊕_ℕ (S₃ × A₄) — запретов 2; например: no-finite-quotients(aut(commutator(G))) & property-t(inn(commutator(G))) & ¬bounded-exponent(inn(commutator(G)))
+значение metabelian(aut(commutator(G))) у G = ⊕_ℕ SL(2,3) — запретов 2; например: class-2(commutator(G)) & ¬metabelian(aut(commutator(G))) & ¬torsion-free(inn(commutator(G))) & ¬two-primes(commutator(G))
+значение locally-solvable(⊕_ℕ A₅ × ⊕_ℕ SL(2, 5)) — запретов 2; например: bounded-exponent(commutator(G)) & locally-solvable(G) & perfect(inn(commutator(G))) & ¬nilpotent(commutator(G))
+значение linear-c(aut(commutator(G))) у G = SL(2,5) × (S₃ ≀ ℤ)′ — запретов 2; например: co-hopfian(inn(commutator(G))) & locally-finite(G) & ¬exponent-2(commutator(G)) & ¬linear-c(aut(commutator(G)))
+значение linear(⊕_ℕ Q8) — запретов 2; например: linear(commutator(G)) & periodic(G) & ¬comp-series(inn(commutator(G)))
+значение linear(aut(commutator(G))) у G = ℚ³ × UT₅(ℤ) — запретов 2; например: left-orderable(inn(commutator(G))) & linear(aut(commutator(G))) & ¬iso(commutator(G), inn(commutator(G))) & ¬metabelian(G)
+значение left-orderable(aut(commutator(G))) у G = ℚ*₊ × F′ (коммутант группы Томпсона F) — запретов 2; например: hopfian(commutator(G)) & torsion-free(inn(commutator(G))) & ¬left-orderable(aut(commutator(G))) & ¬residually-nilpotent(inn(commutator(G)))
+значение kaplansky(F_∞ × S̃L₂(ℝ) (универсальная накрывающая)) — запретов 2; например: kaplansky(G) & ¬no-finite-quotients(G) & ¬rec-pres-ctbl(inn(commutator(G)))
+значение iso(aut(commutator(G)), commutator(G)) у order 1440 — запретов 2; например: fin-gen(inn(commutator(G))) & iso(aut(commutator(G)), commutator(G)) & ¬abelian(G)
+значение iso(G, aut(commutator(G))) у C_p (p > 10⁷⁵) — запретов 2; например: clt(inn(commutator(G))) & iso(G, aut(commutator(G))) & prime-orders(commutator(G)) & ¬iso(aut(commutator(G)), inn(commutator(G)))
+значение index-2(A5 × A6) — запретов 2; например: hyperbolic(aut(commutator(G))) & perfect(commutator(G)) & ¬centerless(commutator(G)) & ¬index-2(inn(commutator(G)))
+значение indecomposable(order 688128) — запретов 2; например: indecomposable(aut(commutator(G))) & nilpotent(G) & ¬bi-orderable(inn(commutator(G))) & ¬co-hopfian(G)
+значение indecomposable(aut(commutator(G))) у G = S3 × A6 — запретов 2; например: indecomposable(aut(commutator(G))) & property-t(aut(commutator(G))) & ¬centerless(commutator(G)) & ¬prime-orders(inn(commutator(G)))
+значение hyperbolic(C2 x C2) — запретов 2; например: hyperbolic(inn(commutator(G))) & maximal(commutator(G)) & ¬virtually-nilpotent(aut(commutator(G)))
+значение hall(commutator(G)) у SL(2,3) × C5 : C4 — запретов 2; например: hall(commutator(G)) & p-group(inn(commutator(G))) & ¬bi-orderable(inn(commutator(G))) & ¬sylow(commutator(G))
+значение hall(commutator(G)) у QD16 × C3 : C4 — запретов 2; например: embeds(aut(commutator(G)), G) & hall(commutator(G)) & kaplansky(inn(commutator(G))) & ¬locally-cyclic(aut(commutator(G)))
+значение hall(C2 x C2) — запретов 2; например: finite(inn(commutator(G))) & ¬hall(inn(commutator(G))) & ¬polynomial-growth(commutator(G)) & ¬whitehead(inn(commutator(G)))
+значение hall(1) — запретов 2; например: central(inn(commutator(G))) & fin-pres(G) & ¬bi-orderable(commutator(G)) & ¬hall(inn(commutator(G)))
+значение finite-index(SL₃(ℤ)) — запретов 2; например: contains-free(inn(commutator(G))) & finite-index(inn(commutator(G))) & word-problem(commutator(G))
+значение fin-gen(aut(commutator(G))) у G = UT₅(ℚ) — запретов 2; например: co-hopfian(inn(commutator(G))) & fin-gen(aut(commutator(G))) & ¬finite(inn(commutator(G)))
+значение exponent-6(240:189) — запретов 2; например: exponent-6(aut(commutator(G))) & perfect(inn(commutator(G))) & ¬free(inn(commutator(G)))
+значение exponent-6((S₃ ≀ ℤ)′) — запретов 2; например: exponent-6(commutator(G)) & ¬amenable(aut(commutator(G))) & ¬proper-subs-cyclic(inn(commutator(G)))
+значение exponent-4(⊕C₂ × UT₅(𝔽₂)) — запретов 2; например: exponent-4(G) & two-generated(inn(commutator(G))) & ¬metabelian(G)
+значение embeds(inn(commutator(G)), commutator(G)) у ⊕_ℕ SL(2,3) — запретов 2; например: embeds(inn(commutator(G)), commutator(G)) & exponent-4(commutator(G)) & ¬comp-series(aut(commutator(G)))
+значение embeds(inn(commutator(G)), commutator(G)) у C2 x (((C2 x C2 x C2 x C2) : ((C4 x C2) : D8)) : C3) — запретов 2; например: embeds(inn(commutator(G)), commutator(G)) & proper-subs-nilpotent(inn(commutator(G))) & ¬prime-orders(inn(commutator(G))) & ¬proper-subs-abelian(aut(commutator(G)))
+значение embeds(inn(commutator(G)), G) у GL(2,5) — запретов 2; например: embeds(inn(commutator(G)), G) & index-2(inn(commutator(G))) & ¬embeds(commutator(G), aut(commutator(G))) & ¬polycyclic(aut(commutator(G)))
+значение embeds(commutator(G), inn(commutator(G))) у ℚ/ℤ × SU(2) — запретов 2; например: divisible(aut(commutator(G))) & ¬dedekind(commutator(G)) & ¬embeds(commutator(G), inn(commutator(G)))
+значение embeds(commutator(G), aut(commutator(G))) у C3 x (((C3 x C3) : C3) : (C2 x C2)) — запретов 2; например: embeds(commutator(G), aut(commutator(G))) & odd-order(commutator(G)) & ¬embeds(G, aut(commutator(G))) & ¬left-orderable(inn(commutator(G)))
+значение embeds(commutator(G), aut(commutator(G))) у 324:124 — запретов 2; например: dedekind(inn(commutator(G))) & embeds(commutator(G), aut(commutator(G))) & prime-orders(commutator(G)) & ¬proper-subs-abelian(commutator(G))
+значение embeds(aut(commutator(G)), commutator(G)) у C_p (p > 10⁷⁵) — запретов 2; например: complemented(inn(commutator(G))) & hopfian(commutator(G)) & ¬embeds(aut(commutator(G)), commutator(G)) & ¬rec-pres-ctbl(commutator(G))
+значение embeds(aut(commutator(G)), G) у группа Гейзенберга бесконечного ранга × D₈ ∘ ℤ(2^∞) — запретов 2; например: exponent-2(aut(commutator(G))) & ¬embeds(aut(commutator(G)), G) & ¬index-2(inn(commutator(G))) & ¬linear(G)
+значение embeds(aut(commutator(G)), G) у SL(2,3) × S4 — запретов 2; например: clt(inn(commutator(G))) & embeds(aut(commutator(G)), G) & ¬indecomposable(G) & ¬locally-nilpotent(inn(commutator(G)))
+значение embeds(aut(commutator(G)), G) у SL(2,3) × A₅ × ℤ — запретов 2; например: linear(commutator(G)) & ¬centerless(inn(commutator(G))) & ¬embeds(aut(commutator(G)), G) & ¬locally-nilpotent(commutator(G))
+значение embeds(G, inn(commutator(G))) у SU(2) — запретов 2; например: comp-series(G) & linear(inn(commutator(G))) & ¬embeds(G, inn(commutator(G))) & ¬rec-pres(G)
+значение embeds(G, aut(commutator(G))) у UT₃(ℝ) — запретов 2; например: bounded-exponent(inn(commutator(G))) & ¬embeds(G, aut(commutator(G))) & ¬locally-cyclic(commutator(G)) & ¬rec-pres-ctbl(aut(commutator(G)))
+значение embeds(G, aut(commutator(G))) у SL(2,3) × S4 — запретов 2; например: locally-solvable(aut(commutator(G))) & ¬centerless(inn(commutator(G))) & ¬embeds(G, aut(commutator(G))) & ¬residually-nilpotent(commutator(G))
+значение embeds(G, aut(commutator(G))) у C2 x (((C3 x C3) : C3) : C2) — запретов 2; например: clt(commutator(G)) & embeds(G, aut(commutator(G))) & prime-orders(commutator(G)) & ¬bi-orderable(inn(commutator(G)))
+значение countable(aut(commutator(G))) у G = F′ (коммутант группы Томпсона F) — запретов 2; например: countable(aut(commutator(G))) & kaplansky(G) & ¬residually-nilpotent(inn(commutator(G)))
+значение contains-free(ℤ(2^∞) × V₄ × SL₂(ℤ)) — запретов 2; например: contains-free(G) & fin-gen(inn(commutator(G))) & kaplansky(inn(commutator(G))) & ¬residually-finite(G)
+значение contains-free(aut(commutator(G))) у G = UT₄(ℤ) × D₈ ∘ ℤ(2^∞) — запретов 2; например: co-hopfian(inn(commutator(G))) & contains-free(aut(commutator(G))) & fin-gen(commutator(G)) & ¬whitehead(commutator(G))
+значение contains-free(SO(3) × SO(3)) — запретов 2; например: divisible(G) & linear-c(G) & ¬contains-free(inn(commutator(G))) & ¬left-orderable(commutator(G))
+значение complemented(commutator(G)) у UT₃(𝔽₃(t)) — запретов 2; например: complemented(commutator(G)) & metabelian(commutator(G)) & ¬exponent-2(inn(commutator(G))) & ¬finite(G)
+значение complemented(commutator(G)) у C3 x (((C3 x C3) : C3) : (C2 x C2)) — запретов 2; например: dedekind(inn(commutator(G))) & locally-finite(inn(commutator(G))) & ¬complemented(commutator(G)) & ¬exponent-4(inn(commutator(G)))
+значение comp-series(Aut(M(ℚ, 𝔽₂))) — запретов 2; например: comp-series(aut(commutator(G))) & embeds(G, commutator(G)) & ¬contains-free(inn(commutator(G))) & ¬rec-pres(G)
+значение co-hopfian(aut(commutator(G))) у G = ∏C₂ × ⊕_p UT₃(𝔽_p)^p — запретов 2; например: co-hopfian(aut(commutator(G))) & exponent-3(inn(commutator(G))) & ¬countable(G) & ¬two-generated(commutator(G))
+значение co-hopfian(aut(commutator(G))) у G = ℤ(2^∞) × SL₃(ℤ) — запретов 2; например: property-t(inn(commutator(G))) & ¬co-hopfian(aut(commutator(G))) & ¬divisible(inn(commutator(G)))
+значение clt(SL(2,3) × S4) — запретов 2; например: clt(G) & clt(aut(commutator(G))) & ¬indecomposable(inn(commutator(G))) & ¬residually-nilpotent(commutator(G))
+значение centerless(aut(commutator(G))) у G = ℤ² ⋊_A ℤ, A = (2 1; 1 1) × C2 x C2 x C2 x D8 — запретов 2; например: centerless(aut(commutator(G))) & divisible(inn(commutator(G))) & residually-finite(aut(commutator(G))) & ¬co-hopfian(commutator(G))
+значение centerless(aut(commutator(G))) у G = Dih(ℤ(2^∞)²) — запретов 2; например: centerless(aut(commutator(G))) & exponent-6(inn(commutator(G))) & index-2(commutator(G)) & ¬two-primes(G)
+значение abelian(aut(commutator(G))) у G = Dih(ℤ(2^∞)²) — запретов 2; например: central(inn(commutator(G))) & index-2(commutator(G)) & ¬abelian(aut(commutator(G))) & ¬min-prime-index(commutator(G))
+значение не записан коммутант у T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) — запретов 1; например: proper-subs-abelian(commutator(G)) & ¬p-group(inn(commutator(G))) & ¬two-generated(commutator(G))
+значение word-problem(группа Новикова — Буна (к. о., проблема слов неразрешима)) — запретов 1; например: rec-pres(G) & ¬two-primes(inn(commutator(G))) & ¬word-problem(G)
+значение whole(ℤ² × PSL₂(ℝ)) — запретов 1; например: left-orderable(G) & ¬bi-orderable(commutator(G)) & ¬whole(inn(commutator(G)))
+значение whitehead(aut(commutator(G))) у G = ⊕_ℕ ℚ/ℤ × UT₅(ℤ) — запретов 1; например: whitehead(aut(commutator(G))) & ¬two-primes(inn(commutator(G)))
+значение virtually-solvable(aut(commutator(G))) у G = 𝒢 (группа Григорчука) × (S₃ ≀ ℤ)′ — запретов 1; например: virtually-solvable(aut(commutator(G))) & ¬finite(commutator(G)) & ¬locally-solvable(inn(commutator(G))) & ¬two-generated(commutator(G))
+значение virtually-solvable(aut(commutator(G))) у G = ⊕ℤ × ℤ[ω] ⋊ S₃ (p3m1) — запретов 1; например: polycyclic(commutator(G)) & virtually-solvable(aut(commutator(G))) & ¬fin-gen(G) & ¬proper-subs-abelian(inn(commutator(G)))
+значение virtually-solvable(aut(commutator(G))) у G = S4 × ⊕_ℤ S₃ — запретов 1; например: proper-subs-nilpotent(inn(commutator(G))) & virtually-solvable(aut(commutator(G))) & ¬residually-nilpotent(commutator(G)) & ¬two-generated(commutator(G))
+значение virtually-nilpotent(UT₃(ℚ)/⟨e₁₃⟩) — запретов 1; например: divisible(G) & free(inn(commutator(G))) & ¬torsion-free(commutator(G)) & ¬virtually-nilpotent(G)
+значение two-primes(aut(commutator(G))) у G = UT₅(𝔽₂) × UT₅(𝔽₂) — запретов 1; например: exponent-2(inn(commutator(G))) & proper-subs-finite(aut(commutator(G))) & ¬proper-subs-cyclic(inn(commutator(G))) & ¬two-primes(aut(commutator(G)))
+значение two-primes(aut(commutator(G))) у G = S4 × ⊕_ℤ S₃ — запретов 1; например: proper-subs-abelian(inn(commutator(G))) & two-primes(aut(commutator(G))) & ¬class-2(commutator(G)) & ¬two-generated(commutator(G))
+значение two-primes(aut(commutator(G))) у G = S4 × S4 — запретов 1; например: embeds(inn(commutator(G)), commutator(G)) & two-primes(aut(commutator(G))) & ¬indecomposable(inn(commutator(G))) & ¬order-p2(inn(commutator(G)))
+значение two-primes(aut(commutator(G))) у G = C2 x (((C2 x C2 x C2 x C2) : ((C4 x C2) : D8)) : C3) — запретов 1; например: hopfian(aut(commutator(G))) & nilpotent(commutator(G)) & ¬exponent-2(inn(commutator(G))) & ¬two-primes(aut(commutator(G)))
+значение two-primes(aut(commutator(G))) у G = (C2 x C2 x C2 x C2 x C2 x C2 x C2 x C2 x C2) : (C7 : C3) — запретов 1; например: maximal(commutator(G)) & two-primes(aut(commutator(G))) & ¬free-abelian(inn(commutator(G))) & ¬two-primes(G)
+значение two-generated(order 1440) — запретов 1; например: perfect(commutator(G)) & two-generated(aut(commutator(G))) & ¬central(inn(commutator(G))) & ¬prime-index(inn(commutator(G)))
+значение two-generated(inn(commutator(G))) у G = C2 x (((C2 x C2 x C2 x C2) : ((C4 x C2) : D8)) : C3) — запретов 1; например: exponent-4(inn(commutator(G))) & two-generated(inn(commutator(G))) & ¬free-abelian(inn(commutator(G))) & ¬order-p2(inn(commutator(G)))
+значение two-generated(inn(commutator(G))) у G = ((C9 : C3) : ((C3 x C3) : C3)) : (C2 x C2) — запретов 1; например: bounded-exponent(aut(commutator(G))) & proper-subs-nilpotent(inn(commutator(G))) & ¬exponent-4(inn(commutator(G))) & ¬two-generated(inn(commutator(G)))
+значение two-generated(UT₃(ℤ) (группа Гейзенберга) × UT₃(ℤ) (группа Гейзенберга)) — запретов 1; например: class-2(G) & two-generated(G) & ¬divisible(aut(commutator(G))) & ¬min-prime-index(inn(commutator(G)))
+значение two-generated(SL(2,3) × SL(2,3)) — запретов 1; например: proper-subs-nilpotent(commutator(G)) & two-generated(G) & ¬indecomposable(inn(commutator(G))) & ¬proper-subs-cyclic(inn(commutator(G)))
+значение two-generated(S5 x S3) — запретов 1; например: ¬locally-solvable(commutator(G)) & ¬maximal(inn(commutator(G))) & ¬perfect(commutator(G)) & ¬two-generated(G)
+значение two-generated(Q8 × ℤ²) — запретов 1; например: iso(aut(commutator(G)), inn(commutator(G))) & two-generated(G) & ¬iso(commutator(G), inn(commutator(G))) & ¬periodic(G)
+значение two-generated(F₂ × F₂) — запретов 1; например: bi-orderable(inn(commutator(G))) & two-generated(commutator(G)) & ¬hyperbolic(inn(commutator(G)))
+значение two-generated(A6) — запретов 1; например: bounded-exponent(inn(commutator(G))) & two-generated(commutator(G)) & ¬locally-finite(G) & ¬prime-orders(inn(commutator(G)))
+значение two-generated(480:1186) — запретов 1; например: two-generated(aut(commutator(G))) & ¬class-2(inn(commutator(G))) & ¬indecomposable(aut(commutator(G))) & ¬solvable(aut(commutator(G)))
+значение torsion-free(inn(commutator(G))) у G = ⊕ℤ × Sp₄(ℤ) — запретов 1; например: property-t(commutator(G)) & torsion-free(inn(commutator(G))) & ¬virtually-nilpotent(commutator(G))
+значение torsion-free(inn(commutator(G))) у G = SO(3) × E₂(ℂ[x₁, x₂, …]) — запретов 1; например: linear(G) & perfect(G) & torsion-free(inn(commutator(G))) & ¬polynomial-growth(G)
+значение torsion-free(aut(commutator(G))) у G = ⊕_ℤ S₃ × F (группа Томпсона) — запретов 1; например: left-orderable(inn(commutator(G))) & ¬bi-orderable(commutator(G)) & ¬proper-subs-cyclic(inn(commutator(G))) & ¬torsion-free(aut(commutator(G)))
+значение torsion-free(aut(commutator(G))) у G = ⊕_ℕ UT₃(ℤ) × ℤ² ∗ ℤ — запретов 1; например: bi-orderable(G) & ¬divisible(inn(commutator(G))) & ¬torsion-free(aut(commutator(G)))
+значение solvable(aut(commutator(G))) у G = ⊕_ℤ S₃ × ⊕_p C_p² — запретов 1; например: exponent-4(inn(commutator(G))) & exponent-6(commutator(G)) & solvable(aut(commutator(G))) & ¬two-generated(commutator(G))
+значение simple(aut(commutator(G))) у G = SL(2,5) × ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 1; например: residually-finite(inn(commutator(G))) & simple(aut(commutator(G))) & ¬clt(aut(commutator(G))) & ¬periodic(G)
+значение residually-nilpotent(aut(commutator(G))) у G = ⊕_ℕ C2 x A4 — запретов 1; например: exponent-4(commutator(G)) & exponent-6(G) & residually-nilpotent(aut(commutator(G))) & ¬iso(aut(commutator(G)), inn(commutator(G)))
+значение residually-nilpotent(aut(commutator(G))) у G = ℤ² ⋊_A ℤ, A = (2 1; 1 1) × ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 1; например: central(inn(commutator(G))) & residually-nilpotent(aut(commutator(G))) & word-problem(commutator(G)) & ¬two-generated(commutator(G))
+значение residually-finite(inn(commutator(G))) у G = SL₃(ℤ) × E₂(ℂ[x₁, x₂, …]) — запретов 1; например: linear-c(G) & perfect(G) & residually-finite(inn(commutator(G))) & ¬fin-gen(G)
+значение residually-finite(aut(commutator(G))) у G = ⊕ℤ × S₃ ≀ ℤ — запретов 1; например: exponent-6(inn(commutator(G))) & residually-finite(aut(commutator(G))) & ¬dedekind(aut(commutator(G))) & ¬polynomial-growth(commutator(G))
+значение residually-finite(aut(commutator(G))) у G = ⊕_ℕ ℚ/ℤ × Dih(ℤ(2^∞)²) — запретов 1; например: co-hopfian(commutator(G)) & exponent-4(inn(commutator(G))) & p-group(commutator(G)) & ¬residually-finite(aut(commutator(G)))
+значение rec-pres-ctbl(⊕ℤ × универсальная группа Холла U) — запретов 1; например: divisible(inn(commutator(G))) & rec-pres-ctbl(commutator(G)) & ¬embeds(commutator(G), inn(commutator(G))) & ¬linear-c(inn(commutator(G)))
+значение rec-pres-ctbl(⊕_ℕ ℚ/ℤ × UT₃(ℤ) × ℤ³) — запретов 1; например: class-2(inn(commutator(G))) & ¬kaplansky(commutator(G)) & ¬periodic(aut(commutator(G))) & ¬rec-pres-ctbl(commutator(G))
+значение rec-pres-ctbl(универсальная группа Холла U × универсальная группа Холла U) — запретов 1; например: comp-series(G) & locally-finite(inn(commutator(G))) & ¬rec-pres-ctbl(G)
+значение rec-pres-ctbl(aut(commutator(G))) у G = ⊕_ℕ ℚ/ℤ × U ≀ U (U — группа Холла) — запретов 1; например: locally-finite(inn(commutator(G))) & no-finite-quotients(G) & rec-pres-ctbl(aut(commutator(G))) & ¬kaplansky(commutator(G))
+значение rec-pres-ctbl(aut(commutator(G))) у G = ⊕_ℕ UT₃(ℤ) × SAut(F₃) = Aut(F₃)′ — запретов 1; например: contains-free(inn(commutator(G))) & perfect(inn(commutator(G))) & rec-pres-ctbl(aut(commutator(G))) & residually-finite(inn(commutator(G)))
+значение rec-pres-ctbl(SL(2,3) × E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩) — запретов 1; например: clt(inn(commutator(G))) & ¬prime-orders(aut(commutator(G))) & ¬proper-subs-abelian(commutator(G)) & ¬rec-pres-ctbl(G)
+значение rec-pres(aut(commutator(G))) у G = ⊕ℤ × S₃ ≀ ℤ — запретов 1; например: bounded-exponent(inn(commutator(G))) & centerless(aut(commutator(G))) & rec-pres(aut(commutator(G))) & ¬comp-series(aut(commutator(G)))
+значение rec-pres(aut(commutator(G))) у G = ℤ² ∗ ℤ — запретов 1; например: rec-pres(G) & ¬hopfian(inn(commutator(G))) & ¬rec-pres(aut(commutator(G)))
+значение rec-pres(aut(commutator(G))) у G = SL(2,5) × ⊕_ℕ (S₃ × D₈) — запретов 1; например: polynomial-growth(inn(commutator(G))) & ¬metabelian(commutator(G)) & ¬rec-pres(aut(commutator(G)))
+значение property-t(inn(commutator(G))) у G = ⊕_ℕ SL(2, 5) × Out(⊕_ℕ A₅) = (∏S₅ ⋊ Sym(ℕ))/⊕A₅ — запретов 1; например: perfect(G) & property-t(inn(commutator(G))) & ¬hopfian(G)
+значение property-t(aut(commutator(G))) у G = ⊕_ℤ S₃ × Aff⁺(ℝ) = ℝ ⋊ ℝ*₊ — запретов 1; например: central(inn(commutator(G))) & ¬countable(commutator(G)) & ¬kaplansky(commutator(G)) & ¬property-t(aut(commutator(G)))
+значение property-t(aut(commutator(G))) у G = ⊕_ℕ SL(2,3) — запретов 1; например: virtually-solvable(inn(commutator(G))) & ¬no-finite-quotients(inn(commutator(G))) & ¬property-t(aut(commutator(G)))
+значение proper-subs-nilpotent(aut(commutator(G))) у G = 𝒢 (группа Григорчука) × Out(⊕_ℕ A₅) = (∏S₅ ⋊ Sym(ℕ))/⊕A₅ — запретов 1; например: finite-index(commutator(G)) & proper-subs-nilpotent(aut(commutator(G))) & ¬co-hopfian(commutator(G)) & ¬hall(inn(commutator(G)))
+значение proper-subs-nilpotent(aut(commutator(G))) у G = UT₃(ℝ) × UT₅(𝔽₂) — запретов 1; например: order-p2(inn(commutator(G))) & proper-subs-nilpotent(aut(commutator(G))) & ¬rec-pres-ctbl(G)
+значение proper-subs-nilpotent(C2 x (((C2 x C2 x C2 x C2) : ((C4 x C2) : D8)) : C3)) — запретов 1; например: indecomposable(commutator(G)) & proper-subs-nilpotent(G) & ¬proper-subs-cyclic(commutator(G)) & ¬torsion-free(inn(commutator(G)))
+значение proper-subs-finite(inn(commutator(G))) у G = ℤ × Sp₄(ℤ) — запретов 1; например: proper-subs-finite(inn(commutator(G))) & ¬comp-series(aut(commutator(G))) & ¬metabelian(G)
+значение proper-subs-finite(aut(commutator(G))) у G = 𝒢 (группа Григорчука) × Out(⊕_ℕ A₅) = (∏S₅ ⋊ Sym(ℕ))/⊕A₅ — запретов 1; например: proper-subs-finite(aut(commutator(G))) & ¬countable(G) & ¬dedekind(inn(commutator(G))) & ¬indecomposable(commutator(G))
+значение proper-subs-cyclic(inn(commutator(G))) у G = ((C9 : C3) : ((C3 x C3) : C3)) : (C2 x C2) — запретов 1; например: proper-subs-cyclic(inn(commutator(G))) & proper-subs-nilpotent(commutator(G)) & ¬exponent-4(inn(commutator(G))) & ¬prime-orders(commutator(G))
+значение proper-subs-cyclic(inn(commutator(G))) у G = ((C2 x ((C4 x C2) : C4)) : D8) x S3 — запретов 1; например: finite-index(commutator(G)) & nilpotent(commutator(G)) & ¬p-group(commutator(G)) & ¬proper-subs-cyclic(inn(commutator(G)))
+значение proper-subs-abelian(группа Холла с центром ⊇ ℚ ⊕ ℚ/ℤ ⊕ (⊕ℤ)) — запретов 1; например: proper-subs-abelian(G) & virtually-solvable(inn(commutator(G))) & ¬clt(commutator(G))
+значение proper-subs-abelian(aut(commutator(G))) у G = ((C3 x C3) : ((C3 x C3) : C3)) : (C2 x C2) — запретов 1; например: exponent-3(commutator(G)) & proper-subs-abelian(aut(commutator(G))) & ¬embeds(commutator(G), inn(commutator(G))) & ¬simple(aut(commutator(G)))
+значение proper-subs-abelian(C2 x C2 x C2 x ((C2 x C2) : ((C2 x C2 x C2 x C2) : C2))) — запретов 1; например: proper-subs-abelian(G) & residually-nilpotent(inn(commutator(G))) & ¬locally-solvable(aut(commutator(G))) & ¬maximal(commutator(G))
+значение proper-subs-abelian(64512:Aut(10752:Aut(64:82))) — запретов 1; например: centerless(G) & proper-subs-abelian(G) & virtually-nilpotent(inn(commutator(G))) & ¬two-primes(G)
+значение prime-orders(order 9999360) — запретов 1; например: exponent-2(commutator(G)) & prime-orders(aut(commutator(G))) & ¬order-pq(aut(commutator(G))) & ¬whole(inn(commutator(G)))
+значение prime-orders(order 19998720) — запретов 1; например: exponent-6(commutator(G)) & prime-orders(aut(commutator(G))) & ¬exponent-4(commutator(G)) & ¬maximal(inn(commutator(G)))
+значение prime-orders(inn(commutator(G))) у G = order 688128 — запретов 1; например: finite(G) & prime-index(commutator(G)) & ¬centerless(commutator(G)) & ¬prime-orders(inn(commutator(G)))
+значение prime-orders(inn(commutator(G))) у G = W′ для W = W(ℤ(2^∞)) — запретов 1; например: locally-solvable(G) & prime-orders(inn(commutator(G))) & ¬exponent-6(inn(commutator(G))) & ¬two-generated(G)
+значение prime-orders(aut(commutator(G))) у G = ⊕ℤ × S₃ ≀ ℤ — запретов 1; например: locally-solvable(inn(commutator(G))) & ¬locally-nilpotent(inn(commutator(G))) & ¬prime-orders(aut(commutator(G))) & ¬virtually-nilpotent(inn(commutator(G)))
+значение prime-orders(aut(commutator(G))) у G = C4 x ((C3 x C3) : GL(2,3)) — запретов 1; например: clt(G) & ¬exponent-6(inn(commutator(G))) & ¬indecomposable(G) & ¬prime-orders(aut(commutator(G)))
+значение prime-orders(SL(2,5) × ⊕_ℕ ℤ(2^∞)) — запретов 1; например: maximal(inn(commutator(G))) & prime-orders(G) & ¬fin-pres(G) & ¬p-group(aut(commutator(G)))
+значение prime-orders(SL(2,3) × C5 : C4) — запретов 1; например: dedekind(inn(commutator(G))) & polynomial-growth(G) & prime-orders(G) & ¬two-primes(G)
+значение prime-orders(S4 × C5 : C4) — запретов 1; например: prime-orders(G) & proper-subs-nilpotent(inn(commutator(G))) & ¬clt(inn(commutator(G))) & ¬iso(aut(commutator(G)), commutator(G))
+значение prime-index(commutator(G)) у группа Маклейна M(ℚ, ℚ) — запретов 1; например: left-orderable(inn(commutator(G))) & prime-index(commutator(G)) & ¬locally-solvable(aut(commutator(G))) & ¬sylow(commutator(G))
+значение prime-index(F₂) — запретов 1; например: linear-c(aut(commutator(G))) & residually-finite(aut(commutator(G))) & ¬prime-index(inn(commutator(G))) & ¬virtually-solvable(commutator(G))
+значение polynomial-growth(aut(commutator(G))) у G = ⊕_p UT₃(𝔽_p)^p — запретов 1; например: co-hopfian(G) & exponent-4(inn(commutator(G))) & polynomial-growth(aut(commutator(G))) & ¬polycyclic(commutator(G))
+значение polynomial-growth(aut(commutator(G))) у G = ⊕C₃ × F (группа Томпсона) — запретов 1; например: polynomial-growth(aut(commutator(G))) & torsion-free(commutator(G)) & ¬p-group(inn(commutator(G)))
+значение polycyclic(aut(commutator(G))) у G = UT₅(𝔽₂) × UT₅(𝔽₂) — запретов 1; например: exponent-4(inn(commutator(G))) & hopfian(G) & ¬polycyclic(aut(commutator(G))) & ¬proper-subs-cyclic(inn(commutator(G)))
+значение polycyclic(aut(commutator(G))) у G = C2 x ((C2 x C2 x C2 x C2) : ((S3 x S3) : C2)) — запретов 1; например: two-primes(G) & ¬clt(G) & ¬p-group(inn(commutator(G))) & ¬polycyclic(aut(commutator(G)))
+значение periodic(aut(commutator(G))) у G = ⊕ℤ × универсальная группа Холла U — запретов 1; например: divisible(inn(commutator(G))) & periodic(aut(commutator(G))) & ¬kaplansky(inn(commutator(G)))
+значение periodic(aut(commutator(G))) у G = ℤ[ω] ⋊ C₃ × UT₅(𝔽₂) — запретов 1; например: order-p2(inn(commutator(G))) & periodic(aut(commutator(G))) & residually-nilpotent(G) & ¬nilpotent(G)
+значение periodic(aut(commutator(G))) у G = Dih(ℤ(2^∞)²) — запретов 1; например: bi-orderable(inn(commutator(G))) & periodic(aut(commutator(G))) & prime-index(commutator(G)) & ¬hall(commutator(G))
+значение perfect(inn(commutator(G))) у G = ⊕ℤ × π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий — запретов 1; например: linear-c(commutator(G)) & perfect(inn(commutator(G))) & torsion-free(commutator(G)) & ¬metabelian(G)
+значение perfect(aut(commutator(G))) у G = 𝒢 (группа Григорчука) × UT₅(ℚ) — запретов 1; например: ¬centerless(inn(commutator(G))) & ¬class-2(inn(commutator(G))) & ¬perfect(aut(commutator(G))) & ¬two-generated(G)
+значение perfect(aut(commutator(G))) у G = 𝒢 (группа Григорчука) × UT₃(ℤ) (группа Гейзенберга) — запретов 1; например: ¬embeds(commutator(G), inn(commutator(G))) & ¬locally-solvable(commutator(G)) & ¬perfect(aut(commutator(G))) & ¬simple(inn(commutator(G)))
+значение perfect(aut(commutator(G))) у G = ⊕_ℤ S₃ × F (группа Томпсона) — запретов 1; например: comp-series(inn(commutator(G))) & left-orderable(inn(commutator(G))) & ¬p-group(inn(commutator(G))) & ¬perfect(aut(commutator(G)))
+значение perfect(aut(commutator(G))) у G = ℤ² ⋊_A ℤ, A = (2 1; 1 1) × E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩ — запретов 1; например: odd-order(inn(commutator(G))) & perfect(aut(commutator(G))) & ¬embeds(G, aut(commutator(G))) & ¬exponent-6(commutator(G))
+значение perfect(aut(commutator(G))) у G = order 24261120 — запретов 1; например: fin-pres(G) & perfect(aut(commutator(G))) & ¬metabelian(inn(commutator(G)))
+значение perfect(aut(commutator(G))) у G = F_∞ × ⊕_ℕ PSL₂(ℝ) — запретов 1; например: iso(G, inn(commutator(G))) & ¬perfect(G) & ¬perfect(aut(commutator(G)))
+значение p-group(aut(commutator(G))) у G = ((C3 x C3) : ((C3 x C3) : C3)) : (C2 x C2) — запретов 1; например: exponent-3(commutator(G)) & p-group(aut(commutator(G))) & ¬indecomposable(inn(commutator(G)))
+значение p-group(Q8 × D₈ ∘ ℤ(2^∞)) — запретов 1; например: free-abelian(inn(commutator(G))) & p-group(G) & ¬bounded-exponent(G) & ¬class-2(aut(commutator(G)))
+значение order-p2(inn(commutator(G))) у G = ((C3 x C3) : ((C3 x C3) : C3)) : (C2 x C2) — запретов 1; например: odd-order(inn(commutator(G))) & prime-orders(commutator(G)) & ¬order-p2(inn(commutator(G))) & ¬whitehead(inn(commutator(G)))
+значение odd-order(inn(commutator(G))) у G = S4 x GL(2,3) — запретов 1; например: odd-order(inn(commutator(G))) & ¬clt(commutator(G)) & ¬kaplansky(inn(commutator(G)))
+значение nilpotent(aut(commutator(G))) у G = ⊕_ℤ S₃ × UT₅(ℤ) — запретов 1; например: free-abelian(inn(commutator(G))) & ¬exponent-3(inn(commutator(G))) & ¬nilpotent(aut(commutator(G)))
+значение min-prime-index(inn(commutator(G))) у G = 576:8653 — запретов 1; например: exponent-6(commutator(G)) & two-primes(commutator(G)) & ¬min-prime-index(inn(commutator(G))) & ¬prime-orders(inn(commutator(G)))
+значение min-prime-index(commutator(G)) у SL(2,3) × SL(2,5) — запретов 1; например: min-prime-index(commutator(G)) & ¬class-2(inn(commutator(G))) & ¬indecomposable(inn(commutator(G))) & ¬iso(commutator(G), inn(commutator(G)))
+значение min-prime-index(commutator(G)) у C_p (p > 10⁷⁵) — запретов 1; например: linear(inn(commutator(G))) & simple(G) & torsion-free(inn(commutator(G))) & ¬min-prime-index(commutator(G))
+значение min-prime-index(A6) — запретов 1; например: centerless(G) & min-prime-index(inn(commutator(G))) & ¬embeds(commutator(G), inn(commutator(G))) & ¬proper-subs-nilpotent(inn(commutator(G)))
+значение min-prime-index(A4) — запретов 1; например: min-prime-index(inn(commutator(G))) & ¬hopfian(G) & ¬proper-subs-nilpotent(commutator(G)) & ¬simple(inn(commutator(G)))
+значение min-prime-index(1) — запретов 1; например: locally-solvable(G) & min-prime-index(inn(commutator(G))) & ¬metabelian(aut(commutator(G))) & ¬two-primes(commutator(G))
+значение metabelian(inn(commutator(G))) у G = 8192:Out(512:Aut(64:17)) — запретов 1; например: proper-subs-nilpotent(inn(commutator(G))) & residually-nilpotent(inn(commutator(G))) & ¬metabelian(inn(commutator(G)))
+значение metabelian(aut(commutator(G))) у G = (C2 x C2 x C2 x C2 x C2 x C2 x C2 x C2 x C2) : (C7 : C3) — запретов 1; например: hall(commutator(G)) & metabelian(aut(commutator(G))) & ¬left-orderable(inn(commutator(G)))
+значение maximal(ℤ[ω] ⋊ C₃) — запретов 1; например: index-2(commutator(G)) & ¬divisible(commutator(G)) & ¬maximal(inn(commutator(G))) & ¬min-prime-index(commutator(G))
+значение maximal(inn(commutator(G))) у G = ((C3 x C3) : ((C3 x C3) : C3)) : (C2 x C2) — запретов 1; например: exponent-6(G) & maximal(inn(commutator(G))) & ¬exponent-2(inn(commutator(G)))
+значение maximal(Sym(ℕ)) — запретов 1; например: embeds(aut(commutator(G)), commutator(G)) & indecomposable(G) & maximal(inn(commutator(G))) & ¬property-t(G)
+значение locally-solvable(aut(commutator(G))) у G = ⊕ℤ × UT₅(ℤ) — запретов 1; например: locally-solvable(aut(commutator(G))) & nilpotent(G) & ¬no-finite-quotients(inn(commutator(G))) & ¬two-primes(aut(commutator(G)))
+значение locally-solvable(aut(commutator(G))) у G = UT₅(𝔽₂) × UT₅(𝔽₂) — запретов 1; например: linear(commutator(G)) & p-group(commutator(G)) & ¬locally-solvable(aut(commutator(G))) & ¬proper-subs-cyclic(inn(commutator(G)))
+значение locally-solvable(aut(commutator(G))) у G = C2 x (((C2 x C2 x C2 x C2) : ((C4 x C2) : D8)) : C3) — запретов 1; например: indecomposable(commutator(G)) & residually-nilpotent(commutator(G)) & ¬embeds(commutator(G), inn(commutator(G))) & ¬locally-solvable(aut(commutator(G)))
+значение locally-solvable(S̃L₂(ℝ) (универсальная накрывающая) × S̃L₂(ℝ) (универсальная накрывающая)) — запретов 1; например: linear(inn(commutator(G))) & locally-solvable(commutator(G)) & perfect(G) & ¬iso(G, aut(commutator(G)))
+значение locally-solvable(SL(2,5) × S̃L₂(ℝ) (универсальная накрывающая)) — запретов 1; например: linear(inn(commutator(G))) & locally-solvable(commutator(G)) & ¬finite-index(commutator(G)) & ¬metabelian(commutator(G))
+значение locally-solvable(F′ (коммутант группы Томпсона F) × F′ (коммутант группы Томпсона F)) — запретов 1; например: comp-series(inn(commutator(G))) & locally-solvable(commutator(G)) & torsion-free(inn(commutator(G))) & ¬class-2(inn(commutator(G)))
+значение locally-nilpotent(⊕ℤ × ℤ[ω] ⋊ C₃) — запретов 1; например: indecomposable(inn(commutator(G))) & locally-nilpotent(commutator(G)) & ¬clt(aut(commutator(G))) & ¬no-finite-quotients(inn(commutator(G)))
+значение locally-nilpotent(ℤ₂ (целые 2-адические) × Dih(ℤ(2^∞)) = ℤ(2^∞) ⋊ C₂) — запретов 1; например: embeds(aut(commutator(G)), G) & proper-subs-finite(inn(commutator(G))) & ¬countable(aut(commutator(G))) & ¬locally-nilpotent(G)
+значение locally-finite(aut(commutator(G))) у G = ⊕_ℤ S₃ — запретов 1; например: locally-finite(aut(commutator(G))) & locally-nilpotent(inn(commutator(G))) & periodic(commutator(G)) & ¬clt(commutator(G))
+значение linear-c(aut(commutator(G))) у G = ⊕_ℤ S₃ × ℤ ≀ ℤ — запретов 1; например: central(inn(commutator(G))) & ¬linear-c(aut(commutator(G))) & ¬linear-c(commutator(G)) & ¬locally-finite(commutator(G))
+значение linear-c(aut(commutator(G))) у G = ⊕_ℤ S₃ × UT₅(ℚ) — запретов 1; например: linear-c(aut(commutator(G))) & locally-nilpotent(inn(commutator(G))) & ¬kaplansky(commutator(G)) & ¬residually-finite(aut(commutator(G)))
+значение linear(aut(commutator(G))) у G = ⊕_ℤ S₃ × SO(3) ∗ SO(3) — запретов 1; например: linear(aut(commutator(G))) & no-finite-quotients(inn(commutator(G))) & ¬locally-nilpotent(commutator(G)) & ¬simple(inn(commutator(G)))
+значение linear(aut(commutator(G))) у G = ⊕_ℕ ℚ/ℤ × S̃L₂(ℝ) (универсальная накрывающая) — запретов 1; например: linear(aut(commutator(G))) & ¬embeds(inn(commutator(G)), commutator(G)) & ¬polynomial-growth(commutator(G))
+значение kaplansky(⊕_ℕ UT₃(ℤ) × группа Хантцше — Вендт) — запретов 1; например: kaplansky(G) & virtually-nilpotent(inn(commutator(G))) & ¬bi-orderable(G) & ¬linear-c(G)
+значение kaplansky(aut(commutator(G))) у G = ⊕_ℤ S₃ × F (группа Томпсона) — запретов 1; например: torsion-free(inn(commutator(G))) & ¬bi-orderable(commutator(G)) & ¬kaplansky(aut(commutator(G))) & ¬locally-finite(inn(commutator(G)))
+значение iso(aut(commutator(G)), inn(commutator(G))) у ⊕ℤ × S₃ ≀ ℤ — запретов 1; например: exponent-6(inn(commutator(G))) & ¬iso(aut(commutator(G)), inn(commutator(G))) & ¬perfect(inn(commutator(G))) & ¬polycyclic(commutator(G))
+значение iso(aut(commutator(G)), commutator(G)) у ⊕_ℕ ℚ/ℤ × UT₅(ℤ) — запретов 1; например: proper-subs-abelian(inn(commutator(G))) & ¬exponent-6(inn(commutator(G))) & ¬iso(aut(commutator(G)), commutator(G)) & ¬two-generated(commutator(G))
+значение iso(aut(commutator(G)), commutator(G)) у ⊕_ℕ S4 — запретов 1; например: centerless(inn(commutator(G))) & metabelian(inn(commutator(G))) & ¬indecomposable(inn(commutator(G))) & ¬iso(aut(commutator(G)), commutator(G))
+значение iso(G, aut(commutator(G))) у order 1536 — запретов 1; например: clt(inn(commutator(G))) & hall(inn(commutator(G))) & iso(G, aut(commutator(G))) & ¬exponent-3(G)
+значение index-2(inn(commutator(G))) у G = C2 x (((C2 x C2 x C2) : ((C2 x C2 x C2) : C4)) : D8) — запретов 1; например: clt(commutator(G)) & index-2(inn(commutator(G))) & proper-subs-nilpotent(commutator(G)) & ¬locally-cyclic(aut(commutator(G)))
+значение index-2(commutator(G)) у S3 × A_∞ (финитарная знакопеременная) — запретов 1; например: embeds(commutator(G), aut(commutator(G))) & index-2(commutator(G)) & ¬clt(G) & ¬iso(commutator(G), inn(commutator(G)))
+значение index-2(F₂) — запретов 1; например: fin-gen(commutator(G)) & linear(aut(commutator(G))) & ¬index-2(inn(commutator(G))) & ¬virtually-solvable(inn(commutator(G)))
+значение indecomposable(inn(commutator(G))) у G = (C2 x C2 x C2 x C2) : ((C2 x ((C2 x C2 x C2) : C4)) : D8) — запретов 1; например: indecomposable(inn(commutator(G))) & nilpotent(commutator(G)) & ¬indecomposable(commutator(G)) & ¬kaplansky(inn(commutator(G)))
+значение indecomposable(inn(commutator(G))) у G = ((C9 : C3) : ((C3 x C3) : C3)) : (C2 x C2) — запретов 1; например: hall(commutator(G)) & indecomposable(inn(commutator(G))) & p-group(commutator(G)) & ¬exponent-2(inn(commutator(G)))
+значение indecomposable(aut(commutator(G))) у G = ⊕ℤ × универсальная группа Холла U — запретов 1; например: divisible(inn(commutator(G))) & indecomposable(aut(commutator(G))) & periodic(inn(commutator(G))) & ¬exponent-2(inn(commutator(G)))
+значение indecomposable(aut(commutator(G))) у G = ⊕ℤ × S₃ ≀ ℤ — запретов 1; например: exponent-6(inn(commutator(G))) & indecomposable(aut(commutator(G))) & ¬residually-nilpotent(commutator(G)) & ¬two-primes(commutator(G))
+значение indecomposable(aut(commutator(G))) у G = ⊕_ℤ S₃ × F (группа Томпсона) — запретов 1; например: indecomposable(aut(commutator(G))) & kaplansky(inn(commutator(G))) & ¬periodic(commutator(G)) & ¬torsion-free(commutator(G))
+значение indecomposable(aut(commutator(G))) у G = ℤ[ω] ⋊ S₃ (p3m1) × SU(2) — запретов 1; например: indecomposable(aut(commutator(G))) & linear(commutator(G)) & ¬countable(inn(commutator(G))) & ¬simple(aut(commutator(G)))
+значение indecomposable(aut(commutator(G))) у G = C2 x ((C4 x C4) : ((C2 x C2) : ((C6 x C2) : C2))) — запретов 1; например: clt(commutator(G)) & indecomposable(commutator(G)) & ¬class-2(inn(commutator(G))) & ¬indecomposable(aut(commutator(G)))
+значение indecomposable(aut(commutator(G))) у G = ((C3 x C3) : ((C3 x C3) : C3)) : (C2 x C2) — запретов 1; например: dedekind(inn(commutator(G))) & exponent-6(commutator(G)) & ¬free(inn(commutator(G))) & ¬indecomposable(aut(commutator(G)))
+значение indecomposable(UT₃(ℚ)/⟨e₁₃⟩) — запретов 1; например: exponent-4(inn(commutator(G))) & indecomposable(G) & no-finite-quotients(G) & ¬left-orderable(commutator(G))
+значение hyperbolic(ℤ⁴ × UT₅(𝔽₂)) — запретов 1; например: comp-series(inn(commutator(G))) & polycyclic(G) & ¬hyperbolic(G) & ¬proper-subs-abelian(commutator(G))
+значение hyperbolic(inn(commutator(G))) у G = ⊕ℤ × BS(2, 3)′ — запретов 1; например: hyperbolic(inn(commutator(G))) & left-orderable(G) & ¬odd-order(inn(commutator(G)))
+значение hyperbolic(aut(commutator(G))) у G = 𝒢 (группа Григорчука) × ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 1; например: p-group(inn(commutator(G))) & rec-pres(commutator(G)) & ¬free-abelian(commutator(G)) & ¬hyperbolic(aut(commutator(G)))
+значение hyperbolic(aut(commutator(G))) у G = ⊕_ℕ ℚ/ℤ × ℤ[ω] ⋊ S₃ (p3m1) — запретов 1; например: hyperbolic(aut(commutator(G))) & solvable(G) & ¬embeds(G, aut(commutator(G))) & ¬two-primes(inn(commutator(G)))
+значение hyperbolic(aut(commutator(G))) у G = SL(2,5) × ⊕_ℕ (S₃ × D₈) — запретов 1; например: simple(inn(commutator(G))) & virtually-solvable(inn(commutator(G))) & ¬hyperbolic(aut(commutator(G)))
+значение hyperbolic(A6) — запретов 1; например: embeds(G, inn(commutator(G))) & hyperbolic(G) & ¬finite(commutator(G))
+значение hopfian(ℚ ≀ ℚ) — запретов 1; например: centerless(G) & divisible(commutator(G)) & hyperbolic(inn(commutator(G))) & ¬hopfian(G)
+значение hopfian(ℚ ≀ ℚ × H(ℤ^(ℕ), ⊕ℚ/ℤ): [eᵢ, eⱼ] = (1/j!)δᵢ при i < j) — запретов 1; например: hopfian(G) & no-finite-quotients(commutator(G)) & residually-finite(inn(commutator(G))) & ¬bi-orderable(commutator(G))
+значение hopfian(S₃ × ℤ² × D₈ ∘ ℤ(2^∞)) — запретов 1; например: hall(inn(commutator(G))) & two-primes(commutator(G)) & ¬hopfian(G) & ¬p-group(commutator(G))
+значение hopfian(GL₃(ℚ)) — запретов 1; например: hopfian(aut(commutator(G))) & odd-order(inn(commutator(G))) & rec-pres-ctbl(aut(commutator(G))) & ¬fin-gen(aut(commutator(G)))
+значение hopfian(Aut(⊕C₂) = GL(ℵ₀, 𝔽₂)) — запретов 1; например: centerless(aut(commutator(G))) & hopfian(aut(commutator(G))) & odd-order(inn(commutator(G))) & ¬fin-gen(commutator(G))
+значение hopfian(A4 × D₈ ∘ ℤ(2^∞)) — запретов 1; например: central(inn(commutator(G))) & property-t(commutator(G)) & ¬hopfian(G) & ¬two-primes(aut(commutator(G)))
+значение hall(commutator(G)) у SL(2,3) × S4 — запретов 1; например: hall(commutator(G)) & ¬embeds(inn(commutator(G)), commutator(G)) & ¬min-prime-index(inn(commutator(G))) & ¬proper-subs-nilpotent(commutator(G))
+значение hall(commutator(G)) у S4 × C9 : C3 — запретов 1; например: hall(commutator(G)) & ¬class-2(commutator(G)) & ¬embeds(G, aut(commutator(G))) & ¬min-prime-index(inn(commutator(G)))
+значение hall(commutator(G)) у A4 × QD16 — запретов 1; например: free(inn(commutator(G))) & hall(commutator(G)) & polycyclic(aut(commutator(G))) & ¬two-generated(commutator(G))
+значение fully-invariant(⊕_ℕ PSL₂(ℝ)) — запретов 1; например: fully-invariant(inn(commutator(G))) & iso(G, inn(commutator(G))) & ¬proper-subs-finite(G) & ¬simple(commutator(G))
+значение finite-index(inn(commutator(G))) у G = π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий — запретов 1; например: finite-index(inn(commutator(G))) & hyperbolic(G) & ¬virtually-solvable(inn(commutator(G)))
+значение fin-pres(aut(commutator(G))) у G = ⊕_ℕ ℚ/ℤ × UT₅(ℤ) — запретов 1; например: fin-pres(aut(commutator(G))) & proper-subs-nilpotent(commutator(G)) & ¬embeds(G, aut(commutator(G))) & ¬exponent-6(inn(commutator(G)))
+значение fin-pres(aut(commutator(G))) у G = ⊕_ℕ UT₃(ℤ) × SAut(F₃) = Aut(F₃)′ — запретов 1; например: fin-pres(inn(commutator(G))) & ¬fin-pres(aut(commutator(G))) & ¬linear(inn(commutator(G)))
+значение fin-pres(aut(commutator(G))) у G = ⊕_ℕ SL(2,3) — запретов 1; например: exponent-2(inn(commutator(G))) & fin-pres(aut(commutator(G))) & ¬co-hopfian(G) & ¬proper-subs-cyclic(inn(commutator(G)))
+значение exponent-6(inn(commutator(G))) у G = ⊕_ℕ UT₃(ℤ) × W(ℤ): W ≅ W ≀ W без кручения — запретов 1; например: exponent-6(inn(commutator(G))) & torsion-free(G) & ¬proper-subs-abelian(commutator(G))
+значение exponent-6(S3 × C7 : C3) — запретов 1; например: exponent-6(G) & residually-nilpotent(aut(commutator(G))) & ¬embeds(aut(commutator(G)), inn(commutator(G))) & ¬prime-index(inn(commutator(G)))
+значение exponent-4(inn(commutator(G))) у G = ⊕_ℤ S₃ × B(∞, n), n нечётно ⩾ 665 — запретов 1; например: exponent-4(inn(commutator(G))) & ¬class-2(commutator(G)) & ¬linear-c(inn(commutator(G)))
+значение exponent-4(aut(commutator(G))) у G = ⊕_ℕ SL(2,3) — запретов 1; например: exponent-4(inn(commutator(G))) & ¬exponent-4(aut(commutator(G))) & ¬two-generated(inn(commutator(G))) & ¬two-primes(aut(commutator(G)))
+значение exponent-3(inn(commutator(G))) у G = 768:Out(64:64) — запретов 1; например: exponent-3(inn(commutator(G))) & ¬clt(G) & ¬whitehead(inn(commutator(G)))
+значение exponent-3(inn(commutator(G))) у G = ((C2 x ((C4 x C2) : C4)) : D8) x S3 — запретов 1; например: dedekind(inn(commutator(G))) & exponent-3(inn(commutator(G))) & ¬centerless(inn(commutator(G))) & ¬exponent-6(commutator(G))
+значение exponent-2(inn(commutator(G))) у G = 972:474 — запретов 1; например: centerless(G) & exponent-2(inn(commutator(G))) & ¬perfect(inn(commutator(G)))
+значение embeds(inn(commutator(G)), commutator(G)) у 𝒢 (группа Григорчука) × UT₅(ℚ) — запретов 1; например: ¬centerless(inn(commutator(G))) & ¬embeds(inn(commutator(G)), commutator(G)) & ¬left-orderable(G) & ¬metabelian(commutator(G))
+значение embeds(inn(commutator(G)), G) у SL(2,5) × ℤ ≀ C₂ = ℤ² ⋊ C₂ — запретов 1; например: virtually-solvable(aut(commutator(G))) & ¬co-hopfian(commutator(G)) & ¬embeds(inn(commutator(G)), G)
+значение embeds(inn(commutator(G)), G) у SL(2,3) × S₃ × ℤ² — запретов 1; например: ¬embeds(commutator(G), aut(commutator(G))) & ¬embeds(inn(commutator(G)), G) & ¬maximal(inn(commutator(G))) & ¬proper-subs-abelian(commutator(G))
+значение embeds(inn(commutator(G)), G) у C6 x GL(2,3) — запретов 1; например: embeds(inn(commutator(G)), G) & proper-subs-nilpotent(commutator(G)) & ¬embeds(commutator(G), aut(commutator(G))) & ¬nilpotent(commutator(G))
+значение embeds(inn(commutator(G)), G) у C2 x (((C2 x C2 x C2 x C2) : ((C4 x C2) : D8)) : C3) — запретов 1; например: clt(inn(commutator(G))) & embeds(inn(commutator(G)), G) & proper-subs-nilpotent(commutator(G)) & ¬prime-orders(inn(commutator(G)))
+значение embeds(commutator(G), inn(commutator(G))) у S4 × UT₅(ℤ) — запретов 1; например: polycyclic(inn(commutator(G))) & ¬embeds(commutator(G), inn(commutator(G))) & ¬exponent-6(inn(commutator(G))) & ¬residually-nilpotent(commutator(G))
+значение embeds(commutator(G), aut(commutator(G))) у группа Маклейна M(ℚ, 𝔽₂) — запретов 1; например: indecomposable(inn(commutator(G))) & locally-nilpotent(commutator(G)) & ¬central(inn(commutator(G))) & ¬embeds(commutator(G), aut(commutator(G)))
+значение embeds(commutator(G), aut(commutator(G))) у C7 : C3 × C7 : C3 — запретов 1; например: embeds(commutator(G), aut(commutator(G))) & proper-subs-cyclic(commutator(G)) & residually-nilpotent(inn(commutator(G))) & ¬kaplansky(aut(commutator(G)))
+значение embeds(commutator(G), aut(commutator(G))) у C2 x ((C2 x C2) : ((C2 x C2) : S4)) — запретов 1; например: two-primes(inn(commutator(G))) & ¬embeds(commutator(G), aut(commutator(G))) & ¬proper-subs-cyclic(inn(commutator(G))) & ¬two-primes(aut(commutator(G)))
+значение embeds(commutator(G), aut(commutator(G))) у (C3 x C3) : ((C2 x C2 x C2 x C2) : C2) — запретов 1; например: centerless(inn(commutator(G))) & clt(inn(commutator(G))) & ¬embeds(commutator(G), aut(commutator(G))) & ¬torsion-free(inn(commutator(G)))
+значение embeds(commutator(G), aut(commutator(G))) у (C2 x C2) : (((C3 x C3) : C3) : (C2 x C2)) — запретов 1; например: exponent-6(commutator(G)) & indecomposable(commutator(G)) & ¬embeds(commutator(G), aut(commutator(G))) & ¬p-group(inn(commutator(G)))
+значение embeds(aut(commutator(G)), inn(commutator(G))) у ⊕ℤ × S₃ ≀ ℤ — запретов 1; например: exponent-6(inn(commutator(G))) & ¬embeds(aut(commutator(G)), inn(commutator(G))) & ¬polycyclic(commutator(G)) & ¬prime-orders(inn(commutator(G)))
+значение embeds(aut(commutator(G)), inn(commutator(G))) у ∏C₂ × PGL₂(ℚ) — запретов 1; например: countable(aut(commutator(G))) & embeds(aut(commutator(G)), inn(commutator(G))) & ¬amenable(aut(commutator(G)))
+значение embeds(aut(commutator(G)), commutator(G)) у ⊕_ℕ ℚ/ℤ × Dih(ℤ(2^∞)²) — запретов 1; например: embeds(aut(commutator(G)), commutator(G)) & no-finite-quotients(commutator(G)) & virtually-nilpotent(inn(commutator(G))) & ¬exponent-2(commutator(G))
+значение embeds(aut(commutator(G)), commutator(G)) у ⊕_ℕ (S₃ × A₄) — запретов 1; например: complemented(commutator(G)) & embeds(aut(commutator(G)), commutator(G)) & proper-subs-cyclic(inn(commutator(G))) & ¬dedekind(G)
+значение embeds(aut(commutator(G)), commutator(G)) у order 1440 — запретов 1; например: embeds(aut(commutator(G)), commutator(G)) & property-t(inn(commutator(G))) & ¬kaplansky(inn(commutator(G)))
+значение embeds(aut(commutator(G)), G) у order 20158709760 — запретов 1; например: complemented(commutator(G)) & embeds(aut(commutator(G)), G) & finite(inn(commutator(G))) & ¬solvable(aut(commutator(G)))
+значение embeds(aut(commutator(G)), G) у SL(2,3) × SL(2,3) — запретов 1; например: embeds(aut(commutator(G)), G) & exponent-6(inn(commutator(G))) & indecomposable(aut(commutator(G))) & ¬clt(aut(commutator(G)))
+значение embeds(aut(commutator(G)), G) у C2 x C4 x S4 — запретов 1; например: proper-subs-abelian(commutator(G)) & ¬embeds(aut(commutator(G)), G) & ¬proper-subs-cyclic(inn(commutator(G))) & ¬two-generated(G)
+значение embeds(G, inn(commutator(G))) у S4 x GL(2,3) — запретов 1; например: embeds(G, inn(commutator(G))) & finite(commutator(G)) & ¬perfect(inn(commutator(G)))
+значение embeds(G, commutator(G)) у order 1440 — запретов 1; например: embeds(G, commutator(G)) & linear-c(inn(commutator(G))) & locally-finite(inn(commutator(G))) & ¬perfect(G)
+значение embeds(G, aut(commutator(G))) у ⊕_ℤ S₃ × ⊕_ℕ SL(2, 5) — запретов 1; например: bounded-exponent(G) & ¬dedekind(inn(commutator(G))) & ¬embeds(G, aut(commutator(G))) & ¬indecomposable(inn(commutator(G)))
+значение embeds(G, aut(commutator(G))) у S̃L₂(ℝ) (универсальная накрывающая) × Dih(ℚ) = ℚ ⋊ C₂ — запретов 1; например: maximal(commutator(G)) & ¬embeds(G, aut(commutator(G))) & ¬embeds(inn(commutator(G)), commutator(G)) & ¬indecomposable(commutator(G))
+значение embeds(G, aut(commutator(G))) у 144:186 — запретов 1; например: embeds(commutator(G), inn(commutator(G))) & locally-solvable(aut(commutator(G))) & ¬embeds(G, aut(commutator(G))) & ¬two-generated(commutator(G))
+значение divisible(aut(commutator(G))) у G = UT₅(ℚ) × UT₃(𝔽₃(t)) — запретов 1; например: metabelian(inn(commutator(G))) & ¬bi-orderable(commutator(G)) & ¬divisible(aut(commutator(G))) & ¬residually-finite(aut(commutator(G)))
+значение dedekind(aut(commutator(G))) у G = ⊕_ℕ ℚ/ℤ × UT₅(ℤ) — запретов 1; например: dedekind(inn(commutator(G))) & ¬dedekind(aut(commutator(G))) & ¬exponent-3(inn(commutator(G))) & ¬exponent-4(inn(commutator(G)))
+значение dedekind(aut(commutator(G))) у G = Dih(ℤ(2^∞)²) — запретов 1; например: exponent-2(inn(commutator(G))) & index-2(commutator(G)) & ¬dedekind(aut(commutator(G))) & ¬hall(commutator(G))
+значение countable(aut(commutator(G))) у G = ⊕_ℤ S₃ — запретов 1; например: countable(aut(commutator(G))) & hyperbolic(inn(commutator(G))) & ¬kaplansky(commutator(G)) & ¬word-problem(commutator(G))
+значение countable(aut(commutator(G))) у G = ℤ[ω] ⋊ S₃ (p3m1) × группа Хантцше — Вендт — запретов 1; например: finite-index(commutator(G)) & residually-finite(commutator(G)) & virtually-solvable(inn(commutator(G))) & ¬countable(aut(commutator(G)))
+значение contains-free(⊕_ℕ C2 x C2 x S3) — запретов 1; например: divisible(inn(commutator(G))) & linear(inn(commutator(G))) & ¬contains-free(G) & ¬left-orderable(inn(commutator(G)))
+значение contains-free(aut(commutator(G))) у G = ⊕_ℕ PSL₂(ℝ) × группа Маклейна M(ℚ, ℚ) — запретов 1; например: embeds(G, inn(commutator(G))) & ¬comp-series(aut(commutator(G))) & ¬contains-free(aut(commutator(G)))
+значение complemented(inn(commutator(G))) у G = ℤ × Sp₄(ℤ) — запретов 1; например: complemented(inn(commutator(G))) & contains-free(commutator(G)) & fin-gen(commutator(G))
+значение complemented(commutator(G)) у ℤ ∗ C₃ — запретов 1; например: complemented(commutator(G)) & two-generated(G) & ¬hopfian(inn(commutator(G)))
+значение complemented(commutator(G)) у S4 × S₃ × ℤ² — запретов 1; например: two-primes(inn(commutator(G))) & ¬clt(inn(commutator(G))) & ¬complemented(commutator(G)) & ¬min-prime-index(inn(commutator(G)))
+значение complemented(commutator(G)) у D10 × ⊕_ℕ ℤ(2^∞) — запретов 1; например: complemented(commutator(G)) & prime-order(commutator(G)) & ¬comp-series(G) & ¬min-prime-index(inn(commutator(G)))
+значение complemented(Sym(ℕ)) — запретов 1; например: complemented(inn(commutator(G))) & embeds(aut(commutator(G)), commutator(G)) & ¬divisible(aut(commutator(G))) & ¬proper-subs-cyclic(aut(commutator(G)))
+значение complemented(F_∞) — запретов 1; например: centerless(G) & complemented(inn(commutator(G))) & free(commutator(G)) & ¬two-generated(G)
+значение complemented(A4) — запретов 1; например: complemented(inn(commutator(G))) & exponent-6(commutator(G)) & iso(commutator(G), inn(commutator(G))) & ¬exponent-6(aut(commutator(G)))
+значение comp-series(aut(commutator(G))) у G = ⊕_ℤ S₃ — запретов 1; например: finite(inn(commutator(G))) & ¬comp-series(aut(commutator(G))) & ¬divisible(commutator(G)) & ¬torsion-free(commutator(G))
+значение co-hopfian(inn(commutator(G))) у G = ⊕_ℕ ℚ/ℤ × W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) — запретов 1; например: co-hopfian(inn(commutator(G))) & locally-finite(G) & ¬word-problem(inn(commutator(G)))
+значение co-hopfian(aut(commutator(G))) у G = ∗_ℕ C₂ — запретов 1; например: co-hopfian(aut(commutator(G))) & kaplansky(commutator(G)) & ¬min-prime-index(inn(commutator(G))) & ¬p-group(commutator(G))
+значение co-hopfian(aut(commutator(G))) у G = SL(2,5) × ⊕_ℕ (S₃ × D₈) — запретов 1; например: polynomial-growth(inn(commutator(G))) & ¬co-hopfian(aut(commutator(G))) & ¬polycyclic(inn(commutator(G)))
+значение clt(inn(commutator(G))) у G = 1536:Out(32:21) — запретов 1; например: clt(inn(commutator(G))) & index-2(commutator(G)) & ¬proper-subs-nilpotent(commutator(G))
+значение clt(S4 × C9) — запретов 1; например: proper-subs-abelian(inn(commutator(G))) & two-primes(G) & ¬clt(G) & ¬clt(inn(commutator(G)))
+значение class-2(aut(commutator(G))) у G = ℤ³ × UT₅(ℤ) — запретов 1; например: class-2(aut(commutator(G))) & polycyclic(G) & ¬hall(inn(commutator(G)))
+значение characteristic(ℤ² × ℚ²) — запретов 1; например: characteristic(inn(commutator(G))) & kaplansky(G) & ¬rec-pres(inn(commutator(G)))
+значение characteristic(T (группа Томпсона)) — запретов 1; например: characteristic(inn(commutator(G))) & no-finite-quotients(G) & rec-pres(G) & ¬free(G)
+значение centerless(inn(commutator(G))) у G = универсальная группа Холла U × T ≀ C₂ = (T × T) ⋊ C₂ (= Out F) — запретов 1; например: centerless(G) & ¬centerless(inn(commutator(G))) & ¬fin-gen(inn(commutator(G)))
+значение centerless(inn(commutator(G))) у G = 1536:Out(32:21) — запретов 1; например: maximal(commutator(G)) & two-primes(inn(commutator(G))) & ¬centerless(inn(commutator(G))) & ¬dedekind(inn(commutator(G)))
+значение centerless(aut(commutator(G))) у G = ℤ² ⋊_A ℤ, A = (2 1; 1 1) × ℤ[ω] ⋊ S₃ (p3m1) — запретов 1; например: centerless(aut(commutator(G))) & polycyclic(inn(commutator(G))) & ¬locally-nilpotent(commutator(G)) & ¬virtually-nilpotent(G)
+значение centerless(aut(commutator(G))) у G = C2 x (((C2 x C2 x C2 x C2) : ((C4 x C2) : D8)) : C3) — запретов 1; например: centerless(aut(commutator(G))) & hyperbolic(commutator(G)) & locally-nilpotent(inn(commutator(G))) & ¬exponent-6(inn(commutator(G)))
+значение bounded-exponent(inn(commutator(G))) у G = ⊕_ℕ SL(2, 5) × Out(⊕_ℕ A₅) = (∏S₅ ⋊ Sym(ℕ))/⊕A₅ — запретов 1; например: bounded-exponent(inn(commutator(G))) & ¬amenable(G) & ¬periodic(commutator(G)) & ¬simple(inn(commutator(G)))
+значение bounded-exponent(aut(commutator(G))) у G = UT₄(ℚ) × UT₃(ℚ) × ℚ³ — запретов 1; например: bounded-exponent(aut(commutator(G))) & co-hopfian(commutator(G)) & kaplansky(commutator(G)) & ¬iso(aut(commutator(G)), inn(commutator(G)))
+значение amenable(aut(commutator(G))) у G = ⊕ℤ × S₃ ≀ ℤ — запретов 1; например: virtually-solvable(G) & ¬amenable(aut(commutator(G))) & ¬rec-pres(inn(commutator(G)))
+значение amenable(aut(commutator(G))) у G = ⊕_ℤ S₃ × F (группа Томпсона) — запретов 1; например: amenable(aut(commutator(G))) & left-orderable(inn(commutator(G))) & ¬clt(commutator(G)) & ¬solvable(aut(commutator(G)))
+значение abelian(aut(commutator(G))) у G = ⊕_ℕ ℚ/ℤ × UT₅(ℤ) — запретов 1; например: linear-c(inn(commutator(G))) & proper-subs-nilpotent(G) & ¬abelian(aut(commutator(G))) & ¬exponent-4(inn(commutator(G)))
+== сводятся к вырожденности: 0 вопросов на 0 запретов ==
+== без кандидата: нужен пример или правило ==
+не бывает? proper-subs-nilpotent(commutator(G)) & ¬iso(commutator(G), inn(commutator(G))) & ¬nilpotent(commutator(G)) & одно из: embeds(commutator(G), aut(commutator(G))), ¬residually-finite(G)   [запретов 2]
+не бывает? co-hopfian(commutator(G)) & locally-finite(inn(commutator(G))) & ¬linear(aut(commutator(G))) & centerless(aut(commutator(G)))   [примеров посылок: 4677]
+не бывает? co-hopfian(commutator(G)) & no-finite-quotients(G) & ¬divisible(G) & central(inn(commutator(G)))   [примеров посылок: 6702]
+не бывает? contains-free(inn(commutator(G))) & residually-finite(G) & comp-series(G)   [примеров посылок: 3053]
+не бывает? dedekind(commutator(G)) & ¬hall(inn(commutator(G))) & ¬order-p2(inn(commutator(G))) & clt(aut(commutator(G)))   [примеров посылок: 1621]
+не бывает? dedekind(inn(commutator(G))) & finite-index(inn(commutator(G))) & ¬proper-subs-finite(commutator(G)) & centerless(aut(commutator(G)))   [примеров посылок: 3924]
+не бывает? divisible(G) & periodic(commutator(G)) & ¬nilpotent(G) & dedekind(inn(commutator(G)))   [примеров посылок: 25]
+не бывает? embeds(G, inn(commutator(G))) & ¬hall(inn(commutator(G))) & clt(inn(commutator(G)))   [примеров посылок: 399]
+не бывает? embeds(commutator(G), inn(commutator(G))) & index-2(commutator(G)) & ¬proper-subs-cyclic(commutator(G)) & clt(inn(commutator(G)))   [примеров посылок: 31]
+не бывает? embeds(commutator(G), inn(commutator(G))) & odd-order(inn(commutator(G))) & ¬free(G) & centerless(G)   [примеров посылок: 421]
+не бывает? embeds(commutator(G), inn(commutator(G))) & ¬exponent-4(aut(commutator(G))) & ¬linear(G) & clt(commutator(G))   [примеров посылок: 2995]
+не бывает? embeds(commutator(G), inn(commutator(G))) & ¬exponent-6(commutator(G)) & ¬finite(G) & clt(commutator(G))   [примеров посылок: 2792]
+не бывает? embeds(commutator(G), inn(commutator(G))) & ¬fin-gen(G) & ¬prime-orders(aut(commutator(G))) & clt(inn(commutator(G)))   [примеров посылок: 3488]
+не бывает? embeds(commutator(G), inn(commutator(G))) & ¬linear-c(G) & ¬torsion-free(aut(commutator(G))) & clt(commutator(G))   [примеров посылок: 2749]
+не бывает? exponent-2(aut(commutator(G))) & ¬kaplansky(aut(commutator(G))) & ¬min-prime-index(inn(commutator(G))) & centerless(G)   [примеров посылок: 141]
+не бывает? exponent-2(inn(commutator(G))) & hyperbolic(commutator(G)) & ¬abelian(aut(commutator(G))) & bi-orderable(commutator(G))   [примеров посылок: 3667]
+не бывает? exponent-3(commutator(G)) & ¬embeds(aut(commutator(G)), G) & ¬maximal(inn(commutator(G))) & dedekind(aut(commutator(G)))   [примеров посылок: 471]
+не бывает? exponent-3(commutator(G)) & ¬locally-nilpotent(G) & ¬maximal(inn(commutator(G))) & class-2(aut(commutator(G)))   [примеров посылок: 3088]
+не бывает? exponent-3(inn(commutator(G))) & maximal(commutator(G)) & ¬exponent-2(aut(commutator(G))) & embeds(aut(commutator(G)), commutator(G))   [примеров посылок: 44]
+не бывает? exponent-3(inn(commutator(G))) & proper-subs-finite(commutator(G)) & ¬residually-finite(G) & centerless(G)   [примеров посылок: 1999]
+не бывает? exponent-3(inn(commutator(G))) & ¬bounded-exponent(aut(commutator(G))) & ¬prime-orders(commutator(G)) & centerless(aut(commutator(G)))   [примеров посылок: 4801]
+не бывает? exponent-3(inn(commutator(G))) & ¬exponent-4(commutator(G)) & embeds(aut(commutator(G)), inn(commutator(G)))   [примеров посылок: 6608]
+не бывает? exponent-4(G) & ¬bi-orderable(aut(commutator(G))) & embeds(commutator(G), inn(commutator(G)))   [примеров посылок: 4388]
+не бывает? exponent-4(aut(commutator(G))) & exponent-4(commutator(G)) & ¬whole(inn(commutator(G))) & centerless(G)   [примеров посылок: 365]
+не бывает? exponent-4(aut(commutator(G))) & ¬embeds(aut(commutator(G)), inn(commutator(G))) & ¬two-primes(G) & embeds(commutator(G), aut(commutator(G)))   [примеров посылок: 1498]
+не бывает? exponent-4(aut(commutator(G))) & ¬hall(inn(commutator(G))) & embeds(aut(commutator(G)), commutator(G))   [примеров посылок: 3902]
+не бывает? exponent-4(inn(commutator(G))) & two-generated(commutator(G)) & ¬proper-subs-cyclic(commutator(G)) & centerless(aut(commutator(G)))   [примеров посылок: 641]
+не бывает? exponent-4(inn(commutator(G))) & ¬virtually-nilpotent(G) & comp-series(commutator(G))   [примеров посылок: 1495]
+не бывает? exponent-6(commutator(G)) & ¬central(inn(commutator(G))) & ¬polycyclic(G) & class-2(commutator(G))   [примеров посылок: 4161]
+не бывает? exponent-6(commutator(G)) & ¬index-2(inn(commutator(G))) & ¬p-group(commutator(G)) & dedekind(aut(commutator(G)))   [примеров посылок: 880]
+не бывает? exponent-6(inn(commutator(G))) & ¬locally-finite(G) & ¬prime-orders(aut(commutator(G))) & embeds(aut(commutator(G)), commutator(G))   [примеров посылок: 1983]
+не бывает? fin-gen(G) & left-orderable(inn(commutator(G))) & ¬polynomial-growth(commutator(G)) & co-hopfian(commutator(G))   [примеров посылок: 1466]
+не бывает? fin-gen(aut(commutator(G))) & ¬free-abelian(commutator(G)) & ¬hyperbolic(aut(commutator(G))) & bounded-exponent(inn(commutator(G)))   [примеров посылок: 1123]
+не бывает? fin-gen(inn(commutator(G))) & locally-nilpotent(commutator(G)) & ¬exponent-2(G) & embeds(G, inn(commutator(G)))   [примеров посылок: 11753]
+не бывает? fin-pres(aut(commutator(G))) & simple(aut(commutator(G))) & ¬index-2(inn(commutator(G))) & embeds(aut(commutator(G)), G)   [примеров посылок: 816]
+не бывает? finite(G) & simple(aut(commutator(G))) & ¬min-prime-index(inn(commutator(G))) & embeds(aut(commutator(G)), commutator(G))   [примеров посылок: 186]
+не бывает? finite-index(commutator(G)) & two-primes(inn(commutator(G))) & ¬iso(G, aut(commutator(G))) & bi-orderable(G)   [примеров посылок: 1926]
+не бывает? finite-index(inn(commutator(G))) & residually-nilpotent(aut(commutator(G))) & ¬hyperbolic(G) & centerless(G)   [примеров посылок: 63]
+не бывает? free(commutator(G)) & indecomposable(G) & ¬linear-c(G) & embeds(aut(commutator(G)), inn(commutator(G)))   [примеров посылок: 46]
+не бывает? free(inn(commutator(G))) & ¬p-group(inn(commutator(G))) & comp-series(commutator(G))   [примеров посылок: 2092]
+не бывает? free(inn(commutator(G))) & ¬proper-subs-cyclic(commutator(G)) & ¬two-generated(aut(commutator(G))) & exponent-4(aut(commutator(G)))   [примеров посылок: 9]
+не бывает? hall(commutator(G)) & simple(commutator(G)) & ¬clt(G) & class-2(inn(commutator(G)))   [примеров посылок: 981]
+не бывает? hall(commutator(G)) & two-primes(aut(commutator(G))) & ¬clt(aut(commutator(G))) & embeds(inn(commutator(G)), G)   [примеров посылок: 1]
+не бывает? hall(inn(commutator(G))) & indecomposable(commutator(G)) & ¬cyclic(commutator(G)) & clt(aut(commutator(G)))   [примеров посылок: 5329]
+не бывает? hall(inn(commutator(G))) & residually-nilpotent(inn(commutator(G))) & ¬p-group(commutator(G)) & centerless(aut(commutator(G)))   [примеров посылок: 3829]
+не бывает? hall(inn(commutator(G))) & ¬exponent-6(commutator(G)) & ¬iso(commutator(G), inn(commutator(G))) & centerless(aut(commutator(G)))   [примеров посылок: 329]
+не бывает? hall(inn(commutator(G))) & ¬metabelian(aut(commutator(G))) & ¬prime-orders(commutator(G)) & class-2(G)   [примеров посылок: 89]
+не бывает? hopfian(commutator(G)) & proper-subs-finite(commutator(G)) & ¬finite(commutator(G)) & exponent-6(inn(commutator(G)))   [примеров посылок: 144]
+не бывает? hyperbolic(commutator(G)) & kaplansky(commutator(G)) & ¬prime-orders(aut(commutator(G))) & exponent-3(inn(commutator(G)))   [примеров посылок: 3667]
+не бывает? hyperbolic(commutator(G)) & ¬proper-subs-cyclic(inn(commutator(G))) & bi-orderable(G)   [примеров посылок: 528]
+не бывает? indecomposable(G) & proper-subs-abelian(G) & ¬linear(G) & central(inn(commutator(G)))   [примеров посылок: 532]
+не бывает? indecomposable(G) & ¬abelian(aut(commutator(G))) & ¬rec-pres(G) & hall(inn(commutator(G)))   [примеров посылок: 13]
+не бывает? indecomposable(G) & ¬co-hopfian(G) & ¬index-2(inn(commutator(G))) & exponent-6(G)   [примеров посылок: 1]
+не бывает? indecomposable(G) & ¬dedekind(commutator(G)) & ¬p-group(commutator(G)) & exponent-2(inn(commutator(G)))   [примеров посылок: 205]
+не бывает? indecomposable(G) & ¬embeds(aut(commutator(G)), inn(commutator(G))) & ¬hopfian(G) & finite(commutator(G))   [примеров посылок: 666]
+не бывает? indecomposable(aut(commutator(G))) & ¬bounded-exponent(commutator(G)) & ¬residually-nilpotent(G) & hall(inn(commutator(G)))   [примеров посылок: 578]
+не бывает? indecomposable(commutator(G)) & kaplansky(inn(commutator(G))) & ¬locally-cyclic(commutator(G)) & co-hopfian(inn(commutator(G)))   [примеров посылок: 5979]
+не бывает? indecomposable(commutator(G)) & prime-orders(inn(commutator(G))) & ¬exponent-4(aut(commutator(G))) & embeds(aut(commutator(G)), commutator(G))   [примеров посылок: 1394]
+не бывает? indecomposable(commutator(G)) & word-problem(commutator(G)) & ¬virtually-nilpotent(G) & dedekind(inn(commutator(G)))   [примеров посылок: 5417]
+не бывает? indecomposable(commutator(G)) & ¬nilpotent(aut(commutator(G))) & ¬two-generated(aut(commutator(G))) & exponent-3(inn(commutator(G)))   [примеров посылок: 1007]
+не бывает? indecomposable(inn(commutator(G))) & nilpotent(commutator(G)) & ¬no-finite-quotients(inn(commutator(G))) & exponent-6(commutator(G))   [примеров посылок: 5628]
+не бывает? indecomposable(inn(commutator(G))) & residually-nilpotent(G) & ¬exponent-2(inn(commutator(G))) & co-hopfian(inn(commutator(G)))   [примеров посылок: 7479]
+не бывает? index-2(commutator(G)) & maximal(inn(commutator(G))) & ¬exponent-3(commutator(G)) & abelian(aut(commutator(G)))   [примеров посылок: 958]
+не бывает? index-2(commutator(G)) & prime-index(inn(commutator(G))) & ¬exponent-6(G) & cyclic(commutator(G))   [примеров посылок: 1462]
+не бывает? index-2(commutator(G)) & ¬clt(G) & ¬left-orderable(inn(commutator(G))) & clt(inn(commutator(G)))   [примеров посылок: 224]
+не бывает? index-2(inn(commutator(G))) & prime-index(commutator(G)) & ¬order-pq(G) & exponent-2(aut(commutator(G)))   [примеров посылок: 7]
+не бывает? index-2(inn(commutator(G))) & prime-index(commutator(G)) & ¬prime-orders(commutator(G)) & exponent-6(commutator(G))   [примеров посылок: 2]
+не бывает? index-2(inn(commutator(G))) & simple(commutator(G)) & ¬exponent-6(commutator(G)) & exponent-6(aut(commutator(G)))   [примеров посылок: 599]
+не бывает? index-2(inn(commutator(G))) & two-primes(aut(commutator(G))) & ¬proper-subs-abelian(commutator(G)) & embeds(commutator(G), inn(commutator(G)))   [примеров посылок: 9]
+не бывает? index-2(inn(commutator(G))) & ¬two-primes(aut(commutator(G))) & clt(aut(commutator(G)))   [примеров посылок: 7]
+не бывает? iso(G, aut(commutator(G))) & ¬prime-index(inn(commutator(G))) & ¬two-primes(G) & hyperbolic(commutator(G))   [примеров посылок: 6]
+не бывает? iso(aut(commutator(G)), inn(commutator(G))) & ¬locally-nilpotent(G) & exponent-6(aut(commutator(G)))   [примеров посылок: 3523]
+не бывает? iso(commutator(G), inn(commutator(G))) & proper-subs-abelian(inn(commutator(G))) & ¬left-orderable(commutator(G)) & clt(commutator(G))   [примеров посылок: 3088]
+не бывает? kaplansky(commutator(G)) & ¬free(inn(commutator(G))) & exponent-4(inn(commutator(G)))   [примеров посылок: 5320]
+не бывает? kaplansky(inn(commutator(G))) & two-generated(commutator(G)) & ¬exponent-2(G) & embeds(G, commutator(G))   [примеров посылок: 6732]
+не бывает? kaplansky(inn(commutator(G))) & two-generated(inn(commutator(G))) & ¬cyclic(G) & iso(G, commutator(G))   [примеров посылок: 11448]
+не бывает? left-orderable(G) & residually-finite(inn(commutator(G))) & ¬property-t(G) & finite-index(commutator(G))   [примеров посылок: 1254]
+не бывает? left-orderable(commutator(G)) & proper-subs-nilpotent(G) & ¬embeds(aut(commutator(G)), inn(commutator(G))) & centerless(G)   [примеров посылок: 23]
+не бывает? linear(commutator(G)) & locally-nilpotent(inn(commutator(G))) & ¬linear(aut(commutator(G))) & indecomposable(commutator(G))   [примеров посылок: 6072]
+не бывает? linear(inn(commutator(G))) & no-finite-quotients(G) & ¬torsion-free(aut(commutator(G))) & fin-pres(G)   [примеров посылок: 4025]
+не бывает? linear-c(aut(commutator(G))) & p-group(inn(commutator(G))) & ¬odd-order(inn(commutator(G))) & index-2(commutator(G))   [примеров посылок: 233]
+не бывает? linear-c(commutator(G)) & perfect(inn(commutator(G))) & ¬polynomial-growth(inn(commutator(G))) & kaplansky(commutator(G))   [примеров посылок: 5320]
+не бывает? locally-cyclic(commutator(G)) & ¬min-prime-index(inn(commutator(G))) & ¬whole(inn(commutator(G))) & exponent-3(commutator(G))   [примеров посылок: 1337]
+не бывает? locally-finite(commutator(G)) & proper-subs-nilpotent(inn(commutator(G))) & ¬polycyclic(G) & fin-pres(G)   [примеров посылок: 5787]
+не бывает? locally-finite(inn(commutator(G))) & torsion-free(G) & ¬linear-c(G) & embeds(commutator(G), inn(commutator(G)))   [примеров посылок: 1641]
+не бывает? locally-nilpotent(G) & ¬rec-pres-ctbl(aut(commutator(G))) & iso(aut(commutator(G)), inn(commutator(G)))   [примеров посылок: 304]
+не бывает? locally-nilpotent(aut(commutator(G))) & ¬dedekind(aut(commutator(G))) & ¬indecomposable(aut(commutator(G))) & free-abelian(inn(commutator(G)))   [примеров посылок: 87]
+не бывает? locally-nilpotent(commutator(G)) & virtually-solvable(G) & ¬proper-subs-cyclic(inn(commutator(G))) & index-2(commutator(G))   [примеров посылок: 46]
+не бывает? locally-nilpotent(inn(commutator(G))) & rec-pres(commutator(G)) & ¬odd-order(commutator(G)) & index-2(commutator(G))   [примеров посылок: 32]
+не бывает? locally-nilpotent(inn(commutator(G))) & two-generated(commutator(G)) & ¬virtually-nilpotent(G) & finite-index(commutator(G))   [примеров посылок: 87]
+не бывает? locally-solvable(G) & two-generated(inn(commutator(G))) & ¬free-abelian(inn(commutator(G))) & left-orderable(inn(commutator(G)))   [примеров посылок: 11307]
+не бывает? locally-solvable(commutator(G)) & ¬embeds(aut(commutator(G)), commutator(G)) & ¬min-prime-index(inn(commutator(G))) & free(commutator(G))   [примеров посылок: 3483]
+не бывает? maximal(commutator(G)) & p-group(commutator(G)) & ¬index-2(commutator(G)) & index-2(inn(commutator(G)))   [примеров посылок: 1]
+не бывает? maximal(commutator(G)) & simple(commutator(G)) & ¬hall(commutator(G)) & free-abelian(inn(commutator(G)))   [примеров посылок: 19]
+не бывает? maximal(inn(commutator(G))) & prime-orders(G) & ¬metabelian(aut(commutator(G))) & clt(aut(commutator(G)))   [примеров посылок: 108]
+не бывает? maximal(inn(commutator(G))) & proper-subs-cyclic(G) & ¬maximal(commutator(G)) & exponent-6(G)   [примеров посылок: 4]
+не бывает? maximal(inn(commutator(G))) & two-primes(aut(commutator(G))) & ¬proper-subs-abelian(commutator(G)) & centerless(commutator(G))   [примеров посылок: 236]
+не бывает? metabelian(G) & prime-index(commutator(G)) & ¬index-2(commutator(G)) & maximal(inn(commutator(G)))   [примеров посылок: 1556]
+не бывает? metabelian(aut(commutator(G))) & polynomial-growth(G) & ¬hall(inn(commutator(G))) & dedekind(commutator(G))   [примеров посылок: 2089]
+не бывает? metabelian(aut(commutator(G))) & two-primes(G) & ¬hall(inn(commutator(G))) & maximal(commutator(G))   [примеров посылок: 13]
+не бывает? metabelian(inn(commutator(G))) & ¬co-hopfian(commutator(G)) & ¬hopfian(commutator(G)) & maximal(commutator(G))   [примеров посылок: 2369]
+не бывает? metabelian(inn(commutator(G))) & ¬hopfian(commutator(G)) & ¬p-group(commutator(G)) & indecomposable(commutator(G))   [примеров посылок: 2023]
+не бывает? min-prime-index(commutator(G)) & ¬centerless(aut(commutator(G))) & ¬left-orderable(inn(commutator(G))) & locally-nilpotent(commutator(G))   [примеров посылок: 2]
+не бывает? min-prime-index(commutator(G)) & ¬clt(G) & ¬exponent-2(inn(commutator(G))) & metabelian(commutator(G))   [примеров посылок: 1]
+не бывает? min-prime-index(commutator(G)) & ¬exponent-4(inn(commutator(G))) & ¬index-2(inn(commutator(G))) & embeds(aut(commutator(G)), G)   [примеров посылок: 81]
+не бывает? min-prime-index(commutator(G)) & ¬free-abelian(inn(commutator(G))) & ¬two-primes(aut(commutator(G))) & locally-nilpotent(commutator(G))   [примеров посылок: 36]
+не бывает? min-prime-index(commutator(G)) & ¬index-2(commutator(G)) & ¬iso(commutator(G), inn(commutator(G))) & exponent-3(commutator(G))   [примеров посылок: 24]
+не бывает? min-prime-index(commutator(G)) & ¬p-group(commutator(G)) & ¬two-primes(aut(commutator(G))) & exponent-2(inn(commutator(G)))   [примеров посылок: 1331]
+не бывает? min-prime-index(commutator(G)) & ¬two-primes(G) & ¬two-primes(aut(commutator(G))) & left-orderable(inn(commutator(G)))   [примеров посылок: 35]
+не бывает? min-prime-index(inn(commutator(G))) & ¬exponent-2(aut(commutator(G))) & locally-cyclic(aut(commutator(G)))   [примеров посылок: 489]
+не бывает? min-prime-index(inn(commutator(G))) & ¬exponent-4(aut(commutator(G))) & ¬property-t(G) & indecomposable(G)   [примеров посылок: 61]
+не бывает? nilpotent(G) & ¬proper-subs-cyclic(inn(commutator(G))) & ¬two-primes(G) & finite(aut(commutator(G)))   [примеров посылок: 3872]
+не бывает? nilpotent(commutator(G)) & ¬hall(commutator(G)) & ¬odd-order(inn(commutator(G))) & maximal(commutator(G))   [примеров посылок: 686]
+не бывает? no-finite-quotients(G) & proper-subs-finite(commutator(G)) & ¬class-2(G) & locally-nilpotent(inn(commutator(G)))   [примеров посылок: 2364]
+не бывает? no-finite-quotients(G) & word-problem(commutator(G)) & ¬torsion-free(aut(commutator(G))) & free(inn(commutator(G)))   [примеров посылок: 3824]
+не бывает? no-finite-quotients(inn(commutator(G))) & residually-finite(G) & ¬periodic(G) & index-2(commutator(G))   [примеров посылок: 3583]
+не бывает? no-finite-quotients(inn(commutator(G))) & ¬centerless(G) & ¬proper-subs-nilpotent(aut(commutator(G))) & min-prime-index(commutator(G))   [примеров посылок: 27]
+не бывает? odd-order(G) & ¬iso(aut(commutator(G)), inn(commutator(G))) & embeds(aut(commutator(G)), G)   [примеров посылок: 1352]
+не бывает? odd-order(commutator(G)) & prime-orders(commutator(G)) & ¬hall(inn(commutator(G))) & embeds(aut(commutator(G)), G)   [примеров посылок: 3323]
+не бывает? odd-order(inn(commutator(G))) & prime-orders(commutator(G)) & ¬proper-subs-abelian(aut(commutator(G))) & embeds(aut(commutator(G)), G)   [примеров посылок: 30]
+не бывает? odd-order(inn(commutator(G))) & ¬residually-nilpotent(aut(commutator(G))) & ¬two-primes(aut(commutator(G))) & locally-solvable(aut(commutator(G)))   [примеров посылок: 801]
+не бывает? order-p2(commutator(G)) & proper-subs-nilpotent(G) & ¬min-prime-index(inn(commutator(G))) & locally-cyclic(aut(commutator(G)))   [примеров посылок: 3553]
+не бывает? order-p2(commutator(G)) & ¬index-2(inn(commutator(G))) & ¬linear(G) & cyclic(aut(commutator(G)))   [примеров посылок: 34]
+не бывает? order-pq(commutator(G)) & ¬periodic(G) & ¬prime-index(inn(commutator(G))) & cyclic(aut(commutator(G)))   [примеров посылок: 9]
+не бывает? p-group(G) & ¬linear(commutator(G)) & exponent-4(inn(commutator(G)))   [примеров посылок: 837]
+не бывает? p-group(G) & ¬proper-subs-cyclic(inn(commutator(G))) & ¬property-t(G) & linear-c(commutator(G))   [примеров посылок: 4727]
+не бывает? p-group(aut(commutator(G))) & ¬free(inn(commutator(G))) & maximal(inn(commutator(G)))   [примеров посылок: 6]
+не бывает? p-group(commutator(G)) & prime-index(inn(commutator(G))) & ¬order-p2(commutator(G)) & embeds(aut(commutator(G)), commutator(G))   [примеров посылок: 599]
+не бывает? p-group(commutator(G)) & virtually-solvable(inn(commutator(G))) & ¬p-group(aut(commutator(G))) & no-finite-quotients(G)   [примеров посылок: 1224]
+не бывает? p-group(commutator(G)) & ¬dedekind(inn(commutator(G))) & ¬two-generated(aut(commutator(G))) & linear-c(G)   [примеров посылок: 550]
+не бывает? p-group(commutator(G)) & ¬proper-subs-nilpotent(inn(commutator(G))) & hyperbolic(inn(commutator(G)))   [примеров посылок: 2189]
+не бывает? p-group(inn(commutator(G))) & word-problem(commutator(G)) & ¬proper-subs-abelian(commutator(G)) & index-2(commutator(G))   [примеров посылок: 290]
+не бывает? p-group(inn(commutator(G))) & ¬co-hopfian(inn(commutator(G))) & ¬exponent-4(commutator(G)) & bounded-exponent(inn(commutator(G)))   [примеров посылок: 6863]
+не бывает? perfect(commutator(G)) & virtually-nilpotent(inn(commutator(G))) & ¬whole(inn(commutator(G))) & no-finite-quotients(inn(commutator(G)))   [примеров посылок: 7495]
+не бывает? perfect(inn(commutator(G))) & torsion-free(inn(commutator(G))) & ¬proper-subs-nilpotent(inn(commutator(G))) & linear-c(aut(commutator(G)))   [примеров посылок: 7828]
+не бывает? periodic(G) & residually-nilpotent(G) & ¬nilpotent(G) & central(inn(commutator(G)))   [примеров посылок: 150]
+не бывает? periodic(G) & two-generated(inn(commutator(G))) & ¬whitehead(commutator(G)) & divisible(G)   [примеров посылок: 2921]
+не бывает? periodic(G) & virtually-nilpotent(aut(commutator(G))) & ¬whole(inn(commutator(G))) & no-finite-quotients(G)   [примеров посылок: 1944]
+не бывает? periodic(aut(commutator(G))) & whitehead(inn(commutator(G))) & ¬clt(aut(commutator(G))) & indecomposable(commutator(G))   [примеров посылок: 5329]
+не бывает? periodic(aut(commutator(G))) & ¬class-2(G) & ¬maximal(inn(commutator(G))) & bi-orderable(commutator(G))   [примеров посылок: 1506]
+не бывает? periodic(commutator(G)) & two-primes(inn(commutator(G))) & ¬proper-subs-finite(commutator(G)) & indecomposable(commutator(G))   [примеров посылок: 1837]
+не бывает? polycyclic(inn(commutator(G))) & proper-subs-cyclic(commutator(G)) & ¬polynomial-growth(aut(commutator(G))) & no-finite-quotients(G)   [примеров посылок: 126]
+не бывает? polycyclic(inn(commutator(G))) & word-problem(G) & ¬cyclic(G) & no-finite-quotients(G)   [примеров посылок: 4249]
+не бывает? polynomial-growth(G) & ¬finite(inn(commutator(G))) & ¬locally-solvable(G) & indecomposable(inn(commutator(G)))   [примеров посылок: 5426]
+не бывает? polynomial-growth(commutator(G)) & proper-subs-cyclic(inn(commutator(G))) & ¬finite(G) & maximal(commutator(G))   [примеров посылок: 5688]
+не бывает? prime-index(inn(commutator(G))) & residually-nilpotent(aut(commutator(G))) & ¬simple(commutator(G)) & maximal(commutator(G))   [примеров посылок: 958]
+не бывает? prime-index(inn(commutator(G))) & ¬min-prime-index(inn(commutator(G))) & class-2(G)   [примеров посылок: 526]
+не бывает? prime-order(commutator(G)) & ¬exponent-4(commutator(G)) & ¬index-2(inn(commutator(G))) & p-group(G)   [примеров посылок: 87]
+не бывает? prime-orders(aut(commutator(G))) & ¬index-2(inn(commutator(G))) & ¬perfect(commutator(G)) & odd-order(commutator(G))   [примеров посылок: 599]
+не бывает? prime-orders(commutator(G)) & residually-nilpotent(commutator(G)) & ¬metabelian(G) & indecomposable(inn(commutator(G)))   [примеров посылок: 390]
+не бывает? prime-orders(inn(commutator(G))) & ¬exponent-6(inn(commutator(G))) & ¬polycyclic(aut(commutator(G))) & locally-solvable(inn(commutator(G)))   [примеров посылок: 1727]
+не бывает? prime-orders(inn(commutator(G))) & ¬proper-subs-finite(inn(commutator(G))) & polynomial-growth(G)   [примеров посылок: 1]
+не бывает? proper-subs-abelian(G) & ¬class-2(aut(commutator(G))) & ¬two-primes(G) & linear(inn(commutator(G)))   [примеров посылок: 2806]
+не бывает? proper-subs-abelian(G) & ¬finite(G) & ¬free(commutator(G)) & exponent-2(inn(commutator(G)))   [примеров посылок: 6269]
+не бывает? proper-subs-abelian(G) & ¬nilpotent(G) & ¬two-primes(G) & exponent-4(inn(commutator(G)))   [примеров посылок: 1]
+не бывает? proper-subs-abelian(commutator(G)) & ¬embeds(commutator(G), inn(commutator(G))) & ¬torsion-free(inn(commutator(G))) & min-prime-index(inn(commutator(G)))   [примеров посылок: 88]
+не бывает? proper-subs-abelian(commutator(G)) & ¬exponent-2(inn(commutator(G))) & ¬odd-order(commutator(G)) & clt(inn(commutator(G)))   [примеров посылок: 157]
+не бывает? proper-subs-abelian(commutator(G)) & ¬exponent-3(commutator(G)) & ¬free-abelian(inn(commutator(G))) & exponent-3(inn(commutator(G)))   [примеров посылок: 236]
+не бывает? proper-subs-abelian(commutator(G)) & ¬linear(inn(commutator(G))) & left-orderable(G)   [примеров посылок: 165]
+не бывает? proper-subs-abelian(commutator(G)) & ¬proper-subs-cyclic(commutator(G)) & ¬whitehead(inn(commutator(G))) & dedekind(commutator(G))   [примеров посылок: 78]
+не бывает? proper-subs-abelian(commutator(G)) & ¬residually-nilpotent(commutator(G)) & ¬two-primes(commutator(G)) & linear(inn(commutator(G)))   [примеров посылок: 2730]
+не бывает? proper-subs-cyclic(G) & ¬class-2(G) & ¬two-primes(G) & left-orderable(inn(commutator(G)))   [примеров посылок: 10]
+не бывает? proper-subs-cyclic(G) & ¬dedekind(G) & ¬prime-order(commutator(G)) & exponent-2(inn(commutator(G)))   [примеров посылок: 35]
+не бывает? proper-subs-cyclic(G) & ¬finite(G) & ¬odd-order(aut(commutator(G))) & exponent-4(inn(commutator(G)))   [примеров посылок: 6535]
+не бывает? proper-subs-cyclic(G) & ¬free-abelian(commutator(G)) & ¬p-group(G) & embeds(aut(commutator(G)), inn(commutator(G)))   [примеров посылок: 35]
+не бывает? proper-subs-cyclic(G) & ¬min-prime-index(commutator(G)) & ¬two-primes(aut(commutator(G))) & locally-nilpotent(inn(commutator(G)))   [примеров посылок: 1]
+не бывает? proper-subs-cyclic(aut(commutator(G))) & ¬bi-orderable(aut(commutator(G))) & ¬maximal(inn(commutator(G))) & kaplansky(commutator(G))   [примеров посылок: 579]
+не бывает? proper-subs-cyclic(commutator(G)) & torsion-free(inn(commutator(G))) & ¬two-primes(aut(commutator(G))) & centerless(aut(commutator(G)))   [примеров посылок: 163]
+не бывает? proper-subs-cyclic(commutator(G)) & ¬exponent-2(aut(commutator(G))) & ¬locally-finite(commutator(G)) & odd-order(inn(commutator(G)))   [примеров посылок: 73]
+не бывает? proper-subs-cyclic(commutator(G)) & ¬hall(inn(commutator(G))) & ¬order-p2(inn(commutator(G))) & finite(G)   [примеров посылок: 195]
+не бывает? proper-subs-cyclic(commutator(G)) & ¬locally-finite(commutator(G)) & ¬polycyclic(commutator(G)) & exponent-2(inn(commutator(G)))   [примеров посылок: 1989]
+не бывает? proper-subs-cyclic(inn(commutator(G))) & ¬embeds(inn(commutator(G)), G) & ¬proper-subs-nilpotent(G) & maximal(commutator(G))   [примеров посылок: 1]
+не бывает? proper-subs-cyclic(inn(commutator(G))) & ¬exponent-3(commutator(G)) & ¬exponent-4(inn(commutator(G))) & exponent-3(inn(commutator(G)))   [примеров посылок: 6759]
+не бывает? proper-subs-finite(G) & ¬kaplansky(aut(commutator(G))) & ¬polynomial-growth(G) & exponent-4(inn(commutator(G)))   [примеров посылок: 5708]
+не бывает? proper-subs-finite(aut(commutator(G))) & solvable(G) & ¬hall(inn(commutator(G))) & perfect(inn(commutator(G)))   [примеров посылок: 1621]
+не бывает? proper-subs-finite(commutator(G)) & ¬finite(aut(commutator(G))) & ¬locally-solvable(aut(commutator(G))) & divisible(inn(commutator(G)))   [примеров посылок: 2089]
+не бывает? proper-subs-finite(inn(commutator(G))) & ¬clt(G) & ¬exponent-4(inn(commutator(G))) & locally-nilpotent(inn(commutator(G)))   [примеров посылок: 9669]
+не бывает? proper-subs-nilpotent(G) & sylow(commutator(G)) & ¬free(inn(commutator(G))) & embeds(inn(commutator(G)), commutator(G))   [примеров посылок: 19]
+не бывает? proper-subs-nilpotent(G) & ¬countable(G) & ¬exponent-2(aut(commutator(G))) & hall(inn(commutator(G)))   [примеров посылок: 389]
+не бывает? proper-subs-nilpotent(G) & ¬embeds(commutator(G), inn(commutator(G))) & perfect(G)   [примеров посылок: 3721]
+не бывает? proper-subs-nilpotent(G) & ¬left-orderable(inn(commutator(G))) & left-orderable(G)   [примеров посылок: 760]
+не бывает? proper-subs-nilpotent(aut(commutator(G))) & residually-nilpotent(G) & ¬finite-index(inn(commutator(G))) & periodic(G)   [примеров посылок: 432]
+не бывает? proper-subs-nilpotent(aut(commutator(G))) & ¬embeds(commutator(G), inn(commutator(G))) & ¬min-prime-index(inn(commutator(G))) & free-abelian(commutator(G))   [примеров посылок: 3088]
+не бывает? proper-subs-nilpotent(aut(commutator(G))) & ¬indecomposable(inn(commutator(G))) & embeds(G, aut(commutator(G)))   [примеров посылок: 6]
+не бывает? proper-subs-nilpotent(aut(commutator(G))) & ¬min-prime-index(inn(commutator(G))) & ¬odd-order(aut(commutator(G))) & exponent-3(G)   [примеров посылок: 8]
+не бывает? proper-subs-nilpotent(commutator(G)) & virtually-nilpotent(G) & ¬two-primes(inn(commutator(G))) & bounded-exponent(inn(commutator(G)))   [примеров посылок: 9688]
+не бывает? proper-subs-nilpotent(commutator(G)) & ¬embeds(inn(commutator(G)), commutator(G)) & ¬locally-nilpotent(commutator(G)) & hall(commutator(G))   [примеров посылок: 4]
+не бывает? proper-subs-nilpotent(commutator(G)) & ¬p-group(aut(commutator(G))) & ¬prime-index(inn(commutator(G))) & iso(commutator(G), inn(commutator(G)))   [примеров посылок: 3088]
+не бывает? proper-subs-nilpotent(commutator(G)) & ¬p-group(commutator(G)) & ¬two-generated(inn(commutator(G))) & prime-orders(inn(commutator(G)))   [примеров посылок: 4952]
+не бывает? proper-subs-nilpotent(inn(commutator(G))) & property-t(commutator(G)) & ¬two-primes(commutator(G)) & maximal(inn(commutator(G)))   [примеров посылок: 579]
+не бывает? proper-subs-nilpotent(inn(commutator(G))) & residually-nilpotent(G) & ¬rec-pres(commutator(G)) & fin-pres(G)   [примеров посылок: 443]
+не бывает? proper-subs-nilpotent(inn(commutator(G))) & ¬bi-orderable(commutator(G)) & ¬virtually-solvable(aut(commutator(G))) & linear(aut(commutator(G)))   [примеров посылок: 3677]
+не бывает? proper-subs-nilpotent(inn(commutator(G))) & ¬centerless(inn(commutator(G))) & ¬clt(inn(commutator(G))) & finite-index(commutator(G))   [примеров посылок: 170]
+не бывает? proper-subs-nilpotent(inn(commutator(G))) & ¬p-group(inn(commutator(G))) & ¬two-primes(aut(commutator(G))) & clt(commutator(G))   [примеров посылок: 284]
+не бывает? property-t(aut(commutator(G))) & ¬hyperbolic(commutator(G)) & embeds(aut(commutator(G)), inn(commutator(G)))   [примеров посылок: 3523]
+не бывает? property-t(commutator(G)) & ¬countable(G) & ¬p-group(commutator(G)) & exponent-2(inn(commutator(G)))   [примеров посылок: 643]
+не бывает? rec-pres(G) & ¬embeds(inn(commutator(G)), G) & no-finite-quotients(inn(commutator(G)))   [примеров посылок: 49]
+не бывает? rec-pres(G) & ¬finite(commutator(G)) & ¬prime-index(inn(commutator(G))) & proper-subs-cyclic(commutator(G))   [примеров посылок: 144]
+не бывает? rec-pres(aut(commutator(G))) & torsion-free(inn(commutator(G))) & ¬hall(inn(commutator(G))) & proper-subs-finite(commutator(G))   [примеров посылок: 839]
+не бывает? rec-pres(inn(commutator(G))) & ¬fin-pres(inn(commutator(G))) & linear-c(inn(commutator(G)))   [примеров посылок: 163]
+не бывает? rec-pres-ctbl(aut(commutator(G))) & ¬finite-index(inn(commutator(G))) & ¬hopfian(G) & indecomposable(G)   [примеров посылок: 2]
+не бывает? residually-finite(G) & ¬clt(inn(commutator(G))) & ¬co-hopfian(G) & clt(commutator(G))   [примеров посылок: 3772]
+не бывает? residually-finite(G) & ¬linear-c(inn(commutator(G))) & left-orderable(commutator(G))   [примеров посылок: 358]
+не бывает? residually-finite(inn(commutator(G))) & ¬free-abelian(commutator(G)) & ¬polynomial-growth(G) & proper-subs-finite(G)   [примеров посылок: 2757]
+не бывает? residually-nilpotent(G) & two-generated(G) & ¬central(inn(commutator(G))) & locally-finite(inn(commutator(G)))   [примеров посылок: 231]
+не бывает? residually-nilpotent(G) & ¬finite-index(inn(commutator(G))) & ¬proper-subs-nilpotent(G) & proper-subs-abelian(aut(commutator(G)))   [примеров посылок: 361]
+не бывает? residually-nilpotent(G) & ¬proper-subs-abelian(inn(commutator(G))) & no-finite-quotients(G)   [примеров посылок: 1738]
+не бывает? residually-nilpotent(aut(commutator(G))) & ¬embeds(commutator(G), aut(commutator(G))) & ¬odd-order(inn(commutator(G))) & p-group(commutator(G))   [примеров посылок: 78]
+не бывает? residually-nilpotent(aut(commutator(G))) & ¬free-abelian(inn(commutator(G))) & ¬locally-nilpotent(G) & indecomposable(aut(commutator(G)))   [примеров посылок: 1220]
+не бывает? residually-nilpotent(aut(commutator(G))) & ¬indecomposable(aut(commutator(G))) & ¬indecomposable(inn(commutator(G))) & p-group(commutator(G))   [примеров посылок: 334]
+не бывает? residually-nilpotent(commutator(G)) & ¬co-hopfian(inn(commutator(G))) & divisible(commutator(G))   [примеров посылок: 4465]
+не бывает? residually-nilpotent(inn(commutator(G))) & ¬hyperbolic(commutator(G)) & proper-subs-cyclic(G)   [примеров посылок: 6896]
+не бывает? residually-nilpotent(inn(commutator(G))) & ¬perfect(inn(commutator(G))) & ¬prime-orders(commutator(G)) & min-prime-index(commutator(G))   [примеров посылок: 1]
+не бывает? residually-nilpotent(inn(commutator(G))) & ¬proper-subs-finite(aut(commutator(G))) & comp-series(commutator(G))   [примеров посылок: 1454]
+не бывает? residually-nilpotent(inn(commutator(G))) & ¬proper-subs-nilpotent(inn(commutator(G))) & comp-series(aut(commutator(G)))   [примеров посылок: 2915]
+не бывает? simple(aut(commutator(G))) & ¬countable(G) & ¬prime-index(inn(commutator(G))) & rec-pres-ctbl(aut(commutator(G)))   [примеров посылок: 144]
+не бывает? simple(aut(commutator(G))) & ¬exponent-6(commutator(G)) & ¬prime-index(inn(commutator(G))) & finite(commutator(G))   [примеров посылок: 103]
+не бывает? simple(aut(commutator(G))) & ¬locally-finite(G) & ¬min-prime-index(inn(commutator(G))) & finite(commutator(G))   [примеров посылок: 543]
+не бывает? simple(aut(commutator(G))) & ¬locally-finite(G) & ¬prime-index(inn(commutator(G))) & exponent-6(inn(commutator(G)))   [примеров посылок: 4437]
+не бывает? simple(aut(commutator(G))) & ¬prime-index(inn(commutator(G))) & ¬word-problem(G) & residually-finite(G)   [примеров посылок: 101]
+не бывает? simple(commutator(G)) & torsion-free(inn(commutator(G))) & ¬centerless(G) & min-prime-index(commutator(G))   [примеров посылок: 10]
+не бывает? simple(commutator(G)) & ¬iso(commutator(G), inn(commutator(G))) & ¬proper-subs-nilpotent(G) & maximal(commutator(G))   [примеров посылок: 647]
+не бывает? solvable(aut(commutator(G))) & ¬class-2(aut(commutator(G))) & ¬clt(aut(commutator(G))) & perfect(inn(commutator(G)))   [примеров посылок: 7474]
+не бывает? sylow(commutator(G)) & ¬exponent-3(inn(commutator(G))) & ¬order-p2(inn(commutator(G))) & proper-subs-abelian(commutator(G))   [примеров посылок: 198]
+не бывает? sylow(commutator(G)) & ¬left-orderable(inn(commutator(G))) & ¬proper-subs-cyclic(commutator(G)) & proper-subs-nilpotent(G)   [примеров посылок: 2]
+не бывает? torsion-free(G) & virtually-nilpotent(inn(commutator(G))) & ¬free(G) & hyperbolic(G)   [примеров посылок: 3062]
+не бывает? torsion-free(G) & ¬bi-orderable(G) & ¬hall(inn(commutator(G))) & locally-cyclic(commutator(G))   [примеров посылок: 104]
+не бывает? torsion-free(commutator(G)) & ¬embeds(aut(commutator(G)), inn(commutator(G))) & ¬index-2(inn(commutator(G))) & locally-finite(aut(commutator(G)))   [примеров посылок: 1237]
+не бывает? torsion-free(commutator(G)) & ¬embeds(commutator(G), inn(commutator(G))) & ¬prime-index(inn(commutator(G))) & locally-cyclic(aut(commutator(G)))   [примеров посылок: 3088]
+не бывает? torsion-free(commutator(G)) & ¬left-orderable(inn(commutator(G))) & proper-subs-nilpotent(commutator(G))   [примеров посылок: 120]
+не бывает? torsion-free(inn(commutator(G))) & two-generated(G) & ¬residually-finite(G) & proper-subs-nilpotent(commutator(G))   [примеров посылок: 5022]
+не бывает? two-generated(aut(commutator(G))) & ¬hall(inn(commutator(G))) & no-finite-quotients(aut(commutator(G)))   [примеров посылок: 3523]
+не бывает? two-generated(aut(commutator(G))) & ¬min-prime-index(inn(commutator(G))) & ¬p-group(commutator(G)) & simple(aut(commutator(G)))   [примеров посылок: 144]
+не бывает? two-generated(commutator(G)) & ¬embeds(commutator(G), inn(commutator(G))) & ¬two-primes(aut(commutator(G))) & p-group(G)   [примеров посылок: 406]
+не бывает? two-generated(commutator(G)) & ¬kaplansky(inn(commutator(G))) & ¬two-primes(aut(commutator(G))) & nilpotent(commutator(G))   [примеров посылок: 274]
+не бывает? two-generated(commutator(G)) & ¬maximal(inn(commutator(G))) & ¬p-group(commutator(G)) & prime-orders(commutator(G))   [примеров посылок: 83]
+не бывает? two-generated(inn(commutator(G))) & ¬clt(G) & ¬metabelian(commutator(G)) & polycyclic(commutator(G))   [примеров посылок: 6013]
+не бывает? two-generated(inn(commutator(G))) & ¬linear-c(commutator(G)) & kaplansky(G)   [примеров посылок: 727]
+не бывает? two-primes(aut(commutator(G))) & ¬clt(inn(commutator(G))) & ¬two-generated(commutator(G)) & proper-subs-nilpotent(commutator(G))   [примеров посылок: 98]
+не бывает? two-primes(commutator(G)) & ¬proper-subs-abelian(commutator(G)) & ¬word-problem(G) & embeds(commutator(G), inn(commutator(G)))   [примеров посылок: 4005]
+не бывает? two-primes(inn(commutator(G))) & ¬indecomposable(commutator(G)) & ¬proper-subs-abelian(inn(commutator(G))) & min-prime-index(commutator(G))   [примеров посылок: 6]
+не бывает? two-primes(inn(commutator(G))) & ¬property-t(G) & ¬two-generated(commutator(G)) & embeds(commutator(G), inn(commutator(G)))   [примеров посылок: 2847]
+не бывает? virtually-nilpotent(inn(commutator(G))) & ¬countable(commutator(G)) & iso(commutator(G), inn(commutator(G)))   [примеров посылок: 300]
+не бывает? whitehead(commutator(G)) & ¬exponent-6(commutator(G)) & ¬index-2(inn(commutator(G))) & amenable(aut(commutator(G)))   [примеров посылок: 3088]
+не бывает? whitehead(inn(commutator(G))) & ¬left-orderable(commutator(G)) & ¬periodic(G) & index-2(commutator(G))   [примеров посылок: 3411]
+не бывает? whitehead(inn(commutator(G))) & ¬proper-subs-abelian(aut(commutator(G))) & indecomposable(commutator(G))   [примеров посылок: 3751]
+не бывает? whitehead(inn(commutator(G))) & ¬residually-finite(G) & ¬two-primes(aut(commutator(G))) & simple(commutator(G))   [примеров посылок: 992]
+не бывает? ¬amenable(G) & ¬centerless(inn(commutator(G))) & proper-subs-finite(inn(commutator(G)))   [примеров посылок: 380]
+не бывает? ¬amenable(G) & ¬iso(commutator(G), inn(commutator(G))) & proper-subs-nilpotent(commutator(G))   [примеров посылок: 73]
+не бывает? ¬centerless(G) & ¬clt(inn(commutator(G))) & ¬embeds(commutator(G), inn(commutator(G))) & proper-subs-abelian(commutator(G))   [примеров посылок: 152]
+не бывает? ¬co-hopfian(G) & ¬exponent-4(inn(commutator(G))) & ¬polycyclic(aut(commutator(G))) & two-primes(commutator(G))   [примеров посылок: 9255]
+не бывает? ¬co-hopfian(G) & ¬kaplansky(inn(commutator(G))) & exponent-3(commutator(G))   [примеров посылок: 3189]
+не бывает? ¬co-hopfian(G) & ¬min-prime-index(inn(commutator(G))) & ¬prime-orders(commutator(G)) & order-p2(commutator(G))   [примеров посылок: 114]
+не бывает? ¬co-hopfian(commutator(G)) & ¬free(inn(commutator(G))) & exponent-3(inn(commutator(G)))   [примеров посылок: 6956]
+не бывает? ¬complemented(commutator(G)) & ¬residually-nilpotent(commutator(G)) & hall(inn(commutator(G)))   [примеров посылок: 1966]
+не бывает? ¬countable(G) & ¬indecomposable(inn(commutator(G))) & exponent-3(commutator(G))   [примеров посылок: 943]
+не бывает? ¬embeds(G, inn(commutator(G))) & ¬hall(commutator(G)) & ¬locally-nilpotent(G) & proper-subs-abelian(G)   [примеров посылок: 6893]
+не бывает? ¬embeds(G, inn(commutator(G))) & ¬nilpotent(G) & ¬virtually-solvable(aut(commutator(G))) & proper-subs-nilpotent(G)   [примеров посылок: 4271]
+не бывает? ¬embeds(commutator(G), inn(commutator(G))) & ¬locally-nilpotent(inn(commutator(G))) & ¬word-problem(G) & proper-subs-abelian(commutator(G))   [примеров посылок: 1521]
+не бывает? ¬embeds(inn(commutator(G)), commutator(G)) & ¬fin-gen(inn(commutator(G))) & countable(aut(commutator(G)))   [примеров посылок: 144]
+не бывает? ¬embeds(inn(commutator(G)), commutator(G)) & ¬two-primes(commutator(G)) & two-primes(aut(commutator(G)))   [примеров посылок: 713]
+не бывает? ¬finite-index(inn(commutator(G))) & ¬indecomposable(commutator(G)) & ¬proper-subs-nilpotent(G) & abelian(aut(commutator(G)))   [примеров посылок: 290]
+не бывает? ¬index-2(inn(commutator(G))) & ¬no-finite-quotients(commutator(G)) & ¬p-group(commutator(G)) & simple(aut(commutator(G)))   [примеров посылок: 1224]
+не бывает? ¬iso(commutator(G), inn(commutator(G))) & ¬p-group(inn(commutator(G))) & ¬two-primes(G) & proper-subs-abelian(commutator(G))   [примеров посылок: 61]
+не бывает? ¬locally-nilpotent(inn(commutator(G))) & ¬rec-pres-ctbl(aut(commutator(G))) & amenable(aut(commutator(G)))   [примеров посылок: 1178]
+не бывает? ¬polynomial-growth(G) & ¬two-generated(inn(commutator(G))) & polycyclic(G)   [примеров посылок: 63]
+не бывает? ¬proper-subs-abelian(commutator(G)) & ¬proper-subs-finite(aut(commutator(G))) & odd-order(inn(commutator(G)))   [примеров посылок: 9605]
+не бывает? ¬proper-subs-finite(G) & ¬two-generated(inn(commutator(G))) & two-primes(aut(commutator(G)))   [примеров посылок: 8228]
+не бывает? ¬proper-subs-nilpotent(inn(commutator(G))) & ¬word-problem(commutator(G)) & proper-subs-finite(commutator(G))   [примеров посылок: 7727]
+== уже в реестре (data/registry/grp.json) ==
+В-7 — запретов 66: Произведения с монстром Тарского: хопфовость.
+В-6 — запретов 25: Коммутант 𝒢′ группы Григорчука: центр, коммутант, неразложимость, совершенность — заполнить по литературе.
+В-1 — запретов 12: Группа Губы и её максимальная подгруппа: центр, простота, хопфовость, неразложимость; свойства максимальной подгруппы.
+В-3 — запретов 8: Хопфова ли UT₃(ℝ) как абстрактная группа?
+== свёрнуто вопросов 17652: следуют из теории и оставленных вопросов ==

@@ -1,0 +1,82 @@
+строк в библиотеке 30953, литералов 562
+не опровергнуто библиотекой 2572590, минимальных обо всех переменных 20000, запретов 18426: выводится 12482, неизвестно 5944
+посылок без единого примера: 155809
+решающих значений 48 на 93 запретов, без кандидата 24 в 22 кластерах, в реестре 0
+свёрнуто вопросов 5827 (список: --полностью)
+вопросов «какие группы бывают с S»: 112 на 114 запретов; без вопроса 5830
+запретов без примера: 117, кластеров: 101
+
+== решающих значений 48: касаются 93 запретов; без кандидата 24; уже в реестре 0 ==
+значение не записано кручение у ℤ̂^× = ∏_p ℤ_p^× × ℤ̂^× = ∏_p ℤ_p^× — запретов 9; например: abelian(prod(G, G)) & hopfian(torsion(prod(G, G))) & ¬linear-c(G)
+значение co-hopfian(ℚ/ℤ × ℚ/ℤ) — запретов 6; например: abelian(prod(G, G)) & co-hopfian(prod(G, G)) & ¬residually-finite(torsion(prod(G, G)))
+значение rec-pres-ctbl(ℤ(2^∞) × V₄ × ℤ(2^∞) × V₄) — запретов 5; например: abelian(prod(G, G)) & co-hopfian(G) & ¬rec-pres-ctbl(torsion(prod(G, G)))
+значение prime-orders(⊕_ℕ C9) — запретов 4; например: abelian(prod(G, G)) & prime-orders(G) & ¬exponent-6(G) & ¬odd-order(torsion(prod(G, G)))
+значение embeds(prod(G, G), G) у ℤ₂ (целые 2-адические) × ⊕_ℕ ℚ — запретов 4; например: abelian(prod(G, G)) & cyclic(torsion(prod(G, G))) & ¬embeds(prod(G, G), G) & ¬hopfian(prod(G, G))
+значение co-hopfian(A × A для группы Корнера A) — запретов 4; например: abelian(prod(G, G)) & co-hopfian(G) & left-orderable(torsion(prod(G, G))) & ¬no-finite-quotients(G)
+значение proper-subs-cyclic(ℤ × C12) — запретов 3; например: abelian(prod(G, G)) & proper-subs-cyclic(G) & ¬free(torsion(prod(G, G))) & ¬proper-subs-finite(G)
+значение locally-cyclic(группа Корнера A (счётного ранга)) — запретов 3; например: abelian(prod(G, G)) & centerless(torsion(prod(G, G))) & locally-cyclic(G) & ¬indecomposable(G)
+значение countable(torsion(prod(G, G))) у G = ℚ/ℤ[1/2] ≅ ⊕_{p > 2} ℤ(p^∞) × ℝ⁺ — запретов 3; например: abelian(prod(G, G)) & divisible(torsion(prod(G, G))) & ¬countable(torsion(prod(G, G)))
+значение co-hopfian(⊕_p C_p^{2p} × ⊕_p C_p^{2p}) — запретов 3; например: abelian(prod(G, G)) & co-hopfian(prod(G, G)) & ¬linear-c(torsion(prod(G, G)))
+значение whitehead(ℝ⁺ × ⊕_ℕ ℚ) — запретов 2; например: abelian(prod(G, G)) & divisible(G) & whitehead(G) & ¬embeds(G, torsion(prod(G, G)))
+значение whitehead(prod(G, G)) у G = ℝ⁺ × ⊕_ℕ ℚ — запретов 2; например: abelian(prod(G, G)) & divisible(G) & whitehead(prod(G, G)) & ¬finite-index(torsion(prod(G, G)))
+значение two-primes(torsion(prod(G, G))) у G = C_p (p > 10⁷⁵) × C2 x C2 x C2 x C2 — запретов 2; например: abelian(prod(G, G)) & clt(prod(G, G)) & ¬two-generated(G) & ¬two-primes(torsion(prod(G, G)))
+значение rec-pres-ctbl(ℤ(2^∞) × ℤ(2^∞)²) — запретов 2; например: abelian(prod(G, G)) & countable(G) & ¬bi-orderable(torsion(prod(G, G))) & ¬rec-pres-ctbl(G)
+значение prime-orders(⊕_p C_p² × C2 x C2 x C2 x C2) — запретов 2; например: abelian(prod(G, G)) & prime-orders(G) & ¬fin-gen(G) & ¬iso(G, torsion(prod(G, G)))
+значение order-p2(torsion(prod(G, G))) у G = C4 × C2 x C2 x C2 x C2 x C2 — запретов 2; например: abelian(prod(G, G)) & co-hopfian(G) & order-p2(torsion(prod(G, G))) & ¬prime-orders(prod(G, G))
+значение iso(G, prod(G, G)) у группа Корнера A (счётного ранга) — запретов 2; например: abelian(prod(G, G)) & embeds(torsion(prod(G, G)), G) & ¬hopfian(G) & ¬iso(G, prod(G, G))
+значение hopfian(⊕_p C_p² × ⊕_p C_p²) — запретов 2; например: abelian(prod(G, G)) & hopfian(G) & ¬cyclic(torsion(prod(G, G))) & ¬hopfian(prod(G, G))
+значение exponent-6(prod(G, G)) у G = C90 — запретов 2; например: abelian(prod(G, G)) & comp-series(G) & ¬exponent-6(prod(G, G)) & ¬two-primes(torsion(prod(G, G)))
+значение embeds(torsion(prod(G, G)), G) у ⊕C₃ × ∏C₂ — запретов 2; например: abelian(prod(G, G)) & embeds(torsion(prod(G, G)), G) & ¬countable(torsion(prod(G, G))) & ¬prime-orders(prod(G, G))
+значение embeds(prod(G, G), G) у ℤ⁵ × ℤ⁵ — запретов 2; например: abelian(prod(G, G)) & embeds(prod(G, G), G) & hopfian(prod(G, G)) & ¬hall(torsion(prod(G, G)))
+значение two-primes(C_p (p > 10⁷⁵)) — запретов 1; например: abelian(prod(G, G)) & embeds(prod(G, G), torsion(prod(G, G))) & odd-order(torsion(prod(G, G))) & ¬two-primes(G)
+значение two-generated(torsion(prod(G, G))) у G = ℤ⁵ × ℤ × V₄ — запретов 1; например: abelian(prod(G, G)) & polynomial-growth(torsion(prod(G, G))) & ¬hyperbolic(G) & ¬two-generated(torsion(prod(G, G)))
+значение two-generated(torsion(prod(G, G))) у G = C_p (p > 10⁷⁵) — запретов 1; например: abelian(prod(G, G)) & cyclic(G) & ¬two-generated(torsion(prod(G, G)))
+значение two-generated(torsion(prod(G, G))) у G = C9 × ℤ — запретов 1; например: abelian(prod(G, G)) & two-generated(G) & ¬comp-series(G) & ¬two-generated(torsion(prod(G, G)))
+значение two-generated(prod(G, G)) у G = C99 — запретов 1; например: abelian(prod(G, G)) & odd-order(torsion(prod(G, G))) & two-generated(prod(G, G)) & ¬indecomposable(G)
+значение two-generated(prod(G, G)) у G = C90 — запретов 1; например: abelian(prod(G, G)) & two-generated(prod(G, G)) & ¬two-primes(torsion(prod(G, G)))
+значение residually-finite(torsion(prod(G, G))) у G = ⊕ℤ × ℤ² × ℚ/ℤ — запретов 1; например: abelian(prod(G, G)) & residually-finite(torsion(prod(G, G))) & ¬bi-orderable(G) & ¬residually-finite(G)
+значение rec-pres-ctbl(ℚ* × ℚ*) — запретов 1; например: abelian(prod(G, G)) & order-p2(torsion(prod(G, G))) & rec-pres-ctbl(prod(G, G)) & ¬fin-gen(G)
+значение proper-subs-finite(группа Корнера A (счётного ранга)) — запретов 1; например: abelian(prod(G, G)) & proper-subs-finite(G) & ¬embeds(prod(G, G), torsion(prod(G, G)))
+значение proper-subs-cyclic(группа Корнера A (счётного ранга)) — запретов 1; например: abelian(prod(G, G)) & comp-series(torsion(prod(G, G))) & proper-subs-cyclic(G) & ¬two-generated(G)
+значение proper-subs-cyclic(torsion(prod(G, G))) у G = ℤ⁵ × ℤ × V₄ — запретов 1; например: abelian(prod(G, G)) & word-problem(G) & ¬hyperbolic(G) & ¬proper-subs-cyclic(torsion(prod(G, G)))
+значение proper-subs-cyclic(torsion(prod(G, G))) у G = C9 × ℤ — запретов 1; например: abelian(prod(G, G)) & two-generated(G) & ¬clt(prod(G, G)) & ¬proper-subs-cyclic(torsion(prod(G, G)))
+значение proper-subs-cyclic(C9 × C12) — запретов 1; например: abelian(prod(G, G)) & proper-subs-cyclic(G) & ¬locally-cyclic(G) & ¬prime-orders(torsion(prod(G, G)))
+значение prime-orders(torsion(prod(G, G))) у G = ℤ⁴ × ℤ² × C₂ — запретов 1; например: abelian(prod(G, G)) & clt(torsion(prod(G, G))) & ¬hall(torsion(prod(G, G))) & ¬prime-orders(torsion(prod(G, G)))
+значение prime-orders(torsion(prod(G, G))) у G = C_p (p > 10⁷⁵) — запретов 1; например: abelian(prod(G, G)) & prime-order(G) & ¬prime-orders(torsion(prod(G, G)))
+значение p-group(torsion(prod(G, G))) у G = ℤ⁴ × ℤ² × C₂ — запретов 1; например: abelian(prod(G, G)) & comp-series(torsion(prod(G, G))) & ¬clt(G) & ¬p-group(torsion(prod(G, G)))
+значение linear-c(torsion(prod(G, G))) у G = ⊕_ℕ C2 x C2 × ⊕_ℕ ℚ — запретов 1; например: abelian(prod(G, G)) & linear(torsion(prod(G, G))) & ¬linear-c(torsion(prod(G, G))) & ¬residually-finite(G)
+значение iso(G, torsion(prod(G, G))) у ⊕_ℕ ℚ/ℤ × ⊕_ℕ C₆ — запретов 1; например: abelian(prod(G, G)) & iso(G, torsion(prod(G, G))) & ¬bounded-exponent(G) & ¬divisible(torsion(prod(G, G)))
+значение iso(G, torsion(prod(G, G))) у C3 x C3 × ⊕C₃ — запретов 1; например: abelian(prod(G, G)) & exponent-3(G) & ¬iso(G, torsion(prod(G, G))) & ¬odd-order(G)
+значение iso(G, prod(G, G)) у ⊕C₃ × C6 x C3 — запретов 1; например: abelian(prod(G, G)) & iso(G, prod(G, G)) & linear(torsion(prod(G, G))) & ¬p-group(torsion(prod(G, G)))
+значение indecomposable(группа Корнера A (счётного ранга)) — запретов 1; например: abelian(prod(G, G)) & bounded-exponent(torsion(prod(G, G))) & indecomposable(G) & ¬hopfian(prod(G, G))
+значение hopfian(ℤ₃^× ≅ C₂ × ℤ₃ × ℤ₃^× ≅ C₂ × ℤ₃) — запретов 1; например: abelian(prod(G, G)) & hopfian(prod(G, G)) & order-p2(torsion(prod(G, G))) & ¬word-problem(prod(G, G))
+значение exponent-6(torsion(prod(G, G))) у G = C96 — запретов 1; например: abelian(prod(G, G)) & exponent-6(torsion(prod(G, G))) & self-normalizing(torsion(prod(G, G))) & ¬exponent-6(G)
+значение exponent-6(C7 × C6 x C3) — запретов 1; например: abelian(prod(G, G)) & exponent-6(G) & linear-c(torsion(prod(G, G))) & ¬two-primes(G)
+значение exponent-4(torsion(prod(G, G))) у G = ℤ⁵ × ℤ × V₄ — запретов 1; например: abelian(prod(G, G)) & fin-gen(torsion(prod(G, G))) & ¬exponent-4(torsion(prod(G, G))) & ¬hyperbolic(G)
+значение exponent-4(torsion(prod(G, G))) у G = C8 x C8 — запретов 1; например: abelian(prod(G, G)) & exponent-4(torsion(prod(G, G))) & periodic(G) & ¬exponent-4(G)
+значение complemented(torsion(prod(G, G))) у G = ⊕ℤ × ℤ² × ℚ/ℤ — запретов 1; например: abelian(prod(G, G)) & ¬complemented(torsion(prod(G, G))) & ¬residually-finite(G)
+== сводятся к вырожденности: 0 вопросов на 0 запретов ==
+== без кандидата: нужен пример или правило ==
+не бывает? abelian(prod(G, G)) & two-generated(G) & ¬hyperbolic(G) & одно из: ¬exponent-2(torsion(prod(G, G))), ¬odd-order(torsion(prod(G, G)))   [запретов 2]
+не бывает? abelian(prod(G, G)) & two-generated(torsion(prod(G, G))) & ¬two-generated(G) & одно из: ¬exponent-2(torsion(prod(G, G))), ¬exponent-6(torsion(prod(G, G)))   [запретов 2]
+не бывает? clt(torsion(prod(G, G))) & ¬polynomial-growth(G) & ¬two-primes(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 609]
+не бывает? clt(torsion(prod(G, G))) & ¬rec-pres(G) & ¬two-generated(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 609]
+не бывает? co-hopfian(G) & fin-gen(G) & ¬embeds(G, torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 296]
+не бывает? co-hopfian(G) & no-finite-quotients(torsion(prod(G, G))) & ¬rec-pres-ctbl(G) & abelian(prod(G, G))   [примеров посылок: 99]
+не бывает? comp-series(torsion(prod(G, G))) & ¬exponent-2(torsion(prod(G, G))) & ¬word-problem(G) & abelian(prod(G, G))   [примеров посылок: 588]
+не бывает? comp-series(torsion(prod(G, G))) & ¬fin-pres(G) & ¬proper-subs-cyclic(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 609]
+не бывает? exponent-3(torsion(prod(G, G))) & ¬exponent-3(G) & ¬odd-order(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 839]
+не бывает? exponent-4(prod(G, G)) & two-generated(torsion(prod(G, G))) & ¬indecomposable(G) & abelian(prod(G, G))   [примеров посылок: 64]
+не бывает? hopfian(torsion(prod(G, G))) & p-group(G) & ¬clt(G) & abelian(prod(G, G))   [примеров посылок: 586]
+не бывает? hyperbolic(G) & indecomposable(torsion(prod(G, G))) & ¬two-generated(prod(G, G)) & abelian(prod(G, G))   [примеров посылок: 330]
+не бывает? indecomposable(G) & ¬free-abelian(torsion(prod(G, G))) & ¬p-group(G) & abelian(prod(G, G))   [примеров посылок: 2467]
+не бывает? indecomposable(G) & ¬p-group(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 544]
+не бывает? no-finite-quotients(G) & ¬divisible(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 1816]
+не бывает? odd-order(torsion(prod(G, G))) & ¬clt(G) & ¬proper-subs-cyclic(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 610]
+не бывает? odd-order(torsion(prod(G, G))) & ¬finite-index(torsion(prod(G, G))) & ¬two-generated(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 333]
+не бывает? prime-orders(torsion(prod(G, G))) & ¬bounded-exponent(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 385]
+не бывает? proper-subs-finite(G) & ¬clt(prod(G, G)) & ¬no-finite-quotients(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 1521]
+не бывает? two-generated(torsion(prod(G, G))) & ¬embeds(prod(G, G), torsion(prod(G, G))) & ¬proper-subs-cyclic(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 338]
+не бывает? ¬complemented(torsion(prod(G, G))) & ¬hopfian(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 1]
+не бывает? ¬divisible(torsion(prod(G, G))) & ¬embeds(G, torsion(prod(G, G))) & ¬residually-finite(torsion(prod(G, G))) & abelian(prod(G, G))   [примеров посылок: 1013]
+== свёрнуто вопросов 5827: следуют из теории и оставленных вопросов ==
