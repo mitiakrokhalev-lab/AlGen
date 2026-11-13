@@ -1,0 +1,27 @@
+схем к перебору 1, нитей 1: G 1
+G: таблица (30953, 93898), 0 с
+[1/1] 3783 с
+готово за 3784 с
+	Command being timed: "python3 -B -m tools.value_tasks перебор G --каталог ../native-tabs --выход ../profiles/v3-G1024461467 --схемы G-10-26-511-517-767-769-770-771 --нитей 1 --посылок 3 --предел 4500"
+	User time (seconds): 3786.58
+	System time (seconds): 48.55
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:04:24
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 14666232
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 368
+	Minor (reclaiming a frame) page faults: 23986699
+	Voluntary context switches: 13133
+	Involuntary context switches: 24357
+	Swaps: 0
+	File system inputs: 68264
+	File system outputs: 664
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

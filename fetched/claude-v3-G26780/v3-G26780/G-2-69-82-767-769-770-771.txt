@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/home/runner/work/AlGen/AlGen/py/algen/table.py", line 1348, in _one
+    form, alive, empty, report = E.run(k, _STATE["lib"], _STATE["vocab"], form)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/AlGen/AlGen/py/algen/enumerate.py", line 1958, in run
+    form.census = _sample_stats(form, mins, report, sample_total)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/AlGen/AlGen/py/tools/value_tasks.py", line 146, in stats
+    vt = value_tasks(form, report)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/AlGen/AlGen/py/tools/value_tasks.py", line 122, in value_tasks
+    for j in by_val[v]:
+             ~~~~~~^^^
+KeyError: 'embeds(commutator(G), aut(commutator(G))) у ℚ/ℤ × UT₄(ℤ)'
+
