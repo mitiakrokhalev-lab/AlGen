@@ -963,7 +963,15 @@ class Library:
             subs = o["подгруппы"]
             pairs = {x["пара"]: x["id"] for x in subs if "пара" in x}
             # Кручение абелевой: T(A × B) = T(A) × T(B).
-            for field in ("центр", "коммутант", "кручение"):
+            # Фраттини: Φ(A × B) = Φ(A) × Φ(B), если A и B конечно порождены или обе
+            # абелевы. ⩽ — всегда: M × B и A × M′ максимальны при максимальных M ⩽ A,
+            # M′ ⩽ B. ⩾ — для к. п.: Φ(N) ⩽ Φ(G) при нормальной к. п. N (если Φ(N) ⊄ M,
+            # то G = MΦ(N), N = (N ∩ M)Φ(N), а Φ(N) — непорождающие, так что N ⩽ M);
+            # для абелевых Φ(X) = ⋂ pX. Для бесконечно порождённых неабелевых не пишем.
+            pa_, pb_ = self.obj[a]["свойства"], self.obj[b]["свойства"]
+            fg = lambda p: p.get("fin-gen") or p.get("finite")
+            frat = bool((fg(pa_) and fg(pb_)) or (pa_.get("abelian") and pb_.get("abelian")))
+            for field in ("центр", "коммутант", "кручение") + (("фраттини",) if frat else ()):
                 sa, sb = (self._sub(k, self.obj[k].get(field)) for k in (a, b))
                 if sa is None or sb is None:
                     continue
