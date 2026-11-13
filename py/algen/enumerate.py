@@ -646,15 +646,19 @@ class Form:
             gim = self._image(r, g)
             if gim is not None and gim[0] == "obj":
                 if t.op in FIELD_OF:
-                    field, what = FIELD_OF[t.op], None
+                    field = FIELD_OF[t.op]
+                    what = MISSING[field]
                 else:
                     n = t.args[1]
                     known = isinstance(n, App) and n.op in FIELD_OF
                     field = FIELD_OF[n.op] if known else None
-                    what = None if known and self._image(r, n) is None else f"фактор по {n}"
+                    if self._image(r, n) is None:
+                        what = MISSING[field] if known else f"не записана подгруппа {n}"
+                    else:
+                        what = f"не записан фактор по {n}"
                 key = base_factor(self.lib, gim[1], None, field)
                 name = self.lib.obj[key].get('имя', key)
-                return f"не записан {what} у {name}" if what else f"не записан {field} у {name}"
+                return f"{what} у {name}"
         if im is None:
             return f"{atom_name(atom)} у {self.where(r)}"
         p, lib = atom[1], self.lib
@@ -1110,6 +1114,8 @@ def _unknowns(o):
 
 # Поля записи группы библиотеки для характеристических подгрупп (подсказки «не записан …»).
 FIELD_OF = {"center": "центр", "commutator": "коммутант", "frattini": "фраттини", "torsion": "кручение"}
+MISSING = {"центр": "не записан центр", "коммутант": "не записан коммутант",
+           "фраттини": "не записана подгруппа Фраттини", "кручение": "не записано кручение"}
 
 
 def base_factor(lib, key, p, field=None):
