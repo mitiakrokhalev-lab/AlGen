@@ -65,6 +65,20 @@ class ValueTasksTest(unittest.TestCase):
         self.assertEqual(kept["условий"], 2)
         self.assertEqual(kept["по видам"], {"A": 1, "C": 1})
         self.assertEqual(kept["различных значений (A)"], 3)
+    def test_many_values_per_condition(self):
+        # у условия больше KEEP значений: покрытие считается по хранимым (раньше KeyError)
+        import tools.value_tasks as V
+        keep = V.KEEP
+        V.KEEP = 2
+        try:
+            f = fake([(True, None, None)] * 5)
+            vt = value_tasks(f, [{"вердикт": "неизвестно", "_cols": [0, 5], "примеров": 5}])
+            allu = vt["все неизвестные"]
+            self.assertEqual(allu["различных значений (A)"], 5)
+            self.assertEqual(allu["покрытие условий A первыми значениями"]["100 %"], 1)
+        finally:
+            V.KEEP = keep
+
 
 if __name__ == "__main__":
     unittest.main()

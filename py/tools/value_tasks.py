@@ -118,7 +118,10 @@ def value_tasks(form, report):
         for j, names in enumerate(per_cond):
             for v in names:
                 by_val.setdefault(v, []).append(j)
-        for k, (v, _n) in enumerate(counts.most_common(), 1):
+        # порядок — по числу условий среди хранимых наборов (наборы условия урезаны до KEEP:
+        # значение из counts может в них не попасть — ошибка pilot-10, 13.11)
+        order = Counter(x for names in per_cond for x in names)
+        for k, (v, _n) in enumerate(order.most_common(), 1):
             for j in by_val[v]:
                 if not hit[j]:
                     hit[j] = True
