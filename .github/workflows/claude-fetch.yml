@@ -1,0 +1,52 @@
+name: claude fetch
+
+# Копия артефактов прошлого запуска в ветку results-<ветка> (артефакты из сессии
+# напрямую не скачиваются). Запуск: пуш в claude-fetch-*; в .github/claude-fetch.json —
+# {"run_id": номер запуска, "pattern": "шаблон имени артефакта"}. Файлы крупнее 90 МБ
+# пропускаются (предел GitHub — 100 МБ на файл), их список — в журнале.
+
+on:
+  push:
+    branches: ["claude-fetch-*"]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - id: c
+        run: |
+          python3 -B - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          p = json.load(open('.github/claude-fetch.json'))
+          assert type(p['run_id']) is int and p['pattern'], p
+          print('run=%d' % p['run_id'])
+          print('pattern=' + p['pattern'])
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: ${{ steps.c.outputs.pattern }}
+          path: fetched
+          run-id: ${{ steps.c.outputs.run }}
+          github-token: ${{ github.token }}
+      - name: В ветку results-<ветка>
+        env:
+          RUN: ${{ steps.c.outputs.run }}
+          PATTERN: ${{ steps.c.outputs.pattern }}
+        run: |
+          du -sh fetched
+          find fetched -type f | head -100
+          echo "пропущены (> 90 МБ):"
+          find fetched -type f -size +90M -print -delete
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e fetched
+          git add fetched
+          git commit -qm "Артефакты ${PATTERN} запуска ${RUN}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"
