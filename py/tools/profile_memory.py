@@ -5,6 +5,7 @@
 """
 
 import argparse
+from collections import Counter
 from contextlib import nullcontext
 from functools import wraps
 import gzip
@@ -194,14 +195,18 @@ def child(a):
             (out / "value-probe.json").write_text(
                 json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         h = hashlib.sha256()
+        raw, kept, folded = Counter(), Counter(), Counter()
         encoder = json.JSONEncoder(ensure_ascii=False, sort_keys=True, separators=(",", ":"))
         with (gzip.open(out / "report.jsonl.gz", "wb") if a.save_report else nullcontext(None)) as archive:
             for row in report:
+                raw[row["вердикт"]] += 1
+                (folded if row.get("свёрнута") else kept)[row["вердикт"]] += 1
                 line = encoder.encode(row).encode() + b"\n"
                 h.update(line)
                 if archive is not None:
                     archive.write(line)
         record("run:end", report_rows=len(report), report_sha256=h.hexdigest(),
+               raw_verdicts=dict(raw), raw_kept_verdicts=dict(kept), raw_folded_verdicts=dict(folded),
                alive=size(alive), empty=size(empty), legacy_stages=form.mem,
                search_solver=search_state(form), solver_factories=solver_count,
                phase_scoped_calls=sum(b.phase_scoped_calls for b in fast._BANKS.values()),
@@ -221,6 +226,82 @@ def child(a):
     except EnumerationComplete:
         pass
     record("end")
+
+
+def profile_sources(value_probe=False):
+    names = ["algen/enumerate.py", "algen/table.py", "algen/deferred.py", "algen/native_enum.py",
+             "algen/native_enum.cpp", "algen/fast.py", "algen/compress.py", "algen/compress_base.py",
+             "tools/profile_memory.py"]
+    if value_probe:
+        names += ["algen/value_classify.py", "algen/native_values.cpp",
+                  "tools/probe_value_classify.py", "tools/bench_value_classify.py"]
+    return {name: hashlib.sha256((Path(__file__).resolve().parents[1] / name).read_bytes()).hexdigest()
+            for name in names}
+
+
+def valid_raw_counts(event):
+    if not isinstance(event, dict) or type(event.get("report_rows")) is not int or event["report_rows"] < 0:
+        return False
+    maps = [event.get(k) for k in ("raw_verdicts", "raw_kept_verdicts", "raw_folded_verdicts")]
+    if any(not isinstance(m, dict) or any(not isinstance(k, str) or not k
+           or type(v) is not int or v < 0 for k, v in m.items()) for m in maps):
+        return False
+    raw, kept, folded = maps
+    return (sum(raw.values()) == event["report_rows"]
+            and all(kept.get(k, 0) + folded.get(k, 0) == raw.get(k, 0)
+                    for k in set(raw) | set(kept) | set(folded)))
+
+
+def fact_pair(a):
+    """Two fresh full-report processes on one runner; no inherited solver state."""
+    out = Path(a.out).resolve()
+    out.mkdir(parents=True, exist_ok=False)
+    from algen.native_enum import library as prepare_native
+    t = time.monotonic()
+    prepare_native()  # equal compiler-cache state for both children
+    preparation = time.monotonic() - t
+    expected_sources = profile_sources()
+    records, events = {}, []
+    begin = time.monotonic()
+    for mode in ("compact", "global"):
+        target = out / mode
+        argv = [sys.executable, "-B", "-m", "tools.profile_memory", "--tables", str(Path(a.tables).resolve()),
+                "--skel", str(Path(a.skel).resolve()), "--library-cache", str(Path(a.library_cache).resolve()),
+                "--scheme", a.scheme, "--out", str(target), "--seconds", str(a.seconds),
+                "--rss-gib", str(a.rss_gib), "--no-state-save"]
+        if mode == "global":
+            argv.append("--legacy-fact-sat")
+        code = subprocess.run(argv, cwd=Path(__file__).resolve().parents[1]).returncode
+        try:
+            measured = json.loads((target / "measurement.json").read_text())
+            stages = [json.loads(s) for s in (target / "stages.jsonl").read_text().splitlines()]
+            end = next(s for s in stages if s.get("stage") == "run:end")
+            for s in stages:
+                events.append(dict(s, variant=mode))
+            records[mode] = dict(returncode=code, measurement=measured, run_end=end)
+        except (OSError, ValueError, TypeError, StopIteration) as exc:
+            records[mode] = dict(returncode=code, error=str(exc))
+    good = all(r.get("returncode") == 0 and r.get("measurement", {}).get("complete") is True
+               for r in records.values())
+    reports = [records[m].get("run_end", {}).get("report_sha256") for m in ("compact", "global")]
+    same = all(isinstance(s, str) and re.fullmatch("[0-9a-f]{64}", s) for s in reports) and reports[0] == reports[1]
+    modes = all(records[m].get("measurement", {}).get("actual_compact_fact_sat") is (m == "compact")
+                and records[m].get("measurement", {}).get("actual_state_save") is False for m in records)
+    source_maps = [records[m].get("measurement", {}).get("code_sha256") for m in ("compact", "global")]
+    sources = all(isinstance(src, dict) and src == expected_sources for src in source_maps)
+    ends = [records[m].get("run_end") for m in ("compact", "global")]
+    counters_valid = all(valid_raw_counts(end) for end in ends)
+    counters = counters_valid and all(ends[0][k] == ends[1][k]
+                   for k in ("report_rows", "raw_verdicts", "raw_kept_verdicts", "raw_folded_verdicts"))
+    result = dict(scope="same runner; two fresh sequential full schemes; no state writes; one pair",
+                  complete=good and same and modes and sources and counters, scheme=a.scheme,
+                  report_sha_equal=same, mode_verified=modes, sources_equal=sources, raw_counters_valid=counters_valid, raw_counters_equal=counters,
+                  order=["compact", "global"], native_preparation_seconds=preparation,
+                  pair_wall_seconds=time.monotonic()-begin,
+                  limits_per_process=dict(seconds=a.seconds, rss_gib=a.rss_gib), variants=records)
+    (out / "measurement.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+    (out / "stages.jsonl").write_text("".join(json.dumps(s, ensure_ascii=False) + "\n" for s in events))
+    print(json.dumps(result, ensure_ascii=False))
 
 
 def main():
@@ -250,6 +331,7 @@ def main():
     p.add_argument("--value-probe", action="store_true", help="read-only numeric value control")
     p.add_argument("--probe-sample", type=int, default=4096)
     p.add_argument("--cprofile", action="store_true", help="per-scheme diagnostic profile; timings include instrumentation")
+    p.add_argument("--pair-facts", action="store_true")
     p.add_argument("--legacy-fact-sat", action="store_true")
     p.add_argument("--no-state-save", action="store_true")
     p.add_argument("--child", action="store_true", help=argparse.SUPPRESS)
@@ -260,6 +342,13 @@ def main():
         p.error("enumeration-only не создаёт полный raw report")
     if a.value_probe and (a.table_only or a.load_only or a.enumeration_only or a.save_report or a.probe_sample <= 0):
         p.error("value-probe needs a positive sampled full run; no load/enumeration-only/raw export")
+    if a.pair_facts:
+        if (a.child or a.value_probe or a.cprofile or a.save_report or a.legacy_fact_sat
+                or a.table_only or a.load_only or a.enumeration_only or not a.no_state_save
+                or a.seconds <= 0 or a.rss_gib <= 0):
+            p.error("pair-facts needs two plain full runs with no-state-save and positive budgets")
+        fact_pair(a)
+        return
     if a.child:
         child(a)
         return
@@ -317,14 +406,7 @@ def main():
         cmd.append("--save-report")
     if a.value_probe:
         cmd += ["--value-probe", "--probe-sample", str(a.probe_sample)]
-    code = {name: hashlib.sha256((Path(__file__).resolve().parents[1] / name).read_bytes()).hexdigest()
-            for name in ("algen/enumerate.py", "algen/table.py", "algen/deferred.py", "algen/native_enum.py",
-                         "algen/native_enum.cpp", "algen/fast.py", "algen/compress.py",
-                         "algen/compress_base.py", "tools/profile_memory.py")}
-    if a.value_probe:
-        for name in ("algen/value_classify.py", "algen/native_values.cpp",
-                     "tools/probe_value_classify.py", "tools/bench_value_classify.py"):
-            code[name] = hashlib.sha256((Path(__file__).resolve().parents[1] / name).read_bytes()).hexdigest()
+    code = profile_sources(a.value_probe)
     start = time.monotonic()
     reason = "exited"
     sampled = 0

@@ -1,27 +1,19 @@
 {
   "version": 1,
-  "name": "claude-pilot-codex-facts-01",
-  "purpose": "Одна полная малая схема1908минимальных: paired cold full-report global/compact SF; exact correctedV3 IDs, cProfile/sampling/statewrites off; не полный класс",
+  "name": "claude-pilot-codex-facts-02",
+  "purpose": "Контроль различий машин: одна полная малая схема1908min два свежих процесса ПОСЛЕДОВАТЕЛЬНО наодномrunner,compactfirst/globalafter; rawcounts+fullReportSHA,cachewritesoff",
   "source_run": 43434101930,
   "preserve_inputs": false,
   "cases": [
     {
-      "id": "fact-global-G14217",
+      "id": "fact-same-runner-G14217",
       "mode": "run",
       "ref": "",
       "scheme": "G-14-217-767-769-770-771",
-      "args": "--no-state-save --legacy-fact-sat",
+      "args": "--pair-facts --no-state-save",
       "seconds": 1200,
-      "rss_gib": 14
-    },
-    {
-      "id": "fact-compact-G14217",
-      "mode": "run",
-      "ref": "",
-      "scheme": "G-14-217-767-769-770-771",
-      "args": "--no-state-save",
-      "seconds": 1200,
-      "rss_gib": 14
+      "rss_gib": 14,
+      "expect_report_sha256": "e583c58440eb06ebc90589d8228aebac0a2e2c1f26c40e691b87b9773f301751"
     }
   ]
 }
