@@ -40,9 +40,11 @@
 """
 import hashlib
 import json
+import os
 
 VERSION = 3  # stable full IDs; exact class checks before merging/export/reopening
 # Бюджет конфликтов на один вызов решателя; None — без ограничения.
+COMPACT_FACTS = os.environ.get("ALGEN_COMPACT_FACTS", "1") != "0"
 CONF_BUDGET = 100_000
 # Ссылки «следует из» длиннее TRIM_FROM укорачиваются до TRIM_PASSES
 # повторными вызовами решателя (короче ссылка — меньше строк возвращается
@@ -406,6 +408,15 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
     sel_q, sel_f = {}, {}
     copies = []
     try:
+        fact_vars = (sorted({abs(l) for l in fixed} | {
+            abs(l) for r in rows if r["вердикт"] == "выводится"
+            for l in (_safe_forbid(form, r) or [])}) if COMPACT_FACTS else None)
+        fact_ids = ({v: i + 1 for i, v in enumerate(fact_vars)} if fact_vars is not None else None)
+        def fact_lit(l):
+            return (fact_ids[abs(l)] if l > 0 else -fact_ids[abs(l)]) if fact_ids is not None else l
+        # Preserve the ordering of participating variables and selectors. Variables
+        # absent from all facts/fixed are free in sf and need no solver slots.
+        nf = len(fact_ids) + 1 if fact_ids is not None else nv
         for r in rows:
             kind = r["вердикт"]
             if kind not in ("неизвестно", "выводится") or r["№"] in refuted:
@@ -422,7 +433,8 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                 continue
             s, sels = (sq, sel_q) if kind == "неизвестно" else (sf, sel_f)
             pre = sb.unsat(fixed, F, list(sels)) if sb is not None and kind == "неизвестно" else None
-            ans = False if pre is not None else _solve(s, fixed + F + list(sels))
+            query = fixed + F if kind == "неизвестно" else [fact_lit(l) for l in fixed + F]
+            ans = False if pre is not None else _solve(s, query + list(sels))
             if ans is False:
                 if pre is not None:
                     cs = [x for x in sels if x in set(pre)]
@@ -433,7 +445,7 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                 # ядро бывает меньше. Любое ядро — верный набор источников; если
                 # решатель не ответил, остаётся прежнее (тоже верное).
                 for _ in range(TRIM_PASSES if len(cs) > TRIM_FROM else 0):
-                    if _solve(s, fixed + F + cs) is not False:
+                    if _solve(s, query + cs) is not False:
                         break
                     core = set(s.get_core() or [])
                     cs2 = [x for x in cs if x in core]
@@ -480,7 +492,7 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                         r["вне фона"] = "решатель не ответил"
             else:
                 nf += 1
-                sf.add_clause([-nf] + [-l for l in F])
+                sf.add_clause([-nf] + [-fact_lit(l) for l in F])
                 sel_f[nf] = r["№"]
     finally:
         if reuse:
