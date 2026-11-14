@@ -39,9 +39,12 @@
    базис без опровергнутых.
 """
 import hashlib
+import json
+import os
 
-VERSION = 2  # 2: вопрос входит в фон, только если фон с ним совместен (5.11)
+VERSION = 3  # stable full IDs; exact class checks before merging/export/reopening
 # Бюджет конфликтов на один вызов решателя; None — без ограничения.
+COMPACT_FACTS = os.environ.get("ALGEN_COMPACT_FACTS", "1") != "0"
 CONF_BUDGET = 100_000
 # Ссылки «следует из» длиннее TRIM_FROM укорачиваются до TRIM_PASSES
 # повторными вызовами решателя (короче ссылка — меньше строк возвращается
@@ -66,7 +69,38 @@ TRIM_FROM, TRIM_PASSES = 4, 0  # прогон 41761019204: max 176 → 163, +10 
 
 
 def row_id(r):
-    return hashlib.sha1(repr(r["класс"]).encode()).hexdigest()[:10]
+    # Lists after JSON round trips and tuples in a fresh report name one class.
+    body = json.dumps(class_key(r), ensure_ascii=False, separators=(",", ":"))
+    return hashlib.sha256(body.encode()).hexdigest()
+
+
+def class_key(r):
+    value = r.get("класс", r.get("запрет"))
+    if not isinstance(value, (list, tuple)) or any(not isinstance(x, str) for x in value):
+        raise ValueError("нужен точный класс запрета")
+    return tuple(value)
+
+
+def checked_ids(report, generate=False):
+    """A digest is an identifier, never proof of equal canonical classes.
+
+    Old reports are checked too. Reject an ambiguous ID before any mutation,
+    rather than hiding a question or importing an unverified dependency.
+    """
+    labels, classes = [], {}
+    for r in report:
+        if not generate and "№" not in r:
+            labels.append(None)
+            continue
+        label = row_id(r) if generate else r.get("№")
+        labels.append(label)
+        if not isinstance(label, str) or not label:
+            raise ValueError("невалидный номер вопроса")
+        signature = class_key(r)
+        if label in classes and classes[label] != signature:
+            raise ValueError("коллизия номера разных классов: " + str(label))
+        classes[label] = signature
+    return labels
 
 
 def interest_key(r):
@@ -328,12 +362,15 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
     фон, их строка остаётся несвёрнутой с полем "опровергнут"."""
     from pysat.solvers import Solver
 
+    labels = checked_ids(report, generate=True)
     refuted = set(refuted)
+    if any(r.get("№") in refuted and r.get("№") != label for r, label in zip(report, labels)):
+        raise ValueError("старые номера опровержений требуют явной миграции")
     T = form.sc.T
     fixed = _fixed(form)
     seen = {}
-    for r in report:
-        r["№"] = row_id(r)
+    for r, label in zip(report, labels):
+        r["№"] = label
         r["свёрнута"] = False
         r["следует из"] = []
         r["сжатие"] = VERSION
@@ -371,6 +408,15 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
     sel_q, sel_f = {}, {}
     copies = []
     try:
+        fact_vars = (sorted({abs(l) for l in fixed} | {
+            abs(l) for r in rows if r["вердикт"] == "выводится"
+            for l in (_safe_forbid(form, r) or [])}) if COMPACT_FACTS else None)
+        fact_ids = ({v: i + 1 for i, v in enumerate(fact_vars)} if fact_vars is not None else None)
+        def fact_lit(l):
+            return (fact_ids[abs(l)] if l > 0 else -fact_ids[abs(l)]) if fact_ids is not None else l
+        # Preserve the ordering of participating variables and selectors. Variables
+        # absent from all facts/fixed are free in sf and need no solver slots.
+        nf = len(fact_ids) + 1 if fact_ids is not None else nv
         for r in rows:
             kind = r["вердикт"]
             if kind not in ("неизвестно", "выводится") or r["№"] in refuted:
@@ -387,7 +433,8 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                 continue
             s, sels = (sq, sel_q) if kind == "неизвестно" else (sf, sel_f)
             pre = sb.unsat(fixed, F, list(sels)) if sb is not None and kind == "неизвестно" else None
-            ans = False if pre is not None else _solve(s, fixed + F + list(sels))
+            query = fixed + F if kind == "неизвестно" else [fact_lit(l) for l in fixed + F]
+            ans = False if pre is not None else _solve(s, query + list(sels))
             if ans is False:
                 if pre is not None:
                     cs = [x for x in sels if x in set(pre)]
@@ -398,7 +445,7 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                 # ядро бывает меньше. Любое ядро — верный набор источников; если
                 # решатель не ответил, остаётся прежнее (тоже верное).
                 for _ in range(TRIM_PASSES if len(cs) > TRIM_FROM else 0):
-                    if _solve(s, fixed + F + cs) is not False:
+                    if _solve(s, query + cs) is not False:
                         break
                     core = set(s.get_core() or [])
                     cs2 = [x for x in cs if x in core]
@@ -445,7 +492,7 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
                         r["вне фона"] = "решатель не ответил"
             else:
                 nf += 1
-                sf.add_clause([-nf] + [-l for l in F])
+                sf.add_clause([-nf] + [-fact_lit(l) for l in F])
                 sel_f[nf] = r["№"]
     finally:
         if reuse:
@@ -467,6 +514,7 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
 def reopen(report, refuted):
     """Номера строк, которые надо развернуть, если вопросы refuted опровергнуты
     (все, кто держится на них, транзитивно). Сами строки помечаются."""
+    checked_ids(report)
     by = {}
     for r in report:
         for d in r.get("следует из", []):
@@ -492,6 +540,10 @@ def verify(form, report, sample=None, rng=None):
     список нарушений; пустой — граф верен."""
     from pysat.solvers import Solver
 
+    try:
+        checked_ids(report)
+    except ValueError as exc:
+        return [("идентичность", str(exc))]
     T = form.sc.T
     fixed = _fixed(form)
     by = {}
@@ -571,6 +623,10 @@ def regress(before, after):
     строки цепочка «следует из» кончается на несвёрнутых строках или на
     экземпляре. Карточка архива, попавшая в выдачу, поэтому не может ни
     потеряться, ни стать опровергнутой. Возвращает список нарушений."""
+    try:
+        checked_ids(after)
+    except ValueError as exc:
+        return [("идентичность", str(exc))]
     bad = []
     if len(before) != len(after):
         bad.append(("строк", len(before), len(after)))
@@ -598,10 +654,12 @@ def regress(before, after):
 def kept_questions(report):
     """Оставленные (несвёрнутые) вопросы схемы — по одному на класс — для
     сжатия между схемами базы (compress_base): запрет именами литералов."""
+    checked_ids(report)
     out, seen = [], set()
     for r in report:
         if r.get("вердикт") != "неизвестно" or r.get("свёрнута") or "№" not in r or r["№"] in seen:
             continue
         seen.add(r["№"])
-        out.append({"№": r["№"], "запрет": list(r["запрет"]), "примеров": r.get("примеров", 0)})
+        out.append({"№": r["№"], "запрет": list(r["запрет"]),
+                    "класс": list(class_key(r)), "примеров": r.get("примеров", 0)})
     return out
