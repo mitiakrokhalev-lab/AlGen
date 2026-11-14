@@ -300,12 +300,14 @@
     "persistence": false,
     "full_candidate_frontier": false,
     "cross_scheme_semantic_value_ids": false,
-    "real_table_benchmark": false
+    "real_table_benchmark": true,
+    "real_table_benchmark_scope": "one4096condition sampled numeric differential, not production or full report speedup"
   },
   "independent_review": {
     "code_math_abi_ownership": "approved",
     "published_scope": "exact four additions verified",
     "benchmark": "approved",
     "ci": "approved: decoded job log,246 tests,3027.802s,0skips; PR merge checkout tree equals frozen head tree"
-  }
+  },
+  "real_table_control_metrics": "metrics-value-control-01.json"
 }

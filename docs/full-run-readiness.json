@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_utc": "2026-11-14T03:27:00+00:00",
+  "updated_utc": "2026-11-14T03:48:00+00:00",
   "scope": "Readiness plan for first full fixed-domain enumeration; NOT a full-run receipt or an implemented automatic launch gate",
   "user_goal": {
     "first_complete_enumeration_once": true,
@@ -360,6 +360,11 @@
     "production_integrated": false,
     "persisted": false,
     "full_frontier_implemented": false,
-    "sat_only_C_equivalence_proved": false
+    "sat_only_C_equivalence_proved": false,
+    "B_dependency_index_implemented": false,
+    "numeric_classification_is_full_candidate_frontier": false,
+    "real_table_numeric_control": "metrics-value-control-01.json",
+    "real_table_control_conditions": 4096,
+    "real_table_proved_B_conditions": 376
   }
 }
