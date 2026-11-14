@@ -1,0 +1,311 @@
+{
+  "version": 1,
+  "date_moscow": "2026-11-14",
+  "scope": "separate numeric API; not production report or full frontier",
+  "code_commit": "c226434953e594172e9755d0327d3cfd5e660eec",
+  "code_tree": "4e3f0a5074b712e401d5afba520df1909896c788",
+  "parent_commit": "4a1a4578a692c8430ef9973544099df63e5c8b68",
+  "pull_request": 19,
+  "ci": {
+    "run": 43523783581,
+    "job": 132224382089,
+    "commit": "c226434953e594172e9755d0327d3cfd5e660eec",
+    "tests": 246,
+    "seconds": 3027.802,
+    "result": "OK",
+    "skipped": 0,
+    "checkout_commit": "be1d172608a2617b84126c293d780d81f45fb349",
+    "checkout_tree": "4e3f0a5074b712e401d5afba520df1909896c788",
+    "checkout_tree_equals_code_tree": true
+  },
+  "local_tests": {
+    "tests": 11,
+    "seconds": 1.046,
+    "result": "OK"
+  },
+  "independent_fuzz": {
+    "forms": 150,
+    "conditions": 6165,
+    "single_events": 66496,
+    "mismatches": 0
+  },
+  "vector_benchmark": {
+    "version": 1,
+    "reference": "existing vectorized tools.value_tasks.classify plus canonical numeric assembly",
+    "native": "bounded PreparedValues plus same global canonical numeric assembly",
+    "scope": "synthetic unique primitive/unrefuted inputs; not group examples, production reports or whole first pass",
+    "cases": [
+      {
+        "rows": 1024,
+        "primitive_atoms": 12,
+        "conditions": 256,
+        "mode": "partial",
+        "input_sha256": "c4d7f7f0d97470af77f4d1098b4d89042801ec4ca9ebba8f404e99ec4df1a2f0",
+        "output_sha256": "f3e79607805d8e396d471c06887cc698d91610c40ff531ddddb471382dcec6ef",
+        "canonical_arrays_compared": 11,
+        "event_count": 35487,
+        "kinds": {
+          "1": 256
+        },
+        "distinct_requested_values": 1024,
+        "reference_prepare": {
+          "wall_seconds": 9.221700020134449e-05,
+          "cpu_seconds": 9.080399999999988e-05
+        },
+        "reference": {
+          "wall_seconds": 0.042537626000012096,
+          "cpu_seconds": 0.04254026000000005
+        },
+        "native_prepare": {
+          "wall_seconds": 0.0002786139998534054,
+          "cpu_seconds": 0.00027920400000003287
+        },
+        "native": {
+          "wall_seconds": 0.002548252999986289,
+          "cpu_seconds": 0.0025504729999999975
+        },
+        "budget_retries": 0,
+        "max_batch_result_bytes": 223603,
+        "context_sha256": "9d07799b6a47542f90b380a98a89c435795169c5df150a5bc6c194e105680478"
+      },
+      {
+        "rows": 4096,
+        "primitive_atoms": 12,
+        "conditions": 256,
+        "mode": "unknown",
+        "input_sha256": "4a6f4bbea25e8050de863c1b8ae190b3a12097f95f756200daff0e2799c8fc40",
+        "output_sha256": "f8d35f74463a3e8ff89e84a2bd9715051113af343cf49430cab34a9f2fb5392b",
+        "canonical_arrays_compared": 11,
+        "event_count": 4096,
+        "kinds": {
+          "1": 1,
+          "2": 255
+        },
+        "distinct_requested_values": 4096,
+        "reference_prepare": {
+          "wall_seconds": 0.00018928100007542525,
+          "cpu_seconds": 0.0001870580000000177
+        },
+        "reference": {
+          "wall_seconds": 0.016423229999873,
+          "cpu_seconds": 0.015820369999999973
+        },
+        "native_prepare": {
+          "wall_seconds": 0.0004068039997946471,
+          "cpu_seconds": 0.0004074849999999852
+        },
+        "native": {
+          "wall_seconds": 0.0022810659997958282,
+          "cpu_seconds": 0.002282384999999998
+        },
+        "budget_retries": 0,
+        "max_batch_result_bytes": 114733,
+        "context_sha256": "f737972824119f367df84a35a75630b82627757f0a47dcaf9f6ac1491020b0c7"
+      },
+      {
+        "rows": 4096,
+        "primitive_atoms": 12,
+        "conditions": 256,
+        "mode": "known",
+        "input_sha256": "e30574715baf10c76bdc8869fdc08a40abf747f19f8bc6d36d6fedfceed2df43",
+        "output_sha256": "0a1aa38d2b94e5b73f56bc592863614ca561e3ee831b023327bf372bbd254636",
+        "canonical_arrays_compared": 11,
+        "event_count": 0,
+        "kinds": {
+          "0": 256
+        },
+        "distinct_requested_values": 0,
+        "reference_prepare": {
+          "wall_seconds": 0.0001596769998286618,
+          "cpu_seconds": 0.0001575839999999884
+        },
+        "reference": {
+          "wall_seconds": 0.009474984999997105,
+          "cpu_seconds": 0.009476995000000044
+        },
+        "native_prepare": {
+          "wall_seconds": 0.0003159790003337548,
+          "cpu_seconds": 0.000316199000000017
+        },
+        "native": {
+          "wall_seconds": 0.0005736619996241643,
+          "cpu_seconds": 0.0005741719999999839
+        },
+        "budget_retries": 0,
+        "max_batch_result_bytes": 4744,
+        "context_sha256": "356bea5ffe1ee25ec9749a91f2103c05b6e112ddc9755dc842930cfc58ca10a0"
+      },
+      {
+        "rows": 30953,
+        "primitive_atoms": 12,
+        "conditions": 1024,
+        "mode": "partial",
+        "input_sha256": "978cb2afe4cf362db9d638959bdf94aa60a10404202311e82244a6c70ddb0db3",
+        "output_sha256": "71e6b3508e745674852e91d24bf2883efe31fa29dfdc6943c0f9228560681765",
+        "canonical_arrays_compared": 11,
+        "event_count": 2943378,
+        "kinds": {
+          "1": 1024
+        },
+        "distinct_requested_values": 30953,
+        "reference_prepare": {
+          "wall_seconds": 0.001057790000231762,
+          "cpu_seconds": 0.0010565070000000398
+        },
+        "reference": {
+          "wall_seconds": 2.623347965999983,
+          "cpu_seconds": 2.6225214039999996
+        },
+        "native_prepare": {
+          "wall_seconds": 0.001273729999866191,
+          "cpu_seconds": 0.0012742600000001936
+        },
+        "native": {
+          "wall_seconds": 0.22955969399981768,
+          "cpu_seconds": 0.22952548499999992
+        },
+        "budget_retries": 10,
+        "max_batch_result_bytes": 3534520,
+        "context_sha256": "7512c5b9a28edbb4c4efba659755ee50554fb23ab81f2e3f34e2e292df5054fc"
+      }
+    ],
+    "native_loader": {
+      "wall_seconds": 0.002517803000046115,
+      "cpu_seconds": 0.0015268029999999655
+    },
+    "engine_sha256": "cbd5a8ec176cbf25190df02f153403860b01bfcc25824e137ce6c0ec0ea868bb",
+    "peak_rss_kib": 249280,
+    "one_pair_per_case": true,
+    "randomized_repeats": false,
+    "compilation_cache_preserved": true,
+    "import_and_fixture_startup_included": false,
+    "production_speedup_claimed": false,
+    "tool_sha256": "482da28a6306b030b79fe82258d8a15475f883c89c8dd8b894da88812ed2f9aa"
+  },
+  "independent_scalar_benchmark": {
+    "task": "review-only exact scalar/native value classifier differential",
+    "utc": "2026-11-13T22:45:45.058660+00:00",
+    "seed": 741029,
+    "nrows": 129,
+    "ncols": 20,
+    "conditions": 5024,
+    "by_depth": {
+      "0": 11,
+      "1": 147,
+      "2": 935,
+      "3": 3931
+    },
+    "single_events": 78928,
+    "kind_counts": {
+      "C": 1252,
+      "A": 126,
+      "B": 0,
+      "R": 3646
+    },
+    "unique_sparse_values_A": 14,
+    "sparse_event_sum_A": 720,
+    "scalar_wall_ns": 147991660,
+    "native_wall_ns": 11146227,
+    "projection_prepare_wall_ns": 254447,
+    "scalar_over_native_wall_ratio": 13.277287462385253,
+    "timing_scope": "one run each; compiler/library loading excluded; native includes bounded calls, copying and global result/counter assembly; projection preparation reported separately",
+    "batch_size": 257,
+    "max_events": 262144,
+    "batches": 22,
+    "budget_retries": 0,
+    "max_batch_result_bytes": 73581,
+    "input_sha256": "66f9208d7653a80b52f0c5ac3d920f8f1a330620c0c8fc861b33250598930c86",
+    "context_sha256": "7d25c83f286b8b6e290b737d8b472839ba7f3dd22dcdc23b568029d3bbca9242",
+    "engine_sha256": "cbd5a8ec176cbf25190df02f153403860b01bfcc25824e137ce6c0ec0ea868bb",
+    "scalar_result_sha256": "3e4e0f97be172293ef0cf9cc3706a9f6434adcd25863874bc92f761e498d7d25",
+    "native_result_sha256": "3e4e0f97be172293ef0cf9cc3706a9f6434adcd25863874bc92f761e498d7d25",
+    "byte_exact_all_11_arrays": true,
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "numpy": "2.5.4",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "sources_sha256": {
+      "py/algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+      "py/algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+      "/tmp/algen-review-value-benchmark.py": "a7ef88c8ffc267791af6d1b4c4049dadd0e1bb36a72cce53c8476819e3287fcf"
+    },
+    "limitations": "small synthetic projection only; no production throughput or SAT verdict equivalence claim"
+  },
+  "attempts": [
+    {
+      "name": "initial10 tests",
+      "seconds": 1.096,
+      "errors": 1,
+      "failures": 1,
+      "reason": "fixture req missing and stale Form._bits cache; fixed"
+    },
+    {
+      "name": "corrected10 tests before return-boundary regression",
+      "seconds": 0.229,
+      "result": "OK"
+    },
+    {
+      "name": "final11 tests",
+      "seconds": 1.046,
+      "result": "OK"
+    },
+    {
+      "name": "fixture cardinality regression",
+      "tests": 1,
+      "seconds": 0.014,
+      "result": "OK"
+    },
+    {
+      "name": "initial vector benchmark",
+      "receipt_sha256": "3f0c3d5b41c45f7e666f672fb1462980fb198161ccc0ef38f60d6847259ed342"
+    },
+    {
+      "name": "failed benchmark fixture",
+      "complete": false,
+      "pid": 1811,
+      "reason": "benchmark fixture requested2048 distinct questions but its finite domain has1563; stopped sampling loop; native kernel not implicated",
+      "wall_seconds_until_stop_request": 107.49000000000024,
+      "cpu_seconds_until_stop_request": 107.48,
+      "vmhwm_line": "VmHWM:\t   46028 kB",
+      "cost_scope": "process counters immediately before SIGINT, not final rusage"
+    }
+  ],
+  "semantics": {
+    "pair_expansion": "signed primitive columns",
+    "duplicates": "collapsed",
+    "negated_pair": "explicit error",
+    "contradictory_forbidden": "explicit error",
+    "existing_refutation_kind": "R",
+    "kinds_are_theory_verdicts": false,
+    "sat_only_c_enabled": false,
+    "exact_signed_value_events": true,
+    "heuristic_names_used_as_ids": false,
+    "numeric_context_hash_is_full_archive_identity": false
+  },
+  "admission": {
+    "default_batch_conditions": 4096,
+    "default_event_budget": 262144,
+    "adaptive_halving": true,
+    "single_over_budget": "explicit debt/error",
+    "whole_projection_memory_bounded": false,
+    "whole_archive_storage_bounded": false
+  },
+  "unchanged": [
+    "production enumeration/report/SAT path",
+    "Library",
+    "Theory",
+    "table fingerprints"
+  ],
+  "integration": {
+    "production_report": false,
+    "persistence": false,
+    "full_candidate_frontier": false,
+    "cross_scheme_semantic_value_ids": false,
+    "real_table_benchmark": false
+  },
+  "independent_review": {
+    "code_math_abi_ownership": "approved",
+    "published_scope": "exact four additions verified",
+    "benchmark": "approved",
+    "ci": "approved: decoded job log,246 tests,3027.802s,0skips; PR merge checkout tree equals frozen head tree"
+  }
+}

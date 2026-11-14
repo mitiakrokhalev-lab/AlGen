@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "updated_utc": "2026-11-08T01:50:12.074780+00:00",
+  "version": 2,
+  "updated_utc": "2026-11-14T03:27:00+00:00",
   "scope": "Readiness plan for first full fixed-domain enumeration; NOT a full-run receipt or an implemented automatic launch gate",
   "user_goal": {
     "first_complete_enumeration_once": true,
@@ -8,7 +8,8 @@
     "avoid_repeating_verified_successful_schemes": true,
     "candidate_class": {
       "k_max": 3,
-      "s_max": 2
+      "s_max": 2,
+      "base_variables_max": 3
     },
     "target_wall_hours": 24,
     "resource_selection_budget_rub_per_day": 1000,
@@ -16,15 +17,18 @@
   },
   "ready_for_full_run": false,
   "automatic_launch_gate_implemented": false,
-  "current_verified_code_commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
+  "current_verified_code_commit": "c226434953e594172e9755d0327d3cfd5e660eec",
   "ci": {
-    "run": 42435664050,
-    "job": 128593834086,
-    "commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
-    "tests": 184,
-    "seconds": 123.646,
+    "run": 43523783581,
+    "job": 132224382089,
+    "commit": "c226434953e594172e9755d0327d3cfd5e660eec",
+    "tests": 246,
+    "seconds": 3027.802,
     "result": "OK",
-    "skipped": 0
+    "skipped": 0,
+    "checkout_commit": "be1d172608a2617b84126c293d780d81f45fb349",
+    "checkout_tree": "4e3f0a5074b712e401d5afba520df1909896c788",
+    "checkout_tree_equals_code_tree": true
   },
   "gates": [
     {
@@ -32,68 +36,78 @@
       "status": "partial",
       "required": "Exact immutable list/hash/count of all allowed schemes across all42bases; independent coverage and symmetry check",
       "observed": {
-        "bases": 42,
-        "completed_bases": 42,
-        "inventory_complete": true,
-        "completed_counts": {
-          "G": 1047,
-          "GN": 5332,
-          "AB": 1713,
-          "GHK": 8907,
-          "GMN": 13840,
-          "GHF": 3645,
-          "Fam": 79,
-          "GX": 1284,
-          "Gx": 1367,
-          "GE": 1354,
-          "GXxy": 1564,
-          "Gxy": 1389,
-          "D": 54,
-          "MN": 843,
-          "ABH": 6941,
-          "ABC": 7012,
-          "n": 310,
-          "pG": 1781,
-          "pqG": 2507,
-          "pGH": 6709,
-          "pqGH": 7733,
-          "GxA": 1655,
-          "GxF": 1787,
-          "GAB": 1564,
-          "GAF": 1642,
-          "GAa": 1422,
-          "GHx": 3765,
-          "GHA": 3621,
-          "GHE": 3721,
-          "GHn": 4399,
-          "GHK2": 9900,
-          "GFE": 1735,
-          "Gnx": 2132,
-          "GnA": 2015,
-          "GnF": 2096,
-          "GNx": 5947,
-          "GNy": 6016,
-          "GNA": 5760,
-          "GNF": 6195,
-          "lmn": 4870,
-          "P": 27,
-          "NQA": 3311
+        "current_language_inventory_complete": false,
+        "current_G_scheme_plan": 1164,
+        "current_G_completed_census": 1162,
+        "current_G_timeouts": 2,
+        "other_bases_current_inventory_unknown": 41,
+        "historical_inventory_pr17": {
+          "source_commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
+          "bases": 42,
+          "completed_bases": 42,
+          "inventory_complete": true,
+          "completed_counts": {
+            "G": 1047,
+            "GN": 5332,
+            "AB": 1713,
+            "GHK": 8907,
+            "GMN": 13840,
+            "GHF": 3645,
+            "Fam": 79,
+            "GX": 1284,
+            "Gx": 1367,
+            "GE": 1354,
+            "GXxy": 1564,
+            "Gxy": 1389,
+            "D": 54,
+            "MN": 843,
+            "ABH": 6941,
+            "ABC": 7012,
+            "n": 310,
+            "pG": 1781,
+            "pqG": 2507,
+            "pGH": 6709,
+            "pqGH": 7733,
+            "GxA": 1655,
+            "GxF": 1787,
+            "GAB": 1564,
+            "GAF": 1642,
+            "GAa": 1422,
+            "GHx": 3765,
+            "GHA": 3621,
+            "GHE": 3721,
+            "GHn": 4399,
+            "GHK2": 9900,
+            "GFE": 1735,
+            "Gnx": 2132,
+            "GnA": 2015,
+            "GnF": 2096,
+            "GNx": 5947,
+            "GNy": 6016,
+            "GNA": 5760,
+            "GNF": 6195,
+            "lmn": 4870,
+            "P": 27,
+            "NQA": 3311
+          },
+          "total_schemes": 148991,
+          "ordered_full_plan_sha256": "fae6a4d9a63c72d9189019f7f014dfedc4493682402ec7c8a77cc81d4de48b56",
+          "inputs_sha256": "83f262286fa9cf250969e97f4245da18418e4f1b9e1d64fe030d2b46a94df6c0",
+          "unresolved_bases": [],
+          "not_attempted_bases": 0,
+          "independent_full_class_and_symmetry_audit_complete": false,
+          "historical_30s_timeouts": [
+            "GHK",
+            "GMN",
+            "GHK2"
+          ]
         },
-        "total_schemes": 148991,
-        "ordered_full_plan_sha256": "fae6a4d9a63c72d9189019f7f014dfedc4493682402ec7c8a77cc81d4de48b56",
-        "inputs_sha256": "83f262286fa9cf250969e97f4245da18418e4f1b9e1d64fe030d2b46a94df6c0",
-        "unresolved_bases": [],
-        "not_attempted_bases": 0,
-        "independent_full_class_and_symmetry_audit_complete": false,
-        "historical_30s_timeouts": [
-          "GHK",
-          "GMN",
-          "GHK2"
-        ]
+        "independent_full_class_and_symmetry_audit_complete": false
       },
       "evidence": [
         "metrics-scheme-plan.json",
-        "план-масштабирования.md"
+        "план-масштабирования.md",
+        "metrics-census-2026-11-14.json"
       ]
     },
     {
@@ -105,11 +119,17 @@
         "stress02_planned": 8,
         "time_budget": 2,
         "rss_budget": 1,
-        "whole_class_estimate_seconds": null
+        "whole_class_estimate_seconds": null,
+        "census04_scope": "G enumeration only, includes2timeout costs",
+        "census04_cpu_seconds": 204038.78,
+        "census04_sum_worker_wall_seconds": 204198,
+        "new_value_api_benchmark_is_synthetic_component": true
       },
       "evidence": [
         "metrics-stress02.json",
-        "metrics-phase-scope.json"
+        "metrics-phase-scope.json",
+        "metrics-census-2026-11-14.json",
+        "metrics-value-classifier.json"
       ]
     },
     {
@@ -117,14 +137,31 @@
       "status": "blocked",
       "required": "Bounded process/tree/cgroup and disk use including frontier/archive/global compression and temporary files; measured reserve and safe parallelism",
       "observed": {
-        "largest_candidate_count": 205509771,
-        "stopped_peak_rss_gib": 12.294,
-        "completed_peak_for_largest_case": null,
-        "workspace_free_mib_approx": 54.7,
-        "new_large_local_runs_allowed": false
+        "historical_stress02": {
+          "largest_candidate_count": 205509771,
+          "stopped_peak_rss_gib": 12.294,
+          "completed_peak_for_largest_case": null,
+          "workspace_free_mib_approx": 54.7,
+          "new_large_local_runs_allowed": false
+        },
+        "prior_review_minimal_memory_fix_reported": true,
+        "prior_review_large_control_rss_gib": 7.34,
+        "prior_review_control_input": "old205.5Mcontrol before latestLibraryupdates",
+        "current_census04_peak_rss_kib": 15582848,
+        "current_census04_peak_rss_gib": 14.8609619140625,
+        "pilot11_known11case_peak_rss_kib": 14890208,
+        "pilot11_failed_case_peak_unknown": true,
+        "table_pilot_rss_plan_limit_not_enforced": true,
+        "workspace_free_mib_approx": 34,
+        "new_large_local_runs_allowed": false,
+        "whole_frontier_disk_budget_measured": false,
+        "prior_review_control_source_run": 42468127201
       },
       "evidence": [
-        "metrics-stress02.json"
+        "metrics-stress02.json",
+        "metrics-census-2026-11-14.json",
+        "metrics-pilot11-values.json",
+        "../status.md"
       ]
     },
     {
@@ -167,13 +204,21 @@
       "status": "blocked",
       "required": "Independent audit of frozen external tasks, representation/generation reachability and Library vs Theory; resolve known gaps in declared scope",
       "observed": {
-        "frozen_tasks": 30,
-        "memory_tasks": 24,
-        "putnam_tasks": 6,
-        "local_probes": 20,
-        "native_generation_checks": 0,
+        "historical_holdout_and_sidebranch_status": {
+          "frozen_tasks": 30,
+          "memory_tasks": 24,
+          "putnam_tasks": 6,
+          "local_probes": 20,
+          "native_generation_checks": 0,
+          "hirsch_gap_open": true,
+          "unported_sidebranch_files_to_review": 5,
+          "absence_of_all_possible_red_flags_proved": false
+        },
+        "current_language_holdout_recheck_complete": false,
+        "reported_archive_cards": 541,
+        "reported_archive_red_flag_cards": 11,
         "hirsch_gap_open": true,
-        "unported_sidebranch_files_to_review": 5,
+        "new_numeric_api_not_a_mathematical_audit": true,
         "absence_of_all_possible_red_flags_proved": false
       },
       "evidence": [
@@ -191,11 +236,18 @@
         "within_scheme_kept_stress02_successful_subset": 838,
         "subset_schemes": 5,
         "global_basis_size": null,
-        "global_compression_factor": null
+        "global_compression_factor": null,
+        "pilot11_within_scheme_kept_unknowns": 13295,
+        "pilot11_nonempty_sample_schemes": 9,
+        "pilot11_kept_C": 36,
+        "pilot11_is_global_basis": false,
+        "pilot11_A_B_retention_is_required": true,
+        "pilot11_A_B_persisted_states_implemented": false
       },
       "evidence": [
         "metrics-stress02.json",
-        "поиск-базиса.md"
+        "поиск-базиса.md",
+        "metrics-pilot11-values.json"
       ]
     },
     {
@@ -205,7 +257,10 @@
       "observed": {
         "imported_scheme_worker_exists": true,
         "whole_class_frontier_storage_measured": false,
-        "whole_class_manifest_complete": true
+        "whole_class_manifest_complete": false,
+        "historical_pr17_manifest_complete": true,
+        "new_value_batch_numeric_hash_is_semantic_archive_identity": false,
+        "new_value_batch_persistence_implemented": false
       },
       "evidence": [
         "динамический-архив.md",
@@ -227,9 +282,11 @@
     "Adding language/class creates a new domain. The archive must distinguish example/theorem additions and corrections or withdrawals.",
     "A list of current minimal questions cannot support all future updates; new counterexamples may expose previously nonminimal stronger questions.",
     "A SAT model is not a group counterexample; contradictory question backgrounds are not coverage proofs.",
-    "No new full run, pilot, rental or purchase is initiated by this record."
+    "No new full run, pilot, rental or purchase is initiated by this record.",
+    "The older42-base148991inventory is historical after language changes; currentGplan has1164schemes.",
+    "Library-value kind A/B/C is not a theory verdict; proved minimal A/B exist. Skipping SAT must preserve pending proof debt.",
+    "Pilot11 counts are observed post-SAT samples with heuristic names and CAP/KEEP, not the whole class or final manual workload."
   ],
-  "evidence_status_commit": "d7d820c8fd5c749149e1edd6d90226d5a46883ee",
   "latest_research_check": {
     "scope": "lazy finite selector search and in-process row dynamics; not full native grammar or SQLite integration",
     "metrics": "metrics-lazy-candidate-search.json",
@@ -239,13 +296,13 @@
     "uncovered": 0,
     "changes_gate_status": false
   },
-  "previous_verified_code_commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
+  "previous_verified_code_commit": "f069a483b0b49b09777cafcb90f414c8d52924b7",
   "previous_ci": {
-    "run": 42421968228,
-    "job": 128552125593,
-    "commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
-    "tests": 178,
-    "seconds": 117.703,
+    "run": 43511990561,
+    "job": 132184276842,
+    "commit": "f069a483b0b49b09777cafcb90f414c8d52924b7",
+    "tests": 235,
+    "seconds": 3096.803,
     "result": "OK",
     "skipped": 0
   },
@@ -255,7 +312,9 @@
     "bases": 42,
     "schemes": 148991,
     "mathematical_coverage_audit_complete": false,
-    "full_task_run_started": false
+    "full_task_run_started": false,
+    "historical_for_older_language": true,
+    "is_current_language_full_inventory": false
   },
   "latest_correctness_check": {
     "metrics": "metrics-pair-requirements.json",
@@ -266,5 +325,41 @@
     "old_paired_results_require_coverage_refresh": true,
     "automatic_archive_coverage_migration_implemented": false,
     "changes_gate_status": false
+  },
+  "historical_ci_records": [
+    {
+      "commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
+      "ci": {
+        "run": 42421968228,
+        "job": 128552125593,
+        "commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
+        "tests": 178,
+        "seconds": 117.703,
+        "result": "OK",
+        "skipped": 0
+      }
+    },
+    {
+      "commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
+      "ci": {
+        "run": 42435664050,
+        "job": 128593834086,
+        "commit": "17c11c8368babe4f02ba516dc3f095afe293596c",
+        "tests": 184,
+        "seconds": 123.646,
+        "result": "OK",
+        "skipped": 0
+      }
+    }
+  ],
+  "historical_evidence_status_commit": "d7d820c8fd5c749149e1edd6d90226d5a46883ee",
+  "evidence_base_commit": "4a1a4578a692c8430ef9973544099df63e5c8b68",
+  "latest_value_work": {
+    "metrics": "metrics-value-classifier.json",
+    "independently_reviewed": true,
+    "production_integrated": false,
+    "persisted": false,
+    "full_frontier_implemented": false,
+    "sat_only_C_equivalence_proved": false
   }
 }
