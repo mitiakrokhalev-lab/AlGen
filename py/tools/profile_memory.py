@@ -248,6 +248,7 @@ def main():
     p.add_argument("--save-report", action="store_true", help="сохранить весь report в gzip по одной строке")
     p.add_argument("--value-probe", action="store_true", help="read-only numeric value control")
     p.add_argument("--probe-sample", type=int, default=4096)
+    p.add_argument("--cprofile", action="store_true", help="per-scheme diagnostic profile; timings include instrumentation")
     p.add_argument("--child", action="store_true", help=argparse.SUPPRESS)
     a = p.parse_args()
     if (a.with_minimal or a.save_enumeration) and not a.enumeration_only:
@@ -268,6 +269,8 @@ def main():
     env = {k: v for k, v in os.environ.items() if not k.startswith("ALGEN_")}
     env.update(ALGEN_SIZE="2", ALGEN_FAST="1", ALGEN_COMPRESS="1", ALGEN_STATE_SAVE="1",
                ALGEN_SKEL=str(Path(a.skel).resolve()), OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1")
+    if a.cprofile:
+        env["ALGEN_PROFILE"] = "1"
     if a.legacy_empty_cache:
         env["ALGEN_DEGEN_EMPTY_CACHE"] = "1"
     if a.legacy_table_load:
@@ -391,6 +394,7 @@ def main():
     result["with_minimal"] = a.with_minimal
     result["saved_enumeration"] = a.save_enumeration
     result["saved_report"] = a.save_report
+    result["cprofile"] = a.cprofile
     result["code_sha256"] = code
     (out / "measurement.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(result, ensure_ascii=False))

@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "name": "claude-pilot-codex-values-01",
-  "purpose": "Один read-only контроль4096 минимальных условий на настоящей таблице:11 канонических массивов, A/B/C×SAT; не полный отчёт и не измерение ускорения E.run",
+  "name": "claude-pilot-codex-profile-01",
+  "purpose": "Диагностический cProfile одной схемы/1024sample для выбора bottleneck; не сравнительный benchmark и не полный отчёт",
   "source_run": 43434101930,
   "preserve_inputs": false,
   "cases": [
     {
-      "id": "codex-value-G6211",
+      "id": "codex-profile-G6211",
       "mode": "run",
       "ref": "",
       "scheme": "G-6-211-767-769-770-771",
-      "args": "--value-probe --probe-sample 4096",
+      "args": "--value-probe --probe-sample 1024 --cprofile",
       "seconds": 1200,
       "rss_gib": 14
     }
