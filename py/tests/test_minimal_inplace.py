@@ -146,6 +146,7 @@ class InplaceMinimalTest(unittest.TestCase):
         его не держит) прямо до или прямо после сжатия: alive либо прежний,
         либо полностью минимальный — никогда не наполовину сжатый."""
         import os
+        import time
 
         class Deadline(Exception):
             pass
@@ -155,9 +156,13 @@ class InplaceMinimalTest(unittest.TestCase):
             expected = snapshot(E.minimal(big_packed()))
         before = snapshot(big_packed())
 
+        delivered = False
         def stop(*_):
+            nonlocal delivered
+            delivered = True
             raise Deadline("deadline")
         for when in ("before", "after"):
+            delivered = False
             def wrapped(mode, *args, when=when):
                 if mode == 1 and when == "before":
                     os.kill(os.getpid(), signal.SIGALRM)
@@ -171,14 +176,73 @@ class InplaceMinimalTest(unittest.TestCase):
                 with patch.object(lib, "algen_minimal_inplace", wrapped):
                     try:
                         E.minimal(alive, inplace=True)
+                        # A worker thread may accept os.kill before the main
+                        # thread runs its Python callback. Keep the handler
+                        # installed until this single signal is observed.
+                        until = time.monotonic() + 2
+                        while not delivered and time.monotonic() < until:
+                            time.sleep(.001)
                     except Deadline:
                         pass
+                    self.assertTrue(delivered, msg="process signal was not delivered")
             finally:
                 signal.signal(signal.SIGALRM, old)
             got = snapshot(alive)
             self.assertIn(got, (before, expected), msg=when)
             if when == "after":
                 self.assertEqual(got, expected)
+
+    def test_signal_inside_truncation_repairs_arrays_before_reraising(self):
+        import inspect
+        import sys
+
+        class Deadline(Exception):
+            pass
+        alive = tiny_packed()
+        with patch.object(E, "NATIVE_MINIMAL", False):
+            expected = snapshot(E.minimal(tiny_packed()))
+        source, first = inspect.getsourcelines(N._truncate)
+        point = first + next(i for i, line in enumerate(source) if line.strip() == "del vv[n:]")
+        fired = False
+        def interrupt(frame, event, arg):
+            nonlocal fired
+            if (not fired and event == "line" and frame.f_code is N._truncate.__code__
+                    and frame.f_lineno == point and frame.f_locals["depth"] == 2):
+                fired = True
+                raise Deadline("between key and support truncation")
+            return interrupt
+        lib = N.library()
+        original = lib.algen_minimal_inplace
+        modes = []
+        def counted(mode, *args):
+            modes.append(mode)
+            return original(mode, *args)
+        previous = sys.gettrace()
+        try:
+            with patch.object(lib, "algen_minimal_inplace", counted):
+                sys.settrace(interrupt)
+                with self.assertRaises(Deadline):
+                    N.minimal_inplace(alive)
+        finally:
+            sys.settrace(previous)
+        self.assertTrue(fired)
+        self.assertEqual(modes, [0, 1])  # retry cleanup, never compact twice
+        self.assertEqual(snapshot(alive), expected)
+
+    def test_persistent_cleanup_failure_is_bounded_and_propagates(self):
+        for error in (MemoryError, RuntimeError):
+            with self.subTest(error=error):
+                with patch.object(N, "_truncate", side_effect=error("cleanup failure")) as cleanup:
+                    with self.assertRaises(error):
+                        N.minimal_inplace(tiny_packed())
+                self.assertEqual(cleanup.call_count, 2)
+
+
+def tiny_packed():
+    alive = PackedConditions(8, 2, 9)
+    alive[(0,), 4] = 3
+    alive[(0, 2), 4] = 7
+    return alive
 
 def big_packed():
     """~1 млн условий длины 3 и 20 тыс. длины 2 (часть третьих — их надмножества)."""

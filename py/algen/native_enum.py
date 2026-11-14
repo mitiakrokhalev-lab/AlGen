@@ -256,7 +256,16 @@ def minimal_inplace(alive):
             raise RuntimeError("native minimal compaction failed")
     finally:
         try:
-            _truncate(alive, sizes)
+            try:
+                _truncate(alive, sizes)
+            except BaseException:
+                # A process-directed signal accepted by another thread can
+                # execute its Python handler here despite the main-thread
+                # mask. Complete the idempotent truncation before propagating
+                # that exception; never repeat compaction with the old bitmap.
+                # A persistent layout/allocation failure still propagates.
+                _truncate(alive, sizes)
+                raise
         finally:
             signal.pthread_sigmask(signal.SIG_SETMASK, previous)
     return alive

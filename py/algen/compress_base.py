@@ -27,6 +27,13 @@ def key(q):
     return (len(q["запрет"]), -q["примеров"] if isinstance(q.get("примеров"), int) else 0, q["id"])
 
 
+def question_signature(q):
+    # New summaries retain the exact canonical class. Old ones only certify
+    # equality of literal text, not equality of a short hash.
+    return (("class", C.class_key(q)) if "класс" in q
+            else ("forbid", tuple(sorted(set(q["запрет"])))))
+
+
 def fold_across(T, name2lit, fixed, questions, budget=None, no_back=None):
     """questions: [{"id": "схема:№", "№", "запрет": [имена], "примеров"}].
     Возвращает (оставленные id, {id: [id источников]}, {id: причина}).
@@ -48,6 +55,14 @@ def fold_across(T, name2lit, fixed, questions, budget=None, no_back=None):
         return out
 
     qs = sorted(questions, key=key)
+    # Cross-scheme copies must agree on the exact class, not merely on a
+    # (historically 40-bit) number. Legacy summaries only certify literal text.
+    identities = {}
+    for q in qs:
+        sig = question_signature(q)
+        if q["id"] in identities:
+            raise ValueError("повтор или коллизия id вопроса: " + str(q["id"]))
+        identities[q["id"]] = sig
     enc = {q["id"]: lits(q) for q in qs}
     fixed_values = [T.lit(a, v) for a, v in fixed]
     if any(l is False for l in fixed_values):
@@ -72,15 +87,16 @@ def fold_across(T, name2lit, fixed, questions, budget=None, no_back=None):
     try:
         for q in qs:
             F = enc[q["id"]]
-            if q["№"] in first:
+            sig = question_signature(q)
+            if sig in first:
                 # тот же вопрос (тот же класс — тот же запрет): у свёрнутого первого —
                 # его источники; у оставленного — он сам (дубликат, не свёртка; verify
                 # такие пропускает — проверщик 5.11: первый мог быть свёрнут или вне фона)
-                f0 = first[q["№"]]
+                f0 = first[sig]
                 folded[q["id"]] = list(folded[f0]) if f0 in folded else [f0]
                 why[q["id"]] = "тот же класс"
                 continue
-            first[q["№"]] = q["id"]
+            first[sig] = q["id"]
             if not F:  # None — литерала нет в каркасе; False — запрет тождественно ложен
                 kept.append(q["id"])
                 why[q["id"]] = "нет литерала в каркасе" if F is None else "запрет ложен"
@@ -135,6 +151,11 @@ def verify_across(T, enc, fx, kept, folded, sample=1000, rng=None, chunk=100, lo
     (загрузка теории каркаса — секунды), внутри — селекторы: условие образца
     включено только при его селекторе, после образца селектор гасится."""
     ks = set(kept)
+    if len(ks) != len(kept):
+        return [("идентичность", "повтор оставленного id")]
+    overlap = ks.intersection(folded)
+    if overlap:
+        return [(qid, "id одновременно оставлен и свёрнут") for qid in sorted(overlap)]
     items = list(folded.items())
     if sample is not None and len(items) > sample:
         items = (rng or random.Random(0)).sample(items, sample)
@@ -208,7 +229,8 @@ def archive_questions(archive, ctx):
 
 def questions_hash(qs):
     from .live import digest
-    return digest(sorted((q["id"], q["№"], q["запрет"]) for q in qs))
+    return digest(sorted((q["id"], q["№"], q["запрет"],
+                          json.dumps(question_signature(q), ensure_ascii=False)) for q in qs))
 
 
 def main():

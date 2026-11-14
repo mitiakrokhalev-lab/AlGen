@@ -526,13 +526,16 @@ def _fp(base):
 
 
 def result_fp(base, k, defer=0):
-    """Completed paired reports made before provider expansion are incomplete.
+    """Version report fixes separately from reusable Library/table inputs.
 
-    Keep Library/table fingerprints and unaffected nonpaired reports reusable.
+    Paired definedness and exact compressed IDs affect completed-report reuse.
     """
     fp = _fp(base) + f":{k}" + (f":d{defer}" if defer else "")
     if base in SWAP:
         fp += f":pair-req:{E.PAIR_REQUIREMENTS_VERSION}"
+    if os.environ.get("ALGEN_COMPRESS") and not E.CENSUS:
+        from .compress import VERSION
+        fp += f":compression:{VERSION}"
     return fp
 
 
