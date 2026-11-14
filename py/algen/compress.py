@@ -39,8 +39,9 @@
    базис без опровергнутых.
 """
 import hashlib
+import json
 
-VERSION = 2  # 2: вопрос входит в фон, только если фон с ним совместен (5.11)
+VERSION = 3  # stable full IDs; exact class checks before merging/export/reopening
 # Бюджет конфликтов на один вызов решателя; None — без ограничения.
 CONF_BUDGET = 100_000
 # Ссылки «следует из» длиннее TRIM_FROM укорачиваются до TRIM_PASSES
@@ -66,7 +67,38 @@ TRIM_FROM, TRIM_PASSES = 4, 0  # прогон 41761019204: max 176 → 163, +10 
 
 
 def row_id(r):
-    return hashlib.sha1(repr(r["класс"]).encode()).hexdigest()[:10]
+    # Lists after JSON round trips and tuples in a fresh report name one class.
+    body = json.dumps(class_key(r), ensure_ascii=False, separators=(",", ":"))
+    return hashlib.sha256(body.encode()).hexdigest()
+
+
+def class_key(r):
+    value = r.get("класс", r.get("запрет"))
+    if not isinstance(value, (list, tuple)) or any(not isinstance(x, str) for x in value):
+        raise ValueError("нужен точный класс запрета")
+    return tuple(value)
+
+
+def checked_ids(report, generate=False):
+    """A digest is an identifier, never proof of equal canonical classes.
+
+    Old reports are checked too. Reject an ambiguous ID before any mutation,
+    rather than hiding a question or importing an unverified dependency.
+    """
+    labels, classes = [], {}
+    for r in report:
+        if not generate and "№" not in r:
+            labels.append(None)
+            continue
+        label = row_id(r) if generate else r.get("№")
+        labels.append(label)
+        if not isinstance(label, str) or not label:
+            raise ValueError("невалидный номер вопроса")
+        signature = class_key(r)
+        if label in classes and classes[label] != signature:
+            raise ValueError("коллизия номера разных классов: " + str(label))
+        classes[label] = signature
+    return labels
 
 
 def interest_key(r):
@@ -328,12 +360,15 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
     фон, их строка остаётся несвёрнутой с полем "опровергнут"."""
     from pysat.solvers import Solver
 
+    labels = checked_ids(report, generate=True)
     refuted = set(refuted)
+    if any(r.get("№") in refuted and r.get("№") != label for r, label in zip(report, labels)):
+        raise ValueError("старые номера опровержений требуют явной миграции")
     T = form.sc.T
     fixed = _fixed(form)
     seen = {}
-    for r in report:
-        r["№"] = row_id(r)
+    for r, label in zip(report, labels):
+        r["№"] = label
         r["свёрнута"] = False
         r["следует из"] = []
         r["сжатие"] = VERSION
@@ -467,6 +502,7 @@ def compress(form, report, refuted=(), key=interest_key, use_instances=True):
 def reopen(report, refuted):
     """Номера строк, которые надо развернуть, если вопросы refuted опровергнуты
     (все, кто держится на них, транзитивно). Сами строки помечаются."""
+    checked_ids(report)
     by = {}
     for r in report:
         for d in r.get("следует из", []):
@@ -492,6 +528,10 @@ def verify(form, report, sample=None, rng=None):
     список нарушений; пустой — граф верен."""
     from pysat.solvers import Solver
 
+    try:
+        checked_ids(report)
+    except ValueError as exc:
+        return [("идентичность", str(exc))]
     T = form.sc.T
     fixed = _fixed(form)
     by = {}
@@ -571,6 +611,10 @@ def regress(before, after):
     строки цепочка «следует из» кончается на несвёрнутых строках или на
     экземпляре. Карточка архива, попавшая в выдачу, поэтому не может ни
     потеряться, ни стать опровергнутой. Возвращает список нарушений."""
+    try:
+        checked_ids(after)
+    except ValueError as exc:
+        return [("идентичность", str(exc))]
     bad = []
     if len(before) != len(after):
         bad.append(("строк", len(before), len(after)))
@@ -598,10 +642,12 @@ def regress(before, after):
 def kept_questions(report):
     """Оставленные (несвёрнутые) вопросы схемы — по одному на класс — для
     сжатия между схемами базы (compress_base): запрет именами литералов."""
+    checked_ids(report)
     out, seen = [], set()
     for r in report:
         if r.get("вердикт") != "неизвестно" or r.get("свёрнута") or "№" not in r or r["№"] in seen:
             continue
         seen.add(r["№"])
-        out.append({"№": r["№"], "запрет": list(r["запрет"]), "примеров": r.get("примеров", 0)})
+        out.append({"№": r["№"], "запрет": list(r["запрет"]),
+                    "класс": list(class_key(r)), "примеров": r.get("примеров", 0)})
     return out
