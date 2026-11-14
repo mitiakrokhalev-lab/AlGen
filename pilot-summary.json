@@ -1,0 +1,558 @@
+{
+ "fact-compact-G14217": {
+  "verdict.json": {
+   "case": "fact-compact-G14217",
+   "complete": true,
+   "measurement": {
+    "scheme": "G-14-217-767-769-770-771",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 111.661,
+    "cpu_seconds": 106.680414,
+    "peak_rss_kib": 11324456,
+    "sampled_rss_kib": 11314076,
+    "limits": {
+     "seconds": 1200,
+     "rss_gib": 14.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": "ok",
+    "complete": true,
+    "scope": "full native scheme",
+    "requested_compact_fact_sat": true,
+    "requested_state_save": false,
+    "actual_compact_fact_sat": true,
+    "actual_state_save": false,
+    "mode_verified": true,
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": false,
+    "cprofile": false,
+    "code_sha256": {
+     "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+     "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "34a761aebfd331382a3c0aa8e31d7a2a170a1162aa1647796e13dabd34e87e83",
+     "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "algen/compress.py": "8ab005847fd509fbc31753cd43eb91f1db00b525a13f2066051c9efe66c1b074",
+     "algen/compress_base.py": "1db5c67a3aa69d89ed1c1587690e73eb31c65852ffc91a7d6c88ffece542769e",
+     "tools/profile_memory.py": "a864e33ae0da5ddc47d4239b9bc5c0a3d9139b7fbbc2a13d7ba847cba842f998"
+    }
+   },
+   "verified": [
+    {
+     "stage": "run:end",
+     "seconds": 105.119,
+     "memory_kib": {
+      "VmHWM": 11324456,
+      "VmRSS": 8890276
+     },
+     "report_rows": 1908,
+     "report_sha256": "e583c58440eb06ebc90589d8228aebac0a2e2c1f26c40e691b87b9773f301751",
+     "alive": {
+      "entries": 1908,
+      "container_bytes": 48,
+      "packed_bytes": 19080
+     },
+     "empty": {
+      "entries": 252708,
+      "container_bytes": 48,
+      "packed_bytes": 2021664
+     },
+     "legacy_stages": [
+      [
+       "начало",
+       7.19,
+       0
+      ],
+      [
+       "перебор",
+       8.11,
+       1908
+      ],
+      [
+       "минимальные",
+       8.11,
+       1908
+      ],
+      [
+       "вердикты",
+       8.21,
+       1908
+      ],
+      [
+       "сжатие",
+       8.89,
+       1908
+      ]
+     ],
+     "search_solver": {
+      "deferred": true,
+      "materialized": false
+     },
+     "solver_factories": 2,
+     "phase_scoped_calls": 4,
+     "phase_max_scope": 281
+    }
+   ],
+   "peaks": [
+    [
+     "start",
+     0.031,
+     {
+      "VmHWM": 72636,
+      "VmRSS": 59364
+     }
+    ],
+    [
+     "built_library:start",
+     0.049,
+     {
+      "VmHWM": 72636,
+      "VmRSS": 66912
+     }
+    ],
+    [
+     "built_library:end",
+     0.687,
+     {
+      "VmHWM": 478116,
+      "VmRSS": 445500
+     }
+    ],
+    [
+     "load:start",
+     0.737,
+     {
+      "VmHWM": 478116,
+      "VmRSS": 447072
+     }
+    ],
+    [
+     "skeleton:start",
+     0.738,
+     {
+      "VmHWM": 478116,
+      "VmRSS": 447072
+     }
+    ],
+    [
+     "solver:start",
+     12.672,
+     {
+      "VmHWM": 3913020,
+      "VmRSS": 2877604
+     }
+    ],
+    [
+     "solver:end",
+     32.393,
+     {
+      "VmHWM": 5103336,
+      "VmRSS": 5103336
+     }
+    ],
+    [
+     "skeleton:end",
+     32.396,
+     {
+      "VmHWM": 5103580,
+      "VmRSS": 5103580
+     }
+    ],
+    [
+     "load:end",
+     48.582,
+     {
+      "VmHWM": 7334416,
+      "VmRSS": 7186300
+     }
+    ],
+    [
+     "enumerate_form:start",
+     53.007,
+     {
+      "VmHWM": 7906440,
+      "VmRSS": 7193052
+     }
+    ],
+    [
+     "enumerate_form:end",
+     77.486,
+     {
+      "VmHWM": 8205696,
+      "VmRSS": 8105600
+     }
+    ],
+    [
+     "enumeration:engine",
+     77.486,
+     {
+      "VmHWM": 8205696,
+      "VmRSS": 8105600
+     }
+    ],
+    [
+     "minimal:start",
+     77.486,
+     {
+      "VmHWM": 8205696,
+      "VmRSS": 8105600
+     }
+    ],
+    [
+     "minimal:end",
+     77.487,
+     {
+      "VmHWM": 8205696,
+      "VmRSS": 8105600
+     }
+    ],
+    [
+     "generic_filter:start",
+     77.487,
+     {
+      "VmHWM": 8205696,
+      "VmRSS": 8105600
+     }
+    ],
+    [
+     "generic_filter:end",
+     77.487,
+     {
+      "VmHWM": 8205696,
+      "VmRSS": 8105600
+     }
+    ],
+    [
+     "solver:start",
+     80.045,
+     {
+      "VmHWM": 8312440,
+      "VmRSS": 8213196
+     }
+    ],
+    [
+     "solver:end",
+     100.324,
+     {
+      "VmHWM": 10383388,
+      "VmRSS": 10383388
+     }
+    ],
+    [
+     "run:end",
+     105.119,
+     {
+      "VmHWM": 11324456,
+      "VmRSS": 8890276
+     }
+    ],
+    [
+     "end",
+     107.222,
+     {
+      "VmHWM": 11324456,
+      "VmRSS": 8888232
+     }
+    ]
+   ],
+   "expect_report_sha256": null,
+   "report_sha_ok": null
+  },
+  "commit.txt": "5c348491f5ed5c5455f2429241896f2e2b85cf3a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 100.73",
+   "System time (seconds): 6.11",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 1:51.70",
+   "Maximum resident set size (kbytes): 11324456",
+   "Exit status: 0"
+  ]
+ },
+ "fact-global-G14217": {
+  "verdict.json": {
+   "case": "fact-global-G14217",
+   "complete": true,
+   "measurement": {
+    "scheme": "G-14-217-767-769-770-771",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 154.231,
+    "cpu_seconds": 152.194653,
+    "peak_rss_kib": 11823708,
+    "sampled_rss_kib": 11653400,
+    "limits": {
+     "seconds": 1200,
+     "rss_gib": 14.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": "ok",
+    "complete": true,
+    "scope": "full native scheme",
+    "requested_compact_fact_sat": false,
+    "requested_state_save": false,
+    "actual_compact_fact_sat": false,
+    "actual_state_save": false,
+    "mode_verified": true,
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": false,
+    "cprofile": false,
+    "code_sha256": {
+     "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+     "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "34a761aebfd331382a3c0aa8e31d7a2a170a1162aa1647796e13dabd34e87e83",
+     "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "algen/compress.py": "8ab005847fd509fbc31753cd43eb91f1db00b525a13f2066051c9efe66c1b074",
+     "algen/compress_base.py": "1db5c67a3aa69d89ed1c1587690e73eb31c65852ffc91a7d6c88ffece542769e",
+     "tools/profile_memory.py": "a864e33ae0da5ddc47d4239b9bc5c0a3d9139b7fbbc2a13d7ba847cba842f998"
+    }
+   },
+   "verified": [
+    {
+     "stage": "run:end",
+     "seconds": 148.448,
+     "memory_kib": {
+      "VmHWM": 11823708,
+      "VmRSS": 8887080
+     },
+     "report_rows": 1908,
+     "report_sha256": "e583c58440eb06ebc90589d8228aebac0a2e2c1f26c40e691b87b9773f301751",
+     "alive": {
+      "entries": 1908,
+      "container_bytes": 48,
+      "packed_bytes": 19080
+     },
+     "empty": {
+      "entries": 252708,
+      "container_bytes": 48,
+      "packed_bytes": 2021664
+     },
+     "legacy_stages": [
+      [
+       "начало",
+       7.2,
+       0
+      ],
+      [
+       "перебор",
+       8.11,
+       1908
+      ],
+      [
+       "минимальные",
+       8.11,
+       1908
+      ],
+      [
+       "вердикты",
+       8.22,
+       1908
+      ],
+      [
+       "сжатие",
+       8.89,
+       1908
+      ]
+     ],
+     "search_solver": {
+      "deferred": true,
+      "materialized": false
+     },
+     "solver_factories": 2,
+     "phase_scoped_calls": 4,
+     "phase_max_scope": 281
+    }
+   ],
+   "peaks": [
+    [
+     "start",
+     0.032,
+     {
+      "VmHWM": 72464,
+      "VmRSS": 59416
+     }
+    ],
+    [
+     "built_library:start",
+     0.051,
+     {
+      "VmHWM": 72464,
+      "VmRSS": 66980
+     }
+    ],
+    [
+     "built_library:end",
+     0.837,
+     {
+      "VmHWM": 477944,
+      "VmRSS": 445512
+     }
+    ],
+    [
+     "load:start",
+     0.847,
+     {
+      "VmHWM": 477944,
+      "VmRSS": 447080
+     }
+    ],
+    [
+     "skeleton:start",
+     0.848,
+     {
+      "VmHWM": 477944,
+      "VmRSS": 447080
+     }
+    ],
+    [
+     "solver:start",
+     13.916,
+     {
+      "VmHWM": 3912904,
+      "VmRSS": 2877764
+     }
+    ],
+    [
+     "solver:end",
+     38.036,
+     {
+      "VmHWM": 5110480,
+      "VmRSS": 5110480
+     }
+    ],
+    [
+     "skeleton:end",
+     38.039,
+     {
+      "VmHWM": 5110728,
+      "VmRSS": 5110728
+     }
+    ],
+    [
+     "load:end",
+     62.944,
+     {
+      "VmHWM": 7341704,
+      "VmRSS": 7193444
+     }
+    ],
+    [
+     "enumerate_form:start",
+     67.76,
+     {
+      "VmHWM": 7913536,
+      "VmRSS": 7200196
+     }
+    ],
+    [
+     "enumerate_form:end",
+     92.351,
+     {
+      "VmHWM": 8213820,
+      "VmRSS": 8113764
+     }
+    ],
+    [
+     "enumeration:engine",
+     92.351,
+     {
+      "VmHWM": 8213820,
+      "VmRSS": 8113764
+     }
+    ],
+    [
+     "minimal:start",
+     92.351,
+     {
+      "VmHWM": 8213820,
+      "VmRSS": 8113764
+     }
+    ],
+    [
+     "minimal:end",
+     92.352,
+     {
+      "VmHWM": 8213820,
+      "VmRSS": 8113764
+     }
+    ],
+    [
+     "generic_filter:start",
+     92.352,
+     {
+      "VmHWM": 8213820,
+      "VmRSS": 8113764
+     }
+    ],
+    [
+     "generic_filter:end",
+     92.352,
+     {
+      "VmHWM": 8213820,
+      "VmRSS": 8113764
+     }
+    ],
+    [
+     "solver:start",
+     95.435,
+     {
+      "VmHWM": 8320700,
+      "VmRSS": 8221456
+     }
+    ],
+    [
+     "solver:end",
+     120.758,
+     {
+      "VmHWM": 10390240,
+      "VmRSS": 10390240
+     }
+    ],
+    [
+     "run:end",
+     148.448,
+     {
+      "VmHWM": 11823708,
+      "VmRSS": 8887080
+     }
+    ],
+    [
+     "end",
+     150.276,
+     {
+      "VmHWM": 11823708,
+      "VmRSS": 8885052
+     }
+    ]
+   ],
+   "expect_report_sha256": null,
+   "report_sha_ok": null
+  },
+  "commit.txt": "5c348491f5ed5c5455f2429241896f2e2b85cf3a",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 144.30",
+   "System time (seconds): 8.12",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 2:34.27",
+   "Maximum resident set size (kbytes): 11823708",
+   "Exit status: 0"
+  ]
+ }
+}
