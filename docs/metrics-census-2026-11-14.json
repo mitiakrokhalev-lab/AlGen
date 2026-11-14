@@ -1,0 +1,1332 @@
+{
+  "03": {
+    "primary_digest_sha256": "fdafb1a4fae2628173c85a525717985523a566614701201141b47f5471977465",
+    "published_sha256": "247e1fbfe42583f1e2cc60347bcc6a6a49161ec83ee59e61b43db4912dc06c68",
+    "part_count": 20,
+    "plan_count": 1164,
+    "unique_ids": 1164,
+    "missing_ids": [],
+    "unexpected_ids": [],
+    "duplicates": [],
+    "commits": {
+      "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a": 20
+    },
+    "fingerprints": {
+      "1e7800024da015b5:G::s2:быстро:3": 1164
+    },
+    "premises": {
+      "3": 1164
+    },
+    "skip": {
+      "[]": 1164
+    },
+    "conditions": {
+      "∀ G : Grp": 1164
+    },
+    "summary": {
+      "схем_в_плане": 1164,
+      "частей_без_плана": [],
+      "ожидалось_схем": null,
+      "полный_план": true,
+      "исходы": {
+        "перепись": 1163,
+        "таймаут 3000.0 с": 1
+      },
+      "посчитано": 1163,
+      "минимальных_всего": 12969258393,
+      "медиана": 428301,
+      "p90": 34220607,
+      "p99": 168210958,
+      "максимум": 348812201,
+      "секунд_всего": 188488.8
+    },
+    "published_summary_mismatches": [],
+    "published_row_mismatches": [],
+    "conventional_median": 428301,
+    "median_middle_values": [
+      428301
+    ],
+    "timeouts": [
+      {
+        "id": "G-2-4-5-24-28-767-769-770-771",
+        "seconds": 3000.7,
+        "stages": [
+          [
+            "начало",
+            8.7,
+            0
+          ],
+          [
+            "перебор",
+            15.24,
+            348035793
+          ],
+          [
+            "минимальные",
+            15.23,
+            348035793
+          ]
+        ],
+        "minimal": null
+      }
+    ],
+    "timeout_record_seconds": "3000.7",
+    "complete_record_seconds": "185488.1",
+    "user_seconds": "190490.56",
+    "system_seconds": "518.73",
+    "cpu_seconds": "191009.29",
+    "sum_worker_wall_seconds": "191065",
+    "max_worker_wall_seconds": "14643",
+    "max_rss_kib": 15421780,
+    "max_rss_gib": "14.707355499267578125",
+    "max_rss_part": 13,
+    "exit_statuses": {
+      "0": 20
+    },
+    "perpart": [
+      {
+        "part": 1,
+        "plan_count": 59,
+        "record_count": 59,
+        "statuses": {
+          "перепись": 59
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 59
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 59
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "4958.16",
+        "sys_seconds": "20.03",
+        "cpu_seconds": "4978.19",
+        "worker_wall_seconds": "4980",
+        "max_rss_kib": 11685284,
+        "exit_status": 0,
+        "record_seconds": "4872.4"
+      },
+      {
+        "part": 2,
+        "plan_count": 59,
+        "record_count": 59,
+        "statuses": {
+          "перепись": 59
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 59
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 59
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "5958.51",
+        "sys_seconds": "20.76",
+        "cpu_seconds": "5979.27",
+        "worker_wall_seconds": "5979",
+        "max_rss_kib": 12367580,
+        "exit_status": 0,
+        "record_seconds": "5840.6"
+      },
+      {
+        "part": 3,
+        "plan_count": 59,
+        "record_count": 59,
+        "statuses": {
+          "перепись": 59
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 59
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 59
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "12029.37",
+        "sys_seconds": "30.35",
+        "cpu_seconds": "12059.72",
+        "worker_wall_seconds": "12061",
+        "max_rss_kib": 14072884,
+        "exit_status": 0,
+        "record_seconds": "11919.3"
+      },
+      {
+        "part": 4,
+        "plan_count": 59,
+        "record_count": 59,
+        "statuses": {
+          "перепись": 59
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 59
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 59
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "10146.07",
+        "sys_seconds": "28.66",
+        "cpu_seconds": "10174.73",
+        "worker_wall_seconds": "10177",
+        "max_rss_kib": 14133328,
+        "exit_status": 0,
+        "record_seconds": "10039.3"
+      },
+      {
+        "part": 5,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "7277.50",
+        "sys_seconds": "17.94",
+        "cpu_seconds": "7295.44",
+        "worker_wall_seconds": "7296",
+        "max_rss_kib": 12153176,
+        "exit_status": 0,
+        "record_seconds": "7179.6"
+      },
+      {
+        "part": 6,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "13352.30",
+        "sys_seconds": "26.33",
+        "cpu_seconds": "13378.63",
+        "worker_wall_seconds": "13380",
+        "max_rss_kib": 13835780,
+        "exit_status": 0,
+        "record_seconds": "13245.1"
+      },
+      {
+        "part": 7,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "9407.84",
+        "sys_seconds": "21.49",
+        "cpu_seconds": "9429.33",
+        "worker_wall_seconds": "9430",
+        "max_rss_kib": 11132600,
+        "exit_status": 0,
+        "record_seconds": "9297.3"
+      },
+      {
+        "part": 8,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "9920.69",
+        "sys_seconds": "26.33",
+        "cpu_seconds": "9947.02",
+        "worker_wall_seconds": "9948",
+        "max_rss_kib": 12074632,
+        "exit_status": 0,
+        "record_seconds": "9811.2"
+      },
+      {
+        "part": 9,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "6614.46",
+        "sys_seconds": "20.52",
+        "cpu_seconds": "6634.98",
+        "worker_wall_seconds": "6637",
+        "max_rss_kib": 12053276,
+        "exit_status": 0,
+        "record_seconds": "6525.9"
+      },
+      {
+        "part": 10,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "6127.58",
+        "sys_seconds": "20.22",
+        "cpu_seconds": "6147.80",
+        "worker_wall_seconds": "6149",
+        "max_rss_kib": 12498024,
+        "exit_status": 0,
+        "record_seconds": "6042.1"
+      },
+      {
+        "part": 11,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "13101.41",
+        "sys_seconds": "31.31",
+        "cpu_seconds": "13132.72",
+        "worker_wall_seconds": "13133",
+        "max_rss_kib": 13805656,
+        "exit_status": 0,
+        "record_seconds": "12995.3"
+      },
+      {
+        "part": 12,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "12337.65",
+        "sys_seconds": "33.03",
+        "cpu_seconds": "12370.68",
+        "worker_wall_seconds": "12371",
+        "max_rss_kib": 11245116,
+        "exit_status": 0,
+        "record_seconds": "12238.9"
+      },
+      {
+        "part": 13,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 57,
+          "таймаут 3000.0 с": 1
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 57,
+          "absent": 1
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "14586.07",
+        "sys_seconds": "36.95",
+        "cpu_seconds": "14623.02",
+        "worker_wall_seconds": "14643",
+        "max_rss_kib": 15421780,
+        "exit_status": 0,
+        "record_seconds": "14490.9"
+      },
+      {
+        "part": 14,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "11692.84",
+        "sys_seconds": "27.15",
+        "cpu_seconds": "11719.99",
+        "worker_wall_seconds": "11721",
+        "max_rss_kib": 12712720,
+        "exit_status": 0,
+        "record_seconds": "11583.8"
+      },
+      {
+        "part": 15,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "10580.53",
+        "sys_seconds": "33.06",
+        "cpu_seconds": "10613.59",
+        "worker_wall_seconds": "10616",
+        "max_rss_kib": 12219468,
+        "exit_status": 0,
+        "record_seconds": "10492.9"
+      },
+      {
+        "part": 16,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "6252.89",
+        "sys_seconds": "23.06",
+        "cpu_seconds": "6275.95",
+        "worker_wall_seconds": "6280",
+        "max_rss_kib": 10955324,
+        "exit_status": 0,
+        "record_seconds": "6163.9"
+      },
+      {
+        "part": 17,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "8230.48",
+        "sys_seconds": "23.04",
+        "cpu_seconds": "8253.52",
+        "worker_wall_seconds": "8255",
+        "max_rss_kib": 11460432,
+        "exit_status": 0,
+        "record_seconds": "8129.9"
+      },
+      {
+        "part": 18,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "9159.00",
+        "sys_seconds": "23.11",
+        "cpu_seconds": "9182.11",
+        "worker_wall_seconds": "9183",
+        "max_rss_kib": 13051100,
+        "exit_status": 0,
+        "record_seconds": "9054.9"
+      },
+      {
+        "part": 19,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "8705.66",
+        "sys_seconds": "28.92",
+        "cpu_seconds": "8734.58",
+        "worker_wall_seconds": "8736",
+        "max_rss_kib": 10860228,
+        "exit_status": 0,
+        "record_seconds": "8596.4"
+      },
+      {
+        "part": 20,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "2bbbabd3edd4625a9bdfacb82b1eb1934771b52a",
+        "fp": {
+          "1e7800024da015b5:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30753, 93898), 0 с",
+        "user_seconds": "10051.55",
+        "sys_seconds": "26.47",
+        "cpu_seconds": "10078.02",
+        "worker_wall_seconds": "10090",
+        "max_rss_kib": 15344480,
+        "exit_status": 0,
+        "record_seconds": "9969.1"
+      }
+    ],
+    "all_parts_exit_zero": true,
+    "all_minimal_counts_equal_sum_by_length": true,
+    "plan_counts": {
+      "1": 59,
+      "2": 59,
+      "3": 59,
+      "4": 59,
+      "5": 58,
+      "6": 58,
+      "7": 58,
+      "8": 58,
+      "9": 58,
+      "10": 58,
+      "11": 58,
+      "12": 58,
+      "13": 58,
+      "14": 58,
+      "15": 58,
+      "16": 58,
+      "17": 58,
+      "18": 58,
+      "19": 58,
+      "20": 58
+    },
+    "cpu_hours": "53.05813611111111111111111111",
+    "sum_worker_wall_hours": "53.07361111111111111111111111",
+    "timeout_wall_minutes": "50.01166666666666666666666667"
+  },
+  "04": {
+    "primary_digest_sha256": "c6255200872bc8ed3dbc5a6347ca3afa3598a49b12fc734539ca285477f81597",
+    "published_sha256": "6cad77617e75ec150013d58ab3005416a19e85a6e1cbfe49a6fcfc204f33a7f4",
+    "part_count": 20,
+    "plan_count": 1164,
+    "unique_ids": 1164,
+    "missing_ids": [],
+    "unexpected_ids": [],
+    "duplicates": [],
+    "commits": {
+      "4a91cf005c90cf177ccfaa84a51a65855fde04d8": 20
+    },
+    "fingerprints": {
+      "40179479aa259919:G::s2:быстро:3": 1164
+    },
+    "premises": {
+      "3": 1164
+    },
+    "skip": {
+      "[]": 1164
+    },
+    "conditions": {
+      "∀ G : Grp": 1164
+    },
+    "summary": {
+      "схем_в_плане": 1164,
+      "частей_без_плана": [],
+      "ожидалось_схем": null,
+      "полный_план": true,
+      "исходы": {
+        "перепись": 1162,
+        "таймаут 3000.0 с": 2
+      },
+      "посчитано": 1162,
+      "минимальных_всего": 11737559708,
+      "медиана": 374086,
+      "p90": 29926983,
+      "p99": 162437040,
+      "максимум": 249068224,
+      "секунд_всего": 201543.6
+    },
+    "published_summary_mismatches": [],
+    "published_row_mismatches": [],
+    "conventional_median": 372067.5,
+    "median_middle_values": [
+      370049,
+      374086
+    ],
+    "timeouts": [
+      {
+        "id": "G-2-4-5-24-28-767-769-770-771",
+        "seconds": 3000.7,
+        "stages": [
+          [
+            "начало",
+            9.26,
+            0
+          ],
+          [
+            "перебор",
+            15.29,
+            361675310
+          ],
+          [
+            "минимальные",
+            15.27,
+            361675310
+          ]
+        ],
+        "minimal": null
+      },
+      {
+        "id": "G-4-5-10-26-28-767-769-770-771",
+        "seconds": 3000.6,
+        "stages": [
+          [
+            "начало",
+            10.43,
+            0
+          ],
+          [
+            "перебор",
+            15.26,
+            389746223
+          ],
+          [
+            "минимальные",
+            15.23,
+            389746223
+          ]
+        ],
+        "minimal": null
+      }
+    ],
+    "timeout_record_seconds": "6001.3",
+    "complete_record_seconds": "195542.3",
+    "user_seconds": "203562.03",
+    "system_seconds": "476.75",
+    "cpu_seconds": "204038.78",
+    "sum_worker_wall_seconds": "204198",
+    "max_worker_wall_seconds": "16429",
+    "max_rss_kib": 15582848,
+    "max_rss_gib": "14.8609619140625",
+    "max_rss_part": 20,
+    "exit_statuses": {
+      "0": 20
+    },
+    "perpart": [
+      {
+        "part": 1,
+        "plan_count": 59,
+        "record_count": 59,
+        "statuses": {
+          "перепись": 59
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 59
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 59
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "7148.80",
+        "sys_seconds": "20.54",
+        "cpu_seconds": "7169.34",
+        "worker_wall_seconds": "7175",
+        "max_rss_kib": 11964324,
+        "exit_status": 0,
+        "record_seconds": "7053.4"
+      },
+      {
+        "part": 2,
+        "plan_count": 59,
+        "record_count": 59,
+        "statuses": {
+          "перепись": 59
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 59
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 59
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "6231.42",
+        "sys_seconds": "17.83",
+        "cpu_seconds": "6249.25",
+        "worker_wall_seconds": "6254",
+        "max_rss_kib": 12710380,
+        "exit_status": 0,
+        "record_seconds": "6128.1"
+      },
+      {
+        "part": 3,
+        "plan_count": 59,
+        "record_count": 59,
+        "statuses": {
+          "перепись": 59
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 59
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 59
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "11801.10",
+        "sys_seconds": "26.59",
+        "cpu_seconds": "11827.69",
+        "worker_wall_seconds": "11829",
+        "max_rss_kib": 14126220,
+        "exit_status": 0,
+        "record_seconds": "11682.8"
+      },
+      {
+        "part": 4,
+        "plan_count": 59,
+        "record_count": 59,
+        "statuses": {
+          "перепись": 59
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 59
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 59
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "8311.45",
+        "sys_seconds": "21.55",
+        "cpu_seconds": "8333.00",
+        "worker_wall_seconds": "8338",
+        "max_rss_kib": 14536788,
+        "exit_status": 0,
+        "record_seconds": "8211.1"
+      },
+      {
+        "part": 5,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "8165.76",
+        "sys_seconds": "23.13",
+        "cpu_seconds": "8188.89",
+        "worker_wall_seconds": "8195",
+        "max_rss_kib": 13835276,
+        "exit_status": 0,
+        "record_seconds": "8075.7"
+      },
+      {
+        "part": 6,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "8436.26",
+        "sys_seconds": "16.98",
+        "cpu_seconds": "8453.24",
+        "worker_wall_seconds": "8457",
+        "max_rss_kib": 15206660,
+        "exit_status": 0,
+        "record_seconds": "8345.8"
+      },
+      {
+        "part": 7,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "10585.36",
+        "sys_seconds": "25.78",
+        "cpu_seconds": "10611.14",
+        "worker_wall_seconds": "10617",
+        "max_rss_kib": 11242048,
+        "exit_status": 0,
+        "record_seconds": "10483.4"
+      },
+      {
+        "part": 8,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "8421.69",
+        "sys_seconds": "17.93",
+        "cpu_seconds": "8439.62",
+        "worker_wall_seconds": "8444",
+        "max_rss_kib": 11405780,
+        "exit_status": 0,
+        "record_seconds": "8318.1"
+      },
+      {
+        "part": 9,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "12484.58",
+        "sys_seconds": "37.28",
+        "cpu_seconds": "12521.86",
+        "worker_wall_seconds": "12529",
+        "max_rss_kib": 10985996,
+        "exit_status": 0,
+        "record_seconds": "12366.3"
+      },
+      {
+        "part": 10,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "10583.86",
+        "sys_seconds": "23.20",
+        "cpu_seconds": "10607.06",
+        "worker_wall_seconds": "10614",
+        "max_rss_kib": 12911768,
+        "exit_status": 0,
+        "record_seconds": "10468.1"
+      },
+      {
+        "part": 11,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "10778.92",
+        "sys_seconds": "23.22",
+        "cpu_seconds": "10802.14",
+        "worker_wall_seconds": "10810",
+        "max_rss_kib": 13097676,
+        "exit_status": 0,
+        "record_seconds": "10685.7"
+      },
+      {
+        "part": 12,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "9867.62",
+        "sys_seconds": "21.01",
+        "cpu_seconds": "9888.63",
+        "worker_wall_seconds": "9896",
+        "max_rss_kib": 11060288,
+        "exit_status": 0,
+        "record_seconds": "9767.0"
+      },
+      {
+        "part": 13,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 57,
+          "таймаут 3000.0 с": 1
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 57,
+          "absent": 1
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "16361.66",
+        "sys_seconds": "34.48",
+        "cpu_seconds": "16396.14",
+        "worker_wall_seconds": "16429",
+        "max_rss_kib": 15451412,
+        "exit_status": 0,
+        "record_seconds": "16264.4"
+      },
+      {
+        "part": 14,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "9993.01",
+        "sys_seconds": "21.50",
+        "cpu_seconds": "10014.51",
+        "worker_wall_seconds": "10023",
+        "max_rss_kib": 13300820,
+        "exit_status": 0,
+        "record_seconds": "9897.4"
+      },
+      {
+        "part": 15,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "14910.46",
+        "sys_seconds": "30.78",
+        "cpu_seconds": "14941.24",
+        "worker_wall_seconds": "14948",
+        "max_rss_kib": 13054144,
+        "exit_status": 0,
+        "record_seconds": "14810.9"
+      },
+      {
+        "part": 16,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "6792.68",
+        "sys_seconds": "19.59",
+        "cpu_seconds": "6812.27",
+        "worker_wall_seconds": "6817",
+        "max_rss_kib": 11098264,
+        "exit_status": 0,
+        "record_seconds": "6692.2"
+      },
+      {
+        "part": 17,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "11333.09",
+        "sys_seconds": "24.19",
+        "cpu_seconds": "11357.28",
+        "worker_wall_seconds": "11363",
+        "max_rss_kib": 11683096,
+        "exit_status": 0,
+        "record_seconds": "11224.3"
+      },
+      {
+        "part": 18,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "7515.29",
+        "sys_seconds": "16.56",
+        "cpu_seconds": "7531.85",
+        "worker_wall_seconds": "7538",
+        "max_rss_kib": 12945608,
+        "exit_status": 0,
+        "record_seconds": "7419.5"
+      },
+      {
+        "part": 19,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 58
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 58
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "8544.69",
+        "sys_seconds": "24.30",
+        "cpu_seconds": "8568.99",
+        "worker_wall_seconds": "8576",
+        "max_rss_kib": 10580000,
+        "exit_status": 0,
+        "record_seconds": "8442.4"
+      },
+      {
+        "part": 20,
+        "plan_count": 58,
+        "record_count": 58,
+        "statuses": {
+          "перепись": 57,
+          "таймаут 3000.0 с": 1
+        },
+        "commit": "4a91cf005c90cf177ccfaa84a51a65855fde04d8",
+        "fp": {
+          "40179479aa259919:G::s2:быстро:3": 58
+        },
+        "engine": {
+          "cpp:aebd2a9e386c236798c796cb": 57,
+          "absent": 1
+        },
+        "table_header": "G: таблица (30953, 93898), 0 с",
+        "user_seconds": "15294.33",
+        "sys_seconds": "30.31",
+        "cpu_seconds": "15324.64",
+        "worker_wall_seconds": "15346",
+        "max_rss_kib": 15582848,
+        "exit_status": 0,
+        "record_seconds": "15207.0"
+      }
+    ],
+    "all_parts_exit_zero": true,
+    "all_minimal_counts_equal_sum_by_length": true,
+    "plan_counts": {
+      "1": 59,
+      "2": 59,
+      "3": 59,
+      "4": 59,
+      "5": 58,
+      "6": 58,
+      "7": 58,
+      "8": 58,
+      "9": 58,
+      "10": 58,
+      "11": 58,
+      "12": 58,
+      "13": 58,
+      "14": 58,
+      "15": 58,
+      "16": 58,
+      "17": 58,
+      "18": 58,
+      "19": 58,
+      "20": 58
+    },
+    "cpu_hours": "56.67743888888888888888888889",
+    "sum_worker_wall_hours": "56.72166666666666666666666667",
+    "timeout_wall_minutes": "100.0216666666666666666666667"
+  },
+  "comparison": {
+    "identical_plan_sequence": true,
+    "identical_id_set": true,
+    "terms_mismatches": [],
+    "settings_mismatches": {
+      "условие": [],
+      "посылок": [],
+      "без": []
+    },
+    "common_complete": 1162,
+    "old_common_minimals": 12620446192,
+    "new_common_minimals": 11737559708,
+    "delta": -882886484,
+    "percent_delta": "-6.995683596033670249176242440",
+    "increased": 359,
+    "decreased": 692,
+    "equal": 111,
+    "old_common_record_seconds": "183589.0",
+    "new_common_record_seconds": "195542.3",
+    "status_changes": [
+      {
+        "id": "G-4-5-10-26-28-767-769-770-771",
+        "old": "перепись",
+        "new": "таймаут 3000.0 с",
+        "old_minimal": 348812201,
+        "new_minimal": null
+      }
+    ],
+    "largest_increases": [
+      {
+        "id": "G-2-191-526-767-769-770-771",
+        "old": 2327989,
+        "new": 98740844,
+        "delta": 96412855
+      },
+      {
+        "id": "G-10-193-528-767-769-770-771",
+        "old": 2391136,
+        "new": 55864045,
+        "delta": 53472909
+      },
+      {
+        "id": "G-4-5-28-664-765-767-769-770-771",
+        "old": 191212380,
+        "new": 241735851,
+        "delta": 50523471
+      },
+      {
+        "id": "G-4-5-13-28-767-769-770-771",
+        "old": 151772317,
+        "new": 186068190,
+        "delta": 34295873
+      },
+      {
+        "id": "G-4-5-28-682-767-769-770-771",
+        "old": 93485407,
+        "new": 113248238,
+        "delta": 19762831
+      }
+    ],
+    "largest_decreases": [
+      {
+        "id": "G-10-26-662-755-767-769-770-771",
+        "old": 94474482,
+        "new": 2205412,
+        "delta": -92269070
+      },
+      {
+        "id": "G-2-10-24-26-767-769-770-771",
+        "old": 208077334,
+        "new": 149329948,
+        "delta": -58747386
+      },
+      {
+        "id": "G-4-5-28-688-767-769-770-771",
+        "old": 110474407,
+        "new": 56189940,
+        "delta": -54284467
+      },
+      {
+        "id": "G-1-10-23-26-767-769-770-771",
+        "old": 177784431,
+        "new": 133969991,
+        "delta": -43814440
+      },
+      {
+        "id": "G-10-26-499-753-767-769-770-771",
+        "old": 168210958,
+        "new": 125183802,
+        "delta": -43027156
+      }
+    ],
+    "terms_compared_ids": 1164,
+    "terms_match_all_1164": true,
+    "k_s_skip_compatible": true,
+    "s_from_fingerprint": 2,
+    "all_result_engines_equal": "cpp:aebd2a9e386c236798c796cb",
+    "total_known_counts_delta": -1231698685,
+    "total_known_counts_percent_delta": "-9.497063345308891633862599380",
+    "total_known_counts_comparison_caveat": "Different completed subsets: census04 excludes the former maximum 348812201 due to an additional timeout. Use common_complete=1162 for a matched count comparison."
+  },
+  "archive_integrity": {
+    "03": {
+      "archive_sha256": "c831c21ebb0d98efaefd38f11976dc61e947648bb8ab807efe69bc9aa1525cb8",
+      "archive_bytes": 180048,
+      "regular_files": 1224,
+      "duplicate_member_names": [],
+      "unsafe_members": [],
+      "archive_to_extracted_mismatches": [],
+      "extra_extracted_files": [],
+      "duplicate_json_keys": false
+    },
+    "04": {
+      "archive_sha256": "c04fb884491dd1be8f961a5d0c6645d4d5e2d0e451569f3f52c413ec5496ee42",
+      "archive_bytes": 179406,
+      "regular_files": 1224,
+      "duplicate_member_names": [],
+      "unsafe_members": [],
+      "archive_to_extracted_mismatches": [],
+      "extra_extracted_files": [],
+      "duplicate_json_keys": false
+    }
+  },
+  "audit_scope": {
+    "method": "Independent Python -I -B standard-library reads of extracted primary artifacts, byte equality against good archives, and structural recomputation; no heavy project imports or reruns.",
+    "expected_part_count": 20,
+    "expected_plan_id_count": 1164,
+    "source_diff_reviewed": false,
+    "source_evidence": "20/20 commit.txt consistent per run; all record fingerprints consistent per run; all completed C++ engine identifiers equal across runs. Commit source diff not audited.",
+    "coverage_limit": "All planned IDs accounted for; completeness against an independently generated full registry was not recomputed.",
+    "null_policy": "A missing census result stays null. Timeout records contribute scheme elapsed seconds but no minimal/count value."
+  },
+  "resource_units": {
+    "cpu_seconds": "Sum of /usr/bin/time User time plus System time for all 20 workers, includes timeout work.",
+    "worker_wall_seconds": "Sum of elapsed time for 20 worker commands; not workflow elapsed time.",
+    "max_rss_kib": "Maximum of the 20 /usr/bin/time Maximum resident set size values, in KiB; not sum over workers.",
+    "max_rss_gib": "max_rss_kib / 1048576.",
+    "legacy_memory_stored": "The legacy VmRSS fields store round(VmRSS_KiB / 1000000, 2). These stored values are neither GiB nor decimal GB and are not used as resource peaks in this receipt.",
+    "timeout_seconds": "Scheme-level recorded elapsed wall seconds; exact timeout CPU cannot be separated from aggregate per-worker CPU."
+  },
+  "summary_caveats": [
+    "полный_план=true validates availability of all 20 plans; ожидалось_схем=null means the publishing command did not set --expect. It does not assert every census completed.",
+    "The published median uses the sorted element at index int(0.5*n); for census04 (n=1162) this is an upper median 374086, whereas the usual arithmetic median is 372067.5.",
+    "Published p90 and p99 use the sorted element at index int(q*n), without interpolation."
+  ],
+  "version": 1,
+  "date_moscow": "2026-11-14",
+  "scope": "G census03/04 current1164scheme plans; enumeration only; failures retained, not all42bases",
+  "source_runs": {
+    "census04": 43476172990
+  },
+  "independent_review": "primary records/plans/time/terms and published summaries reproduced",
+  "whole_class_wall_hours_estimate": null
+}
