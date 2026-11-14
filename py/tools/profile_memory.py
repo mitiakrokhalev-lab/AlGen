@@ -40,7 +40,11 @@ def valid_enumeration_receipt(receipt, with_minimal):
 
 
 def child(a):
-    from algen import enumerate as E, library, table, fast, logic
+    from algen import enumerate as E, library, table, fast, logic, compress
+    if a.value_probe:
+        from tools.probe_value_classify import install
+        E.SAMPLE = a.probe_sample
+        install()
     library.CACHE = Path(a.library_cache).resolve()
     out = Path(a.out)
     stream = (out / "stages.jsonl").open("a", encoding="utf-8", buffering=1)
@@ -184,6 +188,11 @@ def child(a):
     def run(*args, **kwargs):
         result = original_run(*args, **kwargs)
         form, alive, empty, report = result
+        if a.value_probe:
+            receipt = form.census["контроль классификатора"]
+            assert receipt["exact_output"] and receipt["classified"] > 0
+            (out / "value-probe.json").write_text(
+                json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         h = hashlib.sha256()
         encoder = json.JSONEncoder(ensure_ascii=False, sort_keys=True, separators=(",", ":"))
         with (gzip.open(out / "report.jsonl.gz", "wb") if a.save_report else nullcontext(None)) as archive:
@@ -203,7 +212,8 @@ def child(a):
            bank_models=fast.BANK_MODELS, legacy_empty_cache=a.legacy_empty_cache,
            eager_search=a.eager_search, early_min=E.EARLY_MIN, sparse_leaf=E.SPARSE_LEAF,
            native_enum=E.NATIVE_ENUM, native_minimal=E.NATIVE_MINIMAL,
-           scoped_phases=fast.SCOPED_PHASES)
+           scoped_phases=fast.SCOPED_PHASES,
+           compact_fact_sat=compress.COMPACT_FACTS, state_save=table.STATE_SAVE)
     sys.argv = ["table", "перебор", "G", "--каталог", a.tables, "--выход", str(out / "results"),
                 "--схемы", a.scheme, "--нитей", "1", "--посылок", "3", "--предел", str(a.seconds)]
     try:
@@ -237,12 +247,19 @@ def main():
     p.add_argument("--legacy-leaf-minimal", action="store_true", help="полный обход подусловий без раннего выхода")
     p.add_argument("--legacy-leaf-matrix", action="store_true", help="битовые операции по всем целям листа")
     p.add_argument("--save-report", action="store_true", help="сохранить весь report в gzip по одной строке")
+    p.add_argument("--value-probe", action="store_true", help="read-only numeric value control")
+    p.add_argument("--probe-sample", type=int, default=4096)
+    p.add_argument("--cprofile", action="store_true", help="per-scheme diagnostic profile; timings include instrumentation")
+    p.add_argument("--legacy-fact-sat", action="store_true")
+    p.add_argument("--no-state-save", action="store_true")
     p.add_argument("--child", action="store_true", help=argparse.SUPPRESS)
     a = p.parse_args()
     if (a.with_minimal or a.save_enumeration) and not a.enumeration_only:
         p.error("with-minimal/save-enumeration требуют enumeration-only")
     if a.enumeration_only and a.save_report:
         p.error("enumeration-only не создаёт полный raw report")
+    if a.value_probe and (a.table_only or a.load_only or a.enumeration_only or a.save_report or a.probe_sample <= 0):
+        p.error("value-probe needs a positive sampled full run; no load/enumeration-only/raw export")
     if a.child:
         child(a)
         return
@@ -253,8 +270,11 @@ def main():
     if a.seconds <= 0 or a.rss_gib <= 0:
         p.error("нужны положительные лимиты времени и RSS")
     env = {k: v for k, v in os.environ.items() if not k.startswith("ALGEN_")}
-    env.update(ALGEN_SIZE="2", ALGEN_FAST="1", ALGEN_COMPRESS="1", ALGEN_STATE_SAVE="1",
+    env.update(ALGEN_SIZE="2", ALGEN_FAST="1", ALGEN_COMPRESS="1", ALGEN_STATE_SAVE="0" if a.no_state_save else "1",
+               ALGEN_COMPACT_FACTS="0" if a.legacy_fact_sat else "1",
                ALGEN_SKEL=str(Path(a.skel).resolve()), OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1")
+    if a.cprofile:
+        env["ALGEN_PROFILE"] = "1"
     if a.legacy_empty_cache:
         env["ALGEN_DEGEN_EMPTY_CACHE"] = "1"
     if a.legacy_table_load:
@@ -295,9 +315,16 @@ def main():
             cmd.append("--" + option.replace("_", "-"))
     if a.save_report:
         cmd.append("--save-report")
+    if a.value_probe:
+        cmd += ["--value-probe", "--probe-sample", str(a.probe_sample)]
     code = {name: hashlib.sha256((Path(__file__).resolve().parents[1] / name).read_bytes()).hexdigest()
             for name in ("algen/enumerate.py", "algen/table.py", "algen/deferred.py", "algen/native_enum.py",
-                         "algen/native_enum.cpp", "algen/fast.py", "tools/profile_memory.py")}
+                         "algen/native_enum.cpp", "algen/fast.py", "algen/compress.py",
+                         "algen/compress_base.py", "tools/profile_memory.py")}
+    if a.value_probe:
+        for name in ("algen/value_classify.py", "algen/native_values.cpp",
+                     "tools/probe_value_classify.py", "tools/bench_value_classify.py"):
+            code[name] = hashlib.sha256((Path(__file__).resolve().parents[1] / name).read_bytes()).hexdigest()
     start = time.monotonic()
     reason = "exited"
     sampled = 0
@@ -352,6 +379,33 @@ def main():
             result["enumeration_receipt_error"] = str(e)
         result["complete"] = reason == "exited" and proc.returncode == 0 and valid_enumeration_receipt(receipt, a.with_minimal)
     result["scope"] = "table storage only" if a.table_only else ("native load only" if a.load_only else ("native enumeration only" if a.enumeration_only else "full native scheme"))
+    if a.value_probe:
+        from tools.probe_value_classify import valid_receipt
+        receipt = None
+        try:
+            receipt = json.loads((out / "value-probe.json").read_text())
+        except (OSError, ValueError, TypeError) as e:
+            result["value_probe_error"] = str(e)
+        result["value_probe_valid"] = valid_receipt(receipt, a.probe_sample)
+        result["complete"] = (reason == "exited" and proc.returncode == 0
+                              and result["scheme_status"] == "перепись" and result["value_probe_valid"])
+        result["scope"] = "sampled report value control"
+        result["probe_sample"] = a.probe_sample
+        result["value_probe"] = receipt
+    result["requested_compact_fact_sat"] = not a.legacy_fact_sat
+    result["requested_state_save"] = not a.no_state_save
+    if not (a.table_only or a.load_only or a.enumeration_only):
+        actual = {}
+        try:
+            stages = [json.loads(s) for s in (out / "stages.jsonl").read_text().splitlines()]
+            actual = next((s for s in stages if s.get("stage") == "start"), {})
+        except (OSError, ValueError, TypeError) as e:
+            result["mode_error"] = str(e)
+        result["actual_compact_fact_sat"] = actual.get("compact_fact_sat")
+        result["actual_state_save"] = actual.get("state_save")
+        result["mode_verified"] = (result["actual_compact_fact_sat"] is result["requested_compact_fact_sat"]
+                                   and result["actual_state_save"] is result["requested_state_save"])
+        result["complete"] = result["complete"] and result["mode_verified"]
     result["eager_search"] = a.eager_search
     result["early_min"] = not a.legacy_leaf_minimal
     result["sparse_leaf"] = not a.legacy_leaf_matrix
@@ -359,6 +413,7 @@ def main():
     result["with_minimal"] = a.with_minimal
     result["saved_enumeration"] = a.save_enumeration
     result["saved_report"] = a.save_report
+    result["cprofile"] = a.cprofile
     result["code_sha256"] = code
     (out / "measurement.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(result, ensure_ascii=False))
