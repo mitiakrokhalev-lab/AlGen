@@ -1,0 +1,338 @@
+{
+ "codex-value-G6211": {
+  "verdict.json": {
+   "case": "codex-value-G6211",
+   "complete": true,
+   "measurement": {
+    "scheme": "G-6-211-767-769-770-771",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 488.56,
+    "cpu_seconds": 483.70014699999996,
+    "peak_rss_kib": 12298976,
+    "sampled_rss_kib": 12212092,
+    "limits": {
+     "seconds": 1200,
+     "rss_gib": 14.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": "перепись",
+    "complete": true,
+    "scope": "sampled report value control",
+    "value_probe_valid": true,
+    "probe_sample": 4096,
+    "value_probe": {
+     "scope": "real sampled report, all verdicts with _cols; unique primitive reference; no verdict mutation",
+     "total_minimals": 245672,
+     "sampled_minimals": 4096,
+     "report_rows": 4096,
+     "report_rows_without_cols": 0,
+     "classified": 4096,
+     "canonical_arrays_per_batch": 11,
+     "exact_output": true,
+     "ordered_batch_output_sha256": "5521400340ed8f8b8106f4b37f35ac316a6a96f7bf55c35c152a85b2afab98e4",
+     "projection_sha256": "e682fa0cff97948ad7d358aee17dd647f7e42769a89679c0445f12d079167d98",
+     "atom_schema_sha256": "ee08e9308871abf2ebc358674f01052b1289542690b4ecffd5414867ba35265e",
+     "engine_sha256": "4b4aacdae849d03baa4c623abc2dd48ccc67ec3ad74f7f4bbc14c490e75282ab",
+     "rows": 30953,
+     "literal_columns": 562,
+     "kinds": {
+      "C": 2662,
+      "A": 726,
+      "B": 708
+     },
+     "kept_kinds": {
+      "C": 1399,
+      "A": 89,
+      "B": 299
+     },
+     "kind_by_verdict": {
+      "C / выводится": 2406,
+      "A / неизвестно": 726,
+      "B / выводится": 376,
+      "C / неизвестно": 256,
+      "B / неизвестно": 332
+     },
+     "single_events": 116121,
+     "batches": 34,
+     "max_batch_result_bytes": 300916,
+     "budget_retries": 0,
+     "loader": {
+      "wall_seconds": 0.5952571770000077,
+      "cpu_seconds": 0.0020317600000225866
+     },
+     "prepare": {
+      "wall_seconds": 0.003045822999979464,
+      "cpu_seconds": 0.003046846000017922
+     },
+     "native": {
+      "wall_seconds": 0.07799984100006441,
+      "cpu_seconds": 0.07802218299980268
+     },
+     "reference": {
+      "wall_seconds": 0.380613947999791,
+      "cpu_seconds": 0.3806236600000261
+     },
+     "verification": {
+      "wall_seconds": 0.053102074000094035,
+      "cpu_seconds": 0.043233039000142526
+     },
+     "timing_scope": "both reference/native include canonical numeric assembly; checks/hash/cross-tab separate",
+     "production_speedup_claimed": false,
+     "sat_only_c_enabled": false
+    },
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": false,
+    "code_sha256": {
+     "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+     "algen/table.py": "73d25f74f21952ad7c2a9fd93e4b6cec9956651021469d0dce402657b34c3275",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "34a761aebfd331382a3c0aa8e31d7a2a170a1162aa1647796e13dabd34e87e83",
+     "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "tools/profile_memory.py": "130be7684ab4ce60320960e1ae7ad0f0ec53317c6e8449c952f3e5a8c7544267",
+     "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+     "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+     "tools/probe_value_classify.py": "bf5a459cb3a7b86fcc44fdceeac7586f56106aedab8198a9962808f53684a4d0",
+     "tools/bench_value_classify.py": "482da28a6306b030b79fe82258d8a15475f883c89c8dd8b894da88812ed2f9aa"
+    }
+   },
+   "verified": [
+    {
+     "stage": "run:end",
+     "seconds": 482.285,
+     "memory_kib": {
+      "VmHWM": 12298976,
+      "VmRSS": 9698560
+     },
+     "report_rows": 4096,
+     "report_sha256": "586e49c3e02454a965724d4cbe0faeae36ea8565d6c7a2fa315f820ed66d19e9",
+     "alive": {
+      "entries": 245672,
+      "container_bytes": 48,
+      "packed_bytes": 2456720
+     },
+     "empty": {
+      "entries": 155809,
+      "container_bytes": 48,
+      "packed_bytes": 1246472
+     },
+     "legacy_stages": [
+      [
+       "начало",
+       7.2,
+       0
+      ],
+      [
+       "перебор",
+       7.83,
+       245672
+      ],
+      [
+       "минимальные",
+       7.83,
+       245672
+      ],
+      [
+       "вердикты",
+       8.33,
+       4096
+      ],
+      [
+       "сжатие",
+       9.7,
+       4096
+      ]
+     ],
+     "search_solver": {
+      "deferred": true,
+      "materialized": false
+     },
+     "solver_factories": 2,
+     "phase_scoped_calls": 25,
+     "phase_max_scope": 281
+    }
+   ],
+   "peaks": [
+    [
+     "start",
+     0.029,
+     {
+      "VmHWM": 72556,
+      "VmRSS": 59288
+     }
+    ],
+    [
+     "built_library:start",
+     0.047,
+     {
+      "VmHWM": 72556,
+      "VmRSS": 66900
+     }
+    ],
+    [
+     "built_library:end",
+     0.755,
+     {
+      "VmHWM": 478040,
+      "VmRSS": 445552
+     }
+    ],
+    [
+     "load:start",
+     0.764,
+     {
+      "VmHWM": 478040,
+      "VmRSS": 447116
+     }
+    ],
+    [
+     "skeleton:start",
+     0.764,
+     {
+      "VmHWM": 478040,
+      "VmRSS": 447116
+     }
+    ],
+    [
+     "solver:start",
+     13.661,
+     {
+      "VmHWM": 3912820,
+      "VmRSS": 2877640
+     }
+    ],
+    [
+     "solver:end",
+     32.625,
+     {
+      "VmHWM": 5110384,
+      "VmRSS": 5110384
+     }
+    ],
+    [
+     "skeleton:end",
+     32.628,
+     {
+      "VmHWM": 5110628,
+      "VmRSS": 5110628
+     }
+    ],
+    [
+     "load:end",
+     50.109,
+     {
+      "VmHWM": 7341668,
+      "VmRSS": 7193404
+     }
+    ],
+    [
+     "enumerate_form:start",
+     125.346,
+     {
+      "VmHWM": 7913688,
+      "VmRSS": 7200436
+     }
+    ],
+    [
+     "enumerate_form:end",
+     155.31,
+     {
+      "VmHWM": 7935152,
+      "VmRSS": 7834160
+     }
+    ],
+    [
+     "enumeration:engine",
+     155.31,
+     {
+      "VmHWM": 7935152,
+      "VmRSS": 7834160
+     }
+    ],
+    [
+     "minimal:start",
+     155.31,
+     {
+      "VmHWM": 7935152,
+      "VmRSS": 7834160
+     }
+    ],
+    [
+     "minimal:end",
+     155.32,
+     {
+      "VmHWM": 7935152,
+      "VmRSS": 7834164
+     }
+    ],
+    [
+     "generic_filter:start",
+     155.32,
+     {
+      "VmHWM": 7935152,
+      "VmRSS": 7834164
+     }
+    ],
+    [
+     "generic_filter:end",
+     155.32,
+     {
+      "VmHWM": 7935152,
+      "VmRSS": 7834164
+     }
+    ],
+    [
+     "solver:start",
+     244.79,
+     {
+      "VmHWM": 8432560,
+      "VmRSS": 8334532
+     }
+    ],
+    [
+     "solver:end",
+     264.174,
+     {
+      "VmHWM": 10497392,
+      "VmRSS": 10497392
+     }
+    ],
+    [
+     "run:end",
+     482.285,
+     {
+      "VmHWM": 12298976,
+      "VmRSS": 9698560
+     }
+    ],
+    [
+     "end",
+     484.308,
+     {
+      "VmHWM": 12298976,
+      "VmRSS": 9692472
+     }
+    ]
+   ],
+   "expect_report_sha256": null,
+   "report_sha_ok": null
+  },
+  "commit.txt": "199d2721cd91cfc652db23a4b01896e7dddea340",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 472.09",
+   "System time (seconds): 12.79",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 8:08.78",
+   "Maximum resident set size (kbytes): 12298976",
+   "Exit status: 0"
+  ]
+ }
+}
