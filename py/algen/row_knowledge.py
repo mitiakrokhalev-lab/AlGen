@@ -8,116 +8,97 @@ All condition verdicts remain pending. No SAT models are used as group examples.
 from contextlib import contextmanager
 import hashlib
 import json
-import sys
 
 import numpy as np
-from pysat.solvers import Solver
 
 from .live import source_checked
+from .frozen_theory import FrozenTheoryBasis
 from .value_ledger import canonical, structure, _unstructure
 
 
 class FrozenRowTheory:
-    """Private fresh solver over a pinned, checked immutable Theory snapshot.
+    """Exact view over a fresh or explicitly borrowed immutable Theory basis.
 
-    Pinning prevents ClauseStore append/resizing. A byte digest also rejects
-    in-place clause edits. The complete typed atom schema is captured once;
-    only the supplied view's primitive atoms may be claims or conclusions.
-    Existing _derive hints and its mutable solver are deliberately not reused.
+    A shared basis saves full schema hashing and Solver bootstrap across
+    different views of the same unchanged base during a first pass. Each view
+    keeps its complete structural header and proof namespace. No row facts or
+    fixed assumptions are made permanent in the shared solver.
     """
-    def __init__(self, theory, atoms, reference):
-        self.theory, self.atoms = theory, tuple(atoms)
-        self.literals = []
-        count = len(theory.atoms)
-        for atom in self.atoms:
-            if atom[0] == 'pair':
-                self.literals.append(None)
-                continue
-            if atom[0] not in ('p', 'r') or not theory._known(atom):
-                raise ValueError('row proof atom is outside the frozen literal schema')
-            lit = theory.lit(atom)
-            if lit is not None and (type(lit) is not int or lit <= 0):
-                raise ValueError('invalid frozen primitive literal mapping')
-            self.literals.append(0 if lit is None else lit)
-        if len(theory.atoms) != count:
-            raise ValueError('literal lookup mutated the Theory schema')
-        self.schema = tuple(theory.atoms)
-        self._schema_store, self._clause_store = theory.atoms, theory.clauses
-        self._data_store, self._offset_store = theory.clauses.data, theory.clauses.offs
-        self.data = memoryview(self._data_store).toreadonly()
-        self.offsets = memoryview(self._offset_store).toreadonly()
-        self._closed, self._solver, self._depth = False, None, 0
-        schema_hash = hashlib.sha256()
-        for atom in self.schema:
-            schema_hash.update((canonical(structure(atom)) + '\n').encode())
-        self.header = json.loads(canonical(dict(version=1, reference=reference,
-            clauses_sha256=self._clause_digest(), schema_sha256=schema_hash.hexdigest(),
-            view_atoms=[structure(a) for a in self.atoms], view_literals=self.literals)))
-        self.identity = hashlib.sha256(canonical(self.header).encode()).hexdigest()
+    def __init__(self, theory, atoms, reference, *, basis=None):
+        self._closed, self._owns_basis = False, basis is None
+        self._basis = FrozenTheoryBasis(theory,reference) if basis is None else basis
+        try:
+            if (not isinstance(self._basis,FrozenTheoryBasis) or self._basis.theory is not theory
+                    or canonical(reference) != canonical(self._basis.header['reference'])):
+                raise ValueError('borrowed basis must match exact Theory owner and reference')
+            self._basis.check(force=True)
+            self.theory, self.atoms = theory, tuple(atoms)
+            self.schema = self._basis.schema
+            self.literals = []
+            count = len(theory.atoms)
+            for atom in self.atoms:
+                if atom[0] == 'pair':
+                    self.literals.append(None)
+                    continue
+                if atom[0] not in ('p','r'):
+                    raise ValueError('row proof atom is outside the frozen literal schema')
+                lit = self._basis._literal_number(atom)
+                if type(lit) is not int or not 0 <= lit <= len(self.schema):
+                    raise ValueError('invalid frozen primitive literal mapping')
+                self.literals.append(lit)
+            if len(theory.atoms) != count:
+                raise ValueError('literal lookup mutated the Theory schema')
+            self.header = json.loads(canonical(dict(self._basis.header,
+                view_atoms=[structure(a) for a in self.atoms],view_literals=self.literals)))
+            self.identity = hashlib.sha256(canonical(self.header).encode()).hexdigest()
+            self.check(force=True)
+            self._basis._metrics['views_bound'] += 1
+        except BaseException:
+            if self._owns_basis:
+                self._basis.close()
+            self._closed = True
+            raise
 
-    def _clause_digest(self):
-        h = hashlib.sha256(canonical([sys.byteorder, self.data.format, self.offsets.format,
-                                     len(self.data), len(self.offsets)]).encode())
-        h.update(self.data)
-        h.update(self.offsets)
-        return h.hexdigest()
-
-    def check(self, *, force=False):
+    def _check_view(self):
         if self._closed:
             raise RuntimeError('frozen Theory session is closed')
-        if (self.theory.atoms is not self._schema_store
-                or self.theory.clauses is not self._clause_store
-                or self._clause_store.data is not self._data_store
-                or self._clause_store.offs is not self._offset_store
-                or len(self.theory.atoms) != len(self.schema)
-                or ((force or not self._depth) and self._clause_digest() != self.header['clauses_sha256'])
+        if (self.theory is not self._basis.theory or self.schema is not self._basis.schema
                 or self.literals != self.header['view_literals']
                 or [structure(a) for a in self.atoms] != self.header['view_atoms']
                 or hashlib.sha256(canonical(self.header).encode()).hexdigest() != self.identity):
             raise ValueError('frozen Theory changed; a new checked context is required')
 
+    def check(self, *, force=False):
+        self._check_view()
+        self._basis.check(force=force)
+
     @contextmanager
     def _stable(self):
-        """Check the large snapshot at transaction boundaries, not every SAT query."""
-        if self._depth:
-            raise RuntimeError('reentrant frozen Theory operation is forbidden')
-        self.check(force=True)
-        self._depth += 1
-        try:
+        self._check_view()
+        with self._basis._stable():
+            self._check_view()
             yield
-            self.check(force=True)
-        except BaseException:
-            # A failed or interrupted operation must not retain a solver that
-            # could have been initialized during an accidental Theory edit.
-            if self._solver is not None:
-                self._solver.delete()
-                self._solver = None
-            raise
-        finally:
-            self._depth -= 1
+            self._check_view()
+
+    @property
+    def _solver(self):
+        return self._basis._solver
 
     @property
     def _query_solver(self):
         self.check()
-        if self._solver is None:
-            self.check(force=True)
-            # Bootstrap only from the pinned snapshot, not the mutable owner's
-            # current .clauses or an externally replaceable solver factory.
-            clauses = (self.data[self.offsets[i]:self.offsets[i+1]].tolist()
-                       for i in range(len(self.offsets)-1))
-            self._solver = Solver(name='g4', bootstrap_with=clauses)
-            self.check(force=True)
-        return self._solver
+        return self._basis._query_solver
 
     def close(self):
         if not self._closed:
-            if self._solver is not None:
-                self._solver.delete()
-            self.data.release()
-            self.offsets.release()
+            if self._basis._depth:
+                raise RuntimeError('cannot close a view during a proof operation')
+            if self._owns_basis:
+                self._basis.close()
             self._closed = True
 
     def __enter__(self):
+        self.check()
         return self
 
     def __exit__(self, *exc):
