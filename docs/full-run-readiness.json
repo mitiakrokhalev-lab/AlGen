@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_utc": "2026-11-15T05:31:25.909374+00:00",
+  "updated_utc": "2026-11-15T06:31:35.781464+00:00",
   "scope": "Readiness plan for first full fixed-domain enumeration; NOT a full-run receipt or an implemented automatic launch gate",
   "user_goal": {
     "first_complete_enumeration_once": true,
@@ -460,29 +460,25 @@
     "real_table_control_conditions": 4096,
     "real_table_proved_B_conditions": 376
   },
-  "candidate_code_commit": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+  "candidate_code_commit": "1e9421610842eef22ea122de3d9c62fb817d3c95",
   "candidate_ci": {
-    "run": 43660610487,
-    "job": 132648921740,
-    "commit": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
-    "status": "completed",
-    "conclusion": "success",
-    "tests": 270,
-    "seconds": 2812.638,
-    "result": "OK",
-    "errors": 0,
-    "failures": 0,
-    "skipped": 0,
-    "checkout_commit": "952e83e6a66ade47adafc95f0525f676021c48c8",
-    "checkout_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
-    "code_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
-    "checkout_tree_equals_code_tree": true,
-    "actual_checkout_observed_in_completed_log": true,
-    "independently_reviewed": true,
+    "run": 43685600547,
+    "job": 132725327080,
+    "commit": "1e9421610842eef22ea122de3d9c62fb817d3c95",
+    "status": "in_progress",
+    "conclusion": null,
+    "expected_tests": 285,
+    "tests": null,
+    "seconds": null,
+    "result": null,
+    "skipped": null,
+    "errors": null,
+    "failures": null,
+    "expected_checkout_commit": "90d7733c19ba97813104cade22fb0ffc53c6af5c",
+    "expected_checkout_tree": "65a4cd5f50600ac9be71275a0bc97303489d85f0",
+    "actual_checkout_observed_in_completed_log": false,
     "cpu_seconds": null,
-    "peak_rss_kib": null,
-    "job_wall_seconds": 2829.0,
-    "unittest_step_wall_seconds": 2818.0
+    "peak_rss_kib": null
   },
   "latest_compression_work": {
     "metrics": "metrics-compact-fact-sat.json",
@@ -536,6 +532,25 @@
       "peak_rss_kib": null,
       "job_wall_seconds": 2829.0,
       "unittest_step_wall_seconds": 2818.0
+    },
+    {
+      "run": 43685600547,
+      "job": 132725327080,
+      "commit": "1e9421610842eef22ea122de3d9c62fb817d3c95",
+      "status": "in_progress",
+      "conclusion": null,
+      "expected_tests": 285,
+      "tests": null,
+      "seconds": null,
+      "result": null,
+      "skipped": null,
+      "errors": null,
+      "failures": null,
+      "expected_checkout_commit": "90d7733c19ba97813104cade22fb0ffc53c6af5c",
+      "expected_checkout_tree": "65a4cd5f50600ac9be71275a0bc97303489d85f0",
+      "actual_checkout_observed_in_completed_log": false,
+      "cpu_seconds": null,
+      "peak_rss_kib": null
     }
   ],
   "latest_value_ledger": {
@@ -551,5 +566,25 @@
     "real_selectivity_gain_demonstrated": false,
     "full_run_admission_changed": false,
     "full_ci_passed": true
+  },
+  "latest_row_knowledge": {
+    "metrics": "metrics-row-knowledge.json",
+    "code_commit": "1e9421610842eef22ea122de3d9c62fb817d3c95",
+    "independently_reviewed_control": true,
+    "stored_domain": 1908,
+    "registered_row_proof_cycle_verified": true,
+    "production_integrated": false,
+    "full_ci_passed": false,
+    "full_ci_status": "in_progress",
+    "proof_pending": 1908,
+    "current_support_computed": false,
+    "source_propagation_complete": false,
+    "mathematical_primitive_provenance_audited": false,
+    "full_frontier_implemented": false,
+    "real_database_imported_into_persistent_project_archive": false,
+    "selectivity_gain_demonstrated": false,
+    "new_first_full_pass_speedup_demonstrated": false,
+    "scientific_output_reduction_measured": false,
+    "full_run_admission_changed": false
   }
 }
