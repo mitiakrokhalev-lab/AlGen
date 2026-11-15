@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_utc": "2026-11-14T17:30:59.233267+00:00",
+  "updated_utc": "2026-11-15T01:07:58.910735+00:00",
   "scope": "Readiness plan for first full fixed-domain enumeration; NOT a full-run receipt or an implemented automatic launch gate",
   "user_goal": {
     "first_complete_enumeration_once": true,
@@ -191,13 +191,17 @@
         "no_repeat_full_enumeration_update_contract_verified": false,
         "persistent_exact_missing_knowledge_queue_implemented": false,
         "existing_row_unit_propagation": true,
-        "existing_optional_backbone": true
+        "existing_optional_backbone": true,
+        "frozen_domain_ledger_prototype_verified": true,
+        "ledger_current_support_and_source_closure_implemented": false,
+        "ledger_incoming_durable_operation_queue_implemented": false
       },
       "evidence": [
         "динамический-архив.md",
         "граница-кандидатов.md",
         "../py/algen/live.py",
-        "../py/algen/live_worker.py"
+        "../py/algen/live_worker.py",
+        "metrics-value-ledger.json"
       ]
     },
     {
@@ -279,11 +283,15 @@
         "whole_class_manifest_complete": false,
         "historical_pr17_manifest_complete": true,
         "new_value_batch_numeric_hash_is_semantic_archive_identity": false,
-        "new_value_batch_persistence_implemented": false
+        "new_value_batch_persistence_implemented": false,
+        "frozen_domain_ledger_prototype_verified": true,
+        "ledger_current_support_and_source_closure_implemented": false,
+        "ledger_incoming_durable_operation_queue_implemented": false
       },
       "evidence": [
         "динамический-архив.md",
-        "../py/algen/live_worker.py"
+        "../py/algen/live_worker.py",
+        "metrics-value-ledger.json"
       ]
     },
     {
@@ -416,28 +424,22 @@
     "real_table_control_conditions": 4096,
     "real_table_proved_B_conditions": 376
   },
-  "candidate_code_commit": "3c862bbd25792313e6dcbd84412dec1c4435c7b2",
+  "candidate_code_commit": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
   "candidate_ci": {
-    "run": 43617302145,
-    "job": 132515065918,
-    "commit": "3c862bbd25792313e6dcbd84412dec1c4435c7b2",
-    "commit_is_head_at_test_launch": true,
-    "status": "completed",
-    "conclusion": "success",
-    "tests": 259,
-    "seconds": 2558.471,
-    "seconds_scope": "unittest suite wall; not job CPU",
-    "result": "OK",
-    "errors": 0,
-    "failures": 0,
-    "skipped": 0,
-    "checkout_commit": "e591693d9c7f3a7612c51c3ce9eb7e55d996548c",
-    "checkout_tree": "c2f25afe42dde72bb2492ab9143570d0d43e79b4",
-    "code_tree": "c2f25afe42dde72bb2492ab9143570d0d43e79b4",
-    "checkout_tree_equals_code_tree": true,
+    "run": 43660610487,
+    "job": 132648921740,
+    "commit": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+    "status": "in_progress",
+    "expected_tests": 270,
+    "tests": null,
+    "seconds": null,
+    "result": null,
     "cpu_seconds": null,
     "peak_rss_kib": null,
-    "independently_reviewed": true
+    "expected_checkout_commit": "952e83e6a66ade47adafc95f0525f676021c48c8",
+    "expected_checkout_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+    "expected_tree_from_fetched_ref_equals_code_tree": true,
+    "actual_checkout_observed_in_completed_log": false
   },
   "latest_compression_work": {
     "metrics": "metrics-compact-fact-sat.json",
@@ -451,5 +453,36 @@
     "full_frontier_implemented": false,
     "candidate_full_ci_passed": true,
     "full_ci_changes_full_run_admission": false
+  },
+  "candidate_ci_attempts": [
+    {
+      "run": 43658649943,
+      "job": 132642783652,
+      "commit": "e1f07f9d3746518ef59b5467f7772eb613e771eb",
+      "result": "CANCELLED",
+      "started_at": "2026-11-15T00:32:11Z",
+      "completed_at": "2026-11-15T00:55:58Z",
+      "job_wall_seconds": 1427.0,
+      "full_suite_complete": false,
+      "tests": null,
+      "suite_seconds": null,
+      "cpu_seconds": null,
+      "peak_rss_kib": null,
+      "reason": "workflow concurrency after reviewed noncontiguous-projection fix",
+      "checkout_commit": "851ebba77b7c2800516d05a7350a8b1d260e51ac"
+    }
+  ],
+  "latest_value_ledger": {
+    "metrics": "metrics-value-ledger.json",
+    "independently_reviewed_control": true,
+    "stored_domain": 1908,
+    "production_integrated": false,
+    "current_support_computed": false,
+    "proof_pending": 1908,
+    "source_propagation_complete": false,
+    "full_frontier_implemented": false,
+    "real_control_database_imported_into_persistent_project_archive": false,
+    "real_selectivity_gain_demonstrated": false,
+    "full_run_admission_changed": false
   }
 }
