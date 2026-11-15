@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_utc": "2026-11-15T06:31:35.781464+00:00",
+  "updated_utc": "2026-11-15T07:27:36.124038+00:00",
   "scope": "One enrolled row and every saved code of one frozen small domain; not whole-class enumeration/frontier/report",
   "code_commit": "1e9421610842eef22ea122de3d9c62fb817d3c95",
   "code_tree": "65a4cd5f50600ac9be71275a0bc97303489d85f0",
@@ -33,6 +33,11 @@
       "file_name": "algen-row-knowledge-control01-independent-review.json",
       "sha256": "9ea357e86e7ce6099f5b1f97acdf10ffac8bd6b6145b920a432ca4d4fde64890",
       "status": "APPROVED_REAL_CONTROL_WITHIN_DECLARED_SCOPE"
+    },
+    "full_ci": {
+      "file_name": "algen-pr22-ci-final-independent-review.json",
+      "sha256": "de0d77d9faed87c10b87d592e74f0710f9c08732060f5ecf2a8f5569a3f43942",
+      "status": "FINAL_CI_VERIFIED"
     }
   },
   "independent_core_tests": {
@@ -79,20 +84,30 @@
     "run": 43685600547,
     "job": 132725327080,
     "commit": "1e9421610842eef22ea122de3d9c62fb817d3c95",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "success",
     "expected_tests": 285,
-    "tests": null,
-    "seconds": null,
-    "result": null,
-    "skipped": null,
-    "errors": null,
-    "failures": null,
-    "expected_checkout_commit": "90d7733c19ba97813104cade22fb0ffc53c6af5c",
-    "expected_checkout_tree": "65a4cd5f50600ac9be71275a0bc97303489d85f0",
-    "actual_checkout_observed_in_completed_log": false,
+    "tests": 285,
+    "unique_test_ids": 285,
+    "ok": 285,
+    "seconds": 3070.36,
+    "result": "OK",
+    "skipped": 0,
+    "errors": 0,
+    "failures": 0,
+    "checkout_commit": "90d7733c19ba97813104cade22fb0ffc53c6af5c",
+    "checkout_tree": "65a4cd5f50600ac9be71275a0bc97303489d85f0",
+    "code_tree": "65a4cd5f50600ac9be71275a0bc97303489d85f0",
+    "checkout_tree_equals_code_tree": true,
+    "actual_checkout_observed_in_completed_log": true,
+    "independently_reviewed": true,
     "cpu_seconds": null,
-    "peak_rss_kib": null
+    "peak_rss_kib": null,
+    "job_wall_seconds": 3085.0,
+    "unittest_step_wall_seconds": 3076.0,
+    "decoded_text_utf8_sha256": "bb9c369f9abc6f829f8c80d365f4013f254cd0539272066f176b9b450dd53cb0",
+    "stored_decoded_log_sha256": "39b323f8fecd997d8f4461397092a5cf2d9fd5c18f71e3ced23a674a34f53974",
+    "stored_log_has_one_extra_terminal_lf": true
   },
   "control": {
     "run": 43684395730,
@@ -638,6 +653,7 @@
     "Probe receipt accepted malformed proof/type fields"
   ],
   "next_steps": [
+    "Split/profile cold costs and pair a common immutable basis across DIFFERENT views within a first value-layer pass; no measured factor yet",
     "Durable incoming work queue and explicit experimental worker with checked input sources and pending debt",
     "Current supports and versioned archive/compression updates with source withdrawal",
     "Exact full candidate frontier and coverage reasons before acknowledging enumerate",
@@ -649,5 +665,28 @@
     "url": "https://github.com/mitiakrokhalev-lab/AlGen/pull/22",
     "draft": true,
     "base": "codex/value-ledger-01"
+  },
+  "planned_work": {
+    "incoming_queue": {
+      "document": "docs/входящая-очередь-знаний.md",
+      "document_sha256": "fcdff6dba6ee270c10abec3ebdc9a938fde18023ed7304f51443caf5526450fb",
+      "implemented": false,
+      "runtime_or_crash_tests_passed": false,
+      "review_status": "APPROVED_DESIGN_DOCUMENT_ONLY",
+      "review_receipt_file": "algen-incoming-knowledge-plan-independent-review.json",
+      "review_receipt_sha256": "60ea5c81c2f6206e63c14ca7a994517612d1905c85e95ec94a430c7233025299"
+    },
+    "cold_context_first_pass": {
+      "document": "docs/холодный-контекст-первого-прохода.md",
+      "document_sha256": "5cbb118af306027dd09f72e35806b68147db2679297dafd1e28148781466c256",
+      "implemented": false,
+      "runtime_or_crash_tests_passed": false,
+      "review_status": "APPROVED_DESIGN_DOCUMENT_ONLY",
+      "review_receipt_file": "algen-cold-context-plan-independent-review.json",
+      "review_receipt_sha256": "82d4d6d8780837411ea5421d571fa33ba2695273783c6452ac7e0f326c8b174e",
+      "shared_Theory_in_table_view_verified_statically": true,
+      "paired_first_pass_speedup_measured": false,
+      "scope": "experimental value layer; different views of the same unchanged base Theory; not current production E.run speedup"
+    }
   }
 }
