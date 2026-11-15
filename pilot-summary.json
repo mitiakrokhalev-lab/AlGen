@@ -1,0 +1,624 @@
+{
+ "knowledge1-G14217": {
+  "verdict.json": {
+   "case": "knowledge1-G14217",
+   "complete": true,
+   "measurement": {
+    "scheme": "G-14-217-767-769-770-771",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 222.121,
+    "cpu_seconds": 217.13777,
+    "peak_rss_kib": 11046148,
+    "sampled_rss_kib": 10987304,
+    "limits": {
+     "seconds": 1200,
+     "rss_gib": 14.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": "перепись",
+    "complete": true,
+    "scope": "registered row proof/source cycle over all saved conditions; no condition SAT verdicts",
+    "ledger_expected_minimals": 1908,
+    "ledger_probe_valid": true,
+    "row_knowledge_probe": {
+     "version": 1,
+     "scope": "registered proof/source cycle of one row; all saved codes, NOT full frontier/report",
+     "sampled": false,
+     "classified": 1908,
+     "rows": 30953,
+     "literal_columns": 562,
+     "input_projection_sha256": "7f293498c054be53c733160e0fcdfdce22ceddbec0e2499749fa6e9e9386c19e",
+     "input_conditions_sha256": "1ce8f69600c01613683ceb5e2029d6196ab815dc9849ae5fc89860741e1566b8",
+     "initial_state_sha256": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2",
+     "state_hashes": {
+      "masked": "68356af93ab6af8625205690706aa0d834ee340142fca823e93811cc9af16760",
+      "derived": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2",
+      "withdrawn": "ed297228136fe2fc38d00e99fcefff77a2a6e58d19cc7ec903f6dc09f2c189a6",
+      "restored": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2"
+     },
+     "context": {
+      "identity": "1e13b818f0dfb3a14e30b13ac0dc7fd85644a6c77aee8728d9694f929cbbc095",
+      "clauses_sha256": "942c741790f5494d1eea0b9ddbe5f7730da48fbc5ee59532e7eeffa679be9196",
+      "schema_sha256": "44b75030ff4833cb025402abbf558bdb7b37f7d1bce0aa0f4c001531a9b3336a",
+      "clauses": 34305956,
+      "atoms": 3264381
+     },
+     "target_row": 20117,
+     "target_atom": 67,
+     "selection_trials": 1,
+     "target_observation_sha256": "c4eb917aa95bfa6f43531d34bee44cc3cd0632f085a1b3e7f2d94a3121706d92",
+     "hot_conditions_after_mask": 325,
+     "proof_certificate": {
+      "atom": 67,
+      "context": "1e13b818f0dfb3a14e30b13ac0dc7fd85644a6c77aee8728d9694f929cbbc095",
+      "core": [
+       {
+        "atom": [
+         "tuple",
+         [
+          [
+           "str",
+           "p"
+          ],
+          [
+           "str",
+           "residually-nilpotent"
+          ],
+          [
+           "app",
+           "torsion",
+           [
+            [
+             "app",
+             "sym",
+             [
+              [
+               "var",
+               "G"
+              ]
+             ]
+            ]
+           ]
+          ]
+         ]
+        ],
+        "literal": -3221414,
+        "value": false
+       }
+      ],
+      "target": [
+       "tuple",
+       [
+        [
+         "str",
+         "p"
+        ],
+        [
+         "str",
+         "abelian"
+        ],
+        [
+         "app",
+         "sym",
+         [
+          [
+           "var",
+           "G"
+          ]
+         ]
+        ]
+       ]
+      ],
+      "value": false,
+      "version": 1
+     },
+     "source_bundle_sha256": "8719e1754b9bdd2885f4893411b4a653b9241bd48911cfed28c9ed8ec272cfcc",
+     "source_claims": 280,
+     "source_bundle_is_frozen_projection": true,
+     "mathematical_provenance_audited": false,
+     "full_saved_domain_oracles_equal": true,
+     "original_inputs_unchanged": true,
+     "registered_source_withdrawal_verified": true,
+     "fresh_solver_reopen_verified": true,
+     "idempotent_replay_verified": true,
+     "identity_stable": true,
+     "initial": {
+      "revision": 0,
+      "conditions": 1908,
+      "kinds": {
+       "C": 1583,
+       "A": 325
+      },
+      "rows": 30953,
+      "proof_pending": 1908,
+      "domain_import_complete": true,
+      "candidate_frontier_complete": false,
+      "source_propagation_complete": false,
+      "current_support_computed": false,
+      "original_support_preserved": true,
+      "database_bytes": 20852736
+     },
+     "restored": {
+      "revision": 4,
+      "conditions": 1908,
+      "kinds": {
+       "C": 1908
+      },
+      "rows": 30953,
+      "proof_pending": 1908,
+      "domain_import_complete": true,
+      "candidate_frontier_complete": false,
+      "source_propagation_complete": false,
+      "current_support_computed": false,
+      "original_support_preserved": true,
+      "database_bytes": 21110784
+     },
+     "updates": {
+      "enroll": {
+       "operation": "enroll",
+       "outcome": null,
+       "ledger": {
+        "event": "rk:20117:enroll",
+        "revision": 1,
+        "row": 20117,
+        "affected_conditions": 0,
+        "all_conditions": 1908,
+        "add": false,
+        "projection_sha256": "7850cd59b7210f2bcc3bf8c669850679411396557079b41561ff83dab8b09632",
+        "proof_pending": 1908,
+        "candidate_frontier_complete": false,
+        "source_propagation_complete": false,
+        "current_support_computed": false
+       },
+       "source_versions": [
+        {
+         "name": "frozen-existing-row-assumptions",
+         "version": "7f293498c054be53c733160e0fcdfdce22ceddbec0e2499749fa6e9e9386c19e",
+         "bundle_sha256": "8719e1754b9bdd2885f4893411b4a653b9241bd48911cfed28c9ed8ec272cfcc"
+        }
+       ],
+       "proofs": [],
+       "registered_proof_closure_verified": true,
+       "row_entailment_complete": false,
+       "source_propagation_complete": false,
+       "current_support_computed": false,
+       "candidate_frontier_complete": false
+      },
+      "derive": {
+       "operation": "derive",
+       "outcome": "derived",
+       "ledger": {
+        "event": "rk:20117:derive-known-hidden-value",
+        "revision": 2,
+        "row": 20117,
+        "affected_conditions": 1908,
+        "all_conditions": 1908,
+        "add": false,
+        "projection_sha256": "3368a16be6cce79d34f5cc8fea66924ac9ccbebc3529351b852482f14b15975e",
+        "proof_pending": 1908,
+        "candidate_frontier_complete": false,
+        "source_propagation_complete": false,
+        "current_support_computed": false
+       },
+       "source_versions": [
+        {
+         "name": "frozen-existing-row-assumptions",
+         "version": "7f293498c054be53c733160e0fcdfdce22ceddbec0e2499749fa6e9e9386c19e",
+         "bundle_sha256": "8719e1754b9bdd2885f4893411b4a653b9241bd48911cfed28c9ed8ec272cfcc"
+        }
+       ],
+       "proofs": [
+        {
+         "proof": 1,
+         "active": true,
+         "bindings": [
+          {
+           "literal": -3221414,
+           "providers": [
+            [
+             "frozen-existing-row-assumptions",
+             "7f293498c054be53c733160e0fcdfdce22ceddbec0e2499749fa6e9e9386c19e"
+            ]
+           ]
+          }
+         ]
+        }
+       ],
+       "registered_proof_closure_verified": true,
+       "row_entailment_complete": false,
+       "source_propagation_complete": false,
+       "current_support_computed": false,
+       "candidate_frontier_complete": false
+      },
+      "withdraw": {
+       "operation": "withdraw",
+       "outcome": null,
+       "ledger": {
+        "event": "rk:20117:withdraw-registered-bundle",
+        "revision": 3,
+        "row": 20117,
+        "affected_conditions": 1908,
+        "all_conditions": 1908,
+        "add": false,
+        "projection_sha256": "6f070c3a147dc721f7c1c49120ec2fa802d3061dc89b7bcd5e412a684e5bac51",
+        "proof_pending": 1908,
+        "candidate_frontier_complete": false,
+        "source_propagation_complete": false,
+        "current_support_computed": false
+       },
+       "source_versions": [],
+       "proofs": [
+        {
+         "proof": 1,
+         "active": false,
+         "bindings": [
+          {
+           "literal": -3221414,
+           "providers": []
+          }
+         ]
+        }
+       ],
+       "registered_proof_closure_verified": true,
+       "row_entailment_complete": false,
+       "source_propagation_complete": false,
+       "current_support_computed": false,
+       "candidate_frontier_complete": false
+      },
+      "restore": {
+       "operation": "put_source",
+       "outcome": null,
+       "ledger": {
+        "event": "rk:20117:restore-registered-bundle",
+        "revision": 4,
+        "row": 20117,
+        "affected_conditions": 1908,
+        "all_conditions": 1908,
+        "add": false,
+        "projection_sha256": "3368a16be6cce79d34f5cc8fea66924ac9ccbebc3529351b852482f14b15975e",
+        "proof_pending": 1908,
+        "candidate_frontier_complete": false,
+        "source_propagation_complete": false,
+        "current_support_computed": false
+       },
+       "source_versions": [
+        {
+         "name": "frozen-existing-row-assumptions",
+         "version": "7f293498c054be53c733160e0fcdfdce22ceddbec0e2499749fa6e9e9386c19e",
+         "bundle_sha256": "8719e1754b9bdd2885f4893411b4a653b9241bd48911cfed28c9ed8ec272cfcc"
+        }
+       ],
+       "proofs": [
+        {
+         "proof": 1,
+         "active": true,
+         "bindings": [
+          {
+           "literal": -3221414,
+           "providers": [
+            [
+             "frozen-existing-row-assumptions",
+             "7f293498c054be53c733160e0fcdfdce22ceddbec0e2499749fa6e9e9386c19e"
+            ]
+           ]
+          }
+         ]
+        }
+       ],
+       "registered_proof_closure_verified": true,
+       "row_entailment_complete": false,
+       "source_propagation_complete": false,
+       "current_support_computed": false,
+       "candidate_frontier_complete": false
+      }
+     },
+     "stages": {
+      "freeze_select_target": {
+       "wall_seconds": 55.19187746199998,
+       "cpu_seconds": 55.008690157000004
+      },
+      "seed_and_full_oracle": {
+       "wall_seconds": 1.2454714360000025,
+       "cpu_seconds": 1.2370510819999936
+      },
+      "enroll": {
+       "wall_seconds": 1.6294739040000081,
+       "cpu_seconds": 1.628123310999996
+      },
+      "derive_update": {
+       "wall_seconds": 3.128759776999999,
+       "cpu_seconds": 3.1181847259999813
+      },
+      "derived_full_oracle": {
+       "wall_seconds": 0.563199462,
+       "cpu_seconds": 0.5523127499999987
+      },
+      "withdraw_update": {
+       "wall_seconds": 1.9080836250000175,
+       "cpu_seconds": 1.9072881449999954
+      },
+      "reopen_fresh_context_restore": {
+       "wall_seconds": 55.972014056999996,
+       "cpu_seconds": 55.91540634099999
+      }
+     },
+     "database_file": {
+      "bytes": 21110784,
+      "sha256": "368e9c35c94229ba8e5669e53d17f8827c45a9febdc0b88e79ec8e511855bc2d"
+     },
+     "database_files_uploaded": false,
+     "registered_proof_closure_verified": true,
+     "row_entailment_complete": false,
+     "condition_sat_verdicts_generated": false,
+     "proof_pending": 1908,
+     "source_propagation_complete": false,
+     "current_support_computed": false,
+     "candidate_frontier_complete": false,
+     "production_speedup_claimed": false
+    },
+    "requested_compact_fact_sat": true,
+    "requested_state_save": false,
+    "actual_compact_fact_sat": true,
+    "actual_state_save": false,
+    "mode_verified": true,
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": false,
+    "cprofile": false,
+    "actual_ledger_sources": {
+     "algen/value_ledger.py": "500bb4fa63410e0168b15e87d439ca95f4c81918cd56565b929cdb2fd2fbba86",
+     "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+     "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+     "tools/probe_value_ledger.py": "3ad190c16b411a9750910a19b0547ac756b8a925b0f61d3767586a79dc17d9e5",
+     "tools/probe_row_knowledge.py": "546a267d3c8ab73ccb80abf9885028adec3536b893267c486348ddb23cbfc40a",
+     "algen/row_knowledge.py": "c4b61fa7c578d380ef3d7a1bef78d08887cedd9575e8d452c08da46f619dac39",
+     "tools/profile_memory.py": "38c04a1f870aea78e2f5d8f55668a85c11da2d8b587c98177bb5c5fd3b6309f3",
+     "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+     "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+     "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+     "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+     "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+     "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3"
+    },
+    "ledger_mode_verified": true,
+    "code_sha256": {
+     "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+     "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+     "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "algen/compress.py": "8ab005847fd509fbc31753cd43eb91f1db00b525a13f2066051c9efe66c1b074",
+     "algen/compress_base.py": "1db5c67a3aa69d89ed1c1587690e73eb31c65852ffc91a7d6c88ffece542769e",
+     "tools/profile_memory.py": "38c04a1f870aea78e2f5d8f55668a85c11da2d8b587c98177bb5c5fd3b6309f3",
+     "algen/value_ledger.py": "500bb4fa63410e0168b15e87d439ca95f4c81918cd56565b929cdb2fd2fbba86",
+     "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+     "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+     "tools/probe_value_ledger.py": "3ad190c16b411a9750910a19b0547ac756b8a925b0f61d3767586a79dc17d9e5",
+     "tools/probe_row_knowledge.py": "546a267d3c8ab73ccb80abf9885028adec3536b893267c486348ddb23cbfc40a",
+     "algen/row_knowledge.py": "c4b61fa7c578d380ef3d7a1bef78d08887cedd9575e8d452c08da46f619dac39",
+     "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+     "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3"
+    }
+   },
+   "verified": [
+    {
+     "stage": "run:end",
+     "seconds": 215.367,
+     "memory_kib": {
+      "VmHWM": 11046148,
+      "VmRSS": 9642316
+     },
+     "report_rows": 0,
+     "report_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+     "alive": {
+      "entries": 1908,
+      "container_bytes": 48,
+      "packed_bytes": 19080
+     },
+     "empty": {
+      "entries": 252708,
+      "container_bytes": 48,
+      "packed_bytes": 2021664
+     },
+     "legacy_stages": [
+      [
+       "начало",
+       7.19,
+       0
+      ],
+      [
+       "перебор",
+       8.11,
+       1908
+      ],
+      [
+       "минимальные",
+       8.11,
+       1908
+      ]
+     ],
+     "search_solver": {
+      "deferred": true,
+      "materialized": false
+     },
+     "solver_factories": 1,
+     "phase_scoped_calls": 4,
+     "phase_max_scope": 281
+    }
+   ],
+   "peaks": [
+    [
+     "start",
+     0.034,
+     {
+      "VmHWM": 72416,
+      "VmRSS": 59248
+     }
+    ],
+    [
+     "built_library:start",
+     0.054,
+     {
+      "VmHWM": 72416,
+      "VmRSS": 66772
+     }
+    ],
+    [
+     "built_library:end",
+     0.757,
+     {
+      "VmHWM": 477896,
+      "VmRSS": 445356
+     }
+    ],
+    [
+     "load:start",
+     0.814,
+     {
+      "VmHWM": 477896,
+      "VmRSS": 446920
+     }
+    ],
+    [
+     "skeleton:start",
+     0.814,
+     {
+      "VmHWM": 477896,
+      "VmRSS": 446920
+     }
+    ],
+    [
+     "solver:start",
+     14.015,
+     {
+      "VmHWM": 3912916,
+      "VmRSS": 2877628
+     }
+    ],
+    [
+     "solver:end",
+     33.749,
+     {
+      "VmHWM": 5103220,
+      "VmRSS": 5103220
+     }
+    ],
+    [
+     "skeleton:end",
+     33.752,
+     {
+      "VmHWM": 5103472,
+      "VmRSS": 5103472
+     }
+    ],
+    [
+     "load:end",
+     60.634,
+     {
+      "VmHWM": 7334344,
+      "VmRSS": 7186240
+     }
+    ],
+    [
+     "enumerate_form:start",
+     65.126,
+     {
+      "VmHWM": 7906200,
+      "VmRSS": 7192964
+     }
+    ],
+    [
+     "enumerate_form:end",
+     90.302,
+     {
+      "VmHWM": 8206460,
+      "VmRSS": 8106544
+     }
+    ],
+    [
+     "enumeration:engine",
+     90.302,
+     {
+      "VmHWM": 8206460,
+      "VmRSS": 8106544
+     }
+    ],
+    [
+     "minimal:start",
+     90.302,
+     {
+      "VmHWM": 8206460,
+      "VmRSS": 8106544
+     }
+    ],
+    [
+     "minimal:end",
+     90.302,
+     {
+      "VmHWM": 8206460,
+      "VmRSS": 8106544
+     }
+    ],
+    [
+     "generic_filter:start",
+     90.303,
+     {
+      "VmHWM": 8206460,
+      "VmRSS": 8106544
+     }
+    ],
+    [
+     "generic_filter:end",
+     90.303,
+     {
+      "VmHWM": 8206460,
+      "VmRSS": 8106544
+     }
+    ],
+    [
+     "row-knowledge:verified",
+     215.367,
+     {
+      "VmHWM": 11046148,
+      "VmRSS": 9642316
+     }
+    ],
+    [
+     "run:end",
+     215.367,
+     {
+      "VmHWM": 11046148,
+      "VmRSS": 9642316
+     }
+    ],
+    [
+     "end",
+     217.589,
+     {
+      "VmHWM": 11046148,
+      "VmRSS": 9642316
+     }
+    ]
+   ],
+   "expect_report_sha256": null,
+   "report_sha_ok": null
+  },
+  "commit.txt": "74e3c690cfd8701ce42f765c75ac838e17348862",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 210.86",
+   "System time (seconds): 7.13",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 3:42.37",
+   "Maximum resident set size (kbytes): 11046148",
+   "Exit status: 0"
+  ]
+ }
+}
