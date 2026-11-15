@@ -1,0 +1,424 @@
+{
+ "ledger2-G14217": {
+  "verdict.json": {
+   "case": "ledger2-G14217",
+   "complete": true,
+   "measurement": {
+    "scheme": "G-14-217-767-769-770-771",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 190.552,
+    "cpu_seconds": 187.68867999999998,
+    "peak_rss_kib": 8642764,
+    "sampled_rss_kib": 8622560,
+    "limits": {
+     "seconds": 1200,
+     "rss_gib": 14.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": "перепись",
+    "complete": true,
+    "scope": "full small frozen-domain value ledger control; no SAT",
+    "ledger_expected_minimals": 1908,
+    "ledger_probe_valid": true,
+    "ledger_probe": {
+     "version": 1,
+     "scope": "one complete stored minimal domain; NOT a complete future frontier or report",
+     "sampled": false,
+     "classified": 1908,
+     "rows": 30953,
+     "literal_columns": 562,
+     "input_projection_sha256": "7f293498c054be53c733160e0fcdfdce22ceddbec0e2499749fa6e9e9386c19e",
+     "input_conditions_sha256": "1ce8f69600c01613683ceb5e2029d6196ab815dc9849ae5fc89860741e1566b8",
+     "domain_sha256": "bae492d189a71adb8967ceaa6703315cf3e4eadd6cfcf862aee0f01936a66312",
+     "initial_state_sha256": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2",
+     "state_hashes": {
+      "masked": "68356af93ab6af8625205690706aa0d834ee340142fca823e93811cc9af16760",
+      "restored": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2",
+      "new_row_restored": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2"
+     },
+     "full_domain_oracles_equal": true,
+     "external_projection_readback_verified": true,
+     "identities_sources_supports_readback_verified": true,
+     "original_inputs_unchanged": true,
+     "identity_stable": true,
+     "rollback_verified": true,
+     "reopen_verified": true,
+     "idempotent_replay_verified": true,
+     "hidden_observation_sha256": "81ed9c5f89201b9cbc085d2eace4cecbded3f6b35a59f9dbfff4c571ebd1aab5",
+     "hidden_row": 20117,
+     "hidden_atom": 67,
+     "hot_conditions_after_hide": 325,
+     "initial": {
+      "revision": 0,
+      "conditions": 1908,
+      "kinds": {
+       "C": 1908
+      },
+      "rows": 30953,
+      "proof_pending": 1908,
+      "domain_import_complete": true,
+      "candidate_frontier_complete": false,
+      "source_propagation_complete": false,
+      "current_support_computed": false,
+      "original_support_preserved": true,
+      "database_bytes": 20844544
+     },
+     "restored": {
+      "revision": 2,
+      "conditions": 1908,
+      "kinds": {
+       "C": 1908
+      },
+      "rows": 30953,
+      "proof_pending": 1908,
+      "domain_import_complete": true,
+      "candidate_frontier_complete": false,
+      "source_propagation_complete": false,
+      "current_support_computed": false,
+      "original_support_preserved": true,
+      "database_bytes": 20856832
+     },
+     "updates": [
+      {
+       "event": "hide-checked-cell",
+       "revision": 1,
+       "row": 20117,
+       "affected_conditions": 1908,
+       "all_conditions": 1908,
+       "add": false,
+       "projection_sha256": "7850cd59b7210f2bcc3bf8c669850679411396557079b41561ff83dab8b09632",
+       "proof_pending": 1908,
+       "candidate_frontier_complete": false,
+       "source_propagation_complete": false,
+       "current_support_computed": false
+      },
+      {
+       "event": "restore-checked-cell",
+       "revision": 2,
+       "row": 20117,
+       "affected_conditions": 1908,
+       "all_conditions": 1908,
+       "add": false,
+       "projection_sha256": "3368a16be6cce79d34f5cc8fea66924ac9ccbebc3529351b852482f14b15975e",
+       "proof_pending": 1908,
+       "candidate_frontier_complete": false,
+       "source_propagation_complete": false,
+       "current_support_computed": false
+      },
+      {
+       "event": "return-withheld-row",
+       "revision": 1,
+       "row": 30952,
+       "affected_conditions": 1908,
+       "all_conditions": 1908,
+       "add": true,
+       "projection_sha256": "3368a16be6cce79d34f5cc8fea66924ac9ccbebc3529351b852482f14b15975e",
+       "proof_pending": 1908,
+       "candidate_frontier_complete": false,
+       "source_propagation_complete": false,
+       "current_support_computed": false
+      }
+     ],
+     "stages": {
+      "seed": {
+       "wall_seconds": 2.1802055859999996,
+       "cpu_seconds": 2.1393725799999856
+      },
+      "hide_update": {
+       "wall_seconds": 0.22933586599998534,
+       "cpu_seconds": 0.22781753400002458
+      },
+      "hide_full_oracle": {
+       "wall_seconds": 0.930902446999994,
+       "cpu_seconds": 0.896085553000006
+      },
+      "restore_after_reopen": {
+       "wall_seconds": 0.23449796600004902,
+       "cpu_seconds": 0.23316025700000864
+      },
+      "separate_withheld_row_control": {
+       "wall_seconds": 3.3661994749999735,
+       "cpu_seconds": 3.254138970999975
+      }
+     },
+     "database_files": {
+      "values.sqlite": {
+       "bytes": 20856832,
+       "sha256": "6b2cf32a35595da237ace4325803fbfd65935275304d3b91adbd736be4401930"
+      },
+      "append.sqlite": {
+       "bytes": 20844544,
+       "sha256": "216b25f1a0798078ef37ad5a50d9a0367073f361b994eafa208e03e8efc8f40b"
+      }
+     },
+     "database_files_uploaded": false,
+     "masking_is_not_source_retraction": true,
+     "proof_pending": 1908,
+     "current_support_computed": false,
+     "source_propagation_complete": false,
+     "candidate_frontier_complete": false,
+     "sat_verdicts_generated": false,
+     "production_speedup_claimed": false
+    },
+    "requested_compact_fact_sat": true,
+    "requested_state_save": false,
+    "actual_compact_fact_sat": true,
+    "actual_state_save": false,
+    "mode_verified": true,
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": false,
+    "cprofile": false,
+    "actual_ledger_sources": {
+     "algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+     "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+     "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+     "tools/probe_value_ledger.py": "3ad190c16b411a9750910a19b0547ac756b8a925b0f61d3767586a79dc17d9e5",
+     "tools/profile_memory.py": "e6156f7a96320a04fd4d6a0df81f0380fcc6f45eb123bd0b633f5e511667b08d",
+     "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+     "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+     "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+     "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+     "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+     "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3"
+    },
+    "ledger_mode_verified": true,
+    "code_sha256": {
+     "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+     "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+     "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "algen/compress.py": "8ab005847fd509fbc31753cd43eb91f1db00b525a13f2066051c9efe66c1b074",
+     "algen/compress_base.py": "1db5c67a3aa69d89ed1c1587690e73eb31c65852ffc91a7d6c88ffece542769e",
+     "tools/profile_memory.py": "e6156f7a96320a04fd4d6a0df81f0380fcc6f45eb123bd0b633f5e511667b08d",
+     "algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+     "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+     "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+     "tools/probe_value_ledger.py": "3ad190c16b411a9750910a19b0547ac756b8a925b0f61d3767586a79dc17d9e5",
+     "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+     "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3"
+    }
+   },
+   "verified": [
+    {
+     "stage": "run:end",
+     "seconds": 184.368,
+     "memory_kib": {
+      "VmHWM": 8642764,
+      "VmRSS": 8140344
+     },
+     "report_rows": 0,
+     "report_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+     "alive": {
+      "entries": 1908,
+      "container_bytes": 48,
+      "packed_bytes": 19080
+     },
+     "empty": {
+      "entries": 252708,
+      "container_bytes": 48,
+      "packed_bytes": 2021664
+     },
+     "legacy_stages": [
+      [
+       "начало",
+       7.19,
+       0
+      ],
+      [
+       "перебор",
+       8.11,
+       1908
+      ],
+      [
+       "минимальные",
+       8.11,
+       1908
+      ]
+     ],
+     "search_solver": {
+      "deferred": true,
+      "materialized": false
+     },
+     "solver_factories": 1,
+     "phase_scoped_calls": 4,
+     "phase_max_scope": 281
+    }
+   ],
+   "peaks": [
+    [
+     "start",
+     0.039,
+     {
+      "VmHWM": 72588,
+      "VmRSS": 59320
+     }
+    ],
+    [
+     "built_library:start",
+     0.066,
+     {
+      "VmHWM": 72588,
+      "VmRSS": 66844
+     }
+    ],
+    [
+     "built_library:end",
+     0.996,
+     {
+      "VmHWM": 478072,
+      "VmRSS": 445400
+     }
+    ],
+    [
+     "load:start",
+     1.009,
+     {
+      "VmHWM": 478072,
+      "VmRSS": 446968
+     }
+    ],
+    [
+     "skeleton:start",
+     1.01,
+     {
+      "VmHWM": 478072,
+      "VmRSS": 446968
+     }
+    ],
+    [
+     "solver:start",
+     16.361,
+     {
+      "VmHWM": 3913092,
+      "VmRSS": 2877668
+     }
+    ],
+    [
+     "solver:end",
+     47.983,
+     {
+      "VmHWM": 5103168,
+      "VmRSS": 5103168
+     }
+    ],
+    [
+     "skeleton:end",
+     47.988,
+     {
+      "VmHWM": 5103416,
+      "VmRSS": 5103416
+     }
+    ],
+    [
+     "load:end",
+     74.978,
+     {
+      "VmHWM": 7334112,
+      "VmRSS": 7186188
+     }
+    ],
+    [
+     "enumerate_form:start",
+     81.692,
+     {
+      "VmHWM": 7905852,
+      "VmRSS": 7191824
+     }
+    ],
+    [
+     "enumerate_form:end",
+     110.964,
+     {
+      "VmHWM": 8205172,
+      "VmRSS": 8105348
+     }
+    ],
+    [
+     "enumeration:engine",
+     110.964,
+     {
+      "VmHWM": 8205172,
+      "VmRSS": 8105348
+     }
+    ],
+    [
+     "minimal:start",
+     110.964,
+     {
+      "VmHWM": 8205172,
+      "VmRSS": 8105348
+     }
+    ],
+    [
+     "minimal:end",
+     110.964,
+     {
+      "VmHWM": 8205172,
+      "VmRSS": 8105348
+     }
+    ],
+    [
+     "generic_filter:start",
+     110.964,
+     {
+      "VmHWM": 8205172,
+      "VmRSS": 8105348
+     }
+    ],
+    [
+     "generic_filter:end",
+     110.964,
+     {
+      "VmHWM": 8205172,
+      "VmRSS": 8105348
+     }
+    ],
+    [
+     "ledger:verified",
+     184.368,
+     {
+      "VmHWM": 8642764,
+      "VmRSS": 8140344
+     }
+    ],
+    [
+     "run:end",
+     184.368,
+     {
+      "VmHWM": 8642764,
+      "VmRSS": 8140344
+     }
+    ],
+    [
+     "end",
+     186.232,
+     {
+      "VmHWM": 8642764,
+      "VmRSS": 8133184
+     }
+    ]
+   ],
+   "expect_report_sha256": null,
+   "report_sha_ok": null
+  },
+  "commit.txt": "69496b8e4caed201c3ad87045f3f35c96a46cba3",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 180.81",
+   "System time (seconds): 7.79",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 3:10.90",
+   "Maximum resident set size (kbytes): 8642764",
+   "Exit status: 0"
+  ]
+ }
+}
