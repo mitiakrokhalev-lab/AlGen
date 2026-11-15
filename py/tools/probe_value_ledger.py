@@ -37,6 +37,14 @@ def _digest(rows):
     return h.hexdigest()
 
 
+def _matrix_hash(matrix):
+    """Hash logical row order with bounded copies, including native F/strided views."""
+    h = hashlib.sha256()
+    for start in range(0, len(matrix), 256):
+        h.update(memoryview(np.ascontiguousarray(matrix[start:start+256])))
+    return h.hexdigest()
+
+
 def _fresh(form, conditions, max_total_events=1_000_000):
     """Full classification without consulting stored kinds, dependencies or events."""
     result, events = [], 0
@@ -93,7 +101,7 @@ def probe(form, conditions, identities, manifest, source, directory):
     directory.mkdir(parents=True, exist_ok=False)
     if len(identities) != len(form.m):
         raise ValueError('all concrete row identities are required')
-    input_matrix = hashlib.sha256(memoryview(form.m)).hexdigest()
+    input_matrix = _matrix_hash(form.m)
     input_conditions = _digest((list(p), g, support) for (p, g), support in conditions.items())
     initial = _fresh(form, conditions)
     if any(row[2] == 3 for row in initial):
@@ -181,7 +189,7 @@ def probe(form, conditions, identities, manifest, source, directory):
         updates.append(add)
         hashes['new_row_restored'] = _digest(db.state_rows())
         stages['separate_withheld_row_control'] = _elapsed(t)
-    assert hashlib.sha256(memoryview(form.m)).hexdigest() == input_matrix
+    assert _matrix_hash(form.m) == input_matrix
     assert _digest((list(p), g, support) for (p, g), support in conditions.items()) == input_conditions
     files = {p.name: dict(bytes=p.stat().st_size, sha256=hashlib.sha256(p.read_bytes()).hexdigest())
              for p in (db_path, second_path)}

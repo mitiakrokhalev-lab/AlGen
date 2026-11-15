@@ -4,6 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
+import numpy as np
 
 from test_value_classify import fake, packed
 from test_value_ledger import MANIFEST, SOURCE
@@ -12,6 +13,26 @@ from tools.probe_value_ledger import probe, valid_receipt
 
 
 class ValueLedgerProbeTest(unittest.TestCase):
+    def test_noncontiguous_native_projection_is_hashed_in_logical_row_order(self):
+        form = fake([(True, True), (False, True), (True, False)])
+        conditions = packed(form, [((1,), 2), ((3,), 0)])
+        logical = form.m.copy()
+        hashes = []
+        for layout in ('fortran', 'strided'):
+            if layout == 'fortran':
+                form.m = np.asfortranarray(logical)
+            else:
+                padded = np.zeros((6,8), dtype=bool)
+                padded[::2,::2] = logical
+                form.m = padded[::2,::2]
+            self.assertFalse(form.m.flags.c_contiguous)
+            with tempfile.TemporaryDirectory(prefix='algen-ledger-view-') as tmp:
+                result = probe(form, conditions, [dict(concrete=i) for i in range(3)],
+                               MANIFEST, SOURCE, Path(tmp)/'private-db')
+                self.assertTrue(valid_receipt(result))
+                hashes.append(result['input_projection_sha256'])
+        self.assertEqual(hashes[0], hashes[1])
+
     def test_full_small_projection_control_and_fail_closed_receipt(self):
         form = fake([(True, True), (False, True), (True, False)])
         conditions = packed(form, [((1,), 2), ((3,), 0)])
