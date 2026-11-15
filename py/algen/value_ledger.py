@@ -356,6 +356,18 @@ class ValueLedger:
         This is NOT a proof checker or a source-withdrawal engine. New rules,
         language, source dependency closures, and unseen candidates stay debts.
         """
+        with self._atomic():
+            return self._apply_row_in_transaction(event, identity, row, source, expected_revision, add=add)
+
+    def _row_is_managed(self, identity):
+        installed = self.db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='rk_rows'").fetchone()
+        return bool(installed and self.db.execute(
+            "SELECT 1 FROM rk_rows k JOIN rows r ON r.id=k.row_id WHERE r.identity=?", (identity,)).fetchone())
+
+    def _apply_row_in_transaction(self, event, identity, row, source, expected_revision, *, add=False, _managed=False):
+        """Internal atomic bridge; the RowKnowledge caller supplies its checked projection."""
+        if not self.db.in_transaction:
+            raise RuntimeError("row application requires an active write transaction")
         source_checked(source)
         if not isinstance(event, str) or not event or type(expected_revision) is not int or type(add) is not bool:
             raise ValueError("event key, expected revision and add flag required")
@@ -369,44 +381,50 @@ class ValueLedger:
             raise ValueError("contradictory primitive row")
         packed, key = self._pack(row), canonical(structure(identity))
         packet = canonical(dict(add=add, identity=key, row=packed.hex(), source=source))
-        with self._atomic():
-            previous = self.db.execute("SELECT packet,receipt FROM changes WHERE event=?", (event,)).fetchone()
-            if previous:
-                if previous[0] != packet:
-                    raise ValueError("event key reused for a different patch")
-                return dict(json.loads(previous[1]), replayed=True)
-            revision = self._meta("revision")
-            if expected_revision != revision:
-                raise ValueError("stale ledger revision")
-            current = self.db.execute("SELECT r.id,r.revision,v.projection FROM rows r JOIN row_versions v "
-                "ON v.row_id=r.id AND v.revision=r.revision WHERE identity=?", (key,)).fetchone()
-            if (current is None) != add:
-                raise ValueError("assignment already exists" if add else "unknown assignment")
-            revision += 1
-            self.db.execute("DELETE FROM affected")
-            if add:
-                rid = self.db.execute("SELECT count(*) FROM rows").fetchone()[0]
-                if (rid + 1) * ncols > self._meta("max_matrix_bytes"):
-                    raise ValueError("new row exceeds matrix budget")
-                self.db.execute("INSERT INTO rows VALUES(?,?,?)", (rid, key, revision))
-                self.db.execute("INSERT INTO affected SELECT id FROM conditions")
-            else:
-                rid = current["id"]
-                old = np.unpackbits(np.frombuffer(current["projection"], dtype='u1'), bitorder="little")[:ncols]
-                for a in primitive:
-                    if np.any(old[2*a:2*a+2] != row[2*a:2*a+2]):
-                        self.db.execute("INSERT OR IGNORE INTO affected SELECT condition_id FROM literals WHERE atom=?", (a,))
-                self.db.execute("UPDATE rows SET revision=? WHERE id=?", (revision, rid))
-            self.db.execute("INSERT INTO row_versions VALUES(?,?,?,?)", (rid, revision, packed, canonical(source)))
-            prepared = PreparedValues(self.projection())
-            if library().source_hash != self._meta("engine_sha256"):
-                raise ValueError("numeric classifier changed; explicit full refresh required")
-            affected = self.db.execute("SELECT count(*) FROM affected").fetchone()[0]
-            self._reclassify(prepared, revision)
-            self._put("revision", revision)
-            receipt = dict(event=event, revision=revision, row=rid, affected_conditions=affected,
-                all_conditions=self._meta("conditions"), add=add, projection_sha256=prepared.context_sha256,
-                proof_pending=self._meta("conditions"), candidate_frontier_complete=False,
-                source_propagation_complete=False, current_support_computed=False)
-            self.db.execute("INSERT INTO changes VALUES(?,?,?)", (event, packet, canonical(receipt)))
-            return receipt
+        previous = self.db.execute("SELECT packet,receipt FROM changes WHERE event=?", (event,)).fetchone()
+        if previous:
+            if _managed:
+                # RowKnowledge performs its own exact event replay before any
+                # writes. A new knowledge event must never reuse a historical
+                # public event and commit proofs without a new row version.
+                raise ValueError('managed row event collides with an existing ledger event')
+            if previous[0] != packet:
+                raise ValueError("event key reused for a different patch")
+            return dict(json.loads(previous[1]), replayed=True)
+        if not _managed and self._row_is_managed(key):
+            raise ValueError("enrolled row must be updated through RowKnowledge")
+        revision = self._meta("revision")
+        if expected_revision != revision:
+            raise ValueError("stale ledger revision")
+        current = self.db.execute("SELECT r.id,r.revision,v.projection FROM rows r JOIN row_versions v "
+            "ON v.row_id=r.id AND v.revision=r.revision WHERE identity=?", (key,)).fetchone()
+        if (current is None) != add:
+            raise ValueError("assignment already exists" if add else "unknown assignment")
+        revision += 1
+        self.db.execute("DELETE FROM affected")
+        if add:
+            rid = self.db.execute("SELECT count(*) FROM rows").fetchone()[0]
+            if (rid + 1) * ncols > self._meta("max_matrix_bytes"):
+                raise ValueError("new row exceeds matrix budget")
+            self.db.execute("INSERT INTO rows VALUES(?,?,?)", (rid, key, revision))
+            self.db.execute("INSERT INTO affected SELECT id FROM conditions")
+        else:
+            rid = current["id"]
+            old = np.unpackbits(np.frombuffer(current["projection"], dtype='u1'), bitorder="little")[:ncols]
+            for a in primitive:
+                if np.any(old[2*a:2*a+2] != row[2*a:2*a+2]):
+                    self.db.execute("INSERT OR IGNORE INTO affected SELECT condition_id FROM literals WHERE atom=?", (a,))
+            self.db.execute("UPDATE rows SET revision=? WHERE id=?", (revision, rid))
+        self.db.execute("INSERT INTO row_versions VALUES(?,?,?,?)", (rid, revision, packed, canonical(source)))
+        prepared = PreparedValues(self.projection())
+        if library().source_hash != self._meta("engine_sha256"):
+            raise ValueError("numeric classifier changed; explicit full refresh required")
+        affected = self.db.execute("SELECT count(*) FROM affected").fetchone()[0]
+        self._reclassify(prepared, revision)
+        self._put("revision", revision)
+        receipt = dict(event=event, revision=revision, row=rid, affected_conditions=affected,
+            all_conditions=self._meta("conditions"), add=add, projection_sha256=prepared.context_sha256,
+            proof_pending=self._meta("conditions"), candidate_frontier_complete=False,
+            source_propagation_complete=False, current_support_computed=False)
+        self.db.execute("INSERT INTO changes VALUES(?,?,?)", (event, packet, canonical(receipt)))
+        return receipt
