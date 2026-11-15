@@ -38,17 +38,24 @@
     "run": 43660610487,
     "job": 132648921740,
     "commit": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
-    "status": "in_progress",
-    "expected_tests": 270,
-    "tests": null,
-    "seconds": null,
-    "result": null,
+    "status": "completed",
+    "conclusion": "success",
+    "tests": 270,
+    "seconds": 2812.638,
+    "result": "OK",
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "checkout_commit": "952e83e6a66ade47adafc95f0525f676021c48c8",
+    "checkout_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+    "code_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+    "checkout_tree_equals_code_tree": true,
+    "actual_checkout_observed_in_completed_log": true,
+    "independently_reviewed": true,
     "cpu_seconds": null,
     "peak_rss_kib": null,
-    "expected_checkout_commit": "952e83e6a66ade47adafc95f0525f676021c48c8",
-    "expected_checkout_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
-    "expected_tree_from_fetched_ref_equals_code_tree": true,
-    "actual_checkout_observed_in_completed_log": false
+    "job_wall_seconds": 2829.0,
+    "unittest_step_wall_seconds": 2818.0
   },
   "ci_attempts": [
     {
@@ -66,6 +73,29 @@
       "peak_rss_kib": null,
       "reason": "workflow concurrency after reviewed noncontiguous-projection fix",
       "checkout_commit": "851ebba77b7c2800516d05a7350a8b1d260e51ac"
+    },
+    {
+      "run": 43660610487,
+      "job": 132648921740,
+      "commit": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+      "status": "completed",
+      "conclusion": "success",
+      "tests": 270,
+      "seconds": 2812.638,
+      "result": "OK",
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "checkout_commit": "952e83e6a66ade47adafc95f0525f676021c48c8",
+      "checkout_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+      "code_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+      "checkout_tree_equals_code_tree": true,
+      "actual_checkout_observed_in_completed_log": true,
+      "independently_reviewed": true,
+      "cpu_seconds": null,
+      "peak_rss_kib": null,
+      "job_wall_seconds": 2829.0,
+      "unittest_step_wall_seconds": 2818.0
     }
   ],
   "controls": [
@@ -1155,6 +1185,132 @@
         ]
       },
       "receipt_sha256": "0da3ca29e594db662045660bc15bf53112c5c6ef35599bf47df1affea33a8275"
+    },
+    "completed_ci": {
+      "receipt": {
+        "repo": "mitiakrokhalev-lab/AlGen",
+        "checked_at_utc": "2026-11-15T05:17:41Z",
+        "run": {
+          "id": 43660610487,
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+          "head_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+          "run_attempt": 1,
+          "url": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/actions/runs/43660610487"
+        },
+        "job": {
+          "id": 132648921740,
+          "run_id": 43660610487,
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+          "started_at": "2026-11-15T00:56:00Z",
+          "completed_at": "2026-11-15T01:43:09Z",
+          "url": "https://github.com/mitiakrokhalev-lab/AlGen/actions/runs/43660610487/job/132648921740",
+          "unittest_step": {
+            "name": "unittest",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-11-15T00:56:09Z",
+            "completed_at": "2026-11-15T01:43:07Z",
+            "wall_seconds": 2818.0
+          },
+          "wall_seconds": 2829.0
+        },
+        "checkout": {
+          "sha": "952e83e6a66ade47adafc95f0525f676021c48c8",
+          "tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+          "parents": [
+            "f005b439bf7365033d54ea715807b3d4e0ee138c",
+            "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f"
+          ]
+        },
+        "code": {
+          "sha": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+          "tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e"
+        },
+        "observed_docs_head": {
+          "sha": "77ad782698f67f18297329d3623f3b3222531624",
+          "tree": "a383021f730077b16f523e11589e68afba9cae5a"
+        },
+        "previous_cancelled_run": {
+          "id": 43658649943,
+          "status": "completed",
+          "conclusion": "cancelled",
+          "head_sha": "e1f07f9d3746518ef59b5467f7772eb613e771eb",
+          "job_id": 132642783652,
+          "job_status": "completed",
+          "job_conclusion": "cancelled",
+          "job_started_at": "2026-11-15T00:32:11Z",
+          "job_completed_at": "2026-11-15T00:55:58Z",
+          "is_green": false,
+          "job_wall_seconds": 1427.0
+        },
+        "provenance": {
+          "run_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/actions/runs/43660610487",
+          "jobs_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/actions/runs/43660610487/jobs",
+          "code_commit_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/git/commits/d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+          "checkout_commit_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/git/commits/952e83e6a66ade47adafc95f0525f676021c48c8",
+          "job_logs_tool": "mcp__codex_apps__github_fetch_workflow_job_logs",
+          "job_logs_args": {
+            "job_id": 132648921740,
+            "repo_full_name": "mitiakrokhalev-lab/AlGen"
+          },
+          "local_fetch_receipt": "/workspace/work/algen-pr21-ci02-fetch-receipt.json",
+          "previous_cancelled_run_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/actions/runs/43658649943",
+          "previous_cancelled_jobs_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/actions/runs/43658649943/jobs",
+          "fetch_receipt_sha256": "71da08b914ed02cf19ddd136a0a08a2385e027d1605806d8ea50dba32873bb47"
+        },
+        "result": "verified",
+        "tests": {
+          "executed": 270,
+          "unique_test_ids": 270,
+          "ok": 270,
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "expected_failures": 0,
+          "unexpected_successes": 0,
+          "suite_wall_seconds": 2812.638,
+          "suite_summary_lines": [
+            491,
+            493
+          ],
+          "standalone_ok": {
+            "id": "test_rules_B.RulesBTest.test_library_rows_agree",
+            "line": 430,
+            "status": "ok",
+            "result_line": 444
+          }
+        },
+        "measurements": {
+          "cpu_seconds": null,
+          "peak_rss_bytes": null,
+          "reason": "Not measured by this CI; no resource measurement record in decoded log."
+        },
+        "log": {
+          "path": "/workspace/work/algen-pr21-ci02-completed.log",
+          "bytes": 63588,
+          "lines": 513,
+          "sha256": "ace56561576d0bb99a17306a0d41df77f5a798fe9877ca6dcf070868b92bc881",
+          "api_decoded_log_bytes": 63587,
+          "api_decoded_log_lines": 512,
+          "api_decoded_log_sha256": "8e1ae6b3441dc0daa8bfe9f3d44141d7a23cfd91b9fb82a6028582ed9623887a",
+          "raw_equal": false,
+          "matches_api_plus_one_trailing_lf": true,
+          "checkout_sha_line": 122
+        },
+        "review_scope": {
+          "tests_rerun": false,
+          "pilots_rerun": false,
+          "project_files_modified": false,
+          "ci_evidence_applies_to": "code tree 0b35362c5ae43ca449f4effce84d7c29884bce3e, actual merge checkout 952e83e6a66ade47adafc95f0525f676021c48c8",
+          "does_not_establish": "Successful CI on docs-only HEAD 77ad782698f67f18297329d3623f3b3222531624; CPU or RSS measurements; current support/source closure/frontier; PR20 evidence."
+        }
+      },
+      "receipt_sha256": "ed78c56556519ec16ddfb5c5025b2eb77da8e0dfdd5e482f2adfd7b84564fe54"
     }
   },
   "local_validation": {
