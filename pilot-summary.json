@@ -1,0 +1,225 @@
+{
+ "ledger-G14217": {
+  "verdict.json": {
+   "case": "ledger-G14217",
+   "complete": false,
+   "measurement": {
+    "scheme": "G-14-217-767-769-770-771",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 134.22,
+    "cpu_seconds": 130.384275,
+    "peak_rss_kib": 8644036,
+    "sampled_rss_kib": 8644336,
+    "limits": {
+     "seconds": 1200,
+     "rss_gib": 14.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": "ошибка",
+    "complete": false,
+    "scope": "full small frozen-domain value ledger control; no SAT",
+    "ledger_probe_error": "[Errno 2] No such file or directory: '/home/runner/work/AlGen/AlGen/profiles/ledger-G14217/ledger-probe.json'",
+    "ledger_expected_minimals": 1908,
+    "ledger_probe_valid": false,
+    "ledger_probe": null,
+    "requested_compact_fact_sat": true,
+    "requested_state_save": false,
+    "actual_compact_fact_sat": true,
+    "actual_state_save": false,
+    "mode_verified": true,
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": false,
+    "cprofile": false,
+    "actual_ledger_sources": {
+     "algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+     "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+     "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+     "tools/probe_value_ledger.py": "99f682ecd83095dbf9816a22035e4451b012cbead1ced45dbde0b173f23933a9",
+     "tools/profile_memory.py": "e6156f7a96320a04fd4d6a0df81f0380fcc6f45eb123bd0b633f5e511667b08d",
+     "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+     "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+     "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+     "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+     "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+     "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3"
+    },
+    "ledger_mode_verified": true,
+    "code_sha256": {
+     "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+     "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+     "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+     "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+     "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+     "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+     "algen/compress.py": "8ab005847fd509fbc31753cd43eb91f1db00b525a13f2066051c9efe66c1b074",
+     "algen/compress_base.py": "1db5c67a3aa69d89ed1c1587690e73eb31c65852ffc91a7d6c88ffece542769e",
+     "tools/profile_memory.py": "e6156f7a96320a04fd4d6a0df81f0380fcc6f45eb123bd0b633f5e511667b08d",
+     "algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+     "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+     "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+     "tools/probe_value_ledger.py": "99f682ecd83095dbf9816a22035e4451b012cbead1ced45dbde0b173f23933a9",
+     "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+     "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3"
+    }
+   },
+   "verified": [],
+   "peaks": [
+    [
+     "start",
+     0.032,
+     {
+      "VmHWM": 72660,
+      "VmRSS": 59392
+     }
+    ],
+    [
+     "built_library:start",
+     0.052,
+     {
+      "VmHWM": 72660,
+      "VmRSS": 66912
+     }
+    ],
+    [
+     "built_library:end",
+     0.716,
+     {
+      "VmHWM": 478144,
+      "VmRSS": 445464
+     }
+    ],
+    [
+     "load:start",
+     0.763,
+     {
+      "VmHWM": 478144,
+      "VmRSS": 447028
+     }
+    ],
+    [
+     "skeleton:start",
+     0.763,
+     {
+      "VmHWM": 478144,
+      "VmRSS": 447028
+     }
+    ],
+    [
+     "solver:start",
+     13.388,
+     {
+      "VmHWM": 3913148,
+      "VmRSS": 2877732
+     }
+    ],
+    [
+     "solver:end",
+     33.033,
+     {
+      "VmHWM": 5103232,
+      "VmRSS": 5103232
+     }
+    ],
+    [
+     "skeleton:end",
+     33.036,
+     {
+      "VmHWM": 5103480,
+      "VmRSS": 5103480
+     }
+    ],
+    [
+     "load:end",
+     58.709,
+     {
+      "VmHWM": 7334256,
+      "VmRSS": 7186244
+     }
+    ],
+    [
+     "enumerate_form:start",
+     63.147,
+     {
+      "VmHWM": 7906140,
+      "VmRSS": 7192980
+     }
+    ],
+    [
+     "enumerate_form:end",
+     87.536,
+     {
+      "VmHWM": 8206540,
+      "VmRSS": 8106500
+     }
+    ],
+    [
+     "enumeration:engine",
+     87.536,
+     {
+      "VmHWM": 8206540,
+      "VmRSS": 8106500
+     }
+    ],
+    [
+     "minimal:start",
+     87.537,
+     {
+      "VmHWM": 8206540,
+      "VmRSS": 8106500
+     }
+    ],
+    [
+     "minimal:end",
+     87.537,
+     {
+      "VmHWM": 8206540,
+      "VmRSS": 8106500
+     }
+    ],
+    [
+     "generic_filter:start",
+     87.537,
+     {
+      "VmHWM": 8206540,
+      "VmRSS": 8106500
+     }
+    ],
+    [
+     "generic_filter:end",
+     87.537,
+     {
+      "VmHWM": 8206540,
+      "VmRSS": 8106500
+     }
+    ],
+    [
+     "end",
+     129.859,
+     {
+      "VmHWM": 8644036,
+      "VmRSS": 8110484
+     }
+    ]
+   ],
+   "expect_report_sha256": null,
+   "report_sha_ok": null
+  },
+  "commit.txt": "117f4ad82e3e3d774214aa077d867a6a2579a082",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 125.45",
+   "System time (seconds): 5.63",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 2:14.46",
+   "Maximum resident set size (kbytes): 8644036",
+   "Exit status: 0"
+  ]
+ }
+}
