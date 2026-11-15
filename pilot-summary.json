@@ -1,0 +1,137 @@
+{
+ "basis2-pair": {
+  "verdict.json": {
+   "case": "basis2-pair",
+   "complete": false,
+   "measurement": {
+    "version": 1,
+    "scope": "same-runner paired first pass of experimental value layer; not production report",
+    "complete": false,
+    "canonical_outputs_equal": false,
+    "same_parent_and_runner": true,
+    "fresh_isolated_source_and_compiler_cache_per_mode": true,
+    "scheme": "G-14-217-767-769-770-771,G-14-321-767-769-770-771",
+    "mode_measurements": {
+     "separate": {
+      "version": 1,
+      "scheme": "G-14-217-767-769-770-771,G-14-321-767-769-770-771",
+      "basis_mode": "separate",
+      "returncode": 1,
+      "stop_reason": "exited",
+      "wall_seconds": 342.83130385799996,
+      "cpu_seconds": 338.397139,
+      "peak_rss_kib": 11581332,
+      "sampled_child_rss_kib": 11528344,
+      "sampled_tree_rss_kib": 11528344,
+      "sampled_tree_plus_parent_rss_kib": 11548140,
+      "limits": {
+       "seconds": 600,
+       "rss_gib": 14.0,
+       "rss_scope": "polled sum of child process tree plus parent RSS; shared pages may be counted twice"
+      },
+      "expected_cases": [
+       [
+        "G-14-217-767-769-770-771",
+        1908
+       ],
+       [
+        "G-14-321-767-769-770-771",
+        1134
+       ]
+      ],
+      "code_sha256": {
+       "algen/frozen_theory.py": "6b2000343fbfca83911f6218da5aca77994866c6c08a800a46ac02cbe1c61c90",
+       "algen/row_knowledge.py": "feb887cd8b2ab0274186c082ae0e03fc36f37d1ceb30cbe9c0e91da8f718d824",
+       "algen/value_ledger.py": "500bb4fa63410e0168b15e87d439ca95f4c81918cd56565b929cdb2fd2fbba86",
+       "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+       "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+       "tools/probe_shared_theory.py": "f24b507d3a6f97bcbd1f46f6063c976b96850407306c9b16ffb8765e36c9d935",
+       "tools/probe_row_knowledge.py": "546a267d3c8ab73ccb80abf9885028adec3536b893267c486348ddb23cbfc40a",
+       "tools/probe_value_ledger.py": "3ad190c16b411a9750910a19b0547ac756b8a925b0f61d3767586a79dc17d9e5",
+       "tools/profile_memory.py": "40a8e8eb9201ae4afd8f71d2a985b18431d18cf261069f6a8b00ba1f78f56b74",
+       "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+       "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+       "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+       "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+       "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+       "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3",
+       "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+       "algen/compress.py": "8ab005847fd509fbc31753cd43eb91f1db00b525a13f2066051c9efe66c1b074",
+       "algen/compress_base.py": "1db5c67a3aa69d89ed1c1587690e73eb31c65852ffc91a7d6c88ffece542769e",
+       "algen/conditions.py": "6b9f6b2a3dbb1f6e409356e8256a6e545def2e9a14096426414e0a07933cbebe",
+       "algen/live.py": "383b70aa085c649d9cacaacfb78a0ccde57f611ca6508e3ce8264f36cf8711ec"
+      },
+      "complete": false,
+      "scope": "paired first pass of experimental value layer, not production report",
+      "input_files_sha256": {
+       "skel/G.skel.pickle": "ceb398b85452b8ee995f7e4642e860803a8422778426ff8903d6705845a2f5bd",
+       "tables/G.1-20.pickle": "2ae08bdfe2200090dfc753363a8db3b6ef9d292d26b51607f404739af6b452e7",
+       "tables/G.10-20.pickle": "17f8bc21be0691cc8a5fec2b27c947393542038cf86c41ac718d430661c02d7a",
+       "tables/G.11-20.pickle": "2d7592340dc9012fccdfe6c2d20e91271002048f9b125a5b2912fc5da94caf15",
+       "tables/G.12-20.pickle": "ed8bf0c14953f2a93139c937230ac1aa3e40913af3f664a3f98813b34cdcc304",
+       "tables/G.13-20.pickle": "eb707800fc8fc9fb8722dc731258f6bc10e7784361ee8ace4375455abbdb9ba6",
+       "tables/G.14-20.pickle": "6f3248e83f356a9d4c9ffde6402928523889d1c413217e5576d76c8242aecdaa",
+       "tables/G.15-20.pickle": "ab345f588b6be8c50506a0dee38e1dab4644a07022848821d49e40c4a3ed6ebe",
+       "tables/G.16-20.pickle": "1e4c1f1cda67fd1c908c7f620ec3c34904edea74431290828e20adcaf0e4459a",
+       "tables/G.17-20.pickle": "9055bcf25151eaea16ab5589fd8df38d3d4fd4376c7d48033c2a31f0e3cf91de",
+       "tables/G.18-20.pickle": "4a96deb147e51c9efdbfd269a95585dd274806c2540e9d5f2aa67e5aee752917",
+       "tables/G.19-20.pickle": "21bae685bf62bb698920b4a6fa2f61c7618e61c89999ff80770cdfdaf9f8e103",
+       "tables/G.2-20.pickle": "837d57802797fb568c683b817229183e30d7a56cdcc6a4821a3524ab500914b2",
+       "tables/G.20-20.pickle": "66e6dc6056c2c4c281250d636574673965871e2707718d190fe4ad450ca3d765",
+       "tables/G.3-20.pickle": "2a89d7fbb78689bb8fae219b1177af55bfe78be52ba5750f359299013440132f",
+       "tables/G.4-20.pickle": "2431bca408e607010260aae0a9fd31f4ba989d8628c1839c5ec4123003897949",
+       "tables/G.5-20.pickle": "ddabd15cb47d9a6412be25dcc790f04d1a8426630127e70bf7d9bef71042cbc2",
+       "tables/G.6-20.pickle": "5faca632cce8780c73ac6b30f787d72a7af3934c51f6f8f7913cd10ec6b34315",
+       "tables/G.7-20.pickle": "aca9c3f9159d3e8b1d3520ce2e2cfd4ab05993e82ab9479a518474b6e860360d",
+       "tables/G.8-20.pickle": "5cb5099bcb4f071dbcd33477d6328ab15c6c2546a84a0c22524f1a8b0a84e953",
+       "tables/G.9-20.pickle": "d062b0680cab37fd8f91f5b887162ed1763227080b87205d0490d7e4c0ca3004",
+       "tables/G.rep.pickle": "1717ce8d8b2bc7fef02eecdc9b0fc92138db1e7e1ff295e1283dc01e7ff9ba5d",
+       "library-cache/библиотека-40179479aa259919.pickle": "f9ff096ab49a358ab67b31518d6dbb85f9e1a7d45c65d111e336a69ca4663e29"
+      },
+      "input_files_unchanged": true,
+      "input_audit_before_child": {
+       "wall_seconds": 2.1161233740000114,
+       "cpu_seconds": 2.115993864
+      },
+      "input_audit_after_child": {
+       "wall_seconds": 1.6967321950000382,
+       "cpu_seconds": 1.696581193
+      },
+      "validation_error": "[Errno 2] No such file or directory: '/home/runner/work/AlGen/AlGen/profiles/basis2-pair/separate/paired-probe.json'"
+     }
+    },
+    "failures": {
+     "shared": "not started: separate mode incomplete or raised"
+    },
+    "source_copy_setup": {
+     "separate": {
+      "wall_seconds": 0.013712496000010788,
+      "cpu_seconds": 0.013713261999999997
+     }
+    },
+    "parent_total_wall_seconds": 346.94241889399996,
+    "parent_cpu_seconds": 5.1757071880000005,
+    "cpu_model": "AMD EPYC 7763 64-Core Processor",
+    "mem_total_kib": 16367524,
+    "limits": {
+     "total_seconds": 1200,
+     "per_mode_child_seconds": 600,
+     "rss_gib": 14.0
+    }
+   },
+   "verified": [],
+   "peaks": [],
+   "expect_report_sha256": null,
+   "report_sha_ok": null
+  },
+  "commit.txt": "55d8d0c72c1a084dc6787fe3fcccc8f2a2baf5a9",
+  "exit.txt": "exit=0",
+  "time": [
+   "User time (seconds): 331.94",
+   "System time (seconds): 11.69",
+   "Elapsed (wall clock) time (h:mm:ss or m:ss): 5:47.01",
+   "Maximum resident set size (kbytes): 11581332",
+   "Exit status: 0"
+  ]
+ }
+}
