@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_utc": "2026-11-15T07:27:36.124038+00:00",
+  "updated_utc": "2026-11-15T17:22:50.058303+00:00",
   "scope": "Readiness plan for first full fixed-domain enumeration; NOT a full-run receipt or an implemented automatic launch gate",
   "user_goal": {
     "first_complete_enumeration_once": true,
@@ -146,7 +146,8 @@
         "metrics-stress02.json",
         "metrics-phase-scope.json",
         "metrics-census-2026-11-14.json",
-        "metrics-value-classifier.json"
+        "metrics-value-classifier.json",
+        "metrics-shared-theory.json"
       ]
     },
     {
@@ -169,20 +170,22 @@
         "pilot11_known11case_peak_rss_kib": 14890208,
         "pilot11_failed_case_peak_unknown": true,
         "table_pilot_rss_plan_limit_not_enforced": true,
-        "workspace_free_mib_approx": 34,
+        "workspace_free_mib_approx": 19.14,
         "new_large_local_runs_allowed": false,
         "whole_frontier_disk_budget_measured": false,
         "prior_review_control_source_run": 42468127201,
         "compact_SF_small_same_runner_saved_gib": 0.4761390686035156,
         "native_single_signal_cleanup_repair_candidate": true,
         "whole_report_memory_bounded": false,
-        "native_single_signal_cleanup_repair_full_ci_passed": true
+        "native_single_signal_cleanup_repair_full_ci_passed": true,
+        "diagnostic_A_event_budget_case3065_failed": true
       },
       "evidence": [
         "metrics-stress02.json",
         "metrics-census-2026-11-14.json",
         "metrics-pilot11-values.json",
-        "../status.md"
+        "../status.md",
+        "metrics-shared-theory.json"
       ]
     },
     {
@@ -208,7 +211,8 @@
         "граница-кандидатов.md",
         "../py/algen/live.py",
         "../py/algen/live_worker.py",
-        "metrics-value-ledger.json"
+        "metrics-value-ledger.json",
+        "metrics-shared-theory.json"
       ]
     },
     {
@@ -512,35 +516,28 @@
     "real_table_control_conditions": 4096,
     "real_table_proved_B_conditions": 376
   },
-  "candidate_code_commit": "1e9421610842eef22ea122de3d9c62fb817d3c95",
+  "candidate_code_commit": "cec59ff0dc0d602da18a706f258efdceefbc2741",
   "candidate_ci": {
-    "run": 43685600547,
-    "job": 132725327080,
-    "commit": "1e9421610842eef22ea122de3d9c62fb817d3c95",
-    "status": "completed",
-    "conclusion": "success",
-    "expected_tests": 285,
-    "tests": 285,
-    "unique_test_ids": 285,
-    "ok": 285,
-    "seconds": 3070.36,
-    "result": "OK",
-    "skipped": 0,
-    "errors": 0,
-    "failures": 0,
-    "checkout_commit": "90d7733c19ba97813104cade22fb0ffc53c6af5c",
-    "checkout_tree": "65a4cd5f50600ac9be71275a0bc97303489d85f0",
-    "code_tree": "65a4cd5f50600ac9be71275a0bc97303489d85f0",
-    "checkout_tree_equals_code_tree": true,
-    "actual_checkout_observed_in_completed_log": true,
-    "independently_reviewed": true,
+    "commit": "cec59ff0dc0d602da18a706f258efdceefbc2741",
+    "source_code_tree": "ecd0763db8bff12671fbf145e59981eb81967be2",
+    "run": null,
+    "job": null,
+    "status": "not_started",
+    "conclusion": null,
+    "expected_tests": 301,
+    "tests": null,
+    "unique_test_ids": null,
+    "ok": null,
+    "seconds": null,
+    "result": null,
+    "errors": null,
+    "failures": null,
+    "skipped": null,
+    "checkout_commit": null,
+    "checkout_tree": null,
+    "independently_reviewed": false,
     "cpu_seconds": null,
-    "peak_rss_kib": null,
-    "job_wall_seconds": 3085.0,
-    "unittest_step_wall_seconds": 3076.0,
-    "decoded_text_utf8_sha256": "bb9c369f9abc6f829f8c80d365f4013f254cd0539272066f176b9b450dd53cb0",
-    "stored_decoded_log_sha256": "39b323f8fecd997d8f4461397092a5cf2d9fd5c18f71e3ced23a674a34f53974",
-    "stored_log_has_one_extra_terminal_lf": true
+    "peak_rss_kib": null
   },
   "latest_compression_work": {
     "metrics": "metrics-compact-fact-sat.json",
@@ -659,8 +656,32 @@
     "scientific_output_reduction_measured": false,
     "full_run_admission_changed": false,
     "designs_only": [
-      "incoming_queue",
-      "cold_context_first_pass"
+      "incoming_queue"
     ]
+  },
+  "latest_shared_theory": {
+    "metrics": "metrics-shared-theory.json",
+    "code_commit": "cec59ff0dc0d602da18a706f258efdceefbc2741",
+    "experimental_component_implemented": true,
+    "independent_code_review": true,
+    "full_ci_passed": false,
+    "new_full_ci_status": "not_started",
+    "new_full_ci_expected_tests": 301,
+    "production_integrated": false,
+    "production_speedup_claimed": false,
+    "first_control_run": 43720139714,
+    "first_control_complete": false,
+    "new_control_run": 43722046125,
+    "new_control_status": "completed",
+    "paired_comparison_available": false,
+    "scientific_output_reduction_measured": false,
+    "source_propagation_complete": false,
+    "current_support_computed": false,
+    "full_frontier_implemented": false,
+    "full_run_admission_changed": false,
+    "new_control_complete": false,
+    "independent_control02_review": "verified_failed_control",
+    "new_runs_paused_by_user": true,
+    "next_step": "Preflight eligible per-view targets/event budgets before any paired rerun; compact A dependencies, durable queue/worker/current supports/archive/frontier still incomplete"
   }
 }
