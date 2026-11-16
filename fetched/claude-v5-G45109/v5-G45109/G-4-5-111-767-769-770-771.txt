@@ -1,0 +1,453 @@
+строк в библиотеке 30953, литералов 712
+не опровергнуто библиотекой 492972440, минимальных обо всех переменных 20000, запретов 19966: неизвестно 19257, выводится 707, опровергается 2
+посылок без единого примера: 2840493
+решающих значений 318 на 732 запретов, без кандидата 119 в 119 кластерах, в реестре 61
+свёрнуто вопросов 18345 (список: --полностью)
+вопросов «какие группы бывают с S»: 604 на 660 запретов; без вопроса 18597
+запретов без примера: 912, кластеров: 887
+
+== решающих значений 318: касаются 732 запретов; без кандидата 119; уже в реестре 61 ==
+значение two-generated(Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^× × Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^×) — запретов 17; например: centerless(G) & fin-gen(inn(G)) & metabelian(aut(G)) & ¬two-generated(prod(inn(G), inn(G)))
+значение two-generated(A4 × A4) — запретов 15; например: centerless(inn(G)) & proper-subs-nilpotent(G) & ¬two-generated(prod(inn(G), inn(G)))
+значение embeds(prod(inn(G), inn(G)), aut(G)) у PSL₂(ℚ) — запретов 14; например: centerless(aut(G)) & embeds(prod(inn(G), inn(G)), aut(G)) & hopfian(G) & ¬odd-order(inn(G))
+значение exponent-6(S4 × S4) — запретов 11; например: characteristic(inn(G)) & comp-series(inn(G)) & ¬contains-free(G) & ¬exponent-6(prod(inn(G), inn(G)))
+значение embeds(G, aut(G)) у ℤ³ — запретов 10; например: countable(G) & embeds(G, aut(G)) & exponent-4(prod(inn(G), inn(G))) & ¬indecomposable(aut(G))
+значение clt(C7 : C3 × C7 : C3) — запретов 10; например: centerless(aut(G)) & clt(prod(inn(G), inn(G))) & prime-index(inn(G)) & ¬proper-subs-abelian(G)
+значение embeds(prod(inn(G), inn(G)), G) у C3 x ((C3 x C3) : GL(2,3)) — запретов 9; например: countable(aut(G)) & embeds(prod(inn(G), inn(G)), G) & ¬class-2(G)
+значение embeds(prod(inn(G), inn(G)), aut(G)) у Aff(ℤ[1/2]) = ℤ[1/2] ⋊ ℤ[1/2]^× — запретов 8; например: centerless(aut(G)) & embeds(prod(inn(G), inn(G)), aut(G)) & residually-finite(aut(G)) & ¬exponent-4(G)
+значение embeds(aut(G), prod(inn(G), inn(G))) у UT₃(𝔽₃(t)) — запретов 8; например: embeds(aut(G), prod(inn(G), inn(G))) & exponent-6(G) & ¬dedekind(aut(G)) & ¬embeds(G, prod(inn(G), inn(G)))
+значение divisible(Aut(ℝ⁺) = GL_ℚ(ℝ)) — запретов 8; например: divisible(aut(G)) & exponent-4(prod(inn(G), inn(G))) & ¬polynomial-growth(aut(G))
+значение clt(prod(inn(G), inn(G))) у G = (C2 x C2 x C2 x C2) : C3 — запретов 8; например: centerless(G) & clt(prod(inn(G), inn(G))) & ¬embeds(aut(G), inn(G)) & ¬prime-index(inn(G))
+значение prime-index(1) — запретов 7; например: clt(G) & embeds(prod(inn(G), inn(G)), aut(G)) & prime-index(inn(G)) & ¬two-primes(G)
+значение embeds(prod(inn(G), inn(G)), inn(G)) у F (группа Томпсона) — запретов 7; например: embeds(prod(inn(G), inn(G)), inn(G)) & fin-gen(G) & ¬whitehead(prod(inn(G), inn(G)))
+значение embeds(aut(G), prod(inn(G), inn(G))) у Q32 : C2 — запретов 7; например: bounded-exponent(aut(G)) & embeds(aut(G), prod(inn(G), inn(G))) & ¬exponent-6(prod(inn(G), inn(G))) & ¬two-generated(G)
+значение embeds(G, prod(inn(G), inn(G))) у K (бутылка Клейна) — запретов 7; например: embeds(G, prod(inn(G), inn(G))) & ¬centerless(aut(G)) & ¬locally-finite(aut(G))
+значение prime-orders(order 2064384) — запретов 6; например: embeds(prod(inn(G), inn(G)), G) & polynomial-growth(G) & prime-orders(aut(G)) & ¬two-generated(G)
+значение locally-nilpotent(prod(inn(G), inn(G))) у G = UT₃(ℝ) × F₄ — запретов 6; например: left-orderable(G) & ¬countable(inn(G)) & ¬locally-nilpotent(prod(inn(G), inn(G)))
+значение embeds(prod(inn(G), inn(G)), aut(G)) у C2 x C2 x C2 x S3 x D8 — запретов 6; например: co-hopfian(aut(G)) & embeds(prod(inn(G), inn(G)), aut(G)) & ¬p-group(G) & ¬proper-subs-cyclic(inn(G))
+значение embeds(prod(inn(G), inn(G)), G) у D∞ — запретов 6; например: countable(aut(G)) & embeds(aut(G), G) & embeds(prod(inn(G), inn(G)), G) & ¬locally-cyclic(G)
+значение comp-series(aut(G)) у G = D10 × ⊕_p C_p^{2p} — запретов 6; например: comp-series(aut(G)) & locally-finite(prod(inn(G), inn(G))) & ¬dedekind(aut(G)) & ¬hyperbolic(G)
+значение co-hopfian(SO(3) × SO(3)) — запретов 6; например: co-hopfian(prod(inn(G), inn(G))) & comp-series(aut(G)) & ¬hall(inn(G)) & ¬property-t(G)
+значение clt(prod(inn(G), inn(G))) у G = (C2 x C2 x C2 x C2) : (C15 : C4) — запретов 6; например: centerless(G) & clt(prod(inn(G), inn(G))) & ¬locally-nilpotent(inn(G)) & ¬order-pq(G)
+значение perfect(Aut(ℝ⁺) = GL_ℚ(ℝ)) — запретов 5; например: clt(prod(inn(G), inn(G))) & perfect(aut(G)) & ¬word-problem(G)
+значение maximal(C3 x C3) — запретов 5; например: exponent-6(prod(inn(G), inn(G))) & maximal(inn(G)) & residually-nilpotent(G) & ¬exponent-2(inn(G))
+значение locally-nilpotent(SO(3) × SO(3)) — запретов 5; например: comp-series(inn(G)) & locally-nilpotent(prod(inn(G), inn(G))) & ¬proper-subs-nilpotent(G)
+значение kaplansky(BS(1, 2) = ℤ[1/2] ⋊ ℤ × BS(1, 2) = ℤ[1/2] ⋊ ℤ) — запретов 5; например: amenable(aut(G)) & kaplansky(prod(inn(G), inn(G))) & ¬comp-series(inn(G))
+значение index-2(⊕_p C_p²) — запретов 5; например: class-2(G) & index-2(inn(G)) & ¬exponent-4(G) & ¬whitehead(prod(inn(G), inn(G)))
+значение hopfian(Sym(ℕ) × Sym(ℕ)) — запретов 5; например: comp-series(aut(G)) & hopfian(prod(inn(G), inn(G))) & ¬divisible(G) & ¬fin-pres(aut(G))
+значение exponent-6(prod(inn(G), inn(G))) у G = order 129024 — запретов 5; например: amenable(aut(G)) & ¬exponent-6(prod(inn(G), inn(G))) & ¬indecomposable(inn(G)) & ¬metabelian(inn(G))
+значение exponent-4(prod(inn(G), inn(G))) у G = C32 : (C8 x C2) — запретов 5; например: clt(prod(inn(G), inn(G))) & ¬exponent-4(prod(inn(G), inn(G))) & ¬prime-orders(inn(G)) & ¬two-generated(inn(G))
+значение embeds(prod(inn(G), inn(G)), inn(G)) у SU(2) — запретов 5; например: comp-series(aut(G)) & embeds(prod(inn(G), inn(G)), inn(G)) & ¬class-2(inn(G))
+значение embeds(prod(inn(G), inn(G)), G) у Aut(C_p) ≅ C_{p−1} (p > 10⁷⁵) — запретов 5; например: class-2(G) & ¬embeds(prod(inn(G), inn(G)), G) & ¬proper-subs-cyclic(inn(G)) & ¬two-primes(G)
+значение embeds(aut(G), inn(G)) у UT₃(𝔽₃(t)) — запретов 5; например: embeds(aut(G), inn(G)) & locally-finite(prod(inn(G), inn(G))) & ¬proper-subs-finite(G)
+значение embeds(G, prod(inn(G), inn(G))) у (C4 x C4) : C4 — запретов 5; например: embeds(G, prod(inn(G), inn(G))) & exponent-4(prod(inn(G), inn(G))) & ¬proper-subs-cyclic(inn(G))
+значение contains-free(SO(3) × SO(3)) — запретов 5; например: contains-free(prod(inn(G), inn(G))) & whole(inn(G)) & ¬residually-nilpotent(inn(G))
+значение centerless(aut(G)) у G = ⊕_ℕ UT₃(ℤ) — запретов 5; например: bi-orderable(G) & ¬centerless(aut(G)) & ¬exponent-4(prod(inn(G), inn(G)))
+значение word-problem(aut(G)) у G = ⊕_ℕ QD16 — запретов 4; например: bounded-exponent(G) & locally-nilpotent(prod(inn(G), inn(G))) & ¬exponent-2(G) & ¬word-problem(aut(G))
+значение whole(⊕_ℤ S₃) — запретов 4; например: centerless(inn(G)) & ¬embeds(G, prod(inn(G), inn(G))) & ¬indecomposable(inn(G)) & ¬whole(inn(G))
+значение two-generated(π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий) — запретов 4; например: contains-free(prod(inn(G), inn(G))) & fin-pres(G) & ¬two-generated(aut(G))
+значение two-generated((C3 x C3) : C3 × (C3 x C3) : C3) — запретов 4; например: exponent-3(inn(G)) & two-generated(prod(inn(G), inn(G))) & ¬bi-orderable(inn(G))
+значение rec-pres-ctbl(aut(G)) у G = ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 4; например: hopfian(G) & word-problem(prod(inn(G), inn(G))) & ¬rec-pres-ctbl(aut(G)) & ¬residually-nilpotent(aut(G))
+значение rec-pres-ctbl(Dih(ℤ(2^∞)) = ℤ(2^∞) ⋊ C₂ × Dih(ℤ(2^∞)) = ℤ(2^∞) ⋊ C₂) — запретов 4; например: amenable(aut(G)) & embeds(G, aut(G)) & rec-pres-ctbl(prod(inn(G), inn(G))) & ¬hopfian(G)
+значение proper-subs-nilpotent(6291456:Aut(1024:Aut(96:163))) — запретов 4; например: centerless(aut(G)) & p-group(inn(G)) & proper-subs-nilpotent(aut(G)) & ¬whitehead(prod(inn(G), inn(G)))
+значение prime-orders(prod(inn(G), inn(G))) у G = C16 : (C4 x C2) — запретов 4; например: indecomposable(inn(G)) & prime-orders(prod(inn(G), inn(G))) & ¬odd-order(G) & ¬perfect(inn(G))
+значение no-finite-quotients(Aut(⊕C₂) = GL(ℵ₀, 𝔽₂)) — запретов 4; например: contains-free(aut(G)) & virtually-nilpotent(prod(inn(G), inn(G))) & ¬no-finite-quotients(aut(G)) & ¬torsion-free(G)
+значение iso(G, prod(inn(G), inn(G))) у 672:1093 — запретов 4; например: hopfian(inn(G)) & iso(G, prod(inn(G), inn(G))) & ¬left-orderable(G)
+значение indecomposable(GL₃(ℚ)) — запретов 4; например: co-hopfian(G) & exponent-4(prod(inn(G), inn(G))) & indecomposable(aut(G)) & ¬virtually-nilpotent(aut(G))
+значение exponent-6(prod(inn(G), inn(G))) у G = S3 x ((C2 x C2 x C2 x C2) : ((C2 x C2) : S4)) — запретов 4; например: embeds(G, inn(G)) & exponent-6(prod(inn(G), inn(G))) & ¬indecomposable(aut(G)) & ¬two-generated(inn(G))
+значение exponent-6(prod(inn(G), inn(G))) у G = D94 — запретов 4; например: centerless(G) & exponent-6(prod(inn(G), inn(G))) & order-pq(G) & ¬embeds(aut(G), inn(G))
+значение exponent-6(A5 × A5) — запретов 4; например: exponent-6(prod(inn(G), inn(G))) & index-2(inn(G)) & prime-orders(G) & ¬exponent-6(G)
+значение embeds(prod(inn(G), inn(G)), aut(G)) у ((C4 x C2) : C2) : C4 — запретов 4; например: co-hopfian(G) & embeds(prod(inn(G), inn(G)), aut(G)) & exponent-2(aut(G)) & ¬hall(inn(G))
+значение embeds(aut(G), prod(inn(G), inn(G))) у PSL₂(ℚ) — запретов 4; например: embeds(aut(G), prod(inn(G), inn(G))) & ¬indecomposable(inn(G)) & ¬locally-finite(prod(inn(G), inn(G)))
+значение embeds(aut(G), prod(inn(G), inn(G))) у PSL(3,2) — запретов 4; например: embeds(G, aut(G)) & hyperbolic(aut(G)) & ¬embeds(aut(G), prod(inn(G), inn(G))) & ¬metabelian(G)
+значение embeds(aut(G), G) у D10 × ⊕_p C_p^{2p} — запретов 4; например: embeds(aut(G), G) & rec-pres(prod(inn(G), inn(G))) & ¬fin-pres(G) & ¬linear-c(G)
+значение embeds(G, aut(G)) у ⊕C₂ — запретов 4; например: central(inn(G)) & embeds(G, aut(G)) & exponent-4(G) & ¬iso(aut(G), prod(inn(G), inn(G)))
+значение embeds(G, aut(G)) у QD16 : (C2 x C2) — запретов 4; например: clt(aut(G)) & embeds(G, aut(G)) & locally-nilpotent(prod(inn(G), inn(G))) & ¬proper-subs-abelian(inn(G))
+значение countable(aut(G)) у G = D₈ ∘ ℤ(2^∞) — запретов 4; например: countable(aut(G)) & exponent-6(prod(inn(G), inn(G))) & ¬left-orderable(G) & ¬word-problem(G)
+значение contains-free(F_∞ × F_∞) — запретов 4; например: contains-free(prod(inn(G), inn(G))) & kaplansky(inn(G)) & ¬fin-gen(inn(G))
+значение co-hopfian(GL₃(ℤ)) — запретов 4; например: co-hopfian(G) & ¬kaplansky(G) & ¬proper-subs-cyclic(aut(G)) & ¬virtually-nilpotent(prod(inn(G), inn(G)))
+значение whole(ℚ²) — запретов 3; например: co-hopfian(prod(inn(G), inn(G))) & ¬locally-finite(inn(G)) & ¬whole(inn(G))
+значение virtually-solvable(aut(G)) у G = S3 × ℚ* — запретов 3; например: co-hopfian(prod(inn(G), inn(G))) & virtually-solvable(aut(G)) & ¬hopfian(G) & ¬locally-cyclic(G)
+значение virtually-nilpotent(aut(G)) у G = QD16 × ℤ[1/p : p ∈ S] (S — нерекурсивно перечислимое множество простых) — запретов 3; например: clt(prod(inn(G), inn(G))) & virtually-nilpotent(aut(G)) & ¬dedekind(aut(G)) & ¬polycyclic(G)
+значение two-primes(aut(G)) у G = D8 × QD16 — запретов 3; например: embeds(inn(G), G) & exponent-4(prod(inn(G), inn(G))) & ¬exponent-6(prod(inn(G), inn(G))) & ¬two-primes(aut(G))
+значение two-primes(aut(G)) у G = C2 x ((C4 x C2 x C2) : D8) — запретов 3; например: co-hopfian(aut(G)) & p-group(G) & ¬prime-orders(prod(inn(G), inn(G))) & ¬two-primes(aut(G))
+значение two-generated(order 9999360) — запретов 3; например: centerless(aut(G)) & finite-index(inn(G)) & two-generated(prod(inn(G), inn(G))) & ¬two-generated(aut(G))
+значение two-generated(F₂ × F₂) — запретов 3; например: iso(G, inn(G)) & two-generated(prod(inn(G), inn(G))) & ¬iso(aut(G), inn(G)) & ¬min-prime-index(inn(G))
+значение two-generated(65536:Aut(256:16429)) — запретов 3; например: exponent-4(inn(G)) & two-generated(aut(G)) & ¬centerless(aut(G)) & ¬prime-orders(prod(inn(G), inn(G)))
+значение simple(aut(G)) у G = order 1440 — запретов 3; например: embeds(G, prod(inn(G), inn(G))) & fin-pres(aut(G)) & simple(aut(G))
+значение proper-subs-abelian((C2 x C2 x C2 x C2) : ((C2 x C2) : ((C2 x C2 x C2 x C2) : D12))) — запретов 3; например: prime-orders(prod(inn(G), inn(G))) & proper-subs-abelian(aut(G)) & ¬class-2(aut(G)) & ¬exponent-3(inn(G))
+значение prime-orders(S5 x S3) — запретов 3; например: embeds(aut(G), prod(inn(G), inn(G))) & prime-orders(G) & ¬exponent-4(aut(G)) & ¬order-pq(aut(G))
+значение perfect(aut(G)) у G = 768:Out(32:46) — запретов 3; например: embeds(G, prod(inn(G), inn(G))) & perfect(aut(G)) & ¬no-finite-quotients(aut(G))
+значение no-finite-quotients(aut(G)) у G = ⊕_ℕ UT₃(ℤ) — запретов 3; например: bi-orderable(G) & ¬no-finite-quotients(aut(G)) & ¬word-problem(prod(inn(G), inn(G)))
+значение maximal(⊕_ℤ S₃) — запретов 3; например: iso(inn(G), prod(inn(G), inn(G))) & maximal(inn(G)) & ¬abelian(aut(G))
+значение locally-nilpotent(Dih(ℚ) = ℚ ⋊ C₂ × Dih(ℚ) = ℚ ⋊ C₂) — запретов 3; например: amenable(aut(G)) & ¬finite-index(inn(G)) & ¬locally-nilpotent(prod(inn(G), inn(G)))
+значение kaplansky(группа Маклейна M(ℚ, ℚ) × группа Маклейна M(ℚ, ℚ)) — запретов 3; например: divisible(inn(G)) & ¬embeds(aut(G), prod(inn(G), inn(G))) & ¬kaplansky(prod(inn(G), inn(G)))
+значение iso(G, prod(inn(G), inn(G))) у UT₃(ℝ) — запретов 3; например: iso(G, prod(inn(G), inn(G))) & left-orderable(inn(G)) & ¬locally-cyclic(aut(G))
+значение hyperbolic(C3 x C3) — запретов 3; например: hyperbolic(G) & virtually-solvable(inn(G)) & ¬bounded-exponent(aut(G)) & ¬embeds(G, prod(inn(G), inn(G)))
+значение hopfian(GL₃(ℚ)) — запретов 3; например: clt(prod(inn(G), inn(G))) & hopfian(aut(G)) & ¬fin-gen(aut(G)) & ¬locally-nilpotent(aut(G))
+значение finite-index(⊕C₂) — запретов 3; например: embeds(prod(inn(G), inn(G)), aut(G)) & finite-index(inn(G)) & ¬residually-finite(G)
+значение exponent-6(prod(inn(G), inn(G))) у G = (C3 x C3) : ((C2 x C2 x C2 x C2) : C2) — запретов 3; например: comp-series(G) & exponent-6(prod(inn(G), inn(G))) & ¬centerless(inn(G)) & ¬clt(inn(G))
+значение embeds(prod(inn(G), inn(G)), inn(G)) у K (бутылка Клейна) — запретов 3; например: amenable(aut(G)) & embeds(prod(inn(G), inn(G)), inn(G)) & ¬proper-subs-nilpotent(inn(G))
+значение embeds(prod(inn(G), inn(G)), aut(G)) у F (группа Томпсона) — запретов 3; например: bi-orderable(G) & embeds(prod(inn(G), inn(G)), aut(G)) & ¬locally-solvable(inn(G))
+значение embeds(prod(inn(G), inn(G)), aut(G)) у C2 x ((C2 x ((C2 x C2 x C2) : C4)) : D8) — запретов 3; например: embeds(prod(inn(G), inn(G)), aut(G)) & locally-nilpotent(aut(G)) & ¬bi-orderable(inn(G)) & ¬exponent-4(aut(G))
+значение embeds(prod(inn(G), inn(G)), G) у ⊕_ℕ C3 x Q8 — запретов 3; например: exponent-4(prod(inn(G), inn(G))) & ¬embeds(prod(inn(G), inn(G)), G) & ¬two-primes(G)
+значение embeds(prod(inn(G), inn(G)), G) у SL₃(ℤ) — запретов 3; например: contains-free(aut(G)) & ¬embeds(prod(inn(G), inn(G)), G) & ¬residually-nilpotent(inn(G))
+значение embeds(aut(G), G) у C4 x (C9 : C6) — запретов 3; например: embeds(aut(G), G) & ¬embeds(G, prod(inn(G), inn(G))) & ¬index-2(inn(G)) & ¬kaplansky(prod(inn(G), inn(G)))
+значение embeds(G, prod(inn(G), inn(G))) у C2 x ((C2 x C2) : ((C2 x C2) : ((C2 x C2) : S4))) — запретов 3; например: embeds(G, prod(inn(G), inn(G))) & ¬centerless(inn(G)) & ¬iso(aut(G), prod(inn(G), inn(G))) & ¬p-group(inn(G))
+значение embeds(G, aut(G)) у C7 x C7 — запретов 3; например: co-hopfian(aut(G)) & embeds(G, aut(G)) & whitehead(prod(inn(G), inn(G))) & ¬iso(G, aut(G))
+значение complemented(D8) — запретов 3; например: clt(prod(inn(G), inn(G))) & complemented(inn(G)) & ¬dedekind(inn(G)) & ¬iso(aut(G), inn(G))
+значение characteristic(S4) — запретов 3; например: characteristic(inn(G)) & co-hopfian(prod(inn(G), inn(G))) & ¬iso(G, inn(G)) & ¬metabelian(inn(G))
+значение centerless(aut(G)) у G = ⊕ℤ — запретов 3; например: centerless(aut(G)) & clt(inn(G)) & embeds(prod(inn(G), inn(G)), inn(G)) & ¬exponent-6(G)
+значение virtually-solvable(aut(G)) у G = C4 × S₃ ≀ ℤ — запретов 2; например: virtually-solvable(aut(G)) & ¬indecomposable(G) & ¬proper-subs-finite(aut(G)) & ¬whitehead(prod(inn(G), inn(G)))
+значение virtually-solvable(F′ (коммутант группы Томпсона F) × F′ (коммутант группы Томпсона F)) — запретов 2; например: kaplansky(inn(G)) & perfect(inn(G)) & ¬virtually-solvable(prod(inn(G), inn(G)))
+значение virtually-nilpotent(универсальная группа Холла U × универсальная группа Холла U) — запретов 2; например: centerless(G) & virtually-nilpotent(prod(inn(G), inn(G))) & ¬linear-c(inn(G))
+значение two-primes(aut(G)) у G = C3 x C3 × (C3 x C3) : C3 — запретов 2; например: co-hopfian(prod(inn(G), inn(G))) & exponent-3(G) & ¬left-orderable(inn(G)) & ¬two-primes(aut(G))
+значение two-generated(aut(G)) у G = order 1440 — запретов 2; например: embeds(G, prod(inn(G), inn(G))) & polynomial-growth(inn(G)) & ¬two-generated(aut(G)) & ¬two-primes(G)
+значение two-generated(S4 × S4) — запретов 2; например: embeds(aut(G), prod(inn(G), inn(G))) & proper-subs-finite(G) & two-generated(prod(inn(G), inn(G))) & ¬two-primes(G)
+значение two-generated(D∞ × D∞) — запретов 2; например: iso(G, aut(G)) & residually-nilpotent(inn(G)) & ¬min-prime-index(inn(G)) & ¬two-generated(prod(inn(G), inn(G)))
+значение solvable(aut(G)) у G = ⊕_ℕ C2 x C2 x C2 x C2 — запретов 2; например: co-hopfian(prod(inn(G), inn(G))) & solvable(aut(G)) & ¬dedekind(aut(G)) & ¬word-problem(G)
+значение simple(aut(G)) у G = ⊕_ℕ ℚ/ℤ — запретов 2; например: simple(aut(G)) & virtually-nilpotent(prod(inn(G), inn(G))) & ¬bi-orderable(G) & ¬bounded-exponent(G)
+значение residually-nilpotent(aut(G)) у G = ⊕_ℕ QD16 — запретов 2; например: iso(inn(G), prod(inn(G), inn(G))) & residually-nilpotent(aut(G)) & ¬two-generated(prod(inn(G), inn(G)))
+значение rec-pres-ctbl(PSL₂(ℚ) × PSL₂(ℚ)) — запретов 2; например: hopfian(inn(G)) & rec-pres-ctbl(prod(inn(G), inn(G))) & ¬metabelian(aut(G)) & ¬word-problem(prod(inn(G), inn(G)))
+значение rec-pres(aut(G)) у G = T (группа Томпсона) — запретов 2; например: contains-free(G) & rec-pres(prod(inn(G), inn(G))) & ¬rec-pres(aut(G))
+значение property-t(aut(G)) у G = ℤ × C₂ × UT₃(ℤ) × ℤ³ — запретов 2; например: kaplansky(prod(inn(G), inn(G))) & property-t(aut(G)) & ¬exponent-4(prod(inn(G), inn(G)))
+значение proper-subs-finite(aut(G)) у G = ⊕_ℕ C2 x C2 x C2 x C2 — запретов 2; например: locally-nilpotent(prod(inn(G), inn(G))) & proper-subs-finite(aut(G)) & ¬index-2(inn(G)) & ¬polycyclic(G)
+значение proper-subs-abelian(aut(G)) у G = ⊕_ℕ C4 : C4 — запретов 2; например: embeds(prod(inn(G), inn(G)), G) & proper-subs-abelian(aut(G)) & ¬divisible(inn(G))
+значение prime-orders(aut(G)) у G = ⊕ℤ × C2 x C2 x C2 x D8 — запретов 2; например: exponent-4(prod(inn(G), inn(G))) & ¬finite(G) & ¬no-finite-quotients(inn(G)) & ¬prime-orders(aut(G))
+значение prime-orders(S3 × ⊕_ℕ C₃₆) — запретов 2; например: prime-orders(G) & two-generated(prod(inn(G), inn(G))) & ¬embeds(G, prod(inn(G), inn(G))) & ¬kaplansky(prod(inn(G), inn(G)))
+значение polycyclic(aut(G)) у G = Q8 × ⊕_ℕ C₃₆ — запретов 2; например: clt(inn(G)) & ¬polycyclic(aut(G)) & ¬two-primes(G) & ¬whitehead(prod(inn(G), inn(G)))
+значение perfect(aut(G)) у G = ⊕_ℕ UT₃(ℤ) — запретов 2; например: perfect(aut(G)) & ¬comp-series(inn(G)) & ¬iso(G, prod(inn(G), inn(G)))
+значение metabelian(aut(G)) у G = ⊕ℤ × ℚ³ — запретов 2; например: exponent-6(prod(inn(G), inn(G))) & metabelian(aut(G)) & ¬divisible(G) & ¬residually-finite(G)
+значение locally-solvable(prod(inn(G), inn(G))) у G = UT₃(ℚ) × S̃L₂(ℝ) (универсальная накрывающая) — запретов 2; например: ¬centerless(inn(G)) & ¬locally-solvable(prod(inn(G), inn(G))) & ¬rec-pres(aut(G))
+значение locally-solvable(aut(G)) у G = ⊕_ℕ M(ℚ, 𝔽₂) × ⊕_ℕ ℤ(2^∞) — запретов 2; например: embeds(prod(inn(G), inn(G)), G) & locally-solvable(aut(G)) & ¬residually-finite(aut(G))
+значение locally-solvable(SO(3) × SO(3)) — запретов 2; например: embeds(aut(G), G) & locally-solvable(prod(inn(G), inn(G))) & no-finite-quotients(G) & ¬exponent-2(G)
+значение locally-finite(prod(inn(G), inn(G))) у G = E_∞ (экстраспециальная 2-группа счётного ранга) × 𝒢 (группа Григорчука) — запретов 2; например: hopfian(G) & locally-finite(prod(inn(G), inn(G))) & periodic(G) & ¬locally-finite(aut(G))
+значение locally-finite(aut(G)) у G = ℤ³ × UT₃(𝔽₃(t)) — запретов 2; например: locally-finite(aut(G)) & proper-subs-nilpotent(G) & ¬exponent-4(prod(inn(G), inn(G))) & ¬polycyclic(aut(G))
+значение linear(aut(G)) у G = ⊕_p C_p² — запретов 2; например: centerless(inn(G)) & exponent-6(prod(inn(G), inn(G))) & hopfian(G) & ¬linear(aut(G))
+значение iso(inn(G), prod(inn(G), inn(G))) у π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий — запретов 2; например: iso(inn(G), prod(inn(G), inn(G))) & rec-pres(G) & ¬virtually-solvable(prod(inn(G), inn(G)))
+значение iso(G, aut(G)) у Aut(C_{p−1}) ≅ (ℤ/(p−1))ˣ (p > 10⁷⁵) — запретов 2; например: countable(aut(G)) & dedekind(G) & iso(G, aut(G)) & ¬iso(G, prod(inn(G), inn(G)))
+значение indecomposable(aut(G)) у G = ⊕_ℤ S₃ — запретов 2; например: embeds(prod(inn(G), inn(G)), aut(G)) & ¬co-hopfian(inn(G)) & ¬indecomposable(aut(G))
+значение hyperbolic(aut(G)) у G = C₃ ⋊ ℤ × E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩ — запретов 2; например: exponent-6(prod(inn(G), inn(G))) & hyperbolic(aut(G)) & ¬polynomial-growth(inn(G))
+значение fully-invariant(D8) — запретов 2; например: fully-invariant(inn(G)) & metabelian(G) & rec-pres(inn(G)) & ¬two-generated(prod(inn(G), inn(G)))
+значение finite-index(A5) — запретов 2; например: co-hopfian(G) & finite-index(inn(G)) & virtually-solvable(prod(inn(G), inn(G))) & ¬bounded-exponent(G)
+значение finite(aut(G)) у G = QD16 × ℤ³ — запретов 2; например: comp-series(inn(G)) & locally-solvable(inn(G)) & ¬finite(aut(G)) & ¬whitehead(prod(inn(G), inn(G)))
+значение fin-pres(aut(G)) у G = ℤ² ∗ ℤ — запретов 2; например: contains-free(prod(inn(G), inn(G))) & residually-finite(aut(G)) & ¬fin-pres(aut(G))
+значение exponent-6(order 303264) — запретов 2; например: centerless(aut(G)) & exponent-6(G) & ¬embeds(prod(inn(G), inn(G)), inn(G)) & ¬two-primes(G)
+значение exponent-6(aut(G)) у G = E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩ — запретов 2; например: exponent-6(aut(G)) & ¬comp-series(aut(G)) & ¬exponent-4(prod(inn(G), inn(G)))
+значение embeds(prod(inn(G), inn(G)), inn(G)) у SL(2,5) × ℤ[ω] ⋊ S₃ (p3m1) — запретов 2; например: embeds(prod(inn(G), inn(G)), inn(G)) & virtually-nilpotent(G) & ¬locally-solvable(inn(G))
+значение embeds(prod(inn(G), inn(G)), inn(G)) у BS(1, 2) = ℤ[1/2] ⋊ ℤ — запретов 2; например: embeds(prod(inn(G), inn(G)), inn(G)) & locally-solvable(aut(G)) & ¬abelian(aut(G)) & ¬polynomial-growth(aut(G))
+значение embeds(prod(inn(G), inn(G)), aut(G)) у группа Маклейна M(ℚ, 𝔽₂) — запретов 2; например: centerless(aut(G)) & locally-nilpotent(inn(G)) & ¬class-2(inn(G)) & ¬embeds(prod(inn(G), inn(G)), aut(G))
+значение embeds(prod(inn(G), inn(G)), aut(G)) у SU(2) — запретов 2; например: embeds(prod(inn(G), inn(G)), aut(G)) & linear(aut(G)) & ¬locally-solvable(aut(G)) & ¬rec-pres-ctbl(G)
+значение embeds(prod(inn(G), inn(G)), aut(G)) у D86 — запретов 2; например: embeds(prod(inn(G), inn(G)), aut(G)) & prime-orders(G) & proper-subs-finite(aut(G)) & ¬bi-orderable(inn(G))
+значение embeds(prod(inn(G), inn(G)), aut(G)) у (C4 x C4) : C2 — запретов 2; например: centerless(aut(G)) & exponent-4(prod(inn(G), inn(G))) & ¬embeds(prod(inn(G), inn(G)), aut(G)) & ¬order-p2(inn(G))
+значение embeds(prod(inn(G), inn(G)), G) у UT₃(ℤ) (группа Гейзенберга) — запретов 2; например: embeds(prod(inn(G), inn(G)), G) & indecomposable(G) & ¬iso(aut(G), inn(G)) & ¬perfect(inn(G))
+значение embeds(prod(inn(G), inn(G)), G) у C3 x C3 × (C3 x C3) : C3 — запретов 2; например: co-hopfian(G) & embeds(prod(inn(G), inn(G)), G) & exponent-6(G) & ¬left-orderable(inn(G))
+значение embeds(prod(inn(G), inn(G)), G) у C2 x ((C2 x C2 x C2) : ((C2 x C2 x C2) : (C2 x C2))) — запретов 2; например: centerless(aut(G)) & embeds(prod(inn(G), inn(G)), G) & exponent-2(inn(G)) & ¬dedekind(G)
+значение embeds(aut(G), prod(inn(G), inn(G))) у SL(2,5) — запретов 2; например: embeds(aut(G), prod(inn(G), inn(G))) & indecomposable(aut(G)) & prime-orders(inn(G)) & ¬prime-orders(G)
+значение embeds(aut(G), prod(inn(G), inn(G))) у (C3 x C3) : C3 × (C3 x C3) : C3 — запретов 2; например: embeds(aut(G), prod(inn(G), inn(G))) & odd-order(G) & ¬no-finite-quotients(aut(G))
+значение embeds(aut(G), inn(G)) у группа Маклейна M(ℚ, ℚ) — запретов 2; например: embeds(aut(G), inn(G)) & left-orderable(inn(G)) & ¬iso(inn(G), prod(inn(G), inn(G)))
+значение embeds(aut(G), G) у C9 : C3 × C9 : C3 — запретов 2; например: clt(prod(inn(G), inn(G))) & embeds(aut(G), G) & ¬two-generated(inn(G))
+значение embeds(G, prod(inn(G), inn(G))) у SL(2,5) — запретов 2; например: embeds(G, prod(inn(G), inn(G))) & prime-orders(inn(G)) & ¬prime-orders(G) & ¬two-primes(G)
+значение embeds(G, prod(inn(G), inn(G))) у C7 : C9 — запретов 2; например: odd-order(G) & proper-subs-nilpotent(G) & ¬embeds(G, prod(inn(G), inn(G))) & ¬nilpotent(G)
+значение embeds(G, aut(G)) у C16 : C4 — запретов 2; например: dedekind(inn(G)) & embeds(G, aut(G)) & ¬embeds(aut(G), G) & ¬embeds(prod(inn(G), inn(G)), aut(G))
+значение countable(aut(G)) у G = ⊕ℤ × H(ℤ^(ℕ), ⊕ℚ/ℤ): [eᵢ, eⱼ] = (1/j!)δᵢ при i < j — запретов 2; например: countable(aut(G)) & left-orderable(inn(G)) & ¬rec-pres(prod(inn(G), inn(G)))
+значение contains-free(prod(inn(G), inn(G))) у G = S̃L₂(ℝ) (универсальная накрывающая) × группа Маклейна M(ℚ, ℚ) — запретов 2; например: contains-free(prod(inn(G), inn(G))) & torsion-free(G) & ¬linear-c(inn(G))
+значение complemented(C3 x C3) — запретов 2; например: complemented(inn(G)) & dedekind(inn(G)) & ¬embeds(prod(inn(G), inn(G)), aut(G))
+значение co-hopfian(T (группа Томпсона) × T (группа Томпсона)) — запретов 2; например: co-hopfian(prod(inn(G), inn(G))) & fin-pres(inn(G)) & ¬residually-finite(inn(G))
+значение clt(prod(inn(G), inn(G))) у G = C3 : (C4 x D8) — запретов 2; например: clt(prod(inn(G), inn(G))) & exponent-6(aut(G)) & ¬locally-nilpotent(inn(G)) & ¬two-generated(G)
+значение central(ℤ²) — запретов 2; например: central(inn(G)) & ¬iso(inn(G), prod(inn(G), inn(G))) & ¬metabelian(aut(G))
+значение centerless(aut(G)) у G = ℤ × SU(2) — запретов 2; например: ¬centerless(aut(G)) & ¬iso(inn(G), prod(inn(G), inn(G))) & ¬word-problem(aut(G))
+значение word-problem(prod(inn(G), inn(G))) у G = ⊕_ℕ PSL₂(ℝ) × UT₅(ℚ) — запретов 1; например: divisible(inn(G)) & word-problem(prod(inn(G), inn(G))) & ¬bi-orderable(inn(G))
+значение word-problem(aut(G)) у G = ⊕ℤ × ⊕_ℤ S₃ — запретов 1; например: exponent-6(prod(inn(G), inn(G))) & ¬proper-subs-nilpotent(inn(G)) & ¬word-problem(aut(G))
+значение word-problem(aut(G)) у G = ⊕ℤ × ⊕_ℕ M(ℚ, 𝔽₂) — запретов 1; например: locally-nilpotent(prod(inn(G), inn(G))) & word-problem(aut(G)) & ¬polycyclic(G) & ¬residually-nilpotent(aut(G))
+значение word-problem(aut(G)) у G = ⊕_ℕ ℤ(2^∞) — запретов 1; например: two-generated(prod(inn(G), inn(G))) & word-problem(aut(G)) & ¬linear-c(G)
+значение word-problem(aut(G)) у G = ⊕_ℕ UT₃(ℤ) — запретов 1; например: dedekind(inn(G)) & word-problem(aut(G)) & ¬exponent-6(prod(inn(G), inn(G))) & ¬two-generated(G)
+значение word-problem(Aut(F) (F — группа Томпсона)) — запретов 1; например: fin-gen(G) & rec-pres-ctbl(prod(inn(G), inn(G))) & ¬word-problem(G)
+значение whitehead(prod(inn(G), inn(G))) у G = UT₃(ℝ) × UT₃(ℚ)/⟨e₁₃⟩ — запретов 1; например: divisible(inn(G)) & whitehead(prod(inn(G), inn(G))) & ¬exponent-2(inn(G))
+значение virtually-solvable(prod(inn(G), inn(G))) у G = S₃ × ℤ² × F (группа Томпсона) — запретов 1; например: fin-pres(G) & virtually-solvable(prod(inn(G), inn(G))) & ¬linear-c(prod(inn(G), inn(G)))
+значение virtually-solvable(W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W) × W(ℤ(2^∞)): W ≅ W ≀ W = Φ(W)) — запретов 1; например: locally-solvable(G) & ¬perfect(inn(G)) & ¬virtually-solvable(prod(inn(G), inn(G)))
+значение virtually-nilpotent(aut(G)) у G = универсальная группа Холла U × универсальная группа Холла U — запретов 1; например: comp-series(G) & locally-finite(prod(inn(G), inn(G))) & ¬virtually-nilpotent(aut(G))
+значение virtually-nilpotent(aut(G)) у G = UT₃(ℝ) × ℤ[1/2] — запретов 1; например: locally-nilpotent(G) & ¬rec-pres-ctbl(prod(inn(G), inn(G))) & ¬virtually-nilpotent(aut(G))
+значение two-primes(aut(G)) у G = ⊕ℤ × C2 x C2 x C2 x D8 — запретов 1; например: two-primes(aut(G)) & ¬fin-pres(G) & ¬two-generated(prod(inn(G), inn(G)))
+значение two-primes(aut(G)) у G = S3 × (C3 x C3) : C3 — запретов 1; например: exponent-6(G) & two-primes(aut(G)) & ¬centerless(inn(G)) & ¬locally-nilpotent(prod(inn(G), inn(G)))
+значение two-primes(aut(G)) у G = C7 × C7 : C3 — запретов 1; например: odd-order(G) & two-primes(aut(G)) & ¬prime-orders(prod(inn(G), inn(G)))
+значение two-generated(π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий × π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий) — запретов 1; например: co-hopfian(G) & two-generated(prod(inn(G), inn(G))) & ¬no-finite-quotients(G) & ¬property-t(aut(G))
+значение two-generated(prod(inn(G), inn(G))) у G = order 129024 — запретов 1; например: bounded-exponent(aut(G)) & two-generated(G) & ¬solvable(aut(G)) & ¬two-generated(prod(inn(G), inn(G)))
+значение two-generated(prod(inn(G), inn(G))) у G = UT₅(𝔽₂) — запретов 1; например: hyperbolic(G) & indecomposable(G) & two-generated(prod(inn(G), inn(G))) & ¬two-generated(G)
+значение two-generated(prod(inn(G), inn(G))) у G = T (группа Томпсона) × T (группа Томпсона) — запретов 1; например: no-finite-quotients(G) & rec-pres(prod(inn(G), inn(G))) & ¬two-generated(prod(inn(G), inn(G)))
+значение two-generated(prod(inn(G), inn(G))) у G = S3 x S3 — запретов 1; например: exponent-6(G) & solvable(aut(G)) & two-generated(prod(inn(G), inn(G))) & ¬clt(aut(G))
+значение two-generated(prod(inn(G), inn(G))) у G = C7 : C3 × C7 : C3 — запретов 1; например: embeds(G, prod(inn(G), inn(G))) & odd-order(G) & two-generated(prod(inn(G), inn(G))) & ¬whitehead(G)
+значение two-generated(order 2064384) — запретов 1; например: exponent-4(prod(inn(G), inn(G))) & ¬exponent-3(inn(G)) & ¬locally-solvable(aut(G)) & ¬two-generated(aut(G))
+значение two-generated(aut(G)) у G = ⊕ℤ × ⊕_ℤ S₃ — запретов 1; например: exponent-6(prod(inn(G), inn(G))) & ¬comp-series(G) & ¬prime-orders(inn(G)) & ¬two-generated(aut(G))
+значение two-generated(aut(G)) у G = ⊕ℤ × ⊕_ℕ M(ℚ, 𝔽₂) — запретов 1; например: locally-nilpotent(prod(inn(G), inn(G))) & two-generated(aut(G)) & ¬solvable(G)
+значение two-generated(aut(G)) у G = ⊕_ℕ SL(2, 5) — запретов 1; например: two-generated(aut(G)) & ¬fin-gen(G) & ¬virtually-solvable(prod(inn(G), inn(G)))
+значение two-generated(aut(G)) у G = ⊕_ℕ QD16 — запретов 1; например: exponent-4(prod(inn(G), inn(G))) & ¬exponent-2(inn(G)) & ¬two-generated(aut(G)) & ¬two-primes(aut(G))
+значение two-generated(aut(G)) у G = ⊕_ℕ C₆ × E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩ — запретов 1; например: exponent-6(G) & locally-nilpotent(G) & ¬two-generated(aut(G)) & ¬two-generated(prod(inn(G), inn(G)))
+значение two-generated(aut(G)) у G = ℤ⁵ × ℤ⁵ — запретов 1; например: exponent-6(prod(inn(G), inn(G))) & fin-pres(G) & left-orderable(G) & ¬two-generated(aut(G))
+значение two-generated(A5) — запретов 1; например: linear-c(prod(inn(G), inn(G))) & prime-orders(inn(G)) & ¬two-generated(inn(G)) & ¬two-primes(inn(G))
+значение two-generated(8192:Aut(256:54439)) — запретов 1; например: exponent-4(aut(G)) & two-generated(aut(G)) & ¬indecomposable(aut(G)) & ¬two-generated(prod(inn(G), inn(G)))
+значение torsion-free(aut(G)) у G = ⊕ℤ × ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 1; например: torsion-free(aut(G)) & virtually-solvable(prod(inn(G), inn(G))) & ¬whitehead(aut(G))
+значение torsion-free(aut(G)) у G = ⊕ℤ × H(ℤ^(ℕ), ⊕ℚ/ℤ): [eᵢ, eⱼ] = (1/j!)δᵢ при i < j — запретов 1; например: embeds(prod(inn(G), inn(G)), inn(G)) & torsion-free(aut(G)) & ¬prime-orders(inn(G))
+значение solvable(aut(G)) у G = ⊕ℤ × ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 1; например: polycyclic(inn(G)) & ¬solvable(aut(G)) & ¬virtually-nilpotent(prod(inn(G), inn(G)))
+значение solvable(aut(G)) у G = ⊕_ℤ S₃ — запретов 1; например: metabelian(G) & ¬comp-series(inn(G)) & ¬kaplansky(prod(inn(G), inn(G))) & ¬solvable(aut(G))
+значение solvable(aut(G)) у G = ⊕_ℕ ℤ(2^∞) — запретов 1; например: divisible(G) & rec-pres(prod(inn(G), inn(G))) & ¬linear-c(G) & ¬solvable(aut(G))
+значение solvable(aut(G)) у G = ⊕C₃ × (S₃ ≀ ℤ)′ — запретов 1; например: embeds(G, prod(inn(G), inn(G))) & exponent-6(G) & ¬centerless(G) & ¬solvable(aut(G))
+значение simple(aut(G)) у G = ⊕_ℕ ℚ/ℤ × B(2, n), n нечётно ⩾ 665 — запретов 1; например: rec-pres(prod(inn(G), inn(G))) & simple(aut(G)) & ¬exponent-6(G) & ¬min-prime-index(inn(G))
+значение residually-nilpotent(π₁(M), M — замкнутое гиперболическое 3-многообразие без симметрий) — запретов 1; например: contains-free(aut(G)) & embeds(aut(G), prod(inn(G), inn(G))) & residually-nilpotent(G)
+значение residually-nilpotent(aut(G)) у G = ⊕_ℕ C2 x C2 x C2 x C2 — запретов 1; например: residually-nilpotent(aut(G)) & ¬class-2(aut(G)) & ¬comp-series(G) & ¬embeds(aut(G), prod(inn(G), inn(G)))
+значение residually-nilpotent(aut(G)) у G = ℤ² × UT₃(ℝ) — запретов 1; например: kaplansky(prod(inn(G), inn(G))) & ¬rec-pres-ctbl(prod(inn(G), inn(G))) & ¬residually-nilpotent(aut(G))
+значение residually-finite(aut(G)) у G = ⊕C₃ × ℤ ≀ C₂ = ℤ² ⋊ C₂ — запретов 1; например: hopfian(prod(inn(G), inn(G))) & residually-finite(inn(G)) & ¬kaplansky(prod(inn(G), inn(G))) & ¬residually-finite(aut(G))
+значение rec-pres-ctbl(⊕_i R_{P_i}, R_P = ⟨1/p : p ∈ P⟩, P_i — непересекающиеся бесконечные множества простых) — запретов 1; например: kaplansky(G) & rec-pres-ctbl(G) & ¬embeds(G, prod(inn(G), inn(G))) & ¬linear-c(aut(G))
+значение rec-pres-ctbl(aut(G)) у G = ⊕ℤ × ⊕_ℕ M(ℚ, 𝔽₂) — запретов 1; например: locally-nilpotent(inn(G)) & rec-pres-ctbl(aut(G)) & ¬virtually-nilpotent(prod(inn(G), inn(G)))
+значение rec-pres-ctbl(aut(G)) у G = ⊕_ℤ S₃ — запретов 1; например: exponent-6(inn(G)) & ¬rec-pres-ctbl(aut(G)) & ¬whitehead(prod(inn(G), inn(G)))
+значение rec-pres-ctbl(aut(G)) у G = UT₃(ℚ) × K (бутылка Клейна) — запретов 1; например: rec-pres-ctbl(aut(G)) & ¬embeds(aut(G), G) & ¬word-problem(prod(inn(G), inn(G)))
+значение rec-pres(aut(G)) у G = ⊕_ℕ Q8 — запретов 1; например: prime-orders(prod(inn(G), inn(G))) & ¬property-t(inn(G)) & ¬rec-pres(aut(G))
+значение property-t(aut(G)) у G = ⊕ℤ × PSL₂(ℚ) — запретов 1; например: property-t(aut(G)) & ¬polynomial-growth(aut(G)) & ¬two-generated(prod(inn(G), inn(G)))
+значение property-t(aut(G)) у G = QD16 × D₈ ∘ ℤ(2^∞) — запретов 1; например: clt(prod(inn(G), inn(G))) & ¬property-t(aut(G)) & ¬two-generated(inn(G))
+значение proper-subs-nilpotent(64512:Aut(10752:Aut(64:82))) — запретов 1; например: proper-subs-nilpotent(G) & virtually-nilpotent(prod(inn(G), inn(G))) & ¬locally-nilpotent(G) & ¬two-primes(G)
+значение proper-subs-finite(группа Корнера A (счётного ранга)) — запретов 1; например: locally-finite(prod(inn(G), inn(G))) & proper-subs-finite(G) & ¬locally-cyclic(G) & ¬polynomial-growth(G)
+значение proper-subs-finite(inn(G)) у G = UT₅(ℤ) × ℤ² ∗ ℤ — запретов 1; например: bi-orderable(G) & proper-subs-finite(inn(G)) & ¬locally-solvable(prod(inn(G), inn(G)))
+значение proper-subs-finite(aut(G)) у G = ⊕ℤ × W(A₅): W ≅ W ≀ W = W′ — запретов 1; например: proper-subs-finite(aut(G)) & ¬word-problem(prod(inn(G), inn(G)))
+значение proper-subs-finite(aut(G)) у G = ⊕ℤ × C2 x C2 x C2 x D8 — запретов 1; например: exponent-6(prod(inn(G), inn(G))) & ¬embeds(prod(inn(G), inn(G)), inn(G)) & ¬proper-subs-finite(aut(G))
+значение proper-subs-cyclic(группа Корнера A (счётного ранга)) — запретов 1; например: proper-subs-cyclic(G) & virtually-nilpotent(prod(inn(G), inn(G))) & ¬locally-finite(G) & ¬polynomial-growth(G)
+значение proper-subs-cyclic(inn(G)) у G = UT₅(𝔽₂) × UT₃(𝔽₃(t)) — запретов 1; например: locally-nilpotent(inn(G)) & proper-subs-cyclic(inn(G)) & ¬linear-c(prod(inn(G), inn(G)))
+значение proper-subs-cyclic(aut(G)) у G = ⊕ℤ × W(A₅): W ≅ W ≀ W = W′ — запретов 1; например: proper-subs-cyclic(aut(G)) & ¬exponent-6(aut(G)) & ¬prime-orders(prod(inn(G), inn(G)))
+значение proper-subs-cyclic(aut(G)) у G = ⊕_ℕ C2 x C2 x C2 x C2 — запретов 1; например: embeds(prod(inn(G), inn(G)), G) & proper-subs-cyclic(aut(G)) & ¬dedekind(aut(G)) & ¬order-p2(G)
+значение proper-subs-abelian(inn(G)) у G = UT₅(𝔽₂) × ℤ² ∗ ℤ — запретов 1; например: proper-subs-abelian(inn(G)) & ¬locally-solvable(prod(inn(G), inn(G))) & ¬periodic(inn(G))
+значение proper-subs-abelian(aut(G)) у G = ℤ⁵ — запретов 1; например: polycyclic(G) & proper-subs-abelian(aut(G)) & two-generated(prod(inn(G), inn(G))) & ¬two-generated(G)
+значение proper-subs-abelian(C2 x C2 x C2 x ((C2 x C2) : ((C2 x C2 x C2 x C2) : C2))) — запретов 1; например: proper-subs-abelian(G) & residually-finite(aut(G)) & ¬kaplansky(prod(inn(G), inn(G))) & ¬solvable(aut(G))
+значение prime-orders(⊕_ℕ ℚ/ℤ × ⊕_p C_p^p) — запретов 1; например: iso(inn(G), prod(inn(G), inn(G))) & prime-orders(G) & ¬exponent-6(G) & ¬polycyclic(G)
+значение prime-orders(order 688128) — запретов 1; например: hopfian(prod(inn(G), inn(G))) & prime-orders(G) & ¬centerless(G) & ¬clt(inn(G))
+значение prime-orders(SL(2,3) × C5 : C4) — запретов 1; например: hyperbolic(inn(G)) & locally-solvable(prod(inn(G), inn(G))) & prime-orders(G) & ¬two-primes(inn(G))
+значение prime-index(⊕ℤ) — запретов 1; например: locally-nilpotent(inn(G)) & prime-index(inn(G)) & ¬embeds(aut(G), prod(inn(G), inn(G))) & ¬proper-subs-cyclic(inn(G))
+значение polynomial-growth(aut(G)) у G = ⊕ℤ × H(ℤ^(ℕ), ⊕ℚ/ℤ): [eᵢ, eⱼ] = (1/j!)δᵢ при i < j — запретов 1; например: kaplansky(prod(inn(G), inn(G))) & polynomial-growth(aut(G)) & ¬exponent-6(inn(G))
+значение polynomial-growth(aut(G)) у G = ℤ⁵ × ℤ⁵ — запретов 1; например: polynomial-growth(aut(G)) & prime-orders(prod(inn(G), inn(G))) & word-problem(G) & ¬hyperbolic(G)
+значение polycyclic(aut(G)) у G = ⊕ℤ × UT₃(ℤ) ∘ ℚ — запретов 1; например: class-2(G) & polycyclic(aut(G)) & ¬exponent-6(prod(inn(G), inn(G))) & ¬indecomposable(G)
+значение polycyclic(aut(G)) у G = C7 × C6 x C3 — запретов 1; например: clt(prod(inn(G), inn(G))) & hall(inn(G)) & ¬polycyclic(aut(G)) & ¬two-primes(G)
+значение perfect(aut(G)) у G = ⊕ℤ × ℤ⁵ — запретов 1; например: free-abelian(G) & perfect(aut(G)) & ¬embeds(aut(G), prod(inn(G), inn(G)))
+значение perfect(aut(G)) у G = QD16 × C9 : C3 — запретов 1; например: locally-nilpotent(prod(inn(G), inn(G))) & virtually-nilpotent(aut(G)) & ¬p-group(inn(G)) & ¬perfect(aut(G))
+значение perfect(aut(G)) у G = C_p (p > 10⁷⁵) × C6 x C3 — запретов 1; например: comp-series(G) & iso(inn(G), prod(inn(G), inn(G))) & perfect(aut(G)) & ¬exponent-4(G)
+значение p-group(inn(G)) у G = ⊕ℤ × UT₅(𝔽₂) — запретов 1; например: clt(prod(inn(G), inn(G))) & residually-nilpotent(G) & ¬p-group(inn(G)) & ¬periodic(G)
+значение order-pq(prod(inn(G), inn(G))) у G = D94 — запретов 1; например: prime-index(inn(G)) & prime-orders(G) & ¬index-2(inn(G)) & ¬order-pq(prod(inn(G), inn(G)))
+значение order-pq(aut(G)) у G = ⊕ℤ × C2 x C2 x C2 x D8 — запретов 1; например: dedekind(inn(G)) & order-pq(aut(G)) & ¬iso(inn(G), prod(inn(G), inn(G)))
+значение order-p2(aut(G)) у G = C9 : C3 × C9 : C3 — запретов 1; например: co-hopfian(prod(inn(G), inn(G))) & exponent-3(inn(G)) & ¬order-p2(aut(G)) & ¬two-generated(inn(G))
+значение odd-order(aut(G)) у G = C7 : C3 × ⊕ℤ — запретов 1; например: odd-order(inn(G)) & ¬odd-order(aut(G)) & ¬periodic(G) & ¬prime-orders(prod(inn(G), inn(G)))
+значение nilpotent(aut(G)) у G = ⊕ℤ × H(ℤ^(ℕ), ⊕ℚ/ℤ): [eᵢ, eⱼ] = (1/j!)δᵢ при i < j — запретов 1; например: whitehead(prod(inn(G), inn(G))) & ¬nilpotent(aut(G)) & ¬rec-pres(prod(inn(G), inn(G)))
+значение min-prime-index(S4) — запретов 1; например: min-prime-index(inn(G)) & ¬exponent-4(prod(inn(G), inn(G))) & ¬fin-pres(G)
+значение min-prime-index(C3 x C3 x C3 x C3) — запретов 1; например: min-prime-index(inn(G)) & prime-orders(prod(inn(G), inn(G))) & ¬cyclic(aut(G)) & ¬order-p2(inn(G))
+значение metabelian(aut(G)) у G = ⊕_ℕ ℚ/ℤ × ⊕_p UT₃(𝔽_p)^p — запретов 1; например: metabelian(aut(G)) & periodic(inn(G)) & ¬clt(aut(G)) & ¬iso(inn(G), prod(inn(G), inn(G)))
+значение metabelian(aut(G)) у G = ⊕_ℕ QD16 — запретов 1; например: exponent-4(prod(inn(G), inn(G))) & metabelian(aut(G)) & ¬proper-subs-finite(inn(G))
+значение metabelian(aut(G)) у G = C9 × C9 : C3 — запретов 1; например: metabelian(aut(G)) & odd-order(inn(G)) & prime-orders(prod(inn(G), inn(G))) & ¬bi-orderable(inn(G))
+значение metabelian(98304:Aut(512:Aut(32:23))) — запретов 1; например: centerless(aut(G)) & exponent-4(prod(inn(G), inn(G))) & metabelian(aut(G)) & ¬two-generated(G)
+значение locally-solvable(aut(G)) у G = ⊕ℤ × ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 1; например: solvable(G) & ¬locally-solvable(aut(G)) & ¬virtually-nilpotent(prod(inn(G), inn(G)))
+значение locally-solvable(aut(G)) у G = ⊕ℤ × UT₃(ℤ) (группа Гейзенберга) — запретов 1; например: locally-solvable(aut(G)) & whitehead(prod(inn(G), inn(G))) & ¬exponent-4(inn(G))
+значение locally-solvable(aut(G)) у G = D₈ ∘ ℤ(2^∞) — запретов 1; например: indecomposable(G) & locally-finite(prod(inn(G), inn(G))) & proper-subs-cyclic(inn(G)) & ¬locally-solvable(aut(G))
+значение locally-nilpotent(aut(G)) у G = ⊕_ℕ UT₃(ℤ) — запретов 1; например: locally-nilpotent(aut(G)) & ¬exponent-6(prod(inn(G), inn(G))) & ¬finite(aut(G))
+значение locally-nilpotent(aut(G)) у G = ⊕C₃ × UT₃(𝔽₃(t)) — запретов 1; например: exponent-3(G) & ¬locally-nilpotent(aut(G)) & ¬word-problem(prod(inn(G), inn(G)))
+значение locally-finite(aut(G)) у G = ⊕_p C_p^{2p} — запретов 1; например: exponent-4(prod(inn(G), inn(G))) & hopfian(G) & ¬linear-c(G) & ¬locally-finite(aut(G))
+значение locally-finite(aut(G)) у G = ℤ² × UT₅(𝔽₂) — запретов 1; например: locally-finite(prod(inn(G), inn(G))) & rec-pres(G) & ¬left-orderable(G) & ¬locally-finite(aut(G))
+значение locally-cyclic(aut(G)) у G = ⊕_ℕ C3 x C3 — запретов 1; например: locally-cyclic(aut(G)) & prime-orders(G) & ¬embeds(G, prod(inn(G), inn(G))) & ¬simple(G)
+значение linear-c(prod(inn(G), inn(G))) у G = ⊕_ℕ SL(2, 5) × Out(⊕_ℕ A₅) = (∏S₅ ⋊ Sym(ℕ))/⊕A₅ — запретов 1; например: linear-c(prod(inn(G), inn(G))) & perfect(G) & ¬hopfian(G)
+значение linear(⊕_ℕ QD16) — запретов 1; например: exponent-4(prod(inn(G), inn(G))) & linear(G) & ¬linear-c(inn(G))
+значение linear(aut(G)) у G = ∗_ℕ C₂ — запретов 1; например: indecomposable(G) & linear-c(prod(inn(G), inn(G))) & ¬kaplansky(G) & ¬linear(aut(G))
+значение linear(aut(G)) у G = D∞ × C₂ — запретов 1; например: hyperbolic(G) & locally-solvable(prod(inn(G), inn(G))) & ¬linear(aut(G))
+значение kaplansky(F_∞ × F_∞) — запретов 1; например: indecomposable(G) & kaplansky(prod(inn(G), inn(G))) & left-orderable(G) & ¬hopfian(G)
+значение iso(inn(G), prod(inn(G), inn(G))) у универсальная группа Холла U × Sym(ℕ) — запретов 1; например: comp-series(inn(G)) & iso(inn(G), prod(inn(G), inn(G))) & ¬virtually-nilpotent(G)
+значение iso(inn(G), prod(inn(G), inn(G))) у UT₅(ℚ) — запретов 1; например: co-hopfian(G) & iso(inn(G), prod(inn(G), inn(G))) & ¬metabelian(G)
+значение iso(aut(G), prod(inn(G), inn(G))) у Q8 × E_∞ (экстраспециальная 2-группа счётного ранга) — запретов 1; например: hopfian(G) & p-group(G) & ¬co-hopfian(G) & ¬iso(aut(G), prod(inn(G), inn(G)))
+значение iso(G, prod(inn(G), inn(G))) у C2 x (((C2 x C2 x C2) : ((C2 x C2 x C2) : C4)) : D8) — запретов 1; например: iso(G, prod(inn(G), inn(G))) & residually-nilpotent(aut(G)) & ¬kaplansky(G)
+значение iso(G, aut(G)) у S₃ × ℤ² — запретов 1; например: clt(prod(inn(G), inn(G))) & iso(G, aut(G)) & ¬prime-orders(prod(inn(G), inn(G))) & ¬two-generated(G)
+значение index-2(⊕_ℤ S₃) — запретов 1; например: embeds(G, prod(inn(G), inn(G))) & index-2(inn(G)) & ¬word-problem(G)
+значение index-2(C3 x C3) — запретов 1; например: exponent-6(G) & index-2(inn(G)) & ¬embeds(G, prod(inn(G), inn(G))) & ¬embeds(prod(inn(G), inn(G)), G)
+значение indecomposable(aut(G)) у G = ⊕ℤ × U ≀ U (U — группа Холла) — запретов 1; например: indecomposable(aut(G)) & ¬embeds(G, inn(G)) & ¬linear-c(prod(inn(G), inn(G)))
+значение indecomposable(aut(G)) у G = QD16 × ⊕ℤ — запретов 1; например: exponent-4(prod(inn(G), inn(G))) & indecomposable(aut(G)) & ¬dedekind(inn(G)) & ¬p-group(G)
+значение indecomposable(aut(G)) у G = C2 x C2 × (C3 x C3) : C3 — запретов 1; например: exponent-6(G) & locally-nilpotent(prod(inn(G), inn(G))) & ¬embeds(prod(inn(G), inn(G)), G) & ¬indecomposable(aut(G))
+значение indecomposable((S₃ ≀ ℤ)′) — запретов 1; например: exponent-6(prod(inn(G), inn(G))) & indecomposable(G) & ¬class-2(aut(G)) & ¬two-primes(inn(G))
+значение hopfian(prod(inn(G), inn(G))) у G = T (группа Томпсона) × T (группа Томпсона) — запретов 1; например: no-finite-quotients(G) & rec-pres(inn(G)) & ¬hopfian(prod(inn(G), inn(G)))
+значение hopfian(aut(G)) у G = ⊕_ℤ S₃ — запретов 1; например: bounded-exponent(G) & hopfian(aut(G)) & ¬word-problem(prod(inn(G), inn(G)))
+значение hall(inn(G)) у G = ℤ² × UT₅(𝔽₂) — запретов 1; например: clt(prod(inn(G), inn(G))) & ¬free(inn(G)) & ¬hall(inn(G)) & ¬property-t(G)
+значение fully-invariant(⊕_ℤ S₃) — запретов 1; например: fully-invariant(inn(G)) & iso(G, prod(inn(G), inn(G))) & ¬indecomposable(G)
+значение fully-invariant(∗_ℕ C₂) — запретов 1; например: contains-free(inn(G)) & fully-invariant(inn(G)) & ¬embeds(G, prod(inn(G), inn(G)))
+значение fin-pres(aut(G)) у G = ⊕ℤ × ⊕_ℕ M(ℚ, 𝔽₂) — запретов 1; например: fin-pres(aut(G)) & locally-nilpotent(prod(inn(G), inn(G))) & ¬class-2(aut(G)) & ¬polynomial-growth(G)
+значение fin-gen(aut(G)) у G = ⊕_ℤ S₃ — запретов 1; например: fin-gen(aut(G)) & locally-finite(inn(G)) & ¬co-hopfian(prod(inn(G), inn(G)))
+значение exponent-6(prod(inn(G), inn(G))) у G = D96 — запретов 1; например: two-generated(inn(G)) & ¬centerless(inn(G)) & ¬exponent-6(prod(inn(G), inn(G))) & ¬residually-nilpotent(G)
+значение exponent-6(prod(inn(G), inn(G))) у G = ((C9 : C3) : ((C3 x C3) : C3)) : (C2 x C2) — запретов 1; например: embeds(aut(G), G) & exponent-6(prod(inn(G), inn(G))) & ¬residually-nilpotent(inn(G)) & ¬two-generated(aut(G))
+значение exponent-6(order 2064384) — запретов 1; например: embeds(prod(inn(G), inn(G)), G) & exponent-4(G) & exponent-6(aut(G)) & ¬hall(inn(G))
+значение exponent-6(inn(G)) у G = 729:309 — запретов 1; например: locally-nilpotent(prod(inn(G), inn(G))) & odd-order(inn(G)) & ¬exponent-6(inn(G))
+значение exponent-6(aut(G)) у G = ⊕C₃ × ∏C₂ — запретов 1; например: locally-finite(G) & whitehead(prod(inn(G), inn(G))) & ¬exponent-6(aut(G)) & ¬rec-pres-ctbl(G)
+значение exponent-6(S5 x S3) — запретов 1; например: exponent-6(G) & ¬clt(G) & ¬embeds(prod(inn(G), inn(G)), aut(G)) & ¬indecomposable(aut(G))
+значение exponent-4(aut(G)) у G = ⊕_ℕ QD16 — запретов 1; например: exponent-4(aut(G)) & ¬polycyclic(aut(G)) & ¬whitehead(prod(inn(G), inn(G)))
+значение exponent-4(D16 × D16) — запретов 1; например: locally-nilpotent(G) & ¬class-2(inn(G)) & ¬embeds(G, aut(G)) & ¬exponent-4(prod(inn(G), inn(G)))
+значение embeds(prod(inn(G), inn(G)), inn(G)) у ℚ² × K (бутылка Клейна) — запретов 1; например: ¬embeds(inn(G), G) & ¬embeds(prod(inn(G), inn(G)), inn(G)) & ¬fin-pres(G)
+значение embeds(prod(inn(G), inn(G)), aut(G)) у D8 : Q8 — запретов 1; например: class-2(G) & exponent-4(aut(G)) & ¬embeds(inn(G), G) & ¬embeds(prod(inn(G), inn(G)), aut(G))
+значение embeds(prod(inn(G), inn(G)), aut(G)) у C2 x C2 x C2 x Q8 — запретов 1; например: embeds(prod(inn(G), inn(G)), aut(G)) & order-p2(inn(G)) & ¬two-primes(aut(G))
+значение embeds(prod(inn(G), inn(G)), aut(G)) у C2 x C2 x C2 x D8 × C2 x C2 x C2 x D8 — запретов 1; например: clt(prod(inn(G), inn(G))) & embeds(prod(inn(G), inn(G)), G) & embeds(prod(inn(G), inn(G)), aut(G)) & ¬two-generated(inn(G))
+значение embeds(prod(inn(G), inn(G)), aut(G)) у ((C3 x C3) : ((C3 x C3) : C3)) : (C2 x C2) — запретов 1; например: centerless(aut(G)) & exponent-6(aut(G)) & ¬embeds(prod(inn(G), inn(G)), aut(G)) & ¬two-generated(aut(G))
+значение embeds(prod(inn(G), inn(G)), G) у H(ℚ^(ℕ) ⊕ ℚ^(ℕ), ⊕ℚ/ℤ): [(v, w), (v′, w′)] = (vᵢw′ᵢ − v′ᵢwᵢ mod ℤ)ᵢ — запретов 1; например: nilpotent(G) & ¬co-hopfian(aut(G)) & ¬embeds(prod(inn(G), inn(G)), G)
+значение embeds(inn(G), G) у SU(2) — запретов 1; например: comp-series(aut(G)) & ¬embeds(inn(G), G) & ¬virtually-solvable(prod(inn(G), inn(G)))
+значение embeds(aut(G), prod(inn(G), inn(G))) у ⊕_ℕ ℚ/ℤ × Dih(ℤ(2^∞)) = ℤ(2^∞) ⋊ C₂ — запретов 1; например: embeds(aut(G), prod(inn(G), inn(G))) & proper-subs-nilpotent(inn(G)) & ¬exponent-6(aut(G)) & ¬nilpotent(G)
+значение embeds(aut(G), prod(inn(G), inn(G))) у S3 x D14 — запретов 1; например: prime-index(inn(G)) & ¬embeds(aut(G), prod(inn(G), inn(G))) & ¬indecomposable(G) & ¬index-2(inn(G))
+значение embeds(aut(G), prod(inn(G), inn(G))) у C7 : C12 — запретов 1; например: clt(G) & embeds(aut(G), prod(inn(G), inn(G))) & ¬centerless(aut(G)) & ¬two-primes(aut(G))
+значение embeds(aut(G), prod(inn(G), inn(G))) у A5 — запретов 1; например: embeds(aut(G), prod(inn(G), inn(G))) & prime-orders(G) & ¬exponent-4(inn(G)) & ¬iso(G, aut(G))
+значение embeds(aut(G), prod(inn(G), inn(G))) у (C14 x C2) : C3 — запретов 1; например: comp-series(aut(G)) & embeds(aut(G), prod(inn(G), inn(G))) & metabelian(aut(G)) & ¬clt(inn(G))
+значение embeds(aut(G), G) у группа Корнера A (счётного ранга) — запретов 1; например: kaplansky(prod(inn(G), inn(G))) & ¬countable(inn(G)) & ¬embeds(aut(G), G)
+значение embeds(G, prod(inn(G), inn(G))) у QD64 — запретов 1; например: comp-series(inn(G)) & embeds(G, prod(inn(G), inn(G))) & metabelian(aut(G)) & ¬two-generated(aut(G))
+значение embeds(G, inn(G)) у ⊕_ℕ C3 x S3 — запретов 1; например: embeds(G, inn(G)) & locally-finite(inn(G)) & ¬iso(G, inn(G)) & ¬locally-nilpotent(prod(inn(G), inn(G)))
+значение embeds(G, aut(G)) у ⊕ℤ × S̃L₂(ℝ) (универсальная накрывающая) — запретов 1; например: ¬embeds(G, aut(G)) & ¬embeds(prod(inn(G), inn(G)), G) & ¬fin-pres(G)
+значение embeds(G, aut(G)) у ⊕_ℕ M(ℚ, 𝔽₂) × A × A для группы Корнера A — запретов 1; например: locally-solvable(prod(inn(G), inn(G))) & ¬embeds(G, aut(G)) & ¬nilpotent(G) & ¬solvable(aut(G))
+значение embeds(G, aut(G)) у ⊕_p UT₃(𝔽_p)^p — запретов 1; например: class-2(G) & ¬embeds(G, aut(G)) & ¬iso(inn(G), prod(inn(G), inn(G))) & ¬two-primes(G)
+значение embeds(G, aut(G)) у ⊕C₃ × E₃∞: ⟨xᵢ, yᵢ, z | xᵢ³ = yᵢ³ = z³ = 1, [xᵢ, yᵢ] = z центральны⟩ — запретов 1; например: embeds(G, aut(G)) & locally-nilpotent(prod(inn(G), inn(G))) & prime-orders(G) & ¬abelian(G)
+значение embeds(G, aut(G)) у SU(2) — запретов 1; например: embeds(aut(G), inn(G)) & ¬embeds(G, aut(G)) & ¬kaplansky(prod(inn(G), inn(G)))
+значение embeds(G, aut(G)) у C_p (p > 10⁷⁵) — запретов 1; например: odd-order(G) & ¬embeds(G, aut(G)) & ¬exponent-4(prod(inn(G), inn(G))) & ¬p-group(G)
+значение embeds(G, aut(G)) у C9 x C3 — запретов 1; например: embeds(G, aut(G)) & exponent-6(aut(G)) & ¬embeds(aut(G), prod(inn(G), inn(G))) & ¬iso(G, inn(G))
+значение embeds(G, aut(G)) у C6 x Q8 — запретов 1; например: dedekind(G) & embeds(inn(G), G) & ¬embeds(G, aut(G)) & ¬whitehead(prod(inn(G), inn(G)))
+значение dedekind(aut(G)) у G = Q8 × UT₃(𝔽₃(t)) — запретов 1; например: class-2(G) & exponent-6(inn(G)) & ¬dedekind(aut(G)) & ¬prime-orders(prod(inn(G), inn(G)))
+значение dedekind(aut(G)) у G = C9 : C3 × ⊕_ℕ ℤ(2^∞) — запретов 1; например: exponent-3(inn(G)) & ¬dedekind(aut(G)) & ¬iso(inn(G), prod(inn(G), inn(G))) & ¬two-primes(G)
+значение countable(aut(G)) у G = ℤ² ⋊_A ℤ, A = (2 1; 1 1) — запретов 1; например: residually-finite(aut(G)) & ¬co-hopfian(prod(inn(G), inn(G))) & ¬countable(aut(G))
+значение contains-free(aut(G)) у G = ⊕ℤ × UT₃(ℤ) (группа Гейзенберга) — запретов 1; например: free-abelian(inn(G)) & ¬contains-free(aut(G)) & ¬prime-orders(prod(inn(G), inn(G)))
+значение contains-free(aut(G)) у G = ⊕ℤ × PSL₂(ℚ) — запретов 1; например: no-finite-quotients(inn(G)) & ¬contains-free(aut(G)) & ¬virtually-nilpotent(prod(inn(G), inn(G)))
+значение complemented(⊕_ℕ C2 x C2) — запретов 1; например: complemented(inn(G)) & proper-subs-abelian(inn(G)) & ¬linear-c(prod(inn(G), inn(G)))
+значение comp-series(aut(G)) у G = ℤ⁴ × ℤ² × C₂ — запретов 1; например: fin-gen(G) & prime-orders(prod(inn(G), inn(G))) & ¬comp-series(aut(G)) & ¬kaplansky(G)
+значение comp-series(Aut(M(ℚ, ℚ))) — запретов 1; например: bi-orderable(G) & comp-series(aut(G)) & ¬index-2(inn(G)) & ¬iso(aut(G), prod(inn(G), inn(G)))
+значение co-hopfian(aut(G)) у G = ⊕ℤ × ⊕_ℤ S₃ — запретов 1; например: co-hopfian(aut(G)) & embeds(prod(inn(G), inn(G)), inn(G)) & ¬locally-nilpotent(prod(inn(G), inn(G)))
+значение co-hopfian(aut(G)) у G = ⊕_ℕ ℚ/ℤ — запретов 1; например: co-hopfian(aut(G)) & locally-nilpotent(prod(inn(G), inn(G))) & periodic(G) & ¬polycyclic(G)
+значение clt(prod(inn(G), inn(G))) у G = (C6 x C2) : C2 — запретов 1; например: clt(prod(inn(G), inn(G))) & exponent-6(aut(G)) & prime-index(inn(G)) & ¬indecomposable(inn(G))
+значение clt(aut(G)) у G = ⊕C₃ × ∏C₂ — запретов 1; например: periodic(G) & whitehead(prod(inn(G), inn(G))) & ¬clt(aut(G)) & ¬countable(G)
+значение clt(aut(G)) у G = Q8 × C9 : C3 — запретов 1; например: clt(aut(G)) & exponent-6(prod(inn(G), inn(G))) & proper-subs-nilpotent(G) & ¬prime-orders(inn(G))
+значение clt(aut(G)) у G = C9 : C3 × C9 : C3 — запретов 1; например: clt(G) & odd-order(inn(G)) & ¬clt(aut(G)) & ¬embeds(prod(inn(G), inn(G)), G)
+значение class-2(aut(G)) у G = ⊕ℤ × C2 x C2 x C2 x D8 — запретов 1; например: exponent-2(inn(G)) & ¬class-2(aut(G)) & ¬two-generated(prod(inn(G), inn(G))) & ¬two-primes(G)
+значение class-2(aut(G)) у G = ℤ⁵ — запретов 1; например: class-2(aut(G)) & embeds(prod(inn(G), inn(G)), inn(G)) & rec-pres(G) & ¬two-generated(G)
+значение characteristic(⊕_ℕ C2 x C2) — запретов 1; например: characteristic(inn(G)) & prime-orders(inn(G)) & ¬co-hopfian(prod(inn(G), inn(G)))
+значение characteristic(S3) — запретов 1; например: characteristic(inn(G)) & proper-subs-nilpotent(inn(G)) & ¬embeds(prod(inn(G), inn(G)), G) & ¬proper-subs-cyclic(G)
+значение central(⊕_p C_p²) — запретов 1; например: central(inn(G)) & ¬co-hopfian(G) & ¬embeds(prod(inn(G), inn(G)), inn(G))
+значение centerless(inn(G)) у G = 2916:Aut(486:130) — запретов 1; например: exponent-6(G) & indecomposable(G) & ¬centerless(inn(G)) & ¬locally-nilpotent(prod(inn(G), inn(G)))
+значение bounded-exponent(aut(G)) у G = ⊕_ℕ SL(2,3) — запретов 1; например: bounded-exponent(inn(G)) & ¬bounded-exponent(aut(G)) & ¬iso(G, prod(inn(G), inn(G))) & ¬proper-subs-abelian(inn(G))
+значение bounded-exponent(aut(G)) у G = ⊕_ℕ C₆ — запретов 1; например: bounded-exponent(G) & rec-pres(prod(inn(G), inn(G))) & ¬bounded-exponent(aut(G)) & ¬prime-orders(G)
+значение amenable(aut(G)) у G = 𝒢 (группа Григорчука) × H∞(ℚ): ⟨xᵢ, yᵢ, z | [xᵢ, yᵢ] = z⟩ над ℚ (Гейзенберг счётного ранга над ℚ) — запретов 1; например: amenable(aut(G)) & ¬hopfian(prod(inn(G), inn(G))) & ¬locally-solvable(aut(G))
+значение abelian(aut(G)) у G = ⊕_ℕ Q8 — запретов 1; например: abelian(aut(G)) & ¬clt(G) & ¬whitehead(prod(inn(G), inn(G)))
+== сводятся к вырожденности: 0 вопросов на 0 запретов ==
+== без кандидата: нужен пример или правило ==
+не бывает? class-2(G) & ¬exponent-4(prod(inn(G), inn(G))) & ¬exponent-6(inn(G)) & bounded-exponent(inn(G))   [примеров посылок: 2110]
+не бывает? co-hopfian(prod(inn(G), inn(G))) & ¬abelian(aut(G)) & ¬co-hopfian(aut(G)) & amenable(aut(G))   [примеров посылок: 2666]
+не бывает? embeds(aut(G), G) & locally-nilpotent(prod(inn(G), inn(G))) & ¬two-generated(aut(G)) & co-hopfian(G)   [примеров посылок: 398]
+не бывает? embeds(aut(G), prod(inn(G), inn(G))) & iso(G, inn(G)) & ¬whole(inn(G)) & clt(prod(inn(G), inn(G)))   [примеров посылок: 8]
+не бывает? embeds(aut(G), prod(inn(G), inn(G))) & proper-subs-abelian(G) & ¬free(aut(G)) & class-2(inn(G))   [примеров посылок: 2]
+не бывает? embeds(prod(inn(G), inn(G)), G) & exponent-4(G) & ¬two-generated(aut(G)) & dedekind(aut(G))   [примеров посылок: 3]
+не бывает? embeds(prod(inn(G), inn(G)), G) & proper-subs-cyclic(aut(G)) & ¬torsion-free(G) & embeds(G, aut(G))   [примеров посылок: 16]
+не бывает? embeds(prod(inn(G), inn(G)), G) & solvable(aut(G)) & ¬odd-order(inn(G)) & dedekind(G)   [примеров посылок: 175]
+не бывает? embeds(prod(inn(G), inn(G)), inn(G)) & fin-gen(G) & ¬clt(G) & co-hopfian(G)   [примеров посылок: 296]
+не бывает? exponent-4(G) & kaplansky(prod(inn(G), inn(G))) & ¬proper-subs-cyclic(aut(G)) & abelian(aut(G))   [примеров посылок: 57]
+не бывает? exponent-4(prod(inn(G), inn(G))) & order-pq(G) & ¬prime-index(inn(G)) & embeds(aut(G), G)   [примеров посылок: 1]
+не бывает? exponent-6(G) & maximal(inn(G)) & ¬prime-orders(aut(G)) & exponent-4(prod(inn(G), inn(G)))   [примеров посылок: 2]
+не бывает? exponent-6(G) & proper-subs-nilpotent(G) & ¬centerless(aut(G)) & embeds(aut(G), prod(inn(G), inn(G)))   [примеров посылок: 3]
+не бывает? exponent-6(aut(G)) & proper-subs-abelian(G) & ¬embeds(prod(inn(G), inn(G)), G) & exponent-4(prod(inn(G), inn(G)))   [примеров посылок: 5]
+не бывает? exponent-6(aut(G)) & two-generated(aut(G)) & ¬kaplansky(prod(inn(G), inn(G))) & exponent-4(prod(inn(G), inn(G)))   [примеров посылок: 11]
+не бывает? exponent-6(inn(G)) & ¬kaplansky(prod(inn(G), inn(G))) & ¬two-generated(aut(G)) & embeds(aut(G), G)   [примеров посылок: 5]
+не бывает? fin-pres(G) & polynomial-growth(aut(G)) & ¬finite(aut(G)) & co-hopfian(prod(inn(G), inn(G)))   [примеров посылок: 3062]
+не бывает? fin-pres(aut(G)) & locally-finite(prod(inn(G), inn(G))) & ¬periodic(aut(G)) & co-hopfian(G)   [примеров посылок: 3053]
+не бывает? fin-pres(aut(G)) & ¬bi-orderable(G) & ¬finite(aut(G)) & clt(prod(inn(G), inn(G)))   [примеров посылок: 1315]
+не бывает? hopfian(G) & no-finite-quotients(G) & ¬left-orderable(G) & exponent-4(prod(inn(G), inn(G)))   [примеров посылок: 1879]
+не бывает? indecomposable(aut(G)) & prime-index(inn(G)) & ¬exponent-6(inn(G)) & exponent-4(prod(inn(G), inn(G)))   [примеров посылок: 7]
+не бывает? indecomposable(aut(G)) & ¬contains-free(aut(G)) & ¬finite(aut(G)) & clt(prod(inn(G), inn(G)))   [примеров посылок: 236]
+не бывает? index-2(inn(G)) & ¬embeds(aut(G), G) & ¬kaplansky(prod(inn(G), inn(G))) & dedekind(inn(G))   [примеров посылок: 4]
+не бывает? index-2(inn(G)) & ¬embeds(aut(G), prod(inn(G), inn(G))) & ¬exponent-2(inn(G)) & exponent-4(aut(G))   [примеров посылок: 7]
+не бывает? iso(inn(G), prod(inn(G), inn(G))) & ¬embeds(G, inn(G)) & contains-free(G)   [примеров посылок: 4131]
+не бывает? iso(inn(G), prod(inn(G), inn(G))) & ¬periodic(G) & ¬polycyclic(aut(G)) & finite(aut(G))   [примеров посылок: 921]
+не бывает? kaplansky(G) & ¬embeds(aut(G), G) & iso(G, prod(inn(G), inn(G)))   [примеров посылок: 342]
+не бывает? left-orderable(G) & ¬class-2(aut(G)) & ¬contains-free(aut(G)) & co-hopfian(prod(inn(G), inn(G)))   [примеров посылок: 2306]
+не бывает? linear-c(aut(G)) & ¬countable(aut(G)) & ¬dedekind(aut(G)) & clt(prod(inn(G), inn(G)))   [примеров посылок: 778]
+не бывает? linear-c(prod(inn(G), inn(G))) & no-finite-quotients(G) & ¬divisible(G) & bounded-exponent(inn(G))   [примеров посылок: 126]
+не бывает? locally-finite(inn(G)) & ¬virtually-nilpotent(prod(inn(G), inn(G))) & linear(inn(G))   [примеров посылок: 8359]
+не бывает? locally-finite(prod(inn(G), inn(G))) & residually-nilpotent(aut(G)) & ¬periodic(aut(G)) & fin-gen(G)   [примеров посылок: 492]
+не бывает? locally-nilpotent(prod(inn(G), inn(G))) & maximal(inn(G)) & ¬two-generated(aut(G)) & embeds(G, aut(G))   [примеров посылок: 8]
+не бывает? locally-nilpotent(prod(inn(G), inn(G))) & proper-subs-finite(G) & ¬clt(G) & finite-index(inn(G))   [примеров посылок: 1223]
+не бывает? locally-solvable(inn(G)) & ¬exponent-6(prod(inn(G), inn(G))) & free(G)   [примеров посылок: 6228]
+не бывает? maximal(inn(G)) & nilpotent(G) & ¬iso(inn(G), prod(inn(G), inn(G))) & exponent-6(aut(G))   [примеров посылок: 10]
+не бывает? maximal(inn(G)) & prime-orders(G) & ¬exponent-2(aut(G)) & exponent-4(prod(inn(G), inn(G)))   [примеров посылок: 64]
+не бывает? maximal(inn(G)) & proper-subs-cyclic(G) & ¬prime-order(aut(G)) & exponent-4(prod(inn(G), inn(G)))   [примеров посылок: 105]
+не бывает? maximal(inn(G)) & proper-subs-nilpotent(aut(G)) & ¬proper-subs-abelian(G) & exponent-6(prod(inn(G), inn(G)))   [примеров посылок: 7]
+не бывает? metabelian(aut(G)) & odd-order(G) & ¬locally-nilpotent(aut(G)) & embeds(prod(inn(G), inn(G)), G)   [примеров посылок: 13]
+не бывает? min-prime-index(inn(G)) & order-pq(G) & ¬exponent-6(G) & iso(inn(G), prod(inn(G), inn(G)))   [примеров посылок: 4]
+не бывает? min-prime-index(inn(G)) & ¬embeds(aut(G), prod(inn(G), inn(G))) & ¬prime-orders(inn(G)) & locally-nilpotent(G)   [примеров посылок: 7]
+не бывает? nilpotent(aut(G)) & ¬class-2(G) & ¬embeds(aut(G), prod(inn(G), inn(G))) & index-2(inn(G))   [примеров посылок: 106]
+не бывает? nilpotent(aut(G)) & ¬exponent-4(aut(G)) & ¬whitehead(prod(inn(G), inn(G))) & iso(G, aut(G))   [примеров посылок: 181]
+не бывает? order-pq(G) & ¬embeds(prod(inn(G), inn(G)), inn(G)) & ¬whole(inn(G)) & exponent-6(inn(G))   [примеров посылок: 30]
+не бывает? p-group(aut(G)) & ¬exponent-6(prod(inn(G), inn(G))) & ¬indecomposable(G) & min-prime-index(inn(G))   [примеров посылок: 60]
+не бывает? p-group(aut(G)) & ¬p-group(G) & ¬two-generated(prod(inn(G), inn(G))) & maximal(inn(G))   [примеров посылок: 4]
+не бывает? periodic(aut(G)) & ¬hall(inn(G)) & ¬proper-subs-abelian(aut(G)) & kaplansky(prod(inn(G), inn(G)))   [примеров посылок: 1176]
+не бывает? polycyclic(aut(G)) & ¬property-t(G) & ¬two-generated(aut(G)) & clt(prod(inn(G), inn(G)))   [примеров посылок: 437]
+не бывает? prime-index(inn(G)) & ¬p-group(aut(G)) & exponent-4(prod(inn(G), inn(G)))   [примеров посылок: 87]
+не бывает? prime-orders(G) & ¬embeds(prod(inn(G), inn(G)), aut(G)) & locally-nilpotent(aut(G))   [примеров посылок: 27]
+не бывает? prime-orders(G) & ¬metabelian(inn(G)) & embeds(prod(inn(G), inn(G)), inn(G))   [примеров посылок: 81]
+не бывает? prime-orders(aut(G)) & ¬embeds(aut(G), prod(inn(G), inn(G))) & ¬simple(aut(G)) & free-abelian(G)   [примеров посылок: 2]
+не бывает? prime-orders(prod(inn(G), inn(G))) & proper-subs-cyclic(aut(G)) & ¬no-finite-quotients(G) & iso(G, aut(G))   [примеров посылок: 57]
+не бывает? prime-orders(prod(inn(G), inn(G))) & proper-subs-finite(G) & ¬clt(G) & polycyclic(aut(G))   [примеров посылок: 405]
+не бывает? prime-orders(prod(inn(G), inn(G))) & ¬hall(inn(G)) & ¬iso(G, aut(G)) & index-2(inn(G))   [примеров посылок: 1]
+не бывает? proper-subs-abelian(G) & ¬embeds(G, aut(G)) & ¬exponent-6(prod(inn(G), inn(G))) & indecomposable(aut(G))   [примеров посылок: 7]
+не бывает? proper-subs-abelian(G) & ¬exponent-4(inn(G)) & iso(inn(G), prod(inn(G), inn(G)))   [примеров посылок: 1205]
+не бывает? proper-subs-abelian(G) & ¬exponent-4(prod(inn(G), inn(G))) & ¬odd-order(G) & nilpotent(G)   [примеров посылок: 5]
+не бывает? proper-subs-abelian(G) & ¬exponent-4(prod(inn(G), inn(G))) & ¬p-group(G) & prime-orders(prod(inn(G), inn(G)))   [примеров посылок: 40]
+не бывает? proper-subs-abelian(G) & ¬iso(inn(G), prod(inn(G), inn(G))) & ¬two-primes(G) & class-2(G)   [примеров посылок: 1069]
+не бывает? proper-subs-abelian(G) & ¬locally-nilpotent(prod(inn(G), inn(G))) & ¬metabelian(aut(G)) & clt(G)   [примеров посылок: 35]
+не бывает? proper-subs-abelian(G) & ¬virtually-solvable(G) & locally-solvable(prod(inn(G), inn(G)))   [примеров посылок: 3149]
+не бывает? proper-subs-abelian(aut(G)) & ¬abelian(aut(G)) & ¬p-group(G) & iso(inn(G), prod(inn(G), inn(G)))   [примеров посылок: 1]
+не бывает? proper-subs-abelian(aut(G)) & ¬class-2(aut(G)) & ¬p-group(G) & prime-orders(prod(inn(G), inn(G)))   [примеров посылок: 87]
+не бывает? proper-subs-abelian(aut(G)) & ¬embeds(G, prod(inn(G), inn(G))) & ¬embeds(prod(inn(G), inn(G)), G) & embeds(aut(G), prod(inn(G), inn(G)))   [примеров посылок: 5]
+не бывает? proper-subs-abelian(aut(G)) & ¬exponent-4(G) & ¬locally-nilpotent(aut(G)) & embeds(prod(inn(G), inn(G)), G)   [примеров посылок: 112]
+не бывает? proper-subs-abelian(inn(G)) & ¬free-abelian(inn(G)) & iso(G, prod(inn(G), inn(G)))   [примеров посылок: 3072]
+не бывает? proper-subs-abelian(inn(G)) & ¬residually-nilpotent(G) & locally-nilpotent(prod(inn(G), inn(G)))   [примеров посылок: 867]
+не бывает? proper-subs-cyclic(G) & ¬centerless(aut(G)) & ¬kaplansky(inn(G)) & locally-nilpotent(prod(inn(G), inn(G)))   [примеров посылок: 524]
+не бывает? proper-subs-cyclic(G) & ¬embeds(prod(inn(G), inn(G)), inn(G)) & ¬iso(G, aut(G)) & exponent-6(G)   [примеров посылок: 1]
+не бывает? proper-subs-cyclic(G) & ¬embeds(prod(inn(G), inn(G)), inn(G)) & ¬two-primes(G) & locally-nilpotent(inn(G))   [примеров посылок: 1089]
+не бывает? proper-subs-cyclic(G) & ¬exponent-2(aut(G)) & ¬locally-finite(G) & locally-solvable(prod(inn(G), inn(G)))   [примеров посылок: 1]
+не бывает? proper-subs-cyclic(G) & ¬exponent-4(prod(inn(G), inn(G))) & nilpotent(G)   [примеров посылок: 109]
+не бывает? proper-subs-cyclic(G) & ¬iso(G, inn(G)) & ¬iso(inn(G), prod(inn(G), inn(G))) & embeds(aut(G), G)   [примеров посылок: 13]
+не бывает? proper-subs-cyclic(G) & ¬locally-nilpotent(prod(inn(G), inn(G))) & ¬order-pq(inn(G)) & locally-solvable(aut(G))   [примеров посылок: 1]
+не бывает? proper-subs-cyclic(G) & ¬virtually-nilpotent(aut(G)) & iso(inn(G), prod(inn(G), inn(G)))   [примеров посылок: 1]
+не бывает? proper-subs-cyclic(aut(G)) & ¬class-2(aut(G)) & ¬exponent-2(G) & kaplansky(prod(inn(G), inn(G)))   [примеров посылок: 55]
+не бывает? proper-subs-cyclic(inn(G)) & ¬two-generated(G) & iso(G, prod(inn(G), inn(G)))   [примеров посылок: 3662]
+не бывает? proper-subs-cyclic(inn(G)) & ¬virtually-nilpotent(inn(G)) & linear-c(prod(inn(G), inn(G)))   [примеров посылок: 73]
+не бывает? proper-subs-finite(G) & ¬hyperbolic(G) & ¬locally-solvable(aut(G)) & iso(inn(G), prod(inn(G), inn(G)))   [примеров посылок: 225]
+не бывает? proper-subs-finite(G) & ¬locally-finite(aut(G)) & ¬residually-nilpotent(aut(G)) & locally-finite(prod(inn(G), inn(G)))   [примеров посылок: 2087]
+не бывает? proper-subs-finite(inn(G)) & ¬solvable(G) & embeds(prod(inn(G), inn(G)), inn(G))   [примеров посылок: 3088]
+не бывает? rec-pres(G) & virtually-nilpotent(aut(G)) & ¬property-t(aut(G)) & locally-finite(prod(inn(G), inn(G)))   [примеров посылок: 3062]
+не бывает? rec-pres-ctbl(aut(G)) & ¬linear-c(aut(G)) & clt(prod(inn(G), inn(G)))   [примеров посылок: 4]
+не бывает? residually-nilpotent(aut(G)) & ¬hyperbolic(aut(G)) & embeds(G, prod(inn(G), inn(G)))   [примеров посылок: 2]
+не бывает? simple(aut(G)) & ¬clt(aut(G)) & ¬exponent-2(G) & kaplansky(prod(inn(G), inn(G)))   [примеров посылок: 1064]
+не бывает? solvable(aut(G)) & whitehead(prod(inn(G), inn(G))) & ¬prime-orders(aut(G)) & centerless(aut(G))   [примеров посылок: 3]
+не бывает? solvable(aut(G)) & word-problem(aut(G)) & ¬hyperbolic(aut(G)) & co-hopfian(prod(inn(G), inn(G)))   [примеров посылок: 1371]
+не бывает? torsion-free(G) & ¬embeds(G, prod(inn(G), inn(G))) & ¬prime-order(aut(G)) & hyperbolic(G)   [примеров посылок: 1085]
+не бывает? torsion-free(G) & ¬iso(aut(G), prod(inn(G), inn(G))) & ¬min-prime-index(inn(G)) & locally-cyclic(aut(G))   [примеров посылок: 162]
+не бывает? torsion-free(inn(G)) & ¬embeds(prod(inn(G), inn(G)), inn(G)) & proper-subs-finite(inn(G))   [примеров посылок: 731]
+не бывает? two-generated(G) & ¬contains-free(aut(G)) & ¬hyperbolic(G) & co-hopfian(prod(inn(G), inn(G)))   [примеров посылок: 1008]
+не бывает? two-generated(aut(G)) & ¬exponent-4(prod(inn(G), inn(G))) & ¬iso(G, aut(G)) & residually-nilpotent(aut(G))   [примеров посылок: 96]
+не бывает? two-primes(aut(G)) & ¬embeds(aut(G), prod(inn(G), inn(G))) & ¬min-prime-index(inn(G)) & bi-orderable(G)   [примеров посылок: 732]
+не бывает? virtually-nilpotent(inn(G)) & ¬hopfian(prod(inn(G), inn(G))) & fin-gen(G)   [примеров посылок: 1506]
+не бывает? virtually-nilpotent(prod(inn(G), inn(G))) & ¬polynomial-growth(G) & ¬polynomial-growth(aut(G)) & two-generated(aut(G))   [примеров посылок: 145]
+не бывает? virtually-solvable(prod(inn(G), inn(G))) & ¬odd-order(G) & ¬solvable(aut(G)) & proper-subs-cyclic(G)   [примеров посылок: 1]
+не бывает? whitehead(G) & ¬embeds(aut(G), prod(inn(G), inn(G))) & ¬maximal(inn(G)) & locally-solvable(aut(G))   [примеров посылок: 2]
+не бывает? whitehead(inn(G)) & ¬clt(inn(G)) & co-hopfian(prod(inn(G), inn(G)))   [примеров посылок: 1366]
+не бывает? whitehead(prod(inn(G), inn(G))) & ¬exponent-4(prod(inn(G), inn(G))) & hyperbolic(inn(G))   [примеров посылок: 3088]
+не бывает? whitehead(prod(inn(G), inn(G))) & ¬exponent-6(inn(G)) & proper-subs-cyclic(inn(G))   [примеров посылок: 334]
+не бывает? ¬bounded-exponent(G) & ¬embeds(G, prod(inn(G), inn(G))) & ¬nilpotent(G) & proper-subs-nilpotent(G)   [примеров посылок: 5885]
+не бывает? ¬centerless(G) & ¬linear-c(prod(inn(G), inn(G))) & proper-subs-finite(G)   [примеров посылок: 6834]
+не бывает? ¬class-2(inn(G)) & ¬embeds(G, prod(inn(G), inn(G))) & ¬polycyclic(aut(G)) & proper-subs-nilpotent(G)   [примеров посылок: 4726]
+не бывает? ¬clt(G) & ¬embeds(prod(inn(G), inn(G)), inn(G)) & ¬no-finite-quotients(G) & proper-subs-cyclic(G)   [примеров посылок: 36]
+не бывает? ¬embeds(G, prod(inn(G), inn(G))) & ¬hyperbolic(aut(G)) & ¬whitehead(G) & fin-pres(aut(G))   [примеров посылок: 1190]
+не бывает? ¬embeds(G, prod(inn(G), inn(G))) & ¬nilpotent(aut(G)) & ¬polycyclic(G) & proper-subs-cyclic(G)   [примеров посылок: 5776]
+не бывает? ¬embeds(aut(G), inn(G)) & ¬embeds(prod(inn(G), inn(G)), aut(G)) & ¬prime-index(inn(G)) & iso(G, aut(G))   [примеров посылок: 51]
+не бывает? ¬embeds(aut(G), prod(inn(G), inn(G))) & ¬index-2(inn(G)) & ¬kaplansky(prod(inn(G), inn(G))) & iso(G, aut(G))   [примеров посылок: 742]
+не бывает? ¬embeds(inn(G), G) & ¬exponent-6(prod(inn(G), inn(G))) & ¬indecomposable(aut(G)) & centerless(aut(G))   [примеров посылок: 4]
+не бывает? ¬embeds(prod(inn(G), inn(G)), G) & ¬polycyclic(G) & class-2(aut(G))   [примеров посылок: 359]
+не бывает? ¬embeds(prod(inn(G), inn(G)), G) & ¬residually-finite(aut(G)) & clt(inn(G))   [примеров посылок: 1159]
+не бывает? ¬embeds(prod(inn(G), inn(G)), aut(G)) & ¬polynomial-growth(G) & two-primes(aut(G))   [примеров посылок: 387]
+не бывает? ¬embeds(prod(inn(G), inn(G)), inn(G)) & ¬virtually-solvable(prod(inn(G), inn(G))) & locally-nilpotent(inn(G))   [примеров посылок: 582]
+не бывает? ¬exponent-6(prod(inn(G), inn(G))) & ¬indecomposable(aut(G)) & ¬proper-subs-cyclic(inn(G)) & proper-subs-abelian(G)   [примеров посылок: 1]
+не бывает? ¬exponent-6(prod(inn(G), inn(G))) & ¬rec-pres(aut(G)) & periodic(aut(G))   [примеров посылок: 444]
+не бывает? ¬finite-index(inn(G)) & ¬locally-solvable(prod(inn(G), inn(G))) & ¬embeds(G, aut(G))   [примеров посылок: 15]
+не бывает? ¬iso(inn(G), prod(inn(G), inn(G))) & ¬no-finite-quotients(G) & ¬solvable(aut(G)) & proper-subs-cyclic(G)   [примеров посылок: 7135]
+== уже в реестре (data/registry/grp.json) ==
+В-7 — запретов 51: Произведения с монстром Тарского: хопфовость.
+В-6 — запретов 7: Коммутант 𝒢′ группы Григорчука: центр, коммутант, неразложимость, совершенность — заполнить по литературе.
+В-1 — запретов 3: Группа Губы и её максимальная подгруппа: центр, простота, хопфовость, неразложимость; свойства максимальной подгруппы.
+== свёрнуто вопросов 18345: следуют из теории и оставленных вопросов ==

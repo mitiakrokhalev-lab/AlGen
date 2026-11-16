@@ -1,0 +1,34 @@
+строк в библиотеке 30953, литералов 538
+не опровергнуто библиотекой 56389272, минимальных обо всех переменных 60000, запретов 42029: неизвестно 22698, выводится 19317, опровергается 14
+посылок без единого примера: 833152
+решающих значений 21 на 30 запретов, без кандидата 1 в 1 кластерах, в реестре 0
+свёрнуто вопросов 22675 (список: --полностью)
+вопросов «какие группы бывают с S»: 24 на 25 запретов; без вопроса 22673
+запретов без примера: 31, кластеров: 12
+
+== решающих значений 21: касаются 30 запретов; без кандидата 1; уже в реестре 0 ==
+значение two-generated(Sym∗Sym над 3:1) — запретов 5; например: clt(sym(G)) & ¬two-generated(pushout(cayley(G), cayley(G)))
+значение hopfian(Sym∗Sym над Sum_9_2) — запретов 5; например: bounded-exponent(G) & ¬hopfian(pushout(cayley(G), cayley(G)))
+значение two-generated(pushout(cayley(G), cayley(G))) у G = 768:Out(32:46) — запретов 2; например: two-generated(pushout(cayley(G), cayley(G))) & ¬abelian(pushout(cayley(G), cayley(G)))
+значение solvable(pushout(cayley(G), cayley(G))) у G = C3 × C_p (p > 10⁷⁵) — запретов 1; например: solvable(pushout(cayley(G), cayley(G))) & ¬proper-subs-cyclic(sym(G))
+значение residually-nilpotent(sym(G)) у G = ∏_p C_p — запретов 1; например: residually-nilpotent(sym(G)) & ¬abelian(pushout(cayley(G), cayley(G)))
+значение residually-nilpotent(pushout(cayley(G), cayley(G))) у G = ∏_p C_p — запретов 1; например: residually-nilpotent(pushout(cayley(G), cayley(G))) & ¬abelian(pushout(cayley(G), cayley(G)))
+значение property-t(pushout(cayley(G), cayley(G))) у G = order 1440 — запретов 1; например: property-t(pushout(cayley(G), cayley(G))) & ¬bounded-exponent(pushout(cayley(G), cayley(G)))
+значение proper-subs-nilpotent(sym(G)) у G = C_p (p > 10⁷⁵) — запретов 1; например: proper-subs-nilpotent(sym(G)) & ¬solvable(pushout(cayley(G), cayley(G)))
+значение prime-orders(sym(G)) у G = order 1440 — запретов 1; например: prime-orders(sym(G)) & ¬solvable(pushout(cayley(G), cayley(G)))
+значение odd-order(sym(G)) у G = C_p (p > 10⁷⁵) — запретов 1; например: odd-order(sym(G)) & ¬class-2(pushout(cayley(G), cayley(G)))
+значение metabelian(sym(G)) у G = C_p (p > 10⁷⁵) — запретов 1; например: metabelian(sym(G)) & ¬solvable(pushout(cayley(G), cayley(G)))
+значение metabelian(Sym∗Sym над 3:1) — запретов 1; например: metabelian(pushout(cayley(G), cayley(G))) & ¬abelian(sym(G))
+значение locally-solvable(pushout(cayley(G), cayley(G))) у G = ⊕_ℕ PSL₂(ℝ) — запретов 1; например: locally-solvable(pushout(cayley(G), cayley(G))) & ¬proper-subs-nilpotent(sym(G))
+значение locally-nilpotent(pushout(cayley(G), cayley(G))) у G = ⊕_ℕ PSL₂(ℝ) — запретов 1; например: locally-nilpotent(pushout(cayley(G), cayley(G))) & ¬abelian(sym(G))
+значение iso(G, sym(G)) у order 303264 — запретов 1; например: iso(G, sym(G)) & ¬clt(pushout(cayley(G), cayley(G)))
+значение hopfian(sym(G)) у G = ⊕_ℕ PSL₂(ℝ) — запретов 1; например: ¬bounded-exponent(pushout(cayley(G), cayley(G))) & ¬hopfian(sym(G))
+значение hopfian(pushout(cayley(G), cayley(G))) у G = ⊕_ℕ PSL₂(ℝ) — запретов 1; например: hopfian(pushout(cayley(G), cayley(G))) & ¬amenable(G)
+значение embeds(sym(G), G) у ⊕_ℕ PSL₂(ℝ) — запретов 1; например: embeds(sym(G), G) & ¬bounded-exponent(pushout(cayley(G), cayley(G)))
+значение embeds(pushout(cayley(G), cayley(G)), G) у ⊕_ℕ PSL₂(ℝ) — запретов 1; например: embeds(pushout(cayley(G), cayley(G)), G) & ¬class-2(pushout(cayley(G), cayley(G)))
+значение comp-series(sym(G)) у G = ⊕_ℕ PSL₂(ℝ) — запретов 1; например: ¬bounded-exponent(pushout(cayley(G), cayley(G))) & ¬comp-series(sym(G))
+значение centerless(pushout(cayley(G), cayley(G))) у G = order 1440 — запретов 1; например: ¬bounded-exponent(pushout(cayley(G), cayley(G))) & ¬centerless(pushout(cayley(G), cayley(G)))
+== сводятся к вырожденности: 0 вопросов на 0 запретов ==
+== без кандидата: нужен пример или правило ==
+не бывает? ¬iso(G, pushout(cayley(G), cayley(G))) & abelian(pushout(cayley(G), cayley(G)))   [примеров посылок: 30951]
+== свёрнуто вопросов 22675: следуют из теории и оставленных вопросов ==
