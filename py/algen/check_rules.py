@@ -145,7 +145,10 @@ class Table:
     def atom(self, a, env):
         """True / False, UNDEF — терм не определён, Skip — не вычисляется."""
         if "rel" in a:
-            return self.rel(a["rel"], [self.term(x, env) for x in a["args"]])
+            # «значение»: false у отношения — его отрицание (раньше терялось: верные «≇»
+            # считались нарушенными, а посылки «≇» проверялись как «≅»)
+            val = self.rel(a["rel"], [self.term(x, env) for x in a["args"]])
+            return val if val is UNDEF or a.get("значение", True) else not val
         v = self.term(a["t"], env)
         if v is UNDEF:
             return UNDEF
