@@ -81,6 +81,9 @@ CENSUS = os.environ.get("ALGEN_CENSUS") == "1"
 SAMPLE = int(os.environ.get("ALGEN_SAMPLE", "0") or 0)
 SAMPLE_EXAMPLES = int(os.environ.get("ALGEN_SAMPLE_EXAMPLES", "60") or 60)
 EXAMPLE_MIN_SUPPORT = int(os.environ.get("ALGEN_EXAMPLE_MIN_SUPPORT", "0") or 0)
+# Генератор от знаний (algen/knowledge.py): у неизвестных условий вид A/B/C и корни недостающих
+# знаний, в сводке — очередь знаний и вопросы человеку (C). Без флага выдача прежняя бит в бит.
+KNOWLEDGE = os.environ.get("ALGEN_KNOWLEDGE") == "1"
 # Минимальность на месте (без второй копии условий); 0 — прежний путь с копией.
 INPLACE_MINIMAL = os.environ.get("ALGEN_INPLACE_MINIMAL", "1") != "0"
 REFRESH = 200  # выводов строк до пересоздания решателя
@@ -1954,6 +1957,10 @@ def run(max_prem, lib=None, vocab=None, form=None):
                                     form.value_name(x, form.lits(c)[0][0])
                                     for x, c in form.one_unknown(list(prem) + [g ^ 1], limit=60)})
         questions(form, [r for r in report if not r.get("свёрнута")])
+    if KNOWLEDGE:
+        from algen import knowledge
+        _mem("знания", len(report))
+        form.knowledge = knowledge.annotate(form, report)
     if SAMPLE and not CENSUS:
         form.census = _sample_stats(form, mins, report, sample_total)
     for r in report:
@@ -2271,6 +2278,15 @@ def render(form, alive, empty, report, short=False, full=False, json_path=None,
         x["запретов"] += 1
     summary["вопросы"] = qs
     summary["без вопроса"] = sum(1 for r in classes.values() if r["вердикт"] == "неизвестно" and not r.get("вопрос"))
+    kn = getattr(form, "knowledge", None)
+    if kn is not None:  # ALGEN_KNOWLEDGE: без флага сводка прежняя бит в бит
+        from algen import knowledge
+        summary["знания"] = kn["сводка"]
+        for line in knowledge.text(kn["сводка"]):
+            print(line)
+        k = kn["сводка"]["оставленные после сжатия"]
+        print(f"знания: вопросов человеку (C) {k['вопросов человеку (C)']}, корней знаний "
+              f"{k['корней знаний всего']} на {k['ждут знаний (A + B)']} условий A/B", file=sys.stderr)
     print(f"вопросов «какие группы бывают с S»: {len(qs)} на {sum(x['запретов'] for x in qs.values())} запретов; "
           f"без вопроса {summary['без вопроса']}", file=sys.stderr)
     groups = clusters(list(seen))

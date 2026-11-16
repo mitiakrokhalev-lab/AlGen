@@ -133,6 +133,7 @@ jobs:
           ALGEN_SAMPLE_EXAMPLES: ${{ matrix.case.examples || '60' }}
           ALGEN_SKEL: ${{ github.workspace }}/native/skel
           MODULE: ${{ matrix.case.module || 'algen.table' }}
+          ALGEN_KNOWLEDGE: ${{ matrix.case.knowledge || '' }}
         run: |
           mkdir -p ../profiles/$CASE_ID
           cp ../commit.txt ../profiles/

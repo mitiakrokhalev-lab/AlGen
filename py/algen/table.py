@@ -1352,6 +1352,12 @@ def _one(job):
         summary = E.render(form, alive, empty, report, out=out, err=err, registry=_STATE["registry"])
         if live_info:
             summary["dynamic"] = live_info
+        if getattr(form, "knowledge", None) is not None:  # ALGEN_KNOWLEDGE: полные корни знаний схемы
+            import gzip
+            dst = Path(outdir) / f"{sid}.knowledge.json.gz"
+            tmp = dst.with_suffix(".tmp")
+            tmp.write_bytes(gzip.compress(json.dumps(form.knowledge["корни"], ensure_ascii=False).encode(), 6))
+            os.replace(tmp, dst)
         # перепись (ALGEN_CENSUS) — не результат схемы: другой статус, чтобы досчёт
         # по «ok» никогда не принял её за готовую схему
         status = "перепись" if getattr(form, "census", None) is not None else "ok"
