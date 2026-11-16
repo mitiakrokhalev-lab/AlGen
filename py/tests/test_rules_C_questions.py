@@ -32,9 +32,11 @@ CLOSED = [
     # структурные: неабелева без 2-порождения — не все собственные абелевы; конечная — и нильпотентны
     "proper-subs-abelian(G) & ¬abelian(G) & ¬two-generated(G)",
     "finite(G) & proper-subs-nilpotent(G) & ¬nilpotent(G) & ¬two-generated(G)",
+    "proper-subs-finite(G) & ¬periodic(G)",
 ]
 
-# неверны в общем случае: контрпримеры (C₇⋊C₃)² × C₃ (порядок 1323), C₉ × C₉ × C₃, ⊕ₙ ℤ/pⁿ
+# неверны в общем случае: контрпримеры (C₇⋊C₃)² × C₃ (порядок 1323), C₉ × C₉ × C₃, ⊕ₙ ℤ/pⁿ — проверены
+# перебором ревьюером 16.11; в таблице (порядки ⩽ 100) их нет, тест защищает лишь от ложного вывода
 OPEN = [
     "centerless(frattini(G)) & odd-order(G) & ¬centerless(quotient(G, frattini(G))) & ¬indecomposable(quotient(G, center(G)))",
     "odd-order(G) & perfect(quotient(G, center(G))) & ¬cyclic(frattini(G)) & ¬iso(frattini(G), quotient(G, frattini(G)))",
