@@ -1,0 +1,272 @@
+{
+  "заметка": "Перенесено из старого Генератора (данные π-Base) утилитой tools/import-pibase.mjs. Свойства, которых нет в нашей базе, отброшены; T₃ и T₄ вычислены конъюнкцией с T₁. Подпространств у этих записей всего два (точка и всё): π-Base их не знает, и выдумывать нельзя.",
+  "объекты": [
+    {
+      "id": "pb-S000018",
+      "имя": "Double pointed cocountable topology on ℝ",
+      "источник": "π-Base S000018",
+      "props": { "T1": false, "path-connected": false, "separable": false, "T3": false, "T4": false },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "Double pointed cocountable topology on ℝ",
+          "объект": "pb-S000018",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000041",
+      "имя": "Lexicographically ordered unit square [0,1]^2",
+      "источник": "π-Base S000041",
+      "props": { "connected": true, "path-connected": false, "compact": true, "first-countable": true },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "Lexicographically ordered unit square [0,1]^2",
+          "объект": "pb-S000041",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000047",
+      "имя": "Countable sum of Sierpinski spaces",
+      "источник": "π-Base S000047",
+      "props": { "T0": true, "T1": false, "T3": false, "T4": false },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "Countable sum of Sierpinski spaces",
+          "объект": "pb-S000047",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000054",
+      "имя": "Double pointed reals",
+      "источник": "π-Base S000054",
+      "props": { "T1": false, "second-countable": true, "T3": false, "T4": false },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "Double pointed reals",
+          "объект": "pb-S000054",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000072",
+      "имя": "Arens square",
+      "источник": "π-Base S000072",
+      "props": { "countable": true, "T2": true, "totally-disconnected": true, "second-countable": true },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "Arens square",
+          "объект": "pb-S000072",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000080",
+      "имя": "B. Scott's modified Arens square",
+      "источник": "π-Base S000080",
+      "props": { "countable": true, "totally-disconnected": true, "first-countable": true, "T3": false },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "B. Scott's modified Arens square",
+          "объект": "pb-S000080",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000094",
+      "имя": "Strong parallel line topology",
+      "источник": "π-Base S000094",
+      "props": { "first-countable": true, "second-countable": false, "separable": true, "T3": false },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "Strong parallel line topology",
+          "объект": "pb-S000094",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000095",
+      "имя": "Concentric circles",
+      "источник": "π-Base S000095",
+      "props": {
+        "T2": true,
+        "connected": false,
+        "compact": true,
+        "first-countable": true,
+        "second-countable": false,
+        "separable": false
+      },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "Concentric circles",
+          "объект": "pb-S000095",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000105",
+      "имя": "Helly space",
+      "источник": "π-Base S000105",
+      "props": { "T2": true, "compact": true, "first-countable": true, "separable": true },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "Helly space",
+          "объект": "pb-S000105",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000122",
+      "имя": "Gustin's sequence space",
+      "источник": "π-Base S000122",
+      "props": { "countable": true, "T2": true, "connected": true, "first-countable": true },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "Gustin's sequence space",
+          "объект": "pb-S000122",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000192",
+      "имя": "Modified telophase topology",
+      "источник": "π-Base S000192",
+      "props": { "connected": true, "path-connected": false, "compact": true, "second-countable": true },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "Modified telophase topology",
+          "объект": "pb-S000192",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000195",
+      "имя": "Join of cofinite and left-ray topologies on ω₁",
+      "источник": "π-Base S000195",
+      "props": { "T1": true, "compact": false, "first-countable": true, "separable": true },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false, "closed": true }
+        },
+        {
+          "id": "всё",
+          "имя": "Join of cofinite and left-ray topologies on ω₁",
+          "объект": "pb-S000195",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    },
+    {
+      "id": "pb-S000213",
+      "имя": "Pseudocircle",
+      "источник": "π-Base S000213",
+      "props": { "finite": true, "T0": true, "connected": true, "T4": false },
+      "подпространства": [
+        {
+          "id": "точка",
+          "имя": "точка",
+          "объект": "точка",
+          "props": { "whole": false }
+        },
+        {
+          "id": "всё",
+          "имя": "Pseudocircle",
+          "объект": "pb-S000213",
+          "props": { "open": true, "closed": true, "dense": true, "whole": true }
+        }
+      ]
+    }
+  ]
+}

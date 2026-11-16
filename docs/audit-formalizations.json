@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "scope": "Локальные SAT-пробы; full/partial явно разделены. Новые правила не добавлялись.",
+  "probes": [
+    {
+      "id": "M01",
+      "base": "G",
+      "условие": "∀ G : Grp | cyclic(G / center(G))",
+      "цель": "abelian(G)",
+      "scope": "full"
+    },
+    {
+      "id": "M02",
+      "base": "G",
+      "условие": "∀ G : Grp | finite(G / center(G))",
+      "цель": "finite(commutator(G))",
+      "scope": "full"
+    },
+    {
+      "id": "M03",
+      "base": "GN",
+      "условие": "∀ G : Grp; ∀ N : Sub(G) | index-2(N)",
+      "цель": "normal(N)",
+      "scope": "full"
+    },
+    {
+      "id": "M04",
+      "base": "GMN",
+      "условие": "∀ G : Grp; ∀ M : Sub(G); ∀ N : Sub(M) | normal(M), characteristic(N)",
+      "цель": "normal(as-sub(G, M, N))",
+      "scope": "full"
+    },
+    {
+      "id": "M05.a",
+      "base": "GHK",
+      "условие": "∀ G : Grp; ∀ H : Sub(G); ∀ K : Sub(G) | normal(H), normal(K)",
+      "цель": "permutes(H, K)",
+      "scope": "product characterization"
+    },
+    {
+      "id": "M05.b",
+      "base": "GHK",
+      "условие": "∀ G : Grp; ∀ H : Sub(G); ∀ K : Sub(G) | normal(H), normal(K)",
+      "цель": "normal(join(G, H, K))",
+      "scope": "normal join; combine with permutes"
+    },
+    {
+      "id": "M06",
+      "base": "G",
+      "условие": "∀ G : Grp | finite(G), p-group(G), ¬trivial(G)",
+      "цель": "¬trivial(center(G))",
+      "scope": "full"
+    },
+    {
+      "id": "M07",
+      "base": "G",
+      "условие": "∀ G : Grp | exponent-2(G)",
+      "цель": "abelian(G)",
+      "scope": "full"
+    },
+    {
+      "id": "M12",
+      "base": "G",
+      "условие": "∀ G : Grp | cyclic(aut(G))",
+      "цель": "abelian(G)",
+      "scope": "full"
+    },
+    {
+      "id": "M13",
+      "base": "GE",
+      "условие": "∀ G : Grp; ∀ F : Mor(G, G) | finite(G), surjective(F)",
+      "цель": "iso(F)",
+      "scope": "full"
+    },
+    {
+      "id": "M14",
+      "base": "G",
+      "условие": "∀ G : Grp | fin-gen(G), residually-finite(G)",
+      "цель": "hopfian(G)",
+      "scope": "full"
+    },
+    {
+      "id": "M15.a",
+      "base": "G",
+      "условие": "∀ G : Grp | finite(G), fin-gen(G), abelian(G)",
+      "цель": "co-hopfian(G)",
+      "scope": "forward"
+    },
+    {
+      "id": "M15.b",
+      "base": "G",
+      "условие": "∀ G : Grp | co-hopfian(G), fin-gen(G), abelian(G)",
+      "цель": "finite(G)",
+      "scope": "reverse"
+    },
+    {
+      "id": "M16",
+      "base": "GN",
+      "условие": "∀ G : Grp; ∀ N : Sub(G) | free(G)",
+      "цель": "free(N)",
+      "scope": "full"
+    },
+    {
+      "id": "M17",
+      "base": "G",
+      "условие": "∀ G : Grp | free(G), ¬abelian(G)",
+      "цель": "centerless(G)",
+      "scope": "full"
+    },
+    {
+      "id": "M19.partial",
+      "base": "G",
+      "условие": "∀ G : Grp | fin-gen(G), nilpotent(G)",
+      "цель": "subgroup(torsion-set(G))",
+      "scope": "only subgroup, not finite/characteristic"
+    },
+    {
+      "id": "M20",
+      "base": "G",
+      "условие": "∀ G : Grp | polycyclic(G), hirsch(G) = 0",
+      "цель": "finite(G)",
+      "scope": "attempt full; missing hirsch expected"
+    },
+    {
+      "id": "M21",
+      "base": "G",
+      "условие": "∀ G : Grp | divisible(G)",
+      "цель": "no-finite-quotients(G)",
+      "scope": "full"
+    },
+    {
+      "id": "M23.partial",
+      "base": "GHK",
+      "условие": "∀ G : Grp; ∀ H : Sub(G); ∀ K : Sub(G) | finite-index(H), finite-index(K)",
+      "цель": "finite-index(meet(G, H, K))",
+      "scope": "only finiteness; not numerical bound"
+    },
+    {
+      "id": "P05.a",
+      "base": "GHK",
+      "условие": "∀ G : Grp; ∀ H : Sub(G); ∀ K : Sub(G) | finite(G), ¬whole(H), ¬whole(K)",
+      "цель": "¬set-whole(union(G, H, K))",
+      "scope": "two subgroup part only"
+    }
+  ]
+}

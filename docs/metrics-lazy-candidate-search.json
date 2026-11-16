@@ -1,0 +1,3878 @@
+{
+  "version": 1,
+  "scope": "research lazy finite domain and in-process row updates; not production/native/SQLite integration",
+  "source_sha256": "5f966b5b8ac60cdb2e703b37338ff9e1e3655cd0d5c1e8f5ea5bf40032e10477",
+  "reference_source_sha256": "8834b45fb94938fb8f57272395ebbd7f7648ce054e3a639f61a43f63df9cf5e4",
+  "complete": true,
+  "wall_seconds": 3.435854183997435,
+  "cpu_seconds": 3.435435266,
+  "peak_rss_kib": 242928,
+  "base_commit": "15b4476ab9403dad4579ede5f611f45f46990731",
+  "production_code_unchanged": "6e633789b2ac6a56eeea300d59af6a62bc0cb0f7",
+  "time_scope": "run() excludes startup/imports and result serialization; static search includes construction/row loading/search/cleanup; dynamic search excludes row mutation; peak RSS lifetime",
+  "process_measurement": {
+    "returncode": 0,
+    "error": null,
+    "parent_wall_seconds": 3.5748004549968755,
+    "child_user_seconds": 3.475883,
+    "child_system_seconds": 0.08154399999999999,
+    "child_peak_rss_kib": 242928,
+    "environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "ALGEN_SIZE": "2",
+      "ALGEN_FAST": "1"
+    }
+  },
+  "receipt": {
+    "path": "/workspace/work/candidate-lazy-02.json",
+    "bytes": 1055565,
+    "sha256": "64a28be49c1c99c9f001ae9bf4a17ca65ca2bf88b443ff2d217c467776936263",
+    "publication": "aggregates only; full core/provenance trace retained locally"
+  },
+  "launch_attempts": [
+    {
+      "id": "01",
+      "executed_search": false,
+      "returncode": 127,
+      "reason": "/usr/bin/time not installed",
+      "log": "/workspace/work/candidate-lazy-01.log",
+      "wall_seconds": null,
+      "cpu_seconds": null
+    },
+    {
+      "id": "02",
+      "executed_search": true,
+      "returncode": 0,
+      "receipt": "/workspace/work/candidate-lazy-02.json",
+      "parent_wall_seconds": 3.5748004549968755
+    }
+  ],
+  "comparison": {
+    "reference_metrics": "metrics-candidate-search.json",
+    "reference_receipt_sha256": "0331c4a3c4bd8986e494b0f90653007c930d1e8913353ae2b333bf9b805a492e",
+    "cases": 52,
+    "all_input_sha_equal": true,
+    "all_candidates_and_unknown_classifications_equal": true,
+    "old_static_search_wall_seconds": 1.3287023440061603,
+    "new_static_search_wall_seconds": 0.6248924269821146,
+    "static_search_wall_ratio": 2.1262897206532956,
+    "old_static_search_cpu_seconds": 1.3285876080000003,
+    "new_static_search_cpu_seconds": 0.6247917979999991,
+    "same_basis_and_exception_lists_cases": 22,
+    "old_retained": 160,
+    "new_retained": 168,
+    "retained_change_fraction": 0.05,
+    "raw_report_bit_equality_claimed": false,
+    "production_speedup_claimed": false,
+    "ordered_single_pair_no_randomized_repeats": true,
+    "whole_run_comparable": false,
+    "reason": "new run includes6dynamic generations and stronger cut oracle, absent in reference"
+  },
+  "static_totals": {
+    "candidates": 8306,
+    "unknown": 1538,
+    "basis": 113,
+    "exceptions": 55,
+    "retained": 168,
+    "uncovered": 0,
+    "checked_cuts": 462,
+    "cut_candidate_checks": 13161
+  },
+  "static_search_stage_solver_calls": {
+    "meta_solves": 682,
+    "positive_solves": 630,
+    "countermodel_solves": 485,
+    "admission_solves": 168,
+    "validation_solves": 0
+  },
+  "setup_validation_solves_derived_from_successful_protocol": 352,
+  "static_oracle_wall_seconds": 0.22947958500299137,
+  "static_cases": [
+    {
+      "fixture": "synthetic-8100",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "fe1a2a34c53e676c7455ea71103c674809a2f1c8d7c61818cd456eb272e1af4e",
+      "verification": {
+        "candidates": 8,
+        "kinds": {
+          "derived": 2,
+          "library_refuted": 6
+        },
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 2,
+        "cut_candidate_checks": 2,
+        "active_cuts": 2,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0006421840007533319,
+      "search_cpu_seconds": 0.0006403700000001677,
+      "oracle_wall_seconds": 0.00011655300477286801,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "e8aecefa42c1a95c3a7479fa7fbf95b5c664aa115b7fd1fb05900c0b120df074",
+        "domain_hash": "c384ccb3c947481090b6734aed7f8631f1af7b79db3db70d3658447f7b1099ea",
+        "rows_hash": "d2ce7bcc5c1df2a74d4c0cb420da11739110b3123791cbc2142855726ac90f49",
+        "stats": {
+          "meta_solves": 3,
+          "positive_solves": 2,
+          "countermodel_solves": 2,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 39,
+        "initial_meta_clauses": 64
+      }
+    },
+    {
+      "fixture": "synthetic-8100",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "fe1a2a34c53e676c7455ea71103c674809a2f1c8d7c61818cd456eb272e1af4e",
+      "verification": {
+        "candidates": 72,
+        "kinds": {
+          "derived": 14,
+          "library_refuted": 24,
+          "inconsistent_premises": 20,
+          "theory_refuted": 5,
+          "unknown": 9
+        },
+        "unknown": 9,
+        "basis": 3,
+        "exceptions": 1,
+        "retained": 4,
+        "uncovered": 0,
+        "checked_cuts": 9,
+        "cut_candidate_checks": 74,
+        "active_cuts": 9,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0006456890041590668,
+      "search_cpu_seconds": 0.000645868000000327,
+      "oracle_wall_seconds": 0.000645038002403453,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "e8aecefa42c1a95c3a7479fa7fbf95b5c664aa115b7fd1fb05900c0b120df074",
+        "domain_hash": "67a0eafb1f83163b8d22fa10d2779605235221bf0076532cad0414af913ceb95",
+        "rows_hash": "d2ce7bcc5c1df2a74d4c0cb420da11739110b3123791cbc2142855726ac90f49",
+        "stats": {
+          "meta_solves": 14,
+          "positive_solves": 13,
+          "countermodel_solves": 8,
+          "admission_solves": 4,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 80
+      }
+    },
+    {
+      "fixture": "synthetic-8100",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "fe1a2a34c53e676c7455ea71103c674809a2f1c8d7c61818cd456eb272e1af4e",
+      "verification": {
+        "candidates": 264,
+        "kinds": {
+          "derived": 40,
+          "library_refuted": 37,
+          "inconsistent_premises": 124,
+          "theory_refuted": 26,
+          "unknown": 37
+        },
+        "unknown": 37,
+        "basis": 3,
+        "exceptions": 14,
+        "retained": 17,
+        "uncovered": 0,
+        "checked_cuts": 12,
+        "cut_candidate_checks": 429,
+        "active_cuts": 12,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0011500489999889396,
+      "search_cpu_seconds": 0.001150237000000054,
+      "oracle_wall_seconds": 0.0027521999945747666,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "e8aecefa42c1a95c3a7479fa7fbf95b5c664aa115b7fd1fb05900c0b120df074",
+        "domain_hash": "f5b6953fa762d4e47d2d6104335aad70d05b7cc597c5fcefac54c0cf8dbdb3bd",
+        "rows_hash": "d2ce7bcc5c1df2a74d4c0cb420da11739110b3123791cbc2142855726ac90f49",
+        "stats": {
+          "meta_solves": 30,
+          "positive_solves": 29,
+          "countermodel_solves": 24,
+          "admission_solves": 17,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 82,
+        "initial_meta_clauses": 92
+      }
+    },
+    {
+      "fixture": "synthetic-8100",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "fe1a2a34c53e676c7455ea71103c674809a2f1c8d7c61818cd456eb272e1af4e",
+      "verification": {
+        "candidates": 520,
+        "kinds": {
+          "derived": 64,
+          "library_refuted": 40,
+          "inconsistent_premises": 304,
+          "theory_refuted": 49,
+          "unknown": 63
+        },
+        "unknown": 63,
+        "basis": 3,
+        "exceptions": 22,
+        "retained": 25,
+        "uncovered": 0,
+        "checked_cuts": 12,
+        "cut_candidate_checks": 1017,
+        "active_cuts": 12,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.001970938996237237,
+      "search_cpu_seconds": 0.001971484999999884,
+      "oracle_wall_seconds": 0.006429674998798873,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "e8aecefa42c1a95c3a7479fa7fbf95b5c664aa115b7fd1fb05900c0b120df074",
+        "domain_hash": "9df9a53e79a7d3882275240b50abff723f5f91525ae74f2cc720ec7edde22401",
+        "rows_hash": "d2ce7bcc5c1df2a74d4c0cb420da11739110b3123791cbc2142855726ac90f49",
+        "stats": {
+          "meta_solves": 38,
+          "positive_solves": 37,
+          "countermodel_solves": 32,
+          "admission_solves": 25,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 95,
+        "initial_meta_clauses": 100
+      }
+    },
+    {
+      "fixture": "synthetic-8101",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          1,
+          -2,
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "ea8d3cc5385b8ecd15ec21a5615fd4386804e2cfdba0e8f2736d1d2ab7af2368",
+      "verification": {
+        "candidates": 2,
+        "kinds": {
+          "derived": 1,
+          "library_refuted": 1
+        },
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 1,
+        "cut_candidate_checks": 1,
+        "active_cuts": 1,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.00034298999526072294,
+      "search_cpu_seconds": 0.0003416569999998842,
+      "oracle_wall_seconds": 7.291799556696787e-05,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "1c0a76a851e5a34a9a2a2d60d5a9df4245e4779a5c2944c76440fde299a560ae",
+        "domain_hash": "2a80311ff08e8df6da8cf3a193196aaf7d9a399963f70fac5cd6069cd1c02fad",
+        "rows_hash": "bf9fba59749e500704ed3030b5fd2e25cceebc61cd8f564e92dcddfbe9bbc279",
+        "stats": {
+          "meta_solves": 2,
+          "positive_solves": 1,
+          "countermodel_solves": 1,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 38,
+        "initial_meta_clauses": 64
+      }
+    },
+    {
+      "fixture": "synthetic-8101",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          1,
+          -2,
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "ea8d3cc5385b8ecd15ec21a5615fd4386804e2cfdba0e8f2736d1d2ab7af2368",
+      "verification": {
+        "candidates": 66,
+        "kinds": {
+          "derived": 15,
+          "library_refuted": 23,
+          "theory_refuted": 4,
+          "unknown": 4,
+          "inconsistent_premises": 20
+        },
+        "unknown": 4,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 10,
+        "cut_candidate_checks": 65,
+        "active_cuts": 10,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0005861910030944273,
+      "search_cpu_seconds": 0.0005863900000000477,
+      "oracle_wall_seconds": 0.0007891030036262237,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "1c0a76a851e5a34a9a2a2d60d5a9df4245e4779a5c2944c76440fde299a560ae",
+        "domain_hash": "23b196ebf15dbb81861dace1a887a068d88ca88de6d4cc3e41bbcef659eea98e",
+        "rows_hash": "bf9fba59749e500704ed3030b5fd2e25cceebc61cd8f564e92dcddfbe9bbc279",
+        "stats": {
+          "meta_solves": 13,
+          "positive_solves": 12,
+          "countermodel_solves": 7,
+          "admission_solves": 2,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 58,
+        "initial_meta_clauses": 80
+      }
+    },
+    {
+      "fixture": "synthetic-8101",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          1,
+          -2,
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "ea8d3cc5385b8ecd15ec21a5615fd4386804e2cfdba0e8f2736d1d2ab7af2368",
+      "verification": {
+        "candidates": 306,
+        "kinds": {
+          "derived": 54,
+          "library_refuted": 56,
+          "theory_refuted": 27,
+          "unknown": 23,
+          "inconsistent_premises": 146
+        },
+        "unknown": 23,
+        "basis": 2,
+        "exceptions": 7,
+        "retained": 9,
+        "uncovered": 0,
+        "checked_cuts": 13,
+        "cut_candidate_checks": 518,
+        "active_cuts": 13,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0009178840045933612,
+      "search_cpu_seconds": 0.0009174019999997896,
+      "oracle_wall_seconds": 0.003460963001998607,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "1c0a76a851e5a34a9a2a2d60d5a9df4245e4779a5c2944c76440fde299a560ae",
+        "domain_hash": "1aaccbf335522f2e6fd90250fd35b61ddd0ec7206c9a5c375aa0f71cfa2f4599",
+        "rows_hash": "bf9fba59749e500704ed3030b5fd2e25cceebc61cd8f564e92dcddfbe9bbc279",
+        "stats": {
+          "meta_solves": 23,
+          "positive_solves": 22,
+          "countermodel_solves": 16,
+          "admission_solves": 9,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 75,
+        "initial_meta_clauses": 92
+      }
+    },
+    {
+      "fixture": "synthetic-8101",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          1,
+          -2,
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "ea8d3cc5385b8ecd15ec21a5615fd4386804e2cfdba0e8f2736d1d2ab7af2368",
+      "verification": {
+        "candidates": 626,
+        "kinds": {
+          "derived": 90,
+          "library_refuted": 68,
+          "theory_refuted": 57,
+          "unknown": 45,
+          "inconsistent_premises": 366
+        },
+        "unknown": 45,
+        "basis": 3,
+        "exceptions": 11,
+        "retained": 14,
+        "uncovered": 0,
+        "checked_cuts": 13,
+        "cut_candidate_checks": 1254,
+        "active_cuts": 13,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0011165189935127273,
+      "search_cpu_seconds": 0.0011158560000001927,
+      "oracle_wall_seconds": 0.008634181001980323,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "1c0a76a851e5a34a9a2a2d60d5a9df4245e4779a5c2944c76440fde299a560ae",
+        "domain_hash": "10fb9a78cb99aab9ce9b47e8e3028de80a6d2655c1f886c9ed492629b1a00a16",
+        "rows_hash": "bf9fba59749e500704ed3030b5fd2e25cceebc61cd8f564e92dcddfbe9bbc279",
+        "stats": {
+          "meta_solves": 28,
+          "positive_solves": 27,
+          "countermodel_solves": 21,
+          "admission_solves": 14,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 85,
+        "initial_meta_clauses": 100
+      }
+    },
+    {
+      "fixture": "synthetic-8102",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "744a9d54598dab810aa14559d14c7513a5c78d4991f3b7aaf2d3c51b16285832",
+      "verification": {
+        "candidates": 2,
+        "kinds": {
+          "library_refuted": 2
+        },
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 0,
+        "cut_candidate_checks": 0,
+        "active_cuts": 0,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0003191740033798851,
+      "search_cpu_seconds": 0.0003177220000001313,
+      "oracle_wall_seconds": 0.00012699900253210217,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "0729f7fc62b6e37ce444f0d200062850625aa463a21616c00b64f3cd612c20a9",
+        "domain_hash": "052cad9c68c87d52670d05d6f596c970dd105286683c1867a6feacf4298cdb60",
+        "rows_hash": "1878654bc7af5ac445768ce159f958a39f846e783bd214577987d725c005440b",
+        "stats": {
+          "meta_solves": 1,
+          "positive_solves": 0,
+          "countermodel_solves": 0,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 37,
+        "initial_meta_clauses": 64
+      }
+    },
+    {
+      "fixture": "synthetic-8102",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "744a9d54598dab810aa14559d14c7513a5c78d4991f3b7aaf2d3c51b16285832",
+      "verification": {
+        "candidates": 66,
+        "kinds": {
+          "library_refuted": 20,
+          "inconsistent_premises": 18,
+          "derived": 14,
+          "unknown": 9,
+          "theory_refuted": 5
+        },
+        "unknown": 9,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 12,
+        "cut_candidate_checks": 77,
+        "active_cuts": 12,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.000635203999991063,
+      "search_cpu_seconds": 0.0006347920000000506,
+      "oracle_wall_seconds": 0.000880639003298711,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "0729f7fc62b6e37ce444f0d200062850625aa463a21616c00b64f3cd612c20a9",
+        "domain_hash": "46e123e410068bf2a21b2d098ebaeb3bb58f3fa9645732c12aa3ffae18add3dc",
+        "rows_hash": "1878654bc7af5ac445768ce159f958a39f846e783bd214577987d725c005440b",
+        "stats": {
+          "meta_solves": 15,
+          "positive_solves": 14,
+          "countermodel_solves": 9,
+          "admission_solves": 2,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 60,
+        "initial_meta_clauses": 80
+      }
+    },
+    {
+      "fixture": "synthetic-8102",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "744a9d54598dab810aa14559d14c7513a5c78d4991f3b7aaf2d3c51b16285832",
+      "verification": {
+        "candidates": 306,
+        "kinds": {
+          "library_refuted": 50,
+          "inconsistent_premises": 144,
+          "derived": 53,
+          "unknown": 33,
+          "theory_refuted": 26
+        },
+        "unknown": 33,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 13,
+        "cut_candidate_checks": 515,
+        "active_cuts": 13,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0007076309993863106,
+      "search_cpu_seconds": 0.0007067589999998347,
+      "oracle_wall_seconds": 0.0044196169983479194,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "0729f7fc62b6e37ce444f0d200062850625aa463a21616c00b64f3cd612c20a9",
+        "domain_hash": "f0896341ffd0ec26f98f9ea9524b944bc0b278576b40d05fb189b816e8fee105",
+        "rows_hash": "1878654bc7af5ac445768ce159f958a39f846e783bd214577987d725c005440b",
+        "stats": {
+          "meta_solves": 16,
+          "positive_solves": 15,
+          "countermodel_solves": 9,
+          "admission_solves": 2,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 68,
+        "initial_meta_clauses": 92
+      }
+    },
+    {
+      "fixture": "synthetic-8102",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "744a9d54598dab810aa14559d14c7513a5c78d4991f3b7aaf2d3c51b16285832",
+      "verification": {
+        "candidates": 626,
+        "kinds": {
+          "library_refuted": 70,
+          "inconsistent_premises": 364,
+          "derived": 89,
+          "unknown": 53,
+          "theory_refuted": 50
+        },
+        "unknown": 53,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 13,
+        "cut_candidate_checks": 1251,
+        "active_cuts": 13,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0007919269992271438,
+      "search_cpu_seconds": 0.0007912039999999898,
+      "oracle_wall_seconds": 0.007850736001273617,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "0729f7fc62b6e37ce444f0d200062850625aa463a21616c00b64f3cd612c20a9",
+        "domain_hash": "b081f14ea95716dddd41d047b7f5259819fcb12b0b344826d03e2545ae880fe6",
+        "rows_hash": "1878654bc7af5ac445768ce159f958a39f846e783bd214577987d725c005440b",
+        "stats": {
+          "meta_solves": 16,
+          "positive_solves": 15,
+          "countermodel_solves": 9,
+          "admission_solves": 2,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 73,
+        "initial_meta_clauses": 100
+      }
+    },
+    {
+      "fixture": "synthetic-8103",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "831cef44a1d1b57493d1b981f98c52efd7c7e7d2de8bd3fae19969a6686db0e5",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 0,
+        "cut_candidate_checks": 0,
+        "active_cuts": 0,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0003790929986280389,
+      "search_cpu_seconds": 0.00037855199999992095,
+      "oracle_wall_seconds": 5.491199408425018e-05,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "5d7d5a778ef7c1b70f1f4f421ab8748f8d7bc701db9dc2dd4efd953f2f01fd65",
+        "domain_hash": "519e9dd7e1159b8b5846b75d2b98caa13b173f53d74291cafbb993d52051bc32",
+        "rows_hash": "3e65ca0bb19d4b75f1897e6ef7ccaa2d4b0a74226154710cbac18994ba30448c",
+        "stats": {
+          "meta_solves": 1,
+          "positive_solves": 0,
+          "countermodel_solves": 0,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 37,
+        "initial_meta_clauses": 70
+      }
+    },
+    {
+      "fixture": "synthetic-8103",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "831cef44a1d1b57493d1b981f98c52efd7c7e7d2de8bd3fae19969a6686db0e5",
+      "verification": {
+        "candidates": 26,
+        "kinds": {
+          "derived": 5,
+          "library_refuted": 8,
+          "unknown": 3,
+          "inconsistent_premises": 8,
+          "theory_refuted": 2
+        },
+        "unknown": 3,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 7,
+        "cut_candidate_checks": 23,
+        "active_cuts": 7,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0006200409989105538,
+      "search_cpu_seconds": 0.00062031100000004,
+      "oracle_wall_seconds": 0.0006035769984009676,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "5d7d5a778ef7c1b70f1f4f421ab8748f8d7bc701db9dc2dd4efd953f2f01fd65",
+        "domain_hash": "10a99bf64210b3600544c2a0b83f13bef42253dd208bd26b98a288897d8ff623",
+        "rows_hash": "3e65ca0bb19d4b75f1897e6ef7ccaa2d4b0a74226154710cbac18994ba30448c",
+        "stats": {
+          "meta_solves": 10,
+          "positive_solves": 9,
+          "countermodel_solves": 5,
+          "admission_solves": 2,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 55,
+        "initial_meta_clauses": 86
+      }
+    },
+    {
+      "fixture": "synthetic-8103",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "831cef44a1d1b57493d1b981f98c52efd7c7e7d2de8bd3fae19969a6686db0e5",
+      "verification": {
+        "candidates": 118,
+        "kinds": {
+          "derived": 16,
+          "library_refuted": 17,
+          "unknown": 11,
+          "inconsistent_premises": 66,
+          "theory_refuted": 8
+        },
+        "unknown": 11,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 7,
+        "cut_candidate_checks": 164,
+        "active_cuts": 7,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.000670295994495973,
+      "search_cpu_seconds": 0.0006697540000000224,
+      "oracle_wall_seconds": 0.0013233169956947677,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "5d7d5a778ef7c1b70f1f4f421ab8748f8d7bc701db9dc2dd4efd953f2f01fd65",
+        "domain_hash": "0de8c56808af18e7e97cef62bd2e0b8398640ad1844eee76a37c054fda262fd0",
+        "rows_hash": "3e65ca0bb19d4b75f1897e6ef7ccaa2d4b0a74226154710cbac18994ba30448c",
+        "stats": {
+          "meta_solves": 10,
+          "positive_solves": 9,
+          "countermodel_solves": 7,
+          "admission_solves": 2,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 62,
+        "initial_meta_clauses": 98
+      }
+    },
+    {
+      "fixture": "synthetic-8103",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          1
+        ],
+        "available": [
+          1,
+          2,
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "831cef44a1d1b57493d1b981f98c52efd7c7e7d2de8bd3fae19969a6686db0e5",
+      "verification": {
+        "candidates": 222,
+        "kinds": {
+          "derived": 21,
+          "library_refuted": 20,
+          "unknown": 14,
+          "inconsistent_premises": 156,
+          "theory_refuted": 11
+        },
+        "unknown": 14,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 10,
+        "cut_candidate_checks": 418,
+        "active_cuts": 10,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0006228060010471381,
+      "search_cpu_seconds": 0.0006223439999999414,
+      "oracle_wall_seconds": 0.003047338002943434,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "5d7d5a778ef7c1b70f1f4f421ab8748f8d7bc701db9dc2dd4efd953f2f01fd65",
+        "domain_hash": "8ca783f21398269113b32a79a4c6d87b4ee898699ad2157c28217b512d8ad6ac",
+        "rows_hash": "3e65ca0bb19d4b75f1897e6ef7ccaa2d4b0a74226154710cbac18994ba30448c",
+        "stats": {
+          "meta_solves": 13,
+          "positive_solves": 12,
+          "countermodel_solves": 8,
+          "admission_solves": 2,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 70,
+        "initial_meta_clauses": 106
+      }
+    },
+    {
+      "fixture": "synthetic-8104",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "49c6155c947c9aed1848c5833969db3e8f8044a0393105a3c481c2f80ab632a8",
+      "verification": {
+        "candidates": 10,
+        "kinds": {
+          "library_refuted": 10
+        },
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 0,
+        "cut_candidate_checks": 0,
+        "active_cuts": 0,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0014916260042809881,
+      "search_cpu_seconds": 0.0014914430000003698,
+      "oracle_wall_seconds": 7.732499943813309e-05,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "b330e62f6e106ddbe5bc23dfab1bc902581dab4d6934d0fac7cf5bb0301cc8f0",
+        "domain_hash": "ef2ca79cb59d3cd35da059b3e4b3a5c0357a7e31f316df194c8956cf499cbe00",
+        "rows_hash": "52452c78502dc774f77c4b0efc06bc374f7902688c035e36d48f4a7ca7cf79bc",
+        "stats": {
+          "meta_solves": 1,
+          "positive_solves": 0,
+          "countermodel_solves": 0,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 37,
+        "initial_meta_clauses": 62
+      }
+    },
+    {
+      "fixture": "synthetic-8104",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "49c6155c947c9aed1848c5833969db3e8f8044a0393105a3c481c2f80ab632a8",
+      "verification": {
+        "candidates": 90,
+        "kinds": {
+          "library_refuted": 58,
+          "derived": 14,
+          "theory_refuted": 2,
+          "unknown": 16
+        },
+        "unknown": 16,
+        "basis": 5,
+        "exceptions": 0,
+        "retained": 5,
+        "uncovered": 0,
+        "checked_cuts": 13,
+        "cut_candidate_checks": 43,
+        "active_cuts": 13,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0008906130024115555,
+      "search_cpu_seconds": 0.0008909519999997784,
+      "oracle_wall_seconds": 0.0008895619976101443,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "b330e62f6e106ddbe5bc23dfab1bc902581dab4d6934d0fac7cf5bb0301cc8f0",
+        "domain_hash": "e91de3aba7b41a85b57b9bdf52c1e85977b06448d79ff4556045b8be0e751573",
+        "rows_hash": "52452c78502dc774f77c4b0efc06bc374f7902688c035e36d48f4a7ca7cf79bc",
+        "stats": {
+          "meta_solves": 19,
+          "positive_solves": 18,
+          "countermodel_solves": 18,
+          "admission_solves": 5,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 78
+      }
+    },
+    {
+      "fixture": "synthetic-8104",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "49c6155c947c9aed1848c5833969db3e8f8044a0393105a3c481c2f80ab632a8",
+      "verification": {
+        "candidates": 330,
+        "kinds": {
+          "library_refuted": 130,
+          "derived": 65,
+          "theory_refuted": 26,
+          "unknown": 67,
+          "inconsistent_premises": 42
+        },
+        "unknown": 67,
+        "basis": 7,
+        "exceptions": 0,
+        "retained": 7,
+        "uncovered": 0,
+        "checked_cuts": 43,
+        "cut_candidate_checks": 394,
+        "active_cuts": 43,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0024852830028976314,
+      "search_cpu_seconds": 0.0024853879999997552,
+      "oracle_wall_seconds": 0.006436445000872482,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "b330e62f6e106ddbe5bc23dfab1bc902581dab4d6934d0fac7cf5bb0301cc8f0",
+        "domain_hash": "1e60dce83579c8b432830a0f535e89086f9af2d9bbb73cd041eff0c9e8e5e811",
+        "rows_hash": "52452c78502dc774f77c4b0efc06bc374f7902688c035e36d48f4a7ca7cf79bc",
+        "stats": {
+          "meta_solves": 51,
+          "positive_solves": 50,
+          "countermodel_solves": 36,
+          "admission_solves": 7,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 103,
+        "initial_meta_clauses": 90
+      }
+    },
+    {
+      "fixture": "synthetic-8104",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "49c6155c947c9aed1848c5833969db3e8f8044a0393105a3c481c2f80ab632a8",
+      "verification": {
+        "candidates": 650,
+        "kinds": {
+          "library_refuted": 174,
+          "derived": 125,
+          "theory_refuted": 66,
+          "unknown": 119,
+          "inconsistent_premises": 166
+        },
+        "unknown": 119,
+        "basis": 7,
+        "exceptions": 0,
+        "retained": 7,
+        "uncovered": 0,
+        "checked_cuts": 37,
+        "cut_candidate_checks": 1085,
+        "active_cuts": 37,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0016757599951233715,
+      "search_cpu_seconds": 0.0016750050000000627,
+      "oracle_wall_seconds": 0.013774377999652643,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "b330e62f6e106ddbe5bc23dfab1bc902581dab4d6934d0fac7cf5bb0301cc8f0",
+        "domain_hash": "a279c6b3ab44d1735133d2d5b4f8f08286d97ed9cbc5f63e51d55d6992bac24f",
+        "rows_hash": "52452c78502dc774f77c4b0efc06bc374f7902688c035e36d48f4a7ca7cf79bc",
+        "stats": {
+          "meta_solves": 45,
+          "positive_solves": 44,
+          "countermodel_solves": 37,
+          "admission_solves": 7,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 102,
+        "initial_meta_clauses": 98
+      }
+    },
+    {
+      "fixture": "synthetic-8105",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "1d43ac6705cec1e4863cc5920a8a77b416911e97c6b5e1dc0140f1a71fe0865f",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 0,
+        "cut_candidate_checks": 0,
+        "active_cuts": 0,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0003803349973168224,
+      "search_cpu_seconds": 0.0003792329999998678,
+      "oracle_wall_seconds": 5.758499901276082e-05,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "d98a842ab872c05cca0b0577182be9fe4fb84178f3c5940e5b1e001d295cdca4",
+        "domain_hash": "5ad1f71fbfcd0f6e77deaff8122732b22a203925f660f3b08a4962eab8cc982e",
+        "rows_hash": "e9446fdc252e08bcceeae06aee86a8ed60f3dbdfad621cf82fb71db302d8a9c8",
+        "stats": {
+          "meta_solves": 1,
+          "positive_solves": 0,
+          "countermodel_solves": 0,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 37,
+        "initial_meta_clauses": 72
+      }
+    },
+    {
+      "fixture": "synthetic-8105",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "1d43ac6705cec1e4863cc5920a8a77b416911e97c6b5e1dc0140f1a71fe0865f",
+      "verification": {
+        "candidates": 18,
+        "kinds": {
+          "library_refuted": 7,
+          "unknown": 8,
+          "derived": 3
+        },
+        "unknown": 8,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "uncovered": 0,
+        "checked_cuts": 5,
+        "cut_candidate_checks": 11,
+        "active_cuts": 5,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0005440980021376163,
+      "search_cpu_seconds": 0.0005442879999999484,
+      "oracle_wall_seconds": 0.0004925519970129244,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "d98a842ab872c05cca0b0577182be9fe4fb84178f3c5940e5b1e001d295cdca4",
+        "domain_hash": "aeb97526befcdb8cdd12e411f72feb403b503568e77d406f9dc318a92885296b",
+        "rows_hash": "e9446fdc252e08bcceeae06aee86a8ed60f3dbdfad621cf82fb71db302d8a9c8",
+        "stats": {
+          "meta_solves": 10,
+          "positive_solves": 9,
+          "countermodel_solves": 9,
+          "admission_solves": 4,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 55,
+        "initial_meta_clauses": 88
+      }
+    },
+    {
+      "fixture": "synthetic-8105",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "1d43ac6705cec1e4863cc5920a8a77b416911e97c6b5e1dc0140f1a71fe0865f",
+      "verification": {
+        "candidates": 74,
+        "kinds": {
+          "library_refuted": 18,
+          "unknown": 23,
+          "derived": 15,
+          "theory_refuted": 6,
+          "inconsistent_premises": 12
+        },
+        "unknown": 23,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "uncovered": 0,
+        "checked_cuts": 14,
+        "cut_candidate_checks": 101,
+        "active_cuts": 14,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0010195450013270602,
+      "search_cpu_seconds": 0.001019582999999713,
+      "oracle_wall_seconds": 0.001772814997821115,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "d98a842ab872c05cca0b0577182be9fe4fb84178f3c5940e5b1e001d295cdca4",
+        "domain_hash": "844805beb9c39a5c400321dd3778486bf2b052bb427473a4c26f012265984f4c",
+        "rows_hash": "e9446fdc252e08bcceeae06aee86a8ed60f3dbdfad621cf82fb71db302d8a9c8",
+        "stats": {
+          "meta_solves": 19,
+          "positive_solves": 18,
+          "countermodel_solves": 13,
+          "admission_solves": 4,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 71,
+        "initial_meta_clauses": 100
+      }
+    },
+    {
+      "fixture": "synthetic-8105",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "1d43ac6705cec1e4863cc5920a8a77b416911e97c6b5e1dc0140f1a71fe0865f",
+      "verification": {
+        "candidates": 130,
+        "kinds": {
+          "library_refuted": 26,
+          "unknown": 27,
+          "derived": 26,
+          "theory_refuted": 11,
+          "inconsistent_premises": 40
+        },
+        "unknown": 27,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "uncovered": 0,
+        "checked_cuts": 13,
+        "cut_candidate_checks": 194,
+        "active_cuts": 13,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0010730349968071096,
+      "search_cpu_seconds": 0.0010723619999999379,
+      "oracle_wall_seconds": 0.002962121994642075,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "d98a842ab872c05cca0b0577182be9fe4fb84178f3c5940e5b1e001d295cdca4",
+        "domain_hash": "2208e425969856281c6cf0a172424bc8dff4d3214e4799a35e6177e4608213dd",
+        "rows_hash": "e9446fdc252e08bcceeae06aee86a8ed60f3dbdfad621cf82fb71db302d8a9c8",
+        "stats": {
+          "meta_solves": 18,
+          "positive_solves": 17,
+          "countermodel_solves": 13,
+          "admission_solves": 4,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 75,
+        "initial_meta_clauses": 108
+      }
+    },
+    {
+      "fixture": "synthetic-8106",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ba53d8a0bbf60d6e0e6ce1a9e8b31837bb764663b7d4578417c1df8898e37c2",
+      "verification": {
+        "candidates": 2,
+        "kinds": {
+          "unknown": 1,
+          "library_refuted": 1
+        },
+        "unknown": 1,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "uncovered": 0,
+        "checked_cuts": 0,
+        "cut_candidate_checks": 0,
+        "active_cuts": 0,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0004148169973632321,
+      "search_cpu_seconds": 0.0004142250000001013,
+      "oracle_wall_seconds": 7.245800225064158e-05,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "6e0beaba7426faf21e7b93ca8701be88892d14f4e553e70c640619e527a2baf6",
+        "domain_hash": "32ef9a2a0f67528a5d929306d338389f60da744712e547d76bf4571b00e169e4",
+        "rows_hash": "21cef83110e4bdd6b39e0d482454e0dfe1fa7b459210563d07ff59da506e030c",
+        "stats": {
+          "meta_solves": 2,
+          "positive_solves": 1,
+          "countermodel_solves": 1,
+          "admission_solves": 1,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 38,
+        "initial_meta_clauses": 66
+      }
+    },
+    {
+      "fixture": "synthetic-8106",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ba53d8a0bbf60d6e0e6ce1a9e8b31837bb764663b7d4578417c1df8898e37c2",
+      "verification": {
+        "candidates": 54,
+        "kinds": {
+          "unknown": 8,
+          "library_refuted": 20,
+          "inconsistent_premises": 14,
+          "derived": 10,
+          "theory_refuted": 2
+        },
+        "unknown": 8,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "uncovered": 0,
+        "checked_cuts": 9,
+        "cut_candidate_checks": 53,
+        "active_cuts": 9,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0005173090030439198,
+      "search_cpu_seconds": 0.0005174979999997831,
+      "oracle_wall_seconds": 0.0005166779956198297,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "6e0beaba7426faf21e7b93ca8701be88892d14f4e553e70c640619e527a2baf6",
+        "domain_hash": "6ba07d077492f68bd9f70c3209edfd924ebaa8a9dec8b9c4a717c9a42057ad66",
+        "rows_hash": "21cef83110e4bdd6b39e0d482454e0dfe1fa7b459210563d07ff59da506e030c",
+        "stats": {
+          "meta_solves": 11,
+          "positive_solves": 10,
+          "countermodel_solves": 5,
+          "admission_solves": 1,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 56,
+        "initial_meta_clauses": 82
+      }
+    },
+    {
+      "fixture": "synthetic-8106",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ba53d8a0bbf60d6e0e6ce1a9e8b31837bb764663b7d4578417c1df8898e37c2",
+      "verification": {
+        "candidates": 246,
+        "kinds": {
+          "unknown": 25,
+          "library_refuted": 57,
+          "inconsistent_premises": 118,
+          "derived": 36,
+          "theory_refuted": 10
+        },
+        "unknown": 25,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 10,
+        "cut_candidate_checks": 371,
+        "active_cuts": 10,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0006029759970260784,
+      "search_cpu_seconds": 0.0006031850000001171,
+      "oracle_wall_seconds": 0.0026104490025318228,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "6e0beaba7426faf21e7b93ca8701be88892d14f4e553e70c640619e527a2baf6",
+        "domain_hash": "b446c6d76a050b6a958347a7a030f467b47ff00a26d584cb02143efa453271b3",
+        "rows_hash": "21cef83110e4bdd6b39e0d482454e0dfe1fa7b459210563d07ff59da506e030c",
+        "stats": {
+          "meta_solves": 13,
+          "positive_solves": 12,
+          "countermodel_solves": 7,
+          "admission_solves": 2,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 65,
+        "initial_meta_clauses": 94
+      }
+    },
+    {
+      "fixture": "synthetic-8106",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          -2,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ba53d8a0bbf60d6e0e6ce1a9e8b31837bb764663b7d4578417c1df8898e37c2",
+      "verification": {
+        "candidates": 502,
+        "kinds": {
+          "unknown": 42,
+          "library_refuted": 80,
+          "inconsistent_premises": 298,
+          "derived": 60,
+          "theory_refuted": 22
+        },
+        "unknown": 42,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 10,
+        "cut_candidate_checks": 915,
+        "active_cuts": 10,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.000613351003266871,
+      "search_cpu_seconds": 0.0006123680000000853,
+      "oracle_wall_seconds": 0.0062622049954370596,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "6e0beaba7426faf21e7b93ca8701be88892d14f4e553e70c640619e527a2baf6",
+        "domain_hash": "f7e5715f8534fb04b9799ba9ce18431086f11e3d4d3d7cd891910851db669f36",
+        "rows_hash": "21cef83110e4bdd6b39e0d482454e0dfe1fa7b459210563d07ff59da506e030c",
+        "stats": {
+          "meta_solves": 13,
+          "positive_solves": 12,
+          "countermodel_solves": 8,
+          "admission_solves": 2,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 70,
+        "initial_meta_clauses": 102
+      }
+    },
+    {
+      "fixture": "synthetic-8107",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          3,
+          -4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ff1cea79d8c8311c7a28cfc02454b7d6dde30152e7330d04a690bf0bdf5c045",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 0,
+        "cut_candidate_checks": 0,
+        "active_cuts": 0,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.00034355100069660693,
+      "search_cpu_seconds": 0.0003427779999998215,
+      "oracle_wall_seconds": 5.422000685939565e-05,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "05bd5cb7c523bd2bb1db92c842d15f41659341a5a176af8f8194f48206296dc8",
+        "domain_hash": "4dcde301f5e2550a39e5e6397d231fa8f19384e8e45723d079875c4450ab9cd6",
+        "rows_hash": "94b6831b5742fc44d57c7421a6198f34959d68a0942e7a1c83242b83525caeb3",
+        "stats": {
+          "meta_solves": 1,
+          "positive_solves": 0,
+          "countermodel_solves": 0,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 37,
+        "initial_meta_clauses": 72
+      }
+    },
+    {
+      "fixture": "synthetic-8107",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          3,
+          -4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ff1cea79d8c8311c7a28cfc02454b7d6dde30152e7330d04a690bf0bdf5c045",
+      "verification": {
+        "candidates": 18,
+        "kinds": {
+          "inconsistent_premises": 6,
+          "library_refuted": 7,
+          "derived": 5
+        },
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 5,
+        "cut_candidate_checks": 13,
+        "active_cuts": 5,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.00039275400195037946,
+      "search_cpu_seconds": 0.00039290300000027756,
+      "oracle_wall_seconds": 0.0002482290001353249,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "05bd5cb7c523bd2bb1db92c842d15f41659341a5a176af8f8194f48206296dc8",
+        "domain_hash": "bfb69fbd2f8b63630edf0171ee11a71a6e37bc4b9ad627ff63375eef51f7f77d",
+        "rows_hash": "94b6831b5742fc44d57c7421a6198f34959d68a0942e7a1c83242b83525caeb3",
+        "stats": {
+          "meta_solves": 6,
+          "positive_solves": 5,
+          "countermodel_solves": 3,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 51,
+        "initial_meta_clauses": 88
+      }
+    },
+    {
+      "fixture": "synthetic-8107",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          3,
+          -4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ff1cea79d8c8311c7a28cfc02454b7d6dde30152e7330d04a690bf0bdf5c045",
+      "verification": {
+        "candidates": 74,
+        "kinds": {
+          "inconsistent_premises": 44,
+          "library_refuted": 17,
+          "derived": 13
+        },
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 6,
+        "cut_candidate_checks": 73,
+        "active_cuts": 6,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0004385920037748292,
+      "search_cpu_seconds": 0.0004388109999999834,
+      "oracle_wall_seconds": 0.0009154299987130798,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "05bd5cb7c523bd2bb1db92c842d15f41659341a5a176af8f8194f48206296dc8",
+        "domain_hash": "7bddd74e19e38faf1f30b36f3e77ddda500437d09c189056179682ee6ec1f6d6",
+        "rows_hash": "94b6831b5742fc44d57c7421a6198f34959d68a0942e7a1c83242b83525caeb3",
+        "stats": {
+          "meta_solves": 7,
+          "positive_solves": 6,
+          "countermodel_solves": 3,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 100
+      }
+    },
+    {
+      "fixture": "synthetic-8107",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          -1,
+          3,
+          -4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "2ff1cea79d8c8311c7a28cfc02454b7d6dde30152e7330d04a690bf0bdf5c045",
+      "verification": {
+        "candidates": 130,
+        "kinds": {
+          "inconsistent_premises": 94,
+          "library_refuted": 20,
+          "derived": 16
+        },
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 6,
+        "cut_candidate_checks": 157,
+        "active_cuts": 6,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.00044143600098323077,
+      "search_cpu_seconds": 0.000441233999999735,
+      "oracle_wall_seconds": 0.0019540440043783747,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "05bd5cb7c523bd2bb1db92c842d15f41659341a5a176af8f8194f48206296dc8",
+        "domain_hash": "522974616f92c6c4c5b1b9db6d5325d8c994eee5f7c5cb79ce0523148c3f13b2",
+        "rows_hash": "94b6831b5742fc44d57c7421a6198f34959d68a0942e7a1c83242b83525caeb3",
+        "stats": {
+          "meta_solves": 7,
+          "positive_solves": 6,
+          "countermodel_solves": 3,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 108
+      }
+    },
+    {
+      "fixture": "synthetic-8108",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": [
+          -3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "5d9ff6adfe3bc6c22ff0c35d5e2174d9260a94f1cf5b3b30c2ae1a4dbafe8f08",
+      "verification": {
+        "candidates": 10,
+        "kinds": {
+          "library_refuted": 7,
+          "unknown": 2,
+          "derived": 1
+        },
+        "unknown": 2,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 1,
+        "cut_candidate_checks": 1,
+        "active_cuts": 1,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0003465350018814206,
+      "search_cpu_seconds": 0.000345723000000131,
+      "oracle_wall_seconds": 0.00012698800128418952,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "4872dbf4479763c0d8a48efb0b8b01c6d76b757e0e686b35a5c0b536da291cdc",
+        "domain_hash": "1784389075d873d990e680794982b22975bf137597f3962b6f1f01f82bdca797",
+        "rows_hash": "662b4130b7f49779c27cf3d4640ce98fd863dc8c9f248b05b9143494a410f3f5",
+        "stats": {
+          "meta_solves": 4,
+          "positive_solves": 3,
+          "countermodel_solves": 3,
+          "admission_solves": 2,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 40,
+        "initial_meta_clauses": 62
+      }
+    },
+    {
+      "fixture": "synthetic-8108",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": [
+          -3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "5d9ff6adfe3bc6c22ff0c35d5e2174d9260a94f1cf5b3b30c2ae1a4dbafe8f08",
+      "verification": {
+        "candidates": 90,
+        "kinds": {
+          "library_refuted": 37,
+          "unknown": 24,
+          "derived": 15,
+          "theory_refuted": 6,
+          "inconsistent_premises": 8
+        },
+        "unknown": 24,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "uncovered": 0,
+        "checked_cuts": 12,
+        "cut_candidate_checks": 73,
+        "active_cuts": 12,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0009523249973426573,
+      "search_cpu_seconds": 0.0009526339999998967,
+      "oracle_wall_seconds": 0.000939857003686484,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "4872dbf4479763c0d8a48efb0b8b01c6d76b757e0e686b35a5c0b536da291cdc",
+        "domain_hash": "a9aa1cf2f38854bd2150aecc731f719adb35898c558738a155e7d6ade79655e7",
+        "rows_hash": "662b4130b7f49779c27cf3d4640ce98fd863dc8c9f248b05b9143494a410f3f5",
+        "stats": {
+          "meta_solves": 16,
+          "positive_solves": 15,
+          "countermodel_solves": 11,
+          "admission_solves": 3,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 61,
+        "initial_meta_clauses": 78
+      }
+    },
+    {
+      "fixture": "synthetic-8108",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": [
+          -3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "5d9ff6adfe3bc6c22ff0c35d5e2174d9260a94f1cf5b3b30c2ae1a4dbafe8f08",
+      "verification": {
+        "candidates": 330,
+        "kinds": {
+          "library_refuted": 79,
+          "unknown": 80,
+          "derived": 60,
+          "theory_refuted": 37,
+          "inconsistent_premises": 74
+        },
+        "unknown": 80,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "uncovered": 0,
+        "checked_cuts": 15,
+        "cut_candidate_checks": 455,
+        "active_cuts": 15,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0009589949986548163,
+      "search_cpu_seconds": 0.0009424390000001281,
+      "oracle_wall_seconds": 0.004261002002749592,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "4872dbf4479763c0d8a48efb0b8b01c6d76b757e0e686b35a5c0b536da291cdc",
+        "domain_hash": "9a42afd141f2c6d784a490a2ec03d89b4ab7f65df4cf0cf486f77a553f5a5133",
+        "rows_hash": "662b4130b7f49779c27cf3d4640ce98fd863dc8c9f248b05b9143494a410f3f5",
+        "stats": {
+          "meta_solves": 19,
+          "positive_solves": 18,
+          "countermodel_solves": 11,
+          "admission_solves": 3,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 71,
+        "initial_meta_clauses": 90
+      }
+    },
+    {
+      "fixture": "synthetic-8108",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [],
+        "fixed": [],
+        "available": [
+          -3
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "5d9ff6adfe3bc6c22ff0c35d5e2174d9260a94f1cf5b3b30c2ae1a4dbafe8f08",
+      "verification": {
+        "candidates": 650,
+        "kinds": {
+          "library_refuted": 103,
+          "unknown": 133,
+          "derived": 112,
+          "theory_refuted": 80,
+          "inconsistent_premises": 222
+        },
+        "unknown": 133,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "uncovered": 0,
+        "checked_cuts": 11,
+        "cut_candidate_checks": 1115,
+        "active_cuts": 11,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0007935689936857671,
+      "search_cpu_seconds": 0.0007924359999997854,
+      "oracle_wall_seconds": 0.008947545997216366,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "4872dbf4479763c0d8a48efb0b8b01c6d76b757e0e686b35a5c0b536da291cdc",
+        "domain_hash": "8485f1abdd4aaad578adfe04985f6865b0c87a080d4e896494d08cbdd89b8da0",
+        "rows_hash": "662b4130b7f49779c27cf3d4640ce98fd863dc8c9f248b05b9143494a410f3f5",
+        "stats": {
+          "meta_solves": 15,
+          "positive_solves": 14,
+          "countermodel_solves": 12,
+          "admission_solves": 3,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 72,
+        "initial_meta_clauses": 98
+      }
+    },
+    {
+      "fixture": "synthetic-8109",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "62b4ae44c7d2c369655f6793cafad7733669633f0709c7b47faea8215a194e52",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 0,
+        "cut_candidate_checks": 0,
+        "active_cuts": 0,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.00034709500323515385,
+      "search_cpu_seconds": 0.00034520199999965584,
+      "oracle_wall_seconds": 5.755500023951754e-05,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "55ec7fd6e09c0480f9f333074153e487a134149c1b68e1a00f226174336b3a89",
+        "domain_hash": "6a649620eca128bff5f866bff2e219fd1d12215d227993d225d29520d00ca358",
+        "rows_hash": "c90110466e8399fa5bae346a8e064c6d8dba24defbaa86aba412a8fe4940de3e",
+        "stats": {
+          "meta_solves": 1,
+          "positive_solves": 0,
+          "countermodel_solves": 0,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 37,
+        "initial_meta_clauses": 74
+      }
+    },
+    {
+      "fixture": "synthetic-8109",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "62b4ae44c7d2c369655f6793cafad7733669633f0709c7b47faea8215a194e52",
+      "verification": {
+        "candidates": 10,
+        "kinds": {
+          "inconsistent_premises": 4,
+          "library_refuted": 4,
+          "derived": 1,
+          "unknown": 1
+        },
+        "unknown": 1,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "uncovered": 0,
+        "checked_cuts": 2,
+        "cut_candidate_checks": 6,
+        "active_cuts": 2,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.00036591399839380756,
+      "search_cpu_seconds": 0.0003660430000000936,
+      "oracle_wall_seconds": 0.00022843899932922795,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "55ec7fd6e09c0480f9f333074153e487a134149c1b68e1a00f226174336b3a89",
+        "domain_hash": "0528b0e4609e789f86bdc664741aa164edbac7b7c598381afcfef1b70cbfd377",
+        "rows_hash": "c90110466e8399fa5bae346a8e064c6d8dba24defbaa86aba412a8fe4940de3e",
+        "stats": {
+          "meta_solves": 4,
+          "positive_solves": 3,
+          "countermodel_solves": 2,
+          "admission_solves": 1,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 49,
+        "initial_meta_clauses": 90
+      }
+    },
+    {
+      "fixture": "synthetic-8109",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "62b4ae44c7d2c369655f6793cafad7733669633f0709c7b47faea8215a194e52",
+      "verification": {
+        "candidates": 54,
+        "kinds": {
+          "inconsistent_premises": 34,
+          "library_refuted": 11,
+          "derived": 5,
+          "unknown": 3,
+          "theory_refuted": 1
+        },
+        "unknown": 3,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "uncovered": 0,
+        "checked_cuts": 5,
+        "cut_candidate_checks": 63,
+        "active_cuts": 5,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0004125740015297197,
+      "search_cpu_seconds": 0.0004125020000000923,
+      "oracle_wall_seconds": 0.0012909380020573735,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "55ec7fd6e09c0480f9f333074153e487a134149c1b68e1a00f226174336b3a89",
+        "domain_hash": "4efeb978b5f276f7332c98a26261391bff32ca8ea69219faf610a9751f56a0f8",
+        "rows_hash": "c90110466e8399fa5bae346a8e064c6d8dba24defbaa86aba412a8fe4940de3e",
+        "stats": {
+          "meta_solves": 7,
+          "positive_solves": 6,
+          "countermodel_solves": 3,
+          "admission_solves": 1,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 59,
+        "initial_meta_clauses": 102
+      }
+    },
+    {
+      "fixture": "synthetic-8109",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [
+          -1
+        ],
+        "available": [
+          -1,
+          4
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "62b4ae44c7d2c369655f6793cafad7733669633f0709c7b47faea8215a194e52",
+      "verification": {
+        "candidates": 102,
+        "kinds": {
+          "inconsistent_premises": 76,
+          "library_refuted": 13,
+          "derived": 7,
+          "unknown": 4,
+          "theory_refuted": 2
+        },
+        "unknown": 4,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "uncovered": 0,
+        "checked_cuts": 5,
+        "cut_candidate_checks": 137,
+        "active_cuts": 5,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0005247189983492717,
+      "search_cpu_seconds": 0.0005239770000002864,
+      "oracle_wall_seconds": 0.0020857589988736436,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "55ec7fd6e09c0480f9f333074153e487a134149c1b68e1a00f226174336b3a89",
+        "domain_hash": "301691f5b9a733fd756f9666b72aa9b2acc346faa827fe5e69f11d63a250046d",
+        "rows_hash": "c90110466e8399fa5bae346a8e064c6d8dba24defbaa86aba412a8fe4940de3e",
+        "stats": {
+          "meta_solves": 7,
+          "positive_solves": 6,
+          "countermodel_solves": 3,
+          "admission_solves": 1,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 64,
+        "initial_meta_clauses": 110
+      }
+    },
+    {
+      "fixture": "synthetic-8110",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "7f1c8d19671de664c211cf0fb25be7f3c6fc55311e40df6278f6e16998c9729b",
+      "verification": {
+        "candidates": 2,
+        "kinds": {
+          "library_refuted": 1,
+          "unknown": 1
+        },
+        "unknown": 1,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "uncovered": 0,
+        "checked_cuts": 0,
+        "cut_candidate_checks": 0,
+        "active_cuts": 0,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0003144069996778853,
+      "search_cpu_seconds": 0.0003137460000002257,
+      "oracle_wall_seconds": 7.278800330823287e-05,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "51db1e62b1b0e5a2f754e43e66abbc09acdfe3f124311b9ad6b854676df76874",
+        "domain_hash": "28f60f544c2fa8bf6006541d5995a5d52e46e17b1bd2846aace890d026233834",
+        "rows_hash": "fc09c7cac0ea82110338de5c9abdbd285d646105b73620e0b372d2db885b8447",
+        "stats": {
+          "meta_solves": 2,
+          "positive_solves": 1,
+          "countermodel_solves": 1,
+          "admission_solves": 1,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 38,
+        "initial_meta_clauses": 64
+      }
+    },
+    {
+      "fixture": "synthetic-8110",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "7f1c8d19671de664c211cf0fb25be7f3c6fc55311e40df6278f6e16998c9729b",
+      "verification": {
+        "candidates": 66,
+        "kinds": {
+          "library_refuted": 19,
+          "unknown": 41,
+          "derived": 4,
+          "theory_refuted": 2
+        },
+        "unknown": 41,
+        "basis": 5,
+        "exceptions": 0,
+        "retained": 5,
+        "uncovered": 0,
+        "checked_cuts": 10,
+        "cut_candidate_checks": 65,
+        "active_cuts": 10,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0009184949958580546,
+      "search_cpu_seconds": 0.0009187339999998656,
+      "oracle_wall_seconds": 0.0010943860033876263,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "51db1e62b1b0e5a2f754e43e66abbc09acdfe3f124311b9ad6b854676df76874",
+        "domain_hash": "584e39d24fc70b34cbdda8811061667ee775841efbad191ab84c079982b935e0",
+        "rows_hash": "fc09c7cac0ea82110338de5c9abdbd285d646105b73620e0b372d2db885b8447",
+        "stats": {
+          "meta_solves": 16,
+          "positive_solves": 15,
+          "countermodel_solves": 15,
+          "admission_solves": 5,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 61,
+        "initial_meta_clauses": 80
+      }
+    },
+    {
+      "fixture": "synthetic-8110",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "7f1c8d19671de664c211cf0fb25be7f3c6fc55311e40df6278f6e16998c9729b",
+      "verification": {
+        "candidates": 306,
+        "kinds": {
+          "library_refuted": 49,
+          "unknown": 175,
+          "derived": 40,
+          "theory_refuted": 30,
+          "inconsistent_premises": 12
+        },
+        "unknown": 175,
+        "basis": 5,
+        "exceptions": 0,
+        "retained": 5,
+        "uncovered": 0,
+        "checked_cuts": 12,
+        "cut_candidate_checks": 438,
+        "active_cuts": 12,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0008106539971777238,
+      "search_cpu_seconds": 0.0008102320000000773,
+      "oracle_wall_seconds": 0.005055141002230812,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "51db1e62b1b0e5a2f754e43e66abbc09acdfe3f124311b9ad6b854676df76874",
+        "domain_hash": "b7a063bbf95fcc67268c99d775836354abf9eeaca69fa2072f1fbf82a2f68215",
+        "rows_hash": "fc09c7cac0ea82110338de5c9abdbd285d646105b73620e0b372d2db885b8447",
+        "stats": {
+          "meta_solves": 18,
+          "positive_solves": 17,
+          "countermodel_solves": 16,
+          "admission_solves": 5,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 70,
+        "initial_meta_clauses": 92
+      }
+    },
+    {
+      "fixture": "synthetic-8110",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {},
+      "input_sha256": "7f1c8d19671de664c211cf0fb25be7f3c6fc55311e40df6278f6e16998c9729b",
+      "verification": {
+        "candidates": 626,
+        "kinds": {
+          "library_refuted": 69,
+          "unknown": 291,
+          "derived": 104,
+          "theory_refuted": 86,
+          "inconsistent_premises": 76
+        },
+        "unknown": 291,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "uncovered": 0,
+        "checked_cuts": 11,
+        "cut_candidate_checks": 1084,
+        "active_cuts": 11,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0009591049965820275,
+      "search_cpu_seconds": 0.0009585819999999856,
+      "oracle_wall_seconds": 0.010708483001508284,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "51db1e62b1b0e5a2f754e43e66abbc09acdfe3f124311b9ad6b854676df76874",
+        "domain_hash": "e3cc2d4b5ba4ba53f70eae5bfbc1c0aef843173f93c46e6b641002aef59f83bb",
+        "rows_hash": "fc09c7cac0ea82110338de5c9abdbd285d646105b73620e0b372d2db885b8447",
+        "stats": {
+          "meta_solves": 16,
+          "positive_solves": 15,
+          "countermodel_solves": 14,
+          "admission_solves": 4,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 73,
+        "initial_meta_clauses": 100
+      }
+    },
+    {
+      "fixture": "synthetic-8111",
+      "k": 0,
+      "domain": {
+        "n": 5,
+        "k": 0,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "d741121b8b8dfce9e8b4d7b34d7d79d9307c385da04c9eecbba72d1b78bf377a",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 0,
+        "cut_candidate_checks": 0,
+        "active_cuts": 0,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0003197449987055734,
+      "search_cpu_seconds": 0.0003191639999999829,
+      "oracle_wall_seconds": 5.9988997236359864e-05,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "60bc05e9e0eaf9722768c2f1cda7578ab4700e64f66b15c18f502fa4767a6430",
+        "domain_hash": "1ce17bd91a79b76604c2ebb03ec454e82e3efcc2e60661de8125e2b6b371065d",
+        "rows_hash": "0ddea2c1f8dc049dc2e4a11d7eb09a8a86620ba2fcf24c6db588d12e6d668f6c",
+        "stats": {
+          "meta_solves": 1,
+          "positive_solves": 0,
+          "countermodel_solves": 0,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 37,
+        "initial_meta_clauses": 72
+      }
+    },
+    {
+      "fixture": "synthetic-8111",
+      "k": 1,
+      "domain": {
+        "n": 5,
+        "k": 1,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "d741121b8b8dfce9e8b4d7b34d7d79d9307c385da04c9eecbba72d1b78bf377a",
+      "verification": {
+        "candidates": 18,
+        "kinds": {
+          "unknown": 10,
+          "library_refuted": 6,
+          "derived": 1,
+          "theory_refuted": 1
+        },
+        "unknown": 10,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "uncovered": 0,
+        "checked_cuts": 5,
+        "cut_candidate_checks": 15,
+        "active_cuts": 5,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0005559560013352893,
+      "search_cpu_seconds": 0.0005561249999996853,
+      "oracle_wall_seconds": 0.00046640300570288673,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "60bc05e9e0eaf9722768c2f1cda7578ab4700e64f66b15c18f502fa4767a6430",
+        "domain_hash": "0e7380c40c36d4069519a060c128f24d416cbf1dbac87d4263de480ea5b777e5",
+        "rows_hash": "0ddea2c1f8dc049dc2e4a11d7eb09a8a86620ba2fcf24c6db588d12e6d668f6c",
+        "stats": {
+          "meta_solves": 10,
+          "positive_solves": 9,
+          "countermodel_solves": 8,
+          "admission_solves": 4,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 55,
+        "initial_meta_clauses": 88
+      }
+    },
+    {
+      "fixture": "synthetic-8111",
+      "k": 2,
+      "domain": {
+        "n": 5,
+        "k": 2,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "d741121b8b8dfce9e8b4d7b34d7d79d9307c385da04c9eecbba72d1b78bf377a",
+      "verification": {
+        "candidates": 74,
+        "kinds": {
+          "unknown": 34,
+          "library_refuted": 9,
+          "derived": 12,
+          "theory_refuted": 11,
+          "inconsistent_premises": 8
+        },
+        "unknown": 34,
+        "basis": 5,
+        "exceptions": 0,
+        "retained": 5,
+        "uncovered": 0,
+        "checked_cuts": 9,
+        "cut_candidate_checks": 103,
+        "active_cuts": 9,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0009912129971780814,
+      "search_cpu_seconds": 0.0009907700000000297,
+      "oracle_wall_seconds": 0.001517384996986948,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "60bc05e9e0eaf9722768c2f1cda7578ab4700e64f66b15c18f502fa4767a6430",
+        "domain_hash": "65d3d088fc924b09b267d5a76b5b66db9ee7363b2bd910b3a0301b45fca64426",
+        "rows_hash": "0ddea2c1f8dc049dc2e4a11d7eb09a8a86620ba2fcf24c6db588d12e6d668f6c",
+        "stats": {
+          "meta_solves": 15,
+          "positive_solves": 14,
+          "countermodel_solves": 13,
+          "admission_solves": 5,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 67,
+        "initial_meta_clauses": 100
+      }
+    },
+    {
+      "fixture": "synthetic-8111",
+      "k": 3,
+      "domain": {
+        "n": 5,
+        "k": 3,
+        "requirements": {
+          "3": [
+            1
+          ],
+          "5": [
+            -2
+          ]
+        },
+        "cover": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "fixed": [],
+        "available": [
+          5
+        ]
+      },
+      "metadata": {},
+      "input_sha256": "d741121b8b8dfce9e8b4d7b34d7d79d9307c385da04c9eecbba72d1b78bf377a",
+      "verification": {
+        "candidates": 130,
+        "kinds": {
+          "unknown": 50,
+          "library_refuted": 9,
+          "derived": 22,
+          "theory_refuted": 21,
+          "inconsistent_premises": 28
+        },
+        "unknown": 50,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "uncovered": 0,
+        "checked_cuts": 9,
+        "cut_candidate_checks": 157,
+        "active_cuts": 9,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.0008005400013644248,
+      "search_cpu_seconds": 0.0008003879999995966,
+      "oracle_wall_seconds": 0.00252785599877825,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "60bc05e9e0eaf9722768c2f1cda7578ab4700e64f66b15c18f502fa4767a6430",
+        "domain_hash": "cc33878517a6d1fe6befaa40cb802279253d673938e4e0e1ec4973ab55e6377f",
+        "rows_hash": "0ddea2c1f8dc049dc2e4a11d7eb09a8a86620ba2fcf24c6db588d12e6d668f6c",
+        "stats": {
+          "meta_solves": 14,
+          "positive_solves": 13,
+          "countermodel_solves": 11,
+          "admission_solves": 4,
+          "validation_solves": 0
+        },
+        "theory_variables": 5,
+        "meta_variables": 71,
+        "initial_meta_clauses": 108
+      }
+    },
+    {
+      "fixture": "group-four-atom-slice",
+      "k": 0,
+      "domain": {
+        "n": 4,
+        "k": 0,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {
+        "atoms": [
+          "abelian(G)",
+          "cyclic(G)",
+          "perfect(G)",
+          "cyclic(center(G))"
+        ],
+        "objects": [
+          "1:1",
+          "2:1",
+          "4:2",
+          "6:1"
+        ],
+        "rows": 4,
+        "scope": "four selected atoms of G/center(G), actual grow=1 Theory and Library; no native pipeline or full grammar"
+      },
+      "input_sha256": "31b3d0a42121bb88f9b0c4ad563156e7f6807a5ba46d4e8e3b8ffbedf1542ae9",
+      "verification": {
+        "candidates": 0,
+        "kinds": {},
+        "unknown": 0,
+        "basis": 0,
+        "exceptions": 0,
+        "retained": 0,
+        "uncovered": 0,
+        "checked_cuts": 0,
+        "cut_candidate_checks": 0,
+        "active_cuts": 0,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.1598554059964954,
+      "search_cpu_seconds": 0.1598521260000001,
+      "oracle_wall_seconds": 0.026052654000523034,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "5b8379f16d9c92a422d54652c72c36fa995dc25bf25c1992421d3e4d55006178",
+        "domain_hash": "6394fdfa8e5ffa690d8991797ade61698486d8cbc3415205da8a02170030baaa",
+        "rows_hash": "4afb5250fc553fe0ce988f1443ff1c18ee749ae7a59db4d578367b60b971da64",
+        "stats": {
+          "meta_solves": 1,
+          "positive_solves": 0,
+          "countermodel_solves": 0,
+          "admission_solves": 0,
+          "validation_solves": 0
+        },
+        "theory_variables": 4815,
+        "meta_variables": 31,
+        "initial_meta_clauses": 51
+      }
+    },
+    {
+      "fixture": "group-four-atom-slice",
+      "k": 1,
+      "domain": {
+        "n": 4,
+        "k": 1,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {
+        "atoms": [
+          "abelian(G)",
+          "cyclic(G)",
+          "perfect(G)",
+          "cyclic(center(G))"
+        ],
+        "objects": [
+          "1:1",
+          "2:1",
+          "4:2",
+          "6:1"
+        ],
+        "rows": 4,
+        "scope": "four selected atoms of G/center(G), actual grow=1 Theory and Library; no native pipeline or full grammar"
+      },
+      "input_sha256": "31b3d0a42121bb88f9b0c4ad563156e7f6807a5ba46d4e8e3b8ffbedf1542ae9",
+      "verification": {
+        "candidates": 24,
+        "kinds": {
+          "library_refuted": 18,
+          "unknown": 4,
+          "derived": 2
+        },
+        "unknown": 4,
+        "basis": 1,
+        "exceptions": 0,
+        "retained": 1,
+        "uncovered": 0,
+        "checked_cuts": 5,
+        "cut_candidate_checks": 5,
+        "active_cuts": 5,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.13635828800033778,
+      "search_cpu_seconds": 0.13635059400000005,
+      "oracle_wall_seconds": 0.026962716998241376,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "5b8379f16d9c92a422d54652c72c36fa995dc25bf25c1992421d3e4d55006178",
+        "domain_hash": "908045848c646d10840b687d9d41fc80f69c1af65f37a065cf1484fa799e0c52",
+        "rows_hash": "4afb5250fc553fe0ce988f1443ff1c18ee749ae7a59db4d578367b60b971da64",
+        "stats": {
+          "meta_solves": 7,
+          "positive_solves": 6,
+          "countermodel_solves": 6,
+          "admission_solves": 1,
+          "validation_solves": 0
+        },
+        "theory_variables": 4815,
+        "meta_variables": 44,
+        "initial_meta_clauses": 63
+      }
+    },
+    {
+      "fixture": "group-four-atom-slice",
+      "k": 2,
+      "domain": {
+        "n": 4,
+        "k": 2,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {
+        "atoms": [
+          "abelian(G)",
+          "cyclic(G)",
+          "perfect(G)",
+          "cyclic(center(G))"
+        ],
+        "objects": [
+          "1:1",
+          "2:1",
+          "4:2",
+          "6:1"
+        ],
+        "rows": 4,
+        "scope": "four selected atoms of G/center(G), actual grow=1 Theory and Library; no native pipeline or full grammar"
+      },
+      "input_sha256": "31b3d0a42121bb88f9b0c4ad563156e7f6807a5ba46d4e8e3b8ffbedf1542ae9",
+      "verification": {
+        "candidates": 96,
+        "kinds": {
+          "library_refuted": 51,
+          "unknown": 19,
+          "derived": 17,
+          "inconsistent_premises": 6,
+          "theory_refuted": 3
+        },
+        "unknown": 19,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 21,
+        "cut_candidate_checks": 60,
+        "active_cuts": 21,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.14258225700177718,
+      "search_cpu_seconds": 0.1425419200000002,
+      "oracle_wall_seconds": 0.02796064999711234,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "5b8379f16d9c92a422d54652c72c36fa995dc25bf25c1992421d3e4d55006178",
+        "domain_hash": "417ff823a3032ddc4055c4a8f61132569b20081a64943de7c9feb2ba0f253cc5",
+        "rows_hash": "4afb5250fc553fe0ce988f1443ff1c18ee749ae7a59db4d578367b60b971da64",
+        "stats": {
+          "meta_solves": 24,
+          "positive_solves": 23,
+          "countermodel_solves": 20,
+          "admission_solves": 2,
+          "validation_solves": 0
+        },
+        "theory_variables": 4815,
+        "meta_variables": 66,
+        "initial_meta_clauses": 71
+      }
+    },
+    {
+      "fixture": "group-four-atom-slice",
+      "k": 3,
+      "domain": {
+        "n": 4,
+        "k": 3,
+        "requirements": {},
+        "cover": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "fixed": [],
+        "available": []
+      },
+      "metadata": {
+        "atoms": [
+          "abelian(G)",
+          "cyclic(G)",
+          "perfect(G)",
+          "cyclic(center(G))"
+        ],
+        "objects": [
+          "1:1",
+          "2:1",
+          "4:2",
+          "6:1"
+        ],
+        "rows": 4,
+        "scope": "four selected atoms of G/center(G), actual grow=1 Theory and Library; no native pipeline or full grammar"
+      },
+      "input_sha256": "31b3d0a42121bb88f9b0c4ad563156e7f6807a5ba46d4e8e3b8ffbedf1542ae9",
+      "verification": {
+        "candidates": 160,
+        "kinds": {
+          "library_refuted": 67,
+          "unknown": 26,
+          "derived": 33,
+          "inconsistent_premises": 26,
+          "theory_refuted": 8
+        },
+        "unknown": 26,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "uncovered": 0,
+        "checked_cuts": 24,
+        "cut_candidate_checks": 166,
+        "active_cuts": 24,
+        "disabled_cuts": 0
+      },
+      "search_wall_seconds": 0.1502809369994793,
+      "search_cpu_seconds": 0.15026650199999958,
+      "oracle_wall_seconds": 0.028758786000253167,
+      "search_stats": {
+        "complete": true,
+        "revision": 4,
+        "theory_hash": "5b8379f16d9c92a422d54652c72c36fa995dc25bf25c1992421d3e4d55006178",
+        "domain_hash": "9cef436b838611805b94c003882252d079483dc49ea8e784facb250d3624d6c9",
+        "rows_hash": "4afb5250fc553fe0ce988f1443ff1c18ee749ae7a59db4d578367b60b971da64",
+        "stats": {
+          "meta_solves": 28,
+          "positive_solves": 27,
+          "countermodel_solves": 22,
+          "admission_solves": 3,
+          "validation_solves": 0
+        },
+        "theory_variables": 4815,
+        "meta_variables": 73,
+        "initial_meta_clauses": 75
+      }
+    }
+  ],
+  "dynamic_real": [
+    {
+      "action": "start-C1",
+      "verification": {
+        "candidates": 160,
+        "kinds": {
+          "unknown": 58,
+          "library_refuted": 19,
+          "derived": 33,
+          "theory_refuted": 24,
+          "inconsistent_premises": 26
+        },
+        "unknown": 58,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "uncovered": 0,
+        "checked_cuts": 18,
+        "cut_candidate_checks": 320,
+        "active_cuts": 18,
+        "disabled_cuts": 0
+      },
+      "transition": null,
+      "search_wall_seconds": 0.017052941002475563,
+      "revision": 1,
+      "rows_hash": "b228fca8081121f2a3e838b89d96053ac0a38391239436ebe3e09e1436d84951",
+      "search_stage_stats": {
+        "meta_solves": 23,
+        "positive_solves": 22,
+        "countermodel_solves": 19,
+        "admission_solves": 4,
+        "validation_solves": 0
+      }
+    },
+    {
+      "action": "add-C2",
+      "verification": {
+        "candidates": 160,
+        "kinds": {
+          "unknown": 50,
+          "library_refuted": 31,
+          "derived": 33,
+          "theory_refuted": 20,
+          "inconsistent_premises": 26
+        },
+        "unknown": 50,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "uncovered": 0,
+        "checked_cuts": 18,
+        "cut_candidate_checks": 320,
+        "active_cuts": 13,
+        "disabled_cuts": 5
+      },
+      "transition": {
+        "verified": true,
+        "retained_basis": 3,
+        "retained_exceptions": 0,
+        "removed_basis": 1,
+        "removed_exceptions": 0,
+        "newly_unknown": 0,
+        "exposed_before_repair": 0
+      },
+      "search_wall_seconds": 0.00010421499609947205,
+      "revision": 2,
+      "rows_hash": "49d7eb3204f355817a3a65358694e5bb91ca281949251ba283628623020e5e55",
+      "search_stage_stats": {
+        "meta_solves": 1,
+        "positive_solves": 0,
+        "countermodel_solves": 0,
+        "admission_solves": 0,
+        "validation_solves": 0
+      }
+    },
+    {
+      "action": "add-V4-S3",
+      "verification": {
+        "candidates": 160,
+        "kinds": {
+          "library_refuted": 67,
+          "unknown": 26,
+          "derived": 33,
+          "inconsistent_premises": 26,
+          "theory_refuted": 8
+        },
+        "unknown": 26,
+        "basis": 2,
+        "exceptions": 0,
+        "retained": 2,
+        "uncovered": 0,
+        "checked_cuts": 36,
+        "cut_candidate_checks": 454,
+        "active_cuts": 23,
+        "disabled_cuts": 13
+      },
+      "transition": {
+        "verified": true,
+        "retained_basis": 1,
+        "retained_exceptions": 0,
+        "removed_basis": 2,
+        "removed_exceptions": 0,
+        "newly_unknown": 0,
+        "exposed_before_repair": 8
+      },
+      "search_wall_seconds": 0.012705330998869613,
+      "revision": 4,
+      "rows_hash": "2515dfb5661cd9e1aeea1cea35b6228ebec4d78c08d895a7cf46226f5f7112f9",
+      "search_stage_stats": {
+        "meta_solves": 20,
+        "positive_solves": 19,
+        "countermodel_solves": 17,
+        "admission_solves": 1,
+        "validation_solves": 0
+      }
+    },
+    {
+      "action": "withdraw-S3",
+      "verification": {
+        "candidates": 160,
+        "kinds": {
+          "library_refuted": 50,
+          "unknown": 39,
+          "derived": 33,
+          "inconsistent_premises": 26,
+          "theory_refuted": 12
+        },
+        "unknown": 39,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "uncovered": 0,
+        "checked_cuts": 41,
+        "cut_candidate_checks": 544,
+        "active_cuts": 28,
+        "disabled_cuts": 13
+      },
+      "transition": {
+        "verified": true,
+        "retained_basis": 2,
+        "retained_exceptions": 0,
+        "removed_basis": 0,
+        "removed_exceptions": 0,
+        "newly_unknown": 13,
+        "exposed_before_repair": 13
+      },
+      "search_wall_seconds": 0.010235650996037293,
+      "revision": 5,
+      "rows_hash": "900e6d1a446c51133320ca974308ff11bdb12d3a432847d8fe6410d4bf0a5a01",
+      "search_stage_stats": {
+        "meta_solves": 7,
+        "positive_solves": 6,
+        "countermodel_solves": 6,
+        "admission_solves": 1,
+        "validation_solves": 0
+      }
+    },
+    {
+      "action": "withdraw-C2",
+      "verification": {
+        "candidates": 160,
+        "kinds": {
+          "library_refuted": 38,
+          "unknown": 47,
+          "derived": 33,
+          "inconsistent_premises": 26,
+          "theory_refuted": 16
+        },
+        "unknown": 47,
+        "basis": 4,
+        "exceptions": 0,
+        "retained": 4,
+        "uncovered": 0,
+        "checked_cuts": 41,
+        "cut_candidate_checks": 544,
+        "active_cuts": 32,
+        "disabled_cuts": 9
+      },
+      "transition": {
+        "verified": true,
+        "retained_basis": 3,
+        "retained_exceptions": 0,
+        "removed_basis": 0,
+        "removed_exceptions": 0,
+        "newly_unknown": 8,
+        "exposed_before_repair": 8
+      },
+      "search_wall_seconds": 0.0032815569938975386,
+      "revision": 6,
+      "rows_hash": "47f4cfe1cabaf74d9731560c744792714a92db9f3532522801ef8116f034a63d",
+      "search_stage_stats": {
+        "meta_solves": 2,
+        "positive_solves": 1,
+        "countermodel_solves": 1,
+        "admission_solves": 1,
+        "validation_solves": 0
+      }
+    },
+    {
+      "action": "reactivate-S3",
+      "verification": {
+        "candidates": 160,
+        "kinds": {
+          "library_refuted": 57,
+          "unknown": 32,
+          "derived": 33,
+          "inconsistent_premises": 26,
+          "theory_refuted": 12
+        },
+        "unknown": 32,
+        "basis": 3,
+        "exceptions": 0,
+        "retained": 3,
+        "uncovered": 0,
+        "checked_cuts": 46,
+        "cut_candidate_checks": 568,
+        "active_cuts": 28,
+        "disabled_cuts": 18
+      },
+      "transition": {
+        "verified": true,
+        "retained_basis": 2,
+        "retained_exceptions": 0,
+        "removed_basis": 2,
+        "removed_exceptions": 0,
+        "newly_unknown": 0,
+        "exposed_before_repair": 6
+      },
+      "search_wall_seconds": 0.008745155006181449,
+      "revision": 7,
+      "rows_hash": "3f4d60fe174e28b03a31f2803eff62bebcb7584e4eacbb9b44af4b6507b11152",
+      "search_stage_stats": {
+        "meta_solves": 7,
+        "positive_solves": 6,
+        "countermodel_solves": 5,
+        "admission_solves": 1,
+        "validation_solves": 0
+      }
+    }
+  ],
+  "dynamic_snapshot_proof_checks": {
+    "generations": 6,
+    "transitions": 5,
+    "cut_occurrences": 200,
+    "cut_candidate_checks": 2750,
+    "scope": "historical cuts recur across generations; counts are not unique cuts"
+  },
+  "verification": {
+    "reviewer": "review_phase_docs",
+    "code_and_fault_injection_review": "approved after invalidation-before-row-mutation fix",
+    "tests": 22,
+    "test_scope": "12new lazy tests+10unchanged PR15 tests",
+    "root_test_seconds": 0.108,
+    "independent_test_seconds": 0.103,
+    "test_result": "OK",
+    "receipt_review": "all52static+6dynamic/5transitions, raw core provenance and UNSAT semantics at ONLY explicit deps, all forbidden structural regions, inputs and source SHA",
+    "independent_projected_model_solver": "MiniSat22",
+    "independent_review_wall_seconds": 3.184994,
+    "meta_search_repeated": false,
+    "production_full_suite_rerun": false,
+    "production_previous_CI": {
+      "run": 42393621793,
+      "tests": 149,
+      "seconds": 488.839,
+      "result": "OK"
+    }
+  },
+  "limitations": [
+    "Finite selector grammar only; full numerical/pair/symmetry/const/minimality mapping absent.",
+    "Dynamic row add/withdraw/reactivation tested in process; no SQLite integration, durable solver reload or theorem/language update implementation.",
+    "All cuts are checked over the whole structural domain at only their explicit dependencies; no real group inferred from a SAT model.",
+    "Retained basis/exceptions and their order changed; production report equivalence not claimed.",
+    "Total candidates/unknown count repeats fixtures at different k and counts contrapositives separately.",
+    "One original T solver replaces three concurrent theory embeddings, but total peak RSS did not improve; per-stage RSS allocation was not separately profiled.",
+    "Production readiness gates, Hirsch, native holdout and205.5M memory stop remain open.",
+    "Launch01 failed before search; its CPU/wall cost was not measured and is not counted as zero.",
+    "Rows/proof history grows in memory; long update sequences and memory bounds/compaction are not implemented or measured."
+  ]
+}
