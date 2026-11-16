@@ -2,7 +2,9 @@
 # подгрупп (порядок > 100: SmallGroup вне таблицы и образы Aut/Out малых групп).
 #
 # Вызов: gap -q -o 8g chars.g с заранее заданными JOBS (список [ключ, n, i, вид],
-# вид — "G", "Aut" или "Out" от SmallGroup(n, i)) и OUT (см. finite.py, «--характеристические»).
+# вид — "G", "Aut" или "Out" от SmallGroup(n, i); или [ключ, 0, 0, "expr", выражение GAP] —
+# построенная группа Aut(Aut(…)), Out(…), G′(…), …/Z, …/Φ, как в props2x.g)
+# и OUT (см. finite.py, «--характеристические»).
 # Строка вывода — JSON:
 #   key; subs — подгруппы 1, Z(G), G′, Φ(G), G без повторов: порядок, ключ (n:i или null),
 #   свойства как группы, свойства вложения, порядок и ключ фактора, свойства фактора, над (номера);
@@ -46,8 +48,28 @@ JsonProps := function(ps)
   return s;
 end;
 
+# Построенные группы — выражения finite.gap_expr (те же функции, что в props2x.g).
+OutGroup := function(A)
+  return Image(NaturalHomomorphismByNormalSubgroup(A, InnerAutomorphismsAutomorphismGroup(A)));
+end;
+QuotientBy := function(G, N)
+  return Image(NaturalHomomorphismByNormalSubgroup(G, N));
+end;
+AsPc := function(G)
+  if IsSolvableGroup(G) and not IsPcGroup(G) then
+    return Image(IsomorphismPcGroup(G));
+  fi;
+  if not IsPermGroup(G) and not IsPcGroup(G) then
+    return Image(IsomorphismPermGroup(G));
+  fi;
+  return G;
+end;
+QZ := X -> QuotientBy(X, Centre(X));
+QF := X -> QuotientBy(X, FrattiniSubgroup(X));
+
 Build := function(job)
   local H, A, P, I;
+  if job[4] = "expr" then return AsPc(EvalString(job[5])); fi;
   H := SmallGroup(job[2], job[3]);
   if job[4] = "G" then return H; fi;
   A := AutomorphismGroup(H);

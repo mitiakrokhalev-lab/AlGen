@@ -524,8 +524,10 @@ CHARS = Path(__file__).resolve().parents[2] / "data" / "finite" / "grp-chars.jso
 CHARS_SCRIPT = Path(__file__).resolve().parent / "gap" / "chars.g"
 
 
-def chars_jobs():
-    """Конечные группы библиотеки без таблицы подгрупп: [ключ, n, i, вид]."""
+def chars_jobs(max_order=None):
+    """Конечные группы библиотеки без таблицы подгрупп: [ключ, n, i, вид] — SmallGroup и Aut/Out
+    от неё; прочие построенные (Aut(Aut(…)), Out(…), G′(…), …/Z, …/Φ) — [ключ, 0, 0, "expr",
+    выражение GAP] порядка ⩽ max_order (None — без предела; у прежних видов предела нет)."""
     import re
     from .library import built_library
     from .logic import Vocab
@@ -541,32 +543,48 @@ def chars_jobs():
         m = re.fullmatch(r"\d+:(Aut|Out)\((\d+):(\d+)\)", k)
         if m:
             out.append([k, int(m[2]), int(m[3]), m[1]])
+            continue
+        e = gap_expr(k)
+        if e is not None and (max_order is None or int(k.split(":")[0]) <= max_order):
+            out.append([k, 0, 0, "expr", e])
     return sorted(out, key=lambda j: int(j[0].split(":")[0]))
 
 
-def build_chars(jobs, per=300, chunk=4):
+def build_chars(jobs, per=300, chunk=4, max_order=None, total=None, share=(0, 1)):
     """Характеристические подгруппы и Aut/Out (gap/chars.g) → grp-chars.jsonl.
     Пачка из chunk групп — один процесс GAP не дольше per секунд на группу;
-    записанное до остановки сохраняется (GAP пишет построчно)."""
-    todo = chars_jobs()
+    записанное до остановки сохраняется (GAP пишет построчно, пачка — сразу в CHARS).
+    total — общий срок (секунд), share = (i, n) — только задания с номерами ≡ i (mod n)."""
+    todo = chars_jobs(max_order)
     done = {}
     if CHARS.exists():
         done = {r["key"]: r for r in map(json.loads, CHARS.open())}
     todo = [j for j in todo if j[0] not in done]
+    todo = todo[share[0]::share[1]]
     chunks = [todo[i:i + chunk] for i in range(0, len(todo), chunk)]
+    import threading
+    lock = threading.Lock()
+    deadline = time.time() + total if total else None
+
+    def job_gap(j):
+        if j[3] == "expr":
+            return "[" + json.dumps(j[0], ensure_ascii=False) + ", 0, 0, \"expr\", " + json.dumps(j[4]) + "]"
+        return f'["{j[0]}", {j[1]}, {j[2]}, "{j[3]}"]'
     with tempfile.TemporaryDirectory() as tmp:
         def one(i):
+            if deadline and time.time() > deadline:
+                return None
             path = os.path.join(tmp, f"{i}.jsonl")
-            js = ", ".join(f'["{k}", {n}, {m}, "{v}"]' for k, n, m, v in chunks[i])
+            js = ", ".join(job_gap(j) for j in chunks[i])
             prog = f'JOBS:=[{js}];; OUT:="{path}";; Read("{CHARS_SCRIPT}");\n'
             try:
                 subprocess.run(["gap", "-q", "-o", "8g"], input=prog, text=True, timeout=per * len(chunks[i]),
                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             except subprocess.TimeoutExpired:
                 pass
-            # сразу в файл: обрыв задания по сроку не теряет посчитанное
+            # сразу в файл: обрыв задания по сроку не теряет посчитанное (раньше — по ошибке в PROPS2X)
             if os.path.exists(path):
-                with lock, PROPS2X.open("a") as out:
+                with lock, CHARS.open("a") as out:
                     for line in open(path):
                         try:
                             r = json.loads(line)
@@ -575,19 +593,18 @@ def build_chars(jobs, per=300, chunk=4):
                         out.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")
             return path
         with ThreadPoolExecutor(jobs) as ex:
-            paths = list(ex.map(one, range(len(chunks))))
-        for path in paths:
-            if os.path.exists(path):
-                for line in open(path):
-                    try:
-                        r = json.loads(line)
-                    except ValueError:
-                        continue
-                    done[r["key"]] = r
+            list(ex.map(one, range(len(chunks))))
+    if CHARS.exists():
+        for line in CHARS.open():
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            done[r["key"]] = r
     with CHARS.open("w") as out:
         for k in sorted(done, key=lambda k: (int(k.split(":")[0]), k)):
             out.write(json.dumps(done[k], ensure_ascii=False, separators=(",", ":")) + "\n")
-    print(f"посчитано {len(done)} из {len(chars_jobs())}")
+    print(f"посчитано {len(done)} из {len(chars_jobs(max_order))}")
 
 
 if __name__ == "__main__":
@@ -633,7 +650,9 @@ if __name__ == "__main__":
                     help="1, Z, G′, Φ, Aut, Out групп без таблицы подгрупп → data/finite/grp-chars.jsonl")
     a = ap.parse_args()
     if a.chars:
-        build_chars(a.jobs, per=a.stall)
+        i, n = map(int, a.share.split("/"))
+        assert 0 <= i < n, a.share
+        build_chars(a.jobs, per=a.stall, chunk=a.chunk, max_order=a.max_order, total=a.minutes * 60, share=(i, n))
         raise SystemExit
     if a.present:
         build_present()
