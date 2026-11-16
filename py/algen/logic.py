@@ -1032,6 +1032,14 @@ class Theory:
             info = self.g.terms[a]
             if info.links.get("ambient") == b:
                 self._add([e], f"{why}: подгруппа")
+            # подгруппы одной группы: A ⩽ B или A = B ⇒ A ↪ B (раньше выводилось только
+            # «подгруппа ↪ объемлющая»: [Φ, Φ] ⩽ Φ было, а [Φ, Φ] ↪ Φ — нет)
+            amb = info.links.get("ambient")
+            if amb is not None and amb == self.g.terms[b].links.get("ambient"):  # подгруппы одной группы
+                if ("r", "le", a, b) in self.var:
+                    self._add([-self.lit(("r", "le", a, b)), e], f"{why}: ⩽ ⇒ ↪")
+                if ("r", "eq-sub", *sorted((a, b), key=str)) in self.var:
+                    self._add([-self.lit(("r", "eq-sub", *sorted((a, b), key=str))), e], f"{why}: = ⇒ ↪")
             if isinstance(b, App) and b.op in ("prod", "freeprod", "wreath") and a in b.args:
                 self._add([e], f"{why}: множитель {b.op}")
 
@@ -1050,6 +1058,10 @@ class Theory:
                      if obj_sort and any(self.v.fits(obj_sort, s) for s in sorts)}
         for _, rel, a, b in pairs:
             e = self.var[("r", rel, a, b)]
+            # равные подгруппы изоморфны как группы (атом ≅ — если заведён)
+            if (rel == "eq-sub" and ("r", "iso", a, b) in self.var and self.g.terms[a].links.get("ambient") is not None
+                    and self.g.terms[a].links.get("ambient") == self.g.terms[b].links.get("ambient")):
+                self._add([-e, self.lit(("r", "iso", a, b))], "eq-sub: = ⇒ ≅")
             # тривиальные группы изоморфны — только для уже заведённых пар
             # (правилом на все пары: квадрат атомов, и транзитивность ≅ отключается)
             if rel == "iso" and "trivial" in obj_props and all(

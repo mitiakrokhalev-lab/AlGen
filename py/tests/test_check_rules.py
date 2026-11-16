@@ -48,6 +48,23 @@ class CheckRules(unittest.TestCase):
         self.assertEqual(res["НАРУШЕНО"], 0)
         self.assertGreater(res["верно"], 1000)
 
+    def test_negated_relation_is_negated(self):
+        # «≇» у отношения — отрицание: Xᵃᵇ ≇ X′ у S₃ (C₂ и C₃) верно, а «≅» — ложно
+        # (раньше «значение»: false у отношения терялось, и верное правило считалось нарушенным)
+        ab = {"op": "ab", "args": ["X"]}
+        der = {"op": "commutator", "args": ["X"]}
+        pq = [{"p": "order-pq", "t": "X"}]
+        res, _ = check(rule([X], pq, {"rel": "iso", "args": [ab, der], "значение": False}), TABLE, 32)
+        self.assertEqual(res["НАРУШЕНО"], 0)
+        self.assertGreater(res["верно"], 10)
+        res, _ = check(rule([X], pq, {"rel": "iso", "args": [ab, der]}), TABLE, 32)
+        self.assertGreater(res["НАРУШЕНО"], 10)
+        # посылка «≇»: X абелева ⇒ ab(X) ≅ X; с посылкой Xᵃᵇ ≇ X группа неабелева
+        res, _ = check(rule([X], [{"rel": "iso", "args": [ab, "X"], "значение": False}],
+                            {"p": "abelian", "t": "X", "значение": False}), TABLE, 32)
+        self.assertEqual(res["НАРУШЕНО"], 0)
+        self.assertGreater(res["верно"], 100)
+
 
 if __name__ == "__main__":
     unittest.main()
