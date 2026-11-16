@@ -1,0 +1,781 @@
+{
+  "version": 1,
+  "date_moscow": "2026-11-14",
+  "source_run": 43551584453,
+  "source_table_run": 43434101930,
+  "code_commit": "199d2721cd91cfc652db23a4b01896e7dddea340",
+  "value_kernel_commit": "c226434953e594172e9755d0327d3cfd5e660eec",
+  "scheme": "G-6-211-767-769-770-771",
+  "scope": "one real scheme;4096 sampled conditions from245672minimals; no full-class, full-report speedup or candidate frontier claim",
+  "complete_sample": true,
+  "measurement": {
+    "scheme": "G-6-211-767-769-770-771",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 488.56,
+    "cpu_seconds": 483.70014699999996,
+    "peak_rss_kib": 12298976,
+    "sampled_rss_kib": 12212092,
+    "limits": {
+      "seconds": 1200,
+      "rss_gib": 14.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": "перепись",
+    "complete": true,
+    "scope": "sampled report value control",
+    "value_probe_valid": true,
+    "probe_sample": 4096,
+    "value_probe": {
+      "scope": "real sampled report, all verdicts with _cols; unique primitive reference; no verdict mutation",
+      "total_minimals": 245672,
+      "sampled_minimals": 4096,
+      "report_rows": 4096,
+      "report_rows_without_cols": 0,
+      "classified": 4096,
+      "canonical_arrays_per_batch": 11,
+      "exact_output": true,
+      "ordered_batch_output_sha256": "5521400340ed8f8b8106f4b37f35ac316a6a96f7bf55c35c152a85b2afab98e4",
+      "projection_sha256": "e682fa0cff97948ad7d358aee17dd647f7e42769a89679c0445f12d079167d98",
+      "atom_schema_sha256": "ee08e9308871abf2ebc358674f01052b1289542690b4ecffd5414867ba35265e",
+      "engine_sha256": "4b4aacdae849d03baa4c623abc2dd48ccc67ec3ad74f7f4bbc14c490e75282ab",
+      "rows": 30953,
+      "literal_columns": 562,
+      "kinds": {
+        "C": 2662,
+        "A": 726,
+        "B": 708
+      },
+      "kept_kinds": {
+        "C": 1399,
+        "A": 89,
+        "B": 299
+      },
+      "kind_by_verdict": {
+        "C / выводится": 2406,
+        "A / неизвестно": 726,
+        "B / выводится": 376,
+        "C / неизвестно": 256,
+        "B / неизвестно": 332
+      },
+      "single_events": 116121,
+      "batches": 34,
+      "max_batch_result_bytes": 300916,
+      "budget_retries": 0,
+      "loader": {
+        "wall_seconds": 0.5952571770000077,
+        "cpu_seconds": 0.0020317600000225866
+      },
+      "prepare": {
+        "wall_seconds": 0.003045822999979464,
+        "cpu_seconds": 0.003046846000017922
+      },
+      "native": {
+        "wall_seconds": 0.07799984100006441,
+        "cpu_seconds": 0.07802218299980268
+      },
+      "reference": {
+        "wall_seconds": 0.380613947999791,
+        "cpu_seconds": 0.3806236600000261
+      },
+      "verification": {
+        "wall_seconds": 0.053102074000094035,
+        "cpu_seconds": 0.043233039000142526
+      },
+      "timing_scope": "both reference/native include canonical numeric assembly; checks/hash/cross-tab separate",
+      "production_speedup_claimed": false,
+      "sat_only_c_enabled": false
+    },
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": false,
+    "code_sha256": {
+      "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+      "algen/table.py": "73d25f74f21952ad7c2a9fd93e4b6cec9956651021469d0dce402657b34c3275",
+      "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+      "algen/native_enum.py": "34a761aebfd331382a3c0aa8e31d7a2a170a1162aa1647796e13dabd34e87e83",
+      "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+      "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+      "tools/profile_memory.py": "130be7684ab4ce60320960e1ae7ad0f0ec53317c6e8449c952f3e5a8c7544267",
+      "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+      "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+      "tools/probe_value_classify.py": "bf5a459cb3a7b86fcc44fdceeac7586f56106aedab8198a9962808f53684a4d0",
+      "tools/bench_value_classify.py": "482da28a6306b030b79fe82258d8a15475f883c89c8dd8b894da88812ed2f9aa"
+    }
+  },
+  "artifact_audit": {
+    "run": 43551584453,
+    "artifact_id": 14096941699,
+    "zip_bytes": 247825173,
+    "zip_sha256": "0db7d78a5588ef39b948fae226334cf0adf86622a1cbad963de6e194d76ab0f9",
+    "zip_sha256_verified": true,
+    "files": [
+      {
+        "path": "codex-value-G6211/measurement.json",
+        "bytes": 3757,
+        "compressed_bytes": 1727,
+        "crc32": "c7266b3e",
+        "read_and_crc_verified": true,
+        "sha256": "e827a11e5304b86d5fca26f065a6151dabf1baa1601ad9a96e99467881beb116"
+      },
+      {
+        "path": "codex-value-G6211/process.log",
+        "bytes": 127,
+        "compressed_bytes": 111,
+        "crc32": "14801092",
+        "read_and_crc_verified": false
+      },
+      {
+        "path": "codex-value-G6211/results/G-6-211-767-769-770-771.txt",
+        "bytes": 15849,
+        "compressed_bytes": 2382,
+        "crc32": "8df106fb",
+        "read_and_crc_verified": false
+      },
+      {
+        "path": "codex-value-G6211/results/G-6-211-767-769-770-771.json",
+        "bytes": 693715,
+        "compressed_bytes": 62410,
+        "crc32": "38990a5c",
+        "read_and_crc_verified": true,
+        "sha256": "dcf2476f169fb9e9e048693883053c988580779cdb518daf93a2351082c336c7"
+      },
+      {
+        "path": "codex-value-G6211/results/G-6-211-767-769-770-771.vc.json.gz",
+        "bytes": 126474,
+        "compressed_bytes": 126514,
+        "crc32": "0f331cab",
+        "read_and_crc_verified": false
+      },
+      {
+        "path": "codex-value-G6211/results/_план-1-1.json",
+        "bytes": 43,
+        "compressed_bytes": 46,
+        "crc32": "dd066e72",
+        "read_and_crc_verified": false
+      },
+      {
+        "path": "codex-value-G6211/results/теория-в2c475bfcde9ba3c.meta",
+        "bytes": 54,
+        "compressed_bytes": 44,
+        "crc32": "808079fb",
+        "read_and_crc_verified": false
+      },
+      {
+        "path": "codex-value-G6211/results/теория-в2c475bfcde9ba3c.npy",
+        "bytes": 274447776,
+        "compressed_bytes": 247611819,
+        "crc32": "963672d9",
+        "read_and_crc_verified": false
+      },
+      {
+        "path": "codex-value-G6211/rss.jsonl",
+        "bytes": 112250,
+        "compressed_bytes": 12711,
+        "crc32": "30e94ebc",
+        "read_and_crc_verified": true,
+        "sha256": "795c4e2a0fd1e94ad5c2e269362914cf53186beb9b999a76508f40d4d01435a7"
+      },
+      {
+        "path": "codex-value-G6211/stages.jsonl",
+        "bytes": 3290,
+        "compressed_bytes": 1002,
+        "crc32": "501f20b8",
+        "read_and_crc_verified": true,
+        "sha256": "147b054aedfc4fb4c9ddf60023830c4f2da01048b32cb415bc26f9c100af7a91"
+      },
+      {
+        "path": "codex-value-G6211/value-probe.json",
+        "bytes": 1842,
+        "compressed_bytes": 887,
+        "crc32": "53da0f4b",
+        "read_and_crc_verified": true,
+        "sha256": "a3f08b18f8b97ddf40df9801ba929e350240ea98fdb0db4c0fe27f0555c091a5"
+      },
+      {
+        "path": "commit.txt",
+        "bytes": 41,
+        "compressed_bytes": 41,
+        "crc32": "4d5600ad",
+        "read_and_crc_verified": true,
+        "sha256": "50195e57073c5911e298e523ac35b70dec1a93d88f78e0f4fac70ff6287fed3e"
+      },
+      {
+        "path": "exit.txt",
+        "bytes": 7,
+        "compressed_bytes": 9,
+        "crc32": "c0ccb849",
+        "read_and_crc_verified": true,
+        "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061"
+      },
+      {
+        "path": "time.txt",
+        "bytes": 985,
+        "compressed_bytes": 539,
+        "crc32": "3aec81b0",
+        "read_and_crc_verified": true,
+        "sha256": "0d35cc706ddf97a505eddc313a506eb5a5f3a27997a10b4365596e246de2542b"
+      },
+      {
+        "path": "verdict.json",
+        "bytes": 6574,
+        "compressed_bytes": 2481,
+        "crc32": "d1079906",
+        "read_and_crc_verified": true,
+        "sha256": "ce0424f411c95b376976483e4c2998f44e4a39a587a150c999d2d7bfcf01a9f7"
+      }
+    ],
+    "scope": "full ZIP SHA; CRC and contents for selected small primary receipts, not unselected caches or full raw report",
+    "analysis_wall_seconds": 6.645350257000246,
+    "analysis_cpu_seconds": 1.979033091,
+    "analysis_peak_rss_kib": 502728
+  },
+  "report_sha256": "586e49c3e02454a965724d4cbe0faeae36ea8565d6c7a2fa315f820ed66d19e9",
+  "enumeration_engine": "cpp:aebd2a9e386c236798c796cb",
+  "table_fingerprint": "40179479aa259919:G::s2:быстро:3",
+  "raw_report_counts": {
+    "total": 4096,
+    "kinds": {
+      "C": 2662,
+      "A": 726,
+      "B": 708
+    },
+    "kept_kinds": {
+      "C": 1399,
+      "A": 89,
+      "B": 299
+    },
+    "kind_by_verdict": {
+      "C / выводится": 2406,
+      "A / неизвестно": 726,
+      "B / выводится": 376,
+      "C / неизвестно": 256,
+      "B / неизвестно": 332
+    }
+  },
+  "render_summary_counts": {
+    "classes": 4037,
+    "verdicts": {
+      "выводится": 2739,
+      "неизвестно": 1298
+    },
+    "note": "render groups canonical classes; different denominator from raw report"
+  },
+  "time_scope": {
+    "subprocess_wall_seconds": 488.56,
+    "subprocess_cpu_seconds": 483.70014699999996,
+    "command_user_seconds": 472.09,
+    "command_system_seconds": 12.79,
+    "command_cpu_seconds": 484.88,
+    "command_wall_seconds": 488.78,
+    "command_peak_rss_kib": 12298976,
+    "command_peak_rss_gib": 11.729217529296875,
+    "scheme_seconds": 359.7,
+    "scheme_seconds_excludes_startup": true,
+    "enumerate_form_wall_seconds": 29.964,
+    "after_enumeration_to_run_end_seconds": 326.975,
+    "after_enumeration_includes": [
+      "verdicts",
+      "compression",
+      "late hints",
+      "sample statistics",
+      "value control"
+    ],
+    "component_reference_over_native_ratio": 4.879675947025029,
+    "component_difference_seconds": 0.3026141069997266,
+    "instrumentation": "stage hooks and differential control; cProfile disabled",
+    "production_speedup_claimed": false,
+    "component_loader_prepare_native_wall_seconds": 0.6763028410000516,
+    "component_timing_is_warm": true,
+    "command_wall_source": "time.txt:8:08.78"
+  },
+  "output_scope": {
+    "zip_bytes": 247825173,
+    "largest_member": "sorted clause hashes for theorem-growth checking; not a SAT model bank",
+    "largest_member_uncompressed_bytes": 274447776,
+    "largest_member_compressed_bytes": 247611819,
+    "full_raw_report_jsonl_exported": false,
+    "sample_report_hash_is_baseline_for_future_paired_control": true
+  },
+  "semantics": {
+    "proved_B_raw_sample_rows": 376,
+    "proved_B_denominator": 708,
+    "sat_only_C_enabled": false,
+    "automatic_unknown_for_A_B_is_equivalent": false,
+    "A_B_proof_debt_must_be_retained": true
+  },
+  "independent_review": {
+    "status": "approved",
+    "receipt_sha256": "a184f4ed3a9bb98048aecc1ae63249cfc86f492c716646eb5d2ee8027dfad993",
+    "receipt": {
+      "review": "approved",
+      "reviewed_at_utc": "2026-11-14T03:48:23.910816+00:00",
+      "scope": "small primary receipts and frozen comparison source audit; remote API/log provenance; no real projection/kernel rerun",
+      "run": {
+        "id": 43551584453,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "199d2721cd91cfc652db23a4b01896e7dddea340",
+        "branch": "claude-pilot-codex-values-01",
+        "attempt": 1
+      },
+      "artifact": {
+        "id": 14096941699,
+        "name": "claude-codex-value-G6211",
+        "bytes": 247825173,
+        "digest": "sha256:0db7d78a5588ef39b948fae226334cf0adf86622a1cbad963de6e194d76ab0f9",
+        "head_sha": "199d2721cd91cfc652db23a4b01896e7dddea340"
+      },
+      "case_job": 132315057186,
+      "source_run": 43434101930,
+      "selected_primary_files_verified": [
+        {
+          "path": "codex-value-G6211/measurement.json",
+          "bytes": 3757,
+          "crc32": "c7266b3e",
+          "sha256": "e827a11e5304b86d5fca26f065a6151dabf1baa1601ad9a96e99467881beb116"
+        },
+        {
+          "path": "codex-value-G6211/results/G-6-211-767-769-770-771.json",
+          "bytes": 693715,
+          "crc32": "38990a5c",
+          "sha256": "dcf2476f169fb9e9e048693883053c988580779cdb518daf93a2351082c336c7"
+        },
+        {
+          "path": "codex-value-G6211/rss.jsonl",
+          "bytes": 112250,
+          "crc32": "30e94ebc",
+          "sha256": "795c4e2a0fd1e94ad5c2e269362914cf53186beb9b999a76508f40d4d01435a7"
+        },
+        {
+          "path": "codex-value-G6211/stages.jsonl",
+          "bytes": 3290,
+          "crc32": "501f20b8",
+          "sha256": "147b054aedfc4fb4c9ddf60023830c4f2da01048b32cb415bc26f9c100af7a91"
+        },
+        {
+          "path": "codex-value-G6211/value-probe.json",
+          "bytes": 1842,
+          "crc32": "53da0f4b",
+          "sha256": "a3f08b18f8b97ddf40df9801ba929e350240ea98fdb0db4c0fe27f0555c091a5"
+        },
+        {
+          "path": "commit.txt",
+          "bytes": 41,
+          "crc32": "4d5600ad",
+          "sha256": "50195e57073c5911e298e523ac35b70dec1a93d88f78e0f4fac70ff6287fed3e"
+        },
+        {
+          "path": "exit.txt",
+          "bytes": 7,
+          "crc32": "c0ccb849",
+          "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061"
+        },
+        {
+          "path": "time.txt",
+          "bytes": 985,
+          "crc32": "3aec81b0",
+          "sha256": "0d35cc706ddf97a505eddc313a506eb5a5f3a27997a10b4365596e246de2542b"
+        },
+        {
+          "path": "verdict.json",
+          "bytes": 6574,
+          "crc32": "d1079906",
+          "sha256": "ce0424f411c95b376976483e4c2998f44e4a39a587a150c999d2d7bfcf01a9f7"
+        }
+      ],
+      "remote_measurement_and_run_end_equal_local": true,
+      "frozen_source_sha256": {
+        "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+        "algen/table.py": "73d25f74f21952ad7c2a9fd93e4b6cec9956651021469d0dce402657b34c3275",
+        "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+        "algen/native_enum.py": "34a761aebfd331382a3c0aa8e31d7a2a170a1162aa1647796e13dabd34e87e83",
+        "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+        "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+        "tools/profile_memory.py": "130be7684ab4ce60320960e1ae7ad0f0ec53317c6e8449c952f3e5a8c7544267",
+        "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+        "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+        "tools/probe_value_classify.py": "bf5a459cb3a7b86fcc44fdceeac7586f56106aedab8198a9962808f53684a4d0",
+        "tools/bench_value_classify.py": "482da28a6306b030b79fe82258d8a15475f883c89c8dd8b894da88812ed2f9aa"
+      },
+      "samples": {
+        "total_minimals": 245672,
+        "sampled": 4096,
+        "classified": 4096,
+        "rows": 30953,
+        "literal_columns": 562
+      },
+      "kinds": {
+        "C": 2662,
+        "A": 726,
+        "B": 708
+      },
+      "kept_kinds": {
+        "C": 1399,
+        "A": 89,
+        "B": 299
+      },
+      "kind_by_verdict": {
+        "C / выводится": 2406,
+        "A / неизвестно": 726,
+        "B / выводится": 376,
+        "C / неизвестно": 256,
+        "B / неизвестно": 332
+      },
+      "raw_report_verdicts": {
+        "выводится": 2782,
+        "неизвестно": 1314
+      },
+      "rendered_class_verdicts": {
+        "выводится": 2739,
+        "неизвестно": 1298
+      },
+      "rendered_classes": 4037,
+      "denominator_note": "4096 condition/report rows; render groups them into4037 classes; cross-tab is not unique manual questions",
+      "compared_arrays_per_batch": 11,
+      "completed_batches": 34,
+      "single_events": 116121,
+      "budget_retries": 0,
+      "max_batch_result_bytes": 300916,
+      "ordered_batch_output_sha256": "5521400340ed8f8b8106f4b37f35ac316a6a96f7bf55c35c152a85b2afab98e4",
+      "projection_sha256": "e682fa0cff97948ad7d358aee17dd647f7e42769a89679c0445f12d079167d98",
+      "atom_schema_sha256": "ee08e9308871abf2ebc358674f01052b1289542690b4ecffd5414867ba35265e",
+      "engine_sha256": "4b4aacdae849d03baa4c623abc2dd48ccc67ec3ad74f7f4bbc14c490e75282ab",
+      "timing": {
+        "reference": {
+          "wall_seconds": 0.380613947999791,
+          "cpu_seconds": 0.3806236600000261
+        },
+        "native": {
+          "wall_seconds": 0.07799984100006441,
+          "cpu_seconds": 0.07802218299980268
+        },
+        "prepare": {
+          "wall_seconds": 0.003045822999979464,
+          "cpu_seconds": 0.003046846000017922
+        },
+        "loader": {
+          "wall_seconds": 0.5952571770000077,
+          "cpu_seconds": 0.0020317600000225866
+        },
+        "verification": {
+          "wall_seconds": 0.053102074000094035,
+          "cpu_seconds": 0.043233039000142526
+        },
+        "reference_over_native_component_ratio": 4.879675947025029,
+        "loader_prepare_native_wall_seconds": 0.6763028410000516,
+        "native_loader_cache_hit_recorded": false,
+        "timing_scope": "both reference/native include canonical numeric assembly; checks/hash/cross-tab separate"
+      },
+      "whole_control": {
+        "wall_seconds": 488.56,
+        "child_cpu_seconds": 483.70014699999996,
+        "peak_rss_kib": 12298976,
+        "peak_rss_gib": 11.729217529296875,
+        "sampled_rss_kib": 12212092,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 14.0
+        },
+        "complete": true,
+        "memory_scope": "parent samples child VmRSS; child high-water agrees with external time; not cgroup aggregate memory proof"
+      },
+      "cache": {
+        "verdict_cache": {
+          "было": 0,
+          "попаданий": 0,
+          "промахов": 4289
+        },
+        "default_state_save": true,
+        "theory_clause_hashes_file": "codex-value-G6211/results/теория-в2c475bfcde9ba3c.npy",
+        "clause_count": 34305956,
+        "format": "sorted int64 per-clause hashes; 128-byte NPY header",
+        "file_bytes": 274447776,
+        "compressed_bytes": 247611819,
+        "fraction_of_zip_compressed_bytes": 0.9991390947198088,
+        "generated_in_base_setup_before_run_pool": true,
+        "isolated_cache_build_time_measured": false,
+        "cache_read_or_unpacked_by_reviewer": false,
+        "not_a_SAT_model_bank": true,
+        "not_a_value_archive": true
+      },
+      "report": {
+        "sha256": "586e49c3e02454a965724d4cbe0faeae36ea8565d6c7a2fa315f820ed66d19e9",
+        "same_sha_in_local_stage_verdict_remote_log": true,
+        "whole_report_baseline_available": false,
+        "raw_report_rehashed_independently": false,
+        "report_sha_comparison_pass_claimed": false
+      },
+      "proof_limits": {
+        "numeric_arrays_recomputed_by_reviewer": false,
+        "approved_probe_asserts_exact_11_array_equality_every_completed_batch": true,
+        "full_zip_rehashed_by_reviewer": false,
+        "api_digest_agrees_with_root_zip_audit_and_upload_log": true,
+        "production_speedup_established": false,
+        "persistence_or_full_frontier_implemented": false,
+        "sat_only_C_enabled": false
+      },
+      "dynamic_document_plan_review": "three requested clarifications present; plan approved; not implemented"
+    },
+    "raw_report_rehash_independent": false,
+    "full_zip_sha_checked_by_root": true,
+    "selected_primary_crc_sha_independently_checked": true
+  },
+  "stages": [
+    {
+      "stage": "start",
+      "seconds": 0.029,
+      "memory_kib": {
+        "VmHWM": 72556,
+        "VmRSS": 59288
+      },
+      "python": "3.12.16 (main, Oct 26 2026, 02:50:49) [GCC 13.3.0]",
+      "table_fingerprint": "40179479aa259919:G::s2:быстро",
+      "bank_models": 4096,
+      "legacy_empty_cache": false,
+      "eager_search": false,
+      "early_min": true,
+      "sparse_leaf": true,
+      "native_enum": true,
+      "native_minimal": true,
+      "scoped_phases": true
+    },
+    {
+      "stage": "built_library:start",
+      "seconds": 0.047,
+      "memory_kib": {
+        "VmHWM": 72556,
+        "VmRSS": 66900
+      }
+    },
+    {
+      "stage": "built_library:end",
+      "seconds": 0.755,
+      "memory_kib": {
+        "VmHWM": 478040,
+        "VmRSS": 445552
+      }
+    },
+    {
+      "stage": "load:start",
+      "seconds": 0.764,
+      "memory_kib": {
+        "VmHWM": 478040,
+        "VmRSS": 447116
+      }
+    },
+    {
+      "stage": "skeleton:start",
+      "seconds": 0.764,
+      "memory_kib": {
+        "VmHWM": 478040,
+        "VmRSS": 447116
+      }
+    },
+    {
+      "stage": "solver:start",
+      "seconds": 13.661,
+      "memory_kib": {
+        "VmHWM": 3912820,
+        "VmRSS": 2877640
+      },
+      "number": 1,
+      "clauses": 34305956
+    },
+    {
+      "stage": "solver:end",
+      "seconds": 32.625,
+      "memory_kib": {
+        "VmHWM": 5110384,
+        "VmRSS": 5110384
+      },
+      "number": 1
+    },
+    {
+      "stage": "skeleton:end",
+      "seconds": 32.628,
+      "memory_kib": {
+        "VmHWM": 5110628,
+        "VmRSS": 5110628
+      }
+    },
+    {
+      "stage": "load:end",
+      "seconds": 50.109,
+      "memory_kib": {
+        "VmHWM": 7341668,
+        "VmRSS": 7193404
+      }
+    },
+    {
+      "stage": "enumerate_form:start",
+      "seconds": 125.346,
+      "memory_kib": {
+        "VmHWM": 7913688,
+        "VmRSS": 7200436
+      }
+    },
+    {
+      "stage": "enumerate_form:end",
+      "seconds": 155.31,
+      "memory_kib": {
+        "VmHWM": 7935152,
+        "VmRSS": 7834160
+      },
+      "containers": [
+        {
+          "entries": 245672,
+          "container_bytes": 48,
+          "packed_bytes": 2456720
+        },
+        {
+          "entries": 155809,
+          "container_bytes": 48,
+          "packed_bytes": 1246472
+        }
+      ]
+    },
+    {
+      "stage": "enumeration:engine",
+      "seconds": 155.31,
+      "memory_kib": {
+        "VmHWM": 7935152,
+        "VmRSS": 7834160
+      },
+      "engine": "cpp:aebd2a9e386c236798c796cb"
+    },
+    {
+      "stage": "minimal:start",
+      "seconds": 155.31,
+      "memory_kib": {
+        "VmHWM": 7935152,
+        "VmRSS": 7834160
+      }
+    },
+    {
+      "stage": "minimal:end",
+      "seconds": 155.32,
+      "memory_kib": {
+        "VmHWM": 7935152,
+        "VmRSS": 7834164
+      },
+      "containers": [
+        {
+          "entries": 245672,
+          "container_bytes": 48,
+          "packed_bytes": 2456720
+        }
+      ]
+    },
+    {
+      "stage": "generic_filter:start",
+      "seconds": 155.32,
+      "memory_kib": {
+        "VmHWM": 7935152,
+        "VmRSS": 7834164
+      }
+    },
+    {
+      "stage": "generic_filter:end",
+      "seconds": 155.32,
+      "memory_kib": {
+        "VmHWM": 7935152,
+        "VmRSS": 7834164
+      },
+      "containers": [
+        {
+          "entries": 245672,
+          "container_bytes": 48,
+          "packed_bytes": 2456720
+        }
+      ]
+    },
+    {
+      "stage": "solver:start",
+      "seconds": 244.79,
+      "memory_kib": {
+        "VmHWM": 8432560,
+        "VmRSS": 8334532
+      },
+      "number": 2,
+      "clauses": 34305956
+    },
+    {
+      "stage": "solver:end",
+      "seconds": 264.174,
+      "memory_kib": {
+        "VmHWM": 10497392,
+        "VmRSS": 10497392
+      },
+      "number": 2
+    },
+    {
+      "stage": "run:end",
+      "seconds": 482.285,
+      "memory_kib": {
+        "VmHWM": 12298976,
+        "VmRSS": 9698560
+      },
+      "report_rows": 4096,
+      "report_sha256": "586e49c3e02454a965724d4cbe0faeae36ea8565d6c7a2fa315f820ed66d19e9",
+      "alive": {
+        "entries": 245672,
+        "container_bytes": 48,
+        "packed_bytes": 2456720
+      },
+      "empty": {
+        "entries": 155809,
+        "container_bytes": 48,
+        "packed_bytes": 1246472
+      },
+      "legacy_stages": [
+        [
+          "начало",
+          7.2,
+          0
+        ],
+        [
+          "перебор",
+          7.83,
+          245672
+        ],
+        [
+          "минимальные",
+          7.83,
+          245672
+        ],
+        [
+          "вердикты",
+          8.33,
+          4096
+        ],
+        [
+          "сжатие",
+          9.7,
+          4096
+        ]
+      ],
+      "search_solver": {
+        "deferred": true,
+        "materialized": false
+      },
+      "solver_factories": 2,
+      "phase_scoped_calls": 25,
+      "phase_max_scope": 281
+    },
+    {
+      "stage": "end",
+      "seconds": 484.308,
+      "memory_kib": {
+        "VmHWM": 12298976,
+        "VmRSS": 9692472
+      }
+    }
+  ]
+}
