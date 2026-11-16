@@ -1,0 +1,698 @@
+{
+  "version": 1,
+  "scope": "30 frozen problems; 20 local SAT probes, not a complete native coverage audit",
+  "input_sha256": {
+    "audit-memory-frozen.json": "f587608448192df17518cb9f9b385755ad678c37b5eb8a03872208ffa6466c3f",
+    "audit-putnam-frozen.json": "2f07c61409f9432656fe5892f1c13f824986620cf4b75ae1fefd9e9fdeab8e3f",
+    "audit-formalizations.json": "5ab4b3f3de57bd2d0055639f5f2e353dfac1ac54460d3490c49871d2f9131f7e"
+  },
+  "summary": {
+    "frozen_problems": 30,
+    "memory": 24,
+    "putnam": 6,
+    "probes": 20,
+    "parse": {
+      "ok": 19,
+      "unsupported": 1
+    },
+    "local_verdicts": {
+      "выводится": 13,
+      "неизвестно": 6
+    },
+    "structural": {
+      "terms_available": 15,
+      "not_finished": 4,
+      "parser_rejected": 1
+    },
+    "native_problems_checked": 0
+  },
+  "cases": [
+    {
+      "id": "M01",
+      "statement": "Если G/Z(G) циклическая, то G абелева.",
+      "translation": "encoded",
+      "probes": [
+        "M01"
+      ],
+      "measures": [
+        {
+          "id": "M01",
+          "objects": 3,
+          "premises": 1,
+          "constructions": 1,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "выводится"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Полный локальный перевод; проверка в теории grow=1. Native-конвейер отдельно не запускался.",
+      "flags": []
+    },
+    {
+      "id": "M02",
+      "statement": "Если G/Z(G) конечна, то коммутант G конечен (теорема Шура).",
+      "translation": "encoded",
+      "probes": [
+        "M02"
+      ],
+      "measures": [
+        {
+          "id": "M02",
+          "objects": 4,
+          "premises": 1,
+          "constructions": 2,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "выводится"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Полный локальный перевод; проверка в теории grow=1. Native-конвейер отдельно не запускался.",
+      "flags": []
+    },
+    {
+      "id": "M03",
+      "statement": "Подгруппа индекса 2 нормальна.",
+      "translation": "encoded",
+      "probes": [
+        "M03"
+      ],
+      "measures": [
+        {
+          "id": "M03",
+          "objects": 2,
+          "premises": 1,
+          "constructions": 0,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "выводится"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Полный локальный перевод; проверка в теории grow=1. Native-конвейер отдельно не запускался.",
+      "flags": []
+    },
+    {
+      "id": "M04",
+      "statement": "Если K характеристична в H и H нормальна в G, то K нормальна в G.",
+      "translation": "encoded",
+      "probes": [
+        "M04"
+      ],
+      "measures": [
+        {
+          "id": "M04",
+          "objects": 4,
+          "premises": 2,
+          "constructions": 1,
+          "structural_status": "not_finished"
+        }
+      ],
+      "library_rules": [
+        "неизвестно"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Полный локальный перевод; проверка в теории grow=1. Native-конвейер отдельно не запускался.",
+      "flags": [
+        "local_nonderivation_requires_native_check",
+        "universe_check_budget"
+      ]
+    },
+    {
+      "id": "M05",
+      "statement": "Если H и K нормальны в G, то HK — нормальная подгруппа G.",
+      "translation": "encoded",
+      "probes": [
+        "M05.a",
+        "M05.b"
+      ],
+      "measures": [
+        {
+          "id": "M05.a",
+          "objects": 3,
+          "premises": 2,
+          "constructions": 0,
+          "structural_status": "terms_available"
+        },
+        {
+          "id": "M05.b",
+          "objects": 4,
+          "premises": 2,
+          "constructions": 1,
+          "structural_status": "not_finished"
+        }
+      ],
+      "library_rules": [
+        "выводится",
+        "выводится"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Два запроса: перестановочность H,K даёт HK=⟨H,K⟩; затем нормальность join. Это математически обоснованный перевод, не прямой терм внутреннего произведения.",
+      "flags": [
+        "universe_check_budget"
+      ]
+    },
+    {
+      "id": "M06",
+      "statement": "У нетривиальной конечной p-группы центр нетривиален.",
+      "translation": "encoded",
+      "probes": [
+        "M06"
+      ],
+      "measures": [
+        {
+          "id": "M06",
+          "objects": 2,
+          "premises": 3,
+          "constructions": 1,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "выводится"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Полный локальный перевод; проверка в теории grow=1. Native-конвейер отдельно не запускался.",
+      "flags": []
+    },
+    {
+      "id": "M07",
+      "statement": "Если каждый нетривиальный элемент G имеет порядок 2, то G абелева.",
+      "translation": "encoded",
+      "probes": [
+        "M07"
+      ],
+      "measures": [
+        {
+          "id": "M07",
+          "objects": 1,
+          "premises": 1,
+          "constructions": 0,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "выводится"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Полный локальный перевод; проверка в теории grow=1. Native-конвейер отдельно не запускался.",
+      "flags": []
+    },
+    {
+      "id": "M08",
+      "statement": "Отображение x→x⁻¹ является гомоморфизмом тогда и только тогда, когда G абелева.",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Инверсия не является отдельным морфизмом словаря. Эквивалентность можно проверять в слое тождеств; машинный перевод полного iff в этом этапе не выполнен.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    },
+    {
+      "id": "M09",
+      "statement": "Отображение x→x² является гомоморфизмом тогда и только тогда, когда G абелева.",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Потенциальный перевод через эквивалентное тождество (xy)^2=x²y² и сокращение; полный iff генератором не проверен.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    },
+    {
+      "id": "M10",
+      "statement": "В конечной группе нечётного порядка отображение x→x² биективно.",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Нужна биективность функции возведения в квадрат как функции множеств. Нельзя заменить гомоморфностью: группа нечётного порядка может быть неабелевой.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    },
+    {
+      "id": "M11",
+      "statement": "Конечная группа с автоморфизмом порядка 2 без нетривиальных неподвижных элементов абелева.",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Прямой перевод через iso(F), idempotent(compose(F,F)), trivial(equalizer(F,id-mor(G))) использует 3 построения, сверх s≤2. Более короткая эквивалентная запись пока не проверена.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    },
+    {
+      "id": "M12",
+      "statement": "Если Aut(G) циклическая, то G абелева.",
+      "translation": "encoded",
+      "probes": [
+        "M12"
+      ],
+      "measures": [
+        {
+          "id": "M12",
+          "objects": 2,
+          "premises": 1,
+          "constructions": 1,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "выводится"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Полный локальный перевод; проверка в теории grow=1. Native-конвейер отдельно не запускался.",
+      "flags": []
+    },
+    {
+      "id": "M13",
+      "statement": "Сюръективный эндоморфизм конечной группы является изоморфизмом.",
+      "translation": "encoded",
+      "probes": [
+        "M13"
+      ],
+      "measures": [
+        {
+          "id": "M13",
+          "objects": 2,
+          "premises": 2,
+          "constructions": 0,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "выводится"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Полный локальный перевод; проверка в теории grow=1. Native-конвейер отдельно не запускался.",
+      "flags": []
+    },
+    {
+      "id": "M14",
+      "statement": "Конечно порождённая резидуально конечная группа хопфова.",
+      "translation": "encoded",
+      "probes": [
+        "M14"
+      ],
+      "measures": [
+        {
+          "id": "M14",
+          "objects": 1,
+          "premises": 2,
+          "constructions": 0,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "выводится"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Полный локальный перевод; проверка в теории grow=1. Native-конвейер отдельно не запускался.",
+      "flags": []
+    },
+    {
+      "id": "M15",
+      "statement": "Конечно порождённая абелева группа кохопфова тогда и только тогда, когда она конечна.",
+      "translation": "encoded",
+      "probes": [
+        "M15.a",
+        "M15.b"
+      ],
+      "measures": [
+        {
+          "id": "M15.a",
+          "objects": 1,
+          "premises": 3,
+          "constructions": 0,
+          "structural_status": "terms_available"
+        },
+        {
+          "id": "M15.b",
+          "objects": 1,
+          "premises": 3,
+          "constructions": 0,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "выводится",
+        "неизвестно"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Проверены оба направления при fin-gen/abelian: прямое выведено, обратное не выведено локальной теорией. Это не доказательство пропуска native.",
+      "flags": [
+        "local_nonderivation_requires_native_check"
+      ]
+    },
+    {
+      "id": "M16",
+      "statement": "Всякая подгруппа свободной группы свободна (Нильсен–Шрайер).",
+      "translation": "encoded",
+      "probes": [
+        "M16"
+      ],
+      "measures": [
+        {
+          "id": "M16",
+          "objects": 2,
+          "premises": 1,
+          "constructions": 0,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "выводится"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Полный локальный перевод; проверка в теории grow=1. Native-конвейер отдельно не запускался.",
+      "flags": []
+    },
+    {
+      "id": "M17",
+      "statement": "Центр неабелевой свободной группы тривиален.",
+      "translation": "encoded",
+      "probes": [
+        "M17"
+      ],
+      "measures": [
+        {
+          "id": "M17",
+          "objects": 1,
+          "premises": 2,
+          "constructions": 0,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "выводится"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Полный локальный перевод; проверка в теории grow=1. Native-конвейер отдельно не запускался.",
+      "flags": []
+    },
+    {
+      "id": "M18",
+      "statement": "Подгруппа конечного индекса d в свободной группе конечного ранга r свободна ранга 1+d(r−1).",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Прямая формула rank(N)=1+index(G,N)*(rank(G)-1) содержит 6 построений, сверх s≤2; подсчёт символической записи, не результат E.run.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    },
+    {
+      "id": "M19",
+      "statement": "Элементы конечного порядка конечно порождённой нильпотентной группы образуют конечную характеристическую подгруппу.",
+      "translation": "partial",
+      "probes": [
+        "M19.partial"
+      ],
+      "measures": [
+        {
+          "id": "M19.partial",
+          "objects": 2,
+          "premises": 2,
+          "constructions": 1,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "неизвестно"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "torsion-set(G) имеет сорт Grp.subset, для него доступны только subgroup/set-whole; torsion(G) требует abelian(G). Проба subgroup покрывает лишь часть задачи. Конечность и характеристичность торсионной подгруппы не переведены.",
+      "flags": [
+        "incomplete_translation",
+        "local_nonderivation_requires_native_check"
+      ]
+    },
+    {
+      "id": "M20",
+      "statement": "Полицyclicческая группа с длиной Хирша 0 конечна.",
+      "translation": "parser_rejected",
+      "probes": [
+        "M20"
+      ],
+      "measures": [
+        {
+          "id": "M20",
+          "objects": null,
+          "premises": null,
+          "constructions": null,
+          "structural_status": null
+        }
+      ],
+      "library_rules": [
+        "unsupported"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Подтверждённая дыра прямого языка: конструкции hirsch нет. Проба parser отвергнута; старый архив задач Димы также явно отмечает отсутствие длины Хирша.",
+      "flags": [
+        "translation_gap"
+      ]
+    },
+    {
+      "id": "M21",
+      "statement": "У делимой группы нет нетривиальных конечных гомоморфных образов.",
+      "translation": "encoded",
+      "probes": [
+        "M21"
+      ],
+      "measures": [
+        {
+          "id": "M21",
+          "objects": 1,
+          "premises": 1,
+          "constructions": 0,
+          "structural_status": "terms_available"
+        }
+      ],
+      "library_rules": [
+        "неизвестно"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "divisible(G)⇒no-finite-quotients(G) — точный полный перевод; локально не выводится. Требуется диагностика правила/заземления в native.",
+      "flags": [
+        "local_nonderivation_requires_native_check"
+      ]
+    },
+    {
+      "id": "M22",
+      "statement": "Действие на левых смежных классах H даёт вложение G/core_G(H) в Sym(G/H).",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "G/H — множество смежных классов. sym принимает Grp.obj, а coset-act возвращает Grp.gset. Прямой полный перевод не готов; подменять H нормальной нельзя.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    },
+    {
+      "id": "M23",
+      "statement": "Для подгрупп H,K конечного индекса [G:H∩K] ≤ [G:H][G:K].",
+      "translation": "partial",
+      "probes": [
+        "M23.partial"
+      ],
+      "measures": [
+        {
+          "id": "M23.partial",
+          "objects": 4,
+          "premises": 2,
+          "constructions": 1,
+          "structural_status": "not_finished"
+        }
+      ],
+      "library_rules": [
+        "неизвестно"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Локально проверялась только конечность индекса пересечения, а не требуемая численная оценка. Прямая численная оценка содержит 5 построений: три index, meet, num-mul; альтернативная запись через prod-card может иметь другую меру и ещё не проверена.",
+      "flags": [
+        "incomplete_translation",
+        "local_nonderivation_requires_native_check",
+        "universe_check_budget"
+      ]
+    },
+    {
+      "id": "M24",
+      "statement": "Найти неизоморфные группы с изоморфными группами автоморфизмов; пример C3,C4.",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Ручной свидетель: C3≄C4, Aut(C3)≅Aut(C4)≅C2. Существование математически подтверждено, но поиск этой задачи библиотекой не запускался.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    },
+    {
+      "id": "P01",
+      "year": 2007,
+      "number": "A5",
+      "statement": "Если n — число элементов порядка простого p в конечной G, то n=0 или p делит n+1.",
+      "source": "https://kskedlaya.org/putnam-archive/2007.pdf",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Нужна мощность множества элементов порядка p; точный перевод в численный/элементный слой ещё не выполнен. num-sylow считает подгруппы Силова и не заменяет это число.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    },
+    {
+      "id": "P02",
+      "year": 2008,
+      "number": "A6",
+      "statement": "Доказать существование абсолютной c>0: любая нетривиальная конечная G допускает последовательность длины ≤c log|G|, подпроизведения которой дают все элементы G.",
+      "source": "https://kskedlaya.org/putnam-archive/2008.pdf",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Нужны последовательности произвольной длины, упорядоченные подпроизведения и логарифмическая оценка. Точный перевод не выполнен; конечные слова слоя E сами по себе этого не покрывают.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    },
+    {
+      "id": "P03",
+      "year": 2016,
+      "number": "A5",
+      "statement": "Конечная G порождена g,h, ord(g) нечётен. Каждый элемент записывается как g^m1 h^n1 … g^mr h^nr, r≤|G|, все показатели ±1.",
+      "source": "https://kskedlaya.org/putnam-archive/2016.pdf",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Нужны чередующиеся слова переменной длины с ограничением r≤|G|. Наличие two-generated не выражает требуемую длину/форму слова. Точный перевод не выполнен.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    },
+    {
+      "id": "P04",
+      "year": 2018,
+      "number": "A4",
+      "statement": "Для взаимно простых m,n>0 положим a_k=⌊mk/n⌋−⌊m(k−1)/n⌋. Из ∏(g h^a_k)=e следует gh=hg.",
+      "source": "https://kskedlaya.org/putnam-archive/2018.pdf",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Нужны floor и переменное произведение слов. Полный перевод с параметрами m,n не выполнен.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    },
+    {
+      "id": "P05",
+      "year": 1969,
+      "number": "B2",
+      "statement": "Конечная группа не является объединением двух собственных подгрупп. Проверить, сохраняется ли это для трёх.",
+      "source": "https://www.math.toronto.edu/barbeau/putnamgp.pdf",
+      "translation": "partial",
+      "probes": [
+        "P05.a"
+      ],
+      "measures": [
+        {
+          "id": "P05.a",
+          "objects": 4,
+          "premises": 3,
+          "constructions": 1,
+          "structural_status": "not_finished"
+        }
+      ],
+      "library_rules": [
+        "неизвестно"
+      ],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Проба относится только к двум подгруппам и локально не выведена. Для трёх ручной контрпример: C2×C2 есть объединение трёх собственных подгрупп порядка2. Native/библиотечный поиск не запускался.",
+      "flags": [
+        "incomplete_translation",
+        "local_nonderivation_requires_native_check",
+        "universe_check_budget"
+      ]
+    },
+    {
+      "id": "P06",
+      "year": 1977,
+      "number": "B6",
+      "statement": "H≤G конечна порядка h; для каждого x∈H выполнено (xa)^3=e. Множество всех положительных произведений x1 a … xn a конечно и содержит ≤3h² элементов.",
+      "source": "https://www.math.toronto.edu/barbeau/putnamgp.pdf",
+      "translation": "not_encoded",
+      "probes": [],
+      "measures": [],
+      "library_rules": [],
+      "example_library": "not_searched",
+      "native_pipeline": "not_run",
+      "note": "Нужно условие ∀x∈H:(xa)^3=e и множество всех положительных слов H a, затем оценка ≤3h². Полный перевод не выполнен; фиксированная презентация не заменяет семейство.",
+      "flags": [
+        "incomplete_translation"
+      ]
+    }
+  ],
+  "limitations": [
+    "Source statements frozen before language audit; this is not a random sample.",
+    "Local grow=1 proof is not a native E.run coverage certificate.",
+    "Unknown does not mean false; no SAT model is counted as a group example.",
+    "Partial and unencoded translations do not count as closed problems.",
+    "Universe checks limited to20seconds per probe; not_finished is retained.",
+    "M06 initially lost finite(G) in its proposed translation; independent reviewer caught it, corrected before the final run. Initial exploratory helper stopped during M03; partial exploratory output retained outside published metrics.",
+    "Exploratory helper interrupted during universe(M03); its total CPU/wall cost was not measured, not recorded as zero."
+  ]
+}
