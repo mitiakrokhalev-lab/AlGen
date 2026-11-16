@@ -72,6 +72,119 @@ def classify(form, cols):
     return kind, pairs, n_multi, n_allt
 
 
+def _atom(form, c):
+    a = form.atoms[c // 2]
+    return form.lits(c)[0][0] if a[0] == "pair" else form.lit(c)[0]
+
+
+def _row_object(form, r):
+    """Объект строки: ключ записанной группы библиотеки или «×» для построенного произведения."""
+    if hasattr(form, "row_object"):
+        return form.row_object(r)
+    envs = getattr(form, "envs", None)
+    if envs is None:
+        return "?"
+    for im in envs[r].values():
+        if im and im[0] == "obj":
+            return "×" if form.lib.obj[im[1]].get("синтез") else im[1]
+    return "?"
+
+
+def _root(form, r, c):
+    """Корень знания: (шаблон атома, объект строки). У построенных произведений объект «×» —
+    одна задача-правило на шаблон для всех произведений."""
+    from algen.enumerate import atom_name
+    return (atom_name(_atom(form, c)), _row_object(form, r))
+
+
+def _cells_b(form, cols, limit=CAP):
+    """Клетки неизвестных литералов в строках без ложных литералов с ⩾ 2 неизвестными (вид B)."""
+    _, P, valid = form._bits(form.m)
+    cols = list(cols) + list(form.fixed)
+    ok = valid.copy()
+    for c in cols:
+        ok &= ~P[c ^ 1]
+    one, two = np.zeros_like(valid), np.zeros_like(valid)
+    for c in cols:
+        u = ~P[c] & ~P[c ^ 1]
+        two |= one & u
+        one |= u
+    multi = ok & two
+    cells = []
+    for c in cols:
+        rows = multi & ~P[c] & ~P[c ^ 1]
+        if rows.any():
+            for r in form._rows(form.m, rows)[:limit]:
+                cells.append((int(r), int(c)))
+    return cells
+
+
+def _hitting(sets):
+    """Жадное покрытие (ленивая куча): сколько корней, чтобы у каждого условия был хотя бы
+    один выбранный корень."""
+    import heapq
+    by = {}
+    for j, x in enumerate(sets):
+        for v in x:
+            by.setdefault(v, set()).add(j)
+    alive = {j for j, x in enumerate(sets) if x}
+    heap = [(-len(js), n, v) for n, (v, js) in enumerate(by.items())]
+    heapq.heapify(heap)
+    picked = 0
+    while alive and heap:
+        neg, n, v = heapq.heappop(heap)
+        cur = len(by[v] & alive)
+        if cur == 0:
+            continue
+        if cur < -neg:
+            heapq.heappush(heap, (-cur, n, v))
+            continue
+        alive -= by[v]
+        picked += 1
+    return picked
+
+
+def knowledge(form, report):
+    """Генератор от знаний против прежнего «по вопросам» на тех же условиях отчёта.
+
+    Было: неизвестные условия, оставленные после сжатия, — вопросы человеку.
+    Стало: (1) условия вида C (данных хватает, верно на всех примерах) — вопросы человеку;
+    (2) условия A и B ждут значений: их заменяют корни знаний (шаблон атома × записанная
+    группа; у произведений — шаблон × «×», задача-правило), очередь машине/агентам."""
+    out = {}
+    for label, rows in (("все неизвестные", [r for r in report if r["вердикт"] == "неизвестно"]),
+                        ("оставленные после сжатия",
+                         [r for r in report if r["вердикт"] == "неизвестно" and not r.get("свёрнута")])):
+        kinds, roots, sets, t0, stopped = Counter(), Counter(), [], time.time(), None
+        for i, r in enumerate(rows, 1):
+            if time.time() - t0 > SECONDS:
+                stopped = i - 1
+                break
+            cols = r.get("_cols") or []
+            kind, pairs, _n_multi, _n_allt = classify(form, cols)
+            kinds[kind] += 1
+            if kind == "C":
+                continue
+            cells = pairs[:CAP] if kind == "A" else _cells_b(form, cols)
+            rs = {_root(form, x, c) for x, c in cells}
+            sets.append(rs)
+            roots.update(rs)
+        real = sum(1 for (_p, o) in roots if o != "×")
+        out[label] = {
+            "условий": len(rows), "разобрано": stopped if stopped is not None else len(rows),
+            "по видам": dict(kinds),
+            "вопросов человеку (C)": kinds.get("C", 0),
+            "ждут знаний (A + B)": kinds.get("A", 0) + kinds.get("B", 0),
+            "корней знаний всего": len(roots),
+            "из них значений записанных групп": real,
+            "из них правил для произведений (шаблон × «×»)": len(roots) - real,
+            "шаблонов атомов": len({p for p, _o in roots}),
+            "корней, чтобы затронуть все условия A/B (жадно)": _hitting(sets),
+            "топ корней": [[f"{p} у {o}", n] for (p, o), n in roots.most_common(30)],
+            "_корни": roots}
+    return out
+
+
 def _name(form, r, c):
     a = form.atoms[c // 2]
     atom = form.lits(c)[0][0] if a[0] == "pair" else form.lit(c)[0]
@@ -146,15 +259,24 @@ def install():
 
     def stats(form, mins, report, total):
         res = original(form, mins, report, total)
-        vt = value_tasks(form, report)
-        full = {k: v.pop("_значения") for k, v in vt.items()}
-        res["задачи-значения"] = vt
-        res["задачи-значения"]["топ значений"] = Counter(full["все неизвестные"]).most_common(40)
+        kn = knowledge(form, report)
+        full_roots = {k: v.pop("_корни") for k, v in kn.items()}
+        res["знания"] = kn
+        full = {}
+        if os.environ.get("VALUE_TASKS_NAMES") == "1":  # прежний подсчёт имён значений (pilot-11)
+            vt = value_tasks(form, report)
+            full = {k: v.pop("_значения") for k, v in vt.items()}
+            res["задачи-значения"] = vt
+            res["задачи-значения"]["топ значений"] = Counter(full["все неизвестные"]).most_common(40)
         out, sid = _arg("--выход"), _arg("--схемы")
         if out and sid and "," not in sid:
             Path(out).mkdir(parents=True, exist_ok=True)
-            with gzip.open(Path(out) / f"values-{sid}.json.gz", "wt", encoding="utf-8") as f:
-                json.dump({k: dict(v) for k, v in full.items()}, f, ensure_ascii=False)
+            if full:
+                with gzip.open(Path(out) / f"values-{sid}.json.gz", "wt", encoding="utf-8") as f:
+                    json.dump({k: dict(v) for k, v in full.items()}, f, ensure_ascii=False)
+            with gzip.open(Path(out) / f"roots-{sid}.json.gz", "wt", encoding="utf-8") as f:
+                json.dump({k: [[p, o, n] for (p, o), n in v.items()] for k, v in full_roots.items()},
+                          f, ensure_ascii=False)
         return res
 
     E._sample_stats = stats

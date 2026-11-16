@@ -5,7 +5,7 @@ import unittest
 import numpy as np
 
 from algen.enumerate import Form
-from tools.value_tasks import classify, value_tasks
+from tools.value_tasks import _hitting, classify, knowledge, value_tasks
 
 
 def fake(rows):
@@ -78,6 +78,30 @@ class ValueTasksTest(unittest.TestCase):
             self.assertEqual(allu["покрытие условий A первыми значениями"]["100 %"], 1)
         finally:
             V.KEEP = keep
+
+    def test_knowledge_roots_and_comparison(self):
+        # строки 0, 1 — записанные группы g0, g1; строка 2 — построенное произведение («×»)
+        f = fake([(True, None, None), (True, None, None), (None, True, False), (False, False, False)])
+        f.row_object = lambda r: {0: "g0", 1: "g1", 2: "×", 3: "g3"}[r]
+        report = [
+            {"вердикт": "неизвестно", "_cols": [0, 5]},                     # A: c у g0, c у g1, a у ×
+            {"вердикт": "неизвестно", "_cols": [2, 1], "свёрнута": True},   # A: a у ×
+            {"вердикт": "неизвестно", "_cols": [4, 1]},                     # C
+        ]
+        kn = knowledge(f, report)["все неизвестные"]
+        self.assertEqual(kn["по видам"], {"A": 2, "C": 1})
+        self.assertEqual(kn["вопросов человеку (C)"], 1)
+        self.assertEqual(kn["ждут знаний (A + B)"], 2)
+        self.assertEqual(kn["корней знаний всего"], 3)
+        self.assertEqual(kn["из них значений записанных групп"], 2)
+        self.assertEqual(kn["из них правил для произведений (шаблон × «×»)"], 1)
+        self.assertEqual(kn["корней, чтобы затронуть все условия A/B (жадно)"], 1)  # «a у ×» в обоих
+        kept = knowledge(f, report)["оставленные после сжатия"]
+        self.assertEqual((kept["условий"], kept["вопросов человеку (C)"], kept["ждут знаний (A + B)"]), (2, 1, 1))
+
+    def test_hitting(self):
+        self.assertEqual(_hitting([{1, 2}, {2, 3}, {4}]), 2)
+        self.assertEqual(_hitting([set(), {1}]), 1)
 
 
 if __name__ == "__main__":
