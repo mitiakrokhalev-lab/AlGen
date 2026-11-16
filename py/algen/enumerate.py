@@ -1959,8 +1959,8 @@ def run(max_prem, lib=None, vocab=None, form=None):
         questions(form, [r for r in report if not r.get("свёрнута")])
     if KNOWLEDGE:
         from algen import knowledge
-        _mem("знания", len(report))
         form.knowledge = knowledge.annotate(form, report)
+        _mem("знания", len(report))  # после разметки: в «память по этапам» — её цена
     if SAMPLE and not CENSUS:
         form.census = _sample_stats(form, mins, report, sample_total)
     for r in report:

@@ -33,8 +33,8 @@ def scalar_roots(form, kn, cols):
         missing = [c for c in lits if not form.m[r, c]]
         (single if len(missing) == 1 else multi if len(missing) > 1 else []).append((r, missing))
     cells = single if single else multi
-    return {(kn.pattern[c // 2], kn._object(r, v)) for r, missing in cells for c in missing
-            for v in kn.avars[c // 2]} if kn.avars else set()
+    return {(kn.pattern[c // 2], ", ".join(kn._object(r, v) for v in kn.avars[c // 2]) or "—")
+            for r, missing in cells for c in missing}
 
 
 def var_form(rows, objects, synth=()):
@@ -158,15 +158,64 @@ class AnnotateTest(unittest.TestCase):
         self.assertEqual((allu["корней знаний всего"], allu["из них значений записанных групп"],
                           allu["из них правил для произведений (шаблон × «×»)"]), (3, 2, 1))
         self.assertEqual(allu["корней, чтобы затронуть все условия A/B (жадно)"], 1)  # «a(G) у ×» — в обоих
-        self.assertEqual((kept["условий"], kept["вопросов человеку (C)"], kept["ждут знаний (A + B)"]), (3, 1, 1))
+        self.assertEqual((kept["запретов"], kept["строк"], kept["вопросов человеку (C)"], kept["ждут знаний (A + B)"]),
+                         (3, 3, 1, 1))
         self.assertEqual(s["вопросы человеку"], [{"№": 3, "запрет": "c(G) & ¬a(G)", "примеров": 0}])
-        self.assertEqual(s["очередь знаний"][0]["условий"], 1)
+        self.assertEqual(s["очередь знаний"][0]["запретов"], 1)
         self.assertEqual({q["что"] for q in s["очередь знаний"]},
                          {"значение записанной группы", "правило для произведений"})
         self.assertEqual(s["ошибки разметки"], {"ОШИБКА: противоречивый запрет": 1})
         self.assertEqual(sorted(map(tuple, kn["корни"]["все неизвестные"])),
                          [("a(G)", "×", 2), ("c(G)", "g0", 1), ("c(G)", "g1", 1)])
         self.assertTrue(K.text(s)[0].startswith("== знания:"))
+
+
+class ReviewCasesTest(unittest.TestCase):
+    """Случаи из ревью 16.11: счёт по запретам, полные образы, много переменных, повторы."""
+
+    def test_contrapositives_count_once(self):
+        form = var_form([(True, None, None, None), (None, True, False, None)], ["g0", "g1"])
+        # одна и та же пара литералов в двух строках (контрапозиции, один №) и ещё одна строка C
+        report = [{"вердикт": "неизвестно", "_cols": [0, 5], "№": 7, "запрет": ["a(G)", "¬c(G)"]},
+                  {"вердикт": "неизвестно", "_cols": [5, 0], "№": 7, "запрет": ["a(G)", "¬c(G)"]},
+                  {"вердикт": "неизвестно", "_cols": [4, 1], "№": 8, "запрет": ["c(G)", "¬a(G)"]},
+                  {"вердикт": "неизвестно", "_cols": [1, 4], "№": 8, "запрет": ["c(G)", "¬a(G)"]}]
+        s = K.annotate(form, report)["сводка"]
+        k = s["оставленные после сжатия"]
+        self.assertEqual((k["строк"], k["запретов"], k["вопросов человеку (C)"], k["ждут знаний (A + B)"]), (4, 2, 1, 1))
+        self.assertEqual([q["№"] for q in s["вопросы человеку"]], [8])
+        self.assertEqual(s["очередь знаний"][0]["запретов"], 1)  # корень одного запрета, не двух строк
+        self.assertEqual(report[0]["корни"], report[1]["корни"])
+
+    def test_non_group_images_keep_full_identity(self):
+        G = Var("G")
+        f = fake([(None, True), (None, True), (None, True)], [("p", "a", G), ("p", "b", G)])
+        f.lib = SimpleNamespace(obj={"6:1": {}, "×p": {"синтез": True}})
+        images = [("elt", "6:1", 1), ("elt", "6:1", 2), ("elt", "×p", 5)]
+        f._image = lambda r, t: images[r]
+        kn = K.Knowledge(f)
+        kind, n1, _n2, _n0, ids = kn.classify([0, 2])
+        objs = sorted(kn.root_name(x)[1] for x in ids)
+        self.assertEqual((kind, n1), ("A", 3))
+        self.assertEqual(objs, sorted([repr(images[0]), repr(images[1]), "×"]))
+
+    def test_many_variables_and_objects_do_not_overflow(self):
+        vs = [Var(x) for x in "ABCD"]
+        nrows, natoms = 4000, 400
+        f = fake([[None] * natoms for _ in range(nrows)],
+                 [("r", "rel", vs[i % 4], vs[(i + 1) % 4]) if i % 2 else ("p", f"p{i}", vs[i % 4])
+                  for i in range(natoms)])
+        f._image = lambda r, t: None  # «#r»: у каждой строки и переменной свой объект
+        kn = K.Knowledge(f)
+        kind, _n1, n2, _n0, ids = kn.classify([2 * (natoms - 1), 2 * (natoms - 3)])
+        self.assertEqual((kind, n2), ("B", nrows))
+        self.assertTrue(len(ids) and int(ids.max()) < 2 ** 62)
+        atoms = {kn.root_name(x)[0] for x in ids}
+        self.assertEqual(atoms, {kn.pattern[natoms - 1], kn.pattern[natoms - 3]})
+        self.assertIn("#0, #0", {kn.root_name(x)[1] for x in ids})
+
+    def test_hitting_ignores_repeats_inside_a_set(self):
+        self.assertEqual(K.hitting([[1, 1], [2]]), 2)
 
 
 class EndToEndTest(unittest.TestCase):
@@ -179,21 +228,26 @@ class EndToEndTest(unittest.TestCase):
         cls.v = Vocab.section("grp")
         cls.lib = Library()
 
-    def run_once(self, flag):
+    def run_once(self, flag, compress=False):
         with patch.dict("os.environ", ALGEN_EAGER_SEARCH="1"):
             f = E.SchemeForm(self.lib, self.v, "∀ G : Grp", ("center(G)",), with_rows=False)
         self.addCleanup(f.sc.s.delete)
         self.addCleanup(f.search.s.delete)
         f.search.objects = ["1:1", "2:1", "6:1", "8:3", "Z", "Q", "Dinf", "F2", "BS23"]
         f.fill_rows()
-        with patch.object(E, "KNOWLEDGE", flag):
+        env = {"ALGEN_COMPRESS": "1"} if compress else {}
+        with patch.object(E, "KNOWLEDGE", flag), patch.dict("os.environ", env):
+            if not compress:
+                import os
+                os.environ.pop("ALGEN_COMPRESS", None)
             _, alive, empty, report = E.run(1, self.lib, self.v, f)
             summary = E.render(f, alive, empty, report, out=io.StringIO(), err=io.StringIO())
+        f.mem = None  # этап «знания» в «память по этапам» — только с флагом
         return f, report, summary
 
-    def test_flag_only_adds_fields(self):
-        _, report0, summary0 = self.run_once(False)
-        f, report1, summary1 = self.run_once(True)
+    def check(self, compress):
+        _, report0, summary0 = self.run_once(False, compress)
+        f, report1, summary1 = self.run_once(True, compress)
         unknown = [r for r in report1 if r["вердикт"] == "неизвестно"]
         self.assertTrue(unknown, "в схеме нет неизвестных — тест ничего не проверяет")
         self.assertTrue(all(r["вид"] in ("A", "B", "C") for r in unknown))
@@ -201,12 +255,23 @@ class EndToEndTest(unittest.TestCase):
         self.assertIn("знания", summary1)
         self.assertNotIn("знания", summary0)
         kept = summary1["знания"]["оставленные после сжатия"]
-        self.assertEqual(kept["условий"], len([r for r in unknown if not r.get("свёрнута")]))
+        kept_rows = [r for r in unknown if not r.get("свёрнута")]
+        self.assertEqual(kept["строк"], len(kept_rows))
+        units = {("№", r["№"]) if "№" in r else tuple(r["класс"]) for r in kept_rows}
+        self.assertEqual(kept["запретов"], len(units))
+        if compress:  # оставленные запреты — те же, что «оставленные вопросы» сжатия
+            self.assertEqual(kept["запретов"], len(summary1["оставленные вопросы"]))
         stripped = [{k: v for k, v in r.items() if k not in ("вид", "строк", "корней", "корни")} for r in report1]
         self.assertEqual(json.dumps(stripped, ensure_ascii=False, sort_keys=True),
                          json.dumps(report0, ensure_ascii=False, sort_keys=True))
         self.assertEqual(json.dumps({k: v for k, v in summary1.items() if k != "знания"}, ensure_ascii=False,
                                     sort_keys=True), json.dumps(summary0, ensure_ascii=False, sort_keys=True))
+
+    def test_flag_only_adds_fields(self):
+        self.check(False)
+
+    def test_flag_only_adds_fields_with_compression(self):
+        self.check(True)
 
 
 if __name__ == "__main__":
