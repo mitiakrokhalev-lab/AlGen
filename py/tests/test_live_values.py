@@ -37,6 +37,35 @@ class LiveValuesTest(unittest.TestCase):
                 ctx = arc.db.execute("SELECT id FROM contexts").fetchone()[0]
                 self.assertEqual(arc.withdraw(ctx, "g0", src)["states"], {"open": 2})
 
+    def test_row_facts_dump_and_packets_from_new_values(self):
+        from types import SimpleNamespace
+        import numpy as np
+        from algen import table as T
+        from algen.logic import Var
+        from tools.live_values import packets_from_rows
+        G = Var("G")
+        atoms = [("p", x, G) for x in "abc"]
+
+        def form(rows):
+            m = np.zeros((len(rows), 6), dtype=bool)
+            for r, row in enumerate(rows):
+                for i, v in enumerate(row):
+                    if v is not None:
+                        m[r, 2 * i + (0 if v else 1)] = True
+            return SimpleNamespace(atoms=atoms, m=m, envs=[{G: ("obj", f"g{r}")} for r in range(len(rows))],
+                                   where=lambda r: f"G = g{r}")
+        with tempfile.TemporaryDirectory() as d:
+            old, new = Path(d) / "old.rows.jsonl.gz", Path(d) / "new.rows.jsonl.gz"
+            T._write_row_facts(form([(True, None, None), (False, True, None)]), old, "fp0")
+            T._write_row_facts(form([(True, None, False), (False, True, None)]), new, "fp1")
+            packets, added, conflicts = packets_from_rows(old, new, "тест")
+            self.assertEqual((len(packets), added, conflicts), (1, 1, []))
+            self.assertEqual(packets[0]["facts"], {"a(G)": True, "c(G)": False})
+            # значение «ложно» вместо «верно» — расхождение, пакета нет
+            T._write_row_facts(form([(False, None, False), (False, True, None)]), new, "fp2")
+            packets, added, conflicts = packets_from_rows(old, new, "тест")
+            self.assertEqual((len(packets), len(conflicts)), (0, 1))
+
 
 if __name__ == "__main__":
     unittest.main()
