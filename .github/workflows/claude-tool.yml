@@ -1,0 +1,68 @@
+name: claude tool
+
+# Инструмент на готовых таблицах прошлой сборки: пуш в claude-tool-*; в .github/claude-tool.json —
+# {"source_run": номер сборки, "module": "tools.…", "args": "…"}. Выход (каталог ../tool-out) —
+# артефакт и ветка results-<ветка> (файлы > 90 МБ — только в артефакте).
+
+on:
+  push:
+    branches: ["claude-tool-*"]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  tool:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    env:
+      ALGEN_SIZE: "2"
+      ALGEN_FAST: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - id: c
+        run: |
+          python3 -B - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          p = json.load(open('.github/claude-tool.json'))
+          assert type(p['source_run']) is int and p['module'].startswith('tools.'), p
+          print('run=%d' % p['source_run'])
+          print('module=' + p['module'])
+          print('args=' + p.get('args', ''))
+          PY
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with: {name: skel, path: native, run-id: "${{ steps.c.outputs.run }}", github-token: "${{ github.token }}"}
+      - uses: actions/download-artifact@v4
+        with: {name: tabs, path: native-tabs, run-id: "${{ steps.c.outputs.run }}", github-token: "${{ github.token }}"}
+      - name: Инструмент
+        working-directory: py
+        env:
+          MODULE: ${{ steps.c.outputs.module }}
+          ARGS: ${{ steps.c.outputs.args }}
+          ALGEN_SKEL: ${{ github.workspace }}/native/skel
+        run: |
+          mkdir -p ../tool-out
+          mv ../native/кэш ../кэш || true
+          set +e
+          /usr/bin/time -v python3 -B -m "$MODULE" $ARGS 2> ../tool-out/time.txt | tee ../tool-out/stdout.txt
+          echo "exit=$?" | tee ../tool-out/exit.txt
+          tail -25 ../tool-out/time.txt
+          exit 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: tool-out, path: tool-out/, retention-days: 90}
+      - name: В ветку results-<ветка>
+        run: |
+          find tool-out -type f -size +90M -print -delete
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e tool-out
+          git add tool-out
+          git commit -qm "Инструмент ${GITHUB_REF_NAME}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"

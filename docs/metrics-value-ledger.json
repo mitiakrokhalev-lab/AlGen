@@ -1,0 +1,1357 @@
+{
+  "version": 1,
+  "date_moscow": "2026-11-15",
+  "pull_request": 21,
+  "code_commit": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+  "snapshot_core_commit": "e1f07f9d3746518ef59b5467f7772eb613e771eb",
+  "scope": "durable classifications for one frozen minimal domain; not a fresh report, mathematical source propagation or future frontier",
+  "summary": {
+    "full_stored_domain": 1908,
+    "rows": 30953,
+    "literal_columns": 562,
+    "original_kind_counts": {
+      "C": 1908
+    },
+    "hot_single_conditions_after_diagnostic_withholding": 325,
+    "hide_affected_conditions": 1908,
+    "restore_affected_conditions": 1908,
+    "real_selectivity_gain_demonstrated": false,
+    "seed_seconds": 2.1802055859999996,
+    "hide_seconds": 0.22933586599998534,
+    "restore_seconds": 0.23449796600004902,
+    "main_database_bytes": 20856832,
+    "main_database_mib": 19.890625,
+    "child_wall_seconds": 190.552,
+    "child_cpu_seconds": 187.68867999999998,
+    "child_peak_rss_kib": 8642764,
+    "child_peak_rss_gib": 8.242382049560547,
+    "full_report_speedup_claimed": false,
+    "overall_output_reduction_claimed": false,
+    "raw_database_rehashed_independently": false,
+    "current_support_computed": false,
+    "source_propagation_complete": false,
+    "candidate_frontier_complete": false,
+    "proof_pending": 1908,
+    "production_E_run_integrated": false
+  },
+  "ci": {
+    "run": 43660610487,
+    "job": 132648921740,
+    "commit": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+    "status": "completed",
+    "conclusion": "success",
+    "tests": 270,
+    "seconds": 2812.638,
+    "result": "OK",
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "checkout_commit": "952e83e6a66ade47adafc95f0525f676021c48c8",
+    "checkout_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+    "code_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+    "checkout_tree_equals_code_tree": true,
+    "actual_checkout_observed_in_completed_log": true,
+    "independently_reviewed": true,
+    "cpu_seconds": null,
+    "peak_rss_kib": null,
+    "job_wall_seconds": 2829.0,
+    "unittest_step_wall_seconds": 2818.0
+  },
+  "ci_attempts": [
+    {
+      "run": 43658649943,
+      "job": 132642783652,
+      "commit": "e1f07f9d3746518ef59b5467f7772eb613e771eb",
+      "result": "CANCELLED",
+      "started_at": "2026-11-15T00:32:11Z",
+      "completed_at": "2026-11-15T00:55:58Z",
+      "job_wall_seconds": 1427.0,
+      "full_suite_complete": false,
+      "tests": null,
+      "suite_seconds": null,
+      "cpu_seconds": null,
+      "peak_rss_kib": null,
+      "reason": "workflow concurrency after reviewed noncontiguous-projection fix",
+      "checkout_commit": "851ebba77b7c2800516d05a7350a8b1d260e51ac"
+    },
+    {
+      "run": 43660610487,
+      "job": 132648921740,
+      "commit": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+      "status": "completed",
+      "conclusion": "success",
+      "tests": 270,
+      "seconds": 2812.638,
+      "result": "OK",
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "checkout_commit": "952e83e6a66ade47adafc95f0525f676021c48c8",
+      "checkout_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+      "code_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+      "checkout_tree_equals_code_tree": true,
+      "actual_checkout_observed_in_completed_log": true,
+      "independently_reviewed": true,
+      "cpu_seconds": null,
+      "peak_rss_kib": null,
+      "job_wall_seconds": 2829.0,
+      "unittest_step_wall_seconds": 2818.0
+    }
+  ],
+  "controls": [
+    {
+      "run": 43658715698,
+      "job": 132643018923,
+      "code_commit": "117f4ad82e3e3d774214aa077d867a6a2579a082",
+      "source_table_run": 43434101930,
+      "scheme": "G-14-217-767-769-770-771",
+      "expected_minimals": 1908,
+      "workflow_conclusion": "success",
+      "experiment_complete": false,
+      "measurement": {
+        "scheme": "G-14-217-767-769-770-771",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 134.22,
+        "cpu_seconds": 130.384275,
+        "peak_rss_kib": 8644036,
+        "sampled_rss_kib": 8644336,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 14.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "legacy_phase_scope": false,
+        "scheme_status": "ошибка",
+        "complete": false,
+        "scope": "full small frozen-domain value ledger control; no SAT",
+        "ledger_probe_error": "[Errno 2] No such file or directory: '/home/runner/work/AlGen/AlGen/profiles/ledger-G14217/ledger-probe.json'",
+        "ledger_expected_minimals": 1908,
+        "ledger_probe_valid": false,
+        "ledger_probe": null,
+        "requested_compact_fact_sat": true,
+        "requested_state_save": false,
+        "actual_compact_fact_sat": true,
+        "actual_state_save": false,
+        "mode_verified": true,
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": false,
+        "cprofile": false,
+        "actual_ledger_sources": {
+          "algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+          "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+          "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+          "tools/probe_value_ledger.py": "99f682ecd83095dbf9816a22035e4451b012cbead1ced45dbde0b173f23933a9",
+          "tools/profile_memory.py": "e6156f7a96320a04fd4d6a0df81f0380fcc6f45eb123bd0b633f5e511667b08d",
+          "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+          "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+          "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+          "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+          "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+          "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3"
+        },
+        "ledger_mode_verified": true,
+        "code_sha256": {
+          "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+          "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+          "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+          "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+          "algen/compress.py": "8ab005847fd509fbc31753cd43eb91f1db00b525a13f2066051c9efe66c1b074",
+          "algen/compress_base.py": "1db5c67a3aa69d89ed1c1587690e73eb31c65852ffc91a7d6c88ffece542769e",
+          "tools/profile_memory.py": "e6156f7a96320a04fd4d6a0df81f0380fcc6f45eb123bd0b633f5e511667b08d",
+          "algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+          "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+          "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+          "tools/probe_value_ledger.py": "99f682ecd83095dbf9816a22035e4451b012cbead1ced45dbde0b173f23933a9",
+          "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+          "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3"
+        }
+      },
+      "scheme_summary": {
+        "id": "G-14-217-767-769-770-771",
+        "условие": "∀ G : Grp",
+        "термы": [
+          "sym(G)",
+          "torsion(sym(G))",
+          "num:5()",
+          "num:120()",
+          "num:1056()",
+          "num:60()"
+        ],
+        "посылок": 3,
+        "без": [],
+        "отпечаток": "40179479aa259919:G::s2:быстро:3",
+        "секунд": 67.8,
+        "статус": "ошибка",
+        "память ГБ": [
+          7.19,
+          8.11
+        ],
+        "память по этапам": [
+          [
+            "начало",
+            7.19,
+            0
+          ],
+          [
+            "перебор",
+            8.11,
+            1908
+          ],
+          [
+            "минимальные",
+            8.11,
+            1908
+          ]
+        ],
+        "строк противоречат базе": 0,
+        "перепись": {
+          "минимальных": 1908,
+          "пустых посылок": 252708,
+          "не опровергнуто": 566965,
+          "по длине": {
+            "1": 72,
+            "2": 1836
+          },
+          "движок": "cpp:aebd2a9e386c236798c796cb"
+        }
+      },
+      "artifact_audit": {
+        "zip_bytes": 11320,
+        "zip_sha256": "c15aec4ace2f38dda92cd8802877804bd87a442c41a821c91a0035f7e0e8d544",
+        "members": [
+          {
+            "name": "exit.txt",
+            "bytes": 7,
+            "crc32": "c0ccb849",
+            "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061"
+          },
+          {
+            "name": "ledger-G14217/measurement.json",
+            "bytes": 3633,
+            "crc32": "c0e330a4",
+            "sha256": "4e1bf6acc9a2b6152f7f4aa53c17ba92aea585ed7080d395162e799468f999ef"
+          },
+          {
+            "name": "commit.txt",
+            "bytes": 41,
+            "crc32": "8715f101",
+            "sha256": "ed38279b5db65e8ce38bf62f5fd83ed9e3d837ea7211bf8788703ac5a90b5325"
+          },
+          {
+            "name": "ledger-G14217/process.log",
+            "bytes": 125,
+            "crc32": "aaa11438",
+            "sha256": "036bd94265fcd080d4434a3e0f975e6831d174f4c027bd69990997f286622a89"
+          },
+          {
+            "name": "ledger-G14217/results/G-14-217-767-769-770-771.json",
+            "bytes": 865,
+            "crc32": "6f5c43b9",
+            "sha256": "2a199584d58db8123a8b41aa3f9355e9c3943f00b68a24e41a7a585ab7d87d1b"
+          },
+          {
+            "name": "ledger-G14217/results/G-14-217-767-769-770-771.txt",
+            "bytes": 795,
+            "crc32": "e860638a",
+            "sha256": "67bfcbde88124b91f15d45ba4144dd0b122d9d2704fe1c568b7b8bfdc42b0f3b"
+          },
+          {
+            "name": "ledger-G14217/results/_план-1-1.json",
+            "bytes": 44,
+            "crc32": "d07c1cf4",
+            "sha256": "78f55ec327c7dd180552d5f3b201697b74355a34994ca50bbaca87c5b0488289"
+          },
+          {
+            "name": "ledger-G14217/rss.jsonl",
+            "bytes": 30000,
+            "crc32": "93339351",
+            "sha256": "8d9f94274643a4a8d19bc10d58f29c429080cd4f26732c1d867350670c10bc4c"
+          },
+          {
+            "name": "ledger-G14217/stages.jsonl",
+            "bytes": 3491,
+            "crc32": "3acf53d1",
+            "sha256": "144908f9e5ec2ba504d22f902922feb452f1b300857a5a060fb31264d75b40a0"
+          },
+          {
+            "name": "time.txt",
+            "bytes": 1005,
+            "crc32": "9780feb5",
+            "sha256": "51e10ae504347cd157b63f364239693486202849e8530726c67822b4144af580"
+          },
+          {
+            "name": "verdict.json",
+            "bytes": 5328,
+            "crc32": "5ebf2d2b",
+            "sha256": "9fdfca67e1e85fca281c3d187b370b3c3c16fa52343ba8b98b0ce2ed1183cf37"
+          }
+        ]
+      },
+      "input_projection_stage": "all minimal conditions before individual SAT; no report verdicts",
+      "raw_SAT_report_generated": false,
+      "raw_SQLite_exported": false,
+      "failure": {
+        "type": "BufferError",
+        "message": "memoryview: underlying buffer is not C-contiguous",
+        "stage": "input projection digest; before fresh classification and SQLite seed",
+        "fix": "stream logical C-order matrix chunks of at most256rows; Fortran/strided regression"
+      }
+    },
+    {
+      "run": 43659924906,
+      "job": 132646766541,
+      "code_commit": "69496b8e4caed201c3ad87045f3f35c96a46cba3",
+      "source_table_run": 43434101930,
+      "scheme": "G-14-217-767-769-770-771",
+      "expected_minimals": 1908,
+      "workflow_conclusion": "success",
+      "experiment_complete": true,
+      "measurement": {
+        "scheme": "G-14-217-767-769-770-771",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 190.552,
+        "cpu_seconds": 187.68867999999998,
+        "peak_rss_kib": 8642764,
+        "sampled_rss_kib": 8622560,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 14.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "legacy_phase_scope": false,
+        "scheme_status": "перепись",
+        "complete": true,
+        "scope": "full small frozen-domain value ledger control; no SAT",
+        "ledger_expected_minimals": 1908,
+        "ledger_probe_valid": true,
+        "ledger_probe": {
+          "version": 1,
+          "scope": "one complete stored minimal domain; NOT a complete future frontier or report",
+          "sampled": false,
+          "classified": 1908,
+          "rows": 30953,
+          "literal_columns": 562,
+          "input_projection_sha256": "7f293498c054be53c733160e0fcdfdce22ceddbec0e2499749fa6e9e9386c19e",
+          "input_conditions_sha256": "1ce8f69600c01613683ceb5e2029d6196ab815dc9849ae5fc89860741e1566b8",
+          "domain_sha256": "bae492d189a71adb8967ceaa6703315cf3e4eadd6cfcf862aee0f01936a66312",
+          "initial_state_sha256": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2",
+          "state_hashes": {
+            "masked": "68356af93ab6af8625205690706aa0d834ee340142fca823e93811cc9af16760",
+            "restored": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2",
+            "new_row_restored": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2"
+          },
+          "full_domain_oracles_equal": true,
+          "external_projection_readback_verified": true,
+          "identities_sources_supports_readback_verified": true,
+          "original_inputs_unchanged": true,
+          "identity_stable": true,
+          "rollback_verified": true,
+          "reopen_verified": true,
+          "idempotent_replay_verified": true,
+          "hidden_observation_sha256": "81ed9c5f89201b9cbc085d2eace4cecbded3f6b35a59f9dbfff4c571ebd1aab5",
+          "hidden_row": 20117,
+          "hidden_atom": 67,
+          "hot_conditions_after_hide": 325,
+          "initial": {
+            "revision": 0,
+            "conditions": 1908,
+            "kinds": {
+              "C": 1908
+            },
+            "rows": 30953,
+            "proof_pending": 1908,
+            "domain_import_complete": true,
+            "candidate_frontier_complete": false,
+            "source_propagation_complete": false,
+            "current_support_computed": false,
+            "original_support_preserved": true,
+            "database_bytes": 20844544
+          },
+          "restored": {
+            "revision": 2,
+            "conditions": 1908,
+            "kinds": {
+              "C": 1908
+            },
+            "rows": 30953,
+            "proof_pending": 1908,
+            "domain_import_complete": true,
+            "candidate_frontier_complete": false,
+            "source_propagation_complete": false,
+            "current_support_computed": false,
+            "original_support_preserved": true,
+            "database_bytes": 20856832
+          },
+          "updates": [
+            {
+              "event": "hide-checked-cell",
+              "revision": 1,
+              "row": 20117,
+              "affected_conditions": 1908,
+              "all_conditions": 1908,
+              "add": false,
+              "projection_sha256": "7850cd59b7210f2bcc3bf8c669850679411396557079b41561ff83dab8b09632",
+              "proof_pending": 1908,
+              "candidate_frontier_complete": false,
+              "source_propagation_complete": false,
+              "current_support_computed": false
+            },
+            {
+              "event": "restore-checked-cell",
+              "revision": 2,
+              "row": 20117,
+              "affected_conditions": 1908,
+              "all_conditions": 1908,
+              "add": false,
+              "projection_sha256": "3368a16be6cce79d34f5cc8fea66924ac9ccbebc3529351b852482f14b15975e",
+              "proof_pending": 1908,
+              "candidate_frontier_complete": false,
+              "source_propagation_complete": false,
+              "current_support_computed": false
+            },
+            {
+              "event": "return-withheld-row",
+              "revision": 1,
+              "row": 30952,
+              "affected_conditions": 1908,
+              "all_conditions": 1908,
+              "add": true,
+              "projection_sha256": "3368a16be6cce79d34f5cc8fea66924ac9ccbebc3529351b852482f14b15975e",
+              "proof_pending": 1908,
+              "candidate_frontier_complete": false,
+              "source_propagation_complete": false,
+              "current_support_computed": false
+            }
+          ],
+          "stages": {
+            "seed": {
+              "wall_seconds": 2.1802055859999996,
+              "cpu_seconds": 2.1393725799999856
+            },
+            "hide_update": {
+              "wall_seconds": 0.22933586599998534,
+              "cpu_seconds": 0.22781753400002458
+            },
+            "hide_full_oracle": {
+              "wall_seconds": 0.930902446999994,
+              "cpu_seconds": 0.896085553000006
+            },
+            "restore_after_reopen": {
+              "wall_seconds": 0.23449796600004902,
+              "cpu_seconds": 0.23316025700000864
+            },
+            "separate_withheld_row_control": {
+              "wall_seconds": 3.3661994749999735,
+              "cpu_seconds": 3.254138970999975
+            }
+          },
+          "database_files": {
+            "values.sqlite": {
+              "bytes": 20856832,
+              "sha256": "6b2cf32a35595da237ace4325803fbfd65935275304d3b91adbd736be4401930"
+            },
+            "append.sqlite": {
+              "bytes": 20844544,
+              "sha256": "216b25f1a0798078ef37ad5a50d9a0367073f361b994eafa208e03e8efc8f40b"
+            }
+          },
+          "database_files_uploaded": false,
+          "masking_is_not_source_retraction": true,
+          "proof_pending": 1908,
+          "current_support_computed": false,
+          "source_propagation_complete": false,
+          "candidate_frontier_complete": false,
+          "sat_verdicts_generated": false,
+          "production_speedup_claimed": false
+        },
+        "requested_compact_fact_sat": true,
+        "requested_state_save": false,
+        "actual_compact_fact_sat": true,
+        "actual_state_save": false,
+        "mode_verified": true,
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": false,
+        "cprofile": false,
+        "actual_ledger_sources": {
+          "algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+          "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+          "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+          "tools/probe_value_ledger.py": "3ad190c16b411a9750910a19b0547ac756b8a925b0f61d3767586a79dc17d9e5",
+          "tools/profile_memory.py": "e6156f7a96320a04fd4d6a0df81f0380fcc6f45eb123bd0b633f5e511667b08d",
+          "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+          "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+          "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+          "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+          "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+          "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3"
+        },
+        "ledger_mode_verified": true,
+        "code_sha256": {
+          "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+          "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+          "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+          "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+          "algen/compress.py": "8ab005847fd509fbc31753cd43eb91f1db00b525a13f2066051c9efe66c1b074",
+          "algen/compress_base.py": "1db5c67a3aa69d89ed1c1587690e73eb31c65852ffc91a7d6c88ffece542769e",
+          "tools/profile_memory.py": "e6156f7a96320a04fd4d6a0df81f0380fcc6f45eb123bd0b633f5e511667b08d",
+          "algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+          "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+          "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+          "tools/probe_value_ledger.py": "3ad190c16b411a9750910a19b0547ac756b8a925b0f61d3767586a79dc17d9e5",
+          "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+          "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3"
+        }
+      },
+      "scheme_summary": {
+        "id": "G-14-217-767-769-770-771",
+        "условие": "∀ G : Grp",
+        "термы": [
+          "sym(G)",
+          "torsion(sym(G))",
+          "num:5()",
+          "num:120()",
+          "num:1056()",
+          "num:60()"
+        ],
+        "посылок": 3,
+        "без": [],
+        "отпечаток": "40179479aa259919:G::s2:быстро:3",
+        "секунд": 107.4,
+        "статус": "перепись",
+        "память ГБ": [
+          7.19,
+          8.14
+        ],
+        "память по этапам": [
+          [
+            "начало",
+            7.19,
+            0
+          ],
+          [
+            "перебор",
+            8.11,
+            1908
+          ],
+          [
+            "минимальные",
+            8.11,
+            1908
+          ]
+        ],
+        "строк противоречат базе": 0,
+        "запретов": 0,
+        "вердикты": {},
+        "остаток": 0,
+        "значения": [],
+        "без кандидата": [],
+        "вырождено": [],
+        "реестр": {},
+        "отложено": [],
+        "факты без посылок": [
+          "embeds(torsion(sym(G)), sym(G))"
+        ],
+        "вопросы": {},
+        "без вопроса": 0,
+        "трудный контрпример": {},
+        "короткий довод": {},
+        "перепись": {
+          "минимальных": 1908,
+          "пустых посылок": 252708,
+          "не опровергнуто": 566965,
+          "по длине": {
+            "1": 72,
+            "2": 1836
+          },
+          "движок": "cpp:aebd2a9e386c236798c796cb"
+        }
+      },
+      "artifact_audit": {
+        "zip_bytes": 17807,
+        "zip_sha256": "020d2707c962b231fe1bc0af687bd761e186498aaf8df918aab1d8b466d2c638",
+        "members": [
+          {
+            "name": "commit.txt",
+            "bytes": 41,
+            "crc32": "e82984f6",
+            "sha256": "015fc9c8b29dd39ceb5efe717fce3418058921461196d8c07744717c8f3eb80e"
+          },
+          {
+            "name": "exit.txt",
+            "bytes": 7,
+            "crc32": "c0ccb849",
+            "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061"
+          },
+          {
+            "name": "ledger2-G14217/ledger-probe.json",
+            "bytes": 4583,
+            "crc32": "56e8c5c1",
+            "sha256": "e4ffbf8e60b9ca639c8d1c088833bd65c0890a51a9f59b1d5cda6524a3eb25a2"
+          },
+          {
+            "name": "ledger2-G14217/measurement.json",
+            "bytes": 8363,
+            "crc32": "ccb4afe8",
+            "sha256": "e6a85519ae074e01ca889f205c88aa70142a64f519c13d32828e0326a8d8fd38"
+          },
+          {
+            "name": "ledger2-G14217/process.log",
+            "bytes": 127,
+            "crc32": "5953abd8",
+            "sha256": "d5f456d9f4aad1bd36635899ba9c132c91678c8aaf1a00cff318014f43345232"
+          },
+          {
+            "name": "ledger2-G14217/results/G-14-217-767-769-770-771.json",
+            "bytes": 1286,
+            "crc32": "7b28552a",
+            "sha256": "4cb3b458a320650fe21e3910ce134aee8805ae8a27061d2647e7f6e8fbc1cc05"
+          },
+          {
+            "name": "ledger2-G14217/results/G-14-217-767-769-770-771.txt",
+            "bytes": 897,
+            "crc32": "e80ca938",
+            "sha256": "804ffa32b7383a74865237f95d6c8ced7d53d2a28452521cd1abd1e9f207abca"
+          },
+          {
+            "name": "ledger2-G14217/results/_план-1-1.json",
+            "bytes": 44,
+            "crc32": "d07c1cf4",
+            "sha256": "78f55ec327c7dd180552d5f3b201697b74355a34994ca50bbaca87c5b0488289"
+          },
+          {
+            "name": "ledger2-G14217/rss.jsonl",
+            "bytes": 42747,
+            "crc32": "49d1d216",
+            "sha256": "817ab0b1f859489edcd13cb5b3010f9748ee1737ded4edc0b54a653fb46844e7"
+          },
+          {
+            "name": "ledger2-G14217/stages.jsonl",
+            "bytes": 4396,
+            "crc32": "2f817852",
+            "sha256": "3f20140ac5f6bea218246137bc17cc84a180261f97231c0ff4ac5920f3b16486"
+          },
+          {
+            "name": "time.txt",
+            "bytes": 1009,
+            "crc32": "4bb06527",
+            "sha256": "df302b7483266d6a367b55efa9d8dd1f84b2484a10bf241339b1759193106c9d"
+          },
+          {
+            "name": "verdict.json",
+            "bytes": 10746,
+            "crc32": "a8ebec8d",
+            "sha256": "9222db6dac6e1509622a7a096ac75b8871ff3f2200713c76b62e4753ad50d831"
+          }
+        ]
+      },
+      "input_projection_stage": "all minimal conditions before individual SAT; no report verdicts",
+      "raw_SAT_report_generated": false,
+      "raw_SQLite_exported": false
+    }
+  ],
+  "independent_reviews": {
+    "core": {
+      "receipt": {
+        "review_scope": "Experimental ValueLedger only; no native group runs or project edits",
+        "worktree": "/workspace/work/algen-idfix",
+        "source_sha256": {
+          "py/algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+          "py/tests/test_value_ledger.py": "0bbc536c64808fb0c653a33b9933ec57e679c174338225f2fb0fbae5006b818c"
+        },
+        "suite": {
+          "tests": 8,
+          "seconds": 0.546,
+          "errors": 0,
+          "failures": 0,
+          "skips": 0,
+          "result": "OK"
+        },
+        "additional_checks": {
+          "random_updates_and_additions_compared_with_scalar_oracle": 48,
+          "initial_row_counts": [
+            0,
+            1,
+            4,
+            9
+          ],
+          "batch_size": 2,
+          "pairs_fixed_two_connections_stale_revision_and_replay": "passed",
+          "real_sqlite_full_during_update_then_small_retry": "passed"
+        },
+        "blockers": [],
+        "limits": [
+          "Only one frozen condition domain; no proof checking or descendant source retraction",
+          "Original support only; no current support or fresh report",
+          "max_database_bytes bounds main SQLite pages, not aggregate journal/temp files or peak RSS"
+        ]
+      },
+      "receipt_sha256": "cea92eb525554f06a1dc25215b0d068a2eaf68c091c0b1eb1fb24251f604125c"
+    },
+    "launch": {
+      "receipt": {
+        "review": "approved for one addressed real small-domain ledger control and ordinary draft CI",
+        "reviewed_at_utc": "2026-11-15T00:30:33.594838+00:00",
+        "scope": "independent control/probe/launcher review; core algorithm reviewed separately by verify_conditions",
+        "frozen_sources": {
+          "py/algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+          "py/tests/test_value_ledger.py": "0bbc536c64808fb0c653a33b9933ec57e679c174338225f2fb0fbae5006b818c",
+          "py/tools/probe_value_ledger.py": "99f682ecd83095dbf9816a22035e4451b012cbead1ced45dbde0b173f23933a9",
+          "py/tests/test_value_ledger_probe.py": "74f94770a7ad83dce308449afa991c4d4b0a5c3e55942f92e69f06c3d7d8d6c5",
+          "private_profiler": "e6156f7a96320a04fd4d6a0df81f0380fcc6f45eb123bd0b633f5e511667b08d",
+          "private_plan": "e3286f73ef02270cae39e03b852578ea3b9569b35f33fb110d4483a08d68dd52"
+        },
+        "plan": {
+          "version": 1,
+          "name": "codex-ledger-control-01",
+          "purpose": "Full frozen small-domain durable value queue; no SAT/report claim or raw DB upload",
+          "source_run": 43434101930,
+          "preserve_inputs": false,
+          "cases": [
+            {
+              "id": "ledger-G14217",
+              "mode": "run",
+              "ref": "",
+              "scheme": "G-14-217-767-769-770-771",
+              "args": "--no-state-save --ledger-probe --ledger-expected-minimals 1908",
+              "seconds": 1200,
+              "rss_gib": 14,
+              "expected_minimals": 1908
+            }
+          ]
+        },
+        "completed_checks": {
+          "combined_core_and_probe_tests_before_final_kind_guard": {
+            "tests": 10,
+            "seconds": 0.716,
+            "result": "OK"
+          },
+          "final_probe_tests": {
+            "tests": 2,
+            "seconds": 0.127,
+            "result": "OK"
+          },
+          "receipt_adversarial_mutations": {
+            "attempted": 502,
+            "unexpected_acceptances": 0,
+            "domain_condition_counts": [
+              1,
+              2
+            ],
+            "coverage": [
+              "missing fields",
+              "None",
+              "bool/int ambiguity",
+              "update fields",
+              "invalid or joined kind labels",
+              "initial/refinal R forbidden"
+            ]
+          },
+          "late_hot_target": {
+            "rows": 1002,
+            "chosen_row": 1001,
+            "target_hot_conditions": 1,
+            "topK_truncation": false,
+            "result": "OK"
+          },
+          "wrong_support_readback": {
+            "result": "rejected by external oracle"
+          },
+          "wrong_mask_writer": {
+            "result": "rejected in final probe regression test"
+          },
+          "launcher_parent_mock_gates": {
+            "cases": 14,
+            "all_expected_results": true,
+            "real_child_or_Theory_started": false,
+            "negative_cases": [
+              "missing receipt",
+              "invalid proof_pending",
+              "wrong expected condition count",
+              "CENSUS false",
+              "SAMPLE bool false",
+              "SAMPLE nonzero",
+              "state saving true",
+              "missing sources",
+              "wrong source hash",
+              "malformed stages",
+              "nonzero exit",
+              "wrong status",
+              "RSS stop"
+            ]
+          },
+          "child_argument_guards": {
+            "cases": 3,
+            "positive_explicit_no_state_and_expected_count": true,
+            "missing_no_state_rejected": true,
+            "missing_expected_count_rejected": true
+          }
+        },
+        "input_and_oracle_review": [
+          "complete CENSUS return before individual report verdict loop; SAMPLE strictly0",
+          "known1908conditions required in child before probe and in parent success gate",
+          "all packed conditions/supports/order and row matrix/atoms/fixed/pairs/identities/sources/manifest read back against external inputs",
+          "fresh native ALL-domain oracle after seed, mask, restore/reopen, rollback and withheld-row append",
+          "mask applied to an external input copy; target event count checked exactly without a topK limit",
+          "SQLite files created in private tempfile location outside uploaded profiles/out; only aggregate/hash receipts exported",
+          "manifest theory uses table.theory_fp(G,form); preparation cost remains in measured wall"
+        ],
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 14,
+          "source_table_run": 43434101930,
+          "expected_minimals": 1908,
+          "cases": 1
+        },
+        "proof_limits": [
+          "no individual SAT report/theorem verdicts produced by ledger; initial Theory/generator setup may still use SAT internally",
+          "mask is diagnostic withholding of an already checked projection value, not mathematical source retraction",
+          "stored original supports are preserved; current support recomputation remains unimplemented",
+          "source descendant propagation, complete future candidate frontier and production report integration remain explicit debt",
+          "no full GitHub control run or new CI was started by reviewer"
+        ]
+      },
+      "receipt_sha256": "9b89624fd5e8033755004255dfffa1f1228e7bef916478671cfb1681436272b9"
+    },
+    "failure_fix": {
+      "receipt": {
+        "review": "failure audited; narrow layout hash fix and only targeted control02 approved",
+        "reviewed_at_utc": "2026-11-15T00:48:11.179319+00:00",
+        "run": {
+          "id": 43658715698,
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "117f4ad82e3e3d774214aa077d867a6a2579a082",
+          "branch": "claude-pilot-codex-ledger-01"
+        },
+        "artifact": {
+          "id": 14139148216,
+          "name": "claude-ledger-G14217",
+          "bytes": 11320,
+          "digest": "sha256:c15aec4ace2f38dda92cd8802877804bd87a442c41a821c91a0035f7e0e8d544",
+          "head_sha": "117f4ad82e3e3d774214aa077d867a6a2579a082"
+        },
+        "case_job": 132643018923,
+        "verified_ZIP_members": 11,
+        "all_ZIP_CRC_SHA_and_extracted_bytes_verified": true,
+        "failed_outcome": {
+          "complete": false,
+          "scheme_status": "ошибка",
+          "workflow_green_is_not_control_success": true,
+          "error": "BufferError: memoryview: underlying buffer is not C-contiguous",
+          "failed_at": "input projection hash before initial native oracle and before SQLite seed",
+          "frozen_full_conditions_generated": 1908,
+          "ledger_receipt_present": false,
+          "ledger_verified_stage_present": false,
+          "wall_seconds": 134.22,
+          "child_cpu_seconds": 130.384275,
+          "rusage_and_stage_HWM_KiB": 8644036,
+          "parent_sampled_RSS_and_HWM_KiB": 8644336,
+          "keep_resource_slices_separate": true,
+          "mode_and_11_sources_verified": true
+        },
+        "fix": {
+          "scope": "only control matrix hash and regression test; ledger core and private launcher unchanged",
+          "logical_order": "C row order, copied in blocks of at most256rows",
+          "independent_hash_checks": 84,
+          "row_counts": [
+            0,
+            1,
+            2,
+            255,
+            256,
+            257,
+            513
+          ],
+          "column_counts": [
+            4,
+            10,
+            562
+          ],
+          "layouts": [
+            "C",
+            "Fortran",
+            "row/column strided",
+            "negative row/column strides"
+          ],
+          "matches_C_tobytes_sha256": true,
+          "original_inputs_unchanged": true,
+          "maximum_temporary_block_rows": 256,
+          "final_probe_tests": {
+            "tests": 3,
+            "seconds": 0.293,
+            "result": "OK"
+          },
+          "frozen_sources": {
+            "py/algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+            "py/tests/test_value_ledger.py": "0bbc536c64808fb0c653a33b9933ec57e679c174338225f2fb0fbae5006b818c",
+            "py/tools/probe_value_ledger.py": "3ad190c16b411a9750910a19b0547ac756b8a925b0f61d3767586a79dc17d9e5",
+            "py/tests/test_value_ledger_probe.py": "47e09e4a0dc54b91e81f665d0e1d8fbd312d4b70b5b0fca87bdd754a43721a85",
+            "private_profiler": "e6156f7a96320a04fd4d6a0df81f0380fcc6f45eb123bd0b633f5e511667b08d",
+            "private_plan_02": "532f1069eef09e0074cdf830c939845972ef79f5c02e5bb4e1b91df1ad209277"
+          }
+        },
+        "retry": {
+          "approved": true,
+          "cases": 1,
+          "source_run": 43434101930,
+          "scheme": "G-14-217-767-769-770-771",
+          "expected_minimals": 1908,
+          "seconds": 1200,
+          "rss_gib": 14,
+          "arguments": "--no-state-save --ledger-probe --ledger-expected-minimals 1908",
+          "plan_sha256": "532f1069eef09e0074cdf830c939845972ef79f5c02e5bb4e1b91df1ad209277",
+          "separate_private_control_branch": true,
+          "do_not_overwrite_failed01_evidence": true
+        },
+        "limitations": [
+          "no real table rerun or GitHub run was started by reviewer",
+          "no persistence/seed success claimed fromfailed01",
+          "old PR21 CI cannot cover the new probe/test SHA",
+          "targeted realcontrol02 and subsequent CI on updated code are still required"
+        ]
+      },
+      "receipt_sha256": "bac8dd475357acbe760c1f6420b33156e08dc49c3caa19d9c683ba346e19c16d"
+    },
+    "real_control02": {
+      "receipt": {
+        "review": "approved completed real control02 and transfer of narrowfixd6e63d toPR21 followed by one ordinary CI",
+        "reviewed_at_utc": "2026-11-15T01:00:17.721072+00:00",
+        "run": {
+          "id": 43659924906,
+          "status": "completed",
+          "conclusion": "success",
+          "head": "69496b8e4caed201c3ad87045f3f35c96a46cba3",
+          "branch": "claude-pilot-codex-ledger-02"
+        },
+        "artifact": {
+          "id": 14139881199,
+          "bytes": 17807,
+          "digest": "sha256:020d2707c962b231fe1bc0af687bd761e186498aaf8df918aab1d8b466d2c638",
+          "head": "69496b8e4caed201c3ad87045f3f35c96a46cba3"
+        },
+        "case_job": 132646766541,
+        "verified_ZIP_sha256": "020d2707c962b231fe1bc0af687bd761e186498aaf8df918aab1d8b466d2c638",
+        "verified_members": [
+          {
+            "name": "commit.txt",
+            "bytes": 41,
+            "crc32": "e82984f6",
+            "sha256": "015fc9c8b29dd39ceb5efe717fce3418058921461196d8c07744717c8f3eb80e"
+          },
+          {
+            "name": "exit.txt",
+            "bytes": 7,
+            "crc32": "c0ccb849",
+            "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061"
+          },
+          {
+            "name": "ledger2-G14217/ledger-probe.json",
+            "bytes": 4583,
+            "crc32": "56e8c5c1",
+            "sha256": "e4ffbf8e60b9ca639c8d1c088833bd65c0890a51a9f59b1d5cda6524a3eb25a2"
+          },
+          {
+            "name": "ledger2-G14217/measurement.json",
+            "bytes": 8363,
+            "crc32": "ccb4afe8",
+            "sha256": "e6a85519ae074e01ca889f205c88aa70142a64f519c13d32828e0326a8d8fd38"
+          },
+          {
+            "name": "ledger2-G14217/process.log",
+            "bytes": 127,
+            "crc32": "5953abd8",
+            "sha256": "d5f456d9f4aad1bd36635899ba9c132c91678c8aaf1a00cff318014f43345232"
+          },
+          {
+            "name": "ledger2-G14217/results/G-14-217-767-769-770-771.json",
+            "bytes": 1286,
+            "crc32": "7b28552a",
+            "sha256": "4cb3b458a320650fe21e3910ce134aee8805ae8a27061d2647e7f6e8fbc1cc05"
+          },
+          {
+            "name": "ledger2-G14217/results/G-14-217-767-769-770-771.txt",
+            "bytes": 897,
+            "crc32": "e80ca938",
+            "sha256": "804ffa32b7383a74865237f95d6c8ced7d53d2a28452521cd1abd1e9f207abca"
+          },
+          {
+            "name": "ledger2-G14217/results/_план-1-1.json",
+            "bytes": 44,
+            "crc32": "d07c1cf4",
+            "sha256": "78f55ec327c7dd180552d5f3b201697b74355a34994ca50bbaca87c5b0488289"
+          },
+          {
+            "name": "ledger2-G14217/rss.jsonl",
+            "bytes": 42747,
+            "crc32": "49d1d216",
+            "sha256": "817ab0b1f859489edcd13cb5b3010f9748ee1737ded4edc0b54a653fb46844e7"
+          },
+          {
+            "name": "ledger2-G14217/stages.jsonl",
+            "bytes": 4396,
+            "crc32": "2f817852",
+            "sha256": "3f20140ac5f6bea218246137bc17cc84a180261f97231c0ff4ac5920f3b16486"
+          },
+          {
+            "name": "time.txt",
+            "bytes": 1009,
+            "crc32": "4bb06527",
+            "sha256": "df302b7483266d6a367b55efa9d8dd1f84b2484a10bf241339b1759193106c9d"
+          },
+          {
+            "name": "verdict.json",
+            "bytes": 10746,
+            "crc32": "a8ebec8d",
+            "sha256": "9222db6dac6e1509622a7a096ac75b8871ff3f2200713c76b62e4753ad50d831"
+          }
+        ],
+        "remote_measurement_and_stage_equal_primary": true,
+        "input_files_sha256": [
+          "2ae08bdfe2200090dfc753363a8db3b6ef9d292d26b51607f404739af6b452e7 native-tabs/G.1-20.pickle",
+          "17f8bc21be0691cc8a5fec2b27c947393542038cf86c41ac718d430661c02d7a native-tabs/G.10-20.pickle",
+          "2d7592340dc9012fccdfe6c2d20e91271002048f9b125a5b2912fc5da94caf15 native-tabs/G.11-20.pickle",
+          "ed8bf0c14953f2a93139c937230ac1aa3e40913af3f664a3f98813b34cdcc304 native-tabs/G.12-20.pickle",
+          "eb707800fc8fc9fb8722dc731258f6bc10e7784361ee8ace4375455abbdb9ba6 native-tabs/G.13-20.pickle",
+          "6f3248e83f356a9d4c9ffde6402928523889d1c413217e5576d76c8242aecdaa native-tabs/G.14-20.pickle",
+          "ab345f588b6be8c50506a0dee38e1dab4644a07022848821d49e40c4a3ed6ebe native-tabs/G.15-20.pickle",
+          "1e4c1f1cda67fd1c908c7f620ec3c34904edea74431290828e20adcaf0e4459a native-tabs/G.16-20.pickle",
+          "9055bcf25151eaea16ab5589fd8df38d3d4fd4376c7d48033c2a31f0e3cf91de native-tabs/G.17-20.pickle",
+          "4a96deb147e51c9efdbfd269a95585dd274806c2540e9d5f2aa67e5aee752917 native-tabs/G.18-20.pickle",
+          "21bae685bf62bb698920b4a6fa2f61c7618e61c89999ff80770cdfdaf9f8e103 native-tabs/G.19-20.pickle",
+          "837d57802797fb568c683b817229183e30d7a56cdcc6a4821a3524ab500914b2 native-tabs/G.2-20.pickle",
+          "66e6dc6056c2c4c281250d636574673965871e2707718d190fe4ad450ca3d765 native-tabs/G.20-20.pickle",
+          "2a89d7fbb78689bb8fae219b1177af55bfe78be52ba5750f359299013440132f native-tabs/G.3-20.pickle",
+          "2431bca408e607010260aae0a9fd31f4ba989d8628c1839c5ec4123003897949 native-tabs/G.4-20.pickle",
+          "ddabd15cb47d9a6412be25dcc790f04d1a8426630127e70bf7d9bef71042cbc2 native-tabs/G.5-20.pickle",
+          "5faca632cce8780c73ac6b30f787d72a7af3934c51f6f8f7913cd10ec6b34315 native-tabs/G.6-20.pickle",
+          "aca9c3f9159d3e8b1d3520ce2e2cfd4ab05993e82ab9479a518474b6e860360d native-tabs/G.7-20.pickle",
+          "5cb5099bcb4f071dbcd33477d6328ab15c6c2546a84a0c22524f1a8b0a84e953 native-tabs/G.8-20.pickle",
+          "d062b0680cab37fd8f91f5b887162ed1763227080b87205d0490d7e4c0ca3004 native-tabs/G.9-20.pickle",
+          "1717ce8d8b2bc7fef02eecdc9b0fc92138db1e7e1ff295e1283dc01e7ff9ba5d native-tabs/G.rep.pickle",
+          "ceb398b85452b8ee995f7e4642e860803a8422778426ff8903d6705845a2f5bd native/skel/G.skel.pickle",
+          "f9ff096ab49a358ab67b31518d6dbb85f9e1a7d45c65d111e336a69ca4663e29 native/кэш/библиотека-40179479aa259919.pickle"
+        ],
+        "same23input_hashes_as_failed01": true,
+        "frozen_code_sha256": {
+          "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+          "algen/table.py": "0c84c30ee44475d6771fcbed0e05410a82be02bfa84e807ba5fc8b794be4784b",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "742233bf7a2e7c266b360db86cde8fbb87c663241eba320776dffc55a71a0b78",
+          "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+          "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+          "algen/compress.py": "8ab005847fd509fbc31753cd43eb91f1db00b525a13f2066051c9efe66c1b074",
+          "algen/compress_base.py": "1db5c67a3aa69d89ed1c1587690e73eb31c65852ffc91a7d6c88ffece542769e",
+          "tools/profile_memory.py": "e6156f7a96320a04fd4d6a0df81f0380fcc6f45eb123bd0b633f5e511667b08d",
+          "algen/value_ledger.py": "3fdec40fc4144001b5802e24c56c6a48785bb4c8edbeea5ae0eb096c05fd53e7",
+          "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+          "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+          "tools/probe_value_ledger.py": "3ad190c16b411a9750910a19b0547ac756b8a925b0f61d3767586a79dc17d9e5",
+          "algen/logic.py": "8801ec5cc909065f83382f13cfb2a7f53abccd32a8542560bd70efce6d265ca0",
+          "algen/library.py": "63ba0cfe15b0ed60ab4a576ccbdc52c26db0b3a693db0edf6939d68ef5cd47e3"
+        },
+        "fix_commit": {
+          "sha": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+          "parents": [
+            "e1f07f9d3746518ef59b5467f7772eb613e771eb"
+          ],
+          "files": [
+            {
+              "path": "py/tests/test_value_ledger_probe.py",
+              "blob": "234e792ce69069665aaa71e4acbf775dffc9f3fb",
+              "status": "modified"
+            },
+            {
+              "path": "py/tools/probe_value_ledger.py",
+              "blob": "bb99c7b0578dccb6a04bd823c774c73527ccde12",
+              "status": "modified"
+            }
+          ]
+        },
+        "complete": true,
+        "classified_conditions": 1908,
+        "Library_rows": 30953,
+        "literal_columns": 562,
+        "initial_and_restored_data_kinds": {
+          "C": 1908
+        },
+        "proof_pending": 1908,
+        "initial_state_sha256": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2",
+        "state_hashes": {
+          "masked": "68356af93ab6af8625205690706aa0d834ee340142fca823e93811cc9af16760",
+          "restored": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2",
+          "new_row_restored": "b93f6bab944c4eb59eda7888238e825b82cc1359725eac4534a567a2e1bf6ba2"
+        },
+        "input_projection_sha256": "7f293498c054be53c733160e0fcdfdce22ceddbec0e2499749fa6e9e9386c19e",
+        "input_conditions_sha256": "1ce8f69600c01613683ceb5e2029d6196ab815dc9849ae5fc89860741e1566b8",
+        "domain_sha256": "bae492d189a71adb8967ceaa6703315cf3e4eadd6cfcf862aee0f01936a66312",
+        "hidden_observation": {
+          "row": 20117,
+          "atom": 67,
+          "single_A_dependencies_after_hide": 325
+        },
+        "affected_conditions": [
+          1908,
+          1908,
+          1908
+        ],
+        "selectivity_improvement_demonstrated": false,
+        "private_database_receipts": {
+          "values.sqlite": {
+            "bytes": 20856832,
+            "sha256": "6b2cf32a35595da237ace4325803fbfd65935275304d3b91adbd736be4401930"
+          },
+          "append.sqlite": {
+            "bytes": 20844544,
+            "sha256": "216b25f1a0798078ef37ad5a50d9a0367073f361b994eafa208e03e8efc8f40b"
+          }
+        },
+        "private_database_hashes_recomputed_by_reviewer": false,
+        "private_DB_uploaded": false,
+        "stages": {
+          "seed": {
+            "wall_seconds": 2.1802055859999996,
+            "cpu_seconds": 2.1393725799999856
+          },
+          "hide_update": {
+            "wall_seconds": 0.22933586599998534,
+            "cpu_seconds": 0.22781753400002458
+          },
+          "hide_full_oracle": {
+            "wall_seconds": 0.930902446999994,
+            "cpu_seconds": 0.896085553000006
+          },
+          "restore_after_reopen": {
+            "wall_seconds": 0.23449796600004902,
+            "cpu_seconds": 0.23316025700000864
+          },
+          "separate_withheld_row_control": {
+            "wall_seconds": 3.3661994749999735,
+            "cpu_seconds": 3.254138970999975
+          }
+        },
+        "whole_control": {
+          "wall_seconds": 190.552,
+          "child_CPU_seconds": 187.68868,
+          "peak_RSS_KiB": 8642764,
+          "sampled_RSS_KiB": 8622560,
+          "limits": {
+            "seconds": 1200,
+            "rss_gib": 14.0
+          }
+        },
+        "verified_control_claims": {
+          "full_domain_oracles_equal": true,
+          "external_projection_readback_verified": true,
+          "identities_sources_supports_readback_verified": true,
+          "original_inputs_unchanged": true,
+          "identity_stable": true,
+          "rollback_verified": true,
+          "reopen_verified": true,
+          "idempotent_replay_verified": true,
+          "masking_is_not_source_retraction": true
+        },
+        "oracle_rerun_by_reviewer": false,
+        "failure01_retained": {
+          "complete": false,
+          "ZIP_sha256": "c15aec4ace2f38dda92cd8802877804bd87a442c41a821c91a0035f7e0e8d544",
+          "wall_seconds": 134.22,
+          "CPU_seconds": 130.384275
+        },
+        "limitations": [
+          "all1908conditions were selected on hide and restore; no reduction in affected-condition count shown",
+          "update timers and full readback-plus-native-oracle timer measure different work; no comparative speedup estimate",
+          "CENSUS/ledger workload differs from earlier full SAT/report workloads; no end-to-end speedup claim",
+          "DBs remain private; only producer DB-size/digest receipts independently audited, not the DB files themselves",
+          "original supports preserved; current supports, mathematical source descendant propagation, complete future frontier and SAT/report integration remain debt",
+          "old269-test CI does not cover the layout fix; one ordinary CI on updatedPR21 still required"
+        ]
+      },
+      "receipt_sha256": "0da3ca29e594db662045660bc15bf53112c5c6ef35599bf47df1affea33a8275"
+    },
+    "completed_ci": {
+      "receipt": {
+        "repo": "mitiakrokhalev-lab/AlGen",
+        "checked_at_utc": "2026-11-15T05:17:41Z",
+        "run": {
+          "id": 43660610487,
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+          "head_tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+          "run_attempt": 1,
+          "url": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/actions/runs/43660610487"
+        },
+        "job": {
+          "id": 132648921740,
+          "run_id": 43660610487,
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+          "started_at": "2026-11-15T00:56:00Z",
+          "completed_at": "2026-11-15T01:43:09Z",
+          "url": "https://github.com/mitiakrokhalev-lab/AlGen/actions/runs/43660610487/job/132648921740",
+          "unittest_step": {
+            "name": "unittest",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-11-15T00:56:09Z",
+            "completed_at": "2026-11-15T01:43:07Z",
+            "wall_seconds": 2818.0
+          },
+          "wall_seconds": 2829.0
+        },
+        "checkout": {
+          "sha": "952e83e6a66ade47adafc95f0525f676021c48c8",
+          "tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e",
+          "parents": [
+            "f005b439bf7365033d54ea715807b3d4e0ee138c",
+            "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f"
+          ]
+        },
+        "code": {
+          "sha": "d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+          "tree": "0b35362c5ae43ca449f4effce84d7c29884bce3e"
+        },
+        "observed_docs_head": {
+          "sha": "77ad782698f67f18297329d3623f3b3222531624",
+          "tree": "a383021f730077b16f523e11589e68afba9cae5a"
+        },
+        "previous_cancelled_run": {
+          "id": 43658649943,
+          "status": "completed",
+          "conclusion": "cancelled",
+          "head_sha": "e1f07f9d3746518ef59b5467f7772eb613e771eb",
+          "job_id": 132642783652,
+          "job_status": "completed",
+          "job_conclusion": "cancelled",
+          "job_started_at": "2026-11-15T00:32:11Z",
+          "job_completed_at": "2026-11-15T00:55:58Z",
+          "is_green": false,
+          "job_wall_seconds": 1427.0
+        },
+        "provenance": {
+          "run_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/actions/runs/43660610487",
+          "jobs_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/actions/runs/43660610487/jobs",
+          "code_commit_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/git/commits/d6e63d2c0b5f0e30b5b2d35a8346084ed5240e0f",
+          "checkout_commit_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/git/commits/952e83e6a66ade47adafc95f0525f676021c48c8",
+          "job_logs_tool": "mcp__codex_apps__github_fetch_workflow_job_logs",
+          "job_logs_args": {
+            "job_id": 132648921740,
+            "repo_full_name": "mitiakrokhalev-lab/AlGen"
+          },
+          "local_fetch_receipt": "/workspace/work/algen-pr21-ci02-fetch-receipt.json",
+          "previous_cancelled_run_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/actions/runs/43658649943",
+          "previous_cancelled_jobs_api": "https://api.github.com/repos/mitiakrokhalev-lab/AlGen/actions/runs/43658649943/jobs",
+          "fetch_receipt_sha256": "71da08b914ed02cf19ddd136a0a08a2385e027d1605806d8ea50dba32873bb47"
+        },
+        "result": "verified",
+        "tests": {
+          "executed": 270,
+          "unique_test_ids": 270,
+          "ok": 270,
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "expected_failures": 0,
+          "unexpected_successes": 0,
+          "suite_wall_seconds": 2812.638,
+          "suite_summary_lines": [
+            491,
+            493
+          ],
+          "standalone_ok": {
+            "id": "test_rules_B.RulesBTest.test_library_rows_agree",
+            "line": 430,
+            "status": "ok",
+            "result_line": 444
+          }
+        },
+        "measurements": {
+          "cpu_seconds": null,
+          "peak_rss_bytes": null,
+          "reason": "Not measured by this CI; no resource measurement record in decoded log."
+        },
+        "log": {
+          "path": "/workspace/work/algen-pr21-ci02-completed.log",
+          "bytes": 63588,
+          "lines": 513,
+          "sha256": "ace56561576d0bb99a17306a0d41df77f5a798fe9877ca6dcf070868b92bc881",
+          "api_decoded_log_bytes": 63587,
+          "api_decoded_log_lines": 512,
+          "api_decoded_log_sha256": "8e1ae6b3441dc0daa8bfe9f3d44141d7a23cfd91b9fb82a6028582ed9623887a",
+          "raw_equal": false,
+          "matches_api_plus_one_trailing_lf": true,
+          "checkout_sha_line": 122
+        },
+        "review_scope": {
+          "tests_rerun": false,
+          "pilots_rerun": false,
+          "project_files_modified": false,
+          "ci_evidence_applies_to": "code tree 0b35362c5ae43ca449f4effce84d7c29884bce3e, actual merge checkout 952e83e6a66ade47adafc95f0525f676021c48c8",
+          "does_not_establish": "Successful CI on docs-only HEAD 77ad782698f67f18297329d3623f3b3222531624; CPU or RSS measurements; current support/source closure/frontier; PR20 evidence."
+        }
+      },
+      "receipt_sha256": "ed78c56556519ec16ddfb5c5025b2eb77da8e0dfdd5e482f2adfd7b84564fe54"
+    }
+  },
+  "local_validation": {
+    "final_before_layout_fix": {
+      "tests": 10,
+      "seconds": 0.694,
+      "result": "OK"
+    },
+    "after_layout_fix": {
+      "tests": 3,
+      "seconds": 0.23,
+      "result": "OK"
+    },
+    "initial_incomplete_attempts": [
+      {
+        "tests": 8,
+        "seconds": 0.663,
+        "result": "FAILED",
+        "failures": 1,
+        "reason": "temporary affected table missing after reopen; repaired"
+      },
+      {
+        "tests": 1,
+        "seconds": 0.035,
+        "result": "ERROR",
+        "reason": "probe fixture initially refuted; guard and fixture repaired"
+      }
+    ]
+  },
+  "limits": [
+    "One complete1908-condition scheme only; probe caps are not generator class restrictions.",
+    "All initial/restored conditions are data-kindC, not1908scientific questions or checked SAT proofs.",
+    "The artificially withheld existing Library cell is not a new fact or a mathematical source withdrawal.",
+    "Hide and restore reclassified all1908conditions; no real selectivity improvement observed.",
+    "The fresh-oracle timer includes full data readbacks and is not a matched baseline for update timing.",
+    "CENSUS control is not comparable to previous full-SAT-report wall/RSS; no new full-pass speedup claimed.",
+    "Original supports are retained; current supports and proof/source dependency closure stay pending.",
+    "Only code/aggregate/hash artifacts are published. SQLite control files stayed on temporary runner, not imported into a persistent production archive.",
+    "max_database_bytes bounds main SQLite pages, not total journal/TEMP or peak RSS.",
+    "No full future candidate frontier, incoming durable-job queue, global compression or whole-class24h estimate."
+  ],
+  "ready_for_full_run": false,
+  "automatic_full_run_started": false
+}

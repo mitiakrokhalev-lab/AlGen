@@ -1,0 +1,304 @@
+{
+  "version": 1,
+  "date_moscow": "2026-11-14",
+  "run": 43553658999,
+  "commit": "2fc7cf11d4829f9a945fc67e13bfd9f8c7a7d2aa",
+  "source_table_run": 43434101930,
+  "scope": "instrumented1024sample of one real scheme; diagnostic, not comparative benchmark",
+  "measurement": {
+    "scheme": "G-6-211-767-769-770-771",
+    "returncode": 0,
+    "stop_reason": "exited",
+    "wall_seconds": 453.455,
+    "cpu_seconds": 448.41603,
+    "peak_rss_kib": 12268224,
+    "sampled_rss_kib": 12218440,
+    "limits": {
+      "seconds": 1200,
+      "rss_gib": 14.0
+    },
+    "legacy_empty_cache": false,
+    "legacy_table_load": false,
+    "legacy_phase_scope": false,
+    "scheme_status": "перепись",
+    "complete": true,
+    "scope": "sampled report value control",
+    "value_probe_valid": true,
+    "probe_sample": 1024,
+    "value_probe": {
+      "scope": "real sampled report, all verdicts with _cols; unique primitive reference; no verdict mutation",
+      "total_minimals": 245672,
+      "sampled_minimals": 1024,
+      "report_rows": 1024,
+      "report_rows_without_cols": 0,
+      "classified": 1024,
+      "canonical_arrays_per_batch": 11,
+      "exact_output": true,
+      "ordered_batch_output_sha256": "aa792edea03109897dfa5dd072415c66e4005d70c9fcba389baeb691f463a1ef",
+      "projection_sha256": "e682fa0cff97948ad7d358aee17dd647f7e42769a89679c0445f12d079167d98",
+      "atom_schema_sha256": "ee08e9308871abf2ebc358674f01052b1289542690b4ecffd5414867ba35265e",
+      "engine_sha256": "4b4aacdae849d03baa4c623abc2dd48ccc67ec3ad74f7f4bbc14c490e75282ab",
+      "rows": 30953,
+      "literal_columns": 562,
+      "kinds": {
+        "C": 646,
+        "A": 193,
+        "B": 185
+      },
+      "kept_kinds": {
+        "C": 587,
+        "A": 65,
+        "B": 109
+      },
+      "kind_by_verdict": {
+        "C / выводится": 584,
+        "A / неизвестно": 193,
+        "B / выводится": 96,
+        "C / неизвестно": 62,
+        "B / неизвестно": 89
+      },
+      "single_events": 36826,
+      "batches": 10,
+      "max_batch_result_bytes": 191952,
+      "budget_retries": 0,
+      "loader": {
+        "wall_seconds": 0.7576486339999633,
+        "cpu_seconds": 0.0020393229999626783
+      },
+      "prepare": {
+        "wall_seconds": 0.004527436999978818,
+        "cpu_seconds": 0.004528917000016008
+      },
+      "native": {
+        "wall_seconds": 0.0366681960001074,
+        "cpu_seconds": 0.03667990700012069
+      },
+      "reference": {
+        "wall_seconds": 0.1799158709999915,
+        "cpu_seconds": 0.1799379619999968
+      },
+      "verification": {
+        "wall_seconds": 0.24151907300017683,
+        "cpu_seconds": 0.05109151600009909
+      },
+      "timing_scope": "both reference/native include canonical numeric assembly; checks/hash/cross-tab separate",
+      "production_speedup_claimed": false,
+      "sat_only_c_enabled": false
+    },
+    "eager_search": false,
+    "early_min": true,
+    "sparse_leaf": true,
+    "python_enum": false,
+    "with_minimal": false,
+    "saved_enumeration": false,
+    "saved_report": false,
+    "cprofile": true,
+    "code_sha256": {
+      "algen/enumerate.py": "3a0f41ce03c25c5bb5f7ce4e56460a565ae7060721b04eec5809acbbb121d3ed",
+      "algen/table.py": "73d25f74f21952ad7c2a9fd93e4b6cec9956651021469d0dce402657b34c3275",
+      "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+      "algen/native_enum.py": "34a761aebfd331382a3c0aa8e31d7a2a170a1162aa1647796e13dabd34e87e83",
+      "algen/native_enum.cpp": "43d9aede18999a35ed480790a4736aca39b8131eb5a5c9a41d194ad1f78d04cb",
+      "algen/fast.py": "9f67f06b4da0d12e13c35825c4a163f6c618f3ecd2eb355466737c92e6958162",
+      "tools/profile_memory.py": "a6aeebbf3900033365b60b6d3a7cb6b20ed95238b66b318ff053019e29e451ec",
+      "algen/value_classify.py": "85492e8671cfa89fec0aa6ab2941e5dac2fdecdb5293b7367f423143f827e111",
+      "algen/native_values.cpp": "7dd19cf51c2e26493d386c225b478c78e19d297ef9e286752eae6ec95e24a337",
+      "tools/probe_value_classify.py": "bf5a459cb3a7b86fcc44fdceeac7586f56106aedab8198a9962808f53684a4d0",
+      "tools/bench_value_classify.py": "482da28a6306b030b79fe82258d8a15475f883c89c8dd8b894da88812ed2f9aa"
+    }
+  },
+  "artifact_audit": {
+    "run": 43553658999,
+    "artifact_id": 14097347715,
+    "zip_bytes": 247705169,
+    "zip_sha256": "54f7b3e1fa0fea8ad6b23ee6e45062181db28f0b7d8bd4cbbfb8b90264a99d6a",
+    "zip_sha256_verified": true,
+    "files": [
+      {
+        "path": "codex-profile-G6211/measurement.json",
+        "bytes": 3760,
+        "compressed_bytes": 1724,
+        "crc32": "08f9200d",
+        "read_and_crc_verified": true,
+        "sha256": "ab09008ed6dccbcbaea2f68c5c5b6706e261c014717cd4eaf51757cea7e92f6d"
+      },
+      {
+        "path": "codex-profile-G6211/process.log",
+        "bytes": 127,
+        "compressed_bytes": 109,
+        "crc32": "5a029a01",
+        "read_and_crc_verified": true,
+        "sha256": "63566858dec247f756de83e75456cbd6301ab56d9bc515ce6e48af8d8b3c34a4"
+      },
+      {
+        "path": "codex-profile-G6211/results/G-6-211-767-769-770-771.json",
+        "bytes": 338918,
+        "compressed_bytes": 31102,
+        "crc32": "bb3f8bc3",
+        "read_and_crc_verified": true,
+        "sha256": "754efe88f694f7432968867aac729a82a0a58d333de2b69363b30f2993473613"
+      },
+      {
+        "path": "codex-profile-G6211/results/G-6-211-767-769-770-771.prof.txt",
+        "bytes": 8198,
+        "compressed_bytes": 1420,
+        "crc32": "1227280e",
+        "read_and_crc_verified": true,
+        "sha256": "76dcf81925989f7329c2971cd01aa786818f4c3d73f9e9dcf35a4943d7b24292"
+      },
+      {
+        "path": "codex-profile-G6211/results/G-6-211-767-769-770-771.txt",
+        "bytes": 14126,
+        "compressed_bytes": 2260,
+        "crc32": "6d746dab",
+        "read_and_crc_verified": false
+      },
+      {
+        "path": "codex-profile-G6211/results/G-6-211-767-769-770-771.vc.json.gz",
+        "bytes": 36870,
+        "compressed_bytes": 36885,
+        "crc32": "ad005249",
+        "read_and_crc_verified": false
+      },
+      {
+        "path": "codex-profile-G6211/results/_план-1-1.json",
+        "bytes": 43,
+        "compressed_bytes": 46,
+        "crc32": "dd066e72",
+        "read_and_crc_verified": false
+      },
+      {
+        "path": "codex-profile-G6211/results/теория-в2c475bfcde9ba3c.meta",
+        "bytes": 54,
+        "compressed_bytes": 44,
+        "crc32": "808079fb",
+        "read_and_crc_verified": true,
+        "sha256": "a9f11bab868860e42fd09f3bb744191274d098a1b7a8ff2f8fdbe53300d20ede"
+      },
+      {
+        "path": "codex-profile-G6211/results/теория-в2c475bfcde9ba3c.npy",
+        "bytes": 274447776,
+        "compressed_bytes": 247611819,
+        "crc32": "963672d9",
+        "read_and_crc_verified": false
+      },
+      {
+        "path": "codex-profile-G6211/rss.jsonl",
+        "bytes": 103558,
+        "compressed_bytes": 12088,
+        "crc32": "1b765700",
+        "read_and_crc_verified": true,
+        "sha256": "df48c822e462e003c4411d8efbf965fffd390786757ce0182328784fbc25fb87"
+      },
+      {
+        "path": "codex-profile-G6211/stages.jsonl",
+        "bytes": 3295,
+        "compressed_bytes": 1009,
+        "crc32": "74b5a0c6",
+        "read_and_crc_verified": true,
+        "sha256": "3d9497bb343baeb2fe11f013b3f825afb53c0f3882c11aa9af3a75cd98b97e89"
+      },
+      {
+        "path": "codex-profile-G6211/value-probe.json",
+        "bytes": 1833,
+        "compressed_bytes": 881,
+        "crc32": "7d7115a8",
+        "read_and_crc_verified": true,
+        "sha256": "c415493536db04108d9a91e0b21dddf2d50702b1f0989b931bd93d7926cf9cc0"
+      },
+      {
+        "path": "commit.txt",
+        "bytes": 41,
+        "compressed_bytes": 41,
+        "crc32": "82a4bf9b",
+        "read_and_crc_verified": true,
+        "sha256": "90a80f7e8f1cc3dce457a400390f5ecc8f0bf3e8627d076f05af14e2dae3401d"
+      },
+      {
+        "path": "exit.txt",
+        "bytes": 7,
+        "compressed_bytes": 9,
+        "crc32": "c0ccb849",
+        "read_and_crc_verified": true,
+        "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061"
+      },
+      {
+        "path": "time.txt",
+        "bytes": 998,
+        "compressed_bytes": 544,
+        "crc32": "16dbeb2a",
+        "read_and_crc_verified": true,
+        "sha256": "d86f8f52ad8cc4a12f58c2c9659a30cfc61d4f99b0fb56e9a4ae25a41f36dd5b"
+      },
+      {
+        "path": "verdict.json",
+        "bytes": 6584,
+        "compressed_bytes": 2482,
+        "crc32": "9b09d600",
+        "read_and_crc_verified": true,
+        "sha256": "1c0850c0c9c11275fd06a8f791703706a1a971cac4e4a3fc7d235fa4e6f0a501"
+      }
+    ],
+    "scope": "full ZIP SHA; CRC and contents for selected small primary receipts, not unselected caches or full raw report",
+    "analysis_wall_seconds": 7.481458905000181,
+    "analysis_cpu_seconds": 1.512937375,
+    "analysis_peak_rss_kib": 501696
+  },
+  "profile_text_sha256": "76dcf81925989f7329c2971cd01aa786818f4c3d73f9e9dcf35a4943d7b24292",
+  "cprofile": {
+    "total_seconds": 287.359,
+    "total_calls": 198020396,
+    "compress_cumulative_seconds": 166.982,
+    "solve_limited_calls": 1124,
+    "solve_limited_internal_seconds": 111.447,
+    "solve_limited_combines": [
+      "SF",
+      "SQ",
+      "SB"
+    ],
+    "normal_solve_calls": 921,
+    "normal_solve_internal_seconds": 57.192,
+    "new_full_solver_cumulative_seconds": 47.489,
+    "native_enum_cumulative_seconds": 27.071,
+    "bank_add_cumulative_seconds": 9.329,
+    "get_model_cumulative_seconds": 11.088
+  },
+  "caveats": [
+    "nested cumulative times must not be added",
+    "base clause-hash/sort setup occurs before this profile",
+    "SF-only cost not isolated by these numbers",
+    "no production/global speedup inferred"
+  ],
+  "independent_review": {
+    "approved": true,
+    "scope": "small primary CRC/SHA audit and diagnostic profile interpretation; not comparable timing",
+    "run": 43553658999,
+    "verified_primary_files": 12,
+    "profile_bytes": 8198,
+    "profile_sha256": "76dcf81925989f7329c2971cd01aa786818f4c3d73f9e9dcf35a4943d7b24292",
+    "sample": 1024,
+    "kinds": {
+      "C": 646,
+      "A": 193,
+      "B": 185
+    },
+    "B_proved": 96,
+    "projection_sha256": "e682fa0cff97948ad7d358aee17dd647f7e42769a89679c0445f12d079167d98",
+    "instrumented_profile_seconds": 287.359,
+    "compression_cumulative_seconds": 166.982,
+    "all_solve_limited_calls": 1124,
+    "all_solve_limited_C_seconds": 111.447,
+    "all_normal_solve_calls": 921,
+    "all_normal_solve_C_seconds": 57.192,
+    "compression_theory_solver_construction_cumulative_seconds": 47.489,
+    "full_control": 453.455,
+    "CPU_seconds": 448.41603,
+    "peak_rss_kib": 12268224,
+    "interpretation": [
+      "solve_limited aggregates SF, SQ and SB; profile does not isolate all111.447seconds as SF",
+      "cumulative times are nested and must not be summed as disjoint stages",
+      "base theory clause hashing/sorting occurs before per-scheme cProfile",
+      "compact SF is a justified hypothesis for a matched experiment; no speedup established yet"
+    ]
+  }
+}
