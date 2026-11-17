@@ -243,7 +243,8 @@ FOUND := List(QS, q -> 0);
 OUT := OutputTextFile("{out_path}", false);
 SetPrintFormattingStatus(OUT, false);
 for n in [2..{max(upto, odd_upto)}] do
-  if NrSmallGroups(n) <= {per_order} then
+  # порядок без библиотеки малых групп (512, 1024, … в пакете дистрибутива) — пропуск, а не обрыв перебора
+  if SmallGroupsAvailable(n) and NrSmallGroups(n) <= {per_order} then
     for i in [1..NrSmallGroups(n)] do
       G := SmallGroup(n, i);
       for j in [1..Length(QS)] do
