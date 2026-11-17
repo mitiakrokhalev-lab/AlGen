@@ -19,6 +19,12 @@ class CRefuteTest(unittest.TestCase):
         self.assertIn("EmbedsG(", body)
         self.assertIn("IsPrimeInt(Size(G))", body)
 
+    def test_out_is_quotient_of_aut_by_inner(self):
+        body, dear = translate("embeds(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))), inn(G))")
+        self.assertTrue(dear)
+        self.assertIn("OutP(G)", body)
+        self.assertNotIn("QuotientBy(t1, InnQ", body)  # Inn — не отдельная группа в факторе Aut/Inn
+
     def test_unsupported_is_reported(self):
         with self.assertRaises(Exception):
             translate("whitehead(G) & indecomposable(G)")

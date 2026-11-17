@@ -19,8 +19,12 @@ import tempfile
 from pathlib import Path
 
 GAP_HEAD = r'''
-OnBreak := function() FORCE_QUIT_GAP(1); end;
+BreakOnError := false;  # ошибка в предикате — в CALL_WITH_CATCH, не в цикл прерывания
 QuotientBy := function(X, N) return Image(NaturalHomomorphismByNormalSubgroup(X, N)); end;
+OutP := function(X) local A;
+  A := AutomorphismGroup(X);
+  return Image(IsomorphismPermGroup(QuotientBy(A, InnerAutomorphismsAutomorphismGroup(A))));
+end;
 OrderPQ := function(n) local f; f := Factors(n); return Length(f) = 2 and f[1] <> f[2]; end;
 OrderP2 := function(n) local f; f := Factors(n); return Length(f) = 2 and f[1] = f[2]; end;
 PrimeOrders := X -> ForAll(ConjugacyClasses(X), c -> Order(Representative(c)) = 1 or IsPrimeInt(Order(Representative(c))));
@@ -114,6 +118,15 @@ def translate(conj):
         key = str(t)
         if key in names:
             return names[key]
+        # Out(X) = Aut(X)/Inn(X): Inn — подгруппа Aut, а не отдельная группа X/Z(X)
+        if (isinstance(t, App) and t.op == "quotient" and isinstance(t.args[0], App) and t.args[0].op == "aut"
+                and isinstance(t.args[1], App) and t.args[1].op == "inn" and t.args[0].args == t.args[1].args):
+            x = term(t.args[0].args[0])
+            expensive[0] = True
+            var = f"t{len(names) + 1}"
+            names[key] = var
+            lines.append(f"  {var} := OutP({x});")
+            return var
         if not isinstance(t, App) or t.op not in CONS:
             raise Unsupported(f"конструкция {getattr(t, 'op', t)}")
         n, tpl, _kind, dear = CONS[t.op]
