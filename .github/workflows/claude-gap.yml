@@ -1,0 +1,50 @@
+name: claude gap
+
+# Поиск конечных контрпримеров к вопросам человеку (вид C) среди малых групп GAP: пуш в
+# claude-gap-*; в .github/claude-gap.json — {"questions": "путь к файлу вопросов в репозитории",
+# "args": "--до 1000 --нечётные-до 2000 …"}. Выход — ветка results-<ветка> (tool-out/c-refute.jsonl).
+
+on:
+  push:
+    branches: ["claude-gap-*"]
+
+permissions:
+  contents: write
+
+jobs:
+  refute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: GAP
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends gap
+          sudo apt-get install -y -q --no-install-recommends gap-smallgrp || true
+          echo 'Print(NrSmallGroups(64), " ", IdGroupsAvailable(20160), "\n");' | gap -q
+      - name: Поиск
+        run: |
+          mkdir -p tool-out
+          Q=$(python3 -c "import json; print(json.load(open('.github/claude-gap.json'))['questions'])")
+          ARGS=$(python3 -c "import json; print(json.load(open('.github/claude-gap.json')).get('args', ''))")
+          cd py
+          /usr/bin/time -v python3 -B -m tools.c_refute "../$Q" --выход ../tool-out/c-refute.jsonl $ARGS \
+            --только-скрипт ../tool-out/c-refute.g 2> ../tool-out/time.txt || true
+          python3 -B -m tools.c_refute "../$Q" --выход ../tool-out/c-refute.jsonl $ARGS --журнал ../tool-out/gap.log \
+            2>> ../tool-out/time.txt || true
+          tail -c 3000 ../tool-out/gap.log || true
+      - name: В ветку results-<ветка>
+        if: always()
+        run: |
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e tool-out
+          git add tool-out
+          git commit -qm "Поиск контрпримеров ${GITHUB_REF_NAME}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"

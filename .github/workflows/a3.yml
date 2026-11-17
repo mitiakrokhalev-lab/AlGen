@@ -1,0 +1,83 @@
+name: a3
+
+# A3: перебор k ⩽ 2 по всей таблице базы без схем + фильтр выводимости (tools/a3full.py).
+# Таблицы берутся из готового запуска build (TABLES_RUN), код algen — из коммита, которым
+# они построены (TABLES_SHA), иначе отпечаток таблиц не сойдётся.
+# Результат — JSON по базам в ветке «results-<ветка>».
+# Запуск: пуш в ветку «a3-…».
+
+on:
+  push:
+    branches: ["a3-*"]
+
+env:
+  TABLES_RUN: "41453989443"
+  TABLES_SHA: "28e55e517cf002d2945f36c9cfd6fa7448b42f0d"
+  SKIP: ""
+  SAT_FRAC: "0.002"
+
+jobs:
+  a3:
+    permissions:
+      actions: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        base: [G, GN, AB]
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TABLES_SHA }}
+          path: old
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: tab-*
+          path: tab
+          merge-multiple: true
+          run-id: ${{ env.TABLES_RUN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: перебор по всей таблице
+        continue-on-error: true
+        run: |
+          mkdir -p out
+          ls tab | grep "^${{ matrix.base }}\." | head -3
+          ALGEN_PY=old/py timeout 330m python3 tools/a3full.py ${{ matrix.base }} tab out 4 $SAT_FRAC > out/a3-${{ matrix.base }}.log 2>&1 || echo "a3 ${{ matrix.base }}: $?" >> out/a3-${{ matrix.base }}.log
+          tail -n 40 out/a3-${{ matrix.base }}.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a3-${{ matrix.base }}
+          path: out
+          retention-days: 30
+
+  results:
+    needs: a3
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: a3-*
+          path: keep
+          merge-multiple: true
+      - name: результаты в ветку «results-…»
+        run: |
+          ls -la keep
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e keep
+          git add keep
+          git commit -qm "A3 по всей таблице: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"

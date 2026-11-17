@@ -1,0 +1,39 @@
+name: ident
+
+# Сверка перебора схемы у нового и старого кода: выдача (отпечаток всех строк
+# отчёта) должна совпасть бит в бит, время — по фазам. OLD — коммит до ускорения.
+# Запуск: пуш в ветку «ident-…».
+
+on:
+  push:
+    branches: ["ident-*"]
+
+env:
+  ALGEN_FAST: "1"
+  OLD: "5b4b0d2"
+
+jobs:
+  ident:
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        code: [new]  # старый код — в запуске ident-1 (41753917521)
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: старый код перебора
+        if: matrix.code == 'old'
+        run: git checkout $OLD -- py/algen/logic.py py/algen/table.py py/algen/enumerate.py py/algen/library.py py/algen/fast.py
+      - name: отпечаток выдачи
+        run: |
+          cd py
+          timeout 340m python3 -m algen.ident 3 "∀ G : Grp" "center(G); commutator(G)" 2>&1 | tail -25
