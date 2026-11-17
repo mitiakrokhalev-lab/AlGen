@@ -36,6 +36,8 @@ jobs:
           assert 1 <= len(ids) <= 20 and len(ids) == len(set(ids))
           for c in p['cases']:
               assert 0 < c['seconds'] <= 5400 and 0 < c['rss_gib'] <= 15, c
+              # пара — ровно «bk» или «kb» (иное: ноль прогонов или перезапись <case>-b)
+              assert c.get('pair') in (None, 'bk', 'kb') and not (c.get('pair') and c.get('mode') != 'table'), c
           with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
               f.write('cases=' + json.dumps(p['cases'], ensure_ascii=False) + '\n')
               f.write(f"source={p['source_run']}\n")
@@ -247,7 +249,9 @@ jobs:
                       rec[name] = json.loads(p.read_text()) if name.endswith('.json') else p.read_text().strip()
               for t in sorted(Path(d).glob('time*.txt')):  # time.txt; у пар — time-b.txt, time-k.txt
                   rec[t.stem] = [l.strip() for l in t.read_text(errors='replace').splitlines()
-                                 if any(k in l for k in ('Maximum resident', 'Elapsed (wall', 'User time', 'System time', 'Exit status'))]
+                                 if any(k in l for k in ('Maximum resident', 'Elapsed (wall', 'User time', 'System time', 'Exit status',
+                                                         # признаки чужой нагрузки и свопа на машине (для пар)
+                                                         'Percent of CPU', 'Major (requiring', 'Involuntary context'))]
               for e in sorted(Path(d).glob('exit-*.txt')):
                   rec[e.name] = e.read_text().strip()
               for j in sorted(glob.glob(d + '/*/G-*.json')):
