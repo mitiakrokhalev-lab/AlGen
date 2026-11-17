@@ -37,7 +37,7 @@ jobs:
           git config user.name "algen-bot"
           git config user.email "algen-bot@users.noreply.github.com"
           git checkout --orphan "gapdata-${GITHUB_REF_NAME}"
-          git rm -rq --cached . && git clean -fdq
+          git rm -rqf --cached . && git clean -fdq  # -f: расчёт меняет отслеживаемые data/finite/*.jsonl — без него rm отказывал и в ветку уходил весь репозиторий
           cp /tmp/out/*.jsonl .
           git add *.jsonl
           git commit -qm "Данные GAP: ${GITHUB_REF_NAME}, запуск ${GITHUB_RUN_ID}"
