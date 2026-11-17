@@ -575,47 +575,61 @@ class Library:
         Φ, G с факторами и Aut/Out — data/finite/grp-chars.jsonl (считает GAP,
         `finite.py --характеристические`). Список подгрупп неполный. Группа,
         которой нет в библиотеке, заводится записью только со свойствами."""
-        for k, r in load_chars().items():
-            o = self.obj.get(k)
-            if o is None or o["подгруппы"] is not None:
-                continue
-            n = r["order"]
+        # Несколько проходов до неподвижной точки: запись группы, которую заводит другая запись
+        # (фактор, подгруппа, Aut/Out большей группы), в порядке файла может идти раньше её
+        # «родителя» — за один проход она пропускалась (ревью 17.11: 183 из 377 записей).
+        pending = load_chars()
+        while pending:
+            applied = []
+            for k, r in pending.items():
+                o = self.obj.get(k)
+                if o is None:
+                    continue
+                if o["подгруппы"] is not None:
+                    applied.append(k)
+                    continue
+                n = r["order"]
 
-            def obj_of(order, key, props, name):
-                if order == 1:
-                    return "1:1"
-                if order == n:
-                    return k
-                if key and key in self.obj:
-                    return key
-                ak = key or name
-                if ak not in self.obj:
-                    props = dict(props)
-                    for p, f in FINITE_DERIVED.items():
-                        props.setdefault(p, f(props))
-                    for p, v in arith_props(order).items():
+                def obj_of(order, key, props, name):
+                    if order == 1:
+                        return "1:1"
+                    if order == n:
+                        return k
+                    if key and key in self.obj:
+                        return key
+                    ak = key or name
+                    if ak not in self.obj:
+                        props = dict(props)
+                        for p, f in FINITE_DERIVED.items():
+                            props.setdefault(p, f(props))
+                        for p, v in arith_props(order).items():
+                            props.setdefault(p, v)
+                        self.obj[ak] = {"key": ak, "имя": ak, "конечная": True, "свойства": props,
+                                        "подгруппы": None, "без произведений": True,
+                                        **({} if key else {"неканонический": True})}
+                    return ak
+                role = {r["center"]: "Z", r["commutator"]: "G′", r["frattini"]: "Φ"}
+                subs = []
+                for i, x in enumerate(r["subs"]):
+                    name = role.get(i, str(i))
+                    g = obj_of(x["order"], x["group"], x["gprops"], f"{x['order']}:{name}({k})")
+                    q = obj_of(x["qorder"], x["quotient"], x["qprops"], f"{x['qorder']}:{k}/{name}")
+                    props = dict(x["props"])
+                    # нормальная H максимальна ⇔ |G/H| простое (chars.g до 1.11 писал «G/H проста»)
+                    props["maximal"] = arith_props(x["qorder"])["prime-order"]
+                    for p, v in arith_sub_props(n, x["order"]).items():
                         props.setdefault(p, v)
-                    self.obj[ak] = {"key": ak, "имя": ak, "конечная": True, "свойства": props,
-                                    "подгруппы": None, "без произведений": True,
-                                    **({} if key else {"неканонический": True})}
-                return ak
-            role = {r["center"]: "Z", r["commutator"]: "G′", r["frattini"]: "Φ"}
-            subs = []
-            for i, x in enumerate(r["subs"]):
-                name = role.get(i, str(i))
-                g = obj_of(x["order"], x["group"], x["gprops"], f"{x['order']}:{name}({k})")
-                q = obj_of(x["qorder"], x["quotient"], x["qprops"], f"{x['qorder']}:{k}/{name}")
-                props = dict(x["props"])
-                # нормальная H максимальна ⇔ |G/H| простое (chars.g до 1.11 писал «G/H проста»)
-                props["maximal"] = arith_props(x["qorder"])["prime-order"]
-                for p, v in arith_sub_props(n, x["order"]).items():
-                    props.setdefault(p, v)
-                subs.append({"id": str(i), "≅": g, "свойства": props, "фактор": q, "над": [str(j) for j in x["le"]]})
-            o["подгруппы"] = subs
-            o["подгруппы неполные"] = True
-            o["центр"], o["коммутант"], o["фраттини"] = str(r["center"]), str(r["commutator"]), str(r["frattini"])
-            if "aut_order" in r and "aut" not in o:
-                self._apply_aut(k, o, r)
+                    subs.append({"id": str(i), "≅": g, "свойства": props, "фактор": q, "над": [str(j) for j in x["le"]]})
+                o["подгруппы"] = subs
+                o["подгруппы неполные"] = True
+                o["центр"], o["коммутант"], o["фраттини"] = str(r["center"]), str(r["commutator"]), str(r["frattini"])
+                if "aut_order" in r and "aut" not in o:
+                    self._apply_aut(k, o, r)
+                applied.append(k)
+            if not applied:
+                break
+            for k in applied:
+                del pending[k]
 
     @staticmethod
     def _center_commutator(o):

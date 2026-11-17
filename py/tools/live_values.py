@@ -36,19 +36,32 @@ def packets_from_rows(old, new, reference, kind="library"):
     """Пакеты для строк, у которых в новых таблицах прибавились значения: все известные значения
     новой строки (прежние + новые). Расхождение значения — ошибка (новое знание не отменяет старое)."""
     a, b = read_rows(old), read_rows(new)
-    packets, added, conflicts = [], 0, []
+    packets, added, conflicts, lost = [], 0, [], []
     for key, (assignment, where, facts) in b.items():
         prev = a.get(key, (None, None, {}))[2]
         flips = [x for x, v in prev.items() if x in facts and facts[x] != v]
         if flips:
             conflicts.append((where, flips[:5]))
             continue
+        gone = [x for x in prev if x not in facts and x in b_names(b)]
+        if gone:  # значение было и пропало — не новое знание; в архив не подаётся
+            lost.append((where, gone[:5]))
         gain = [x for x in facts if x not in prev]
         if gain:
             added += len(gain)
             packets.append({"key": key, "assignment": assignment, "facts": facts,
                             "source": {"kind": kind, "reference": reference, "where": where}})
+    packets_from_rows.lost = lost
     return packets, added, conflicts
+
+
+def b_names(rows, _cache={}):
+    """Имена атомов снимка (по фактам строк) — чтобы «пропавшим» не считать атом, которого нет в схеме."""
+    k = id(rows)
+    if k not in _cache:
+        _cache.clear()
+        _cache[k] = {x for _a, _w, facts in rows.values() for x in facts}
+    return _cache[k]
 
 
 def reclassify(arc, ctx, rows_path):
@@ -102,9 +115,13 @@ def run(db, export=None, values=None, out=print):
             ctx = arc.db.execute("SELECT id FROM contexts ORDER BY rowid LIMIT 1").fetchone()[0]
         before = arc.stats(ctx)
         out(json.dumps({"до": before["states"]}, ensure_ascii=False))
-        refuted = []
+        refuted, failed = [], []
         for packet in values or []:
-            arc.apply_example(ctx, packet)
+            try:
+                arc.apply_example(ctx, packet)
+            except ValueError as e:  # пакет не принят — дальше, с отчётом (архив откатывает транзакцию)
+                failed.append((packet.get("key"), str(e)[:200]))
+                continue
             for qid, payload in arc.db.execute(
                     "SELECT q.id, q.payload FROM refutations r JOIN examples e ON e.id = r.example "
                     "JOIN questions q ON q.id = r.question WHERE e.active = 1 AND e.name = ? AND q.context = ?",
@@ -112,7 +129,8 @@ def run(db, export=None, values=None, out=print):
                 p = json.loads(payload)
                 refuted.append({"вопрос": " & ".join(p.get("запрет", [])), "вид": p.get("вид"), "строка": packet["key"]})
         after = arc.stats(ctx)
-        out(json.dumps({"после": after["states"], "задания": after["pending"]}, ensure_ascii=False))
+        out(json.dumps({"после": after["states"], "задания": after["pending"], "не принято пакетов": len(failed),
+                        "примеры": failed[:3]}, ensure_ascii=False))
         for r in refuted:
             out(json.dumps(r, ensure_ascii=False))
         return before, after, refuted
@@ -131,8 +149,10 @@ def main(argv=None):
     values = json.load(open(a.значения, encoding="utf-8")) if a.значения else []
     if a.rows_old and a.rows_new:
         packets, added, conflicts = packets_from_rows(a.rows_old, a.rows_new, a.источник)
+        lost = getattr(packets_from_rows, "lost", [])
         print(json.dumps({"строк с новыми значениями": len(packets), "новых значений": added,
-                          "расхождений": len(conflicts), "примеры расхождений": conflicts[:5]}, ensure_ascii=False))
+                          "расхождений": len(conflicts), "примеры расхождений": conflicts[:5],
+                          "строк с пропавшими значениями": len(lost), "примеры пропавших": lost[:5]}, ensure_ascii=False))
         values += packets
     run(a.архив, a.выгрузка, values)
     if a.переразметка and a.rows_new:

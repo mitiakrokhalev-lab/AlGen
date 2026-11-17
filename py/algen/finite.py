@@ -21,6 +21,7 @@ import json
 import math
 import os
 import subprocess
+import sys
 import tempfile
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -326,13 +327,27 @@ def load_homs(path=HOMS):
         return {r["key"]: r for r in map(json.loads, f)}
 
 
+def _jsonl_records(path):
+    """Записи JSONL; обрезанная строка (обрыв процесса посреди дописывания) пропускается с
+    предупреждением, а не роняет загрузку библиотеки."""
+    out = []
+    with open(path, encoding="utf-8") as f:
+        for n, line in enumerate(f, 1):
+            if not line.strip():
+                continue
+            try:
+                out.append(json.loads(line))
+            except ValueError:
+                print(f"{path}: строка {n} не разбирается — пропущена", file=sys.stderr)
+    return out
+
+
 def load_chars(path=None):
     """key → запись о подгруппах 1, Z, G′, Φ и Aut/Out (grp-chars.jsonl), если посчитано."""
     path = path or Path(__file__).resolve().parents[2] / "data" / "finite" / "grp-chars.jsonl"
     if not Path(path).exists():
         return {}
-    with open(path) as f:
-        return {r["key"]: r for r in map(json.loads, f)}
+    return {r["key"]: r for r in _jsonl_records(path)}
 
 
 def library_finite_keys():
@@ -554,17 +569,22 @@ def build_chars(jobs, per=300, chunk=4, max_order=None, total=None, share=(0, 1)
     """Характеристические подгруппы и Aut/Out (gap/chars.g) → grp-chars.jsonl.
     Пачка из chunk групп — один процесс GAP не дольше per секунд на группу;
     записанное до остановки сохраняется (GAP пишет построчно, пачка — сразу в CHARS).
-    total — общий срок (секунд), share = (i, n) — только задания с номерами ≡ i (mod n)."""
+    total — общий срок (секунд) от начала вызова; share = (i, n) — задания с crc32(ключа) ≡ i (mod n):
+    доля не зависит от того, что уже посчитано (раньше срез шёл после отбора — повторный запуск
+    доли брал другие задания)."""
+    import zlib
+    start = time.time()
+    deadline = start + total if total else None
     todo = chars_jobs(max_order)
+    n_jobs = len(todo)
+    todo = [j for j in todo if zlib.crc32(j[0].encode()) % share[1] == share[0]]
     done = {}
     if CHARS.exists():
-        done = {r["key"]: r for r in map(json.loads, CHARS.open())}
+        done = {r["key"]: r for r in _jsonl_records(CHARS)}
     todo = [j for j in todo if j[0] not in done]
-    todo = todo[share[0]::share[1]]
     chunks = [todo[i:i + chunk] for i in range(0, len(todo), chunk)]
     import threading
     lock = threading.Lock()
-    deadline = time.time() + total if total else None
 
     def job_gap(j):
         if j[3] == "expr":
@@ -577,8 +597,10 @@ def build_chars(jobs, per=300, chunk=4, max_order=None, total=None, share=(0, 1)
             path = os.path.join(tmp, f"{i}.jsonl")
             js = ", ".join(job_gap(j) for j in chunks[i])
             prog = f'JOBS:=[{js}];; OUT:="{path}";; Read("{CHARS_SCRIPT}");\n'
+            # пачка не переживает общий срок; память GAP — 6 ГБ (две нити на 16 ГБ раннера)
+            limit = per * len(chunks[i]) if not deadline else max(60, min(per * len(chunks[i]), deadline - time.time()))
             try:
-                subprocess.run(["gap", "-q", "-o", "8g"], input=prog, text=True, timeout=per * len(chunks[i]),
+                subprocess.run(["gap", "-q", "-o", "6g"], input=prog, text=True, timeout=limit,
                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             except subprocess.TimeoutExpired:
                 pass
@@ -595,16 +617,15 @@ def build_chars(jobs, per=300, chunk=4, max_order=None, total=None, share=(0, 1)
         with ThreadPoolExecutor(jobs) as ex:
             list(ex.map(one, range(len(chunks))))
     if CHARS.exists():
-        for line in CHARS.open():
-            try:
-                r = json.loads(line)
-            except ValueError:
-                continue
+        for r in _jsonl_records(CHARS):
             done[r["key"]] = r
-    with CHARS.open("w") as out:
+    tmp = CHARS.with_suffix(".tmp")
+    with tmp.open("w") as out:
         for k in sorted(done, key=lambda k: (int(k.split(":")[0]), k)):
             out.write(json.dumps(done[k], ensure_ascii=False, separators=(",", ":")) + "\n")
-    print(f"посчитано {len(done)} из {len(chars_jobs(max_order))}")
+    os.replace(tmp, CHARS)
+    print(f"записей {len(done)}; заданий было {n_jobs}, в доле {share[0]}/{share[1]} — {len(todo)}, "
+          f"{round(time.time() - start)} с")
 
 
 if __name__ == "__main__":

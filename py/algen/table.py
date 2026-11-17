@@ -1314,19 +1314,21 @@ def _write_row_facts(form, dst, fp):
     import gzip
     from .enumerate import atom_name
     from .live import digest
-    idx = [i for i, a in enumerate(form.atoms) if a[0] != "pair"]
+    idx = np.array([i for i, a in enumerate(form.atoms) if a[0] != "pair"], dtype=np.int64)
     names = [atom_name(form.atoms[i]) for i in idx]
     m = np.asarray(form.m)
+    yes, no = m[:, 2 * idx], m[:, 2 * idx + 1]  # векторно: строки × атомы
+    both = np.flatnonzero((yes & no).any(axis=1))
+    if len(both):  # как library_row: строка не может утверждать и отрицать атом
+        raise ValueError(f"строка {int(both[0])} одновременно утверждает и отрицает атом")
     tmp = dst.with_suffix(".tmp")
     with gzip.open(tmp, "wt", encoding="utf-8") as f:
         f.write(json.dumps({"атомы": names, "библиотека": fp}, ensure_ascii=False) + "\n")
         for r in range(len(form.envs)):
             assignment = {str(t): im for t, im in form.envs[r].items()}
-            row = m[r]
-            t = [j for j, i in enumerate(idx) if row[2 * i]]
-            fl = [j for j, i in enumerate(idx) if row[2 * i + 1]]
             f.write(json.dumps({"key": digest(assignment), "assignment": assignment, "where": form.where(r),
-                                "t": t, "f": fl}, ensure_ascii=False, default=list) + "\n")
+                                "t": np.flatnonzero(yes[r]).tolist(), "f": np.flatnonzero(no[r]).tolist()},
+                               ensure_ascii=False, default=list) + "\n")
     os.replace(tmp, dst)
 
 
@@ -1352,7 +1354,10 @@ def _one(job):
     try:
         form = view(_STATE["forms"][base], terms)
         if os.environ.get("ALGEN_ROW_FACTS") == "1":
-            _write_row_facts(form, Path(outdir) / f"{sid}.rows.jsonl.gz", fp)
+            try:  # снимок строк — для опыта; его сбой не делает схему «ошибкой»
+                _write_row_facts(form, Path(outdir) / f"{sid}.rows.jsonl.gz", fp)
+            except Exception:
+                err.write("снимок строк не записан:\n" + traceback.format_exc())
         from . import fast
         phase_theory = getattr(getattr(form, "sc", None), "T", None)
         phase_atoms = getattr(form, "atoms", None)

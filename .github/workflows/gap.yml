@@ -31,6 +31,7 @@ jobs:
           cd py
           python3 -m algen.finite $(cat ../.github/gap-command 2>/dev/null || echo --авт) --нитей 4
       - name: результат в ветку «gapdata-…»
+        if: always()  # и после обрыва расчёта по сроку — посчитанное не теряется
         run: |
           mkdir -p /tmp/out && cp data/finite/*.jsonl /tmp/out/
           git config user.name "algen-bot"
