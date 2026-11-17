@@ -66,6 +66,37 @@ class LiveValuesTest(unittest.TestCase):
             packets, added, conflicts = packets_from_rows(old, new, "тест")
             self.assertEqual((len(packets), len(conflicts)), (0, 1))
 
+    def test_reclassify_by_new_rows(self):
+        from types import SimpleNamespace
+        import numpy as np
+        from algen import table as T
+        from algen.logic import Var
+        from tools.live_values import reclassify
+        G = Var("G")
+        atoms = [("p", x, G) for x in "abc"]
+
+        def form(rows):
+            m = np.zeros((len(rows), 6), dtype=bool)
+            for r, row in enumerate(rows):
+                for i, v in enumerate(row):
+                    if v is not None:
+                        m[r, 2 * i + (0 if v else 1)] = True
+            return SimpleNamespace(atoms=atoms, m=m, envs=[{G: ("obj", f"g{r}")} for r in range(len(rows))],
+                                   where=lambda r: f"G = g{r}")
+        with tempfile.TemporaryDirectory() as d:
+            exp = Path(d) / "S.archive.jsonl.gz"
+            write_report(exp, HEADER, REPORT)
+            rows = Path(d) / "new.rows.jsonl.gz"
+            # вопрос 1 (a, ¬c): в строке g0 c стало «верно» — строка выбывает; g1: a неизвестно, c ложно — A
+            # вопрос 2 (b, c): был C; в g0 c стало «верно», b неизвестно — теперь A (ждёт b у g0), g1 выбывает
+            T._write_row_facts(form([(True, None, True), (None, False, False)]), rows, "fp")
+            with LiveArchive(Path(d) / "a.db") as arc:
+                with gzip.open(exp, "rt", encoding="utf-8") as f:
+                    header = json.loads(next(f))["header"]
+                    ctx = arc.import_report(header, (json.loads(s) for s in f if s.strip()))
+                res = reclassify(arc, ctx, rows)
+            self.assertEqual(sorted((o, n, k) for o, n, k in res.values()), [("A", "A", 1), ("C", "A", 1)])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -51,6 +51,45 @@ def packets_from_rows(old, new, reference, kind="library"):
     return packets, added, conflicts
 
 
+def reclassify(arc, ctx, rows_path):
+    """Переразметка A/B/C открытых и свёрнутых вопросов архива по снимку строк (без перепрогона):
+    формула варианта (запрет + закреплённые) против известных значений строк — как в
+    algen/knowledge.py. Возвращает {вопрос: (прежний вид, новый вид, строк с одним неизвестным)}."""
+    import numpy as np
+    with gzip.open(rows_path, "rt", encoding="utf-8") as f:
+        names = json.loads(next(f))["атомы"]
+        rows = [json.loads(line) for line in f]
+    col = {n: i for i, n in enumerate(names)}
+    T = np.zeros((len(rows), len(names)), dtype=bool)
+    F = np.zeros_like(T)
+    for r, x in enumerate(rows):
+        T[r, x["t"]] = True
+        F[r, x["f"]] = True
+    out = {}
+    for qid, payload in arc.db.execute(
+            "SELECT id, payload FROM questions WHERE context=? AND verdict='неизвестно' AND state IN ('open','folded')",
+            (ctx,)).fetchall():
+        p = json.loads(payload)
+        formula = [v[0] for v in arc.db.execute("SELECT formula FROM variants WHERE question=?", (qid,)).fetchall()]
+        lits = json.loads(formula[0]) if formula else p.get("запрет", [])
+        ok = np.ones(len(rows), dtype=bool)
+        unknown = np.zeros(len(rows), dtype=np.int64)
+        for lit in lits:
+            neg = lit.startswith("¬")
+            name = lit[1:] if neg else lit
+            j = col.get(name)
+            if j is None:  # атома нет в снимке — значение неизвестно во всех строках
+                unknown += 1
+                continue
+            true, false = (F[:, j], T[:, j]) if neg else (T[:, j], F[:, j])
+            ok &= ~false
+            unknown += ~true & ~false
+        alltrue, single, multi = ok & (unknown == 0), ok & (unknown == 1), ok & (unknown >= 2)
+        kind = "R" if alltrue.any() else "A" if single.any() else "B" if multi.any() else "C"
+        out[qid] = (p.get("вид"), kind, int(single.sum()))
+    return out
+
+
 def run(db, export=None, values=None, out=print):
     with LiveArchive(db) as arc:
         ctx = None
@@ -87,6 +126,7 @@ def main(argv=None):
     ap.add_argument("--строки-было", dest="rows_old", help="<схема>.rows.jsonl.gz прежних таблиц")
     ap.add_argument("--строки-стало", dest="rows_new", help="<схема>.rows.jsonl.gz новых таблиц")
     ap.add_argument("--источник", default="новые таблицы", help="reference для пакетов из строк")
+    ap.add_argument("--переразметка", action="store_true", help="после значений: виды A/B/C по снимку --строки-стало")
     a = ap.parse_args(argv)
     values = json.load(open(a.значения, encoding="utf-8")) if a.значения else []
     if a.rows_old and a.rows_new:
@@ -95,6 +135,14 @@ def main(argv=None):
                           "расхождений": len(conflicts), "примеры расхождений": conflicts[:5]}, ensure_ascii=False))
         values += packets
     run(a.архив, a.выгрузка, values)
+    if a.переразметка and a.rows_new:
+        from collections import Counter
+        with LiveArchive(a.архив) as arc:
+            ctx = arc.db.execute("SELECT id FROM contexts ORDER BY rowid LIMIT 1").fetchone()[0]
+            res = reclassify(arc, ctx, a.rows_new)
+        moves = Counter((old, new) for old, new, _ in res.values())
+        print(json.dumps({"переразметка": {f"{o}→{n}": c for (o, n), c in sorted(moves.items(), key=str)}},
+                         ensure_ascii=False))
     return 0
 
 
