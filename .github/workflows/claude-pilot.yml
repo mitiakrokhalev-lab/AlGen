@@ -74,7 +74,8 @@ jobs:
   case:
     needs: plan
     runs-on: ubuntu-24.04
-    timeout-minutes: 100
+    # pair — два прогона подряд на одной машине (см. «Прогон (table …)»)
+    timeout-minutes: ${{ matrix.case.pair && 210 || 100 }}
     strategy:
       fail-fast: false
       max-parallel: 20
@@ -136,18 +137,35 @@ jobs:
           ALGEN_KNOWLEDGE: ${{ matrix.case.knowledge && '1' || '' }}
           ALGEN_DYNAMIC_EXPORT: ${{ matrix.case.export && '1' || '' }}
           ALGEN_ROW_FACTS: ${{ matrix.case.rows && '1' || '' }}
+          PAIR: ${{ matrix.case.pair || '' }}
         run: |
-          mkdir -p ../profiles/$CASE_ID
+          mkdir -p ../profiles
           cp ../commit.txt ../profiles/
           mv ../native/кэш ../кэш
           set +e
-          /usr/bin/time -v python3 -B -m "$MODULE" перебор G --каталог ../native-tabs \
-            --выход ../profiles/$CASE_ID --схемы "$SCHEME" --нитей 1 --посылок 3 \
-            --предел "$SECONDS_LIMIT" 2> ../profiles/time.txt
-          echo "exit=$?" | tee ../profiles/exit.txt
-          tail -30 ../profiles/time.txt
-          head -120 ../profiles/$CASE_ID/*.prof.txt || true
-          python3 -B -c "import json,glob; [print(f, {k: json.load(open(f)).get(k) for k in ('статус','секунд','память ГБ','память по этапам')}) for f in glob.glob('../profiles/$CASE_ID/G-*.json')]"
+          run_one() {  # $1 — суффикс каталога выдачи и файлов time/exit («» — одиночный прогон)
+            out="../profiles/$CASE_ID$1"
+            mkdir -p "$out"
+            /usr/bin/time -v python3 -B -m "$MODULE" перебор G --каталог ../native-tabs \
+              --выход "$out" --схемы "$SCHEME" --нитей 1 --посылок 3 \
+              --предел "$SECONDS_LIMIT" 2> "../profiles/time$1.txt"
+            echo "exit=$?" | tee "../profiles/exit$1.txt"
+            tail -30 "../profiles/time$1.txt"
+            head -120 "$out"/*.prof.txt || true
+            python3 -B -c "import json,glob; [print(f, {k: json.load(open(f)).get(k) for k in ('статус','секунд','память ГБ','память по этапам')}) for f in glob.glob('$out/G-*.json')]"
+          }
+          if [ -z "$PAIR" ]; then
+            run_one ""
+          else
+            # пара на одной машине (разброс между машинами GitHub — до ±30 %): b — без знаний
+            # (прежний генератор, выдача бит в бит прежняя), k — ALGEN_KNOWLEDGE=1; порядок — из плана
+            # («bk» или «kb»). Выгрузка и снимок строк в паре не включаются: их цена — не цена разметки.
+            for v in $(echo "$PAIR" | grep -o '[bk]'); do
+              if [ "$v" = k ]; then export ALGEN_KNOWLEDGE=1; else export ALGEN_KNOWLEDGE=; fi
+              export ALGEN_DYNAMIC_EXPORT= ALGEN_ROW_FACTS=
+              run_one "-$v"
+            done
+          fi
           exit 0
       - name: Прогон
         if: matrix.case.mode != 'table'
@@ -227,13 +245,21 @@ jobs:
                   p = Path(d) / name
                   if p.exists():
                       rec[name] = json.loads(p.read_text()) if name.endswith('.json') else p.read_text().strip()
-              t = Path(d) / 'time.txt'
-              if t.exists():
-                  rec['time'] = [l.strip() for l in t.read_text(errors='replace').splitlines()
+              for t in sorted(Path(d).glob('time*.txt')):  # time.txt; у пар — time-b.txt, time-k.txt
+                  rec[t.stem] = [l.strip() for l in t.read_text(errors='replace').splitlines()
                                  if any(k in l for k in ('Maximum resident', 'Elapsed (wall', 'User time', 'System time', 'Exit status'))]
-              for j in glob.glob(d + '/*/G-*.json'):
+              for e in sorted(Path(d).glob('exit-*.txt')):
+                  rec[e.name] = e.read_text().strip()
+              for j in sorted(glob.glob(d + '/*/G-*.json')):
                   r = json.loads(Path(j).read_text())
-                  rec.setdefault('schemes', []).append({k: r.get(k) for k in ('id', 'статус', 'секунд', 'память ГБ', 'память по этапам', 'перепись')})
+                  s = {k: r.get(k) for k in ('id', 'статус', 'секунд', 'память ГБ', 'память по этапам', 'перепись')}
+                  s['каталог'] = Path(j).parent.name  # у пар — <case>-b / <case>-k
+                  kn = r.get('знания')
+                  if kn:  # ALGEN_KNOWLEDGE: цена этапа и виды оставленных после сжатия
+                      left = kn.get('оставленные после сжатия') or {}
+                      s['знания'] = {'секунд разметки': kn.get('секунд разметки'),
+                                     **{k: left.get(k) for k in ('по видам', 'вопросов человеку (C)', 'ждут знаний (A + B)', 'корней знаний всего')}}
+                  rec.setdefault('schemes', []).append(s)
               for f in glob.glob(d + '/*/*.prof.txt'):
                   rec['profile_head'] = Path(f).read_text(errors='replace').splitlines()[:110]
               out[case] = rec
