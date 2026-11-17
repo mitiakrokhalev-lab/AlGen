@@ -1307,6 +1307,29 @@ def _load_state(sid, form, base):
     return out
 
 
+def _write_row_facts(form, dst, fp):
+    """ALGEN_ROW_FACTS=1: известные значения каждой строки схемы (динамический опыт 2б.4д) —
+    первая строка {"атомы": имена}, далее {"key", "assignment", "where", "t": [верные], "f": [ложные]}
+    по номерам атомов (парные пропущены). Ключ и подстановка — как у live.library_row."""
+    import gzip
+    from .enumerate import atom_name
+    from .live import digest
+    idx = [i for i, a in enumerate(form.atoms) if a[0] != "pair"]
+    names = [atom_name(form.atoms[i]) for i in idx]
+    m = np.asarray(form.m)
+    tmp = dst.with_suffix(".tmp")
+    with gzip.open(tmp, "wt", encoding="utf-8") as f:
+        f.write(json.dumps({"атомы": names, "библиотека": fp}, ensure_ascii=False) + "\n")
+        for r in range(len(form.envs)):
+            assignment = {str(t): im for t, im in form.envs[r].items()}
+            row = m[r]
+            t = [j for j, i in enumerate(idx) if row[2 * i]]
+            fl = [j for j, i in enumerate(idx) if row[2 * i + 1]]
+            f.write(json.dumps({"key": digest(assignment), "assignment": assignment, "where": form.where(r),
+                                "t": t, "f": fl}, ensure_ascii=False, default=list) + "\n")
+    os.replace(tmp, dst)
+
+
 def _one(job):
     base, sid, terms, k, outdir, fp = job
     out, err = io.StringIO(), io.StringIO()
@@ -1328,6 +1351,8 @@ def _one(job):
         prof.enable()
     try:
         form = view(_STATE["forms"][base], terms)
+        if os.environ.get("ALGEN_ROW_FACTS") == "1":
+            _write_row_facts(form, Path(outdir) / f"{sid}.rows.jsonl.gz", fp)
         from . import fast
         phase_theory = getattr(getattr(form, "sc", None), "T", None)
         phase_atoms = getattr(form, "atoms", None)

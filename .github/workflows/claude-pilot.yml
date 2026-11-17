@@ -134,6 +134,8 @@ jobs:
           ALGEN_SKEL: ${{ github.workspace }}/native/skel
           MODULE: ${{ matrix.case.module || 'algen.table' }}
           ALGEN_KNOWLEDGE: ${{ matrix.case.knowledge && '1' || '' }}
+          ALGEN_DYNAMIC_EXPORT: ${{ matrix.case.export && '1' || '' }}
+          ALGEN_ROW_FACTS: ${{ matrix.case.rows && '1' || '' }}
         run: |
           mkdir -p ../profiles/$CASE_ID
           cp ../commit.txt ../profiles/
