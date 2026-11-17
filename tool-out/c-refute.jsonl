@@ -1,0 +1,23 @@
+{"вопрос": "centerless(frattini(G)) & odd-order(G) & ¬centerless(quotient(G, frattini(G))) & ¬indecomposable(quotient(G, center(G)))", "кандидаты": []}
+{"вопрос": "centerless(quotient(G, frattini(G))) & odd-order(G) & ¬iso(G, quotient(G, center(G))) & ¬proper-subs-cyclic(quotient(G, center(G)))", "кандидаты": []}
+{"вопрос": "odd-order(G) & perfect(quotient(G, center(G))) & ¬cyclic(frattini(G)) & ¬iso(frattini(G), quotient(G, frattini(G)))", "кандидаты": []}
+{"вопрос": "hall(frattini(G)) & indecomposable(G) & odd-order(profinite(G)) & ¬prime-orders(G)", "кандидаты": []}
+{"вопрос": "hall(frattini(G)) & odd-order(profinite(G)) & ¬metabelian(G)", "кандидаты": []}
+{"вопрос": "embeds(quotient(G, frattini(G)), inn(quotient(G, frattini(G)))) & odd-order(G) & ¬exponent-2(frattini(G)) & ¬proper-subs-cyclic(G)", "кандидаты": []}
+{"вопрос": "centerless(quotient(G, frattini(G))) & exponent-6(quotient(G, commutator(G))) & odd-order(G) & ¬centerless(G)", "кандидаты": []}
+{"вопрос": "embeds(commutator(G), quotient(G, commutator(G))) & odd-order(G) & ¬free-abelian(frattini(G)) & ¬proper-subs-nilpotent(quotient(G, frattini(G)))", "кандидаты": []}
+{"вопрос": "embeds(quotient(G, commutator(G)), quotient(G, frattini(G))) & indecomposable(quotient(G, commutator(G))) & odd-order(G) & ¬iso(G, quotient(G, frattini(G)))", "кандидаты": []}
+{"вопрос": "exponent-2(G) & locally-cyclic(quotient(G, frattini(G))) & ¬index-2(frattini(G)) & ¬odd-order(quotient(G, commutator(G)))", "кандидаты": []}
+{"вопрос": "embeds(aut(commutator(G)), G) & odd-order(G) & ¬iso(aut(commutator(G)), inn(commutator(G)))", "кандидаты": []}
+{"вопрос": "exponent-2(G) & two-generated(G) & ¬order-pq(aut(G)) & ¬primitive(regular-act(G))", "кандидаты": []}
+{"вопрос": "free-abelian(G) & hyperbolic(G) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G))", "кандидаты": []}
+{"вопрос": "free-abelian(G) & indecomposable(G) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G))", "кандидаты": []}
+{"вопрос": "embeds(quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G)))), inn(G)) & odd-order(G) & proper-subs-abelian(G) & ¬proper-subs-cyclic(inn(G))", "кандидаты": []}
+{"вопрос": "abelian(prod(G, G)) & divisible(torsion(prod(G, G))) & hyperbolic(G) & ¬free(G)", "кандидаты": []}
+{"вопрос": "abelian(prod(G, G)) & indecomposable(G) & ¬embeds(prod(G, G), torsion(prod(G, G))) & ¬hopfian(G)", "кандидаты": []}
+{"вопрос": "abelian(prod(G, G)) & p-group(G) & residually-finite(torsion(prod(G, G))) & ¬bounded-exponent(G)", "кандидаты": []}
+{"вопрос": "clt(commutator(G)) & indecomposable(G) & ¬embeds(quotient(G, frattini(G)), quotient(G, commutator(G))) & ¬linear-c(quotient(G, commutator(G)))", "причина": "свойство linear-c", "кандидаты": null}
+{"вопрос": "embeds(quotient(G, commutator(G)), quotient(G, frattini(G))) & odd-order(G) & proper-subs-cyclic(G) & ¬whitehead(frattini(G))", "причина": "свойство whitehead", "кандидаты": null}
+{"вопрос": "central(inn(commutator(G))) & periodic(G) & residually-nilpotent(G) & ¬nilpotent(G)", "причина": "у inn(commutator(G)) нет объемлющей", "кандидаты": null}
+{"вопрос": "indecomposable(G) & whitehead(G) & ¬prime-order(aut(G)) & ¬primitive(regular-act(G))", "причина": "свойство whitehead", "кандидаты": null}
+{"вопрос": "exponent-6(inn(G)) & order-pq(G) & ¬embeds(prod(inn(G), inn(G)), inn(G)) & ¬whole(inn(G))", "причина": "у inn(G) нет объемлющей", "кандидаты": null}

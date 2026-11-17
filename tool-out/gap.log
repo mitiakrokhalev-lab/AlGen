@@ -1,0 +1,52 @@
+function(  ) ... end
+function( X, N ) ... end
+function( n ) ... end
+function( n ) ... end
+function( X ) ... end
+function( X, test ) ... end
+function( X ) ... end
+function( X, Y ) ... end
+function( X, Y ) ... end
+function( X ) ... end
+function( X ) ... end
+function( X ) ... end
+function( X ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+function( G ) ... end
+[ [ 0, function( G ) ... end, false, true ], 
+  [ 1, function( G ) ... end, false, true ], 
+  [ 2, function( G ) ... end, false, true ], 
+  [ 3, function( G ) ... end, false, false ], 
+  [ 4, function( G ) ... end, false, false ], 
+  [ 5, function( G ) ... end, false, true ], 
+  [ 6, function( G ) ... end, false, true ], 
+  [ 8, function( G ) ... end, false, true ], 
+  [ 9, function( G ) ... end, false, true ], 
+  [ 11, function( G ) ... end, false, false ], 
+  [ 13, function( G ) ... end, true, true ], 
+  [ 14, function( G ) ... end, true, false ], 
+  [ 15, function( G ) ... end, true, false ], 
+  [ 16, function( G ) ... end, true, false ], 
+  [ 19, function( G ) ... end, true, true ], 
+  [ 20, function( G ) ... end, false, false ], 
+  [ 21, function( G ) ... end, false, false ], 
+  [ 22, function( G ) ... end, false, false ] ]
+[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+OutputTextFile(/tmp/tmpfeob_a4h/hits.jsonl)
+Error, <N> must be a normal subgroup of <G> at /usr/share/gap/lib/ghom.gi:1376 called from
