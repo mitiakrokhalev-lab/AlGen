@@ -35,7 +35,9 @@ jobs:
           cd py
           /usr/bin/time -v python3 -B -m tools.c_refute "../$Q" --выход ../tool-out/c-refute.jsonl $ARGS \
             --только-скрипт ../tool-out/c-refute.g 2> ../tool-out/time.txt || true
-          python3 -B -m tools.c_refute "../$Q" --выход ../tool-out/c-refute.jsonl $ARGS 2>> ../tool-out/time.txt || true
+          python3 -B -m tools.c_refute "../$Q" --выход ../tool-out/c-refute.jsonl $ARGS --журнал ../tool-out/gap.log \
+            2>> ../tool-out/time.txt || true
+          tail -c 3000 ../tool-out/gap.log || true
       - name: В ветку results-<ветка>
         if: always()
         run: |

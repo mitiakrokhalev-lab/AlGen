@@ -263,6 +263,7 @@ def main(argv=None):
     ap.add_argument("--попаданий", type=int, default=2)
     ap.add_argument("--только-скрипт")
     ap.add_argument("--секунд", type=int, default=18000)
+    ap.add_argument("--журнал", help="вывод GAP (ошибки разбора и счёта) — в этот файл")
     a = ap.parse_args(argv)
     qs = read_questions(a.вопросы)
     with tempfile.TemporaryDirectory() as tmp:
@@ -271,11 +272,15 @@ def main(argv=None):
         if a.только_скрипт:
             Path(a.только_скрипт).write_text(text, encoding="utf-8")
         else:
+            log = open(a.журнал, "w", encoding="utf-8") if a.журнал else subprocess.DEVNULL
             try:
                 subprocess.run(["gap", "-q", "-o", "8g"], input=text, text=True, timeout=a.секунд,
-                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                               stdout=log, stderr=subprocess.STDOUT)
             except subprocess.TimeoutExpired:
                 pass
+            finally:
+                if a.журнал:
+                    log.close()
         hits = [json.loads(x) for x in raw.read_text().splitlines()] if raw.exists() else []
     by = {}
     for h in hits:
