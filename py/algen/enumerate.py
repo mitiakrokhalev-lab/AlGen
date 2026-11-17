@@ -1958,9 +1958,14 @@ def run(max_prem, lib=None, vocab=None, form=None):
                                     for x, c in form.one_unknown(list(prem) + [g ^ 1], limit=60)})
         questions(form, [r for r in report if not r.get("свёрнута")])
     if KNOWLEDGE:
+        import time
         from algen import knowledge
+        t_kn = time.perf_counter(), time.process_time()
         form.knowledge = knowledge.annotate(form, report)
-        _mem("знания", len(report))  # после разметки: в «память по этапам» — её цена
+        # цена разметки — в сводке «знания» (стена и процессор), память — в «память по этапам»
+        form.knowledge["сводка"]["секунд разметки"] = {
+            "стена": round(time.perf_counter() - t_kn[0], 2), "процессор": round(time.process_time() - t_kn[1], 2)}
+        _mem("знания", len(report))
     if SAMPLE and not CENSUS:
         form.census = _sample_stats(form, mins, report, sample_total)
     for r in report:
