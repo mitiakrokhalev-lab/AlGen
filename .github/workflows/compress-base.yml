@@ -1,0 +1,69 @@
+name: compress-base
+
+# Сжатие между схемами базы G: шесть схем по отдельности (compress_run, с
+# verify и regress), затем их оставленные вопросы — общим базисом относительно
+# каркаса G (compress_base, с verify). Запуск: «[compress-base]» в сообщении коммита.
+
+on:
+  push:
+    branches: ["claude/project-thread-x5hadw"]
+
+jobs:
+  scheme:
+    if: contains(github.event.head_commit.message, '[compress-base]')
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        s:
+          - {id: G-1, terms: "center(G)"}
+          - {id: G-2, terms: "commutator(G)"}
+          - {id: G-3, terms: "ab(G)"}
+          - {id: G-9, terms: "torsion(G)"}
+          - {id: G-10, terms: "frattini(G)"}
+          - {id: G-1-2, terms: "center(G); commutator(G)"}
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      ALGEN_FAST: "1"
+      ALGEN_COMPRESS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: схема ${{ matrix.s.id }}
+        run: |
+          mkdir -p out && cd py
+          timeout 290m python3 -m algen.compress_run 3 "∀ G : Grp" "${{ matrix.s.terms }}" ../out/${{ matrix.s.id }}.json ${{ matrix.s.id }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kept-${{ matrix.s.id }}
+          path: out/${{ matrix.s.id }}.json
+  base:
+    needs: scheme
+    if: always() && contains(github.event.head_commit.message, '[compress-base]')
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    env:
+      ALGEN_FAST: "1"
+      ALGEN_SIZE: "2"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: kept-*
+          path: kept
+          merge-multiple: true
+      - name: сжатие между схемами G
+        run: |
+          ls kept && cd py
+          timeout 330m python3 -m algen.compress_base G ../kept --выход ../kept/база-G.json

@@ -1,0 +1,64 @@
+name: claude mine summary
+
+# Сводка кандидатов в правила из артефактов census-* прошлого запуска claude-mine:
+# одинаковые условия разных схем склеиваются, итог — gzip в results-<ветка>.
+
+on:
+  push:
+    branches: ["claude-minesum-*"]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  sum:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - id: c
+        run: python3 -c "import json;print('run=%d' % json.load(open('.github/claude-minesum.json'))['run_id'])" >> "$GITHUB_OUTPUT"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: census-*
+          path: parts
+          run-id: ${{ steps.c.outputs.run }}
+          github-token: ${{ github.token }}
+      - name: Сводка
+        run: |
+          python3 -B - <<'PY'
+          import json, glob, gzip, collections
+          from pathlib import Path
+          agg, schemes, raw = {}, 0, 0
+          goals = collections.Counter(); prems = collections.Counter()
+          for f in glob.glob('parts/**/G-*.json', recursive=True):
+              r = json.loads(Path(f).read_text())
+              schemes += 1
+              for e in (r.get('перепись') or {}).get('примеры', []):
+                  raw += 1
+                  key = (tuple(e['посылки']), e['цель'])
+                  a = agg.setdefault(key, {'посылки': e['посылки'], 'цель': e['цель'], 'строк': 0, 'настоящих': 0, 'схем': 0})
+                  a['строк'] = max(a['строк'], e['строк с посылками']); a['настоящих'] = max(a['настоящих'], e.get('настоящих', 0))
+                  a['схем'] += 1
+          out = sorted(agg.values(), key=lambda a: (-a['настоящих'], -a['схем']))
+          for a in out:
+              goals[a['цель']] += 1
+              for p in a['посылки']: prems[p] += 1
+          summary = {'схем': schemes, 'кандидатов с повторами': raw, 'различных': len(out),
+                     'по числу настоящих строк': {k: sum(1 for a in out if lo <= a['настоящих'] < hi)
+                         for k, lo, hi in (('50-99', 50, 100), ('100-499', 100, 500), ('500-999', 500, 1000), ('1000+', 1000, 10**9))},
+                     'частые цели': goals.most_common(60), 'частые посылки': prems.most_common(60)}
+          Path('mine-summary.json').write_text(json.dumps(summary, ensure_ascii=False, indent=1))
+          with gzip.open('mine-candidates.jsonl.gz', 'wt') as g:
+              for a in out:
+                  g.write(json.dumps(a, ensure_ascii=False) + '\n')
+          print(json.dumps({k: v for k, v in summary.items() if not k.startswith('частые')}, ensure_ascii=False))
+          PY
+          ls -la mine-*
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e mine-summary.json -e mine-candidates.jsonl.gz
+          git add mine-summary.json mine-candidates.jsonl.gz
+          git commit -qm "Сводка кандидатов ${GITHUB_REF_NAME}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"

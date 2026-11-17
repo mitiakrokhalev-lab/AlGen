@@ -1,0 +1,1778 @@
+{
+  "version": 1,
+  "name": "stress-codex-02",
+  "scope": "8 selected native G schemes; not the whole class",
+  "planned": 8,
+  "outcomes": {
+    "ok": 5,
+    "incomplete": 3
+  },
+  "all_complete": false,
+  "measurements_all_observed": {
+    "wall_seconds": {
+      "observed": 8,
+      "value": 4996.803
+    },
+    "cpu_seconds": {
+      "observed": 8,
+      "value": 4993.930717
+    },
+    "peak_rss_kib": {
+      "observed": 8,
+      "value": 12890740
+    }
+  },
+  "unknown_ids_ok": 218188,
+  "kept_ids_ok": 838,
+  "within_scheme_ratio_ok": 260.3675417661098,
+  "cases": [
+    {
+      "id": "G-1-183-470-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ok",
+        "scheme_seconds": 101.2,
+        "k": 3,
+        "verdict_cache": {
+          "было": 187,
+          "попаданий": 187,
+          "промахов": 0
+        }
+      },
+      "outcome": "ok",
+      "measurement": {
+        "scheme": "G-1-183-470-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 152.002,
+        "cpu_seconds": 151.828249,
+        "peak_rss_kib": 4777192,
+        "sampled_rss_kib": 4774980,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "measurement_matches_plan": true,
+      "enumeration_engine": "cpp:de929440fab85a8586d9344e",
+      "report_rows": 0,
+      "report_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_verdicts": {},
+      "first_class_verdicts": {},
+      "unknown_ids": 0,
+      "kept_ids": 0,
+      "folded_ids": 0
+    },
+    {
+      "id": "G-14-20-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ok",
+        "scheme_seconds": 166.9,
+        "k": 3,
+        "verdict_cache": {
+          "было": 28126,
+          "попаданий": 17662,
+          "промахов": 0
+        }
+      },
+      "outcome": "ok",
+      "measurement": {
+        "scheme": "G-14-20-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 281.168,
+        "cpu_seconds": 280.90749200000005,
+        "peak_rss_kib": 5501320,
+        "sampled_rss_kib": 5487204,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "measurement_matches_plan": true,
+      "enumeration_engine": "cpp:de929440fab85a8586d9344e",
+      "report_rows": 17344,
+      "report_sha256": "77ed743c613ab1b49e0db506e1baf44bcd383e56372f28cf58d04f35765bde05",
+      "raw_verdicts": {
+        "выводится": 6628,
+        "неизвестно": 10716
+      },
+      "first_class_verdicts": {
+        "выводится": 2088,
+        "неизвестно": 2858
+      },
+      "unknown_ids": 2858,
+      "kept_ids": 84,
+      "folded_ids": 2774
+    },
+    {
+      "id": "G-4-17-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ok",
+        "scheme_seconds": 269.0,
+        "k": 3,
+        "verdict_cache": {
+          "было": 37386,
+          "попаданий": 23229,
+          "промахов": 0
+        }
+      },
+      "outcome": "ok",
+      "measurement": {
+        "scheme": "G-4-17-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 487.746,
+        "cpu_seconds": 487.582231,
+        "peak_rss_kib": 5514268,
+        "sampled_rss_kib": 5492092,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "measurement_matches_plan": true,
+      "enumeration_engine": "cpp:de929440fab85a8586d9344e",
+      "report_rows": 20627,
+      "report_sha256": "d199dd500fda1f7602f0e98b9033de66c1659d581023b56701a87112ecd42e3a",
+      "raw_verdicts": {
+        "выводится": 3928,
+        "неизвестно": 16699
+      },
+      "first_class_verdicts": {
+        "выводится": 1160,
+        "неизвестно": 4311
+      },
+      "unknown_ids": 4311,
+      "kept_ids": 669,
+      "folded_ids": 3642
+    },
+    {
+      "id": "G-15-320-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 143.3,
+        "k": 3,
+        "verdict_cache": null
+      },
+      "outcome": "ok",
+      "measurement": {
+        "scheme": "G-15-320-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 205.089,
+        "cpu_seconds": 204.471813,
+        "peak_rss_kib": 5403764,
+        "sampled_rss_kib": 5387528,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "measurement_matches_plan": true,
+      "enumeration_engine": "cpp:de929440fab85a8586d9344e",
+      "report_rows": 3671,
+      "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+      "raw_verdicts": {
+        "неизвестно": 3507,
+        "выводится": 157,
+        "опровергается": 7
+      },
+      "first_class_verdicts": {
+        "неизвестно": 1781,
+        "выводится": 90,
+        "опровергается": 7
+      },
+      "unknown_ids": 1788,
+      "kept_ids": 9,
+      "folded_ids": 1779
+    },
+    {
+      "id": "G-10-13-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 277.2,
+        "k": 3,
+        "verdict_cache": null
+      },
+      "outcome": "incomplete",
+      "measurement": {
+        "scheme": "G-10-13-705-707-708-709",
+        "returncode": -15,
+        "stop_reason": "time_budget",
+        "wall_seconds": 1200.54,
+        "cpu_seconds": 1200.372838,
+        "peak_rss_kib": 6806700,
+        "sampled_rss_kib": 6804300,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": null,
+        "complete": false,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "measurement_matches_plan": true,
+      "reason": "time_budget; exit=-15; scheme=None"
+    },
+    {
+      "id": "G-4-220-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 762.1,
+        "k": 3,
+        "verdict_cache": null
+      },
+      "outcome": "incomplete",
+      "measurement": {
+        "scheme": "G-4-220-705-707-708-709",
+        "returncode": -15,
+        "stop_reason": "time_budget",
+        "wall_seconds": 1200.598,
+        "cpu_seconds": 1200.4285399999999,
+        "peak_rss_kib": 6369336,
+        "sampled_rss_kib": 6367252,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": null,
+        "complete": false,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "measurement_matches_plan": true,
+      "reason": "time_budget; exit=-15; scheme=None"
+    },
+    {
+      "id": "G-4-5-26-445-700-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 464.5,
+        "k": 3,
+        "verdict_cache": null
+      },
+      "outcome": "incomplete",
+      "measurement": {
+        "scheme": "G-4-5-26-445-700-705-707-708-709",
+        "returncode": -15,
+        "stop_reason": "rss_budget",
+        "wall_seconds": 745.806,
+        "cpu_seconds": 744.6423669999999,
+        "peak_rss_kib": 12890740,
+        "sampled_rss_kib": 12890716,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": null,
+        "complete": false,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "measurement_matches_plan": true,
+      "reason": "rss_budget; exit=-15; scheme=None"
+    },
+    {
+      "id": "G-14-20-390-705-707-708-709",
+      "baseline": {
+        "run": 42209559171,
+        "status": "ошибка",
+        "scheme_seconds": 712.6,
+        "k": 3,
+        "verdict_cache": null
+      },
+      "outcome": "ok",
+      "measurement": {
+        "scheme": "G-14-20-390-705-707-708-709",
+        "returncode": 0,
+        "stop_reason": "exited",
+        "wall_seconds": 723.854,
+        "cpu_seconds": 723.697187,
+        "peak_rss_kib": 7188300,
+        "sampled_rss_kib": 7180644,
+        "limits": {
+          "seconds": 1200,
+          "rss_gib": 12.0
+        },
+        "legacy_empty_cache": false,
+        "legacy_table_load": false,
+        "scheme_status": "ok",
+        "complete": true,
+        "scope": "full native scheme",
+        "eager_search": false,
+        "early_min": true,
+        "sparse_leaf": true,
+        "python_enum": false,
+        "with_minimal": false,
+        "saved_enumeration": false,
+        "saved_report": true,
+        "code_sha256": {
+          "algen/enumerate.py": "6b1d994cd6a9587c631589d2d418c6f52bf7e22e7c89445301276202da549687",
+          "algen/table.py": "aa9837e41449b5cf76e41a1718c717fa0ccc4af771447ea1e93f35d58b7e8725",
+          "algen/deferred.py": "e360ee3625a6e6f4fe71b0bfa8653a15b4139fdc266cf8ea786f151270940fcd",
+          "algen/native_enum.py": "9d014fff0c820c036f154b3a21473e2e73da4e998bce767cf06434c4e5eacc6c",
+          "algen/native_enum.cpp": "539262fbd5a0c1e4b91b0c59b305820b1f92995d501cbe165fe173eb1b94fbb9",
+          "tools/profile_memory.py": "37190130e45ea036ee0528f87b06b1eeb3e4961284d0d91bc2738fa50fb68d97"
+        }
+      },
+      "measurement_matches_plan": true,
+      "enumeration_engine": "cpp:de929440fab85a8586d9344e",
+      "report_rows": 721011,
+      "report_sha256": "29a4c344434f4c391a62bdba55eff772b5151f62875db000c8f046d6f916233d",
+      "raw_verdicts": {
+        "неизвестно": 719505,
+        "выводится": 1506
+      },
+      "first_class_verdicts": {
+        "неизвестно": 209231,
+        "выводится": 749
+      },
+      "unknown_ids": 209231,
+      "kept_ids": 76,
+      "folded_ids": 209155
+    }
+  ],
+  "notes": [
+    "Сумма wall процессов не wall workflow; неизвестные времена не нули.",
+    "RSS — пик отдельного процесса, не дерева/cgroup.",
+    "Выдача посчитана только для проверенных ok; охват — ровно схемы плана.",
+    "Baseline 16б использовал кэш вердиктов и считал scheme_seconds без startup; новый wall включает startup без прежнего кэша. Прямого коэффициента ускорения нет.",
+    "Проверяются целостность и согласованность свёрток, а не новое SAT-доказательство базиса."
+  ],
+  "source": {
+    "run": "https://github.com/mitiakrokhalev-lab/AlGen/actions/runs/42366011491",
+    "commit": "11a42ed4efdc803ca3f2b6bc808a76b9f0847c28",
+    "started_at_utc": "2026-11-07T10:56:00Z",
+    "last_job_finished_at_utc": "2026-11-07T11:21:04Z",
+    "workflow_wall_seconds": 1504,
+    "outcome_detail": {
+      "ok": 5,
+      "time_budget": 2,
+      "rss_budget": 1,
+      "missing": 0,
+      "invalid": 0
+    },
+    "independent_review": "verify_conditions: all9ZIP hash/size; all8 source hashes/measurements/stages; full streaming CRC/JSON/SHA/ID/deps of all5 reports; old5 raw SHA independently reread"
+  },
+  "plan": {
+    "version": 1,
+    "name": "stress-codex-02",
+    "comparison_run": 42307026640,
+    "compiled_backend_required": true,
+    "date": "2026-11-07",
+    "scope": "8 selected native G schemes; not the whole class",
+    "base": "G",
+    "class": "",
+    "size": 2,
+    "k": 3,
+    "source_run": 42173383257,
+    "native_fingerprint": "73a2a35d2480ac9c:G::s2:быстро",
+    "max_parallel": 4,
+    "seconds_per_process": 1200,
+    "rss_gib": 12,
+    "cases": [
+      {
+        "id": "G-1-183-470-705-707-708-709",
+        "reason": "Прежний успех: центр, нормализатор и фактор",
+        "terms": [
+          "center(G)",
+          "normalizer(G, center(G))",
+          "quotient(G, normalizer(G, center(G)))",
+          "num:5()",
+          "num:120()",
+          "num:1056()",
+          "num:60()"
+        ],
+        "baseline": {
+          "run": 42209559171,
+          "status": "ok",
+          "scheme_seconds": 101.2,
+          "k": 3,
+          "verdict_cache": {
+            "было": 187,
+            "попаданий": 187,
+            "промахов": 0
+          }
+        }
+      },
+      {
+        "id": "G-14-20-705-707-708-709",
+        "reason": "Прежний успех: Sym и Кэли",
+        "terms": [
+          "sym(G)",
+          "cayley(G)",
+          "num:5()",
+          "num:120()",
+          "num:1056()",
+          "num:60()"
+        ],
+        "baseline": {
+          "run": 42209559171,
+          "status": "ok",
+          "scheme_seconds": 166.9,
+          "k": 3,
+          "verdict_cache": {
+            "было": 28126,
+            "попаданий": 17662,
+            "промахов": 0
+          }
+        }
+      },
+      {
+        "id": "G-4-17-705-707-708-709",
+        "reason": "Прежний успех: Aut и регулярное действие",
+        "terms": [
+          "aut(G)",
+          "regular-act(G)",
+          "num:5()",
+          "num:120()",
+          "num:1056()",
+          "num:60()"
+        ],
+        "baseline": {
+          "run": 42209559171,
+          "status": "ok",
+          "scheme_seconds": 269.0,
+          "k": 3,
+          "verdict_cache": {
+            "было": 37386,
+            "попаданий": 23229,
+            "промахов": 0
+          }
+        }
+      },
+      {
+        "id": "G-15-320-705-707-708-709",
+        "reason": "Прежний OOM, затем успешный локальный контроль Ulm/Ulm",
+        "terms": [
+          "ulm(G)",
+          "ulm(ulm(G))",
+          "num:5()",
+          "num:120()",
+          "num:1056()",
+          "num:60()"
+        ],
+        "baseline": {
+          "run": 42209559171,
+          "status": "ошибка",
+          "scheme_seconds": 143.3,
+          "k": 3,
+          "verdict_cache": null
+        },
+        "known_report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699"
+      },
+      {
+        "id": "G-10-13-705-707-708-709",
+        "reason": "Прежний OOM: Frattini и профинитное пополнение",
+        "terms": [
+          "frattini(G)",
+          "profinite(G)",
+          "num:5()",
+          "num:120()",
+          "num:1056()",
+          "num:60()"
+        ],
+        "baseline": {
+          "run": 42209559171,
+          "status": "ошибка",
+          "scheme_seconds": 277.2,
+          "k": 3,
+          "verdict_cache": null
+        }
+      },
+      {
+        "id": "G-4-220-705-707-708-709",
+        "reason": "Прежний OOM: Aut и Frattini, 13 млн живых условий",
+        "terms": [
+          "aut(G)",
+          "frattini(aut(G))",
+          "num:5()",
+          "num:120()",
+          "num:1056()",
+          "num:60()"
+        ],
+        "baseline": {
+          "run": 42209559171,
+          "status": "ошибка",
+          "scheme_seconds": 762.1,
+          "k": 3,
+          "verdict_cache": null
+        }
+      },
+      {
+        "id": "G-4-5-26-445-700-705-707-708-709",
+        "reason": "Прежний OOM: Aut/Inn и вложенные факторы",
+        "terms": [
+          "aut(G)",
+          "inn(G)",
+          "quotient(aut(G), inn(G))",
+          "center(quotient(aut(G), inn(G)))",
+          "quotient(quotient(aut(G), inn(G)), center(quotient(aut(G), inn(G))))",
+          "num:5()",
+          "num:120()",
+          "num:1056()",
+          "num:60()"
+        ],
+        "baseline": {
+          "run": 42209559171,
+          "status": "ошибка",
+          "scheme_seconds": 464.5,
+          "k": 3,
+          "verdict_cache": null
+        }
+      },
+      {
+        "id": "G-14-20-390-705-707-708-709",
+        "reason": "Прежний OOM: Sym, Кэли и pushout",
+        "terms": [
+          "sym(G)",
+          "cayley(G)",
+          "pushout(cayley(G), cayley(G))",
+          "num:5()",
+          "num:120()",
+          "num:1056()",
+          "num:60()"
+        ],
+        "baseline": {
+          "run": 42209559171,
+          "status": "ошибка",
+          "scheme_seconds": 712.6,
+          "k": 3,
+          "verdict_cache": null
+        }
+      }
+    ],
+    "input_files_sha256": {
+      "native/skel/G.skel.pickle": "554b49cef6017012d35bc4b4a364bbdeb79c8c3fc622d02d4578ae50c11330c7",
+      "native/кэш/библиотека-73a2a35d2480ac9c.pickle": "1fcf69b2fe3dfe3d6a6bcf95692cb37835d3d8031b435a98a42786fbf39d65fb",
+      "native-tabs/G.1-20.pickle": "1a932ae131a175da3df0e716c572f938384d401f18c741b82d938282941e5aaf",
+      "native-tabs/G.10-20.pickle": "a79a89319d6523c3f8818de33215419edffdc1cf1da6622c5a4e51619180dca5",
+      "native-tabs/G.11-20.pickle": "b1ffcb65854099cf3ee4ec05f1e4641238258d5c0e72f892e9709ceb565a57e0",
+      "native-tabs/G.12-20.pickle": "e7f838046237b1749d473babff0be212478c4e09205d1964485ef8ff9f751f8a",
+      "native-tabs/G.13-20.pickle": "b9a91e27a044dac4562e4ccdf4d10133a8d1f459a39f054cb51edc41235eb83e",
+      "native-tabs/G.14-20.pickle": "c39db8259912842a20fdbdb28cff2c98b0a0013205007c0a0b0ea8129c48a922",
+      "native-tabs/G.15-20.pickle": "91cb209bab73c7d2ed29d1cdcb0b29c832eaef8eb8d272ca219240c3baadd1c2",
+      "native-tabs/G.16-20.pickle": "878b612107c0ab6b7a719e5a76aeae69858c47b6a2ba31b2e3a106a549725840",
+      "native-tabs/G.17-20.pickle": "06c385b70187a575e5d2670aa2e04f1619c323a82969fdd6e1eb94aecc8a39de",
+      "native-tabs/G.18-20.pickle": "80562dd3f09dd363683c0d7b4305e55d887c11a05c00be19f9ab0aba56225c05",
+      "native-tabs/G.19-20.pickle": "47c5826f5e3d41e08cc655d02d31ed3320f19f0cc3cfd83adc02fe6b8b748e8e",
+      "native-tabs/G.2-20.pickle": "811f8ffcf57fbc342807adb7239ebc6c09d0fb3b4b563936a2e3fabe3efd6c3a",
+      "native-tabs/G.20-20.pickle": "1a3bf8e7b58517d13b863b75488400a7d5a267a353ea38ece2124687b887909a",
+      "native-tabs/G.3-20.pickle": "41fa0c6f93d40f346b3fdab31d1d6ee1882ca89d181e18c7bb76252c5f14bd97",
+      "native-tabs/G.4-20.pickle": "37542b12ddf0a2337966da15d4552a408909cfd12e20a522ff26ebf604f877c2",
+      "native-tabs/G.5-20.pickle": "fce0707c7a0b0db2d31239a16737a7b4bae2f571567810cafb45737c875e16d8",
+      "native-tabs/G.6-20.pickle": "7ef05bb32f924b8597e98aa1fbb0eb685794a45e89bbd43ef321c652f6f73003",
+      "native-tabs/G.7-20.pickle": "da93a2f7ece8e138cffd8e01eaa767574beebfcef431fdf8b468104a21320e4b",
+      "native-tabs/G.8-20.pickle": "ad7d4d9c573db017bcba7553a03397401ead3c48c9d0f40058ef16e6669f7447",
+      "native-tabs/G.9-20.pickle": "de7d10651fec0802860fe9de9030bfb949203da1dec176a83199555b2cf5b645",
+      "native-tabs/G.rep.pickle": "a1da261c9d2d2edb4013c5d8122e252f74718704cb603f88097dd84187c65d03"
+    },
+    "timing_note": "Baseline 16б: scheme time excludes startup, old ok reused verdict cache. New process includes startup without loading prior verdict cache; timing is not a matched speed comparison."
+  },
+  "report_rows_ok": 762653,
+  "artifacts": [
+    {
+      "id": 13572481865,
+      "name": "stress-G-4-5-26-445-700-705-707-708-709",
+      "size_in_bytes": 101865632,
+      "digest": "sha256:d51f7d77e15e10e65b851323e4bb1cb4ea8726d0c8ac4d920c6525e39636ab86",
+      "expires_at": "2026-12-07T11:14:23Z",
+      "workflow_run": {
+        "id": 42366011491,
+        "repository_id": 1437275168,
+        "head_repository_id": 1437275168,
+        "head_branch": "stress-codex-02",
+        "head_sha": "11a42ed4efdc803ca3f2b6bc808a76b9f0847c28"
+      }
+    },
+    {
+      "id": 13571958480,
+      "name": "stress-G-14-20-390-705-707-708-709",
+      "size_in_bytes": 135372772,
+      "digest": "sha256:0ff7ca87bf1c14aaf08d9a02b7c5dc0b75286b7ba595713664ecae71b4765184",
+      "expires_at": "2026-12-07T11:17:26Z",
+      "workflow_run": {
+        "id": 42366011491,
+        "repository_id": 1437275168,
+        "head_repository_id": 1437275168,
+        "head_branch": "stress-codex-02",
+        "head_sha": "11a42ed4efdc803ca3f2b6bc808a76b9f0847c28"
+      }
+    },
+    {
+      "id": 13571928963,
+      "name": "stress-G-4-220-705-707-708-709",
+      "size_in_bytes": 101880169,
+      "digest": "sha256:e6994624040ccd6e441233f7d0c1c101a7ecada15b7764e6a6ac87901a7ea160",
+      "expires_at": "2026-12-07T11:20:33Z",
+      "workflow_run": {
+        "id": 42366011491,
+        "repository_id": 1437275168,
+        "head_repository_id": 1437275168,
+        "head_branch": "stress-codex-02",
+        "head_sha": "11a42ed4efdc803ca3f2b6bc808a76b9f0847c28"
+      }
+    },
+    {
+      "id": 13571708155,
+      "name": "stress-G-15-320-705-707-708-709",
+      "size_in_bytes": 102034295,
+      "digest": "sha256:a8bad9d0d884582cafbc18245765f84fa10ac3870f7d8ccc5373e0e3b0a78a30",
+      "expires_at": "2026-12-07T10:59:59Z",
+      "workflow_run": {
+        "id": 42366011491,
+        "repository_id": 1437275168,
+        "head_repository_id": 1437275168,
+        "head_branch": "stress-codex-02",
+        "head_sha": "11a42ed4efdc803ca3f2b6bc808a76b9f0847c28"
+      }
+    },
+    {
+      "id": 13571629512,
+      "name": "stress-G-4-17-705-707-708-709",
+      "size_in_bytes": 103305302,
+      "digest": "sha256:0ab1db2853cd8e6d47e56c6bbc36b5a3be3bdff0a5216adcb5703317c5574751",
+      "expires_at": "2026-12-07T11:04:41Z",
+      "workflow_run": {
+        "id": 42366011491,
+        "repository_id": 1437275168,
+        "head_repository_id": 1437275168,
+        "head_branch": "stress-codex-02",
+        "head_sha": "11a42ed4efdc803ca3f2b6bc808a76b9f0847c28"
+      }
+    },
+    {
+      "id": 13571599366,
+      "name": "stress-G-10-13-705-707-708-709",
+      "size_in_bytes": 101881988,
+      "digest": "sha256:37115c5634b721a35c563d8d1457db897d526d3b7a2ed3389e8912155b0b6b1d",
+      "expires_at": "2026-12-07T11:19:44Z",
+      "workflow_run": {
+        "id": 42366011491,
+        "repository_id": 1437275168,
+        "head_repository_id": 1437275168,
+        "head_branch": "stress-codex-02",
+        "head_sha": "11a42ed4efdc803ca3f2b6bc808a76b9f0847c28"
+      }
+    },
+    {
+      "id": 13571308584,
+      "name": "stress-G-14-20-705-707-708-709",
+      "size_in_bytes": 102785470,
+      "digest": "sha256:7a577882cd716acc52f6a695c4ea7c6a7df5607674fc5252f95cf72fa8f10374",
+      "expires_at": "2026-12-07T11:01:18Z",
+      "workflow_run": {
+        "id": 42366011491,
+        "repository_id": 1437275168,
+        "head_repository_id": 1437275168,
+        "head_branch": "stress-codex-02",
+        "head_sha": "11a42ed4efdc803ca3f2b6bc808a76b9f0847c28"
+      }
+    },
+    {
+      "id": 13570669864,
+      "name": "stress-G-1-183-470-705-707-708-709",
+      "size_in_bytes": 101849084,
+      "digest": "sha256:20874b99bdb89c5031cbc4df283e6164c7bb6465e3252752dc2b1b3a20e67927",
+      "expires_at": "2026-12-07T10:59:10Z",
+      "workflow_run": {
+        "id": 42366011491,
+        "repository_id": 1437275168,
+        "head_repository_id": 1437275168,
+        "head_branch": "stress-codex-02",
+        "head_sha": "11a42ed4efdc803ca3f2b6bc808a76b9f0847c28"
+      }
+    },
+    {
+      "id": 13571684170,
+      "name": "stress-summary",
+      "size_in_bytes": 3695,
+      "digest": "sha256:45f28b136c5d8828b583db881afaae097922f8a37d46c30d26dccdfc828b48c8",
+      "expires_at": "2026-12-07T11:21:00Z",
+      "workflow_run": {
+        "id": 42366011491,
+        "head_sha": "11a42ed4efdc803ca3f2b6bc808a76b9f0847c28"
+      }
+    }
+  ],
+  "stage_observations": {
+    "G-1-183-470-705-707-708-709": [
+      {
+        "stage": "enumerate_form:end",
+        "seconds": 136.454,
+        "memory_kib": {
+          "VmHWM": 4294648,
+          "VmRSS": 4270520
+        },
+        "containers": [
+          {
+            "entries": 0,
+            "container_bytes": 48,
+            "packed_bytes": 0
+          },
+          {
+            "entries": 208838,
+            "container_bytes": 1827096,
+            "packed_bytes": null
+          }
+        ]
+      },
+      {
+        "stage": "enumeration:engine",
+        "seconds": 136.454,
+        "memory_kib": {
+          "VmHWM": 4294648,
+          "VmRSS": 4270524
+        },
+        "engine": "cpp:de929440fab85a8586d9344e"
+      },
+      {
+        "stage": "minimal:start",
+        "seconds": 136.454,
+        "memory_kib": {
+          "VmHWM": 4294648,
+          "VmRSS": 4270524
+        }
+      },
+      {
+        "stage": "minimal:end",
+        "seconds": 136.454,
+        "memory_kib": {
+          "VmHWM": 4294648,
+          "VmRSS": 4270524
+        },
+        "containers": [
+          {
+            "entries": 0,
+            "container_bytes": 48,
+            "packed_bytes": 0
+          }
+        ]
+      },
+      {
+        "stage": "run:end",
+        "seconds": 148.096,
+        "memory_kib": {
+          "VmHWM": 4777192,
+          "VmRSS": 4279864
+        },
+        "report_rows": 0,
+        "report_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "alive": {
+          "entries": 0,
+          "container_bytes": 48,
+          "packed_bytes": 0
+        },
+        "empty": {
+          "entries": 208838,
+          "container_bytes": 1827096,
+          "packed_bytes": null
+        },
+        "legacy_stages": [
+          [
+            "начало",
+            4.1,
+            0
+          ],
+          [
+            "перебор",
+            4.27,
+            0
+          ],
+          [
+            "минимальные",
+            4.27,
+            0
+          ],
+          [
+            "вердикты",
+            4.27,
+            0
+          ],
+          [
+            "сжатие",
+            4.28,
+            0
+          ]
+        ],
+        "search_solver": {
+          "deferred": true,
+          "materialized": false
+        },
+        "solver_factories": 2
+      },
+      {
+        "stage": "end",
+        "seconds": 149.334,
+        "memory_kib": {
+          "VmHWM": 4777192,
+          "VmRSS": 4266760
+        },
+        "is_last_record": true
+      }
+    ],
+    "G-14-20-705-707-708-709": [
+      {
+        "stage": "enumerate_form:end",
+        "seconds": 99.711,
+        "memory_kib": {
+          "VmHWM": 4298612,
+          "VmRSS": 4298612
+        },
+        "containers": [
+          {
+            "entries": 17344,
+            "container_bytes": 48,
+            "packed_bytes": 173440
+          },
+          {
+            "entries": 609133,
+            "container_bytes": 5274392,
+            "packed_bytes": null
+          }
+        ]
+      },
+      {
+        "stage": "enumeration:engine",
+        "seconds": 99.711,
+        "memory_kib": {
+          "VmHWM": 4298616,
+          "VmRSS": 4298616
+        },
+        "engine": "cpp:de929440fab85a8586d9344e"
+      },
+      {
+        "stage": "minimal:start",
+        "seconds": 99.711,
+        "memory_kib": {
+          "VmHWM": 4298616,
+          "VmRSS": 4298616
+        }
+      },
+      {
+        "stage": "minimal:end",
+        "seconds": 99.712,
+        "memory_kib": {
+          "VmHWM": 4298616,
+          "VmRSS": 4298616
+        },
+        "containers": [
+          {
+            "entries": 17344,
+            "container_bytes": 48,
+            "packed_bytes": 173440
+          }
+        ]
+      },
+      {
+        "stage": "run:end",
+        "seconds": 277.717,
+        "memory_kib": {
+          "VmHWM": 5501320,
+          "VmRSS": 4523148
+        },
+        "report_rows": 17344,
+        "report_sha256": "77ed743c613ab1b49e0db506e1baf44bcd383e56372f28cf58d04f35765bde05",
+        "alive": {
+          "entries": 17344,
+          "container_bytes": 48,
+          "packed_bytes": 173440
+        },
+        "empty": {
+          "entries": 609133,
+          "container_bytes": 5274392,
+          "packed_bytes": null
+        },
+        "legacy_stages": [
+          [
+            "начало",
+            4.09,
+            0
+          ],
+          [
+            "перебор",
+            4.3,
+            17344
+          ],
+          [
+            "минимальные",
+            4.3,
+            17344
+          ],
+          [
+            "вердикты",
+            4.35,
+            17344
+          ],
+          [
+            "сжатие",
+            4.65,
+            17344
+          ]
+        ],
+        "search_solver": {
+          "deferred": true,
+          "materialized": false
+        },
+        "solver_factories": 2
+      },
+      {
+        "stage": "end",
+        "seconds": 278.862,
+        "memory_kib": {
+          "VmHWM": 5501320,
+          "VmRSS": 4468716
+        },
+        "is_last_record": true
+      }
+    ],
+    "G-4-17-705-707-708-709": [
+      {
+        "stage": "enumerate_form:end",
+        "seconds": 104.04,
+        "memory_kib": {
+          "VmHWM": 4295236,
+          "VmRSS": 4295012
+        },
+        "containers": [
+          {
+            "entries": 20627,
+            "container_bytes": 48,
+            "packed_bytes": 206270
+          },
+          {
+            "entries": 575040,
+            "container_bytes": 4688312,
+            "packed_bytes": null
+          }
+        ]
+      },
+      {
+        "stage": "enumeration:engine",
+        "seconds": 104.04,
+        "memory_kib": {
+          "VmHWM": 4295236,
+          "VmRSS": 4295012
+        },
+        "engine": "cpp:de929440fab85a8586d9344e"
+      },
+      {
+        "stage": "minimal:start",
+        "seconds": 104.04,
+        "memory_kib": {
+          "VmHWM": 4295236,
+          "VmRSS": 4295012
+        }
+      },
+      {
+        "stage": "minimal:end",
+        "seconds": 104.042,
+        "memory_kib": {
+          "VmHWM": 4295236,
+          "VmRSS": 4295016
+        },
+        "containers": [
+          {
+            "entries": 20627,
+            "container_bytes": 48,
+            "packed_bytes": 206270
+          }
+        ]
+      },
+      {
+        "stage": "run:end",
+        "seconds": 483.974,
+        "memory_kib": {
+          "VmHWM": 5514268,
+          "VmRSS": 4679808
+        },
+        "report_rows": 20627,
+        "report_sha256": "d199dd500fda1f7602f0e98b9033de66c1659d581023b56701a87112ecd42e3a",
+        "alive": {
+          "entries": 20627,
+          "container_bytes": 48,
+          "packed_bytes": 206270
+        },
+        "empty": {
+          "entries": 575040,
+          "container_bytes": 4688312,
+          "packed_bytes": null
+        },
+        "legacy_stages": [
+          [
+            "начало",
+            4.09,
+            0
+          ],
+          [
+            "перебор",
+            4.3,
+            20627
+          ],
+          [
+            "минимальные",
+            4.3,
+            20627
+          ],
+          [
+            "вердикты",
+            4.37,
+            20627
+          ],
+          [
+            "сжатие",
+            4.68,
+            20627
+          ]
+        ],
+        "search_solver": {
+          "deferred": true,
+          "materialized": false
+        },
+        "solver_factories": 2
+      },
+      {
+        "stage": "end",
+        "seconds": 485.35,
+        "memory_kib": {
+          "VmHWM": 5514268,
+          "VmRSS": 4640524
+        },
+        "is_last_record": true
+      }
+    ],
+    "G-15-320-705-707-708-709": [
+      {
+        "stage": "enumerate_form:end",
+        "seconds": 148.038,
+        "memory_kib": {
+          "VmHWM": 4296136,
+          "VmRSS": 4261644
+        },
+        "containers": [
+          {
+            "entries": 3671,
+            "container_bytes": 48,
+            "packed_bytes": 36710
+          },
+          {
+            "entries": 65688,
+            "container_bytes": 562488,
+            "packed_bytes": null
+          }
+        ]
+      },
+      {
+        "stage": "enumeration:engine",
+        "seconds": 148.038,
+        "memory_kib": {
+          "VmHWM": 4296136,
+          "VmRSS": 4261648
+        },
+        "engine": "cpp:de929440fab85a8586d9344e"
+      },
+      {
+        "stage": "minimal:start",
+        "seconds": 148.038,
+        "memory_kib": {
+          "VmHWM": 4296136,
+          "VmRSS": 4261648
+        }
+      },
+      {
+        "stage": "minimal:end",
+        "seconds": 148.039,
+        "memory_kib": {
+          "VmHWM": 4296136,
+          "VmRSS": 4261648
+        },
+        "containers": [
+          {
+            "entries": 3671,
+            "container_bytes": 48,
+            "packed_bytes": 36710
+          }
+        ]
+      },
+      {
+        "stage": "run:end",
+        "seconds": 201.607,
+        "memory_kib": {
+          "VmHWM": 5403764,
+          "VmRSS": 4358692
+        },
+        "report_rows": 3671,
+        "report_sha256": "72cdaf733a31c127ac81f093cc8cbdae57fbb87b47ee962bb21bc41e7bc8e699",
+        "alive": {
+          "entries": 3671,
+          "container_bytes": 48,
+          "packed_bytes": 36710
+        },
+        "empty": {
+          "entries": 65688,
+          "container_bytes": 562488,
+          "packed_bytes": null
+        },
+        "legacy_stages": [
+          [
+            "начало",
+            4.09,
+            0
+          ],
+          [
+            "перебор",
+            4.26,
+            3671
+          ],
+          [
+            "минимальные",
+            4.26,
+            3671
+          ],
+          [
+            "вердикты",
+            4.27,
+            3671
+          ],
+          [
+            "сжатие",
+            4.36,
+            3671
+          ]
+        ],
+        "search_solver": {
+          "deferred": true,
+          "materialized": false
+        },
+        "solver_factories": 2
+      },
+      {
+        "stage": "end",
+        "seconds": 202.62,
+        "memory_kib": {
+          "VmHWM": 5403764,
+          "VmRSS": 4353652
+        },
+        "is_last_record": true
+      }
+    ],
+    "G-10-13-705-707-708-709": [
+      {
+        "stage": "enumerate_form:end",
+        "seconds": 184.622,
+        "memory_kib": {
+          "VmHWM": 4962672,
+          "VmRSS": 4700380
+        },
+        "containers": [
+          {
+            "entries": 17447922,
+            "container_bytes": 48,
+            "packed_bytes": 174479220
+          },
+          {
+            "entries": 3030679,
+            "container_bytes": 24387832,
+            "packed_bytes": null
+          }
+        ]
+      },
+      {
+        "stage": "enumeration:engine",
+        "seconds": 184.622,
+        "memory_kib": {
+          "VmHWM": 4962672,
+          "VmRSS": 4700380
+        },
+        "engine": "cpp:de929440fab85a8586d9344e"
+      },
+      {
+        "stage": "minimal:start",
+        "seconds": 184.622,
+        "memory_kib": {
+          "VmHWM": 4962672,
+          "VmRSS": 4700380
+        }
+      },
+      {
+        "stage": "minimal:end",
+        "seconds": 186.645,
+        "memory_kib": {
+          "VmHWM": 5225180,
+          "VmRSS": 4831672
+        },
+        "containers": [
+          {
+            "entries": 17447922,
+            "container_bytes": 48,
+            "packed_bytes": 174479220
+          }
+        ]
+      },
+      {
+        "stage": "verdicts:progress",
+        "seconds": 1198.111,
+        "memory_kib": {
+          "VmHWM": 6798856,
+          "VmRSS": 6762888
+        },
+        "report_rows": 1294907,
+        "degeneration_targets": 0,
+        "degeneration_cache": {
+          "entries": 0,
+          "container_bytes": 64,
+          "packed_bytes": null
+        },
+        "verdict_cache": {
+          "entries": 1295000,
+          "container_bytes": 41943128,
+          "packed_bytes": null
+        },
+        "bank_unsat": 4763,
+        "is_last_record": true
+      }
+    ],
+    "G-4-220-705-707-708-709": [
+      {
+        "stage": "enumerate_form:end",
+        "seconds": 209.981,
+        "memory_kib": {
+          "VmHWM": 4688184,
+          "VmRSS": 4688184
+        },
+        "containers": [
+          {
+            "entries": 13218958,
+            "container_bytes": 48,
+            "packed_bytes": 132189580
+          },
+          {
+            "entries": 3073044,
+            "container_bytes": 27436344,
+            "packed_bytes": null
+          }
+        ]
+      },
+      {
+        "stage": "enumeration:engine",
+        "seconds": 209.982,
+        "memory_kib": {
+          "VmHWM": 4688188,
+          "VmRSS": 4688188
+        },
+        "engine": "cpp:de929440fab85a8586d9344e"
+      },
+      {
+        "stage": "minimal:start",
+        "seconds": 209.982,
+        "memory_kib": {
+          "VmHWM": 4688188,
+          "VmRSS": 4688188
+        }
+      },
+      {
+        "stage": "minimal:end",
+        "seconds": 211.347,
+        "memory_kib": {
+          "VmHWM": 4980388,
+          "VmRSS": 4785688
+        },
+        "containers": [
+          {
+            "entries": 13218958,
+            "container_bytes": 48,
+            "packed_bytes": 132189580
+          }
+        ]
+      },
+      {
+        "stage": "verdicts:progress",
+        "seconds": 1190.549,
+        "memory_kib": {
+          "VmHWM": 6350584,
+          "VmRSS": 6320504
+        },
+        "report_rows": 999918,
+        "degeneration_targets": 0,
+        "degeneration_cache": {
+          "entries": 0,
+          "container_bytes": 64,
+          "packed_bytes": null
+        },
+        "verdict_cache": {
+          "entries": 1000000,
+          "container_bytes": 41943128,
+          "packed_bytes": null
+        },
+        "bank_unsat": 12053,
+        "is_last_record": true
+      }
+    ],
+    "G-4-5-26-445-700-705-707-708-709": [
+      {
+        "stage": "enumerate_form:end",
+        "seconds": 731.283,
+        "memory_kib": {
+          "VmHWM": 11499092,
+          "VmRSS": 8231696
+        },
+        "containers": [
+          {
+            "entries": 205509771,
+            "container_bytes": 48,
+            "packed_bytes": 2055097710
+          },
+          {
+            "entries": 15669963,
+            "container_bytes": 126856312,
+            "packed_bytes": null
+          }
+        ]
+      },
+      {
+        "stage": "enumeration:engine",
+        "seconds": 731.283,
+        "memory_kib": {
+          "VmHWM": 11499092,
+          "VmRSS": 8231696
+        },
+        "engine": "cpp:de929440fab85a8586d9344e"
+      },
+      {
+        "stage": "minimal:start",
+        "seconds": 731.284,
+        "memory_kib": {
+          "VmHWM": 11499092,
+          "VmRSS": 8231696
+        },
+        "is_last_record": true
+      }
+    ],
+    "G-14-20-390-705-707-708-709": [
+      {
+        "stage": "enumerate_form:end",
+        "seconds": 132.925,
+        "memory_kib": {
+          "VmHWM": 4534484,
+          "VmRSS": 4534484
+        },
+        "containers": [
+          {
+            "entries": 721011,
+            "container_bytes": 48,
+            "packed_bytes": 7210110
+          },
+          {
+            "entries": 2746960,
+            "container_bytes": 24387832,
+            "packed_bytes": null
+          }
+        ]
+      },
+      {
+        "stage": "enumeration:engine",
+        "seconds": 132.926,
+        "memory_kib": {
+          "VmHWM": 4534484,
+          "VmRSS": 4534484
+        },
+        "engine": "cpp:de929440fab85a8586d9344e"
+      },
+      {
+        "stage": "minimal:start",
+        "seconds": 132.926,
+        "memory_kib": {
+          "VmHWM": 4534484,
+          "VmRSS": 4534484
+        }
+      },
+      {
+        "stage": "minimal:end",
+        "seconds": 132.976,
+        "memory_kib": {
+          "VmHWM": 4534484,
+          "VmRSS": 4534484
+        },
+        "containers": [
+          {
+            "entries": 721011,
+            "container_bytes": 48,
+            "packed_bytes": 7210110
+          }
+        ]
+      },
+      {
+        "stage": "run:end",
+        "seconds": 715.823,
+        "memory_kib": {
+          "VmHWM": 7188300,
+          "VmRSS": 6030312
+        },
+        "report_rows": 721011,
+        "report_sha256": "29a4c344434f4c391a62bdba55eff772b5151f62875db000c8f046d6f916233d",
+        "alive": {
+          "entries": 721011,
+          "container_bytes": 48,
+          "packed_bytes": 7210110
+        },
+        "empty": {
+          "entries": 2746960,
+          "container_bytes": 24387832,
+          "packed_bytes": null
+        },
+        "legacy_stages": [
+          [
+            "начало",
+            4.1,
+            0
+          ],
+          [
+            "перебор",
+            4.53,
+            721011
+          ],
+          [
+            "минимальные",
+            4.53,
+            721011
+          ],
+          [
+            "вердикты",
+            5.64,
+            721011
+          ],
+          [
+            "сжатие",
+            6.03,
+            721011
+          ]
+        ],
+        "search_solver": {
+          "deferred": true,
+          "materialized": false
+        },
+        "solver_factories": 3
+      },
+      {
+        "stage": "end",
+        "seconds": 721.501,
+        "memory_kib": {
+          "VmHWM": 7188300,
+          "VmRSS": 4713888
+        },
+        "is_last_record": true
+      }
+    ]
+  },
+  "comparison_stress01": {
+    "run": 42307026640,
+    "commit": "c5196d4af4463f7354b53bdf3a543c0759505bbb",
+    "cases": [
+      {
+        "id": "G-1-183-470-705-707-708-709",
+        "previous_outcome": "ok",
+        "previous_stop_reason": "exited",
+        "current_outcome": "ok",
+        "current_stop_reason": "exited",
+        "raw_sha256_equal": true,
+        "report_rows_equal": true,
+        "unknown_id_count_equal": true,
+        "kept_count_equal": true,
+        "wall_seconds_before": 217.052,
+        "wall_seconds_after": 152.002,
+        "observed_wall_ratio": 1.4279548953303245,
+        "different_summary_keys": [
+          "память по этапам",
+          "секунд"
+        ],
+        "semantic_summary_equal": true
+      },
+      {
+        "id": "G-14-20-705-707-708-709",
+        "previous_outcome": "ok",
+        "previous_stop_reason": "exited",
+        "current_outcome": "ok",
+        "current_stop_reason": "exited",
+        "raw_sha256_equal": true,
+        "report_rows_equal": true,
+        "unknown_id_count_equal": true,
+        "kept_count_equal": true,
+        "wall_seconds_before": 376.564,
+        "wall_seconds_after": 281.168,
+        "observed_wall_ratio": 1.3392846981164286,
+        "different_summary_keys": [
+          "память ГБ",
+          "память по этапам",
+          "секунд"
+        ],
+        "semantic_summary_equal": true
+      },
+      {
+        "id": "G-4-17-705-707-708-709",
+        "previous_outcome": "ok",
+        "previous_stop_reason": "exited",
+        "current_outcome": "ok",
+        "current_stop_reason": "exited",
+        "raw_sha256_equal": true,
+        "report_rows_equal": true,
+        "unknown_id_count_equal": true,
+        "kept_count_equal": true,
+        "wall_seconds_before": 752.487,
+        "wall_seconds_after": 487.746,
+        "observed_wall_ratio": 1.5427845640968865,
+        "different_summary_keys": [
+          "память по этапам",
+          "секунд"
+        ],
+        "semantic_summary_equal": true
+      },
+      {
+        "id": "G-15-320-705-707-708-709",
+        "previous_outcome": "ok",
+        "previous_stop_reason": "exited",
+        "current_outcome": "ok",
+        "current_stop_reason": "exited",
+        "raw_sha256_equal": true,
+        "report_rows_equal": true,
+        "unknown_id_count_equal": true,
+        "kept_count_equal": true,
+        "wall_seconds_before": 327.013,
+        "wall_seconds_after": 205.089,
+        "observed_wall_ratio": 1.5944931224980374,
+        "different_summary_keys": [
+          "память ГБ",
+          "память по этапам",
+          "секунд"
+        ],
+        "semantic_summary_equal": true
+      },
+      {
+        "id": "G-10-13-705-707-708-709",
+        "previous_outcome": "incomplete",
+        "previous_stop_reason": "time_budget",
+        "current_outcome": "incomplete",
+        "current_stop_reason": "time_budget"
+      },
+      {
+        "id": "G-4-220-705-707-708-709",
+        "previous_outcome": "incomplete",
+        "previous_stop_reason": "time_budget",
+        "current_outcome": "incomplete",
+        "current_stop_reason": "time_budget"
+      },
+      {
+        "id": "G-4-5-26-445-700-705-707-708-709",
+        "previous_outcome": "incomplete",
+        "previous_stop_reason": "time_budget",
+        "current_outcome": "incomplete",
+        "current_stop_reason": "rss_budget"
+      },
+      {
+        "id": "G-14-20-390-705-707-708-709",
+        "previous_outcome": "ok",
+        "previous_stop_reason": "exited",
+        "current_outcome": "ok",
+        "current_stop_reason": "exited",
+        "raw_sha256_equal": true,
+        "report_rows_equal": true,
+        "unknown_id_count_equal": true,
+        "kept_count_equal": true,
+        "wall_seconds_before": 1096.908,
+        "wall_seconds_after": 723.854,
+        "observed_wall_ratio": 1.515371884385525,
+        "different_summary_keys": [
+          "память ГБ",
+          "память по этапам",
+          "секунд"
+        ],
+        "semantic_summary_equal": true
+      }
+    ],
+    "timing_limitations": "Same plan/input SHA, cold verdict cache and startup included. Single measurements on separate standard runners; combines PR12 leaf changes and PR13 C++ kernel. No speed ratio for unfinished cases or full class.",
+    "paired_complete_count": 5
+  },
+  "unfinished_process_cost": {
+    "wall_seconds": 3146.944,
+    "cpu_seconds": 3145.4437449999996
+  },
+  "partial_manifest": {
+    "source_commit": "d3a4157d4468e8653dbce531aaf5e9a372cc0ff5",
+    "size": 2,
+    "k": 3,
+    "class": "",
+    "bases_total": 42,
+    "bases": [
+      {
+        "base": "G",
+        "status": "complete",
+        "schemes": 1047,
+        "sha256": "f23022d03a2203abda5c315056d80dcc2916ad718820212491e79d6799f7d4b4",
+        "wall_seconds": 2.205
+      },
+      {
+        "base": "AB",
+        "status": "complete",
+        "schemes": 1713,
+        "sha256": "f8d94f4d95a59d3d9971061d3515dc25138b315cf25a0e31fd04264fb4c9a9c1",
+        "wall_seconds": 30.217
+      },
+      {
+        "base": "GN",
+        "status": "not_finished",
+        "schemes": null,
+        "wall_seconds": 60.001
+      },
+      {
+        "base": "GMN",
+        "status": "not_finished",
+        "schemes": null,
+        "wall_seconds": 60.002
+      }
+    ]
+  },
+  "limitations": [
+    "Exactly8selectedGschemes; full42baseplan unknown.",
+    "5complete and3unfinished; no whole-class all_complete or OOM elimination.",
+    "RSS is one process, not process tree/cgroup/PSS; sampled limit may overshoot.",
+    "Aut/Inn/factors previously timed out before enumeration finished; different reached stages are not a paired memory regression.",
+    "838kept only within5complete schemes, not global basis; no newSAT proof of cross-scheme basis.",
+    "Caches/tables reused from source_run42173383257; fresh table/library construction cost not measured.",
+    "Full30problem audit still has0native checks; Hirsch remains open."
+  ]
+}

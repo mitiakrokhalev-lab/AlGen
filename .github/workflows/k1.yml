@@ -1,0 +1,81 @@
+name: k1
+
+# Остаток k = 1 по каждой базе на готовых таблицах другого запуска build
+# (TABLES_RUN) текущим кодом: ALGEN_STALE=1 разрешает таблицы прошлых правил.
+# Это верно, пока правила и библиотека только пополнялись: выведенные значения
+# строк остаются выводами, решения условий принимает текущая теория.
+# Запуск: пуш в ветку «k1-…»; номер запуска с таблицами — в .github/k1-tables-run.
+
+on:
+  push:
+    branches: ["k1-*"]
+
+env:
+  ARGS: ""
+  # ALGEN_STALE не ставится: таблица прошлых правил без проверки «правила только добавлялись» — дыра
+
+jobs:
+  k1:
+    permissions:
+      actions: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        base: [G, GX, Gx, GE, Fam, AB, GMN, GHF, GN, GHK]
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - run: echo "RUN=$(cat .github/k1-tables-run)" >> $GITHUB_ENV
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: tab-*
+          path: tab
+          merge-multiple: true
+          run-id: ${{ env.RUN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: остаток k = 1
+        continue-on-error: true
+        run: |
+          mkdir -p out && cd py
+          ls ../tab | wc -l
+          timeout 320m python3 -m algen.table k1 ${{ matrix.base }} --каталог ../tab --выход ../out $ARGS 2> ../out/k1-${{ matrix.base }}.log || echo "k1 ${{ matrix.base }}: $?" >> ../out/k1-${{ matrix.base }}.log
+          tail -n 3 ../out/k1-${{ matrix.base }}.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: k1-${{ matrix.base }}
+          path: out
+          retention-days: 30
+
+  results:
+    needs: k1
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: k1-*
+          path: all
+          merge-multiple: true
+      - name: результаты в ветку «results-…»
+        run: |
+          R=$(cat .github/k1-tables-run)
+          ls -la all
+          tar czf k1.tar.gz all
+          mkdir -p keep && cp all/*.txt all/*.log keep/ 2>/dev/null || true
+          git config user.name "algen-bot"
+          git config user.email "algen-bot@users.noreply.github.com"
+          git checkout --orphan "results-${GITHUB_REF_NAME}"
+          git rm -rq --cached . && git clean -fdq -e k1.tar.gz -e keep
+          git add k1.tar.gz keep
+          git commit -qm "k = 1 по базам: ${GITHUB_REF_NAME}, таблицы запуска $R, запуск ${GITHUB_RUN_ID}"
+          git push -f origin "HEAD:refs/heads/results-${GITHUB_REF_NAME}"

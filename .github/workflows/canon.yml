@@ -1,0 +1,40 @@
+name: canon
+
+# Сверка каркаса (теории базы) у нового и старого кода заземления: атомы и клаузы
+# должны совпасть бит в бит. OLD — коммит до ускорения. Запуск: пуш в ветку «canon-…».
+
+on:
+  push:
+    branches: ["canon-*"]
+
+env:
+  ALGEN_SIZE: "2"
+  ALGEN_FAST: "1"
+  OLD: "60e8ef6"
+
+jobs:
+  canon:
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        base: [GE, GN]
+        code: [new]  # старый код — в запуске canon-3 (41749856320)
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy python-sat pyyaml
+      - name: старый код заземления
+        if: matrix.code == 'old'
+        run: git checkout $OLD -- py/algen/logic.py py/algen/table.py py/algen/enumerate.py
+      - name: отпечаток
+        run: |
+          cd py
+          /usr/bin/time -v timeout 330m python3 -m algen.canon ${{ matrix.base }} 2>&1 | grep -E "^${{ matrix.base }} |память|Maximum resident|Elapsed"
