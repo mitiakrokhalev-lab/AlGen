@@ -1,0 +1,304 @@
+{
+  "scheme": "G-4-17-767-769-770-771",
+  "source_run": 44027003918,
+  "expected_fingerprint": "a32525981b40d3d8:G::s2:быстро",
+  "knowledge": true,
+  "k": 3,
+  "size": 2,
+  "sample": null,
+  "interpreter": "3.12.16 (main, Oct 26 2026, 02:50:49) [GCC 13.3.0]",
+  "native_source_key": "cba5e6f17868c5cdb4ac7d7e",
+  "limits": {
+    "seconds": 1500,
+    "rss_gib": 14.0
+  },
+  "order": [
+    "grouped",
+    "ungrouped"
+  ],
+  "shared_native_setup_wall_seconds": 5.968414935999988,
+  "total_wall_seconds": 1108.2000529499999,
+  "checkout": "0e53aca318ef5ae5f6d9199945a83feb895fe3e9",
+  "inputs_before": {
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.1-20.pickle": {
+      "bytes": 56734742,
+      "sha256": "214ad77931dd8831ba7b03fb0a83eed6fa2897871b2d91fb1622cbd7f09e9529"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.10-20.pickle": {
+      "bytes": 56699313,
+      "sha256": "c324cfa21a11e0ee9a5cd7e31fda6807c44122bb61d421841815bf778ab7bb4e"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.11-20.pickle": {
+      "bytes": 56699527,
+      "sha256": "a42174cf2123d889150b7e7f313d540054361970dd0821f51d7e56bec16729af"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.12-20.pickle": {
+      "bytes": 56699611,
+      "sha256": "748daf6ddd0a8105ac1466306ba7b03db2f9dd341c16d02124ff4ffa5337d093"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.13-20.pickle": {
+      "bytes": 56699586,
+      "sha256": "7eb0cd89adf3163ea3acf6bee41c4e08dc4e07d522d00d1171ac3eef21fbf3a4"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.14-20.pickle": {
+      "bytes": 56699584,
+      "sha256": "d41137ebdd0e67575135d88fcb5d09bc998b599e16fc4534c766f7f90dc9a23f"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.15-20.pickle": {
+      "bytes": 56699707,
+      "sha256": "28c63e18bd84f42dc468fe6cf562b394dbca28a8d5d2f227083643ccf9b8a8cc"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.16-20.pickle": {
+      "bytes": 56699648,
+      "sha256": "9cd7e24c3f0fc3c1d8a8c14371c442aa71bc3f7d47195e71d99263e48241a130"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.17-20.pickle": {
+      "bytes": 56699601,
+      "sha256": "77d53c926982f2ea2ca2be2cb12fa66fc97f67447b6bcbc2d5681b9ac5bced54"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.18-20.pickle": {
+      "bytes": 56699657,
+      "sha256": "c0f14bafedbaacec49c7e8b1e1e40ec6873938def005df90956097f81c4755e6"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.19-20.pickle": {
+      "bytes": 56699749,
+      "sha256": "fba7c50b3e4f8396bb3cae9041a09ab4a34358daa8f4a3db14c5f87dc72c247c"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.2-20.pickle": {
+      "bytes": 56734775,
+      "sha256": "ff4ffaaa9057531549d82e2b6e0d52daaa17f2984a0567ea0bf801403e768361"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.20-20.pickle": {
+      "bytes": 56699625,
+      "sha256": "f63e5d27ee6c51007192e0bb0756c9f67951ba8dc7d952da8610148655c2d28b"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.3-20.pickle": {
+      "bytes": 56735023,
+      "sha256": "f065b02cf306ad7a3e8bba1ca6fe98ef14f17a18fb215b67064dda1177bc2eed"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.4-20.pickle": {
+      "bytes": 56699513,
+      "sha256": "33c24e17f7b027b652d784f44dcfe99c652532518f9f2bef2a263bf3149e9f8b"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.5-20.pickle": {
+      "bytes": 56699576,
+      "sha256": "cc31a57b16b81b610b00c75a4c010e821510bd3dbe77dde3c5887cf153dc8b53"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.6-20.pickle": {
+      "bytes": 56699626,
+      "sha256": "d31995292cc4455ecfecad50322694331653437e54dd0eeb4d87bc0437e737f5"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.7-20.pickle": {
+      "bytes": 56699602,
+      "sha256": "ddff9786b8b0fa5e8f0f33cd7bacd9b39ed04a769baeac8c4f94b95c91716a7e"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.8-20.pickle": {
+      "bytes": 56699569,
+      "sha256": "e82d61e806053fad142549ee677da0c883a3968eb46830f3c99e7795ac32c4ee"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.9-20.pickle": {
+      "bytes": 56699379,
+      "sha256": "f0164b6520a3ce9fbd7854b5802a269f5ada9f205eedb70aaeb93f3a39a1ab24"
+    },
+    "/home/runner/work/AlGen/AlGen/native-tabs/G.rep.pickle": {
+      "bytes": 322803,
+      "sha256": "73e3f8b10a7c9eb878cf383c0a0a70fb911aaa97649c6374aeca728c46e02152"
+    },
+    "/home/runner/work/AlGen/AlGen/native/skel/G.skel.pickle": {
+      "bytes": 1246190079,
+      "sha256": "3e941a849fcfe14d28631af1748dbb6193274e3fb087ed2b0737fb9d44e57085"
+    },
+    "/home/runner/work/AlGen/AlGen/кэш/библиотека-a32525981b40d3d8.pickle": {
+      "bytes": 60960613,
+      "sha256": "e5f0fe667530d63e76bf9113ebd045e1d6ebd2cd18ba87be249cb5c0c23287b5"
+    }
+  },
+  "inputs_unchanged": true,
+  "equal": {
+    "enumeration": true,
+    "report": true,
+    "summary": true,
+    "text": true,
+    "same_code": true,
+    "table": true,
+    "final_minima": true,
+    "matrix": true,
+    "knowledge": true,
+    "actual_grouping": true
+  },
+  "modes": [
+    {
+      "mode": "1",
+      "returncode": 0,
+      "stop": "exited",
+      "wall_seconds": 530.499327734,
+      "sampled_rss_kib": 11457460,
+      "cpu_seconds": 527.859267,
+      "log_sha256": "d07b8b497cfc2da08910e0c419fb4d0282b9c474583412e7849ce5c9b9f7d73e",
+      "receipt": {
+        "table_fingerprint": "a32525981b40d3d8:G::s2:быстро",
+        "grouping": {
+          "input": [
+            32183,
+            396
+          ],
+          "groups": 5522,
+          "wall_seconds": 0.042807831000004626
+        },
+        "enumeration": {
+          "wall_seconds": 11.700135047999993,
+          "cpu_seconds": 11.638448087000008,
+          "engine": "cpp:cba5e6f17868c5cdb4ac7d7e",
+          "alive": 20823,
+          "empty": 545405,
+          "n_alive": 2730725,
+          "packed_bytes": 4571470,
+          "sha256": "c4b883791282101320fb9f2e25d2c462120f2106d0dfe93e66f52a4707119b1e"
+        },
+        "enumeration_digest_seconds": 0.0028817909999929725,
+        "report": {
+          "rows": 20823,
+          "bytes": 29161389,
+          "sha256": "6e6584cb31823d1a4be2924547d224f0dd80ef22ffa31fd44c9fe6aa5e301952",
+          "digest_seconds": 0.2760624929999267
+        },
+        "final_minima": 20823,
+        "wall_seconds": 525.822572786,
+        "cpu_seconds": 523.7033739999999,
+        "peak_rss_kib": 11457360,
+        "filesystem_input_blocks": 1600,
+        "filesystem_output_blocks": 3448,
+        "summary": {
+          "bytes": 1335704,
+          "status": "ok",
+          "scheme_seconds": 472.3,
+          "запретов": 5519,
+          "вердикты": {
+            "выводится": 1644,
+            "неизвестно": 3875
+          },
+          "оставленные вопросы": 605,
+          "оставленные факты": 1153,
+          "свёрнуто": 3270,
+          "sha256_without_timings": "e9673fb649844d9d95a9c43a72f959b01f3b52b06719c22a396b43dc962f2ab5"
+        },
+        "knowledge_time": {
+          "стена": 1.21,
+          "процессор": 1.21
+        },
+        "knowledge_counts": {
+          "все неизвестные": {
+            "запретов": 3875,
+            "вопросов человеку (C)": 18,
+            "ждут знаний (A + B)": 3857,
+            "корней знаний всего": 41265
+          },
+          "оставленные после сжатия": {
+            "запретов": 605,
+            "вопросов человеку (C)": 3,
+            "ждут знаний (A + B)": 602,
+            "корней знаний всего": 19181
+          }
+        },
+        "text": {
+          "bytes": 39978,
+          "sha256": "80400ae92e72ca2072e89baefa06b9430446f335af0760840a78c0f21b3ab17d"
+        },
+        "sources": {
+          "/home/runner/work/AlGen/AlGen/py/algen/enumerate.py": "78a4a0eb696c18d4a244bdd2bd5f688d35ab4d6254359fca1edcd60b1a458b21",
+          "/home/runner/work/AlGen/AlGen/py/algen/library.py": "38ca0556ffa499772c5d7647fde5f79ebd00866b88a9cb200ad122e5ef731b67",
+          "/home/runner/work/AlGen/AlGen/py/algen/native_enum.py": "77d156e158a13f38a88a51f0b0fd8882b23b2b2d83d3b2e766dbc1389d919f1d",
+          "/home/runner/work/AlGen/AlGen/py/algen/table.py": "9f8d10bc5b2909e257a35ac30617ba0792c317d552d61908fad9ac7900ea7d05",
+          "/home/runner/work/AlGen/AlGen/py/algen/native_enum.cpp": "bd000fcf3617cf608755d35971bbbc10fba523ecd4bd2264ff48d9c56c79386c"
+        }
+      }
+    },
+    {
+      "mode": "0",
+      "returncode": 0,
+      "stop": "exited",
+      "wall_seconds": 567.063332446,
+      "sampled_rss_kib": 11452092,
+      "cpu_seconds": 564.5391679999998,
+      "log_sha256": "9006d1f65412a68ec54083f2edad48dc797f2d4a458c715d60e6a03b358a7787",
+      "receipt": {
+        "table_fingerprint": "a32525981b40d3d8:G::s2:быстро",
+        "grouping": {
+          "input": [
+            32183,
+            396
+          ],
+          "groups": null,
+          "wall_seconds": 1.2750999985655653e-05
+        },
+        "enumeration": {
+          "wall_seconds": 21.93212749999998,
+          "cpu_seconds": 21.845808617000003,
+          "engine": "cpp:cba5e6f17868c5cdb4ac7d7e",
+          "alive": 20823,
+          "empty": 545405,
+          "n_alive": 2730725,
+          "packed_bytes": 4571470,
+          "sha256": "c4b883791282101320fb9f2e25d2c462120f2106d0dfe93e66f52a4707119b1e"
+        },
+        "enumeration_digest_seconds": 0.0031802260000404203,
+        "report": {
+          "rows": 20823,
+          "bytes": 29161389,
+          "sha256": "6e6584cb31823d1a4be2924547d224f0dd80ef22ffa31fd44c9fe6aa5e301952",
+          "digest_seconds": 0.2698181989999284
+        },
+        "final_minima": 20823,
+        "wall_seconds": 562.690615203,
+        "cpu_seconds": 560.386079,
+        "peak_rss_kib": 11452052,
+        "filesystem_input_blocks": 0,
+        "filesystem_output_blocks": 3448,
+        "summary": {
+          "bytes": 1335704,
+          "status": "ok",
+          "scheme_seconds": 504.6,
+          "запретов": 5519,
+          "вердикты": {
+            "выводится": 1644,
+            "неизвестно": 3875
+          },
+          "оставленные вопросы": 605,
+          "оставленные факты": 1153,
+          "свёрнуто": 3270,
+          "sha256_without_timings": "e9673fb649844d9d95a9c43a72f959b01f3b52b06719c22a396b43dc962f2ab5"
+        },
+        "knowledge_time": {
+          "стена": 1.23,
+          "процессор": 1.21
+        },
+        "knowledge_counts": {
+          "все неизвестные": {
+            "запретов": 3875,
+            "вопросов человеку (C)": 18,
+            "ждут знаний (A + B)": 3857,
+            "корней знаний всего": 41265
+          },
+          "оставленные после сжатия": {
+            "запретов": 605,
+            "вопросов человеку (C)": 3,
+            "ждут знаний (A + B)": 602,
+            "корней знаний всего": 19181
+          }
+        },
+        "text": {
+          "bytes": 39978,
+          "sha256": "80400ae92e72ca2072e89baefa06b9430446f335af0760840a78c0f21b3ab17d"
+        },
+        "sources": {
+          "/home/runner/work/AlGen/AlGen/py/algen/enumerate.py": "78a4a0eb696c18d4a244bdd2bd5f688d35ab4d6254359fca1edcd60b1a458b21",
+          "/home/runner/work/AlGen/AlGen/py/algen/library.py": "38ca0556ffa499772c5d7647fde5f79ebd00866b88a9cb200ad122e5ef731b67",
+          "/home/runner/work/AlGen/AlGen/py/algen/native_enum.py": "77d156e158a13f38a88a51f0b0fd8882b23b2b2d83d3b2e766dbc1389d919f1d",
+          "/home/runner/work/AlGen/AlGen/py/algen/table.py": "9f8d10bc5b2909e257a35ac30617ba0792c317d552d61908fad9ac7900ea7d05",
+          "/home/runner/work/AlGen/AlGen/py/algen/native_enum.cpp": "bd000fcf3617cf608755d35971bbbc10fba523ecd4bd2264ff48d9c56c79386c"
+        }
+      }
+    }
+  ],
+  "complete": true
+}

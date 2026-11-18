@@ -1,0 +1,1 @@
+{"scheme": "G-4-17-767-769-770-771", "complete": true, "equal": {"enumeration": true, "report": true, "summary": true, "text": true, "same_code": true, "table": true, "final_minima": true, "matrix": true, "knowledge": true, "actual_grouping": true}}
