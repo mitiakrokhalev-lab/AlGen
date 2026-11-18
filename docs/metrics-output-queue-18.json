@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "updated_utc": "2026-11-18T16:36:41.970131+00:00",
+  "scope": "Audit of kept knowledge in P19 mode k, one complete G scheme and four sampled G schemes. No AlGen rerun.",
+  "run": 44024985371,
+  "runtime_code_commit": "e07ddc16aafe7a9385b41d39918323f1911b6c85",
+  "table_run": 43866079198,
+  "pilot_metadata_sha256": "7dd5d9e274d55ec558a8cb0cb44364c6a76aae8adae0c0effb61bf8d1cb59fb6",
+  "raw_sidecars_republished": false,
+  "whole_class_measured": false,
+  "cases": [
+    {
+      "scheme": "G-10-13-767-769-770-771",
+      "case": "t-G1013",
+      "fully_checked_minimal_domain": false,
+      "minimal_conditions": 14810399,
+      "checked_conditions": 20000,
+      "kept_root_rows": 24862,
+      "kept_AB": 845,
+      "kept_C": 1,
+      "input_artifact": {
+        "artifact_id": 14304904005,
+        "zip_sha256": "7c248b4acf1dcc2269b40bf939240a00a7938aa687d23c9594dc94bafd46842d",
+        "file": "G-10-13-767-769-770-771.knowledge.json.gz",
+        "member_sha256": "8d593fd37e89fe531716368c1db8051a97fa4d54b4891b5e07ee3d701bc9d2ba",
+        "member_crc32": "34731c70",
+        "bytes": 356529
+      }
+    },
+    {
+      "scheme": "G-14-22-440-767-769-770-771",
+      "case": "t-G1420390",
+      "fully_checked_minimal_domain": false,
+      "minimal_conditions": 218425,
+      "checked_conditions": 60000,
+      "kept_root_rows": 11216,
+      "kept_AB": 41,
+      "kept_C": 0,
+      "input_artifact": {
+        "artifact_id": 14304135233,
+        "zip_sha256": "fe4fd533b50d20b32f63bc5a37127b04e6e3c4d91b94c8ca1787d6cc298b637d",
+        "file": "G-14-22-440-767-769-770-771.knowledge.json.gz",
+        "member_sha256": "d4be47deb22917c3c7e222f22949295f7e77be37f5d63bb92817d05858c245d4",
+        "member_crc32": "5fa1653f",
+        "bytes": 154621
+      }
+    },
+    {
+      "scheme": "G-4-17-767-769-770-771",
+      "case": "t-G417",
+      "fully_checked_minimal_domain": true,
+      "minimal_conditions": 20823,
+      "checked_conditions": 20823,
+      "kept_root_rows": 13283,
+      "kept_AB": 620,
+      "kept_C": 5,
+      "input_artifact": {
+        "artifact_id": 14302844242,
+        "zip_sha256": "eedb54032dc5ad4bfe2f878a5557cc6a72d075b91f649724f05950377812592f",
+        "file": "G-4-17-767-769-770-771.knowledge.json.gz",
+        "member_sha256": "0dbe47dbe6d7dce6f68634f81579f4b40f6ba4714563c2f798a117a0e1fde043",
+        "member_crc32": "e2ce0e92",
+        "bytes": 195407
+      }
+    },
+    {
+      "scheme": "G-4-5-111-767-769-770-771",
+      "case": "t-G45109",
+      "fully_checked_minimal_domain": false,
+      "minimal_conditions": 22716844,
+      "checked_conditions": 20000,
+      "kept_root_rows": 43553,
+      "kept_AB": 909,
+      "kept_C": 1,
+      "input_artifact": {
+        "artifact_id": 14304219728,
+        "zip_sha256": "1677d425ab52132bb3ecf005c58b3a4b33212232fc069e2a40c5e9da0d6fc9f2",
+        "file": "G-4-5-111-767-769-770-771.knowledge.json.gz",
+        "member_sha256": "1f82e7ffc90c136d0189465bf5d3c7ebd74923f70f5134a9b0d9db68adc7853d",
+        "member_crc32": "2d412fd1",
+        "bytes": 574135
+      }
+    },
+    {
+      "scheme": "G-6-211-767-769-770-771",
+      "case": "t-G6209",
+      "fully_checked_minimal_domain": false,
+      "minimal_conditions": 245672,
+      "checked_conditions": 60000,
+      "kept_root_rows": 617,
+      "kept_AB": 126,
+      "kept_C": 6,
+      "input_artifact": {
+        "artifact_id": 14303930458,
+        "zip_sha256": "9ff90acbb16bef342e5c29c6c57b344869dd83e77fa1f1e9b1d1e7052a3d9586",
+        "file": "G-6-211-767-769-770-771.knowledge.json.gz",
+        "member_sha256": "68a0c1bd86922c03bed1bd10ce0f11c56fc4723da95c92849251de72e3b0bf41",
+        "member_crc32": "d2306072",
+        "bytes": 6021
+      }
+    }
+  ],
+  "shared_requests": {
+    "identity": "Exact (atom template, displayed object tuple) pair within one pilot and Library context.",
+    "scheme_local_rows": 93531,
+    "unique_pairs": 83857,
+    "duplicate_rows_merged": 9674,
+    "duplicate_rows_merged_percent": 10.343094802792656,
+    "keys_used_in_multiple_schemes": 9442,
+    "keys_by_number_of_schemes": {
+      "1": 74415,
+      "2": 9223,
+      "3": 206,
+      "4": 13
+    },
+    "kept_root_forbid_incidence_sum": 205706,
+    "unique_stored_group_value_pairs": 83478,
+    "unique_product_rule_pairs": 379
+  },
+  "potential_batching": {
+    "scope": "Group value requests by the exact object tuple. Suitability and cost of a common calculation unmeasured.",
+    "distinct_object_tuples_for_values": 2767,
+    "mean_value_requests_per_object_tuple": 30.16913624864474,
+    "median_value_requests_per_object_tuple": 15,
+    "maximum_value_requests_per_object_tuple": 219,
+    "top_object_tuple_value_counts": {
+      "10": 1694,
+      "50": 5512,
+      "100": 9612,
+      "500": 38208
+    },
+    "batches_run": 0,
+    "values_or_verdicts_resolved_by_this_audit": 0
+  },
+  "question_view": {
+    "kept_AB_pending": 2541,
+    "kept_C_for_human_review": 13,
+    "kept_forbids": 2554,
+    "kept_C_percentage": 0.5090054815974941,
+    "C_count_after_resolving_AB_unknown": true
+  },
+  "packing_probe": {
+    "scope": "Only kept knowledge triples and their order. No candidate frontier, proof or report encoding.",
+    "both_layouts": "Single compact UTF-8 JSON with all five scheme streams; gzip level 6 and mtime=0.",
+    "canonical_sha256": "1974de93c9086c425245bcea149bfcd5f4961602bfd7203fd02632cc74dd103b",
+    "round_trip_equal": true,
+    "literal_tuple_bytes": 4832129,
+    "literal_tuple_gzip_bytes": 466638,
+    "dictionary_bytes": 1831440,
+    "dictionary_gzip_bytes": 440191
+  },
+  "measurement": {
+    "scope": "Analyze the verified local gzip inputs, merge, encode and check both layouts. Transfer excluded.",
+    "wall_seconds": 1.8220815980021143,
+    "process_cpu_seconds": 1.878162,
+    "process_peak_rss_kib": 146960,
+    "stored_input_gzip_bytes": 1286713
+  }
+}
