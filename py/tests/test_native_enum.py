@@ -1,5 +1,6 @@
 """Exact compiled/Python comparisons and cancellation inside the native kernel."""
 from itertools import product
+import os
 import signal
 import unittest
 from unittest.mock import patch
@@ -8,7 +9,7 @@ import numpy as np
 
 from algen import enumerate as E, native_enum as N
 from algen.conditions import PackedConditions
-from test_enumerate import RandomForm
+from test_enumerate import FakeForm, RandomForm
 
 
 class NativeTest(unittest.TestCase):
@@ -39,6 +40,39 @@ class NativeTest(unittest.TestCase):
                     self.assertTrue(f.enumeration_engine.startswith("cpp:"))
                 results.append((list(alive.items()), empty, f.n_alive))
             self.assertEqual(*results, msg=f"case {case}")
+
+    def test_weighted_rows_preserve_support_and_all_enumeration_outputs(self):
+        # Over four words after grouping, mixed positive weights, a sparse
+        # premise that repacks rows, and fixed filtering with or without hits.
+        f = RandomForm(np.random.default_rng(8361), 13, 321, req=True, need=True)
+        f.e[:, 2:4] = f.e[:, :2]
+        f.e[:, 4:6] = False
+        f.e[::23, 4] = True
+        rows = np.repeat(f.e, 1 + np.arange(len(f.e)) % 11, axis=0)
+        groups = N.group_equal_rows(rows)
+        self.assertIsNotNone(groups)
+        self.assertEqual(len(groups[0]), 321)
+        self.assertEqual(sum(map(int, groups[1])), len(rows))
+        self.assertEqual(set(groups[1]), set(range(1, 12)))
+        f.e = f.m = rows
+        for fixed in ([], [0], [5]):
+            with self.subTest(fixed=fixed):
+                f.fixed = fixed
+                result = []
+                for native, grouped in ((False, "0"), (True, "0"), (True, "1")):
+                    with patch.object(E, "NATIVE_ENUM", native), patch.dict(os.environ, ALGEN_NATIVE_GROUP_ROWS=grouped):
+                        alive, empty = E.enumerate_form(f, 3)
+                    result.append((list(alive.items()), list(empty), f.n_alive))
+                self.assertEqual(result[0], result[1])
+                self.assertEqual(result[0], result[2])
+
+    def test_grouped_zero_premises_keep_original_fixed_row_count(self):
+        f = FakeForm([(True, True, None)] * 611 + [(True, False, False)] * 531)
+        f.fixed = [2]
+        with patch.object(E, "NATIVE_ENUM", True), patch.object(E, "ZERO_PREMISES", True):
+            with patch.dict(os.environ, ALGEN_NATIVE_GROUP_ROWS="1"):
+                alive, _ = E.enumerate_form(f, 3)
+        self.assertEqual(alive[(), 0], 611)
 
     def test_arbitrary_minimal_order_duplicates_and_independent_arrays(self):
         rng = np.random.default_rng(81)

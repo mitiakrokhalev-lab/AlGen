@@ -1620,23 +1620,37 @@ def enumerate_form(form, max_prem, goals=None, m=None):
     reqcols |= {j for j, supplied_cols in providers.items() if reqcols.intersection(supplied_cols)}
     vec = VEC and goals is None
     prune = PRUNE_FREE and not form.fixed  # alive_direct смотрит все строки, а не строки записи
-    start = np.flatnonzero(m[:, form.fixed].all(axis=1)) if form.fixed else np.arange(nr)
-    P0 = pack(start)
+    fixed_rows = m[:, form.fixed].all(axis=1) if form.fixed else None
+    start = np.flatnonzero(fixed_rows) if fixed_rows is not None else every
     native = None
     form.enumeration_engine = "python"
     if NATIVE_ENUM and vec and isinstance(alive, PackedConditions) and 0 <= max_prem <= 3:
-        from .native_enum import enumerate_numeric
+        from .native_enum import enumerate_numeric, group_equal_rows
         skip = np.array([j in const or j ^ 1 in const or j // 2 in deferred or j in drop
                          or (j // 2 in pairs and j % 2) for j in range(n_lit)], dtype=np.uint8)
         fixed_mask = np.array([j in have0 for j in range(n_lit)], dtype=np.uint8)
         req_mask = np.array([j in reqcols for j in range(n_lit)], dtype=np.uint8)
         relation = np.array([PROPS_ONLY_FROM and form.atoms[a][0] == "r"
                              for a in range(n_atoms)], dtype=np.uint8)
-        all_rows = P0 if not form.fixed else pack(every)
-        native = enumerate_numeric(alive, P0, all_rows, len(start), goal_static, skip, fixed_mask,
+        groups = group_equal_rows(m)
+        weights, all_row_count = None, None
+        all_indices, selected = every, start
+        if groups is not None:
+            all_indices, weights = groups
+            all_row_count = len(all_indices)
+            if fixed_rows is not None:
+                keep = fixed_rows[all_indices]
+                selected, weights = all_indices[keep], weights[keep]
+            else:
+                selected = all_indices
+        P0 = pack(selected)
+        all_rows = P0 if fixed_rows is None else pack(all_indices)
+        native = enumerate_numeric(alive, P0, all_rows, len(selected), goal_static, skip, fixed_mask,
                                    form.req, req_mask, clash, lmask if need else np.zeros(n_lit, dtype=np.uint64),
-                                   full if need else 0, prune, relation, PROPS_ONLY_FROM, providers=providers)
+                                   full if need else 0, prune, relation, PROPS_ONLY_FROM, providers=providers,
+                                   row_weights=weights, all_row_count=all_row_count)
     if native is None:
+        P0 = pack(start)
         for depth in range(1, max_prem + 1):
             go([], ones(len(start)), 0, depth, 0, P0, start)
     else:
