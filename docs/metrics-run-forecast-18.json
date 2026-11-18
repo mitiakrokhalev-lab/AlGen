@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "updated_utc": "2026-11-18T16:03:38.297691+00:00",
+  "scope": "Planning scenarios only. The current whole-class CPU, elapsed time and archive size are unmeasured.",
+  "document_base": "b217b62640eedccdf00538c3b5cca508c818e0d6",
+  "source_file_sha256": {
+    "pilot19": "7dd5d9e274d55ec558a8cb0cb44364c6a76aae8adae0c0effb61bf8d1cb59fb6",
+    "weighted": "692f43d94bbd02b103f1e829b2f1c215536d168183e8db3460c650c1aea77d70",
+    "output": "c3b67eff4db8a114753d916ab99df94c1dcefa1d206e13dfbb58304b027eb652",
+    "old_plan": "acd2d861f5563fe51ac50dbef40f981ee899880384390e23472f7330cec12eee",
+    "census04": "6cad77617e75ec150013d58ab3005416a19e85a6e1cbfe49a6fcfc204f33a7f4"
+  },
+  "pilot19_kept_knowledge": {
+    "run": 44024985371,
+    "code_commit": "e07ddc16aafe7a9385b41d39918323f1911b6c85",
+    "table_run": 43866079198,
+    "mode": "ALGEN_KNOWLEDGE=1",
+    "unit": "A scheme-local distinct knowledge root: a stored-group value or a product rule.",
+    "scope": "Five G cases; one complete minimal domain, four sampled. No cross-scheme deduplication or extrapolation.",
+    "cases": [
+      {
+        "scheme": "G-10-13-767-769-770-771",
+        "case": "t-G1013",
+        "minimal_conditions": 14810399,
+        "inspected_conditions": 20000,
+        "kept_unknowns": 846,
+        "kept_AB": 845,
+        "kept_C": 1,
+        "kept_roots": 24862,
+        "kept_value_roots": 24694,
+        "kept_product_rule_roots": 168,
+        "all_unknown_roots": 40579,
+        "cpu_seconds": 1702.98,
+        "wall_seconds": 1718.39,
+        "peak_rss_kib": 12403240
+      },
+      {
+        "scheme": "G-4-5-111-767-769-770-771",
+        "case": "t-G45109",
+        "minimal_conditions": 22716844,
+        "inspected_conditions": 20000,
+        "kept_unknowns": 910,
+        "kept_AB": 909,
+        "kept_C": 1,
+        "kept_roots": 43553,
+        "kept_value_roots": 43380,
+        "kept_product_rule_roots": 173,
+        "all_unknown_roots": 66925,
+        "cpu_seconds": 1334.41,
+        "wall_seconds": 1338.81,
+        "peak_rss_kib": 12454688
+      },
+      {
+        "scheme": "G-14-22-440-767-769-770-771",
+        "case": "t-G1420390",
+        "minimal_conditions": 218425,
+        "inspected_conditions": 60000,
+        "kept_unknowns": 41,
+        "kept_AB": 41,
+        "kept_C": 0,
+        "kept_roots": 11216,
+        "kept_value_roots": 11198,
+        "kept_product_rule_roots": 18,
+        "all_unknown_roots": 18978,
+        "cpu_seconds": 456.67,
+        "wall_seconds": 463.63,
+        "peak_rss_kib": 12047464
+      },
+      {
+        "scheme": "G-6-211-767-769-770-771",
+        "case": "t-G6209",
+        "minimal_conditions": 245672,
+        "inspected_conditions": 60000,
+        "kept_unknowns": 132,
+        "kept_AB": 126,
+        "kept_C": 6,
+        "kept_roots": 617,
+        "kept_value_roots": 566,
+        "kept_product_rule_roots": 51,
+        "all_unknown_roots": 795,
+        "cpu_seconds": 422.83,
+        "wall_seconds": 424.64,
+        "peak_rss_kib": 11985308
+      },
+      {
+        "scheme": "G-4-17-767-769-770-771",
+        "case": "t-G417",
+        "minimal_conditions": 20823,
+        "inspected_conditions": 20823,
+        "kept_unknowns": 625,
+        "kept_AB": 620,
+        "kept_C": 5,
+        "kept_roots": 13283,
+        "kept_value_roots": 13206,
+        "kept_product_rule_roots": 77,
+        "all_unknown_roots": 26065,
+        "cpu_seconds": 585.21,
+        "wall_seconds": 587.24,
+        "peak_rss_kib": 11414152
+      }
+    ],
+    "statistics": {
+      "kept_roots": {
+        "sum": 93531,
+        "mean": 18706.2,
+        "median": 13283,
+        "minimum": 617,
+        "maximum": 43553
+      },
+      "kept_value_roots": {
+        "sum": 93044,
+        "mean": 18608.8
+      },
+      "kept_product_rule_roots": {
+        "sum": 487,
+        "mean": 97.4
+      },
+      "all_unknown_roots": {
+        "sum": 153342,
+        "mean": 30668.4
+      },
+      "kept_AB": {
+        "sum": 2541,
+        "mean": 508.2
+      },
+      "kept_C": {
+        "sum": 13,
+        "mean": 2.6
+      }
+    },
+    "representative_current_class_sample": false
+  },
+  "table06_full_G417": {
+    "run": 44276676254,
+    "table_run": 44027003918,
+    "scheme": "G-4-17-767-769-770-771",
+    "grouped_code_commit": "988672254b5c101f09f4a655304757df7ccc7a9e",
+    "canonical_report": {
+      "rows": 20823,
+      "bytes": 29161389,
+      "sha256": "6e6584cb31823d1a4be2924547d224f0dd80ef22ffa31fd44c9fe6aa5e301952",
+      "digest_seconds": 0.2760624929999267
+    },
+    "kept": {
+      "запретов": 605,
+      "вопросов человеку (C)": 3,
+      "ждут знаний (A + B)": 602,
+      "корней знаний всего": 19181
+    },
+    "folded_unknown": 3270,
+    "process_cpu_seconds": 527.859267,
+    "process_wall_seconds": 530.499327734,
+    "enumeration_wall_seconds": 11.700135047999993,
+    "peak_rss_kib": 11457360
+  },
+  "historical_inventory": {
+    "source_commit": "47cc3ad560027bb0903fcdec874748761a9a575d",
+    "bases": 42,
+    "schemes": 148991,
+    "ordered_full_plan_sha256": "fae6a4d9a63c72d9189019f7f014dfedc4493682402ec7c8a77cc81d4de48b56",
+    "scope": "Structural inventory on the older language, from PR17, including all 42 bases.",
+    "current_language_scheme_count": null
+  },
+  "historical_G_census04": {
+    "run": 43476172990,
+    "scope": "Older language and data. G-only census without verdicts or report compression.",
+    "planned": 1164,
+    "completed": 1162,
+    "timed_out": 2,
+    "minima_completed": 11737559708,
+    "largest_completed_minima": 249068224,
+    "sum_reported_scheme_wall_seconds_including_timeouts": 201543.6,
+    "sum_reported_scheme_wall_seconds_completed": 195542.3,
+    "verdict_rate_needed_for_one_day_if_G_only_conditions_each_processed": 6792.569275462963,
+    "illustrative_verdict_rate_source_run": 42468685833,
+    "illustrative_verdict_stage_only": [
+      {
+        "conditions_per_core_second": 1000,
+        "ideal_wall_days_at_20_cores": 6.792569275462963
+      },
+      {
+        "conditions_per_core_second": 2000,
+        "ideal_wall_days_at_20_cores": 3.3962846377314815
+      }
+    ],
+    "current_verdict_throughput_measured": false
+  },
+  "whole_run_scenarios": {
+    "formula": "wall days = historical N * assumed mean CPU seconds per scheme / (usable cores * 86400)",
+    "historical_N": 148991,
+    "assumed_sustained_usable_cores": 20,
+    "includes_initialization_in_per_case_anchors": true,
+    "modeled_parallel_efficiency": 1.0,
+    "additional_global_setup_IO_retries_and_unsplittable_tail_modeled": false,
+    "cpu_seconds_budget_one_day": 1728000,
+    "cpu_seconds_per_scheme_budget_one_day": 11.598015987542873,
+    "cases": [
+      {
+        "anchor": "Full historical Ulm, grouped; native16 data",
+        "assumed_mean_cpu_seconds": 119.047252,
+        "ideal_wall_days": 10.26444972380324
+      },
+      {
+        "anchor": "Full G417, grouped; table06 data",
+        "assumed_mean_cpu_seconds": 527.859267,
+        "ideal_wall_days": 45.51289354722049
+      },
+      {
+        "anchor": "P19 mode k mean, with four sampled cases; table03 data",
+        "assumed_mean_cpu_seconds": 900.4200000000001,
+        "ideal_wall_days": 77.63569225694445
+      }
+    ],
+    "whole_class_estimate_seconds": null,
+    "ready_for_full_run": false
+  }
+}

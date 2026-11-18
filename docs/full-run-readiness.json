@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_utc": "2026-11-18T14:53:42.048298+00:00",
+  "updated_utc": "2026-11-18T16:03:38.297691+00:00",
   "scope": "Readiness plan for first full fixed-domain enumeration; NOT a full-run receipt or an implemented automatic launch gate",
   "user_goal": {
     "first_complete_enumeration_once": true,
@@ -1009,5 +1009,19 @@
     "historical_finite_coverage_checked": true,
     "updated_basis_built": false,
     "full_run_admission_changed": false
+  },
+  "latest_run_forecast": {
+    "metrics": "metrics-run-forecast-18.json",
+    "historical_scheme_count": 148991,
+    "assumed_sustained_usable_cores": 20,
+    "cpu_seconds_per_scheme_budget_one_day": 11.598015987542873,
+    "ideal_wall_days_at_measured_case_anchors": [
+      10.26444972380324,
+      45.51289354722049,
+      77.63569225694445
+    ],
+    "current_inventory_and_weighted_per_scheme_cost_measured": false,
+    "whole_class_estimate_seconds": null,
+    "whole_class_ready": false
   }
 }
