@@ -15,8 +15,69 @@ import argparse
 import gzip
 import json
 import sys
+import zlib
+from itertools import zip_longest
 
-from algen.live import LiveArchive
+from algen.live import LiveArchive, VERSION, context_identity, digest, dumps
+
+
+def _export_header(stream):
+    """Accept a complete v1 export, including the promised record count."""
+    try:
+        header = json.loads(next(stream))["header"]
+    except (StopIteration, KeyError, TypeError) as error:
+        raise ValueError("нет полного заголовка выгрузки") from error
+    if (not isinstance(header, dict) or header.get("format") != "algen.full-report"
+            or type(header.get("version")) is not int or header["version"] != VERSION
+            or header.get("complete") is not True
+            or not isinstance(header.get("scheme"), str) or not header["scheme"]):
+        raise ValueError("нужна полная выгрузка algen.full-report текущей версии")
+    for name in ("report_count", "unconditional_count"):
+        if type(header.get(name)) is not int or header[name] < 0:
+            raise ValueError("нет точного счётчика записей выгрузки")
+    context_identity(header)
+    return header
+
+
+def _report_rows(stream, header):
+    expected = header["report_count"] + header["unconditional_count"]
+    seen = 0
+    for line in stream:
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        seen += 1
+        if not isinstance(row, dict) or seen > expected:
+            raise ValueError("записи выгрузки не соответствуют заголовку")
+        yield row
+    if seen != expected:
+        raise ValueError("выгрузка обрезана: не все обещанные записи сохранены")
+
+
+def _existing_context(arc, requested=None):
+    if requested is None:
+        contexts = arc.db.execute("SELECT id FROM contexts LIMIT 2").fetchall()
+        if len(contexts) != 1:
+            raise ValueError("нужен --контекст: в архиве нет единственного контекста")
+        requested = contexts[0][0]
+    if not arc.db.execute("SELECT 1 FROM contexts WHERE id=?", (requested,)).fetchone():
+        raise ValueError("неизвестный контекст архива")
+    arc._writable(requested)
+    return requested
+
+
+def _reuse_report(arc, ctx, header, stream, known_header):
+    """Reuse only the identical full export; never replace saved history."""
+    if dumps(header) != known_header:
+        raise ValueError("выгрузка изменилась в уже импортированной схеме")
+    stored = arc.db.execute("SELECT payload FROM records WHERE context=? AND scheme=? ORDER BY position",
+                            (ctx, header["scheme"]))
+    missing = object()
+    for old, new in zip_longest(stored, _report_rows(stream, header), fillvalue=missing):
+        if (old is missing or new is missing
+                or zlib.decompress(old[0]).decode() != dumps(new)):
+            raise ValueError("выгрузка изменилась в уже импортированной схеме")
+    arc._writable(ctx)
 
 
 def read_rows(path):
@@ -103,16 +164,23 @@ def reclassify(arc, ctx, rows_path):
     return out
 
 
-def run(db, export=None, values=None, out=print):
+def run(db, export=None, values=None, out=print, *, context=None):
     with LiveArchive(db) as arc:
         ctx = None
         if export:
             with gzip.open(export, "rt", encoding="utf-8") as f:
-                header = json.loads(next(f))["header"]
-                known = arc.db.execute("SELECT context FROM schemes WHERE name=?", (header.get("scheme"),)).fetchone()
-                ctx = known[0] if known else arc.import_report(header, (json.loads(s) for s in f if s.strip()))
+                header = _export_header(f)
+                ctx = digest(context_identity(header))
+                if context is not None and context != ctx:
+                    raise ValueError("--контекст не совпадает с контекстом выгрузки")
+                known = arc.db.execute("SELECT header FROM scheme_headers WHERE context=? AND name=?",
+                                       (ctx, header["scheme"])).fetchone()
+                if known:
+                    _reuse_report(arc, ctx, header, f, known[0])
+                else:
+                    ctx = arc.import_report(header, _report_rows(f, header))
         if ctx is None:
-            ctx = arc.db.execute("SELECT id FROM contexts ORDER BY rowid LIMIT 1").fetchone()[0]
+            ctx = _existing_context(arc, context)
         before = arc.stats(ctx)
         out(json.dumps({"до": before["states"]}, ensure_ascii=False))
         refuted, failed = [], []
@@ -141,6 +209,7 @@ def main(argv=None):
     ap.add_argument("архив")
     ap.add_argument("--выгрузка")
     ap.add_argument("--значения")
+    ap.add_argument("--контекст", dest="context", help="точный ID контекста; обязателен при неоднозначном архиве без выгрузки")
     ap.add_argument("--строки-было", dest="rows_old", help="<схема>.rows.jsonl.gz прежних таблиц")
     ap.add_argument("--строки-стало", dest="rows_new", help="<схема>.rows.jsonl.gz новых таблиц")
     ap.add_argument("--источник", default="новые таблицы", help="reference для пакетов из строк")
@@ -154,11 +223,11 @@ def main(argv=None):
                           "расхождений": len(conflicts), "примеры расхождений": conflicts[:5],
                           "строк с пропавшими значениями": len(lost), "примеры пропавших": lost[:5]}, ensure_ascii=False))
         values += packets
-    run(a.архив, a.выгрузка, values)
+    _, after, _ = run(a.архив, a.выгрузка, values, context=a.context)
     if a.переразметка and a.rows_new:
         from collections import Counter
         with LiveArchive(a.архив) as arc:
-            ctx = arc.db.execute("SELECT id FROM contexts ORDER BY rowid LIMIT 1").fetchone()[0]
+            ctx = _existing_context(arc, after["context"])
             res = reclassify(arc, ctx, a.rows_new)
         moves = Counter((old, new) for old, new, _ in res.values())
         print(json.dumps({"переразметка": {f"{o}→{n}": c for (o, n), c in sorted(moves.items(), key=str)}},
