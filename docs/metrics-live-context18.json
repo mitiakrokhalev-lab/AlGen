@@ -1,0 +1,351 @@
+{
+  "version": 1,
+  "updated_utc": "2026-11-18T04:15:26.047791+00:00",
+  "scope": "Exact export-context routing and full-export replay guard in tools.live_values; not full archive dynamics/source proof/frontier or a speed comparison",
+  "base_code": "0a7237674d5290e5a64dd952153185a8f879ec4b",
+  "parent_night_docs": "a5a4f91993ae58cc2cfe1d4e024b9e22f32ac88a",
+  "code_commit": "2dca35dd81417a475b24bb6edbcdc23d02427460",
+  "code_tree": "53e3de8ec6a1d475366e6cfb029462c77c4be1b0",
+  "draft_PR": 23,
+  "code_source_sha256": {
+    "py/algen/live.py": "fc31e5bcde4738844a8c7796bfd0930ce1a1ef548e30c09d18b7fe13fc1fe2ba",
+    "py/tools/live_values.py": "27074b83599085332b3862e9f1f213ad5110a9af2b4be9a2d3acdb6d454c1372",
+    "py/tests/test_live_values_context.py": "e5a8cf5e378c1412bc23ad3c0539c69fa0e40781e6ff49572b8b215281fe2096"
+  },
+  "reviews": {
+    "target": {
+      "file_name": "target-review.json",
+      "sha256": "712cac92f782ae10f667b692396ac1a5f39643b0e1c968495f9798165d39c8d6"
+    },
+    "publication": {
+      "file_name": "publication-review.json",
+      "sha256": "869762f0251a42bb3772f971c355af27ba31151c3e919aca806f8e7a3ef480e5"
+    },
+    "real_export_metadata": {
+      "file_name": "archive-metadata-review.json",
+      "sha256": "7fe2759f7096645c2e0714eb66fc4a1622074e3663aabb91e7b55d9f4536dac4"
+    },
+    "direct_source_blobs": {
+      "file_name": "direct-blob-review.json",
+      "sha256": "e1c54b1f6d5128edddb183945fef9b26ef8f2b00f6a66e4d237d7a615112969c"
+    },
+    "CI": {
+      "file_name": "ci-review.json",
+      "sha256": "a92f86063a49958fab8191f1f52d3164b5ac7fb5003c92f08d1d49e1063bb5bb"
+    }
+  },
+  "baseline_reproduction": {
+    "same_scheme_different_context": true,
+    "new_export_ignored": true,
+    "old_context_can_be_refuted_by_new_packet": true,
+    "synthetic_predicates_only": true,
+    "mathematical_counterexample_claimed": false
+  },
+  "changes": {
+    "v1_context_identity_extracted_without_DB_write": true,
+    "v1_JSON_header_IDs_preserved": true,
+    "existing_report_header_and_all_ordered_records_checked": true,
+    "declared_record_counts_enforced_in_tool": true,
+    "truncated_new_import_rolls_back": true,
+    "ambiguous_no_export_context_rejected": true,
+    "explicit_context_supported": true,
+    "CLI_reclassification_uses_updated_context": true,
+    "single_context_no_export_still_supported": true,
+    "application_to_wrong_export_context_blocked": true,
+    "archive_schema_version_changed": false
+  },
+  "tests": {
+    "independent_target_tests": 31,
+    "new_regressions": 12,
+    "old_Live_tests": 18,
+    "old_live_values_test": 1,
+    "independent_target_seconds": 1.220285,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "additional_adversarial_checks": 5,
+    "scratch_dependency_note": "Current frozen live/tool code, unchanged baseline Live dependencies, synthetic fixtures; CLI reclassification test uses numpy. Full CI covers complete current repository."
+  },
+  "CI": {
+    "run": 44230058314,
+    "job": 134552603887,
+    "commit": "2dca35dd81417a475b24bb6edbcdc23d02427460",
+    "code_tree": "53e3de8ec6a1d475366e6cfb029462c77c4be1b0",
+    "checkout_commit": "e623ca95e18b7924adfdf43ad8c53441ec6294ab",
+    "checkout_tree": "53e3de8ec6a1d475366e6cfb029462c77c4be1b0",
+    "checkout_tree_source": "Git API for checkout observed in decoded log; runtime tree not separately printed",
+    "runtime_tree_printed": false,
+    "status": "completed",
+    "conclusion": "success",
+    "expected_tests": 343,
+    "tests": 343,
+    "unique_test_ids": 343,
+    "ok": 343,
+    "seconds": 2789.132,
+    "result": "OK",
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "job_wall_seconds": 2814,
+    "unittest_step_wall_seconds": 2794,
+    "cpu_seconds": null,
+    "peak_rss_kib": null,
+    "independently_reviewed": true,
+    "actual_checkout_observed_in_completed_log": true
+  },
+  "existing_exports_metadata": {
+    "pilots": [
+      {
+        "pilot": 17,
+        "artifact_id": 14265552067,
+        "zip_bytes": 2575278,
+        "zip_sha256": "20f3a8b29a9fec92accd18c0e47619a02f24f108af51b28a5dca9e14a7f5c281",
+        "export_path": "x1-G417/G-4-17-767-769-770-771.archive.jsonl.gz",
+        "header": {
+          "base": "G",
+          "class": "",
+          "complete": true,
+          "declaration": "∀ G : Grp",
+          "dynamic": null,
+          "fixed": [],
+          "format": "algen.full-report",
+          "generation": {
+            "close_marked": true,
+            "compress": true,
+            "defer": 0,
+            "fast": true,
+            "k": 3,
+            "k_spec": "3",
+            "size": 2,
+            "skip": [],
+            "term_limit": null,
+            "terms": [
+              "aut(G)",
+              "regular-act(G)",
+              "num:5()",
+              "num:120()",
+              "num:1056()",
+              "num:60()"
+            ]
+          },
+          "library": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "report_count": 20823,
+          "scheme": "G-4-17-767-769-770-771",
+          "theory": "в64f7726ebf3295f",
+          "unconditional_count": 0,
+          "variables": [
+            "G"
+          ],
+          "version": 1,
+          "worker_run": ""
+        },
+        "context": "524bbe83ea3a2ee79bce507440d33db712fe89c62a3155150457dd731215ae15",
+        "records": 20823,
+        "record_verdict_counts": {
+          "выводится": 5464,
+          "неизвестно": 15359
+        },
+        "ordered_canonical_records_sha256": "2353890d1af855c39580a8618f62afb03607698daaed8b2879065c09b9a88488",
+        "row_snapshots": []
+      },
+      {
+        "pilot": 18,
+        "artifact_id": 14285803925,
+        "zip_bytes": 5186312,
+        "zip_sha256": "d59690c8fa70e1c0bac7026e9bf952988a829fe6013cdeaa099062b6a1d79c5b",
+        "export_path": "r0-G417/G-4-17-767-769-770-771.archive.jsonl.gz",
+        "header": {
+          "base": "G",
+          "class": "",
+          "complete": true,
+          "declaration": "∀ G : Grp",
+          "dynamic": null,
+          "fixed": [],
+          "format": "algen.full-report",
+          "generation": {
+            "close_marked": true,
+            "compress": true,
+            "defer": 0,
+            "fast": true,
+            "k": 3,
+            "k_spec": "3",
+            "size": 2,
+            "skip": [],
+            "term_limit": null,
+            "terms": [
+              "aut(G)",
+              "regular-act(G)",
+              "num:5()",
+              "num:120()",
+              "num:1056()",
+              "num:60()"
+            ]
+          },
+          "library": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "report_count": 20823,
+          "scheme": "G-4-17-767-769-770-771",
+          "theory": "в64f7726ebf3295f",
+          "unconditional_count": 0,
+          "variables": [
+            "G"
+          ],
+          "version": 1,
+          "worker_run": ""
+        },
+        "context": "524bbe83ea3a2ee79bce507440d33db712fe89c62a3155150457dd731215ae15",
+        "records": 20823,
+        "record_verdict_counts": {
+          "выводится": 5464,
+          "неизвестно": 15359
+        },
+        "ordered_canonical_records_sha256": "2353890d1af855c39580a8618f62afb03607698daaed8b2879065c09b9a88488",
+        "row_snapshots": [
+          {
+            "path": "r0-G417/G-4-17-767-769-770-771.rows.jsonl.gz",
+            "header_keys": [
+              "атомы",
+              "библиотека"
+            ],
+            "atoms": 198,
+            "atoms_sha256": "a0324997a75cbb693a09f32cb42adddf8ab093741c6806eb1a548167c9e38001",
+            "library": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+            "library_matches_export": true,
+            "rows": 30953,
+            "unique_row_keys": 30953,
+            "true_cells": 1083395,
+            "false_cells": 4003296,
+            "duplicate_atoms": 0,
+            "assignment_digests_valid": true,
+            "declares_theory": false,
+            "declares_context": false
+          }
+        ]
+      }
+    ],
+    "contexts_equal": true,
+    "full_headers_equal": true,
+    "canonical_records_equal": true,
+    "facts_applied_to_archive": false,
+    "build06_comparison_performed": false,
+    "mathematical_truth_audited": false
+  },
+  "real_export_import_replay_control": {
+    "result": {
+      "version": 1,
+      "source_context": "524bbe83ea3a2ee79bce507440d33db712fe89c62a3155150457dd731215ae15",
+      "records_in_DB": 20823,
+      "contexts_in_DB": 1,
+      "operations": [
+        {
+          "pilot": 17,
+          "operation": "full_export_import_in_RAM",
+          "measured_cost": {
+            "wall_seconds": 4.617480404001981,
+            "cpu_seconds": 4.613389535
+          },
+          "stats": {
+            "context": "524bbe83ea3a2ee79bce507440d33db712fe89c62a3155150457dd731215ae15",
+            "revision": 0,
+            "states": {
+              "folded": 3317,
+              "open": 625,
+              "proved": 1577
+            },
+            "record_verdicts": {
+              "выводится": 5464,
+              "неизвестно": 15359
+            },
+            "schemes": {
+              "1": 1
+            },
+            "examples": 0,
+            "invalidated": 0,
+            "unresolved": 0,
+            "successor": null,
+            "runs": [],
+            "pending": []
+          }
+        },
+        {
+          "pilot": 18,
+          "operation": "exact_full_export_replay_in_RAM",
+          "measured_cost": {
+            "wall_seconds": 0.8696166650006489,
+            "cpu_seconds": 0.8691903569999999
+          },
+          "stats": {
+            "context": "524bbe83ea3a2ee79bce507440d33db712fe89c62a3155150457dd731215ae15",
+            "revision": 0,
+            "states": {
+              "folded": 3317,
+              "open": 625,
+              "proved": 1577
+            },
+            "record_verdicts": {
+              "выводится": 5464,
+              "неизвестно": 15359
+            },
+            "schemes": {
+              "1": 1
+            },
+            "examples": 0,
+            "invalidated": 0,
+            "unresolved": 0,
+            "successor": null,
+            "runs": [],
+            "pending": []
+          }
+        }
+      ],
+      "replay_persistent_tables_unchanged": true,
+      "overall_cost": {
+        "wall_seconds": 9.75088880399926,
+        "cpu_seconds": 6.142930496999999
+      },
+      "peak_rss_kib": 83584,
+      "database_persisted": false,
+      "real_examples_applied": false,
+      "build06_comparison": false,
+      "new_mathematical_proof": false
+    },
+    "script_sha256": "ee9fc3cea4a28ec8a05946a08a3dac2b36cba13c884e301d54ac076592b4ea65",
+    "receipt": {
+      "file_name": "replay-review.json",
+      "sha256": "d319e7580eac0aebe566a2397bde34959c924e3fdc15a99b3e368ab93c1a1bdf"
+    },
+    "domain": "G417, complete saved minimal domain of pilots17/18 using table03; not full class or build06",
+    "archive_disk_bytes": null,
+    "disk_IO_measured": false,
+    "io_read_bytes": null,
+    "io_write_bytes": null,
+    "manual_C_queue_size_measured": false,
+    "full_class_time_estimate_seconds": null,
+    "timings": "One process/one run; import and exact replay include record parsing, exclude network, header reading and whole-DB validation hashes; overall includes these. RSS is whole-process ru_maxrss, not DB size.",
+    "claim": "Existing export import/replay guard in RAM only, not disk durability/restart, generator speed comparison, row update or mathematical verdict audit."
+  },
+  "existing_exports_metadata_review_scope": "All streamed records/counts/header identities; snapshot row shapes/key digests/column consistency. No new facts applied, no mathematical truth audit.",
+  "limits": {
+    "row_snapshot_Theory_context_provenance_verified": false,
+    "row_format_has_Theory_or_context": false,
+    "build06_dynamic_control_passed": false,
+    "nonmonotone_snapshot_updates_implemented_by_this_change": false,
+    "multiple_variant_reclassification_fixed_by_this_change": false,
+    "reclassification_persisted_by_this_change": false,
+    "current_support_computed": false,
+    "global_source_propagation_complete": false,
+    "candidate_frontier_complete": false,
+    "whole_class_coverage_verified": false,
+    "ready_for_full_run": false,
+    "gates_open": 9,
+    "time_or_memory_speedup_demonstrated": false,
+    "mathematical_data_changed": false
+  },
+  "new_GitHub_runs": {
+    "full_CI": [
+      44230058314
+    ],
+    "new_AlGen_pilots": [],
+    "old_CI331_repeated": false
+  },
+  "next_step": "Version row snapshots and validate Theory/language/generation provenance against the selected archive; distinguish changes to rules from added data before the build06 control. Audit losses and all variants separately. Keep missing candidate frontier explicit."
+}

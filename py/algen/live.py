@@ -41,6 +41,27 @@ def source_checked(source):
         raise ValueError("нужен источник library/gap/proof/user и reference; SAT-модель не пример группы")
 
 
+def context_identity(header):
+    """Validate the unchanged v1 context identity without inserting a snapshot."""
+    if not isinstance(header, dict):
+        raise ValueError("контекст должен быть словарём")
+    required = ("base", "class", "theory", "library", "declaration")
+    if any(k not in header or not isinstance(header[k], str) for k in required):
+        raise ValueError("неполный контекст: нужны base/class/theory/library/declaration")
+    if not header["base"] or not header["theory"] or not header["library"]:
+        raise ValueError("пустой отпечаток контекста")
+    fixed = header.get("fixed", [])
+    if not isinstance(fixed, list):
+        raise ValueError("fixed должен быть списком литералов")
+    for item in fixed:
+        literal(item)
+    variables = header.get("variables", [])
+    if not isinstance(variables, list) or any(not isinstance(v, str) or not v for v in variables):
+        raise ValueError("variables должен быть списком имён переменных")
+    identity = dict({k: header[k] for k in required}, fixed=sorted(set(fixed)), variables=sorted(set(variables)))
+    return identity
+
+
 def write_report(path, header, report, unconditional=()):
     """Атомарный потоковый экспорт ВСЕГО report, включая свёрнутые вопросы."""
     unconditional = tuple(unconditional)
@@ -197,20 +218,7 @@ class LiveArchive:
             raise ValueError("снимок завершён; действующий контекст: " + r[0])
 
     def _context(self, header):
-        required = ("base", "class", "theory", "library", "declaration")
-        if any(k not in header or not isinstance(header[k], str) for k in required):
-            raise ValueError("неполный контекст: нужны base/class/theory/library/declaration")
-        if not header["base"] or not header["theory"] or not header["library"]:
-            raise ValueError("пустой отпечаток контекста")
-        fixed = header.get("fixed", [])
-        if not isinstance(fixed, list):
-            raise ValueError("fixed должен быть списком литералов")
-        for item in fixed:
-            literal(item)
-        variables = header.get("variables", [])
-        if not isinstance(variables, list) or any(not isinstance(v, str) or not v for v in variables):
-            raise ValueError("variables должен быть списком имён переменных")
-        identity = dict({k: header[k] for k in required}, fixed=sorted(set(fixed)), variables=sorted(set(variables)))
+        identity = context_identity(header)
         ctx = digest(identity)
         self.db.execute("INSERT OR IGNORE INTO contexts(id,header) VALUES(?,?)", (ctx, dumps(identity)))
         return ctx
