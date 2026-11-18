@@ -1,0 +1,1626 @@
+{
+  "version": 1,
+  "updated_utc": "2026-11-18T01:28:02.765056+00:00",
+  "scope": "Audit of five archived paired mode comparisons: one complete small current minimal domain and four samples; not whole class/frontier/full-run admission",
+  "source_branch": "claude/amazing-hawking-ekdxfv",
+  "current_source_commit": "0a7237674d5290e5a64dd952153185a8f879ec4b",
+  "current_source_tree": "db9c87cd7399cef1ea2fd804e39eacb35892b2bc",
+  "control_commit": "a1f9db2281b13e993e8aab1dfa48d6fe9bb5e83a",
+  "runtime_code_commit": "e07ddc16aafe7a9385b41d39918323f1911b6c85",
+  "runtime_table_run": 43866079198,
+  "runtime_table_branch": "pilot-claude-tab-03",
+  "run": 44024985371,
+  "workflow_status": "completed",
+  "workflow_conclusion": "success",
+  "planned_pairs": 5,
+  "observed_pairs": 5,
+  "observed_modes": 10,
+  "error_or_missing_modes": 0,
+  "completed_new_AlGen_runs_in_this_audit": 0,
+  "CI": {
+    "run": 44028227759,
+    "job": 133853707494,
+    "commit": "0a7237674d5290e5a64dd952153185a8f879ec4b",
+    "code_tree": "db9c87cd7399cef1ea2fd804e39eacb35892b2bc",
+    "checkout_commit": "0a7237674d5290e5a64dd952153185a8f879ec4b",
+    "checkout_tree": "db9c87cd7399cef1ea2fd804e39eacb35892b2bc",
+    "checkout_tree_source": "Git API for checkout observed in decoded log; runtime tree not separately printed",
+    "runtime_tree_printed": false,
+    "status": "completed",
+    "conclusion": "success",
+    "expected_tests": 331,
+    "tests": 331,
+    "unique_test_ids": 331,
+    "ok": 331,
+    "seconds": 2487.231,
+    "result": "OK",
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "job_wall_seconds": 2503,
+    "unittest_step_wall_seconds": 2493,
+    "cpu_seconds": null,
+    "peak_rss_kib": null,
+    "independently_reviewed": true,
+    "actual_checkout_observed_in_completed_log": true
+  },
+  "reviews": {
+    "CI": {
+      "file_name": "ci44028227759.independent-review.json",
+      "sha256": "792a9c0cfb88555eb81251ec700491bbadd0b7178e9632de84e3a6f3e52b68a2"
+    },
+    "paired_data": {
+      "file_name": "pilot19.independent-review.json",
+      "sha256": "db7a7d5edc950095ac62c8971404648d8c827a91b31fbb021f0f7b41eab6156e"
+    }
+  },
+  "artifact_manifests": [
+    {
+      "artifact_id": 14304904005,
+      "name": "claude-t-G1013",
+      "zip_bytes": 8947081,
+      "zip_sha256": "7c248b4acf1dcc2269b40bf939240a00a7938aa687d23c9594dc94bafd46842d",
+      "source_digest_matches": true,
+      "zip_saved_locally": false,
+      "original_retained_on_GitHub": true,
+      "members": [
+        {
+          "path": "commit.txt",
+          "bytes": 41,
+          "crc32": "30215179",
+          "sha256": "33843d32d7b4bf958fd8991c73de9d79da1b9e2b61f6c8ffe7ffd45da10a7463",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "exit-k.txt",
+          "bytes": 7,
+          "crc32": "c0ccb849",
+          "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "exit-b.txt",
+          "bytes": 7,
+          "crc32": "c0ccb849",
+          "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G1013-b/G-10-13-767-769-770-771.json",
+          "bytes": 46924805,
+          "crc32": "14df2611",
+          "sha256": "10aefe5256362b127353dc37c89e74c0ed55be3d9b62632b423246eefb2f2d7f",
+          "lines": 697532,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G1013-b/G-10-13-767-769-770-771.txt",
+          "bytes": 69545,
+          "crc32": "d255fa07",
+          "sha256": "2093034cedc362b3afafe183375d888f5d36d01ac634f7064aa18bd06b6626e9",
+          "lines": 347,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G1013-b/_план-1-1.json",
+          "bytes": 43,
+          "crc32": "c959f3a5",
+          "sha256": "ded13bd8c7fbadb146f5d7056836c083967e1376b13b6c04e62aa3ca99586016",
+          "lines": 0,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G1013-k/G-10-13-767-769-770-771.json",
+          "bytes": 46945883,
+          "crc32": "91c3191c",
+          "sha256": "d4f92321898e2502285822e7e064f68b1be792899d18c9dd3211122a1abac30e",
+          "lines": 698324,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G1013-k/G-10-13-767-769-770-771.knowledge.json.gz",
+          "bytes": 356529,
+          "crc32": "34731c70",
+          "sha256": "8d593fd37e89fe531716368c1db8051a97fa4d54b4891b5e07ee3d701bc9d2ba",
+          "lines": 1663,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G1013-k/G-10-13-767-769-770-771.txt",
+          "bytes": 72558,
+          "crc32": "085b3a22",
+          "sha256": "6db6977d2b744046c5d1609825001db286c63feb36956c942e412742065f8591",
+          "lines": 370,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G1013-k/_план-1-1.json",
+          "bytes": 43,
+          "crc32": "c959f3a5",
+          "sha256": "ded13bd8c7fbadb146f5d7056836c083967e1376b13b6c04e62aa3ca99586016",
+          "lines": 0,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "time-b.txt",
+          "bytes": 1072,
+          "crc32": "406a749c",
+          "sha256": "818bbf1345c621dfa876b27eea10f33203d4a70ea2ac7136f6e5ac48d3603f07",
+          "lines": 27,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "time-k.txt",
+          "bytes": 1073,
+          "crc32": "7e70205e",
+          "sha256": "4cbd90d82559549350946d41c257c0596fc8f543367cedefb220d6096c51fda8",
+          "lines": 27,
+          "small_primary_preserved": true
+        }
+      ]
+    },
+    {
+      "artifact_id": 14304219728,
+      "name": "claude-t-G45109",
+      "zip_bytes": 9843384,
+      "zip_sha256": "1677d425ab52132bb3ecf005c58b3a4b33212232fc069e2a40c5e9da0d6fc9f2",
+      "source_digest_matches": true,
+      "zip_saved_locally": false,
+      "original_retained_on_GitHub": true,
+      "members": [
+        {
+          "path": "exit-b.txt",
+          "bytes": 7,
+          "crc32": "c0ccb849",
+          "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "exit-k.txt",
+          "bytes": 7,
+          "crc32": "c0ccb849",
+          "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G45109-b/G-4-5-111-767-769-770-771.json",
+          "bytes": 69129296,
+          "crc32": "03c57a36",
+          "sha256": "e74e6764879ea6649e26b8d322bfb07adcaa0be5bdab9d89f897d020dbe241d8",
+          "lines": 1013163,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "commit.txt",
+          "bytes": 41,
+          "crc32": "30215179",
+          "sha256": "33843d32d7b4bf958fd8991c73de9d79da1b9e2b61f6c8ffe7ffd45da10a7463",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G45109-b/G-4-5-111-767-769-770-771.txt",
+          "bytes": 86052,
+          "crc32": "bb21d0aa",
+          "sha256": "8fcae058175d32d7edaa3a95eb7ffbd3f8dc37a47b128eeb8eb90a5cd356cc4d",
+          "lines": 451,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G45109-b/_план-1-1.json",
+          "bytes": 45,
+          "crc32": "cca7f8d1",
+          "sha256": "aefc7ad36d8759dbc6d4a6f3ba1073d0739211c727988b67e5fa0ba45d5429d2",
+          "lines": 0,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G45109-k/G-4-5-111-767-769-770-771.json",
+          "bytes": 69152689,
+          "crc32": "bfeba1e1",
+          "sha256": "8ed498ffc63c431fd581ae667b1fbd3cd407f025393841d074afc607d5067430",
+          "lines": 1013955,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G45109-k/G-4-5-111-767-769-770-771.knowledge.json.gz",
+          "bytes": 574135,
+          "crc32": "2d412fd1",
+          "sha256": "1f82e7ffc90c136d0189465bf5d3c7ebd74923f70f5134a9b0d9db68adc7853d",
+          "lines": 2347,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G45109-k/G-4-5-111-767-769-770-771.txt",
+          "bytes": 89119,
+          "crc32": "0f5b77f9",
+          "sha256": "9ed0905f4e59e914a54dd79d86a7c208d7bf2e6f194ce65f6c0b3aab7d90d945",
+          "lines": 474,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G45109-k/_план-1-1.json",
+          "bytes": 45,
+          "crc32": "cca7f8d1",
+          "sha256": "aefc7ad36d8759dbc6d4a6f3ba1073d0739211c727988b67e5fa0ba45d5429d2",
+          "lines": 0,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "time-b.txt",
+          "bytes": 1076,
+          "crc32": "a8a2e2dc",
+          "sha256": "3be8ae5178307dbe73614136027a86134ea6819c59d57ed7f5f4ddf01f5bd683",
+          "lines": 27,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "time-k.txt",
+          "bytes": 1076,
+          "crc32": "1b6a6049",
+          "sha256": "6f557a84c3040c4557d0940efaaf04b17cd9f889be311b8fb534cd03b9546fca",
+          "lines": 27,
+          "small_primary_preserved": true
+        }
+      ]
+    },
+    {
+      "artifact_id": 14304135233,
+      "name": "claude-t-G1420390",
+      "zip_bytes": 2107191,
+      "zip_sha256": "fe4fd533b50d20b32f63bc5a37127b04e6e3c4d91b94c8ca1787d6cc298b637d",
+      "source_digest_matches": true,
+      "zip_saved_locally": false,
+      "original_retained_on_GitHub": true,
+      "members": [
+        {
+          "path": "exit-b.txt",
+          "bytes": 7,
+          "crc32": "c0ccb849",
+          "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "commit.txt",
+          "bytes": 41,
+          "crc32": "30215179",
+          "sha256": "33843d32d7b4bf958fd8991c73de9d79da1b9e2b61f6c8ffe7ffd45da10a7463",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "exit-k.txt",
+          "bytes": 7,
+          "crc32": "c0ccb849",
+          "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G1420390-b/G-14-22-440-767-769-770-771.json",
+          "bytes": 7130759,
+          "crc32": "a8acb0fd",
+          "sha256": "466b23f80e4116fe7d8c6e8cdf55fe527b7796098e45402e48c1c78b264bdc9b",
+          "lines": 130035,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G1420390-b/G-14-22-440-767-769-770-771.txt",
+          "bytes": 5811,
+          "crc32": "709c4d29",
+          "sha256": "32631e4fe2c98ea1f335d89f673e18c0c434e41599ef0ec0a59cf64f7ea31fb6",
+          "lines": 38,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G1420390-b/_план-1-1.json",
+          "bytes": 47,
+          "crc32": "3f4ffffa",
+          "sha256": "b33260f768587b96b57b2dd275eb8e09ef9f68fd674d2b5fe369da6663a733cf",
+          "lines": 0,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G1420390-k/G-14-22-440-767-769-770-771.json",
+          "bytes": 7154212,
+          "crc32": "0fbb5f1f",
+          "sha256": "e2937e9a3618b02f812fb8195c0dd77b0c3ccb5f25036191f26e7f643850f844",
+          "lines": 130820,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G1420390-k/G-14-22-440-767-769-770-771.knowledge.json.gz",
+          "bytes": 154621,
+          "crc32": "5fa1653f",
+          "sha256": "d4be47deb22917c3c7e222f22949295f7e77be37f5d63bb92817d05858c245d4",
+          "lines": 620,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G1420390-k/G-14-22-440-767-769-770-771.txt",
+          "bytes": 8961,
+          "crc32": "b608e009",
+          "sha256": "3e616a604f8029275a3f8c6a4ce2c8a1d3a5b60463259f2fd192e3723533bc38",
+          "lines": 60,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G1420390-k/_план-1-1.json",
+          "bytes": 47,
+          "crc32": "3f4ffffa",
+          "sha256": "b33260f768587b96b57b2dd275eb8e09ef9f68fd674d2b5fe369da6663a733cf",
+          "lines": 0,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "time-b.txt",
+          "bytes": 1074,
+          "crc32": "f8694953",
+          "sha256": "7c1d843ee5feda5ec399aac3f3068e64dbf8c0d300950b05773aee2d0bb63dc8",
+          "lines": 27,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "time-k.txt",
+          "bytes": 1075,
+          "crc32": "0dd45597",
+          "sha256": "998643e8dd8515e8951ef215ef80fcbf06e446db52dda098b070bbe6ef16ea99",
+          "lines": 27,
+          "small_primary_preserved": true
+        }
+      ]
+    },
+    {
+      "artifact_id": 14303930458,
+      "name": "claude-t-G6209",
+      "zip_bytes": 1362485,
+      "zip_sha256": "9ff90acbb16bef342e5c29c6c57b344869dd83e77fa1f1e9b1d1e7052a3d9586",
+      "source_digest_matches": true,
+      "zip_saved_locally": false,
+      "original_retained_on_GitHub": true,
+      "members": [
+        {
+          "path": "exit-b.txt",
+          "bytes": 7,
+          "crc32": "c0ccb849",
+          "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "commit.txt",
+          "bytes": 41,
+          "crc32": "30215179",
+          "sha256": "33843d32d7b4bf958fd8991c73de9d79da1b9e2b61f6c8ffe7ffd45da10a7463",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "exit-k.txt",
+          "bytes": 7,
+          "crc32": "c0ccb849",
+          "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G6209-b/G-6-211-767-769-770-771.json",
+          "bytes": 3455194,
+          "crc32": "184148e8",
+          "sha256": "db2be048c1bf1ae8eab2432cec846cbc1104b420ccedaa2768a5b97ef39c7f9e",
+          "lines": 71029,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G6209-b/G-6-211-767-769-770-771.txt",
+          "bytes": 15418,
+          "crc32": "920e262a",
+          "sha256": "c2fdb661ebfaf237820abdf5569bb6d245a7d95cd3b55c0e470caaffa833e476",
+          "lines": 87,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G6209-b/_план-1-1.json",
+          "bytes": 43,
+          "crc32": "dd066e72",
+          "sha256": "0aeed23ae976338f425038d2d1c4b46668813cd5c129bc37dbb87fd38e582dbd",
+          "lines": 0,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G6209-k/G-6-211-767-769-770-771.json",
+          "bytes": 3478081,
+          "crc32": "8300205b",
+          "sha256": "ab1c3463d70b131c37d5801be8bbf2ef87d63689a39bf4f2b94ae0da4e91f573",
+          "lines": 71846,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G6209-k/G-6-211-767-769-770-771.knowledge.json.gz",
+          "bytes": 6021,
+          "crc32": "d2306072",
+          "sha256": "68a0c1bd86922c03bed1bd10ce0f11c56fc4723da95c92849251de72e3b0bf41",
+          "lines": 33,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G6209-k/G-6-211-767-769-770-771.txt",
+          "bytes": 19601,
+          "crc32": "f49e1873",
+          "sha256": "6972678d46e3d44aebe929502eda0955eef9276557f4c76a8874dbf86f2da547",
+          "lines": 115,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G6209-k/_план-1-1.json",
+          "bytes": 43,
+          "crc32": "dd066e72",
+          "sha256": "0aeed23ae976338f425038d2d1c4b46668813cd5c129bc37dbb87fd38e582dbd",
+          "lines": 0,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "time-b.txt",
+          "bytes": 1066,
+          "crc32": "c52c622a",
+          "sha256": "3d9dabf0244cafdaf99f736dfe7e3b6a1d60ef70039e359ddad98feed7ecd2e4",
+          "lines": 27,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "time-k.txt",
+          "bytes": 1064,
+          "crc32": "b400f74b",
+          "sha256": "03d108bc3e7460ce5e6a650f76c8ad5e9c80a2caf45905504db2f37560b0f456",
+          "lines": 27,
+          "small_primary_preserved": true
+        }
+      ]
+    },
+    {
+      "artifact_id": 14302844242,
+      "name": "claude-t-G417",
+      "zip_bytes": 744245,
+      "zip_sha256": "eedb54032dc5ad4bfe2f878a5557cc6a72d075b91f649724f05950377812592f",
+      "source_digest_matches": true,
+      "zip_saved_locally": false,
+      "original_retained_on_GitHub": true,
+      "members": [
+        {
+          "path": "commit.txt",
+          "bytes": 41,
+          "crc32": "30215179",
+          "sha256": "33843d32d7b4bf958fd8991c73de9d79da1b9e2b61f6c8ffe7ffd45da10a7463",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "exit-k.txt",
+          "bytes": 7,
+          "crc32": "c0ccb849",
+          "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "exit-b.txt",
+          "bytes": 7,
+          "crc32": "c0ccb849",
+          "sha256": "19eaf43821a7660ec323a87c8457bf74823beb296c39f5e01aa8a683aa50f061",
+          "lines": 1,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G417-b/G-4-17-767-769-770-771.json",
+          "bytes": 1369251,
+          "crc32": "8acdbe09",
+          "sha256": "c7527b885d7307ac4c6493936e1f6a593180d317e73e97ddcec2b38517ed6f33",
+          "lines": 43038,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G417-b/G-4-17-767-769-770-771.txt",
+          "bytes": 36671,
+          "crc32": "fe97e8b1",
+          "sha256": "62364eba31dc0105a17df5303df0629b0a05bf359f137edb243f33f32b2babf0",
+          "lines": 231,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G417-k/G-4-17-767-769-770-771.json",
+          "bytes": 1392145,
+          "crc32": "9109dc6c",
+          "sha256": "3d6d766d1f2ef84f168624415e5db3e8a3ad571205a013d88a59ffe470675196",
+          "lines": 43850,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G417-b/_план-1-1.json",
+          "bytes": 42,
+          "crc32": "e0bad91f",
+          "sha256": "a59b2a2b2e378b14be3ce6644dbab05f9288d2042c0b217919c81620cdb02945",
+          "lines": 0,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "t-G417-k/G-4-17-767-769-770-771.knowledge.json.gz",
+          "bytes": 195407,
+          "crc32": "e2ce0e92",
+          "sha256": "0dbe47dbe6d7dce6f68634f81579f4b40f6ba4714563c2f798a117a0e1fde043",
+          "lines": 810,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G417-k/G-4-17-767-769-770-771.txt",
+          "bytes": 40427,
+          "crc32": "4eb0ad82",
+          "sha256": "45ac5a36da817c326b6428a8a3c09d7bb0b6f569da0a2fb8551bd28a93a219a4",
+          "lines": 258,
+          "small_primary_preserved": false
+        },
+        {
+          "path": "t-G417-k/_план-1-1.json",
+          "bytes": 42,
+          "crc32": "e0bad91f",
+          "sha256": "a59b2a2b2e378b14be3ce6644dbab05f9288d2042c0b217919c81620cdb02945",
+          "lines": 0,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "time-b.txt",
+          "bytes": 1064,
+          "crc32": "7c4bf8bc",
+          "sha256": "62a4c51f96b5d423bbe1cd4e8c9612974a017f271da655a105ae756473a23142",
+          "lines": 27,
+          "small_primary_preserved": true
+        },
+        {
+          "path": "time-k.txt",
+          "bytes": 1060,
+          "crc32": "a0b102de",
+          "sha256": "9b40fbdd1072d73fc80c028cfd7445b75d1b87363740eb85bda274f6bbb3098a",
+          "lines": 27,
+          "small_primary_preserved": true
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "t-G1013",
+      "scheme": "G-10-13-767-769-770-771",
+      "order": "kb",
+      "planned_sample": 20000,
+      "code": "e07ddc16aafe7a9385b41d39918323f1911b6c85",
+      "source_table_run": 43866079198,
+      "modes": {
+        "b": {
+          "resources": {
+            "wall_seconds": 1759.34,
+            "user_seconds": 1705.36,
+            "system_seconds": 39.37,
+            "cpu_seconds": 1744.7299999999998,
+            "cpu_percent": 99,
+            "peak_rss_kib": 12406232,
+            "filesystem_inputs": 194400,
+            "filesystem_outputs": 91824,
+            "involuntary_context_switches": 11991,
+            "exit_status": 0
+          },
+          "exit_file": "exit=0",
+          "status": "перепись",
+          "scheme_seconds": 1686.7,
+          "fingerprint": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "census": {
+            "минимальных": 14810399,
+            "выборка": 20000,
+            "в отчёте": 20000,
+            "отсеяно до отчёта": 0,
+            "неизвестно на одном значении": 16559,
+            "сводится к вырожденности": 0
+          },
+          "verdicts": {
+            "выводится": 612,
+            "неизвестно": 19355,
+            "опровергается": 1
+          },
+          "unknown_remaining": 846,
+          "forbidden": 19968,
+          "folded_facts": 0,
+          "kept_questions_count": 846,
+          "knowledge": {},
+          "logical_legacy_json_sha256": "e8f09c0c743e3871d55fabd17d9a4d6d5020a91acc4a766ffc187a7f30c11671",
+          "legacy_field_sha256": {
+            "id": "d7dc9a5aeb3a031a2a2e33a978e1f6202be5eecf02ff60137f95f95eced4868a",
+            "условие": "dfb2bfe11673328b7a14bab782316da0d36bee8748029525467bdcb9b9bbac53",
+            "термы": "fbf1eb218087af793cf0d1c954941aae674635bc72e9738330b6ba4c7b6ddb80",
+            "посылок": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+            "без": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "отпечаток": "6054acf7900c900aec66cd1cc20ca057984911c0dd4709f1bbc30035d21def12",
+            "статус": "dba9e4f14187ddb10b33c505db66e569ae6927ee649302567279a48cd99ccada",
+            "строк противоречат базе": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "запретов": "94c0ea004c87b19f6129e95b356384faa3ab5dff761c228b0b46646fd6c15920",
+            "вердикты": "f59c6d18d047a27eec635a76b6dde5f8d30941ac29f863c25f07e3d05adf782b",
+            "остаток": "6cb6d4b2fa122bf8bd63280061e4a230565fdec3ce03268caa2f48ccd931c691",
+            "значения": "d87c4ce124c6f48e812db7ba8aca589afe6efb05f37f1882211c3e22b67c9cb6",
+            "без кандидата": "6fefc3af2644b3a00909486a9534e7418b7da086ed8cd5a2677dc6545ba4488f",
+            "вырождено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "реестр": "e991b04787b55168d7a843c97caf169d513250c6231080ecaab520cbc3b340d3",
+            "отложено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "свёрнуто": "e8e064a3e127d21cd4f69cddd27f43c5ff22b151f8d31062c0c32c9f33e5fa6b",
+            "оставленные вопросы": "bc740ac9848f09c2326ff319490ad8d83b6d1bfffeb65646598d9b0f4c631b51",
+            "оставленные факты": "67d3b7d707f200fbbf33cc0633a17baa6b9297a4b1bfb19a10226be6d73e4601",
+            "свёрнуто фактов": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "факты без посылок": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "вопросы": "ca1e567bc98c747c2844cb62d4e3cb24c428be75f120f2733eaf73166ffaf064",
+            "без вопроса": "777e00f15b5b3beadb31243e48d7bc7f93fd87f77d0943e1ae15e53c473de381",
+            "трудный контрпример": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "короткий довод": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "перепись": "4b9f17cec5b66864ab1f27917847e49d38f77c2b284a02565b92d05242539c38"
+          },
+          "json_bytes": 46924805,
+          "text_bytes": 69545
+        },
+        "k": {
+          "resources": {
+            "wall_seconds": 1718.39,
+            "user_seconds": 1664.52,
+            "system_seconds": 38.46,
+            "cpu_seconds": 1702.98,
+            "cpu_percent": 99,
+            "peak_rss_kib": 12403240,
+            "filesystem_inputs": 69648,
+            "filesystem_outputs": 93192,
+            "involuntary_context_switches": 11922,
+            "exit_status": 0
+          },
+          "exit_file": "exit=0",
+          "status": "перепись",
+          "scheme_seconds": 1647.1,
+          "fingerprint": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "census": {
+            "минимальных": 14810399,
+            "выборка": 20000,
+            "в отчёте": 20000,
+            "отсеяно до отчёта": 0,
+            "неизвестно на одном значении": 16559,
+            "сводится к вырожденности": 0
+          },
+          "verdicts": {
+            "выводится": 612,
+            "неизвестно": 19355,
+            "опровергается": 1
+          },
+          "unknown_remaining": 846,
+          "forbidden": 19968,
+          "folded_facts": 0,
+          "kept_questions_count": 846,
+          "knowledge": {
+            "все неизвестные": {
+              "строк": 19386,
+              "запретов": 19355,
+              "вопросов человеку (C)": 28,
+              "ждут знаний (A + B)": 19327,
+              "корней знаний всего": 40579,
+              "из них значений записанных групп": 40392,
+              "из них правил для произведений (шаблон × «×»)": 187,
+              "шаблонов атомов": 192,
+              "корней, чтобы затронуть все условия A/B (жадно)": 659,
+              "по видам": {
+                "A": 16530,
+                "B": 2797,
+                "C": 28
+              }
+            },
+            "оставленные после сжатия": {
+              "строк": 848,
+              "запретов": 846,
+              "вопросов человеку (C)": 1,
+              "ждут знаний (A + B)": 845,
+              "корней знаний всего": 24862,
+              "из них значений записанных групп": 24694,
+              "из них правил для произведений (шаблон × «×»)": 168,
+              "шаблонов атомов": 176,
+              "корней, чтобы затронуть все условия A/B (жадно)": 166,
+              "по видам": {
+                "A": 743,
+                "B": 102,
+                "C": 1
+              }
+            },
+            "очередь знаний_list_length": 100,
+            "вопросы человеку_list_length": 1
+          },
+          "logical_legacy_json_sha256": "e8f09c0c743e3871d55fabd17d9a4d6d5020a91acc4a766ffc187a7f30c11671",
+          "legacy_field_sha256": {
+            "id": "d7dc9a5aeb3a031a2a2e33a978e1f6202be5eecf02ff60137f95f95eced4868a",
+            "условие": "dfb2bfe11673328b7a14bab782316da0d36bee8748029525467bdcb9b9bbac53",
+            "термы": "fbf1eb218087af793cf0d1c954941aae674635bc72e9738330b6ba4c7b6ddb80",
+            "посылок": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+            "без": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "отпечаток": "6054acf7900c900aec66cd1cc20ca057984911c0dd4709f1bbc30035d21def12",
+            "статус": "dba9e4f14187ddb10b33c505db66e569ae6927ee649302567279a48cd99ccada",
+            "строк противоречат базе": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "запретов": "94c0ea004c87b19f6129e95b356384faa3ab5dff761c228b0b46646fd6c15920",
+            "вердикты": "f59c6d18d047a27eec635a76b6dde5f8d30941ac29f863c25f07e3d05adf782b",
+            "остаток": "6cb6d4b2fa122bf8bd63280061e4a230565fdec3ce03268caa2f48ccd931c691",
+            "значения": "d87c4ce124c6f48e812db7ba8aca589afe6efb05f37f1882211c3e22b67c9cb6",
+            "без кандидата": "6fefc3af2644b3a00909486a9534e7418b7da086ed8cd5a2677dc6545ba4488f",
+            "вырождено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "реестр": "e991b04787b55168d7a843c97caf169d513250c6231080ecaab520cbc3b340d3",
+            "отложено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "свёрнуто": "e8e064a3e127d21cd4f69cddd27f43c5ff22b151f8d31062c0c32c9f33e5fa6b",
+            "оставленные вопросы": "bc740ac9848f09c2326ff319490ad8d83b6d1bfffeb65646598d9b0f4c631b51",
+            "оставленные факты": "67d3b7d707f200fbbf33cc0633a17baa6b9297a4b1bfb19a10226be6d73e4601",
+            "свёрнуто фактов": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "факты без посылок": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "вопросы": "ca1e567bc98c747c2844cb62d4e3cb24c428be75f120f2733eaf73166ffaf064",
+            "без вопроса": "777e00f15b5b3beadb31243e48d7bc7f93fd87f77d0943e1ae15e53c473de381",
+            "трудный контрпример": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "короткий довод": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "перепись": "4b9f17cec5b66864ab1f27917847e49d38f77c2b284a02565b92d05242539c38"
+          },
+          "json_bytes": 46945883,
+          "text_bytes": 72558
+        }
+      },
+      "legacy_json_equal_except_performance_and_top_level_knowledge": true,
+      "differing_legacy_keys": [],
+      "normalization_excludes_exactly": [
+        "секунд",
+        "память ГБ",
+        "память по этапам",
+        "знания"
+      ],
+      "observed_wall_change_percent": -2.327577386974655,
+      "saved_current_minimal_domain_fully_sampled": false
+    },
+    {
+      "case_id": "t-G45109",
+      "scheme": "G-4-5-111-767-769-770-771",
+      "order": "bk",
+      "planned_sample": 20000,
+      "code": "e07ddc16aafe7a9385b41d39918323f1911b6c85",
+      "source_table_run": 43866079198,
+      "modes": {
+        "b": {
+          "resources": {
+            "wall_seconds": 1329.84,
+            "user_seconds": 1292.1,
+            "system_seconds": 28.84,
+            "cpu_seconds": 1320.9399999999998,
+            "cpu_percent": 99,
+            "peak_rss_kib": 12460624,
+            "filesystem_inputs": 67504,
+            "filesystem_outputs": 135856,
+            "involuntary_context_switches": 6476,
+            "exit_status": 0
+          },
+          "exit_file": "exit=0",
+          "status": "перепись",
+          "scheme_seconds": 1264.2,
+          "fingerprint": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "census": {
+            "минимальных": 22716844,
+            "выборка": 20000,
+            "в отчёте": 20000,
+            "отсеяно до отчёта": 0,
+            "неизвестно на одном значении": 17427,
+            "сводится к вырожденности": 1
+          },
+          "verdicts": {
+            "выводится": 709,
+            "неизвестно": 19255,
+            "опровергается": 2
+          },
+          "unknown_remaining": 910,
+          "forbidden": 19966,
+          "folded_facts": 0,
+          "kept_questions_count": 910,
+          "knowledge": {},
+          "logical_legacy_json_sha256": "5b53be4e26cf1e591274bfca50aa57fecbdae3d204f8c8167d9f9bc9441cf2a2",
+          "legacy_field_sha256": {
+            "id": "4b651f599256414e497ba08648cea4c889f95f0b2319a47e20a7ed8ee4286e25",
+            "условие": "dfb2bfe11673328b7a14bab782316da0d36bee8748029525467bdcb9b9bbac53",
+            "термы": "91ca804e6ce76402e8a8a5f60f962268996cedf49aba05ab69ee56fbe4355560",
+            "посылок": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+            "без": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "отпечаток": "6054acf7900c900aec66cd1cc20ca057984911c0dd4709f1bbc30035d21def12",
+            "статус": "dba9e4f14187ddb10b33c505db66e569ae6927ee649302567279a48cd99ccada",
+            "строк противоречат базе": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "запретов": "4be91a483b6ec97a9da1310983e7fe615d98ffcc728cc0a2c65c98b2107e0020",
+            "вердикты": "56cf72ffdcc72a421ef95a1971be6cf839c0cfdedab1c65667e95ed1108a1ebb",
+            "остаток": "39e18a493b913441c12fac89a09f24958e5da0ff6f3300c80c5359f36e3223aa",
+            "значения": "161348e1deb7d5d1e46b7922d34e3975a93765f2a95f005bcdca24c78b40c35e",
+            "без кандидата": "828aad99a16cb45da637236aca3ea167a839c46f5fd01596456f71c7c1d39f6c",
+            "вырождено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "реестр": "0657c591803c6f67487b16e8d4e2631aa878dd5baa6ebd693885c41665acd6d2",
+            "отложено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "свёрнуто": "df38cbbe543c5c7f0db56d5329a3871285efff87c7aa49a67755ccdbb927d4b0",
+            "оставленные вопросы": "9eee443b016d25a161f87b72ebaa55943991e3ea7c6cb32e22be3b1977b7b3ce",
+            "оставленные факты": "9466f2c325d726a4b176134af50dab423b8ff8eb7d218e5200691b0dfee66660",
+            "свёрнуто фактов": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "факты без посылок": "c2e70a3c7d0e39efd5920a94c85bf65182012f57c9b06bb480d679f438aad9e3",
+            "вопросы": "7e70ca1cd07e2f8075e68dd0c323d02a833b755a98bb464045c6979a0d9f64ee",
+            "без вопроса": "3c61080e8f57c70020fa2333b3a923be29f730fda6c174420b088823c539ab51",
+            "трудный контрпример": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "короткий довод": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "перепись": "343291b151a66d187ddd01a07dd9b4168d3a54fb2f4c534887c2a32c8247bc71"
+          },
+          "json_bytes": 69129296,
+          "text_bytes": 86052
+        },
+        "k": {
+          "resources": {
+            "wall_seconds": 1338.81,
+            "user_seconds": 1305.46,
+            "system_seconds": 28.95,
+            "cpu_seconds": 1334.41,
+            "cpu_percent": 99,
+            "peak_rss_kib": 12454688,
+            "filesystem_inputs": 861640,
+            "filesystem_outputs": 136400,
+            "involuntary_context_switches": 6772,
+            "exit_status": 0
+          },
+          "exit_file": "exit=0",
+          "status": "перепись",
+          "scheme_seconds": 1273.6,
+          "fingerprint": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "census": {
+            "минимальных": 22716844,
+            "выборка": 20000,
+            "в отчёте": 20000,
+            "отсеяно до отчёта": 0,
+            "неизвестно на одном значении": 17427,
+            "сводится к вырожденности": 1
+          },
+          "verdicts": {
+            "выводится": 709,
+            "неизвестно": 19255,
+            "опровергается": 2
+          },
+          "unknown_remaining": 910,
+          "forbidden": 19966,
+          "folded_facts": 0,
+          "kept_questions_count": 910,
+          "knowledge": {
+            "все неизвестные": {
+              "строк": 19287,
+              "запретов": 19255,
+              "вопросов человеку (C)": 13,
+              "ждут знаний (A + B)": 19242,
+              "корней знаний всего": 66925,
+              "из них значений записанных групп": 66707,
+              "из них правил для произведений (шаблон × «×»)": 218,
+              "шаблонов атомов": 225,
+              "корней, чтобы затронуть все условия A/B (жадно)": 813,
+              "по видам": {
+                "A": 17396,
+                "B": 1846,
+                "C": 13
+              }
+            },
+            "оставленные после сжатия": {
+              "строк": 915,
+              "запретов": 910,
+              "вопросов человеку (C)": 1,
+              "ждут знаний (A + B)": 909,
+              "корней знаний всего": 43553,
+              "из них значений записанных групп": 43380,
+              "из них правил для произведений (шаблон × «×»)": 173,
+              "шаблонов атомов": 193,
+              "корней, чтобы затронуть все условия A/B (жадно)": 231,
+              "по видам": {
+                "A": 793,
+                "B": 116,
+                "C": 1
+              }
+            },
+            "очередь знаний_list_length": 100,
+            "вопросы человеку_list_length": 1
+          },
+          "logical_legacy_json_sha256": "5b53be4e26cf1e591274bfca50aa57fecbdae3d204f8c8167d9f9bc9441cf2a2",
+          "legacy_field_sha256": {
+            "id": "4b651f599256414e497ba08648cea4c889f95f0b2319a47e20a7ed8ee4286e25",
+            "условие": "dfb2bfe11673328b7a14bab782316da0d36bee8748029525467bdcb9b9bbac53",
+            "термы": "91ca804e6ce76402e8a8a5f60f962268996cedf49aba05ab69ee56fbe4355560",
+            "посылок": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+            "без": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "отпечаток": "6054acf7900c900aec66cd1cc20ca057984911c0dd4709f1bbc30035d21def12",
+            "статус": "dba9e4f14187ddb10b33c505db66e569ae6927ee649302567279a48cd99ccada",
+            "строк противоречат базе": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "запретов": "4be91a483b6ec97a9da1310983e7fe615d98ffcc728cc0a2c65c98b2107e0020",
+            "вердикты": "56cf72ffdcc72a421ef95a1971be6cf839c0cfdedab1c65667e95ed1108a1ebb",
+            "остаток": "39e18a493b913441c12fac89a09f24958e5da0ff6f3300c80c5359f36e3223aa",
+            "значения": "161348e1deb7d5d1e46b7922d34e3975a93765f2a95f005bcdca24c78b40c35e",
+            "без кандидата": "828aad99a16cb45da637236aca3ea167a839c46f5fd01596456f71c7c1d39f6c",
+            "вырождено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "реестр": "0657c591803c6f67487b16e8d4e2631aa878dd5baa6ebd693885c41665acd6d2",
+            "отложено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "свёрнуто": "df38cbbe543c5c7f0db56d5329a3871285efff87c7aa49a67755ccdbb927d4b0",
+            "оставленные вопросы": "9eee443b016d25a161f87b72ebaa55943991e3ea7c6cb32e22be3b1977b7b3ce",
+            "оставленные факты": "9466f2c325d726a4b176134af50dab423b8ff8eb7d218e5200691b0dfee66660",
+            "свёрнуто фактов": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "факты без посылок": "c2e70a3c7d0e39efd5920a94c85bf65182012f57c9b06bb480d679f438aad9e3",
+            "вопросы": "7e70ca1cd07e2f8075e68dd0c323d02a833b755a98bb464045c6979a0d9f64ee",
+            "без вопроса": "3c61080e8f57c70020fa2333b3a923be29f730fda6c174420b088823c539ab51",
+            "трудный контрпример": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "короткий довод": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "перепись": "343291b151a66d187ddd01a07dd9b4168d3a54fb2f4c534887c2a32c8247bc71"
+          },
+          "json_bytes": 69152689,
+          "text_bytes": 89119
+        }
+      },
+      "legacy_json_equal_except_performance_and_top_level_knowledge": true,
+      "differing_legacy_keys": [],
+      "normalization_excludes_exactly": [
+        "секунд",
+        "память ГБ",
+        "память по этапам",
+        "знания"
+      ],
+      "observed_wall_change_percent": 0.6745172351561024,
+      "saved_current_minimal_domain_fully_sampled": false
+    },
+    {
+      "case_id": "t-G1420390",
+      "scheme": "G-14-22-440-767-769-770-771",
+      "order": "kb",
+      "planned_sample": 60000,
+      "code": "e07ddc16aafe7a9385b41d39918323f1911b6c85",
+      "source_table_run": 43866079198,
+      "modes": {
+        "b": {
+          "resources": {
+            "wall_seconds": 457.63,
+            "user_seconds": 436.52,
+            "system_seconds": 18.38,
+            "cpu_seconds": 454.9,
+            "cpu_percent": 99,
+            "peak_rss_kib": 12044892,
+            "filesystem_inputs": 57712,
+            "filesystem_outputs": 13976,
+            "involuntary_context_switches": 2952,
+            "exit_status": 0
+          },
+          "exit_file": "exit=0",
+          "status": "перепись",
+          "scheme_seconds": 399.3,
+          "fingerprint": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "census": {
+            "минимальных": 218425,
+            "выборка": 60000,
+            "в отчёте": 60000,
+            "отсеяно до отчёта": 0,
+            "неизвестно на одном значении": 19847,
+            "сводится к вырожденности": 0
+          },
+          "verdicts": {
+            "выводится": 19391,
+            "неизвестно": 22626,
+            "опровергается": 10
+          },
+          "unknown_remaining": 41,
+          "forbidden": 42027,
+          "folded_facts": 25375,
+          "kept_questions_count": 41,
+          "knowledge": {},
+          "logical_legacy_json_sha256": "4fa0ba0c28f46e4c5ee90e0de74215c43fa0e7e0cb29dc04b275e66cd58d7544",
+          "legacy_field_sha256": {
+            "id": "281941eb4332842965af2e50b89272f7412239f772f1b9a6159b4c6744ddefda",
+            "условие": "dfb2bfe11673328b7a14bab782316da0d36bee8748029525467bdcb9b9bbac53",
+            "термы": "e946e76da19cc9819b34dfca173724c1cd0e3c3401f1171cdd93a63a35eca27d",
+            "посылок": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+            "без": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "отпечаток": "6054acf7900c900aec66cd1cc20ca057984911c0dd4709f1bbc30035d21def12",
+            "статус": "dba9e4f14187ddb10b33c505db66e569ae6927ee649302567279a48cd99ccada",
+            "строк противоречат базе": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "запретов": "8ef6ff8b1d998d376244d3f119d3ddb3ee83da35a3f30e7011edc74f5ed46964",
+            "вердикты": "abe8f2912f95e5ac6d61fc94409fc7a8fba06f4e6fcb52ff7c5fcb216a32bcae",
+            "остаток": "3d914f9348c9cc0ff8a79716700b9fcd4d2f3e711608004eb8f138bcba7f14d9",
+            "значения": "cac804600906cf8938415b7e77001b0a6faa8acccacabdfe802484441cd004a2",
+            "без кандидата": "a13aca86645fb541a3ec0ab93e5fb83b441a527b0ad28aea045074816c9ecdda",
+            "вырождено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "реестр": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "отложено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "свёрнуто": "c53d4dcb8c1351798d9d6fa1766bf90153d8a4c2e18f9c3346e9a39e85e7709f",
+            "оставленные вопросы": "e7d908237577c38a45a061b9bcf662c3fda891f24159d32bf4d0fe657737e15e",
+            "оставленные факты": "6fd577384a60cb7536d26e893271193ef893442b19ddad259b183727caa599f0",
+            "свёрнуто фактов": "3d710986c655ed1d1cf840a6fbde5b8b1fab1f377fa6da916ee1cab2e3a12ebd",
+            "факты без посылок": "071f94fff98fb1c4cc053dbc08a41d15fcc2a7a3ccc74b794cca3807a46470ad",
+            "вопросы": "389096f3bc0b494e96f78197d471890686ede57692b8d05d14add9f98486ac5b",
+            "без вопроса": "c9ec8e96c078bedd7ba00226c8f4cc14ce2dc209bf827d67b8f163f6af8723d6",
+            "трудный контрпример": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "короткий довод": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "перепись": "59962f1dbe9bb41c455086deb5d83c0e838b2c61d389ceb6d17fde57d9590e92"
+          },
+          "json_bytes": 7130759,
+          "text_bytes": 5811
+        },
+        "k": {
+          "resources": {
+            "wall_seconds": 463.63,
+            "user_seconds": 438.27,
+            "system_seconds": 18.4,
+            "cpu_seconds": 456.66999999999996,
+            "cpu_percent": 98,
+            "peak_rss_kib": 12047464,
+            "filesystem_inputs": 69560,
+            "filesystem_outputs": 14952,
+            "involuntary_context_switches": 2856,
+            "exit_status": 0
+          },
+          "exit_file": "exit=0",
+          "status": "перепись",
+          "scheme_seconds": 399.6,
+          "fingerprint": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "census": {
+            "минимальных": 218425,
+            "выборка": 60000,
+            "в отчёте": 60000,
+            "отсеяно до отчёта": 0,
+            "неизвестно на одном значении": 19847,
+            "сводится к вырожденности": 0
+          },
+          "verdicts": {
+            "выводится": 19391,
+            "неизвестно": 22626,
+            "опровергается": 10
+          },
+          "unknown_remaining": 41,
+          "forbidden": 42027,
+          "folded_facts": 25375,
+          "kept_questions_count": 41,
+          "knowledge": {
+            "все неизвестные": {
+              "строк": 33224,
+              "запретов": 22633,
+              "вопросов человеку (C)": 684,
+              "ждут знаний (A + B)": 21949,
+              "корней знаний всего": 18978,
+              "из них значений записанных групп": 18902,
+              "из них правил для произведений (шаблон × «×»)": 76,
+              "шаблонов атомов": 88,
+              "корней, чтобы затронуть все условия A/B (жадно)": 182,
+              "по видам": {
+                "A": 13785,
+                "B": 8164,
+                "C": 684
+              }
+            },
+            "оставленные после сжатия": {
+              "строк": 46,
+              "запретов": 41,
+              "вопросов человеку (C)": 0,
+              "ждут знаний (A + B)": 41,
+              "корней знаний всего": 11216,
+              "из них значений записанных групп": 11198,
+              "из них правил для произведений (шаблон × «×»)": 18,
+              "шаблонов атомов": 24,
+              "корней, чтобы затронуть все условия A/B (жадно)": 24,
+              "по видам": {
+                "A": 38,
+                "B": 3
+              }
+            },
+            "очередь знаний_list_length": 100,
+            "вопросы человеку_list_length": 0
+          },
+          "logical_legacy_json_sha256": "4fa0ba0c28f46e4c5ee90e0de74215c43fa0e7e0cb29dc04b275e66cd58d7544",
+          "legacy_field_sha256": {
+            "id": "281941eb4332842965af2e50b89272f7412239f772f1b9a6159b4c6744ddefda",
+            "условие": "dfb2bfe11673328b7a14bab782316da0d36bee8748029525467bdcb9b9bbac53",
+            "термы": "e946e76da19cc9819b34dfca173724c1cd0e3c3401f1171cdd93a63a35eca27d",
+            "посылок": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+            "без": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "отпечаток": "6054acf7900c900aec66cd1cc20ca057984911c0dd4709f1bbc30035d21def12",
+            "статус": "dba9e4f14187ddb10b33c505db66e569ae6927ee649302567279a48cd99ccada",
+            "строк противоречат базе": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "запретов": "8ef6ff8b1d998d376244d3f119d3ddb3ee83da35a3f30e7011edc74f5ed46964",
+            "вердикты": "abe8f2912f95e5ac6d61fc94409fc7a8fba06f4e6fcb52ff7c5fcb216a32bcae",
+            "остаток": "3d914f9348c9cc0ff8a79716700b9fcd4d2f3e711608004eb8f138bcba7f14d9",
+            "значения": "cac804600906cf8938415b7e77001b0a6faa8acccacabdfe802484441cd004a2",
+            "без кандидата": "a13aca86645fb541a3ec0ab93e5fb83b441a527b0ad28aea045074816c9ecdda",
+            "вырождено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "реестр": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "отложено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "свёрнуто": "c53d4dcb8c1351798d9d6fa1766bf90153d8a4c2e18f9c3346e9a39e85e7709f",
+            "оставленные вопросы": "e7d908237577c38a45a061b9bcf662c3fda891f24159d32bf4d0fe657737e15e",
+            "оставленные факты": "6fd577384a60cb7536d26e893271193ef893442b19ddad259b183727caa599f0",
+            "свёрнуто фактов": "3d710986c655ed1d1cf840a6fbde5b8b1fab1f377fa6da916ee1cab2e3a12ebd",
+            "факты без посылок": "071f94fff98fb1c4cc053dbc08a41d15fcc2a7a3ccc74b794cca3807a46470ad",
+            "вопросы": "389096f3bc0b494e96f78197d471890686ede57692b8d05d14add9f98486ac5b",
+            "без вопроса": "c9ec8e96c078bedd7ba00226c8f4cc14ce2dc209bf827d67b8f163f6af8723d6",
+            "трудный контрпример": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "короткий довод": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "перепись": "59962f1dbe9bb41c455086deb5d83c0e838b2c61d389ceb6d17fde57d9590e92"
+          },
+          "json_bytes": 7154212,
+          "text_bytes": 8961
+        }
+      },
+      "legacy_json_equal_except_performance_and_top_level_knowledge": true,
+      "differing_legacy_keys": [],
+      "normalization_excludes_exactly": [
+        "секунд",
+        "память ГБ",
+        "память по этапам",
+        "знания"
+      ],
+      "observed_wall_change_percent": 1.311102856019053,
+      "saved_current_minimal_domain_fully_sampled": false
+    },
+    {
+      "case_id": "t-G6209",
+      "scheme": "G-6-211-767-769-770-771",
+      "order": "bk",
+      "planned_sample": 60000,
+      "code": "e07ddc16aafe7a9385b41d39918323f1911b6c85",
+      "source_table_run": 43866079198,
+      "modes": {
+        "b": {
+          "resources": {
+            "wall_seconds": 428.54,
+            "user_seconds": 408.42,
+            "system_seconds": 14.46,
+            "cpu_seconds": 422.88,
+            "cpu_percent": 98,
+            "peak_rss_kib": 11984996,
+            "filesystem_inputs": 67496,
+            "filesystem_outputs": 7432,
+            "involuntary_context_switches": 2095,
+            "exit_status": 0
+          },
+          "exit_file": "exit=0",
+          "status": "перепись",
+          "scheme_seconds": 364.8,
+          "fingerprint": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "census": {
+            "минимальных": 245672,
+            "выборка": 60000,
+            "в отчёте": 60000,
+            "отсеяно до отчёта": 0,
+            "неизвестно на одном значении": 10740,
+            "сводится к вырожденности": 1
+          },
+          "verdicts": {
+            "выводится": 32306,
+            "неизвестно": 14427
+          },
+          "unknown_remaining": 132,
+          "forbidden": 46733,
+          "folded_facts": 40467,
+          "kept_questions_count": 132,
+          "knowledge": {},
+          "logical_legacy_json_sha256": "099e1609d5b6192ab0b7758b7d30bd40d9d08df15aa341869ff3236c2048910f",
+          "legacy_field_sha256": {
+            "id": "7c0ebcb543e2a591658cfe62bf2813d4113273ef4aa74b2607b12b819ed0139e",
+            "условие": "dfb2bfe11673328b7a14bab782316da0d36bee8748029525467bdcb9b9bbac53",
+            "термы": "4bf693b80ba5564f3dfdaccfe56ff938aef9fbb518cfe166f63e4c9509b0c7a0",
+            "посылок": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+            "без": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "отпечаток": "6054acf7900c900aec66cd1cc20ca057984911c0dd4709f1bbc30035d21def12",
+            "статус": "dba9e4f14187ddb10b33c505db66e569ae6927ee649302567279a48cd99ccada",
+            "строк противоречат базе": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "запретов": "b7a9c1fc1f23a585d293468ad425add861fdeca720f5ed466ccf23153939f066",
+            "вердикты": "496fc608f16508e85c8866075b680bed99990e6b46a42e31f9876a400035d2d8",
+            "остаток": "dbb1ded63bc70732626c5dfe6c7f50ced3d560e970f30b15335ac290358748f6",
+            "значения": "514372e2f296962fc35b3b6c6884318eb5678c0bf97c2a5d5e33d018d28dec74",
+            "без кандидата": "fada5e99780018911ab07d7aa6f9a5a5f1c451f0436e9c9bf2f8d0fa61d56a87",
+            "вырождено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "реестр": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "отложено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "свёрнуто": "bf97ab5cbf3b401086bf9564b5a82ea40034c4ea2e9ded7e1a6b1c124e7dfd55",
+            "оставленные вопросы": "bd356fc5f7aefa5bf20f5058ee5fdd21215c3117aa8a6bfd55df2f1b2e6321bb",
+            "оставленные факты": "a508f4e099e469cd41db3a6ffeafd93948fd167f694eff8f9cc279f1009acc1e",
+            "свёрнуто фактов": "6d686c523accddcb0811aea379ebb22f4a982663e71d5806b35b9da6a8fdec2c",
+            "факты без посылок": "8e0274829083b28f5b7441b25cb4880aebd1ace51e77622a11f22543fbd2d0e1",
+            "вопросы": "ba0e10fc72d8518ca656551ccab4b9616bc75bf64feed996bfddb3f0054160cc",
+            "без вопроса": "e3becaf1be21ba7d0eba6216968240b631bfb19fd42c8704180363cfd851e866",
+            "трудный контрпример": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "короткий довод": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "перепись": "09824ba3539f9dabcbe9c2a791834df93d15ddefb55094cdfcda0ed5cf45ada3"
+          },
+          "json_bytes": 3455194,
+          "text_bytes": 15418
+        },
+        "k": {
+          "resources": {
+            "wall_seconds": 424.64,
+            "user_seconds": 408.41,
+            "system_seconds": 14.42,
+            "cpu_seconds": 422.83000000000004,
+            "cpu_percent": 99,
+            "peak_rss_kib": 11985308,
+            "filesystem_inputs": 7760,
+            "filesystem_outputs": 6888,
+            "involuntary_context_switches": 2032,
+            "exit_status": 0
+          },
+          "exit_file": "exit=0",
+          "status": "перепись",
+          "scheme_seconds": 362.6,
+          "fingerprint": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "census": {
+            "минимальных": 245672,
+            "выборка": 60000,
+            "в отчёте": 60000,
+            "отсеяно до отчёта": 0,
+            "неизвестно на одном значении": 10740,
+            "сводится к вырожденности": 1
+          },
+          "verdicts": {
+            "выводится": 32306,
+            "неизвестно": 14427
+          },
+          "unknown_remaining": 132,
+          "forbidden": 46733,
+          "folded_facts": 40467,
+          "kept_questions_count": 132,
+          "knowledge": {
+            "все неизвестные": {
+              "строк": 18558,
+              "запретов": 14427,
+              "вопросов человеку (C)": 2326,
+              "ждут знаний (A + B)": 12101,
+              "корней знаний всего": 795,
+              "из них значений записанных групп": 727,
+              "из них правил для произведений (шаблон × «×»)": 68,
+              "шаблонов атомов": 70,
+              "корней, чтобы затронуть все условия A/B (жадно)": 102,
+              "по видам": {
+                "A": 8387,
+                "B": 3714,
+                "C": 2326
+              }
+            },
+            "оставленные после сжатия": {
+              "строк": 186,
+              "запретов": 132,
+              "вопросов человеку (C)": 6,
+              "ждут знаний (A + B)": 126,
+              "корней знаний всего": 617,
+              "из них значений записанных групп": 566,
+              "из них правил для произведений (шаблон × «×»)": 51,
+              "шаблонов атомов": 53,
+              "корней, чтобы затронуть все условия A/B (жадно)": 46,
+              "по видам": {
+                "A": 98,
+                "B": 28,
+                "C": 6
+              }
+            },
+            "очередь знаний_list_length": 100,
+            "вопросы человеку_list_length": 6
+          },
+          "logical_legacy_json_sha256": "099e1609d5b6192ab0b7758b7d30bd40d9d08df15aa341869ff3236c2048910f",
+          "legacy_field_sha256": {
+            "id": "7c0ebcb543e2a591658cfe62bf2813d4113273ef4aa74b2607b12b819ed0139e",
+            "условие": "dfb2bfe11673328b7a14bab782316da0d36bee8748029525467bdcb9b9bbac53",
+            "термы": "4bf693b80ba5564f3dfdaccfe56ff938aef9fbb518cfe166f63e4c9509b0c7a0",
+            "посылок": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+            "без": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "отпечаток": "6054acf7900c900aec66cd1cc20ca057984911c0dd4709f1bbc30035d21def12",
+            "статус": "dba9e4f14187ddb10b33c505db66e569ae6927ee649302567279a48cd99ccada",
+            "строк противоречат базе": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "запретов": "b7a9c1fc1f23a585d293468ad425add861fdeca720f5ed466ccf23153939f066",
+            "вердикты": "496fc608f16508e85c8866075b680bed99990e6b46a42e31f9876a400035d2d8",
+            "остаток": "dbb1ded63bc70732626c5dfe6c7f50ced3d560e970f30b15335ac290358748f6",
+            "значения": "514372e2f296962fc35b3b6c6884318eb5678c0bf97c2a5d5e33d018d28dec74",
+            "без кандидата": "fada5e99780018911ab07d7aa6f9a5a5f1c451f0436e9c9bf2f8d0fa61d56a87",
+            "вырождено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "реестр": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "отложено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "свёрнуто": "bf97ab5cbf3b401086bf9564b5a82ea40034c4ea2e9ded7e1a6b1c124e7dfd55",
+            "оставленные вопросы": "bd356fc5f7aefa5bf20f5058ee5fdd21215c3117aa8a6bfd55df2f1b2e6321bb",
+            "оставленные факты": "a508f4e099e469cd41db3a6ffeafd93948fd167f694eff8f9cc279f1009acc1e",
+            "свёрнуто фактов": "6d686c523accddcb0811aea379ebb22f4a982663e71d5806b35b9da6a8fdec2c",
+            "факты без посылок": "8e0274829083b28f5b7441b25cb4880aebd1ace51e77622a11f22543fbd2d0e1",
+            "вопросы": "ba0e10fc72d8518ca656551ccab4b9616bc75bf64feed996bfddb3f0054160cc",
+            "без вопроса": "e3becaf1be21ba7d0eba6216968240b631bfb19fd42c8704180363cfd851e866",
+            "трудный контрпример": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "короткий довод": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "перепись": "09824ba3539f9dabcbe9c2a791834df93d15ddefb55094cdfcda0ed5cf45ada3"
+          },
+          "json_bytes": 3478081,
+          "text_bytes": 19601
+        }
+      },
+      "legacy_json_equal_except_performance_and_top_level_knowledge": true,
+      "differing_legacy_keys": [],
+      "normalization_excludes_exactly": [
+        "секунд",
+        "память ГБ",
+        "память по этапам",
+        "знания"
+      ],
+      "observed_wall_change_percent": -0.9100667382274774,
+      "saved_current_minimal_domain_fully_sampled": false
+    },
+    {
+      "case_id": "t-G417",
+      "scheme": "G-4-17-767-769-770-771",
+      "order": "bk",
+      "planned_sample": 21000,
+      "code": "e07ddc16aafe7a9385b41d39918323f1911b6c85",
+      "source_table_run": 43866079198,
+      "modes": {
+        "b": {
+          "resources": {
+            "wall_seconds": 591.79,
+            "user_seconds": 572.77,
+            "system_seconds": 14.25,
+            "cpu_seconds": 587.02,
+            "cpu_percent": 99,
+            "peak_rss_kib": 11414884,
+            "filesystem_inputs": 67504,
+            "filesystem_outputs": 3400,
+            "involuntary_context_switches": 2894,
+            "exit_status": 0
+          },
+          "exit_file": "exit=0",
+          "status": "перепись",
+          "scheme_seconds": 522.6,
+          "fingerprint": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "census": {
+            "минимальных": 20823,
+            "выборка": 20823,
+            "в отчёте": 20823,
+            "отсеяно до отчёта": 0,
+            "неизвестно на одном значении": 9540,
+            "сводится к вырожденности": 461
+          },
+          "verdicts": {
+            "выводится": 1577,
+            "неизвестно": 3942
+          },
+          "unknown_remaining": 625,
+          "forbidden": 5519,
+          "folded_facts": 1485,
+          "kept_questions_count": 625,
+          "knowledge": {},
+          "logical_legacy_json_sha256": "4bab121343b9680b65f18208aa6a0bd4095f636e46e9cf3324b2c7f3587ea403",
+          "legacy_field_sha256": {
+            "id": "b62eb646ef404ba1fd7cf7911a05fb01b2f358bea42d6683451ae9c3ab8951b4",
+            "условие": "dfb2bfe11673328b7a14bab782316da0d36bee8748029525467bdcb9b9bbac53",
+            "термы": "d40e165cbe9384cf4926e04f54483f6037733221466be826256c8ae0e077235c",
+            "посылок": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+            "без": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "отпечаток": "6054acf7900c900aec66cd1cc20ca057984911c0dd4709f1bbc30035d21def12",
+            "статус": "dba9e4f14187ddb10b33c505db66e569ae6927ee649302567279a48cd99ccada",
+            "строк противоречат базе": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "запретов": "20f1a57d5d8c667c827ce96dfe1390dfb2fa4eecc6c6a87910da4a0d5bb4f874",
+            "вердикты": "11ac4a27178fb54a9b1d299038c37fd1bac06b329d39b6123db0b07892b04c52",
+            "остаток": "ad723f42c7aba316d944f19f340ce47d8e0c6fb354d212736ec4782314a6824a",
+            "значения": "14307a45fcfdd49f1003fcbebd06204398b6e28caa2db9ab3c9ee285223c068d",
+            "без кандидата": "fbc0ddee4c445288b496b1d32d6b987175405b5b9c60da36fe26f45751d6abef",
+            "вырождено": "0582b0f22162d11e4c014425756336bf6290ba503d92b0e393293a66a16e700f",
+            "реестр": "4d641967617ec5fc2b5f9ad33b85270272145a96c0bd3ea256f3be65187426f0",
+            "отложено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "свёрнуто": "24c6b85f015fc5e822f0f7600d1cbd0ce0f70a1df9f1492b067339132d2a63aa",
+            "оставленные вопросы": "6f59d0b56f55f611408e327a4c819103ff070e99a9bfb2ddae6990ba9735b785",
+            "оставленные факты": "1ed190097ebc6e78802228ec904ba07bb44c3314f26cee5c98a417c892f8f98a",
+            "свёрнуто фактов": "c010bb0f7f8f335ccb2bc4e598eee48be11f87ac60a39a1a1cb4185688857003",
+            "факты без посылок": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "вопросы": "7b4afb815cd3c2b6171634323b1dd967bf7fe88b26a7bad3ccc7a92aec36ece8",
+            "без вопроса": "d146f0489a9200090d393f119c8e36690b7d1730fca225f4902b66d191c6bd74",
+            "трудный контрпример": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "короткий довод": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "перепись": "4f578411c51a8b8d566ef31ea30f24333a81300531d0fbd76b93d8834819d8c3"
+          },
+          "json_bytes": 1369251,
+          "text_bytes": 36671
+        },
+        "k": {
+          "resources": {
+            "wall_seconds": 587.24,
+            "user_seconds": 571.15,
+            "system_seconds": 14.06,
+            "cpu_seconds": 585.2099999999999,
+            "cpu_percent": 99,
+            "peak_rss_kib": 11414152,
+            "filesystem_inputs": 688,
+            "filesystem_outputs": 3216,
+            "involuntary_context_switches": 2763,
+            "exit_status": 0
+          },
+          "exit_file": "exit=0",
+          "status": "перепись",
+          "scheme_seconds": 521.6,
+          "fingerprint": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+          "census": {
+            "минимальных": 20823,
+            "выборка": 20823,
+            "в отчёте": 20823,
+            "отсеяно до отчёта": 0,
+            "неизвестно на одном значении": 9540,
+            "сводится к вырожденности": 461
+          },
+          "verdicts": {
+            "выводится": 1577,
+            "неизвестно": 3942
+          },
+          "unknown_remaining": 625,
+          "forbidden": 5519,
+          "folded_facts": 1485,
+          "kept_questions_count": 625,
+          "knowledge": {
+            "все неизвестные": {
+              "строк": 15359,
+              "запретов": 3942,
+              "вопросов человеку (C)": 61,
+              "ждут знаний (A + B)": 3881,
+              "корней знаний всего": 26065,
+              "из них значений записанных групп": 25954,
+              "из них правил для произведений (шаблон × «×»)": 111,
+              "шаблонов атомов": 116,
+              "корней, чтобы затронуть все условия A/B (жадно)": 240,
+              "по видам": {
+                "A": 2459,
+                "B": 1422,
+                "C": 61
+              }
+            },
+            "оставленные после сжатия": {
+              "строк": 2378,
+              "запретов": 625,
+              "вопросов человеку (C)": 5,
+              "ждут знаний (A + B)": 620,
+              "корней знаний всего": 13283,
+              "из них значений записанных групп": 13206,
+              "из них правил для произведений (шаблон × «×»)": 77,
+              "шаблонов атомов": 81,
+              "корней, чтобы затронуть все условия A/B (жадно)": 128,
+              "по видам": {
+                "A": 501,
+                "B": 119,
+                "C": 5
+              }
+            },
+            "очередь знаний_list_length": 100,
+            "вопросы человеку_list_length": 5
+          },
+          "logical_legacy_json_sha256": "4bab121343b9680b65f18208aa6a0bd4095f636e46e9cf3324b2c7f3587ea403",
+          "legacy_field_sha256": {
+            "id": "b62eb646ef404ba1fd7cf7911a05fb01b2f358bea42d6683451ae9c3ab8951b4",
+            "условие": "dfb2bfe11673328b7a14bab782316da0d36bee8748029525467bdcb9b9bbac53",
+            "термы": "d40e165cbe9384cf4926e04f54483f6037733221466be826256c8ae0e077235c",
+            "посылок": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+            "без": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "отпечаток": "6054acf7900c900aec66cd1cc20ca057984911c0dd4709f1bbc30035d21def12",
+            "статус": "dba9e4f14187ddb10b33c505db66e569ae6927ee649302567279a48cd99ccada",
+            "строк противоречат базе": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "запретов": "20f1a57d5d8c667c827ce96dfe1390dfb2fa4eecc6c6a87910da4a0d5bb4f874",
+            "вердикты": "11ac4a27178fb54a9b1d299038c37fd1bac06b329d39b6123db0b07892b04c52",
+            "остаток": "ad723f42c7aba316d944f19f340ce47d8e0c6fb354d212736ec4782314a6824a",
+            "значения": "14307a45fcfdd49f1003fcbebd06204398b6e28caa2db9ab3c9ee285223c068d",
+            "без кандидата": "fbc0ddee4c445288b496b1d32d6b987175405b5b9c60da36fe26f45751d6abef",
+            "вырождено": "0582b0f22162d11e4c014425756336bf6290ba503d92b0e393293a66a16e700f",
+            "реестр": "4d641967617ec5fc2b5f9ad33b85270272145a96c0bd3ea256f3be65187426f0",
+            "отложено": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "свёрнуто": "24c6b85f015fc5e822f0f7600d1cbd0ce0f70a1df9f1492b067339132d2a63aa",
+            "оставленные вопросы": "6f59d0b56f55f611408e327a4c819103ff070e99a9bfb2ddae6990ba9735b785",
+            "оставленные факты": "1ed190097ebc6e78802228ec904ba07bb44c3314f26cee5c98a417c892f8f98a",
+            "свёрнуто фактов": "c010bb0f7f8f335ccb2bc4e598eee48be11f87ac60a39a1a1cb4185688857003",
+            "факты без посылок": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "вопросы": "7b4afb815cd3c2b6171634323b1dd967bf7fe88b26a7bad3ccc7a92aec36ece8",
+            "без вопроса": "d146f0489a9200090d393f119c8e36690b7d1730fca225f4902b66d191c6bd74",
+            "трудный контрпример": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "короткий довод": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "перепись": "4f578411c51a8b8d566ef31ea30f24333a81300531d0fbd76b93d8834819d8c3"
+          },
+          "json_bytes": 1392145,
+          "text_bytes": 40427
+        }
+      },
+      "legacy_json_equal_except_performance_and_top_level_knowledge": true,
+      "differing_legacy_keys": [],
+      "normalization_excludes_exactly": [
+        "секунд",
+        "память ГБ",
+        "память по этапам",
+        "знания"
+      ],
+      "observed_wall_change_percent": -0.7688538163875602,
+      "saved_current_minimal_domain_fully_sampled": true
+    }
+  ],
+  "equality": {
+    "full_canonical_legacy_JSON_projection_equal_all5": true,
+    "excluded_exact_top_level_keys": [
+      "секунд",
+      "память ГБ",
+      "память по этапам",
+      "знания"
+    ],
+    "dict_key_order_canonicalized": true,
+    "list_order_preserved": true,
+    "legacy_fields_per_mode": 26,
+    "raw_JSON_bytes_equal": false,
+    "raw_text_bytes_equal": false,
+    "full_PackedConditions_arrays_separately_hashed": false
+  },
+  "measurement": {
+    "each_pair_same_runner": true,
+    "fresh_Python_process_per_mode": true,
+    "orders": {
+      "bk": 3,
+      "kb": 2
+    },
+    "single_observation_per_case": true,
+    "input_pickle_files_hashed_before_pair": 23,
+    "same_pre_pair_hashes_all_jobs": true,
+    "input_rehashed_between_or_after_modes": false,
+    "compiler_or_OS_cache_effects_eliminated": false,
+    "isolated_knowledge_stage_cost_measured": false,
+    "wall_change_percent_range": [
+      -2.327577386974655,
+      1.311102856019053
+    ],
+    "stable_algorithm_speedup_demonstrated": false,
+    "memory_improvement_demonstrated": false,
+    "rss_14GiB_plan_enforced": false,
+    "peak_RSS_scope": "GNU time -v process accounting, not sampled tree/cgroup maximum",
+    "filesystem_IO_scope": "GNU time filesystem input/output counters; kept in original units",
+    "old_vs_new_GAP_data_effect_measured": false,
+    "whole_class_estimate_seconds": null
+  },
+  "output": {
+    "kept_forbidden_sum": 2554,
+    "C_sum": 13,
+    "AB_pending_sum": 2541,
+    "counts_are_sums_not_deduplicated_union": true,
+    "knowledge_root_union_computed": false,
+    "AB_proved_or_dropped": false,
+    "C_proved_open_science": false,
+    "mathematical_problems_solved_by_annotation": 0,
+    "baseline_JSON_bytes_sum": 128009305,
+    "knowledge_JSON_bytes_sum": 128123010,
+    "raw_archive_output_reduction_demonstrated": false,
+    "largest_raw_JSON": {
+      "bytes": 69152689,
+      "case": "t-G45109",
+      "mode": "k"
+    }
+  },
+  "build06": {
+    "run": 44027003918,
+    "head": "daf2b93e917033aba1bf948298c4c94fdc3d71d3",
+    "branch": "pilot-claude-tab-06",
+    "API_status": "completed",
+    "API_conclusion": "success",
+    "API_jobs": 23,
+    "API_all_jobs_success": true,
+    "API_artifacts": 23,
+    "large_table_artifacts_downloaded_or_audited": false,
+    "not_the_inputs_of_pilot19": true
+  },
+  "storage": {
+    "original_ZIPs_remain_on_GitHub": true,
+    "original_ZIPs_saved_locally": false,
+    "all60_members_stream_hashed_and_CRC_checked": true,
+    "small_primaries_preserved": true,
+    "large_raw_JSON_or_reports_republished": false,
+    "old_files_deleted": false,
+    "free_space_snapshot_bytes": 14417920,
+    "free_space_snapshot_utc": "2026-11-18T01:28:02.765056+00:00"
+  },
+  "readiness": {
+    "ready_for_full_run": false,
+    "all9_gates_still_open": true,
+    "candidate_frontier_complete": false,
+    "current_support_computed": false,
+    "source_propagation_complete": false,
+    "knowledge_annotation_integrated": true,
+    "knowledge_first_SAT_scheduling_implemented": false
+  },
+  "next_step": "Before dynamic comparison of archived questions with build06, separate changes to mathematical rules from new data; verify archive/snapshot context fingerprints. Reuse completed pilot17/18 archives. Compute row delta and A/B/C update inside a bounded control with only aggregates/hashes exported; keep new minima outside saved domain as frontier debt."
+}
