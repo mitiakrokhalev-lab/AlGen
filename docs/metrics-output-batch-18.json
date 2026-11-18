@@ -1,0 +1,298 @@
+{
+  "version": 1,
+  "updated_utc": "2026-11-18T14:53:42.048298+00:00",
+  "base": "1b9fd6c1771b488b8910caeb6d063da59675e69a",
+  "control_commit": "a49eff02d14ca0d606646502323f16354c443a52",
+  "run": 44325839799,
+  "scope": "Quantity of output in one full scheme and measured effects on fixed archived IDs",
+  "baseline": {
+    "run": 44276676254,
+    "table_source": 44027003918,
+    "scheme": "G-4-17-767-769-770-771",
+    "report": {
+      "rows": 20823,
+      "bytes": 29161389,
+      "sha256": "6e6584cb31823d1a4be2924547d224f0dd80ef22ffa31fd44c9fe6aa5e301952",
+      "digest_seconds": 0.2760624929999267
+    },
+    "rendered_classes": 5519,
+    "verdicts_by_class": {
+      "выводится": 1644,
+      "неизвестно": 3875
+    },
+    "kept": {
+      "запретов": 605,
+      "вопросов человеку (C)": 3,
+      "ждут знаний (A + B)": 602,
+      "корней знаний всего": 19181
+    },
+    "folded_unknown": 3270
+  },
+  "historic_C19_proof_probe": {
+    "scope": "Saved pilot19 G417 C candidates, current scoped Theory and proposed rules. No report regeneration or physical table update.",
+    "historical_run": 44024985371,
+    "case_sha256": "3d6d766d1f2ef84f168624415e5db3e8a3ad571205a013d88a59ffe470675196",
+    "proposed_rules_sha256": "8c63d3b6f528e0f72f63ab574627b86b69fb61707fbf12e53049b4ebe8875058",
+    "vocab_sha256": "38c10c9eb8b84306ea4f09d8b12cca8465ccf0770ec9daeba8056daa0ffda6ca",
+    "rules_before_sha256": "c4fb26550a6f9cbd06ec2de4959298260739f7ed0a895cdf1229e8d54a8df0fe",
+    "results": [
+      {
+        "ID": "dfabc5450e9a79d1b5f74c9d6fd48ee30590f2bc3378b2a3865c5fd4fd208c4a",
+        "before": "выводится",
+        "after": "выводится"
+      },
+      {
+        "ID": "5c64c9471761cfcccffbcf363a2b5eee0c66e71d5423467368f7ff64668695ed",
+        "before": "неизвестно",
+        "after": "выводится"
+      },
+      {
+        "ID": "37812f7efc61ebb246f846d6471c24b2886f3d739730b821c6dd059cf284da68",
+        "before": "неизвестно",
+        "after": "неизвестно"
+      },
+      {
+        "ID": "e6815216e6b6436b19c834e905068e408da25b8bba0536c6754231a7f7b7a0e7",
+        "before": "неизвестно",
+        "after": "выводится"
+      },
+      {
+        "ID": "2163881c0ce663848fcfc6bc079f2ce2057d2ba8c911e6008f9b6b199e01e739",
+        "before": "неизвестно",
+        "after": "выводится"
+      }
+    ],
+    "wall_seconds": 6.888325638996321,
+    "cpu_seconds": 6.887963149
+  },
+  "finite_P18_replay": {
+    "scope": "Five proved finite values on the fixed historical pilot18 domain. No insertion, new theory or full enumeration.",
+    "artifact_id": 14285803925,
+    "archive_zip_sha256": "d59690c8fa70e1c0bac7026e9bf952988a829fe6013cdeaa099062b6a1d79c5b",
+    "scheme": "G-4-17-767-769-770-771",
+    "theory": "в64f7726ebf3295f",
+    "library": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+    "rows": 30953,
+    "report_rows": 20823,
+    "original_known_cells": {
+      "8:5": null,
+      "16:14": null,
+      "32:51": null,
+      "64:267": null,
+      "128:2328": null
+    },
+    "proved_embedding_values": {
+      "8:5": false,
+      "16:14": true,
+      "32:51": true,
+      "64:267": true,
+      "128:2328": true
+    },
+    "target_variants_unique_IDs": 462,
+    "new_known_cells": 5,
+    "previous_unknown_IDs_refuted": 151,
+    "previous_kept_IDs_refuted": 35,
+    "changed_kept_representative_classes": {
+      "A→R": 35
+    },
+    "kept_unknown_before": 625,
+    "wall_seconds": 7.9901813520045835,
+    "cpu_seconds": 3.6597198559999997,
+    "peak_rss_kib": 195160
+  },
+  "finite_P18_overlap": {
+    "scope": "Five proved finite values on the fixed historical pilot18 domain. No insertion, new theory or full enumeration.",
+    "artifact_id": 14285803925,
+    "archive_zip_sha256": "d59690c8fa70e1c0bac7026e9bf952988a829fe6013cdeaa099062b6a1d79c5b",
+    "scheme": "G-4-17-767-769-770-771",
+    "theory": "в64f7726ebf3295f",
+    "library": "7b0c9e9497b4479a:G::s2:быстро:3:compression:3",
+    "rows": 30953,
+    "report_rows": 20823,
+    "original_known_cells": {
+      "8:5": null,
+      "16:14": null,
+      "32:51": null,
+      "64:267": null,
+      "128:2328": null
+    },
+    "proved_embedding_values": {
+      "8:5": false,
+      "16:14": true,
+      "32:51": true,
+      "64:267": true,
+      "128:2328": true
+    },
+    "target_variants_unique_IDs": 462,
+    "new_known_cells": 5,
+    "previous_unknown_IDs_refuted": 151,
+    "previous_kept_IDs_refuted": 35,
+    "refutations_by_single_value": {
+      "8:5": {
+        "all": 5,
+        "kept": 4
+      },
+      "16:14": {
+        "all": 146,
+        "kept": 31
+      },
+      "32:51": {
+        "all": 146,
+        "kept": 31
+      },
+      "64:267": {
+        "all": 146,
+        "kept": 31
+      },
+      "128:2328": {
+        "all": 146,
+        "kept": 31
+      }
+    },
+    "minimum_batches_for_all_refutations": [
+      [
+        "8:5",
+        "16:14"
+      ],
+      [
+        "8:5",
+        "32:51"
+      ],
+      [
+        "8:5",
+        "64:267"
+      ],
+      [
+        "8:5",
+        "128:2328"
+      ]
+    ],
+    "minimum_batches_for_kept_refutations": [
+      [
+        "8:5",
+        "16:14"
+      ],
+      [
+        "8:5",
+        "32:51"
+      ],
+      [
+        "8:5",
+        "64:267"
+      ],
+      [
+        "8:5",
+        "128:2328"
+      ]
+    ],
+    "changed_kept_representative_classes": {
+      "A→R": 35
+    },
+    "kept_unknown_before": 625,
+    "wall_seconds": 3.529770933004329,
+    "cpu_seconds": 3.206524514,
+    "peak_rss_kib": 195372
+  },
+  "table06_control": {
+    "phase": "complete",
+    "baseline_report_sha256": "6e6584cb31823d1a4be2924547d224f0dd80ef22ffa31fd44c9fe6aa5e301952",
+    "baseline_report_rows": 20823,
+    "kept_unknowns": 605,
+    "current_c_count": 3,
+    "kept_AB": 602,
+    "kept_roots": 19181,
+    "current_C_verdicts": [
+      {
+        "ID": "5c64c9471761cfcccffbcf363a2b5eee0c66e71d5423467368f7ff64668695ed",
+        "before": "неизвестно",
+        "after": "выводится"
+      },
+      {
+        "ID": "37812f7efc61ebb246f846d6471c24b2886f3d739730b821c6dd059cf284da68",
+        "before": "неизвестно",
+        "after": "неизвестно"
+      },
+      {
+        "ID": "e6815216e6b6436b19c834e905068e408da25b8bba0536c6754231a7f7b7a0e7",
+        "before": "неизвестно",
+        "after": "выводится"
+      }
+    ],
+    "newly_proved_on_fixed_C": 2,
+    "library_row_audit": {
+      "rows": 32183,
+      "source_columns": 396,
+      "distinct_projections": 5522,
+      "theories": {
+        "before": {
+          "clauses": 29389,
+          "inconsistent_projections": 0,
+          "inconsistent_rows": 0,
+          "grounded_package_clauses": {}
+        },
+        "after": {
+          "clauses": 29441,
+          "inconsistent_projections": 0,
+          "inconsistent_rows": 0,
+          "grounded_package_clauses": {
+            "свободная абелева и гиперболическая ⇒ циклическая": 25,
+            "свободная абелева и неразложимая ⇒ циклическая": 25,
+            "нециклическая 2-порождённая экспоненты 2 ⇒ |Aut(X)| = pq": 1,
+            "абелева не экспоненты 2 ⇒ центр Aut нетривиален": 1
+          }
+        }
+      },
+      "newly_inconsistent_rows": 0,
+      "scope": "All rows of the G-4-17 Library projection; joint consistency in the scoped theory."
+    },
+    "direct_value_control": {
+      "known_cells_added": 2858,
+      "updates_by_rule": {
+        "свободная абелева и гиперболическая ⇒ циклическая": 0,
+        "свободная абелева и неразложимая ⇒ циклическая": 0,
+        "нециклическая 2-порождённая экспоненты 2 ⇒ |Aut(X)| = pq": 0,
+        "абелева не экспоненты 2 ⇒ центр Aut нетривиален": 2858
+      },
+      "grounded_instances_in_projection": 6,
+      "missing_instance_columns": {
+        "нециклическая 2-порождённая экспоненты 2 ⇒ |Aut(X)| = pq": 1,
+        "абелева не экспоненты 2 ⇒ центр Aut нетривиален": 1
+      },
+      "previous_unknown_IDs_refuted": 0,
+      "previous_kept_unknown_IDs_refuted": 0,
+      "previous_kept_kind_counts_refuted": {},
+      "scope": "Direct rule propagation and real row witnesses for fixed old report variants. No fresh minima, basis or verdict pipeline."
+    },
+    "source_run": 44027003918,
+    "table_fingerprint": "a32525981b40d3d8:G::s2:быстро",
+    "scheme": "G-4-17-767-769-770-771",
+    "proposed_rules_sha256": "5a2fe9bae117171dcc97271f1b135859e6a725b084b25a71b39405d354a203a7",
+    "code_checkout": "a49eff02d14ca0d606646502323f16354c443a52",
+    "wall_seconds": 670.432997065,
+    "cpu_seconds": 658.9052479999999,
+    "peak_rss_kib": 11472768,
+    "filesystem_input_blocks": 1512,
+    "filesystem_output_blocks": 3448,
+    "generator_status": "ok",
+    "complete": true,
+    "returncode": 0,
+    "stop": "exited",
+    "process_wall_seconds": 674.9472836939999,
+    "sampled_peak_rss_kib": 11473124,
+    "limits": {
+      "seconds": 1250,
+      "sampled_rss_gib": 14
+    },
+    "process_log_sha256": "7a0461c6e36c00067f26fb6c24c5ecf8d63a63c81c14c6deebee1624743c5e43"
+  },
+  "review_receipt_sha256": {
+    "audit-freeze.json": "39d87b00174e0b866ffd3ca22a094faa285b59ea00772b79576db6533a6fb098",
+    "finite-preflight.json": "53910a3b152fb7e8d1a6ea3e74d2cba228796e4918996518b77d40a20d66f8cb",
+    "finite-values.json": "f1cb0d53dd0b4d4df1d17471c913dc7a9f7ca96fecf82f579ca3cbe469d07d63",
+    "table06-results.json": "be1715b96116973db16d8f6d0fd5fd9d6c15e4304c12bfc11aa91e2772e43f33",
+    "three-rules.json": "8eca0276e26f480e526165d23a757dcdcb4415b94436bdba77ccc5ca53d442dd"
+  },
+  "whole_class_coverage": false,
+  "data_or_rules_applied_to_default_library": false,
+  "new_full_report_after_rule_change_measured": false
+}

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_utc": "2026-11-18T10:28:09.270811+00:00",
+  "updated_utc": "2026-11-18T14:53:42.048298+00:00",
   "scope": "Readiness plan for first full fixed-domain enumeration; NOT a full-run receipt or an implemented automatic launch gate",
   "user_goal": {
     "first_complete_enumeration_once": true,
@@ -282,12 +282,14 @@
         "pilot11_kept_C": 36,
         "pilot11_is_global_basis": false,
         "pilot11_A_B_retention_is_required": true,
-        "pilot11_A_B_persisted_states_implemented": false
+        "pilot11_A_B_persisted_states_implemented": false,
+        "fixed_G417_report_output_enrichment_control": true
       },
       "evidence": [
         "metrics-stress02.json",
         "поиск-базиса.md",
-        "metrics-pilot11-values.json"
+        "metrics-pilot11-values.json",
+        "metrics-output-batch-18.json"
       ]
     },
     {
@@ -996,6 +998,16 @@
     "same_full_report_in_completed_pairs": true,
     "whole_class_seconds_estimate": null,
     "whole_class_coverage_verified": false,
+    "full_run_admission_changed": false
+  },
+  "latest_output_volume_control": {
+    "metrics": "metrics-output-batch-18.json",
+    "control_run": 44325839799,
+    "control_commit": "a49eff02d14ca0d606646502323f16354c443a52",
+    "real_G417_projection_audit_passed": true,
+    "proposed_rule_package_accepted_into_default_library": false,
+    "historical_finite_coverage_checked": true,
+    "updated_basis_built": false,
     "full_run_admission_changed": false
   }
 }
