@@ -1,0 +1,5 @@
+{
+  "source_run": 44027003918,
+  "module": "tools.bench_grouped_rows",
+  "args": "--tables ../native-tabs --skel ../native/skel --library-cache ../кэш --scheme G-4-17-767-769-770-771 --source-run 44027003918 --seconds 1500 --rss-gib 14 --knowledge --output ../tool-out/paired-grouped-rows.json"
+}
