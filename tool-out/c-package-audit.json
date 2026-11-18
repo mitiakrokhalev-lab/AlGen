@@ -1,0 +1,92 @@
+{
+  "phase": "complete",
+  "baseline_report_sha256": "6e6584cb31823d1a4be2924547d224f0dd80ef22ffa31fd44c9fe6aa5e301952",
+  "baseline_report_rows": 20823,
+  "kept_unknowns": 605,
+  "current_c_count": 3,
+  "kept_AB": 602,
+  "kept_roots": 19181,
+  "current_C_verdicts": [
+    {
+      "ID": "5c64c9471761cfcccffbcf363a2b5eee0c66e71d5423467368f7ff64668695ed",
+      "before": "неизвестно",
+      "after": "выводится"
+    },
+    {
+      "ID": "37812f7efc61ebb246f846d6471c24b2886f3d739730b821c6dd059cf284da68",
+      "before": "неизвестно",
+      "after": "неизвестно"
+    },
+    {
+      "ID": "e6815216e6b6436b19c834e905068e408da25b8bba0536c6754231a7f7b7a0e7",
+      "before": "неизвестно",
+      "after": "выводится"
+    }
+  ],
+  "newly_proved_on_fixed_C": 2,
+  "library_row_audit": {
+    "rows": 32183,
+    "source_columns": 396,
+    "distinct_projections": 5522,
+    "theories": {
+      "before": {
+        "clauses": 29389,
+        "inconsistent_projections": 0,
+        "inconsistent_rows": 0,
+        "grounded_package_clauses": {}
+      },
+      "after": {
+        "clauses": 29441,
+        "inconsistent_projections": 0,
+        "inconsistent_rows": 0,
+        "grounded_package_clauses": {
+          "свободная абелева и гиперболическая ⇒ циклическая": 25,
+          "свободная абелева и неразложимая ⇒ циклическая": 25,
+          "нециклическая 2-порождённая экспоненты 2 ⇒ |Aut(X)| = pq": 1,
+          "абелева не экспоненты 2 ⇒ центр Aut нетривиален": 1
+        }
+      }
+    },
+    "newly_inconsistent_rows": 0,
+    "scope": "All rows of the G-4-17 Library projection; joint consistency in the scoped theory."
+  },
+  "direct_value_control": {
+    "known_cells_added": 2858,
+    "updates_by_rule": {
+      "свободная абелева и гиперболическая ⇒ циклическая": 0,
+      "свободная абелева и неразложимая ⇒ циклическая": 0,
+      "нециклическая 2-порождённая экспоненты 2 ⇒ |Aut(X)| = pq": 0,
+      "абелева не экспоненты 2 ⇒ центр Aut нетривиален": 2858
+    },
+    "grounded_instances_in_projection": 6,
+    "missing_instance_columns": {
+      "нециклическая 2-порождённая экспоненты 2 ⇒ |Aut(X)| = pq": 1,
+      "абелева не экспоненты 2 ⇒ центр Aut нетривиален": 1
+    },
+    "previous_unknown_IDs_refuted": 0,
+    "previous_kept_unknown_IDs_refuted": 0,
+    "previous_kept_kind_counts_refuted": {},
+    "scope": "Direct rule propagation and real row witnesses for fixed old report variants. No fresh minima, basis or verdict pipeline."
+  },
+  "source_run": 44027003918,
+  "table_fingerprint": "a32525981b40d3d8:G::s2:быстро",
+  "scheme": "G-4-17-767-769-770-771",
+  "proposed_rules_sha256": "5a2fe9bae117171dcc97271f1b135859e6a725b084b25a71b39405d354a203a7",
+  "code_checkout": "a49eff02d14ca0d606646502323f16354c443a52",
+  "wall_seconds": 670.432997065,
+  "cpu_seconds": 658.9052479999999,
+  "peak_rss_kib": 11472768,
+  "filesystem_input_blocks": 1512,
+  "filesystem_output_blocks": 3448,
+  "generator_status": "ok",
+  "complete": true,
+  "returncode": 0,
+  "stop": "exited",
+  "process_wall_seconds": 674.9472836939999,
+  "sampled_peak_rss_kib": 11473124,
+  "limits": {
+    "seconds": 1250,
+    "sampled_rss_gib": 14
+  },
+  "process_log_sha256": "7a0461c6e36c00067f26fb6c24c5ecf8d63a63c81c14c6deebee1624743c5e43"
+}

@@ -1,0 +1,23 @@
+	Command being timed: "python3 -B -m tools.audit_c_package"
+	User time (seconds): 641.38
+	System time (seconds): 23.94
+	Percent of CPU this job got: 98%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 11:15.14
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11472768
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 371
+	Minor (reclaiming a frame) page faults: 13406394
+	Voluntary context switches: 7100
+	Involuntary context switches: 4899
+	Swaps: 0
+	File system inputs: 72120
+	File system outputs: 4192
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
