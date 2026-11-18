@@ -56,7 +56,7 @@ def library():
         lib = C.PyDLL(str(target))
         lib.algen_enum.restype = C.c_void_p
         lib.algen_enum.argtypes = [C.c_int, C.c_int, C.c_int, C.c_uint64, C.c_int, C.c_int,
-                                  C.c_void_p, C.c_size_t, C.c_void_p, C.c_size_t] + [C.c_void_p] * 12 + [C.c_int, C.c_int]
+                                  C.c_void_p, C.c_size_t, C.c_void_p, C.c_size_t] + [C.c_void_p] * 13 + [C.c_int, C.c_int]
         lib.algen_count.argtypes = [C.c_void_p]
         lib.algen_count.restype = C.c_uint64
         lib.algen_size.argtypes = [C.c_void_p, C.c_int, C.c_int]
@@ -85,8 +85,29 @@ def library():
     return _library
 
 
+def group_equal_rows(matrix):
+    """Represent identical complete bit rows by one index and their multiplicity.
+
+    The caller keeps the original matrix for refutations, witnesses and export.
+    Keep the old representation for small or lightly duplicated inputs.
+    """
+    rows, cols = matrix.shape
+    if (rows < 512 or not cols or matrix.dtype != np.bool_
+            or os.environ.get("ALGEN_NATIVE_GROUP_ROWS", "1") == "0"):
+        return None
+    packed = np.ascontiguousarray(np.packbits(matrix, axis=1, bitorder="little"))
+    keys = packed.view(np.dtype(("V", packed.shape[1]))).reshape(-1)
+    _, indices, counts = np.unique(keys, return_index=True, return_counts=True)
+    if 2 * len(indices) > rows:
+        return None
+    # Adjacent equal weights let the kernel count whole words by popcount.
+    order = np.argsort(counts, kind="stable")
+    return indices[order], counts[order].astype(np.uint64)
+
+
 def enumerate_numeric(alive, P0, pall, selected, goal_mask, skip, have0,
-                      req, reqcols, clash, coverage, full, prune, relations, props_from, providers=None):
+                      req, reqcols, clash, coverage, full, prune, relations, props_from,
+                      providers=None, *, row_weights=None, all_row_count=None):
     """Return (packed alive, list empty, count), or None before starting native.
 
     Bounds are checked before C++. Numerical arrays remain live for the call;
@@ -128,7 +149,16 @@ def enumerate_numeric(alive, P0, pall, selected, goal_mask, skip, have0,
               np.array(offsets, dtype=np.int32), np.array(values, dtype=np.int32),
               np.array(clash_offsets, dtype=np.int32), np.array(clash_values, dtype=np.int32),
               np.array(provider_offsets, dtype=np.int32), np.array(provider_values, dtype=np.int32)]
-    nr = alive.max_support
+    nr = alive.max_support if all_row_count is None else all_row_count
+    if (all_row_count is None) != (row_weights is None) or not 0 <= selected <= nr <= alive.max_support:
+        raise ValueError("native enumeration row counts")
+    weights = None
+    if row_weights is not None:
+        weights = np.ascontiguousarray(row_weights)
+        if (weights.dtype != np.uint64 or weights.shape != (selected,)
+                or any(int(w) <= 0 for w in weights)
+                or sum(map(int, weights)) > alive.max_support):
+            raise ValueError("native enumeration row weights")
     if (arrays[0].shape != (n, max(1, (nr+63)//64))
             or arrays[1].shape != (n, max(1, (selected+63)//64))
             or any(a.size != n for a in arrays[2:7])
@@ -137,6 +167,7 @@ def enumerate_numeric(alive, P0, pall, selected, goal_mask, skip, have0,
     handle = lib.algen_enum(n, k, alive.width, full, int(prune), props_from,
                             arrays[0].ctypes.data, nr, arrays[1].ctypes.data, selected,
                             *[a.ctypes.data for a in arrays[2:]],
+                            None if weights is None else weights.ctypes.data,
                             array(alive.key_type).itemsize, array(alive.support_type).itemsize)
     if not handle:
         raise RuntimeError("native enumeration returned no result")

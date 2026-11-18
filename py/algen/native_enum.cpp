@@ -27,8 +27,47 @@ struct Matrix {
     size_t cols, rows, words;
     const U *data;
     Bits owned;
-    Matrix(const U *d,size_t c,size_t r):cols(c),rows(r),words(std::max<size_t>(1,(r+63)/64)),data(d) {}
+    Bits weights, word_weights;
+    Matrix(const U *d,size_t c,size_t r,const U *counts=nullptr)
+        :cols(c),rows(r),words(std::max<size_t>(1,(r+63)/64)),data(d) {
+        if (counts) {
+            weights.assign(counts, counts+rows);
+            set_word_weights();
+        }
+    }
     const U *col(int c) const { return data+size_t(c)*words; }
+    void set_word_weights() {
+        if (std::all_of(weights.begin(),weights.end(),[](U w) { return w==1; })) {
+            weights.clear();
+            return;
+        }
+        word_weights.resize(words);
+        for (size_t w=0;w<words;++w) {
+            size_t first=w*64, end=std::min(first+64,rows);
+            U weight=weights[first];
+            for (size_t i=first+1;i<end;++i)
+                if (weights[i]!=weight) { weight=0; break; }
+            word_weights[w]=weight;
+        }
+    }
+    U support(int c,const Bits &selected) const {
+        const U *values=col(c);
+        U count=0;
+        if (weights.empty()) {
+            for (size_t w=0;w<words;++w) count+=__builtin_popcountll(values[w]&selected[w]);
+            return count;
+        }
+        for (size_t w=0;w<words;++w) {
+            U hits=values[w]&selected[w];
+            if (!hits) continue;
+            if (word_weights[w]) count+=word_weights[w]*__builtin_popcountll(hits);
+            else while (hits) {
+                count+=weights[w*64+__builtin_ctzll(hits)];
+                hits&=hits-1;
+            }
+        }
+        return count;
+    }
     Matrix(const Matrix &p,const Bits &r):cols(p.cols),rows(0),words(0),data(nullptr) {
         std::vector<size_t> positions;
         for (size_t w=0;w<r.size();++w) {
@@ -36,6 +75,11 @@ struct Matrix {
             while(x) { positions.push_back(w*64+__builtin_ctzll(x)); x&=x-1; }
         }
         rows=positions.size(); words=std::max<size_t>(1,(rows+63)/64);
+        if (!p.weights.empty()) {
+            weights.reserve(rows);
+            for (size_t i:positions) weights.push_back(p.weights[i]);
+            set_word_weights();
+        }
         owned.assign(cols*words,0);
         for(size_t c=0;c<cols;++c) {
             if (!(c%64)) signals();
@@ -161,8 +205,7 @@ struct Engine {
         std::vector<int> q;
         for(int size=1;size<int(p.size());++size) if(!subsets(m,p,size,0,q)) return;
         for(int g=0;g<n;++g) if((m[g/64]>>(g%64))&1) {
-            U support=0; for(size_t w=0;w<r.size();++w) support+=__builtin_popcountll(P.col(g)[w]&r[w]);
-            out.keys[depth].push((cp<<width)|U(g)); out.supports[depth].push(support);
+            out.keys[depth].push((cp<<width)|U(g)); out.supports[depth].push(P.support(g,r));
         }
     }
     void children(std::vector<int> &p,const Bits &r,int start,int depth,U pm,const Matrix &P) {
@@ -249,12 +292,12 @@ void *algen_enum(int n,int k,int width,U full,int prune,int props_from,
                 const uint8_t *reqcols,const uint8_t *relations,
                 const int32_t *reqoffs,const int32_t *reqvalues,
                 const int32_t *clashoffs,const int32_t *clashvalues,
-                const int32_t *provideroffs,const int32_t *providervalues,int ksize,int vsize) {
+                const int32_t *provideroffs,const int32_t *providervalues,const U *weights,int ksize,int vsize) {
     try {
         if((ksize!=1&&ksize!=2&&ksize!=4&&ksize!=8)||(vsize!=1&&vsize!=2&&vsize!=4&&vsize!=8))
             throw std::invalid_argument("native enumeration: item size");
         Engine e(ksize,vsize,n,k,width,full,prune,props_from,all,nr,coverage,goals,skip,have0,reqcols,relations,reqoffs,reqvalues,clashoffs,clashvalues,provideroffs,providervalues);
-        Matrix P(initial,n,selected); Bits r=ones(selected); std::vector<int> p;
+        Matrix P(initial,n,selected,weights); Bits r=ones(selected); std::vector<int> p;
         for(int depth=1;depth<=k;++depth) e.go(p,r,0,depth,0,P);
         signals(); return new Result(std::move(e.out));
     } catch(const Interrupted &) { return nullptr; }
